@@ -26,10 +26,17 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: 'npm'
 
       - run: npm ci
       - run: npm run build
+
+      - name: Debug build output
+        run: |
+          echo "=== dist contents ==="
+          ls -la dist/
+          echo ""
+          echo "=== index.html first 10 lines ==="
+          head -10 dist/index.html
 
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
