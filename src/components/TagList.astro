@@ -1,0 +1,15 @@
+---
+interface Props {
+  tags: string[];
+}
+
+const { tags } = Astro.props;
+---
+
+<span class="text-sm text-[var(--color-text-tertiary)]">
+  {tags.map((tag, i) => (
+    <span>
+      {tag}{i < tags.length - 1 ? <span class="mx-1">·</span> : null}
+    </span>
+  ))}
+</span>

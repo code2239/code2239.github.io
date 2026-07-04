@@ -1,0 +1,23 @@
+---
+import Layout from "../../components/Layout.astro";
+import ProjectCard from "../../components/ProjectCard.astro";
+import { projectsData } from "../../lib/config";
+---
+
+<Layout title="项目">
+  <div class="max-w-content py-16">
+    <h1 class="text-3xl font-semibold mb-2">项目</h1>
+    <p class="text-[var(--color-text-secondary)] mb-12">作品与开源项目</p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      {projectsData.map((project) => (
+        <ProjectCard
+          name={project.name}
+          description={project.description}
+          tags={[...project.tags]}
+          url={project.url}
+        />
+      ))}
+    </div>
+  </div>
+</Layout>

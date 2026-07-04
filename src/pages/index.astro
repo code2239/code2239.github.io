@@ -1,0 +1,74 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../components/Layout.astro";
+import ArticleCard from "../components/ArticleCard.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import { siteConfig, projectsData } from "../lib/config";
+
+const posts = await getCollection("blog");
+const latestPosts = posts
+  .sort(
+    (a, b) =>
+      new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+  )
+  .slice(0, 2);
+---
+
+<Layout title={siteConfig.name} description={siteConfig.description}>
+  <!-- Hero -->
+  <section class="max-w-content py-24 md:py-32 text-center">
+    <h1 class="text-4xl font-semibold tracking-tight mb-4">
+      {siteConfig.name}
+    </h1>
+    <p class="text-[var(--color-text-secondary)] text-lg max-w-lg mx-auto leading-relaxed">
+      {siteConfig.tagline}
+    </p>
+  </section>
+
+  <!-- Latest Posts -->
+  <section class="max-w-content pb-16">
+    <div class="flex items-center justify-between mb-6">
+      <h2 class="text-lg font-semibold">最新文章</h2>
+      <a
+        href="/blog"
+        class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150"
+      >
+        查看全部 &rarr;
+      </a>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      {latestPosts.map((post) => (
+        <ArticleCard
+          title={post.data.title}
+          date={post.data.date}
+          summary={post.data.summary}
+          tags={post.data.tags}
+          href={`/blog/${post.id.replace(/\.md$/, "")}`}
+        />
+      ))}
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section class="max-w-content pb-16">
+    <div class="flex items-center justify-between mb-6">
+      <h2 class="text-lg font-semibold">精选项目</h2>
+      <a
+        href="/projects"
+        class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150"
+      >
+        查看全部 &rarr;
+      </a>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      {projectsData.slice(0, 2).map((project) => (
+        <ProjectCard
+          name={project.name}
+          description={project.description}
+          tags={[...project.tags]}
+          url={project.url}
+        />
+      ))}
+    </div>
+  </section>
+</Layout>

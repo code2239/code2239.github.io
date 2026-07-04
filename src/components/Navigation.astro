@@ -1,0 +1,51 @@
+---
+interface Props {
+  variant?: "header" | "footer";
+}
+
+const { variant = "header" } = Astro.props;
+
+const links = [
+  { href: "/blog", label: "博客" },
+  { href: "/projects", label: "项目" },
+  { href: "/about", label: "关于" },
+];
+---
+
+{
+  variant === "header" ? (
+    <nav class="flex items-center justify-between py-6 max-w-content">
+      <a href="/" class="text-base font-semibold no-underline tracking-tight">
+        星游寰宇
+      </a>
+      <div class="flex items-center gap-6">
+        {links.map((link) => (
+          <a
+            href={link.href}
+            class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150"
+          >
+            {link.label}
+          </a>
+        ))}
+      </div>
+    </nav>
+  ) : (
+    <footer class="border-t border-[var(--color-border)] mt-24 py-8">
+      <div class="max-w-content flex items-center justify-between">
+        <span class="text-sm text-[var(--color-text-tertiary)]">
+          &copy; {new Date().getFullYear()} 星游寰宇
+        </span>
+        <div class="flex items-center gap-4">
+          {links.map((link) => (
+            <a
+              href={link.href}
+              class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150"
+            >
+              {link.label}
+            </a>
+          ))}
+        </div>
+      </div>
+    </footer>
+  )
+}

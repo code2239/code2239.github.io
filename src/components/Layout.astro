@@ -1,0 +1,40 @@
+---
+import Navigation from "./Navigation.astro";
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+const fullTitle = `${title} — 星游寰宇`;
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content={description || "星游寰宇的个人网站——技术文章、项目展示与思考笔记"}
+    />
+    <meta name="color-scheme" content="light" />
+    <title>{fullTitle}</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <Navigation variant="header" />
+    <main class="flex-1">
+      <slot />
+    </main>
+    <Navigation variant="footer" />
+  </body>
+</html>
