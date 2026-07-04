@@ -1,0 +1,339 @@
+<!DOCTYPE html><html lang="zh-CN"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="星游寰宇的个人网站——技术文章、项目展示与思考笔记"><meta name="color-scheme" content="light"><title>多代理「开会」模式 — 开源前端应用汇总 — 星游寰宇</title><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"><link rel="stylesheet" href="/_astro/_slug_.7HNCBA16.css"></head> <body class="min-h-screen flex flex-col"> <nav class="flex items-center justify-between py-6 max-w-content"><a href="/" class="text-base font-semibold no-underline tracking-tight">
+星游寰宇
+</a><div class="flex items-center gap-6"><a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150">博客</a><a href="/projects" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150">项目</a><a href="/about" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150">关于</a></div></nav> <main class="flex-1">  <article class="max-w-content py-16"> <header class="mb-12 text-center"> <h1 class="text-3xl font-semibold mb-3">多代理「开会」模式 — 开源前端应用汇总</h1> <div class="flex items-center justify-center gap-2 text-[var(--color-text-tertiary)] text-sm"> <time datetime="2026-07-04">2026-07-04</time>  <span>·</span> <span class="text-sm text-[var(--color-text-tertiary)]"> <span> Agent<span class="mx-1">·</span> </span><span> 开源<span class="mx-1">·</span> </span><span> 前端<span class="mx-1">·</span> </span><span> ChatDev<span class="mx-1">·</span> </span><span> AutoGen </span> </span>  </div> </header> <div>  <blockquote>
+<p>整理日期：2026-07-04
+覆盖范围：ChatDev / MetaGPT / AutoGen Studio / AgentVerse / CrewAI / LangGraph / OpenAgents</p>
+</blockquote>
+<hr>
+<h2 id="一概览表">一、概览表</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>项目</th><th>GitHub</th><th align="center">会议可视化</th><th align="center">结构化产出</th><th align="center">部署难度</th><th align="center">最像”开会”</th></tr></thead><tbody><tr><td><strong>ChatDev</strong></td><td><code>OpenBMB/ChatDev</code></td><td align="center">⭐⭐⭐⭐⭐</td><td align="center">代码</td><td align="center">低</td><td align="center">✅ 最像</td></tr><tr><td><strong>MetaGPT</strong></td><td><code>geekan/MetaGPT</code></td><td align="center">⭐⭐⭐⭐</td><td align="center">PRD/设计图/代码</td><td align="center">中</td><td align="center">✅</td></tr><tr><td><strong>AutoGen Studio</strong></td><td><code>microsoft/autogen</code></td><td align="center">⭐⭐⭐⭐</td><td align="center">灵活配置</td><td align="center">低</td><td align="center">✅</td></tr><tr><td><strong>AgentVerse</strong></td><td><code>OpenBMB/AgentVerse</code></td><td align="center">⭐⭐⭐</td><td align="center">灵活</td><td align="center">低</td><td align="center">✅</td></tr><tr><td><strong>CrewAI</strong></td><td><code>crewAIInc/crewAI</code></td><td align="center">⭐⭐</td><td align="center">灵活</td><td align="center">低</td><td align="center">一般</td></tr><tr><td><strong>LangGraph Studio</strong></td><td><code>langchain-ai/langgraph</code></td><td align="center">⭐⭐⭐</td><td align="center">DAG 状态图</td><td align="center">中</td><td align="center">调试向</td></tr><tr><td><strong>OpenAgents</strong></td><td><code>xlang-ai/OpenAgents</code></td><td align="center">⭐⭐</td><td align="center">工具输出</td><td align="center">低</td><td align="center">❌ 非核心</td></tr></tbody></table>
+<hr>
+<h2 id="二逐项详解">二、逐项详解</h2>
+<h3 id="1-chatdev--虚拟软件公司代理逐轮开会">1. ChatDev — 虚拟软件公司，代理逐轮开会</h3>
+<p><strong>GitHub</strong>: <a href="https://github.com/OpenBMB/ChatDev">OpenBMB/ChatDev</a></p>
+<p><strong>核心概念</strong>: 模拟一家完整的虚拟软件公司，AI 代理扮演 CEO、CTO、程序员、测试员等角色，在聊天面板中逐轮讨论，从需求一路走到交付代码。</p>
+<p><strong>前端形态</strong>:</p>
+<ul>
+<li>多窗口聊天面板，实时展示代理对话</li>
+<li>分阶段可视化：需求分析 → 系统设计 → 编码 → 测试 → 文档</li>
+<li>每个阶段切换发言人，可以看到不同代理”发言”</li>
+</ul>
+<p><strong>会议模式</strong>:</p>
+<ul>
+<li>使用 Chat Chain（对话链）机制</li>
+<li>代理之间按顺序发言，逐轮推进</li>
+<li>每个阶段有明确的主持人和参与者</li>
+</ul>
+<p><strong>技术栈</strong>: Python 后端 + Web 前端（Gradio 或自研）</p>
+<p><strong>适合场景</strong>: 想直观看到代理如何通过”开会”协作完成软件开发任务</p>
+<hr>
+<h3 id="2-metagpt--sop-驱动的结构化会议">2. MetaGPT — SOP 驱动的结构化会议</h3>
+<p><strong>GitHub</strong>: <a href="https://github.com/geekan/MetaGPT">geekan/MetaGPT</a></p>
+<p><strong>核心概念</strong>: 更进一步——代理不仅聊天，还按**标准作业流程（SOP）**产出结构化文档。产品经理出 PRD，架构师出系统设计，工程师编码，所有产出物在共享工作空间可见。</p>
+<p><strong>前端形态</strong>:</p>
+<ul>
+<li>Dashboard 仪表盘 + 文档共享区</li>
+<li>消息池（Message Pool）：所有代理读写共享消息</li>
+<li>结构化输出可视化：PRD 文档、架构图、API 设计、代码</li>
+</ul>
+<p><strong>会议模式</strong>:</p>
+<ul>
+<li>SOP 驱动的逐角色发言（严格顺序）</li>
+<li>产品经理启动 → 架构师回应 → 工程师实现</li>
+<li>每个发言附带结构化产物（不只是聊天文字）</li>
+</ul>
+<p><strong>技术栈</strong>: Python 后端 + Web 前端</p>
+<p><strong>适合场景</strong>: 需要代理产出不只是代码，而是完整文档链（PRD → 设计 → 代码 → 测试报告）</p>
+<hr>
+<h3 id="3-autogen-studio--微软的低代码多代理工作台">3. AutoGen Studio — 微软的低代码多代理工作台</h3>
+<p><strong>GitHub</strong>: <a href="https://github.com/microsoft/autogen">microsoft/autogen</a></p>
+<p><strong>核心概念</strong>: 微软出品，最成熟的 Web 拖拽界面，可设计、测试、监控多代理工作流。内置多种群聊模式（GroupChat / RoundRobin / SelectorGroupChat）。</p>
+<p><strong>前端形态</strong>:</p>
+<ul>
+<li><strong>拖拽式画布</strong>：可视化设计代理、工具和对话流</li>
+<li><strong>实时对话监控</strong>：观察多个代理在聊天室中互动</li>
+<li><strong>JSON 配置导出</strong>：代理团队定义可保存为声明式配置</li>
+<li><strong>内置测试 Playground</strong>：直接在上面对话测试</li>
+</ul>
+<p><strong>会议模式</strong>:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>模式</th><th>描述</th></tr></thead><tbody><tr><td><code>RoundRobinGroupChat</code></td><td>代理轮流发言</td></tr><tr><td><code>SelectorGroupChat</code></td><td>智能选择下一个发言人</td></tr><tr><td><code>Swarm</code></td><td>代理之间可相互移交任务</td></tr><tr><td><code>MagenticOne</code></td><td>多代理单协调者模式</td></tr></tbody></table>
+<p><strong>部署</strong>:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">pip</span><span style="color:#9ECBFF"> install</span><span style="color:#9ECBFF"> autogenstudio</span></span>
+<span class="line"><span style="color:#B392F0">autogenstudio</span><span style="color:#9ECBFF"> ui</span><span style="color:#79B8FF"> --port</span><span style="color:#79B8FF"> 8081</span></span></code></pre>
+<p><strong>技术栈</strong>: Python 后端 (FastAPI) + React 前端</p>
+<p><strong>适合场景</strong>: 需要图形化拖拽设计代理团队，不需要写代码</p>
+<hr>
+<h3 id="4-agentverse--多代理社会模拟与议事会">4. AgentVerse — 多代理社会模拟与议事会</h3>
+<p><strong>GitHub</strong>: <a href="https://github.com/OpenBMB/AgentVerse">OpenBMB/AgentVerse</a></p>
+<p><strong>核心概念</strong>: 聚焦于多代理<strong>社会模拟</strong>，支持多种协作拓扑（垂直/水平/混合），其中”议事会”（council）模式让多代理围绕一个话题群组讨论。</p>
+<p><strong>前端形态</strong>:</p>
+<ul>
+<li>Web 聊天界面，展示多代理对话流</li>
+<li>支持自定义代理数量和角色</li>
+<li>对话历史可视化</li>
+</ul>
+<p><strong>会议模式</strong>:</p>
+<ul>
+<li>Council（议事会）：所有代理平等讨论</li>
+<li>Vertical（垂直）：层级式委派</li>
+<li>Horizontal（水平）：并行协作</li>
+</ul>
+<p><strong>技术栈</strong>: Python + Web UI</p>
+<p><strong>适合场景</strong>: 想研究代理社会行为和群体决策过程</p>
+<hr>
+<h3 id="5-crewai--角色驱动的代理团队">5. CrewAI — 角色驱动的代理团队</h3>
+<p><strong>GitHub</strong>: <a href="https://github.com/crewAIInc/crewAI">crewAIInc/crewAI</a></p>
+<p><strong>核心概念</strong>: 强调给每个代理分配<strong>角色（role）、目标（goal）、背景故事（backstory）</strong>。代理像真实团队成员一样协作，有顺序执行和层级委派两种模式。</p>
+<p><strong>前端形态</strong>:</p>
+<ul>
+<li>官方 Web 监控面板（功能不如 AutoGen Studio 丰富）</li>
+<li>社区有多个第三方前端（CrewAI UI、AgentForge 等）</li>
+<li>偏向”任务管理面板”而非”聊天室”</li>
+</ul>
+<p><strong>会议模式</strong>:</p>
+<ul>
+<li>Sequential：链式顺序执行</li>
+<li>Hierarchical：管理者代理分配任务给下属</li>
+</ul>
+<p><strong>代码示例</strong>:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:#F97583">from</span><span style="color:#E1E4E8"> crewai </span><span style="color:#F97583">import</span><span style="color:#E1E4E8"> Agent, Task, Crew</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">researcher </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Agent(</span></span>
+<span class="line"><span style="color:#FFAB70">    role</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">"市场研究员"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#FFAB70">    goal</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">"分析目标市场的竞争格局"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#FFAB70">    backstory</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">"你是一名拥有20年经验的市场研究专家"</span></span>
+<span class="line"><span style="color:#E1E4E8">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">analyst </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Agent(</span></span>
+<span class="line"><span style="color:#FFAB70">    role</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">"数据分析师"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#FFAB70">    goal</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">"从研究数据中提取关键洞察"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#FFAB70">    backstory</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">"你擅长从复杂数据中找出规律"</span></span>
+<span class="line"><span style="color:#E1E4E8">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">crew </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Crew(</span><span style="color:#FFAB70">agents</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">[researcher, analyst], </span><span style="color:#FFAB70">tasks</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">[</span><span style="color:#79B8FF">...</span><span style="color:#E1E4E8">])</span></span>
+<span class="line"><span style="color:#E1E4E8">crew.kickoff()</span></span></code></pre>
+<p><strong>技术栈</strong>: Python</p>
+<p><strong>适合场景</strong>: 需要代理有不同的”人格”和专业背景的生产级任务</p>
+<hr>
+<h3 id="6-langgraph-studio--面向开发者的调试-ide">6. LangGraph Studio — 面向开发者的调试 IDE</h3>
+<p><strong>GitHub</strong>: <a href="https://github.com/langchain-ai/langgraph">langchain-ai/langgraph</a></p>
+<p><strong>核心概念</strong>: LangChain 出品，用<strong>状态机/有向图</strong>建模代理工作流。Studio 是可视化调试工具，不是”开会 UI”，但你可以看到代理在每个节点的状态变化。</p>
+<p><strong>前端形态</strong>:</p>
+<ul>
+<li>图形编辑器：可视化设计代理流程图</li>
+<li>状态检查器：在每一步观察代理的内部状态</li>
+<li>流式事件追踪：实时看到数据如何在节点间流转</li>
+<li>人机交互断点：在关键节点插入人工审批</li>
+</ul>
+<p><strong>会议模式</strong>: 不直接模拟会议，而是建模为状态图（适合复杂分支逻辑）</p>
+<p><strong>技术栈</strong>: Python + React (Studio)</p>
+<p><strong>适合场景</strong>: 需要精确控制代理协作逻辑的开发者</p>
+<hr>
+<h3 id="7-openagents--代理工具平台非会议向">7. OpenAgents — 代理工具平台（非会议向）</h3>
+<p><strong>GitHub</strong>: <a href="https://github.com/xlang-ai/OpenAgents">xlang-ai/OpenAgents</a></p>
+<p><strong>核心概念</strong>: 偏向<strong>人-代理交互</strong>而非代理间会议。提供类 ChatGPT 插件界面，让代理使用 200+ 工具完成任务。有代理市场可分享/部署代理。</p>
+<p><strong>前端形态</strong>: 聊天式 UI（类似 ChatGPT Plugins）</p>
+<p><strong>会议模式</strong>: ❌ 不在此项目重点范围内</p>
+<hr>
+<h2 id="三与你当前-claude-code-环境的对应关系">三、与你当前 Claude Code 环境的对应关系</h2>
+<p>你的 Claude Code 已有以下相关能力：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Claude Code 能力</th><th>对应开源项目的理念</th></tr></thead><tbody><tr><td><strong><code>ecc:council</code></strong> 技能</td><td>类似 AgentVerse 的 Council 模式</td></tr><tr><td><strong><code>ecc:team-agent-orchestration</code></strong></td><td>类似 CrewAI 的团队编排</td></tr><tr><td><strong><code>Workflow</code> 脚本编排</strong></td><td>类似 AutoGen 的 workflow 定义</td></tr><tr><td><strong><code>SendMessage</code> 代理通信</strong></td><td>底层消息传递（所有框架的基础）</td></tr><tr><td><strong>100+ 专业代理</strong></td><td>类似 MetaGPT 的角色分配</td></tr></tbody></table>
+<hr>
+<h2 id="四选型建议">四、选型建议</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>你的需求</th><th>推荐</th></tr></thead><tbody><tr><td>想看代理”开会聊天”的全过程</td><td><strong>ChatDev</strong></td></tr><tr><td>需要代理产出完整文档链</td><td><strong>MetaGPT</strong></td></tr><tr><td>想拖拽设计代理团队，不写代码</td><td><strong>AutoGen Studio</strong></td></tr><tr><td>想研究代理群体行为</td><td><strong>AgentVerse</strong></td></tr><tr><td>生产环境需要角色化代理</td><td><strong>CrewAI</strong></td></tr><tr><td>需要精确控制协作流程</td><td><strong>LangGraph</strong></td></tr><tr><td>想在 Claude Code 内直接使用</td><td><strong>Workflow + ecc:council</strong></td></tr></tbody></table>
+<hr>
+<h2 id="五快速启动命令">五、快速启动命令</h2>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6A737D"># ChatDev</span></span>
+<span class="line"><span style="color:#B392F0">git</span><span style="color:#9ECBFF"> clone</span><span style="color:#9ECBFF"> https://github.com/OpenBMB/ChatDev.git</span></span>
+<span class="line"><span style="color:#79B8FF">cd</span><span style="color:#9ECBFF"> ChatDev</span><span style="color:#E1E4E8"> &#x26;&#x26; </span><span style="color:#B392F0">pip</span><span style="color:#9ECBFF"> install</span><span style="color:#79B8FF"> -r</span><span style="color:#9ECBFF"> requirements.txt</span></span>
+<span class="line"><span style="color:#B392F0">python</span><span style="color:#9ECBFF"> run.py</span><span style="color:#79B8FF"> --task</span><span style="color:#9ECBFF"> "build a snake game"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># AutoGen Studio</span></span>
+<span class="line"><span style="color:#B392F0">pip</span><span style="color:#9ECBFF"> install</span><span style="color:#9ECBFF"> autogenstudio</span></span>
+<span class="line"><span style="color:#B392F0">autogenstudio</span><span style="color:#9ECBFF"> ui</span><span style="color:#79B8FF"> --port</span><span style="color:#79B8FF"> 8081</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># MetaGPT</span></span>
+<span class="line"><span style="color:#B392F0">git</span><span style="color:#9ECBFF"> clone</span><span style="color:#9ECBFF"> https://github.com/geekan/MetaGPT.git</span></span>
+<span class="line"><span style="color:#79B8FF">cd</span><span style="color:#9ECBFF"> MetaGPT</span><span style="color:#E1E4E8"> &#x26;&#x26; </span><span style="color:#B392F0">pip</span><span style="color:#9ECBFF"> install</span><span style="color:#79B8FF"> -e</span><span style="color:#9ECBFF"> .</span></span>
+<span class="line"><span style="color:#B392F0">python</span><span style="color:#9ECBFF"> startup.py</span><span style="color:#9ECBFF"> "write a snake game in python"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># CrewAI</span></span>
+<span class="line"><span style="color:#B392F0">pip</span><span style="color:#9ECBFF"> install</span><span style="color:#9ECBFF"> crewai</span></span>
+<span class="line"><span style="color:#6A737D"># 然后写你自己的 crew 脚本</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># AgentVerse</span></span>
+<span class="line"><span style="color:#B392F0">git</span><span style="color:#9ECBFF"> clone</span><span style="color:#9ECBFF"> https://github.com/OpenBMB/AgentVerse.git</span></span>
+<span class="line"><span style="color:#79B8FF">cd</span><span style="color:#9ECBFF"> AgentVerse</span><span style="color:#E1E4E8"> &#x26;&#x26; </span><span style="color:#B392F0">pip</span><span style="color:#9ECBFF"> install</span><span style="color:#79B8FF"> -r</span><span style="color:#9ECBFF"> requirements.txt</span></span></code></pre>
+<hr>
+<h2 id="六相关资源">六、相关资源</h2>
+<ul>
+<li><a href="https://microsoft.github.io/autogen/">AutoGen 官方文档</a></li>
+<li><a href="https://arxiv.org/abs/2307.07924">ChatDev 论文</a></li>
+<li><a href="https://arxiv.org/abs/2308.00352">MetaGPT 论文</a></li>
+<li><a href="https://langchain-ai.github.io/langgraph/">LangGraph 文档</a></li>
+<li><a href="https://docs.crewai.com/">CrewAI 文档</a></li>
+</ul>  </div> <hr> <div class="mt-8"> <a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150">
+&larr; 返回博客列表
+</a> </div> </article>  </main> <footer class="border-t border-[var(--color-border)] mt-24 py-8"><div class="max-w-content flex items-center justify-between"><span class="text-sm text-[var(--color-text-tertiary)]">
+&copy; 2026 星游寰宇
+</span><div class="flex items-center gap-4"><a href="/blog" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150">博客</a><a href="/projects" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150">项目</a><a href="/about" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150">关于</a></div></div></footer> </body></html>

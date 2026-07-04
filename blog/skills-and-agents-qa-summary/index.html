@@ -1,0 +1,304 @@
+<!DOCTYPE html><html lang="zh-CN"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="星游寰宇的个人网站——技术文章、项目展示与思考笔记"><meta name="color-scheme" content="light"><title>Skills 与 Agents 问答总结 — 星游寰宇</title><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"><link rel="stylesheet" href="/_astro/_slug_.7HNCBA16.css"></head> <body class="min-h-screen flex flex-col"> <nav class="flex items-center justify-between py-6 max-w-content"><a href="/" class="text-base font-semibold no-underline tracking-tight">
+星游寰宇
+</a><div class="flex items-center gap-6"><a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150">博客</a><a href="/projects" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150">项目</a><a href="/about" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150">关于</a></div></nav> <main class="flex-1">  <article class="max-w-content py-16"> <header class="mb-12 text-center"> <h1 class="text-3xl font-semibold mb-3">Skills 与 Agents 问答总结</h1> <div class="flex items-center justify-center gap-2 text-[var(--color-text-tertiary)] text-sm"> <time datetime="2026-07-04">2026-07-04</time>  <span>·</span> <span class="text-sm text-[var(--color-text-tertiary)]"> <span> Claude Code<span class="mx-1">·</span> </span><span> Agent<span class="mx-1">·</span> </span><span> Skill<span class="mx-1">·</span> </span><span> Workflow </span> </span>  </div> </header> <div>  <blockquote>
+<p>整理日期：2026-07-04
+来源：对话中关于 Claude Code 多代理系统的 12 轮问答</p>
+</blockquote>
+<hr>
+<h2 id="一基础概念">一、基础概念</h2>
+<h3 id="三个核心概念的区别">三个核心概念的区别</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>概念</th><th>是什么</th><th>调用方式</th><th>例子</th></tr></thead><tbody><tr><td><strong>Skill</strong></td><td>工作流指令集，告诉你怎么做</td><td><code>Skill</code> 工具</td><td><code>superpowers:brainstorming</code></td></tr><tr><td><strong>Agent</strong></td><td>独立 AI 实例，负责执行具体任务</td><td><code>Agent</code> 工具</td><td><code>ecc:code-reviewer</code></td></tr><tr><td><strong>Workflow</strong></td><td>编排脚本，协调多个 Agent 协作</td><td><code>Workflow</code> 工具</td><td><code>review-changes</code></td></tr></tbody></table>
+<p><strong>类比：Skill = 剧本 + 导演，Agent = 演员，Workflow = 拍摄计划</strong></p>
+<hr>
+<h2 id="二skill-和-agent-的关系">二、Skill 和 Agent 的关系</h2>
+<h3 id="核心原则">核心原则</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Skill（主对话中运行，全工具权限）</span></span>
+<span class="line"><span>  │</span></span>
+<span class="line"><span>  ├─ Agent 工具 → 启动 ecc:security-reviewer（只有 Read/Grep/Glob/Bash）</span></span>
+<span class="line"><span>  ├─ Agent 工具 → 启动 ecc:react-reviewer（只有 Read/Grep/Glob/Bash）</span></span>
+<span class="line"><span>  └─ Agent 工具 → 启动 implementer（可以 Write/Edit）</span></span></code></pre>
+<ul>
+<li><strong>Skill 调 Agent</strong>：Skill 运行在主对话中，通过 <code>Agent</code> 工具分派任务</li>
+<li><strong>Agent 的能力边界由 tools 列表决定</strong>：给什么工具，就能做什么</li>
+<li><strong>Skill 不越权</strong>：因为 Skill 只会调用该调的 Agent</li>
+<li><strong>Agent 不越权</strong>：因为它的工具集从定义上就被锁死了</li>
+</ul>
+<h3 id="skill-和-agent-的职责分工">Skill 和 Agent 的职责分工</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>角色</th><th>职责</th><th>你的工具</th></tr></thead><tbody><tr><td><strong>规划者</strong></td><td>分析需求 → 拆解任务 → 排优先级</td><td>Stage 1+2（brainstorming + writing-plans）</td></tr><tr><td><strong>协调者</strong></td><td>分配任务 → 管理依赖 → 仲裁分歧</td><td>Stage 4（subagent-driven-development）</td></tr><tr><td><strong>执行者</strong></td><td>接收任务 → 实现 → 交付</td><td>Task implementer 子代理</td></tr></tbody></table>
+<hr>
+<h2 id="三agent-的能力边界控制">三、Agent 的能力边界控制</h2>
+<h3 id="三种控制方式">三种控制方式</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>方式</th><th>机制</th><th align="center">强度</th></tr></thead><tbody><tr><td><strong>工具限制</strong></td><td><code>tools: Read, Grep, Glob</code> — 没给的工具永远用不了</td><td align="center">硬</td></tr><tr><td><strong>System Prompt 约束</strong></td><td>prompt 里写”你只能做 X，禁止做 Y”</td><td align="center">软</td></tr><tr><td><strong>调用者控制</strong></td><td>Skill/主 Agent 选择性地调用特定 Agent</td><td align="center">中</td></tr></tbody></table>
+<h3 id="示例创建一个受限-agent">示例：创建一个受限 Agent</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="yaml"><code><span class="line"><span style="color:#6A737D"># .claude/agents/my-reviewer.md</span></span>
+<span class="line"><span style="color:#B392F0">---</span></span>
+<span class="line"><span style="color:#85E89D">name</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">my-reviewer</span></span>
+<span class="line"><span style="color:#85E89D">description</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">只审查，不写代码</span></span>
+<span class="line"><span style="color:#85E89D">tools</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">Read, Grep, Glob</span></span>
+<span class="line"><span style="color:#85E89D">model</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">sonnet</span></span>
+<span class="line"><span style="color:#B392F0">---</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#9ECBFF">你只能审查代码质量，不能修改任何文件。</span></span></code></pre>
+<h3 id="能否设置只使用特定-skill-的-agent">能否设置只使用特定 Skill 的 Agent？</h3>
+<p><strong>不能直接设置”Skill 白名单”</strong>——Skill 是全局注册表。但可以通过以下方式实现：</p>
+<ol>
+<li><strong>不给 Skill 工具</strong>（<code>tools</code> 里不写 <code>Skill</code>）— 硬隔离</li>
+<li><strong>System Prompt 约束</strong> — prompt 里写”你只能用 X、Y 两个技能”</li>
+<li><strong>写专用 Skill</strong> — Skill 本身是全局的，但内容决定了只有特定 Agent 会用它</li>
+</ol>
+<h3 id="能否设置只使用特定-agent-的-skill">能否设置只使用特定 Agent 的 Skill？</h3>
+<p><strong>不能直接设置”Agent 白名单”</strong>——但可以通过以下方式实现：</p>
+<ol>
+<li><strong>Skill 里写死调用哪个 Agent</strong> — Skill 的指令明确指定 Agent 类型</li>
+<li><strong>限制 Skill 调用者的工具</strong> — 不让 Skill 调用者有 <code>Agent</code> 工具</li>
+</ol>
+<hr>
+<h2 id="四自定义-agent-和自定义-skill">四、自定义 Agent 和自定义 Skill</h2>
+<h3 id="自定义-agent">自定义 Agent</h3>
+<p>在 <code>.claude/agents/</code> 下创建 <code>.md</code> 文件即可：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>.claude/agents/</span></span>
+<span class="line"><span>  ├─ snake-logic-reviewer.md     → 专审游戏逻辑</span></span>
+<span class="line"><span>  ├─ snake-canvas-reviewer.md    → 专审 Canvas 渲染</span></span>
+<span class="line"><span>  └─ snake-ux-reviewer.md        → 专审键盘交互</span></span></code></pre>
+<p><strong>Agent 来源不限于内置</strong>：</p>
+<ul>
+<li>本地 <code>.md</code> 文件（最直接）</li>
+<li>MCP 连接外部 Agent（如 LobeHub）</li>
+<li>Workflow 脚本内联定义</li>
+<li>API 对接外部模型</li>
+</ul>
+<h3 id="自定义-skill">自定义 Skill</h3>
+<p>Skills 是全局注册表，可以在 <code>.claude/skills/</code> 下创建。自定义 Agent 可以在其 system prompt 中指定使用哪些 Skill。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>.claude/</span></span>
+<span class="line"><span>  ├─ agents/</span></span>
+<span class="line"><span>  │   └─ snake-logic-reviewer.md   → prompt 里限制只用 audit 类 Skill</span></span>
+<span class="line"><span>  └─ skills/</span></span>
+<span class="line"><span>      └─ snake-logic-audit.md      → 专为 logic-reviewer 写的专用 Skill</span></span></code></pre>
+<h3 id="自定义-agent-能拥有私有-skill-吗">自定义 Agent 能拥有私有 Skill 吗？</h3>
+<p><strong>不能。</strong> Skill 是全局的，不属于任何 Agent。但可以通过 prompt 约束 Agent 只能用指定 Skill。</p>
+<hr>
+<h2 id="五agent-协同工作模式">五、Agent 协同工作模式</h2>
+<h3 id="claude-code-内置的三种协同模式">Claude Code 内置的三种协同模式</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>模式</th><th>工具</th><th>适用场景</th></tr></thead><tbody><tr><td><strong>点对点通信</strong></td><td><code>SendMessage</code></td><td>简单指派</td></tr><tr><td><strong>编排式协同</strong></td><td><code>Workflow</code></td><td>多 Agent 并行 + 流水线</td></tr><tr><td><strong>议事会</strong></td><td><code>ecc:council</code></td><td>多 Agent 讨论决策</td></tr></tbody></table>
+<h3 id="对应你已有的-5-stage-工作流">对应你已有的 5 Stage 工作流</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Stage 1: brainstorming        → 设计</span></span>
+<span class="line"><span>Stage 2: writing-plans         → 计划（精确到函数签名）</span></span>
+<span class="line"><span>Stage 3: using-git-worktrees   → 隔离环境</span></span>
+<span class="line"><span>Stage 4: subagent-driven-dev   → 批量分发 implementer + reviewer</span></span>
+<span class="line"><span>Stage 5: finishing             → 收尾合并</span></span></code></pre>
+<h3 id="开源前端应用外部参考">开源前端应用（外部参考）</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>项目</th><th>最接近的模式</th></tr></thead><tbody><tr><td><strong>ChatDev</strong></td><td>代理逐轮开会讨论</td></tr><tr><td><strong>MetaGPT</strong></td><td>SOP 驱动的结构化会议 + 文档产出</td></tr><tr><td><strong>AutoGen Studio</strong></td><td>拖拽设计代理团队，Web UI</td></tr><tr><td><strong>AgentVerse</strong></td><td>议事会（Council）模式</td></tr></tbody></table>
+<p>详见 <code>multi-agent-collaboration-frontend-tools.md</code></p>
+<hr>
+<h2 id="六单代理-vs-多代理决策框架">六、单代理 vs 多代理决策框架</h2>
+<h3 id="对比表">对比表</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>维度</th><th align="center">单代理</th><th align="center">多代理</th></tr></thead><tbody><tr><td>简单任务效率</td><td align="center">✅ 高</td><td align="center">❌ 杀鸡用牛刀</td></tr><tr><td>复杂任务质量</td><td align="center">⚠️ 容易遗漏</td><td align="center">✅ 专业深度 + 交叉验证</td></tr><tr><td>并行任务速度</td><td align="center">❌ 串行瓶颈</td><td align="center">✅ 3-10x 加速</td></tr><tr><td>Token 成本</td><td align="center">✅ 低</td><td align="center">❌ 1.5-3x</td></tr><tr><td>运维复杂度</td><td align="center">✅ 简单</td><td align="center">❌ 需要编排</td></tr><tr><td>错误率</td><td align="center">⚠️ 自审盲区</td><td align="center">✅ 对抗验证减少遗漏</td></tr><tr><td>串行任务延迟</td><td align="center">✅ 无通信开销</td><td align="center">❌ 通信开销叠加</td></tr></tbody></table>
+<h3 id="决策原则">决策原则</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>任务是否独立可拆分？</span></span>
+<span class="line"><span>  ├─ 是 → 任务是否复杂到单代理不可靠？</span></span>
+<span class="line"><span>  │        ├─ 是 → 用多代理 ✅</span></span>
+<span class="line"><span>  │        └─ 否 → 单代理足够</span></span>
+<span class="line"><span>  └─ 否 → 任务天然串行？</span></span>
+<span class="line"><span>           ├─ 是 → 单代理更高效 ✅（除非需要对抗验证）</span></span>
+<span class="line"><span>           └─ 否 → 重新审视任务分解方式</span></span></code></pre>
+<p><strong>核心原则：多代理不是银弹——它解决的是”单代理能力边界”问题，代价是 token、延迟和编排复杂度。</strong></p>
+<hr>
+<h2 id="七架构全景图">七、架构全景图</h2>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>┌─────────────────────────────────────────────────────┐</span></span>
+<span class="line"><span>│                    你的 Claude Code 环境               │</span></span>
+<span class="line"><span>│                                                       │</span></span>
+<span class="line"><span>│  Skills（剧本）          Agents（演员）                 │</span></span>
+<span class="line"><span>│  ┌──────────────┐      ┌──────────────────────┐      │</span></span>
+<span class="line"><span>│  │ brainstorming │──▶  │ ecc:architect         │      │</span></span>
+<span class="line"><span>│  │ writing-plans │──▶  │ Plan                  │      │</span></span>
+<span class="line"><span>│  │ subagent-dev  │──▶  │ implementer           │      │</span></span>
+<span class="line"><span>│  │               │──▶  │ ecc:code-reviewer     │      │</span></span>
+<span class="line"><span>│  │               │──▶  │ ecc:security-reviewer │      │</span></span>
+<span class="line"><span>│  │ finishing     │──▶  │ ecc:doc-updater       │      │</span></span>
+<span class="line"><span>│  └──────────────┘      └──────────────────────┘      │</span></span>
+<span class="line"><span>│                                                       │</span></span>
+<span class="line"><span>│  自定义扩展                                          │</span></span>
+<span class="line"><span>│  ┌──────────────┐      ┌──────────────────────┐      │</span></span>
+<span class="line"><span>│  │ 自定义 Skill  │──▶  │ 自定义 Agent (.md)    │      │</span></span>
+<span class="line"><span>│  └──────────────┘      │ MCP 外部 Agent        │      │</span></span>
+<span class="line"><span>│                         │ API 对接模型          │      │</span></span>
+<span class="line"><span>│                         └──────────────────────┘      │</span></span>
+<span class="line"><span>└─────────────────────────────────────────────────────┘</span></span></code></pre>  </div> <hr> <div class="mt-8"> <a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150">
+&larr; 返回博客列表
+</a> </div> </article>  </main> <footer class="border-t border-[var(--color-border)] mt-24 py-8"><div class="max-w-content flex items-center justify-between"><span class="text-sm text-[var(--color-text-tertiary)]">
+&copy; 2026 星游寰宇
+</span><div class="flex items-center gap-4"><a href="/blog" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150">博客</a><a href="/projects" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150">项目</a><a href="/about" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150">关于</a></div></div></footer> </body></html>
