@@ -1,6 +1,6 @@
 ---
 title: "Skills 与 Agents 问答总结"
-date: 2026-07-04
+date: "2026-07-04"
 tags: ["Claude Code", "Agent", "Skill", "Workflow"]
 summary: "关于 Claude Code 多代理系统的 12 轮问答——涵盖 Skill/Agent/Workflow 概念、能力边界控制、协同工作模式、单代理与多代理决策框架。"
 ---
