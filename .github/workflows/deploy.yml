@@ -5,6 +5,9 @@ on:
     branches: [main]
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -17,17 +20,6 @@ jobs:
 
       - run: npm ci
       - run: npm run build
-
-      - name: Verify dist
-        run: |
-          echo "=== dist contents ==="
-          ls -la dist/
-          echo ""
-          echo "=== index.html exists? ==="
-          test -f dist/index.html && echo "YES" || echo "NO"
-          echo ""
-          echo "=== dist/index.html first 5 lines ==="
-          head -5 dist/index.html
 
       - uses: peaceiris/actions-gh-pages@v4
         with:
