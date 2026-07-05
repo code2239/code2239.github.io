@@ -875,19 +875,19 @@ ls ~/.claude/plugins/cache/superpowers-marketplace/superpowers/ 2>/dev/null
 
 ### Superpowers 14 技能清单
 
-| # | 技能名 | 文件大小 |
-|---|--------|----------|
-| 1 | using-superpowers | 3,063 bytes |
-| 2 | brainstorming | 10,435 bytes |
-| 3 | systematic-debugging | 9,885 bytes |
-| 4 | test-driven-development | 9,894 bytes |
-| 5 | verification-before-completion | 4,201 bytes |
-| 6 | requesting-code-review | 2,826 bytes |
-| 7 | receiving-code-review | 6,382 bytes |
-| 8 | writing-plans | 7,092 bytes |
-| 9 | executing-plans | 2,588 bytes |
-| 10 | subagent-driven-development | 21,647 bytes |
-| 11 | dispatching-parallel-agents | 6,644 bytes |
-| 12 | finishing-a-development-branch | 6,832 bytes |
-| 13 | using-git-worktrees | 7,472 bytes |
-| 14 | writing-skills | 26,431 bytes |
+| #   | 技能名                            | 文件大小         |
+| --- | ------------------------------ | ------------ |
+| 1   | using-superpowers              | 3,063 bytes  |
+| 2   | brainstorming                  | 10,435 bytes |
+| 3   | systematic-debugging           | 9,885 bytes  |
+| 4   | test-driven-development        | 9,894 bytes  |
+| 5   | verification-before-completion | 4,201 bytes  |
+| 6   | requesting-code-review         | 2,826 bytes  |
+| 7   | receiving-code-review          | 6,382 bytes  |
+| 8   | writing-plans                  | 7,092 bytes  |
+| 9   | executing-plans                | 2,588 bytes  |
+| 10  | subagent-driven-development    | 21,647 bytes |
+| 11  | dispatching-parallel-agents    | 6,644 bytes  |
+| 12  | finishing-a-development-branch | 6,832 bytes  |
+| 13  | using-git-worktrees            | 7,472 bytes  |
+| 14  | writing-skills                 | 26,431 bytes |
