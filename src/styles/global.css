@@ -37,33 +37,6 @@
   --astro-code-token-link: #0550ae;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-bg: #111111;
-    --color-bg-secondary: #1a1a1a;
-    --color-text: #ededed;
-    --color-text-secondary: #a0a0a0;
-    --color-text-tertiary: #666666;
-    --color-border: #2e2e2e;
-    --color-border-hover: #444444;
-    --color-accent: #60a5fa;
-    --color-accent-soft: #1e293b;
-
-    /* Shiki code highlighting (dark) */
-    --astro-code-color-text: #e6edf3;
-    --astro-code-color-background: #161b22;
-    --astro-code-token-constant: #79c0ff;
-    --astro-code-token-string: #a5d6ff;
-    --astro-code-token-comment: #8b949e;
-    --astro-code-token-keyword: #ff7b72;
-    --astro-code-token-parameter: #d2a8ff;
-    --astro-code-token-function: #d2a8ff;
-    --astro-code-token-string-expression: #a5d6ff;
-    --astro-code-token-punctuation: #e6edf3;
-    --astro-code-token-link: #79c0ff;
-  }
-}
-
 /* ===== Reading Progress Bar ===== */
 .reading-progress {
   position: fixed;
