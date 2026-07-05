@@ -20,8 +20,9 @@ const hasToc = headings.length > 0;
 <Layout title={title}>
   <ReadingProgress />
 
-  <div class="max-w-content py-16">
+  <div class="px-6 xl:px-12 py-16">
     <article>
+      <!-- Header -->
       <header class="mb-12 text-center">
         <h1 class="text-3xl font-semibold mb-3 tracking-tight">{title}</h1>
         <div class="flex items-center justify-center gap-2 text-[var(--color-text-tertiary)] text-sm">
@@ -37,8 +38,21 @@ const hasToc = headings.length > 0;
         </div>
       </header>
 
-      <div class="flex gap-16">
-        <div class="flex-1 min-w-0">
+      <!-- Body: TOC (left) + Content (center) -->
+      <div class="blog-layout">
+        <!-- TOC: left sidebar -->
+        {
+          hasToc && (
+            <aside class="blog-toc">
+              <div class="sticky top-24">
+                <TableOfContents headings={headings} />
+              </div>
+            </aside>
+          )
+        }
+
+        <!-- Main content -->
+        <div class="blog-body">
           <div class="prose prose-neutral max-w-none">
             <slot />
           </div>
@@ -54,20 +68,34 @@ const hasToc = headings.length > 0;
             </a>
           </div>
         </div>
-
-        {
-          hasToc && (
-            <aside class="hidden xl:block w-56 shrink-0">
-              <div class="sticky top-24">
-                <TableOfContents headings={headings} />
-              </div>
-            </aside>
-          )
-        }
       </div>
     </article>
   </div>
 </Layout>
+
+<style>
+  .blog-layout {
+    display: grid;
+    grid-template-columns: 14rem 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  .blog-toc {
+    display: none;
+  }
+
+  @media (min-width: 1024px) {
+    .blog-toc {
+      display: block;
+    }
+  }
+
+  .blog-body {
+    min-width: 0;
+    padding-right: 2rem;
+  }
+</style>
 
 <script>
   const tocLinks = document.querySelectorAll<HTMLAnchorElement>(".toc-list a");
