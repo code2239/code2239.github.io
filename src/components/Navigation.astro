@@ -7,25 +7,54 @@ const { variant = "header" } = Astro.props;
 
 const links = [
   { href: "/blog", label: "博客" },
-      { href: "/about", label: "关于" },
+  { href: "/about", label: "关于" },
 ];
 ---
 
 {
   variant === "header" ? (
-    <nav class="sticky top-0 z-40 bg-[var(--color-bg)]/80 backdrop-blur-md flex items-center justify-between py-4 px-6 max-w-content border-b border-[var(--color-border)]">
-      <a href="/" class="text-base font-semibold no-underline tracking-tight">
-        星游寰宇
-      </a>
-      <div class="flex items-center gap-6">
-        {links.map((link) => (
-          <a
-            href={link.href}
-            class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150"
-          >
-            {link.label}
-          </a>
-        ))}
+    <nav class="sticky top-0 z-40 bg-[var(--color-bg)]/80 backdrop-blur-md border-b border-[var(--color-border)]">
+      <div class="max-w-content flex items-center justify-between py-4">
+        <a href="/" class="text-base font-semibold no-underline tracking-tight">
+          星游寰宇
+        </a>
+
+        <!-- Desktop nav -->
+        <div class="hidden sm:flex items-center gap-6">
+          {links.map((link) => (
+            <a
+              href={link.href}
+              class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150"
+            >
+              {link.label}
+            </a>
+          ))}
+        </div>
+
+        <!-- Mobile hamburger -->
+        <button
+          id="menu-btn"
+          class="sm:hidden flex flex-col gap-1 p-2 -mr-2 cursor-pointer"
+          aria-label="打开菜单"
+        >
+          <span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-transform duration-200"></span>
+          <span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-opacity duration-200"></span>
+          <span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-transform duration-200"></span>
+        </button>
+      </div>
+
+      <!-- Mobile menu -->
+      <div id="mobile-menu" class="hidden sm:hidden border-t border-[var(--color-border)] bg-[var(--color-bg)]">
+        <div class="max-w-content flex flex-col gap-2 py-4">
+          {links.map((link) => (
+            <a
+              href={link.href}
+              class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1"
+            >
+              {link.label}
+            </a>
+          ))}
+        </div>
       </div>
     </nav>
   ) : (
@@ -48,3 +77,22 @@ const links = [
     </footer>
   )
 }
+
+<style>
+  .menu-bar { transition: transform 250ms ease, opacity 250ms ease; }
+  .menu-open .menu-bar:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+  .menu-open .menu-bar:nth-child(2) { opacity: 0; }
+  .menu-open .menu-bar:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+</style>
+
+<script>
+  const btn = document.getElementById("menu-btn");
+  const menu = document.getElementById("mobile-menu");
+  if (btn && menu) {
+    btn.addEventListener("click", () => {
+      const open = menu.classList.toggle("hidden");
+      btn.classList.toggle("menu-open", !open);
+      btn.setAttribute("aria-label", open ? "打开菜单" : "关闭菜单");
+    });
+  }
+</script>

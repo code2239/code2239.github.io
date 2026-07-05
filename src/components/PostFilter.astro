@@ -22,8 +22,15 @@ const { allTags } = Astro.props;
       type="text"
       id="post-search"
       placeholder="搜索文章标题或摘要..."
-      class="w-full pl-10 pr-4 py-2.5 text-sm bg-[var(--color-bg)] border border-[var(--color-border)] rounded-lg text-[var(--color-text)] placeholder:text-[var(--color-text-tertiary)] focus:outline-none focus:border-[var(--color-accent)] transition-colors duration-150"
+      class="w-full pl-10 pr-10 py-2.5 text-sm bg-[var(--color-bg)] border border-[var(--color-border)] rounded-lg text-[var(--color-text)] placeholder:text-[var(--color-text-tertiary)] focus:outline-none focus:border-[var(--color-accent)] transition-colors duration-150"
     />
+    <button
+      id="search-clear"
+      class="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 rounded-full text-[var(--color-text-tertiary)] hover:text-[var(--color-text)] transition-colors hidden items-center justify-center cursor-pointer text-xs"
+      aria-label="清除搜索"
+    >
+      &times;
+    </button>
   </div>
 
   <!-- Tag filter buttons -->
@@ -117,7 +124,19 @@ const { allTags } = Astro.props;
     if (searchInput) {
       searchInput.addEventListener("input", () => {
         updateVisibility();
+        const clearBtn2 = document.getElementById("search-clear");
+        if (clearBtn2) clearBtn2.style.display = searchInput.value ? "flex" : "none";
       });
+      // Clear button
+      const clearBtn = document.getElementById("search-clear");
+      if (clearBtn) {
+        clearBtn.addEventListener("click", () => {
+          searchInput.value = "";
+          searchInput.focus();
+          clearBtn.style.display = "none";
+          updateVisibility();
+        });
+      }
     }
 
     // Check URL for initial tag

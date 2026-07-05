@@ -60,5 +60,65 @@ const desc =
       <slot />
     </main>
     <Navigation variant="footer" />
+
+    <!-- Link preview tooltip -->
+    <div id="link-preview" style="display:none;position:fixed;z-index:99;max-width:18rem;pointer-events:none;"></div>
+
+<style>
+  #link-preview {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    box-shadow: var(--shadow-lg);
+    font-size: 0.8125rem;
+    color: var(--color-text);
+    line-height: 1.5;
+  }
+  #link-preview .lp-title { font-weight: 600; margin-bottom: 0.25rem; }
+  #link-preview .lp-summary { color: var(--color-text-secondary); font-size: 0.75rem; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+</style>
+
+<script>
+  (async () => {
+    try {
+      const res = await fetch("/posts.json");
+      if (!res.ok) return;
+      const posts = await res.json();
+      const map = new Map(posts.map((p: { href: string; title: string; summary: string }) => [p.href, p]));
+
+      const tip = document.getElementById("link-preview");
+      if (!tip) return;
+
+      let currentHref = "";
+      let timer: ReturnType<typeof setTimeout>;
+
+      document.addEventListener("mouseover", (e) => {
+        const target = (e.target as HTMLElement).closest("a[href^='/blog/']") as HTMLAnchorElement | null;
+        if (!target) { tip.style.display = "none"; currentHref = ""; return; }
+        const href = target.getAttribute("href");
+        if (!href || href === currentHref) return;
+        const post = map.get(href);
+        if (!post) return;
+
+        currentHref = href;
+        timer = setTimeout(() => {
+          tip.innerHTML = `<div class="lp-title">${post.title}</div><div class="lp-summary">${post.summary}</div>`;
+          const rect = target.getBoundingClientRect();
+          let left = rect.left;
+          let top = rect.bottom + 6;
+          if (left + 288 > window.innerWidth) left = window.innerWidth - 296;
+          if (top + 80 > window.innerHeight) top = rect.top - 80;
+          Object.assign(tip.style, { left: left + "px", top: top + "px", display: "block" });
+        }, 300);
+      }, { passive: true });
+
+      document.addEventListener("mouseout", (e) => {
+        const target = (e.target as HTMLElement).closest("a[href^='/blog/']");
+        if (target) { clearTimeout(timer); tip.style.display = "none"; currentHref = ""; }
+      }, { passive: true });
+    } catch {}
+  })();
+</script>
   </body>
 </html>
