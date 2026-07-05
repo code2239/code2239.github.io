@@ -5,10 +5,16 @@ import "../styles/global.css";
 interface Props {
   title: string;
   description?: string;
+  ogImage?: string;
+  canonicalURL?: string;
 }
 
-const { title, description } = Astro.props;
+const { title, description, ogImage, canonicalURL } = Astro.props;
 const fullTitle = `${title} — 星游寰宇`;
+const siteUrl = "https://code2239.github.io";
+const pageUrl = canonicalURL ? `${siteUrl}${canonicalURL}` : Astro.url.href;
+const desc =
+  description || "星游寰宇的个人网站——技术文章、项目展示与思考笔记";
 ---
 
 <!doctype html>
@@ -16,13 +22,37 @@ const fullTitle = `${title} — 星游寰宇`;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content={description || "星游寰宇的个人网站——技术文章、项目展示与思考笔记"}
-    />
-    <meta name="color-scheme" content="light" />
+    <meta name="description" content={desc} />
+    <meta name="color-scheme" content="light dark" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={desc} />
+    <meta property="og:url" content={pageUrl} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="星游寰宇" />
+    <meta property="og:locale" content="zh_CN" />
+    {ogImage && <meta property="og:image" content={`${siteUrl}${ogImage}`} />}
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={desc} />
+    {ogImage && (
+      <meta name="twitter:image" content={`${siteUrl}${ogImage}`} />
+    )}
+
+    <!-- Canonical -->
+    <link rel="canonical" href={pageUrl} />
+
     <title>{fullTitle}</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="星游寰宇 RSS"
+      href="/rss.xml"
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
