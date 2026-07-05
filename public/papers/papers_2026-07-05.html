@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background: #f5f5f5; margin: 0; padding: 0; color: #333; }
+  .container { max-width: 680px; margin: 0 auto; background: #fff; }
+  .header { background: linear-gradient(135deg, #1a73e8 0%, #0d47a1 100%); color: #fff; padding: 32px 24px; text-align: center; }
+  .header h1 { margin: 0 0 8px 0; font-size: 24px; }
+  .header .date { font-size: 14px; opacity: 0.85; }
+  .stats { display: flex; justify-content: center; gap: 24px; padding: 20px 24px; background: #e8f0fe; flex-wrap: wrap; }
+  .stat { text-align: center; }
+  .stat .num { font-size: 28px; font-weight: 700; color: #1a73e8; }
+  .stat .label { font-size: 12px; color: #666; margin-top: 4px; }
+  .section { padding: 24px; }
+  .section-title { font-size: 18px; font-weight: 600; color: #1a73e8; border-bottom: 2px solid #1a73e8; padding-bottom: 8px; margin: 0 0 16px 0; }
+  .highlight-paper { background: #fffde7; border-left: 4px solid #f9a825; padding: 16px; margin-bottom: 16px; border-radius: 4px; }
+  .highlight-paper .htitle { font-size: 16px; font-weight: 600; margin: 0 0 6px 0; }
+  .highlight-paper .htitle a { color: #1a73e8; text-decoration: none; }
+  .highlight-paper .hmeta { font-size: 13px; color: #666; }
+  .highlight-paper .habstract { font-size: 13px; color: #555; margin-top: 8px; line-height: 1.5; }
+  .paper-card { border: 1px solid #e0e0e0; border-radius: 6px; padding: 14px; margin-bottom: 12px; }
+  .paper-card .ptitle { font-size: 15px; font-weight: 600; margin: 0 0 4px 0; }
+  .paper-card .ptitle a { color: #1a73e8; text-decoration: none; }
+  .paper-card .pmeta { font-size: 12px; color: #888; }
+  .paper-card .pmeta .source-tag { display: inline-block; padding: 1px 6px; border-radius: 3px; font-size: 11px; margin-right: 6px; }
+  .source-arxiv { background: #b71c1c; color: #fff; }
+  .source-pubmed { background: #1565c0; color: #fff; }
+  .source-crossref { background: #2e7d32; color: #fff; }
+  .source-semantic { background: #6a1b9a; color: #fff; }
+  .pabstract { font-size: 13px; color: #555; margin-top: 6px; line-height: 1.5; }
+  .footer { text-align: center; padding: 20px 24px; font-size: 12px; color: #999; border-top: 1px solid #eee; }
+  .badge-citations { display: inline-block; background: #e8f5e9; color: #2e7d32; padding: 2px 8px; border-radius: 10px; font-size: 12px; font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="container">
+  <!-- Header -->
+  <div class="header">
+    <h1>🔋 固态电池文献速递</h1>
+    <div class="date">2026-07-05</div>
+  </div>
+
+  <!-- 统计 -->
+  <div class="stats">
+    <div class="stat"><div class="num">29</div><div class="label">📄 论文总数</div></div>
+    <div class="stat"><div class="num">35</div><div class="label">📥 检索总数 (含重复)</div></div>
+    <div class="stat"><div class="num">0</div><div class="label">📊 被引用论文</div></div>
+  </div>
+  <div style="text-align:center;font-size:13px;color:#888;padding:0 24px 12px;">来源分布: CrossRef: 7 · PubMed: 5</div>
+
+  <!-- 精选推荐 -->
+  <div class="section">
+    <h2 class="section-title">⭐ 精选推荐</h2>
+    <div class="highlight-paper">
+      <p class="htitle"><a href="https://pubmed.ncbi.nlm.nih.gov/42397184/" target="_blank">In Situ Raman Spectroscopy Reveals the Dynamic Evolution and Ethanol Dependence of SEI Structure in Li-Mediated N</a></p>
+      <div class="hmeta">👤 En-Hui Ma, Wen-Xuan Li, Hai-Sheng Su, Yuan-Hui Xiao, Hong-Wei Li et al. · Journal of the American Chemical Society · 2026-Jul-03 · 📊 Cited 0</div>
+      <div class="habstract">The lithium-mediated nitrogen reduction reaction (Li-NRR) provides a promising strategy toward green NH</div>
+    </div>
+    <div class="highlight-paper">
+      <p class="htitle"><a href="https://pubmed.ncbi.nlm.nih.gov/42397026/" target="_blank">Toward 400 Wh/kg Sulfide-Based All-Solid-State Lithium Metal Batteries: From Interfacial Failure Mechanisms to Pouch Cell Integration.</a></p>
+      <div class="hmeta">👤 Xinglan Xiao, Haodong Shi, Zhong-Shuai Wu · ACS applied materials & interfaces · 2026-Jul-03 · 📊 Cited 0</div>
+      <div class="habstract">The demand for long-endurance power systems in energy vehicles, space shuttles, and drones requires batteries with high energy density. Achieving this goal relies not only on advanced active materials but also on multiscale collaborative design and precise manufacturing across the entire chain,…</div>
+    </div>
+    <div class="highlight-paper">
+      <p class="htitle"><a href="https://pubmed.ncbi.nlm.nih.gov/42396978/" target="_blank">Interfacial Degradation Electrochemistry of Micro-Silicon Anodes in Solid-State and Liquid Electrolytes.</a></p>
+      <div class="hmeta">👤 Seokjin Kim, Jeongwoo Kim, Jaekyung Sung · Advanced science (Weinheim, Baden-Wurttemberg, Germany) · 2026-Jul-03 · 📊 Cited 0</div>
+      <div class="habstract">Micro-silicon (m-Si) is a promising next-generation anode material for lithium-ion batteries (LIBs), but its practical use is limited by severe volume expansion, particle pulverization, and unstable solid electrolyte interphase (SEI) formation. Recently, solidelectrolyte (SE)-free m-Si electrodes…</div>
+    </div>
+    <div class="highlight-paper">
+      <p class="htitle"><a href="https://pubmed.ncbi.nlm.nih.gov/42394638/" target="_blank">Time-Scale Renormalization of Correlation Decay Governs Li-Ion Transport in Garnet Solid Electrolytes.</a></p>
+      <div class="hmeta">👤 Saumya Ranjan Mahanta, Swastika Banerjee · Journal of the American Chemical Society · 2026-Jul-03 · 📊 Cited 0</div>
+      <div class="habstract">Ion transport in solids is a key determinant of next-generation energy technologies, especially solid-state batteries, fuel cells, and other electrochemical systems. However, designing a superionic conductor remains challenging because ionic conductivity arises from a coupled interplay among…</div>
+    </div>
+    <div class="highlight-paper">
+      <p class="htitle"><a href="https://pubmed.ncbi.nlm.nih.gov/42394618/" target="_blank">A Selective-Transport Elastomeric Coating Regulating Hierarchical Solid Electrolyte Interphase for Low-Temperature Lithium-Metal Batteries.</a></p>
+      <div class="hmeta">👤 Hang Ding, Linming Bai, Xinyuan Shan, Yue Li, Sijin Jin et al. · Advanced materials (Deerfield Beach, Fla.) · 2026-Jul-03 · 📊 Cited 0</div>
+      <div class="habstract">Enhancing the low-temperature cycling performance of lithium metal batteries (LMBs) relies on the rational design of solid electrolyte interphases (SEIs). Conventional approaches typically involve tuning electrolyte compositions to indirectly generate SEIs dominated by organic or inorganic…</div>
+    </div>
+  </div>
+  <!-- 全部论文 -->
+  <div class="section">
+    <h2 class="section-title">📋 全部论文</h2>
+    <div class="paper-card">
+      <p class="ptitle"><a href="https://pubmed.ncbi.nlm.nih.gov/42397184/" target="_blank">In Situ Raman Spectroscopy Reveals the Dynamic Evolution and Ethanol Dependence of SEI Structure in Li-Mediated N</a></p>
+      <div class="pmeta"><span class="source-tag source-pubmed">PubMed</span> · <span>Journal of the American Chemical Society</span> · <span>📅 2026-Jul-03</span></div>
+      <div class="pmeta">👤 En-Hui Ma, Wen-Xuan Li, Hai-Sheng Su et al.</div>
+      <div class="pabstract">The lithium-mediated nitrogen reduction reaction (Li-NRR) provides a promising strategy toward green NH</div>
+    </div>
+    <div class="paper-card">
+      <p class="ptitle"><a href="https://pubmed.ncbi.nlm.nih.gov/42397026/" target="_blank">Toward 400 Wh/kg Sulfide-Based All-Solid-State Lithium Metal Batteries: From Interfacial Failure Mechanisms to Pouch Cell Integration.</a></p>
+      <div class="pmeta"><span class="source-tag source-pubmed">PubMed</span> · <span>ACS applied materials & interfaces</span> · <span>📅 2026-Jul-03</span></div>
+      <div class="pmeta">👤 Xinglan Xiao, Haodong Shi, Zhong-Shuai Wu</div>
+      <div class="pabstract">The demand for long-endurance power systems in energy vehicles, space shuttles, and drones requires batteries with high energy density. Achieving this goal relies not only on advanced active materials but also on multiscale collaborative design and precise manufacturing across the entire chain,…</div>
+    </div>
+    <div class="paper-card">
+      <p class="ptitle"><a href="https://pubmed.ncbi.nlm.nih.gov/42396978/" target="_blank">Interfacial Degradation Electrochemistry of Micro-Silicon Anodes in Solid-State and Liquid Electrolytes.</a></p>
+      <div class="pmeta"><span class="source-tag source-pubmed">PubMed</span> · <span>Advanced science (Weinheim, Baden-Wurttemberg, Germany)</span> · <span>📅 2026-Jul-03</span></div>
+      <div class="pmeta">👤 Seokjin Kim, Jeongwoo Kim, Jaekyung Sung</div>
+      <div class="pabstract">Micro-silicon (m-Si) is a promising next-generation anode material for lithium-ion batteries (LIBs), but its practical use is limited by severe volume expansion, particle pulverization, and unstable solid electrolyte interphase (SEI) formation. Recently, solidelectrolyte (SE)-free m-Si electrodes…</div>
+    </div>
+    <div class="paper-card">
+      <p class="ptitle"><a href="https://pubmed.ncbi.nlm.nih.gov/42394638/" target="_blank">Time-Scale Renormalization of Correlation Decay Governs Li-Ion Transport in Garnet Solid Electrolytes.</a></p>
+      <div class="pmeta"><span class="source-tag source-pubmed">PubMed</span> · <span>Journal of the American Chemical Society</span> · <span>📅 2026-Jul-03</span></div>
+      <div class="pmeta">👤 Saumya Ranjan Mahanta, Swastika Banerjee</div>
+      <div class="pabstract">Ion transport in solids is a key determinant of next-generation energy technologies, especially solid-state batteries, fuel cells, and other electrochemical systems. However, designing a superionic conductor remains challenging because ionic conductivity arises from a coupled interplay among…</div>
+    </div>
+    <div class="paper-card">
+      <p class="ptitle"><a href="https://pubmed.ncbi.nlm.nih.gov/42394618/" target="_blank">A Selective-Transport Elastomeric Coating Regulating Hierarchical Solid Electrolyte Interphase for Low-Temperature Lithium-Metal Batteries.</a></p>
+      <div class="pmeta"><span class="source-tag source-pubmed">PubMed</span> · <span>Advanced materials (Deerfield Beach, Fla.)</span> · <span>📅 2026-Jul-03</span></div>
+      <div class="pmeta">👤 Hang Ding, Linming Bai, Xinyuan Shan et al.</div>
+      <div class="pabstract">Enhancing the low-temperature cycling performance of lithium metal batteries (LMBs) relies on the rational design of solid electrolyte interphases (SEIs). Conventional approaches typically involve tuning electrolyte compositions to indirectly generate SEIs dominated by organic or inorganic…</div>
+    </div>
+    <div class="paper-card">
+      <p class="ptitle"><a href="https://doi.org/10.1093/nsr/nwag411" target="_blank">Interfacial percolation enables high-conductivity lean-lithium oxychloride electrolytes for all-solid-state batteries</a></p>
+      <div class="pmeta"><span class="source-tag source-crossref">CrossRef</span> · <span>National Science Review</span> · <span>📅 2026-07-03</span></div>
+      <div class="pmeta">👤 Deyuan Li, Guangwen Zhang, Boyuan Xu et al.</div>
+      <div class="pabstract">Abstract Inorganic solid-state electrolytes (SSEs) underpin the development of all-solid-state batteries (ASSBs), but their ionic conductivity relies heavily on Li-concentrated or even Li-stuffed materials, which not only elevates Li consumption but also compromises their (electro)chemical…</div>
+    </div>
+    <div class="paper-card">
+      <p class="ptitle"><a href="https://doi.org/10.1002/adma.202523142" target="_blank">3D‐Printed Ultra‐Thin Solid Polymer Electrolytes with Superior Dielectric Properties for Wide Temperature Range All‐Solid‐State Batteries</a></p>
+      <div class="pmeta"><span class="source-tag source-crossref">CrossRef</span> · <span>Advanced Materials</span> · <span>📅 2026-07-04</span></div>
+      <div class="pmeta">👤 Sijie Liu, Le Zhou, Jiaming Tan et al.</div>
+      <div class="pabstract">ABSTRACT The development of all‐solid‐state batteries (ASSBs) is critical for overcoming the safety and performance limitations of conventional lithium‐ion batteries with liquid electrolytes. Solid polymer electrolytes (SPEs) offer promising processability and interfacial contact but suffer from…</div>
+    </div>
+    <div class="paper-card">
+      <p class="ptitle"><a href="https://doi.org/10.1002/ange.2026-m2506060000" target="_blank">Inside Back Cover: Dynamic Anion Space Gradient Distribution Drives Wide‐Temperature‐Range All‐Solid‐State Lithium‐Ion Batteries</a></p>
+      <div class="pmeta"><span class="source-tag source-crossref">CrossRef</span> · <span>Angewandte Chemie</span> · <span>📅 2026-07-03</span></div>
+      <div class="pmeta">👤 Chao Li, Wenshuo Zhang, Zhenkun He et al.</div>
+    </div>
+    <div class="paper-card">
+      <p class="ptitle"><a href="https://doi.org/10.1002/adfm.76923" target="_blank">Interfacial Trap State Suppression through a Highly Ordered Chlorinated Cathode Interlayer Strategy toward Efficient Organic Solar Cells</a></p>
+      <div class="pmeta"><span class="source-tag source-crossref">CrossRef</span> · <span>Advanced Functional Materials</span> · <span>📅 2026-07-03</span></div>
+      <div class="pmeta">👤 Ting Su, Haoling Zhang, Jinjian He et al.</div>
+      <div class="pabstract">ABSTRACT Balancing ordered molecular packing in cathode interlayers with the suppression of trap states along the electron transport pathway continues to be a major hurdle for high‐performance organic solar cells (OSCs). Here, a molecular design strategy that enables vertical ordering across the…</div>
+    </div>
+    <div class="paper-card">
+      <p class="ptitle"><a href="https://doi.org/10.1126/sciadv.aef2744" target="_blank">A sustainable seven-electron cascade battery via orchestrated gas-liquid-solid triphase redox reactions</a></p>
+      <div class="pmeta"><span class="source-tag source-crossref">CrossRef</span> · <span>Science Advances</span> · <span>📅 2026-07-03</span></div>
+      <div class="pmeta">👤 Lingchang Wu, Chaoyi Qiu, Junwei Zhang et al.</div>
+      <div class="pabstract">The quest for high-energy-density batteries has spurred interest in multielectron chemistry beyond conventional two-electron reactions. Here, we report a cascade battery that synergistically integrates gas-phase (Cl 2 ↔ Cl − ), liquid-phase (Cu 2+ ↔ Cu + ), and solid-phase (S ↔ CuS ↔ Cu 2 S) redox…</div>
+    </div>
+    <div class="paper-card">
+      <p class="ptitle"><a href="https://doi.org/10.1021/acsenergylett.6c01258" target="_blank">Hydrogen-Bond-Mediated In Situ Polymerization Enables High-Voltage PDOL-Based Solid-State Lithium Batteries</a></p>
+      <div class="pmeta"><span class="source-tag source-crossref">CrossRef</span> · <span>ACS Energy Letters</span> · <span>📅 2026-07-03</span></div>
+      <div class="pmeta">👤 Dan Chan, Jie Shi, Mengyu Zhu et al.</div>
+    </div>
+    <div class="paper-card">
+      <p class="ptitle"><a href="https://doi.org/10.1002/adma.73925" target="_blank">Zwitterionic Polymer Electrolytes With Dipole‐Rotation‐Assisted Ion Conduction for Solid Lithium Metal Batteries</a></p>
+      <div class="pmeta"><span class="source-tag source-crossref">CrossRef</span> · <span>Advanced Materials</span> · <span>📅 2026-07-04</span></div>
+      <div class="pmeta">👤 Miao He, Yuxin Fan, Niandong He et al.</div>
+      <div class="pabstract">ABSTRACT Solid polymer electrolytes are promising for lithium metal batteries, yet achieving both high ionic conductivity and interfacial stability remains a major challenge. Here, we report a molecular rotor strategy that addresses this trade‐off by incorporating 3‐(1‐Pyridinio)‐1‐propanesulfonate…</div>
+    </div>
+  </div>
+  <div class="footer">
+    <p>🔋 固态电池每日文献速递 · 自动生成于 2026-07-05</p>
+    <p>数据来源: arXiv · PubMed · CrossRef · Semantic Scholar</p>
+    <p style="margin-top:8px;">如需退订，请回复此邮件。论文数据可能存在延迟，请以原始出版源为准。</p>
+  </div>
+</div>
+</body>
+</html>
