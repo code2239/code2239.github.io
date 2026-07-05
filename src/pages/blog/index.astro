@@ -2,6 +2,7 @@
 import { getCollection } from "astro:content";
 import Layout from "../../components/Layout.astro";
 import ArticleCard from "../../components/ArticleCard.astro";
+import PostFilter from "../../components/PostFilter.astro";
 
 const posts = await getCollection("blog");
 
@@ -9,23 +10,37 @@ const sortedPosts = posts.sort(
   (a, b) =>
     new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
 );
+
+const allTags = [...new Set(posts.flatMap((p) => p.data.tags))].sort();
 ---
 
 <Layout title="博客">
   <div class="max-w-content py-16">
     <h1 class="text-3xl font-semibold mb-2">博客</h1>
-    <p class="text-[var(--color-text-secondary)] mb-12">技术文章与思考笔记</p>
+    <p class="text-[var(--color-text-secondary)] mb-8">技术文章与思考笔记</p>
+
+    <PostFilter allTags={allTags} />
 
     <div class="flex flex-col gap-4">
       {sortedPosts.map((post) => (
-        <ArticleCard
-          title={post.data.title}
-          date={post.data.date}
-          summary={post.data.summary}
-          tags={post.data.tags}
-          href={`/blog/${post.id.replace(/\.md$/, "")}`}
-        />
+        <div class="post-item" data-tags={post.data.tags.join(",")}>
+          <ArticleCard
+            title={post.data.title}
+            date={post.data.date}
+            summary={post.data.summary}
+            tags={post.data.tags}
+            href={`/blog/${post.id.replace(/\.md$/, "")}`}
+          />
+        </div>
       ))}
     </div>
+
+    <p
+      id="filter-empty"
+      class="text-center text-[var(--color-text-tertiary)] py-12"
+      style="display: none;"
+    >
+      没有找到匹配标签的文章。
+    </p>
   </div>
 </Layout>

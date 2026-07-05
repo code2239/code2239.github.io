@@ -1,0 +1,98 @@
+---
+interface Props {
+  allTags: string[];
+}
+
+const { allTags } = Astro.props;
+---
+
+<div class="flex flex-wrap gap-2 mb-8" id="tag-filters">
+  <button
+    class="tag-filter-btn active text-xs font-medium px-3 py-1.5 rounded-full border transition-colors duration-150 cursor-pointer"
+    data-tag=""
+  >
+    全部
+  </button>
+  {allTags.map((tag) => (
+    <button
+      class="tag-filter-btn text-xs font-medium px-3 py-1.5 rounded-full border transition-colors duration-150 cursor-pointer"
+      data-tag={tag}
+    >
+      {tag}
+    </button>
+  ))}
+</div>
+
+<style>
+  .tag-filter-btn {
+    color: var(--color-text-secondary);
+    background: var(--color-bg);
+    border-color: var(--color-border);
+  }
+  .tag-filter-btn:hover {
+    color: var(--color-accent);
+    border-color: var(--color-accent);
+  }
+  .tag-filter-btn.active {
+    color: var(--color-bg);
+    background: var(--color-text);
+    border-color: var(--color-text);
+  }
+  .post-item {
+    transition: opacity 200ms ease, transform 200ms ease;
+  }
+  .post-item.filtered-out {
+    opacity: 0;
+    transform: scale(0.97);
+    pointer-events: none;
+    position: absolute;
+  }
+</style>
+
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>(".tag-filter-btn");
+  const posts = document.querySelectorAll<HTMLElement>(".post-item");
+
+  const updateFilter = (activeTag: string) => {
+    buttons.forEach((btn) => {
+      btn.classList.toggle("active", btn.dataset.tag === activeTag);
+    });
+
+    let visibleCount = 0;
+    posts.forEach((post) => {
+      const tags = post.dataset.tags || "";
+      const matches = !activeTag || tags.split(",").includes(activeTag);
+      if (matches) {
+        post.classList.remove("filtered-out");
+        visibleCount++;
+      } else {
+        post.classList.add("filtered-out");
+      }
+    });
+
+    const emptyEl = document.getElementById("filter-empty");
+    if (emptyEl) {
+      emptyEl.style.display = visibleCount === 0 ? "block" : "none";
+    }
+  };
+
+  buttons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const tag = btn.dataset.tag || "";
+      updateFilter(tag);
+      const url = new URL(window.location.href);
+      if (tag) {
+        url.searchParams.set("tag", tag);
+      } else {
+        url.searchParams.delete("tag");
+      }
+      window.history.replaceState({}, "", url.toString());
+    });
+  });
+
+  const params = new URLSearchParams(window.location.search);
+  const initialTag = params.get("tag") || "";
+  if (initialTag) {
+    updateFilter(initialTag);
+  }
+</script>

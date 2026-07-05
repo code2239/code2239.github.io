@@ -1,44 +1,99 @@
 ---
 import Layout from "../components/Layout.astro";
 import TagList from "../components/TagList.astro";
+import TableOfContents from "../components/TableOfContents.astro";
+import ReadingProgress from "../components/ReadingProgress.astro";
 
 interface Props {
   title: string;
   date: string;
   tags: string[];
+  headings?: { depth: number; slug: string; text: string }[];
+  wordCount?: number;
 }
 
-const { title, date, tags } = Astro.props;
+const { title, date, tags, headings = [], wordCount = 0 } = Astro.props;
+const readingTime = Math.max(1, Math.ceil(wordCount / 300));
+const hasToc = headings.length > 0;
 ---
 
 <Layout title={title}>
-  <article class="max-w-content py-16">
-    <header class="mb-12 text-center">
-      <h1 class="text-3xl font-semibold mb-3">{title}</h1>
-      <div class="flex items-center justify-center gap-2 text-[var(--color-text-tertiary)] text-sm">
-        <time datetime={date}>{date}</time>
-        {tags.length > 0 && (
-          <>
-            <span>·</span>
-            <TagList tags={tags} />
-          </>
-        )}
+  <ReadingProgress />
+
+  <div class="max-w-content py-16">
+    <article>
+      <header class="mb-12 text-center">
+        <h1 class="text-3xl font-semibold mb-3 tracking-tight">{title}</h1>
+        <div class="flex items-center justify-center gap-2 text-[var(--color-text-tertiary)] text-sm">
+          <time datetime={date}>{date}</time>
+          <span class="text-[var(--color-border)]">·</span>
+          <span>{readingTime} 分钟阅读</span>
+          {tags.length > 0 && (
+            <>
+              <span class="text-[var(--color-border)]">·</span>
+              <TagList tags={tags} />
+            </>
+          )}
+        </div>
+      </header>
+
+      <div class="flex gap-16">
+        <div class="flex-1 min-w-0">
+          <div class="prose prose-neutral max-w-none">
+            <slot />
+          </div>
+
+          <hr class="!mt-12 !mb-8" />
+
+          <div>
+            <a
+              href="/blog"
+              class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150"
+            >
+              &larr; 返回博客列表
+            </a>
+          </div>
+        </div>
+
+        {
+          hasToc && (
+            <aside class="hidden xl:block w-56 shrink-0">
+              <div class="sticky top-24">
+                <TableOfContents headings={headings} />
+              </div>
+            </aside>
+          )
+        }
       </div>
-    </header>
-
-    <div>
-      <slot />
-    </div>
-
-    <hr />
-
-    <div class="mt-8">
-      <a
-        href="/blog"
-        class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150"
-      >
-        &larr; 返回博客列表
-      </a>
-    </div>
-  </article>
+    </article>
+  </div>
 </Layout>
+
+<script>
+  const tocLinks = document.querySelectorAll<HTMLAnchorElement>(".toc-list a");
+  if (tocLinks.length > 0) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            tocLinks.forEach((link) => {
+              link.classList.toggle(
+                "active",
+                link.getAttribute("href") === `#${entry.target.id}`
+              );
+            });
+          }
+        }
+      },
+      { rootMargin: "-80px 0px -80% 0px" }
+    );
+
+    tocLinks.forEach((link) => {
+      const id = link.getAttribute("href")?.slice(1);
+      if (id) {
+        const target = document.getElementById(id);
+        if (target) observer.observe(target);
+      }
+    });
+  }
+</script>

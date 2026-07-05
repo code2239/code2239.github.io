@@ -8,4 +8,9 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
   site: 'https://code2239.github.io',
+  markdown: {
+    shikiConfig: {
+      theme: 'css-variables',
+    },
+  },
 });

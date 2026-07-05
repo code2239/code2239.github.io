@@ -2,6 +2,7 @@
 import { getCollection } from "astro:content";
 import Layout from "../components/Layout.astro";
 import ArticleCard from "../components/ArticleCard.astro";
+import TagList from "../components/TagList.astro";
 import { siteConfig } from "../lib/config";
 
 const posts = await getCollection("blog");
@@ -10,7 +11,10 @@ const latestPosts = posts
     (a, b) =>
       new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
   )
-  .slice(0, 2);
+  .slice(0, 6);
+
+// Collect all unique tags from all posts
+const allTags = [...new Set(posts.flatMap((p) => p.data.tags))].sort();
 ---
 
 <Layout title={siteConfig.name} description={siteConfig.description}>
@@ -22,6 +26,32 @@ const latestPosts = posts
     <p class="text-[var(--color-text-secondary)] text-lg max-w-lg mx-auto leading-relaxed">
       {siteConfig.tagline}
     </p>
+    <div class="mt-6 flex items-center justify-center gap-4">
+      <a
+        href={siteConfig.social.github}
+        class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-accent)] transition-colors duration-150 flex items-center gap-1.5"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+        GitHub
+      </a>
+      <a
+        href={`mailto:${siteConfig.social.email}`}
+        class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-accent)] transition-colors duration-150"
+      >
+        Email
+      </a>
+    </div>
+  </section>
+
+  <!-- About snippet -->
+  <section class="max-w-content pb-16">
+    <div class="border border-[var(--color-border)] rounded-xl p-6 bg-[var(--color-bg)]">
+      <p class="text-[var(--color-text-secondary)] leading-relaxed text-sm m-0">
+        我专注于探索 <strong class="text-[var(--color-text)]">AI Agent 协作</strong>、<strong class="text-[var(--color-text)]">软件工程工具链</strong> 以及 <strong class="text-[var(--color-text)]">人机交互的新范式</strong>。这个网站记录了我的技术思考、项目实践与学习笔记。
+      </p>
+    </div>
   </section>
 
   <!-- Latest Posts -->
@@ -30,22 +60,38 @@ const latestPosts = posts
       <h2 class="text-lg font-semibold">最新文章</h2>
       <a
         href="/blog"
-        class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150"
+        class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-accent)] transition-colors duration-150"
       >
         查看全部 &rarr;
       </a>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       {latestPosts.map((post) => (
-        <ArticleCard
-          title={post.data.title}
-          date={post.data.date}
-          summary={post.data.summary}
-          tags={post.data.tags}
-          href={`/blog/${post.id.replace(/\.md$/, "")}`}
-        />
+        <div class="fade-in">
+          <ArticleCard
+            title={post.data.title}
+            date={post.data.date}
+            summary={post.data.summary}
+            tags={post.data.tags}
+            href={`/blog/${post.id.replace(/\.md$/, "")}`}
+          />
+        </div>
       ))}
     </div>
   </section>
 
-  </Layout>
+  <!-- Tags cloud -->
+  <section class="max-w-content pb-24">
+    <h2 class="text-lg font-semibold mb-4">话题标签</h2>
+    <div class="flex flex-wrap gap-2">
+      {allTags.map((tag) => (
+        <a
+          href={`/blog?tag=${encodeURIComponent(tag)}`}
+          class="text-xs text-[var(--color-text-secondary)] bg-[var(--color-bg-secondary)] border border-[var(--color-border)] px-3 py-1 rounded-full no-underline hover:text-[var(--color-accent)] hover:border-[var(--color-accent)] transition-colors duration-150"
+        >
+          {tag}
+        </a>
+      ))}
+    </div>
+  </section>
+</Layout>
