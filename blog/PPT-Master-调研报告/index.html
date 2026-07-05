@@ -1,0 +1,327 @@
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-dmqsi53g> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="星游寰宇的个人网站——技术文章、项目展示与思考笔记"><meta name="color-scheme" content="light"><!-- Open Graph --><meta property="og:title" content="PPT Master（ppt-master）深度调研报告 — 星游寰宇"><meta property="og:description" content="星游寰宇的个人网站——技术文章、项目展示与思考笔记"><meta property="og:url" content="https://code2239.github.io/blog/PPT-Master-%E8%B0%83%E7%A0%94%E6%8A%A5%E5%91%8A/"><meta property="og:type" content="website"><meta property="og:site_name" content="星游寰宇"><meta property="og:locale" content="zh_CN"><!-- Twitter Card --><meta name="twitter:card" content="summary"><meta name="twitter:title" content="PPT Master（ppt-master）深度调研报告 — 星游寰宇"><meta name="twitter:description" content="星游寰宇的个人网站——技术文章、项目展示与思考笔记"><!-- Canonical --><link rel="canonical" href="https://code2239.github.io/blog/PPT-Master-%E8%B0%83%E7%A0%94%E6%8A%A5%E5%91%8A/"><title>PPT Master（ppt-master）深度调研报告 — 星游寰宇</title><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="alternate" type="application/rss+xml" title="星游寰宇 RSS" href="/rss.xml"><link rel="stylesheet" href="/_astro/_slug_.C_t6U7me.css">
+<style>.blog-layout[data-astro-cid-bvzihdzo]{display:block}.blog-toc[data-astro-cid-bvzihdzo]{display:none}.blog-body[data-astro-cid-bvzihdzo]{min-width:0}@media(min-width:1024px){.blog-layout[data-astro-cid-bvzihdzo]{display:grid;grid-template-columns:14rem 1fr;gap:3rem;align-items:start}.blog-toc[data-astro-cid-bvzihdzo]{display:block}.blog-body[data-astro-cid-bvzihdzo]{padding-right:2rem}}.copy-btn[data-astro-cid-bvzihdzo]{position:absolute;top:8px;right:8px;padding:4px 10px;font-size:.6875rem;font-family:var(--font-sans);color:var(--color-text-tertiary);background:var(--color-bg);border:1px solid var(--color-border);border-radius:6px;cursor:pointer;opacity:0;transition:opacity .15s ease,color .15s ease}pre[data-astro-cid-bvzihdzo]:hover .copy-btn[data-astro-cid-bvzihdzo]{opacity:1}.copy-btn[data-astro-cid-bvzihdzo]:hover{color:var(--color-accent);border-color:var(--color-accent)}.copy-btn[data-astro-cid-bvzihdzo].copied{color:#16a34a;border-color:#16a34a}.back-to-top[data-astro-cid-bvzihdzo]{position:fixed;bottom:2rem;right:2rem;z-index:40;width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:50%;border:1px solid var(--color-border);background:var(--color-bg);color:var(--color-text-secondary);cursor:pointer;box-shadow:var(--shadow-md);transition:opacity .2s ease,transform .2s ease}.back-to-top[data-astro-cid-bvzihdzo]:hover{color:var(--color-accent);border-color:var(--color-accent);transform:translateY(-2px)}.back-to-top[data-astro-cid-bvzihdzo].hidden{opacity:0;pointer-events:none}
+</style></head> <body class="min-h-screen flex flex-col" data-astro-cid-dmqsi53g> <nav class="sticky top-0 z-40 bg-[var(--color-bg)]/80 backdrop-blur-md border-b border-[var(--color-border)]" data-astro-cid-pux6a34n><div class="max-w-content flex items-center justify-between py-4" data-astro-cid-pux6a34n><a href="/" class="text-base font-semibold no-underline tracking-tight" data-astro-cid-pux6a34n>
+星游寰宇
+</a><!-- Desktop nav --><div class="hidden sm:flex items-center gap-6" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>博客</a><a href="/about" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>关于</a></div><!-- Mobile hamburger --><button id="menu-btn" class="sm:hidden flex flex-col gap-1 p-2 -mr-2 cursor-pointer" aria-label="打开菜单" data-astro-cid-pux6a34n><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-transform duration-200" data-astro-cid-pux6a34n></span><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-opacity duration-200" data-astro-cid-pux6a34n></span><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-transform duration-200" data-astro-cid-pux6a34n></span></button></div><!-- Mobile menu --><div id="mobile-menu" class="hidden sm:hidden border-t border-[var(--color-border)] bg-[var(--color-bg)]" data-astro-cid-pux6a34n><div class="max-w-content flex flex-col gap-2 py-4" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>博客</a><a href="/about" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>关于</a></div></div></nav><script type="module">const e=document.getElementById("menu-btn"),n=document.getElementById("mobile-menu");e&&n&&e.addEventListener("click",()=>{const t=n.classList.toggle("hidden");e.classList.toggle("menu-open",!t),e.setAttribute("aria-label",t?"打开菜单":"关闭菜单")});</script> <main class="flex-1" data-astro-cid-dmqsi53g>  <div class="reading-progress" id="reading-progress" style="width: 0%"></div> <script type="module">const o=document.getElementById("reading-progress");if(!o)throw new Error("Reading progress bar element not found");const r=()=>{const n=window.scrollY,e=document.documentElement.scrollHeight-window.innerHeight,t=e>0?n/e*100:0;o.style.width=`${Math.min(t,100)}%`};window.addEventListener("scroll",r,{passive:!0});</script>  <button id="back-to-top" class="back-to-top hidden" aria-label="返回顶部" data-astro-cid-bvzihdzo> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-bvzihdzo> <polyline points="18 15 12 9 6 15" data-astro-cid-bvzihdzo></polyline> </svg> </button> <div class="px-6 xl:px-12 pt-12 pb-16" data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <header class="mb-12 text-center" data-astro-cid-bvzihdzo> <h1 class="text-3xl font-semibold mb-3 tracking-tight" data-astro-cid-bvzihdzo>PPT Master（ppt-master）深度调研报告</h1> <div class="flex items-center justify-center gap-2 text-[var(--color-text-tertiary)] text-sm" data-astro-cid-bvzihdzo> <time datetime="2026-07-05" data-astro-cid-bvzihdzo>2026-07-05</time> <span class="text-[var(--color-border)]" data-astro-cid-bvzihdzo>·</span> <span data-astro-cid-bvzihdzo>16 分钟阅读</span>  <span class="text-[var(--color-border)]" data-astro-cid-bvzihdzo>·</span> <span class="text-sm text-[var(--color-text-tertiary)]"> <span> AI<span class="mx-1">·</span> </span><span> 调研<span class="mx-1">·</span> </span><span> PPT<span class="mx-1">·</span> </span><span> 自动化<span class="mx-1">·</span> </span><span> 工具 </span> </span>  </div> </header> <div class="blog-layout" data-astro-cid-bvzihdzo> <aside class="blog-toc" data-astro-cid-bvzihdzo> <div class="sticky top-24" data-astro-cid-bvzihdzo> <nav class="toc"> <p class="text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-3">目录</p> <ul class="toc-list"> <li class> <a href="#1-开发者与公司背景">1. 开发者与公司背景</a> </li><li class> <a href="#2-底层技术栈">2. 底层技术栈</a> </li><li class="toc-h3"> <a href="#核心技术架构差异化创新">核心技术架构（差异化创新）</a> </li><li class> <a href="#3-开源属性与商业模式">3. 开源属性与商业模式</a> </li><li class> <a href="#4-功能全景解析">4. 功能全景解析</a> </li><li class="toc-h3"> <a href="#核心功能与核心技术">核心功能与核心技术</a> </li><li class="toc-h3"> <a href="#其他亮点功能">其他亮点功能</a> </li><li class> <a href="#5-主要竞品清单">5. 主要竞品清单</a> </li><li class> <a href="#6-与竞品的横向比较">6. 与竞品的横向比较</a> </li><li class="toc-h3"> <a href="#各竞品最适用的细分场景">各竞品最适用的细分场景</a> </li><li class> <a href="#7-版本迭代信息">7. 版本迭代信息</a> </li><li class> <a href="#一句话锐评">一句话锐评</a> </li> </ul> </nav> </div> </aside> <div class="blog-body" data-astro-cid-bvzihdzo> <div class="prose prose-neutral max-w-none" data-astro-cid-bvzihdzo>  <h1 id="ppt-masterppt-master深度调研报告">PPT Master（ppt-master）深度调研报告</h1>
+<blockquote>
+<p><strong>调研日期</strong>：2026-07-05<br>
+<strong>资料来源</strong>：GitHub、新浪科技、CSDN、Trendshift、WPS 官方、Beautiful.ai Blog 等多渠道交叉验证</p>
+</blockquote>
+<hr>
+<h2 id="1-开发者与公司背景">1. 开发者与公司背景</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>维度</th><th>详情</th></tr></thead><tbody><tr><td><strong>开发方</strong></td><td><strong>Hugo He（何雨果）</strong>，独立开发者</td></tr><tr><td><strong>国家/地区</strong></td><td>中国</td></tr><tr><td><strong>职业背景</strong></td><td>投融资行业从业者，持有 <strong>CPA</strong>（注册会计师）、<strong>CPV</strong>（注册资产评估师）、<strong>Consulting Engineer (Investment)</strong>（咨询工程师-投资）三重专业资质</td></tr><tr><td><strong>GitHub</strong></td><td><a href="https://github.com/hugohe3">@hugohe3</a></td></tr><tr><td><strong>个人网站</strong></td><td><a href="https://www.hehugo.com/">hehugo.com</a></td></tr><tr><td><strong>融资阶段</strong></td><td><strong>零融资，纯独立开发</strong>。未接受任何风险投资，无大厂背书。通过 API 中转商（PackyCode、APIKEY.FUN、RunAPI、优云智算）的 affiliate 赞助维持运营</td></tr></tbody></table>
+<blockquote>
+<p><strong>来源</strong>：<a href="https://finance.sina.cn/2026-05-01/detail-inhwmrev0208202.d.html?vt=4">新浪科技报道</a> 明确证实：<em>“同期没有融资，没有大厂背书，就是一个独立开发者做出来的。“</em></p>
+</blockquote>
+<hr>
+<h2 id="2-底层技术栈">2. 底层技术栈</h2>
+<p>PPT Master 本身<strong>不自带大模型</strong>，而是作为 AI IDE（Claude Code / Cursor / VS Code Copilot 等）中的 <strong>Skill/工作流</strong> 运行，通过 IDE 所接入的大模型来驱动生成。开发者推荐的最佳模型搭配：</p>
+<ul>
+<li><strong>Claude 系列</strong>（Claude Opus / Sonnet）：凭借 ~1M Token 的超大上下文窗口，适合一次处理长篇文档</li>
+<li><strong>DeepSeek V4</strong>：成本极低，约 ¥0.6 可生成两份 PPT</li>
+<li><strong>GPT-4o / GPT-5</strong>：综合能力强</li>
+<li><strong>Gemini 系列</strong>：多模态处理文档</li>
+<li><strong>gpt-image-2 / DALL·E</strong>：用于 AI 配图生成</li>
+</ul>
+<h3 id="核心技术架构差异化创新">核心技术架构（差异化创新）</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>输入文档 → 预处理(Markdown) → AI三角色协作 → 逐页SVG生成 → Python脚本SVG→DrawingML → 原生.pptx</span></span></code></pre>
+<ul>
+<li><strong>三角色接力工作流</strong>：Strategist（内容策划）→ Image Generator（配图生成）→ Executor（格式转换），模拟人类制作 PPT 的思维链条</li>
+<li><strong>SVG → DrawingML 转换引擎</strong>：SVG 和 DrawingML 本质同为 2D 矢量格式，转换是”方言翻译”而非格式跨越，这是其能产出<strong>真正可编辑 PPTX</strong> 的技术关键</li>
+<li><strong>Python 后处理管道</strong>：字体检测、渐变优化、形状去重、动画注入等</li>
+</ul>
+<hr>
+<h2 id="3-开源属性与商业模式">3. 开源属性与商业模式</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>维度</th><th>详情</th></tr></thead><tbody><tr><td><strong>开源/闭源</strong></td><td><strong>完全开源</strong></td></tr><tr><td><strong>开源协议</strong></td><td><strong>MIT 协议</strong>（最宽松，可自由使用、修改、商用）</td></tr><tr><td><strong>定价模式</strong></td><td><strong>完全免费</strong>。唯一开销 = 调用大模型 API 的 Token 费用</td></tr><tr><td><strong>用户参考成本</strong></td><td>DeepSeek V4：约 ¥0.6/份 PPT；Claude Opus：约 ¥0.5–3/份；VS Code Copilot：最低 $0.08/份</td></tr><tr><td><strong>隐私安全</strong></td><td>文件全程本地处理，不上传任何第三方服务器</td></tr><tr><td><strong>盈利方式</strong></td><td>通过 API 中转商 affiliate 推广获得赞助，不向用户收费</td></tr></tbody></table>
+<hr>
+<h2 id="4-功能全景解析">4. 功能全景解析</h2>
+<p><strong>主要功能</strong>（一句话概括）：将任意格式文档（PDF/Word/Markdown/URL/文本/Excel）通过 AI 生成为<strong>原生可编辑的 PowerPoint (.pptx) 文件</strong>，每一页、每个文本框和图表都能在 PPT 中直接修改。</p>
+<h3 id="核心功能与核心技术">核心功能与核心技术</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>#</th><th>核心功能</th><th>背后关键技术</th></tr></thead><tbody><tr><td><strong>1</strong></td><td><strong>原生可编辑 PPTX 输出</strong></td><td>独创 <strong>SVG → DrawingML 矢量转换引擎</strong>。AI 生成结构化 SVG，Python 脚本将其编译为 PowerPoint 原生形状（文本框、矩形、渐变、图表），每个元素可在 PPT 中逐项修改，非位图截图</td></tr><tr><td><strong>2</strong></td><td><strong>20+ 布局模板 × 52+ 可视化图表模板</strong></td><td>覆盖 MBB 咨询级、学术答辩、科技风、品牌风、政务风等场景。内置战略模型图、架构图、流程图等标准化图表模板 + <strong>6700+ 矢量图标库</strong>（Tabler/Phosphor/Simple Icons）</td></tr><tr><td><strong>3</strong></td><td><strong>多角色 AI 协作工作流</strong></td><td><strong>Strategist → Image Generator → Executor</strong> 三角色接力。支持 12 种 AI 生图后端（gpt-image-2、DALL·E、Gemini 等），自动生成演讲者备注并转为多语言 TTS 语音旁白，支持原生动画和页面转场</td></tr></tbody></table>
+<h3 id="其他亮点功能">其他亮点功能</h3>
+<ul>
+<li><strong>10+ 画布格式</strong>：标准 16:9/4:3、小红书 (3:4)、朋友圈 (1:1)、Story (9:16) 等</li>
+<li><strong>语音旁白</strong>：从演讲者备注自动生成 TTS 音频，可导出为视频</li>
+<li><strong>自定义 PPTX 模板</strong>：可上传自己的 .pptx 作为母版，AI 遵循企业品牌风格</li>
+<li><strong>多 IDE 兼容</strong>：Claude Code、Codex、Cursor、VS Code Copilot、Codebuddy</li>
+</ul>
+<hr>
+<h2 id="5-主要竞品清单">5. 主要竞品清单</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>#</th><th>竞品</th><th>定位</th><th>备注</th></tr></thead><tbody><tr><td>1</td><td><strong>Gamma</strong></td><td>一站式 AI 文档/网页/幻灯片生成平台</td><td>$680M Series B 融资，估值 $2.1B，2026 年市场领导者</td></tr><tr><td>2</td><td><strong>Beautiful.ai</strong></td><td>品牌级 AI 幻灯片设计工具</td><td>Smart Slide 自动布局引擎，品牌管控最强</td></tr><tr><td>3</td><td><strong>WPS AI / 博思 AIPPT</strong></td><td>中文用户专属 AI PPT 工具</td><td>中文理解最优，完美 PPTX 导出，免费</td></tr><tr><td>4</td><td><strong>Microsoft Copilot in PowerPoint</strong></td><td>深度集成 Microsoft 365 生态</td><td>从 SharePoint/OneDrive 文档直接创建，企业级</td></tr><tr><td>5</td><td><strong>Plus AI</strong></td><td>PowerPoint/Google Slides 原生插件</td><td>零迁移成本，完美原生 PPTX 导出</td></tr></tbody></table>
+<blockquote>
+<p>注：<strong>Tome</strong> 已于 2026 年 3 月退出 AI Slides 市场，转向销售自动化，不再作为竞品。</p>
+</blockquote>
+<hr>
+<h2 id="6-与竞品的横向比较">6. 与竞品的横向比较</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">对比维度</th><th align="left"><strong>PPT Master</strong></th><th align="left"><strong>Gamma</strong></th><th align="left"><strong>Beautiful.ai</strong></th><th align="left"><strong>WPS AI</strong></th><th align="left"><strong>Plus AI</strong></th></tr></thead><tbody><tr><td align="left"><strong>价格</strong></td><td align="left">免费（仅 Token 费 ≈ ¥0.5–3/份）</td><td align="left">$8–15/月</td><td align="left">$12–45/月</td><td align="left">免费</td><td align="left">$15–25/月</td></tr><tr><td align="left"><strong>PPTX 可编辑性</strong></td><td align="left">⭐⭐⭐⭐⭐ 原生可编辑</td><td align="left">⭐⭐⭐ 布局偶有偏移</td><td align="left">⭐⭐⭐⭐ 强</td><td align="left">⭐⭐⭐⭐⭐ 原生可编辑</td><td align="left">⭐⭐⭐⭐⭐ 原生可编辑</td></tr><tr><td align="left"><strong>易用性与上手门槛</strong></td><td align="left">⭐⭐ 需配置 Python 环境 + AI IDE</td><td align="left">⭐⭐⭐⭐⭐ 开箱即用</td><td align="left">⭐⭐⭐⭐ 引导式体验</td><td align="left">⭐⭐⭐⭐⭐ 开箱即用</td><td align="left">⭐⭐⭐⭐ 安装插件即可</td></tr><tr><td align="left"><strong>设计自由度</strong></td><td align="left">⭐⭐⭐⭐⭐ 全开放可定制</td><td align="left">⭐⭐⭐ 卡片式布局约束</td><td align="left">⭐⭐⭐ Smart Slide 规则约束</td><td align="left">⭐⭐⭐ 模板驱动</td><td align="left">⭐⭐⭐⭐ 原生 PPT 全功能</td></tr><tr><td align="left"><strong>中文支持</strong></td><td align="left">⭐⭐⭐⭐ 好</td><td align="left">⭐⭐ 一般</td><td align="left">⭐⭐ 一般</td><td align="left">⭐⭐⭐⭐⭐ 最优</td><td align="left">⭐⭐ 一般</td></tr><tr><td align="left"><strong>生态与集成能力</strong></td><td align="left">⭐⭐⭐ 依赖 AI IDE 生态</td><td align="left">⭐⭐⭐⭐ 多格式 + 协作</td><td align="left">⭐⭐⭐⭐ 团队协作 + 品牌库</td><td align="left">⭐⭐⭐⭐⭐ WPS 生态深度集成</td><td align="left">⭐⭐⭐⭐⭐ Office/Google 双生态</td></tr></tbody></table>
+<h3 id="各竞品最适用的细分场景">各竞品最适用的细分场景</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>工具</th><th>最佳适用场景</th></tr></thead><tbody><tr><td><strong>PPT Master</strong></td><td>需要<strong>完全可编辑的 PPTX</strong>、预算有限、对设计有高要求的独立创作者；咨询/金融从业者；学术答辩</td></tr><tr><td><strong>Gamma</strong></td><td>快速从 brief 生成现代化幻灯片、Web 原生展示优先、团队协作场景</td></tr><tr><td><strong>Beautiful.ai</strong></td><td>企业品牌团队、需要强制设计一致性、多人协作的品牌化幻灯片</td></tr><tr><td><strong>WPS AI</strong></td><td>中文内容为主、WPS 用户、国内办公生态、预算敏感</td></tr><tr><td><strong>Plus AI</strong></td><td>深度依赖 PowerPoint/Google Slides 原生工作流、需要零迁移成本的企业用户</td></tr></tbody></table>
+<hr>
+<h2 id="7-版本迭代信息">7. 版本迭代信息</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>维度</th><th>详情</th></tr></thead><tbody><tr><td><strong>首次公开发布</strong></td><td>2026 年 Q1（具体 v1.0.0 日期暂无公开信息）</td></tr><tr><td><strong>当前最新稳定版</strong>（截至 2026-07-05）</td><td><strong>v2.11.0</strong>（发布于 2026-06-20）</td></tr><tr><td><strong>更新频率</strong></td><td><strong>极高频率迭代</strong>。项目在约 3 个月内从 v1.x 迭代至 v2.11.0，平均每周发布 1–2 个版本</td></tr><tr><td><strong>Star 增长</strong></td><td>2026 年 5–7 月呈爆发增长：从约 4,600 Star → <strong>35,000+ Star</strong>，GitHub Trending 多榜登顶</td></tr><tr><td><strong>仓库地址</strong></td><td><a href="https://github.com/hugohe3/ppt-master">github.com/hugohe3/ppt-master</a></td></tr><tr><td><strong>安装方式</strong></td><td>Claude Code 插件市场：<code>/plugin marketplace add hugohe3/ppt-master</code></td></tr></tbody></table>
+<hr>
+<h2 id="一句话锐评">一句话锐评</h2>
+<blockquote>
+<p><strong>免费开源、输出真正可编辑，是 2026 年最值得重点关注的 AI PPT 工具，尤其适合独立创作者和咨询/金融/学术场景。</strong></p>
+</blockquote>
+<hr>
+<p><em>Sources: <a href="https://github.com/hugohe3/ppt-master">GitHub</a> · <a href="https://trendshift.io/repositories/25760">Trendshift</a> · <a href="https://blog.csdn.net/keshi_curry/article/details/160112855">CSDN 技术拆解</a> · <a href="https://finance.sina.cn/2026-05-01/detail-inhwmrev0208202.d.html">新浪科技</a> · <a href="https://www.wps.cn/article/LxFqa1ik.html">WPS AI 对比</a> · <a href="https://www.beautiful.ai/blog/best-ai-presentation-makers">Beautiful.ai Blog</a> · <a href="https://gitcode.csdn.net/69f5e5ec54b52172bc7156a6.html">GitCode 报道</a> · <a href="https://www.sourcepulse.org/projects/20851718">SourcePulse</a></em></p>  </div> <!-- Previous / Next navigation --> <nav class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-12 pt-8 border-t border-[var(--color-border)]" data-astro-cid-bvzihdzo> <a href="/blog/Skill调用清晰化指南-调研报告" class="card-hover p-4 no-underline group" data-astro-cid-bvzihdzo> <span class="text-xs text-[var(--color-text-tertiary)] block mb-1" data-astro-cid-bvzihdzo>&larr; 上一篇</span> <span class="text-sm font-medium text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors line-clamp-1" data-astro-cid-bvzihdzo>Skill 调用清晰化指南 — 如何让 Skill 的触发变得精准可控</span> </a> <a href="/blog/MetaGPT-调研报告" class="card-hover p-4 no-underline group text-right" data-astro-cid-bvzihdzo> <span class="text-xs text-[var(--color-text-tertiary)] block mb-1" data-astro-cid-bvzihdzo>下一篇 &rarr;</span> <span class="text-sm font-medium text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors line-clamp-1" data-astro-cid-bvzihdzo>MetaGPT 深度调研报告</span> </a> </nav> <hr class="!mt-12 !mb-8" data-astro-cid-bvzihdzo> <div data-astro-cid-bvzihdzo> <a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-bvzihdzo>
+&larr; 返回博客列表
+</a> </div> </div> </div> </article> </div>  </main> <footer class="border-t border-[var(--color-border)] mt-24 py-8" data-astro-cid-pux6a34n><div class="max-w-content flex items-center justify-between" data-astro-cid-pux6a34n><span class="text-sm text-[var(--color-text-tertiary)]" data-astro-cid-pux6a34n>
+&copy; 2026 星游寰宇
+</span><div class="flex items-center gap-4" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>博客</a><a href="/about" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>关于</a></div></div></footer> <!-- Link preview tooltip --> <div id="link-preview" style="display:none;position:fixed;z-index:99;max-width:18rem;pointer-events:none;" data-astro-cid-dmqsi53g></div>  <script type="module">(async()=>{try{const c=await fetch("/posts.json");if(!c.ok)return;const u=await c.json(),p=new Map(u.map(t=>[t.href,t])),e=document.getElementById("link-preview");if(!e)return;let n="",d;document.addEventListener("mouseover",t=>{const s=t.target.closest("a[href^='/blog/']");if(!s){e.style.display="none",n="";return}const i=s.getAttribute("href");if(!i||i===n)return;const r=p.get(i);r&&(n=i,d=setTimeout(()=>{e.innerHTML=`<div class="lp-title">${r.title}</div><div class="lp-summary">${r.summary}</div>`;const o=s.getBoundingClientRect();let a=o.left,l=o.bottom+6;a+288>window.innerWidth&&(a=window.innerWidth-296),l+80>window.innerHeight&&(l=o.top-80),Object.assign(e.style,{left:a+"px",top:l+"px",display:"block"})},300))},{passive:!0}),document.addEventListener("mouseout",t=>{t.target.closest("a[href^='/blog/']")&&(clearTimeout(d),e.style.display="none",n="")},{passive:!0})}catch{}})();</script> </body> </html>  <script type="module">document.querySelectorAll("pre").forEach(o=>{const t=document.createElement("button");t.className="copy-btn",t.textContent="复制",t.addEventListener("click",async()=>{const e=o.querySelector("code")?.textContent||o.textContent||"";try{await navigator.clipboard.writeText(e),t.textContent="已复制",t.classList.add("copied"),setTimeout(()=>{t.textContent="复制",t.classList.remove("copied")},2e3)}catch{t.textContent="失败",setTimeout(()=>{t.textContent="复制"},2e3)}}),o.style.position="relative",o.appendChild(t)});const c=document.querySelectorAll(".toc-list a");if(c.length>0){const o=new IntersectionObserver(t=>{for(const e of t)e.isIntersecting&&c.forEach(n=>{n.classList.toggle("active",n.getAttribute("href")===`#${e.target.id}`)})},{rootMargin:"-80px 0px -80% 0px"});c.forEach(t=>{const e=t.getAttribute("href")?.slice(1);if(e){const n=document.getElementById(e);n&&o.observe(n)}})}const s=document.getElementById("back-to-top");s&&(window.addEventListener("scroll",()=>{s.classList.toggle("hidden",window.scrollY<400)},{passive:!0}),s.addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"})));</script>

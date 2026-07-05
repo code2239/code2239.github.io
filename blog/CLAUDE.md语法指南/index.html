@@ -1,0 +1,181 @@
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-dmqsi53g> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="星游寰宇的个人网站——技术文章、项目展示与思考笔记"><meta name="color-scheme" content="light"><!-- Open Graph --><meta property="og:title" content="CLAUDE.md 语法指南 — 星游寰宇"><meta property="og:description" content="星游寰宇的个人网站——技术文章、项目展示与思考笔记"><meta property="og:url" content="https://code2239.github.io/blog/CLAUDE.md%E8%AF%AD%E6%B3%95%E6%8C%87%E5%8D%97/"><meta property="og:type" content="website"><meta property="og:site_name" content="星游寰宇"><meta property="og:locale" content="zh_CN"><!-- Twitter Card --><meta name="twitter:card" content="summary"><meta name="twitter:title" content="CLAUDE.md 语法指南 — 星游寰宇"><meta name="twitter:description" content="星游寰宇的个人网站——技术文章、项目展示与思考笔记"><!-- Canonical --><link rel="canonical" href="https://code2239.github.io/blog/CLAUDE.md%E8%AF%AD%E6%B3%95%E6%8C%87%E5%8D%97/"><title>CLAUDE.md 语法指南 — 星游寰宇</title><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="alternate" type="application/rss+xml" title="星游寰宇 RSS" href="/rss.xml"><link rel="stylesheet" href="/_astro/_slug_.C_t6U7me.css">
+<style>.blog-layout[data-astro-cid-bvzihdzo]{display:block}.blog-toc[data-astro-cid-bvzihdzo]{display:none}.blog-body[data-astro-cid-bvzihdzo]{min-width:0}@media(min-width:1024px){.blog-layout[data-astro-cid-bvzihdzo]{display:grid;grid-template-columns:14rem 1fr;gap:3rem;align-items:start}.blog-toc[data-astro-cid-bvzihdzo]{display:block}.blog-body[data-astro-cid-bvzihdzo]{padding-right:2rem}}.copy-btn[data-astro-cid-bvzihdzo]{position:absolute;top:8px;right:8px;padding:4px 10px;font-size:.6875rem;font-family:var(--font-sans);color:var(--color-text-tertiary);background:var(--color-bg);border:1px solid var(--color-border);border-radius:6px;cursor:pointer;opacity:0;transition:opacity .15s ease,color .15s ease}pre[data-astro-cid-bvzihdzo]:hover .copy-btn[data-astro-cid-bvzihdzo]{opacity:1}.copy-btn[data-astro-cid-bvzihdzo]:hover{color:var(--color-accent);border-color:var(--color-accent)}.copy-btn[data-astro-cid-bvzihdzo].copied{color:#16a34a;border-color:#16a34a}.back-to-top[data-astro-cid-bvzihdzo]{position:fixed;bottom:2rem;right:2rem;z-index:40;width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:50%;border:1px solid var(--color-border);background:var(--color-bg);color:var(--color-text-secondary);cursor:pointer;box-shadow:var(--shadow-md);transition:opacity .2s ease,transform .2s ease}.back-to-top[data-astro-cid-bvzihdzo]:hover{color:var(--color-accent);border-color:var(--color-accent);transform:translateY(-2px)}.back-to-top[data-astro-cid-bvzihdzo].hidden{opacity:0;pointer-events:none}
+</style></head> <body class="min-h-screen flex flex-col" data-astro-cid-dmqsi53g> <nav class="sticky top-0 z-40 bg-[var(--color-bg)]/80 backdrop-blur-md border-b border-[var(--color-border)]" data-astro-cid-pux6a34n><div class="max-w-content flex items-center justify-between py-4" data-astro-cid-pux6a34n><a href="/" class="text-base font-semibold no-underline tracking-tight" data-astro-cid-pux6a34n>
+星游寰宇
+</a><!-- Desktop nav --><div class="hidden sm:flex items-center gap-6" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>博客</a><a href="/about" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>关于</a></div><!-- Mobile hamburger --><button id="menu-btn" class="sm:hidden flex flex-col gap-1 p-2 -mr-2 cursor-pointer" aria-label="打开菜单" data-astro-cid-pux6a34n><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-transform duration-200" data-astro-cid-pux6a34n></span><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-opacity duration-200" data-astro-cid-pux6a34n></span><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-transform duration-200" data-astro-cid-pux6a34n></span></button></div><!-- Mobile menu --><div id="mobile-menu" class="hidden sm:hidden border-t border-[var(--color-border)] bg-[var(--color-bg)]" data-astro-cid-pux6a34n><div class="max-w-content flex flex-col gap-2 py-4" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>博客</a><a href="/about" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>关于</a></div></div></nav><script type="module">const e=document.getElementById("menu-btn"),n=document.getElementById("mobile-menu");e&&n&&e.addEventListener("click",()=>{const t=n.classList.toggle("hidden");e.classList.toggle("menu-open",!t),e.setAttribute("aria-label",t?"打开菜单":"关闭菜单")});</script> <main class="flex-1" data-astro-cid-dmqsi53g>  <div class="reading-progress" id="reading-progress" style="width: 0%"></div> <script type="module">const o=document.getElementById("reading-progress");if(!o)throw new Error("Reading progress bar element not found");const r=()=>{const n=window.scrollY,e=document.documentElement.scrollHeight-window.innerHeight,t=e>0?n/e*100:0;o.style.width=`${Math.min(t,100)}%`};window.addEventListener("scroll",r,{passive:!0});</script>  <button id="back-to-top" class="back-to-top hidden" aria-label="返回顶部" data-astro-cid-bvzihdzo> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-bvzihdzo> <polyline points="18 15 12 9 6 15" data-astro-cid-bvzihdzo></polyline> </svg> </button> <div class="px-6 xl:px-12 pt-12 pb-16" data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <header class="mb-12 text-center" data-astro-cid-bvzihdzo> <h1 class="text-3xl font-semibold mb-3 tracking-tight" data-astro-cid-bvzihdzo>CLAUDE.md 语法指南</h1> <div class="flex items-center justify-center gap-2 text-[var(--color-text-tertiary)] text-sm" data-astro-cid-bvzihdzo> <time datetime="2026-07-05" data-astro-cid-bvzihdzo>2026-07-05</time> <span class="text-[var(--color-border)]" data-astro-cid-bvzihdzo>·</span> <span data-astro-cid-bvzihdzo>7 分钟阅读</span>  <span class="text-[var(--color-border)]" data-astro-cid-bvzihdzo>·</span> <span class="text-sm text-[var(--color-text-tertiary)]"> <span> AI<span class="mx-1">·</span> </span><span> CLAUDE.md </span> </span>  </div> </header> <div class="blog-layout" data-astro-cid-bvzihdzo> <aside class="blog-toc" data-astro-cid-bvzihdzo> <div class="sticky top-24" data-astro-cid-bvzihdzo> <nav class="toc"> <p class="text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-3">目录</p> <ul class="toc-list"> <li class> <a href="#1-基本格式">1. 基本格式</a> </li><li class> <a href="#2--文件导入语法">2. @ 文件导入语法</a> </li><li class> <a href="#3-clauderules-模块化规则">3. .claude/rules/ 模块化规则</a> </li><li class> <a href="#4-文件层级与加载顺序">4. 文件层级与加载顺序</a> </li><li class="toc-h3"> <a href="#目录结构示例">目录结构示例</a> </li><li class> <a href="#5-html-注释零-token-成本">5. HTML 注释（零 token 成本）</a> </li><li class> <a href="#6-引用-agentsmd">6. 引用 AGENTS.md</a> </li><li class> <a href="#7-最佳实践">7. 最佳实践</a> </li><li class> <a href="#8-完整示例">8. 完整示例</a> </li> </ul> </nav> </div> </aside> <div class="blog-body" data-astro-cid-bvzihdzo> <div class="prose prose-neutral max-w-none" data-astro-cid-bvzihdzo>  <h1 id="claudemd-语法指南">CLAUDE.md 语法指南</h1>
+<blockquote>
+<p>CLAUDE.md 是 Claude Code 的项目指令配置文件，使用纯 Markdown 格式书写。</p>
+</blockquote>
+<hr>
+<h2 id="1-基本格式">1. 基本格式</h2>
+<p>纯 Markdown，没有特殊头部要求，直接书写即可：</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="markdown"><code><span class="line"><span style="color:var(--astro-code-foreground);font-weight:bold"># 项目名称</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-foreground);font-weight:bold">## 技术栈</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">- 前端：React + TypeScript</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">- 后端：Python FastAPI</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-foreground);font-weight:bold">## 编码规范</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">- 使用 2 空格缩进</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">- 遵循 ESLint 配置</span></span></code></pre>
+<hr>
+<h2 id="2--文件导入语法">2. <code>@</code> 文件导入语法</h2>
+<p>引用其他文件内容，相对路径基于<strong>当前 CLAUDE.md 所在目录</strong>：</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="markdown"><code><span class="line"><span style="color:var(--astro-code-foreground)">参考 @README 了解项目概述，@package.json 查看可用命令。</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-foreground);font-weight:bold">## 代码规范</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">详见 @docs/code-style.md</span></span></code></pre>
+<p><strong>规则</strong>：</p>
+<ul>
+<li>支持递归导入，最深 <strong>5 层</strong></li>
+<li>包裹反引号（<code>@README</code>）则保持原样输出，不解析</li>
+</ul>
+<hr>
+<h2 id="3-clauderules-模块化规则">3. <code>.claude/rules/</code> 模块化规则</h2>
+<p>将指令拆成多个 <code>.md</code> 文件，使用 <strong>YAML frontmatter</strong> 限定适用路径：</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="markdown"><code><span class="line"><span style="color:var(--astro-code-foreground)">---</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">paths</span><span style="color:var(--astro-code-token-keyword)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">  - </span><span style="color:var(--astro-code-token-string-expression)">"src/api/**/*.ts"</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">  - </span><span style="color:var(--astro-code-token-string-expression)">"src/**/*.{ts,tsx}"</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">---</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground);font-weight:bold"># API 开发规则</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">- 所有端点必须包含输入验证</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">- 错误响应统一格式 { error: string }</span></span></code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>规则</th><th>说明</th></tr></thead><tbody><tr><td><strong>无 <code>paths</code> 字段</strong></td><td>会话启动时即加载</td></tr><tr><td><strong>有 <code>paths</code> 字段</strong></td><td>仅当操作匹配文件时加载</td></tr></tbody></table>
+<hr>
+<h2 id="4-文件层级与加载顺序">4. 文件层级与加载顺序</h2>
+<p>CLAUDE.md 按层级自动加载（从系统级到项目级<strong>拼接</strong>，非覆盖）：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>作用域</th><th>位置</th><th>用途</th></tr></thead><tbody><tr><td><strong>组织策略</strong></td><td><code>/etc/claude-code/CLAUDE.md</code>（Linux）</td><td>IT 管理的全局规则</td></tr><tr><td><strong>用户全局</strong></td><td><code>~/.claude/CLAUDE.md</code></td><td>个人偏好，跨项目生效</td></tr><tr><td><strong>项目根目录</strong></td><td><code>./CLAUDE.md</code> 或 <code>./.claude/CLAUDE.md</code></td><td>团队共享项目指令</td></tr><tr><td><strong>本地（已 gitignore）</strong></td><td><code>./CLAUDE.local.md</code></td><td>个人项目偏好</td></tr><tr><td><strong>子目录</strong></td><td><code>./subfolder/CLAUDE.md</code></td><td>限定子目录范围</td></tr></tbody></table>
+<h3 id="目录结构示例">目录结构示例</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>your-project/</span></span>
+<span class="line"><span>├── CLAUDE.md              # 项目级指令（最常用）</span></span>
+<span class="line"><span>├── CLAUDE.local.md        # 个人偏好（已 .gitignore）</span></span>
+<span class="line"><span>├── subfolder/</span></span>
+<span class="line"><span>│   └── CLAUDE.md          # 子目录专用指令</span></span>
+<span class="line"><span>└── .claude/</span></span>
+<span class="line"><span>    ├── CLAUDE.md</span></span>
+<span class="line"><span>    └── rules/</span></span>
+<span class="line"><span>        ├── code-style.md</span></span>
+<span class="line"><span>        ├── testing.md</span></span>
+<span class="line"><span>        └── security.md</span></span></code></pre>
+<hr>
+<h2 id="5-html-注释零-token-成本">5. HTML 注释（零 token 成本）</h2>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="markdown"><code><span class="line"><span style="color:var(--astro-code-token-comment)">&#x3C;!-- 这行注释仅对人类可见，不会消耗 Claude 的上下文 token --></span></span></code></pre>
+<hr>
+<h2 id="6-引用-agentsmd">6. 引用 AGENTS.md</h2>
+<p>如果项目已有 AGENTS.md，无需重写：</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="markdown"><code><span class="line"><span style="color:var(--astro-code-foreground)">@AGENTS.md</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-foreground);font-weight:bold">## Claude Code 专用指令</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">- 修改 src/billing/ 下的代码时请先建 plan</span></span></code></pre>
+<hr>
+<h2 id="7-最佳实践">7. 最佳实践</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>准则</th><th>说明</th></tr></thead><tbody><tr><td><strong>简洁</strong></td><td>每行都被当作强指令，避免冗长</td></tr><tr><td><strong>具体</strong></td><td>”使用 2 空格缩进” ✅ / “代码格式规范” ❌</td></tr><tr><td><strong>长度</strong></td><td>每文件 <strong>200 行以内</strong>，800–1500 tokens 为宜</td></tr><tr><td><strong>不要放</strong></td><td>API 密钥、密码、安全漏洞详情</td></tr><tr><td><strong>自动生成</strong></td><td>在项目目录运行 <code>/init</code> 可自动分析代码库生成初始 CLAUDE.md</td></tr><tr><td><strong>实时添加</strong></td><td>会话中按 <code>#</code> 热键可临时补充指令</td></tr></tbody></table>
+<hr>
+<h2 id="8-完整示例">8. 完整示例</h2>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="markdown"><code><span class="line"><span style="color:var(--astro-code-foreground);font-weight:bold"># My Project</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">@README</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-foreground);font-weight:bold">## 编码规范</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">- TypeScript strict 模式</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">- 使用 2 空格缩进</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-foreground);font-weight:bold">## 测试</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">- 所有 PR 必须通过 </span><span style="color:var(--astro-code-token-string)">`npm test`</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">- 覆盖率不低于 80%</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-foreground);font-weight:bold">## Git 工作流</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">- 从 main 分支切 feature branch</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">- 提交信息遵循 Conventional Commits</span></span></code></pre>
+<hr>
+<p><strong>官方文档</strong>：<a href="https://code.claude.com/docs/en/memory">code.claude.com/docs/en/memory</a></p>  </div> <!-- Previous / Next navigation --> <nav class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-12 pt-8 border-t border-[var(--color-border)]" data-astro-cid-bvzihdzo> <a href="/blog/Harness工程完全指南" class="card-hover p-4 no-underline group" data-astro-cid-bvzihdzo> <span class="text-xs text-[var(--color-text-tertiary)] block mb-1" data-astro-cid-bvzihdzo>&larr; 上一篇</span> <span class="text-sm font-medium text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors line-clamp-1" data-astro-cid-bvzihdzo>Harness 工程完全指南</span> </a> <a href="/blog/Anthropic-Skills调研报告" class="card-hover p-4 no-underline group text-right" data-astro-cid-bvzihdzo> <span class="text-xs text-[var(--color-text-tertiary)] block mb-1" data-astro-cid-bvzihdzo>下一篇 &rarr;</span> <span class="text-sm font-medium text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors line-clamp-1" data-astro-cid-bvzihdzo>Anthropic Skills（anthropics/skills）深度调研报告</span> </a> </nav> <hr class="!mt-12 !mb-8" data-astro-cid-bvzihdzo> <div data-astro-cid-bvzihdzo> <a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-bvzihdzo>
+&larr; 返回博客列表
+</a> </div> </div> </div> </article> </div>  </main> <footer class="border-t border-[var(--color-border)] mt-24 py-8" data-astro-cid-pux6a34n><div class="max-w-content flex items-center justify-between" data-astro-cid-pux6a34n><span class="text-sm text-[var(--color-text-tertiary)]" data-astro-cid-pux6a34n>
+&copy; 2026 星游寰宇
+</span><div class="flex items-center gap-4" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>博客</a><a href="/about" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>关于</a></div></div></footer> <!-- Link preview tooltip --> <div id="link-preview" style="display:none;position:fixed;z-index:99;max-width:18rem;pointer-events:none;" data-astro-cid-dmqsi53g></div>  <script type="module">(async()=>{try{const c=await fetch("/posts.json");if(!c.ok)return;const u=await c.json(),p=new Map(u.map(t=>[t.href,t])),e=document.getElementById("link-preview");if(!e)return;let n="",d;document.addEventListener("mouseover",t=>{const s=t.target.closest("a[href^='/blog/']");if(!s){e.style.display="none",n="";return}const i=s.getAttribute("href");if(!i||i===n)return;const r=p.get(i);r&&(n=i,d=setTimeout(()=>{e.innerHTML=`<div class="lp-title">${r.title}</div><div class="lp-summary">${r.summary}</div>`;const o=s.getBoundingClientRect();let a=o.left,l=o.bottom+6;a+288>window.innerWidth&&(a=window.innerWidth-296),l+80>window.innerHeight&&(l=o.top-80),Object.assign(e.style,{left:a+"px",top:l+"px",display:"block"})},300))},{passive:!0}),document.addEventListener("mouseout",t=>{t.target.closest("a[href^='/blog/']")&&(clearTimeout(d),e.style.display="none",n="")},{passive:!0})}catch{}})();</script> </body> </html>  <script type="module">document.querySelectorAll("pre").forEach(o=>{const t=document.createElement("button");t.className="copy-btn",t.textContent="复制",t.addEventListener("click",async()=>{const e=o.querySelector("code")?.textContent||o.textContent||"";try{await navigator.clipboard.writeText(e),t.textContent="已复制",t.classList.add("copied"),setTimeout(()=>{t.textContent="复制",t.classList.remove("copied")},2e3)}catch{t.textContent="失败",setTimeout(()=>{t.textContent="复制"},2e3)}}),o.style.position="relative",o.appendChild(t)});const c=document.querySelectorAll(".toc-list a");if(c.length>0){const o=new IntersectionObserver(t=>{for(const e of t)e.isIntersecting&&c.forEach(n=>{n.classList.toggle("active",n.getAttribute("href")===`#${e.target.id}`)})},{rootMargin:"-80px 0px -80% 0px"});c.forEach(t=>{const e=t.getAttribute("href")?.slice(1);if(e){const n=document.getElementById(e);n&&o.observe(n)}})}const s=document.getElementById("back-to-top");s&&(window.addEventListener("scroll",()=>{s.classList.toggle("hidden",window.scrollY<400)},{passive:!0}),s.addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"})));</script>

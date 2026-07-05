@@ -1,0 +1,540 @@
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-dmqsi53g> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="星游寰宇的个人网站——技术文章、项目展示与思考笔记"><meta name="color-scheme" content="light"><!-- Open Graph --><meta property="og:title" content="深度调研报告：browser-use（AI 浏览器代理框架） — 星游寰宇"><meta property="og:description" content="星游寰宇的个人网站——技术文章、项目展示与思考笔记"><meta property="og:url" content="https://code2239.github.io/blog/browser-use-%E8%B0%83%E7%A0%94%E6%8A%A5%E5%91%8A/"><meta property="og:type" content="website"><meta property="og:site_name" content="星游寰宇"><meta property="og:locale" content="zh_CN"><!-- Twitter Card --><meta name="twitter:card" content="summary"><meta name="twitter:title" content="深度调研报告：browser-use（AI 浏览器代理框架） — 星游寰宇"><meta name="twitter:description" content="星游寰宇的个人网站——技术文章、项目展示与思考笔记"><!-- Canonical --><link rel="canonical" href="https://code2239.github.io/blog/browser-use-%E8%B0%83%E7%A0%94%E6%8A%A5%E5%91%8A/"><title>深度调研报告：browser-use（AI 浏览器代理框架） — 星游寰宇</title><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="alternate" type="application/rss+xml" title="星游寰宇 RSS" href="/rss.xml"><link rel="stylesheet" href="/_astro/_slug_.C_t6U7me.css">
+<style>.blog-layout[data-astro-cid-bvzihdzo]{display:block}.blog-toc[data-astro-cid-bvzihdzo]{display:none}.blog-body[data-astro-cid-bvzihdzo]{min-width:0}@media(min-width:1024px){.blog-layout[data-astro-cid-bvzihdzo]{display:grid;grid-template-columns:14rem 1fr;gap:3rem;align-items:start}.blog-toc[data-astro-cid-bvzihdzo]{display:block}.blog-body[data-astro-cid-bvzihdzo]{padding-right:2rem}}.copy-btn[data-astro-cid-bvzihdzo]{position:absolute;top:8px;right:8px;padding:4px 10px;font-size:.6875rem;font-family:var(--font-sans);color:var(--color-text-tertiary);background:var(--color-bg);border:1px solid var(--color-border);border-radius:6px;cursor:pointer;opacity:0;transition:opacity .15s ease,color .15s ease}pre[data-astro-cid-bvzihdzo]:hover .copy-btn[data-astro-cid-bvzihdzo]{opacity:1}.copy-btn[data-astro-cid-bvzihdzo]:hover{color:var(--color-accent);border-color:var(--color-accent)}.copy-btn[data-astro-cid-bvzihdzo].copied{color:#16a34a;border-color:#16a34a}.back-to-top[data-astro-cid-bvzihdzo]{position:fixed;bottom:2rem;right:2rem;z-index:40;width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:50%;border:1px solid var(--color-border);background:var(--color-bg);color:var(--color-text-secondary);cursor:pointer;box-shadow:var(--shadow-md);transition:opacity .2s ease,transform .2s ease}.back-to-top[data-astro-cid-bvzihdzo]:hover{color:var(--color-accent);border-color:var(--color-accent);transform:translateY(-2px)}.back-to-top[data-astro-cid-bvzihdzo].hidden{opacity:0;pointer-events:none}
+</style></head> <body class="min-h-screen flex flex-col" data-astro-cid-dmqsi53g> <nav class="sticky top-0 z-40 bg-[var(--color-bg)]/80 backdrop-blur-md border-b border-[var(--color-border)]" data-astro-cid-pux6a34n><div class="max-w-content flex items-center justify-between py-4" data-astro-cid-pux6a34n><a href="/" class="text-base font-semibold no-underline tracking-tight" data-astro-cid-pux6a34n>
+星游寰宇
+</a><!-- Desktop nav --><div class="hidden sm:flex items-center gap-6" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>博客</a><a href="/about" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>关于</a></div><!-- Mobile hamburger --><button id="menu-btn" class="sm:hidden flex flex-col gap-1 p-2 -mr-2 cursor-pointer" aria-label="打开菜单" data-astro-cid-pux6a34n><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-transform duration-200" data-astro-cid-pux6a34n></span><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-opacity duration-200" data-astro-cid-pux6a34n></span><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-transform duration-200" data-astro-cid-pux6a34n></span></button></div><!-- Mobile menu --><div id="mobile-menu" class="hidden sm:hidden border-t border-[var(--color-border)] bg-[var(--color-bg)]" data-astro-cid-pux6a34n><div class="max-w-content flex flex-col gap-2 py-4" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>博客</a><a href="/about" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>关于</a></div></div></nav><script type="module">const e=document.getElementById("menu-btn"),n=document.getElementById("mobile-menu");e&&n&&e.addEventListener("click",()=>{const t=n.classList.toggle("hidden");e.classList.toggle("menu-open",!t),e.setAttribute("aria-label",t?"打开菜单":"关闭菜单")});</script> <main class="flex-1" data-astro-cid-dmqsi53g>  <div class="reading-progress" id="reading-progress" style="width: 0%"></div> <script type="module">const o=document.getElementById("reading-progress");if(!o)throw new Error("Reading progress bar element not found");const r=()=>{const n=window.scrollY,e=document.documentElement.scrollHeight-window.innerHeight,t=e>0?n/e*100:0;o.style.width=`${Math.min(t,100)}%`};window.addEventListener("scroll",r,{passive:!0});</script>  <button id="back-to-top" class="back-to-top hidden" aria-label="返回顶部" data-astro-cid-bvzihdzo> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-bvzihdzo> <polyline points="18 15 12 9 6 15" data-astro-cid-bvzihdzo></polyline> </svg> </button> <div class="px-6 xl:px-12 pt-12 pb-16" data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <header class="mb-12 text-center" data-astro-cid-bvzihdzo> <h1 class="text-3xl font-semibold mb-3 tracking-tight" data-astro-cid-bvzihdzo>深度调研报告：browser-use（AI 浏览器代理框架）</h1> <div class="flex items-center justify-center gap-2 text-[var(--color-text-tertiary)] text-sm" data-astro-cid-bvzihdzo> <time datetime="2026-07-05" data-astro-cid-bvzihdzo>2026-07-05</time> <span class="text-[var(--color-border)]" data-astro-cid-bvzihdzo>·</span> <span data-astro-cid-bvzihdzo>25 分钟阅读</span>  <span class="text-[var(--color-border)]" data-astro-cid-bvzihdzo>·</span> <span class="text-sm text-[var(--color-text-tertiary)]"> <span> AI<span class="mx-1">·</span> </span><span> 调研<span class="mx-1">·</span> </span><span> Browser<span class="mx-1">·</span> </span><span> 自动化<span class="mx-1">·</span> </span><span> 工具 </span> </span>  </div> </header> <div class="blog-layout" data-astro-cid-bvzihdzo> <aside class="blog-toc" data-astro-cid-bvzihdzo> <div class="sticky top-24" data-astro-cid-bvzihdzo> <nav class="toc"> <p class="text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-3">目录</p> <ul class="toc-list"> <li class> <a href="#-1-skill-元信息">📦 1. Skill 元信息</a> </li><li class> <a href="#-2-调用方式调用词">🎯 2. 调用方式（调用词）</a> </li><li class="toc-h3"> <a href="#skill-定义文件定位">Skill 定义文件定位</a> </li><li class="toc-h3"> <a href="#调用方式分析">调用方式分析</a> </li><li class="toc-h3"> <a href="#调用词结论">调用词结论</a> </li><li class="toc-h3"> <a href="#使用示例">使用示例</a> </li><li class> <a href="#-3-token-消耗评估-核心新增项">💰 3. Token 消耗评估（★ 核心新增项）</a> </li><li class="toc-h3"> <a href="#31-上下文加载开销">3.1 上下文加载开销</a> </li><li class="toc-h3"> <a href="#32-运行时额外开销">3.2 运行时额外开销</a> </li><li class="toc-h3"> <a href="#33-优化建议">3.3 优化建议</a> </li><li class> <a href="#-4-功能与技术解析">🧠 4. 功能与技术解析</a> </li><li class="toc-h3"> <a href="#41-核心功能">4.1 核心功能</a> </li><li class="toc-h3"> <a href="#42-核心架构">4.2 核心架构</a> </li><li class="toc-h3"> <a href="#43-技术特点">4.3 技术特点</a> </li><li class="toc-h3"> <a href="#44-竞品--同类工具">4.4 竞品 / 同类工具</a> </li><li class> <a href="#-5-版本与更新">📅 5. 版本与更新</a> </li><li class> <a href="#总评">总评</a> </li><li class> <a href="#附录参考链接汇总">附录：参考链接汇总</a> </li> </ul> </nav> </div> </aside> <div class="blog-body" data-astro-cid-bvzihdzo> <div class="prose prose-neutral max-w-none" data-astro-cid-bvzihdzo>  <h1 id="深度调研报告browser-useai-浏览器代理框架">深度调研报告：browser-use（AI 浏览器代理框架）</h1>
+<blockquote>
+<p><strong>调研日期：</strong> 2026-07-05
+<strong>仓库地址：</strong> <a href="https://github.com/browser-use/browser-use">https://github.com/browser-use/browser-use</a></p>
+</blockquote>
+<hr>
+<h2 id="-1-skill-元信息">📦 1. Skill 元信息</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>字段</th><th>值</th></tr></thead><tbody><tr><td><strong>名称</strong></td><td><code>browser-use</code>（Python 库/框架，非严格意义上的 Claude Skill）</td></tr><tr><td><strong>GitHub 地址</strong></td><td><a href="https://github.com/browser-use/browser-use">https://github.com/browser-use/browser-use</a></td></tr><tr><td><strong>开发者/组织</strong></td><td><a href="https://github.com/browser-use">XHLLC</a></td></tr><tr><td><strong>Star 热度</strong></td><td><strong>~132,000–180,000+</strong>（2026 年初数据，GitHub 上最热门的浏览器自动化 AI 框架）</td></tr><tr><td><strong>Fork 数</strong></td><td><strong>~18,500+</strong></td></tr><tr><td><strong>贡献者</strong></td><td>350+</td></tr><tr><td><strong>总提交数</strong></td><td>2,800+</td></tr><tr><td><strong>许可证</strong></td><td>MIT</td></tr><tr><td><strong>PyPI 下载量</strong></td><td>4,200,000+</td></tr><tr><td><strong>主要语言</strong></td><td>Python</td></tr></tbody></table>
+<blockquote>
+<p><strong>重要声明：</strong> <code>browser-use</code> 是一个通用的 <strong>Python 库</strong>（AI 浏览器自动化框架），<strong>而非 Claude Code 的 SKILL.md 格式的 Skill</strong>。本报告将遵循 CLAUDE.md 的调研框架，但会针对其作为 Python 库的实际情况进行适配说明。</p>
+</blockquote>
+<p><strong>参考来源：</strong> <a href="https://github.com/browser-use/browser-use">GitHub 主仓库</a> · <a href="https://github.com/browser-use/browser-use">前文搜索数据（132k stars, 18.5k forks）</a> · <a href="https://pypi.org/project/browser-use/">PyPI</a> · <a href="https://docs.browser-use.com/">文档站</a></p>
+<hr>
+<h2 id="-2-调用方式调用词">🎯 2. 调用方式（调用词）</h2>
+<h3 id="skill-定义文件定位">Skill 定义文件定位</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>文件路径</th><th>用途</th></tr></thead><tbody><tr><td>主仓库：<code>browser-use/browser-use</code></td><td>Python 库的核心代码仓库，无 SKILL.md 或 CLAUDE.md</td></tr><tr><td>官方文档站：<code>docs.browser-use.com</code></td><td>包含 Agent 配置、自定义 Skills 系统、CLI 使用说明等</td></tr><tr><td>社区适配版：<a href="https://github.com/jolpango/prompts"><code>jolpango/prompts</code></a> 中的 <code>browser-use-CLAUDE.md</code></td><td>社区制作的 Claude Code 适配器，用于在 Claude Code 中调用 browser-use</td></tr></tbody></table>
+<h3 id="调用方式分析">调用方式分析</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>维度</th><th>描述</th></tr></thead><tbody><tr><td><strong>工具本质</strong></td><td>Python 库，通过 <code>import browser_use</code> 引入，非 Claude Skill 标准格式</td></tr><tr><td><strong>激活方式</strong></td><td>两种方式：</td></tr><tr><td>└─ <strong>方式 A：Python SDK 调用</strong></td><td>在 Python 代码中 <code>from browser_use import Agent</code> 创建 Agent 实例并运行任务</td></tr><tr><td>└─ <strong>方式 B：CLI 命令行工具</strong></td><td>安装后可通过 <code>browser-use run "你的任务"</code> 从终端直接执行</td></tr><tr><td><strong>安装命令</strong></td><td><code>pip install browser-use</code></td></tr><tr><td><strong>是否支持参数传递</strong></td><td>是。任务描述、LLM 模型选择、浏览器选项等均可通过参数传递</td></tr><tr><td><strong>社区 Claude Code 适配</strong></td><td>存在社区版 <a href="https://raw.githubusercontent.com/jolpango/prompts/refs/heads/main/browser-use-CLAUDE.md">browser-use-CLAUDE.md</a>，可将其放入项目根目录让 Claude Code 调用 browser-use 完成任务</td></tr></tbody></table>
+<h3 id="调用词结论">调用词结论</h3>
+<blockquote>
+<p><strong>⚠️ 调用词未明确定义为特定斜杠命令或 @提及。</strong> 该工具作为 Python 库，通过 <code>Agent(task="...")</code> 创建实例并通过 <code>agent.run()</code> 执行。推荐方式是向 LLM（如 Claude 或 GPT-4o）描述任务目标，LLM 生成使用 browser-use 的 Python 代码来自动化浏览器操作。严格来说<strong>这并非一个可斜杠调用的 Skill</strong>，而是一个 Python 编程框架。</p>
+</blockquote>
+<h3 id="使用示例">使用示例</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:var(--astro-code-token-keyword)">from</span><span style="color:var(--astro-code-foreground)"> browser_use </span><span style="color:var(--astro-code-token-keyword)">import</span><span style="color:var(--astro-code-foreground)"> Agent</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">from</span><span style="color:var(--astro-code-foreground)"> langchain_openai </span><span style="color:var(--astro-code-token-keyword)">import</span><span style="color:var(--astro-code-foreground)"> ChatOpenAI</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">import</span><span style="color:var(--astro-code-foreground)"> asyncio</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">agent </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-function)"> Agent</span><span style="color:var(--astro-code-token-punctuation)">(</span></span>
+<span class="line"><span style="color:var(--astro-code-token-punctuation)">    task</span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-string-expression)">"打开知乎，搜索"</span><span style="color:var(--astro-code-token-punctuation)">Claude Code</span><span style="color:var(--astro-code-token-string-expression)">"并获取第一个帖子的标题"</span><span style="color:var(--astro-code-token-punctuation)">,</span></span>
+<span class="line"><span style="color:var(--astro-code-token-punctuation)">    llm</span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-function)">ChatOpenAI</span><span style="color:var(--astro-code-token-punctuation)">(model</span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-string-expression)">"gpt-4o"</span><span style="color:var(--astro-code-token-punctuation)">),</span></span>
+<span class="line"><span style="color:var(--astro-code-token-punctuation)">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">asyncio</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">run</span><span style="color:var(--astro-code-token-punctuation)">(agent.</span><span style="color:var(--astro-code-token-function)">run</span><span style="color:var(--astro-code-token-punctuation)">())</span></span></code></pre>
+<p><strong>参考来源：</strong> <a href="https://github.com/browser-use/browser-use">GitHub 主仓库</a> · <a href="https://docs.browser-use.com/">官方文档 Agents 部分</a> · <a href="https://github.com/jolpango/prompts/blob/main/browser-use-CLAUDE.md">社区 CLAUDE.md 适配</a></p>
+<hr>
+<h2 id="-3-token-消耗评估-核心新增项">💰 3. Token 消耗评估（★ 核心新增项）</h2>
+<h3 id="31-上下文加载开销">3.1 上下文加载开销</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>核心指令文件</th><th>文件类型</th><th>原始字符数（估）</th><th>预估加载 Token 数</th></tr></thead><tbody><tr><td>主仓库代码（整个项目）</td><td>Python 源代码 + 文档</td><td>数十万字符</td><td><strong>不适用</strong>（非静态加载的指令文件）</td></tr><tr><td>社区 CLAUDE.md 适配器</td><td>Markdown（Claude Code 适配指令）</td><td>~3,000–5,000 字符</td><td><strong>~750–1,250 tokens</strong></td></tr><tr><td>官方文档 Agent 配置指南</td><td>Web 文档</td><td>~10,000+ 字符（按需读取）</td><td><strong>不固定，取决于对话内容</strong></td></tr></tbody></table>
+<blockquote>
+<p><strong>结论：</strong> 由于 browser-use 不是标准的 Skill 文件格式，它没有固定的加载开销。若使用社区 CLAUDE.md 适配版本，相比空白对话额外消耗约 <strong>750–1,250 Tokens</strong>（估算值）。对 Claude 200K 上下文窗口而言，约占 <strong>0.38%–0.63%</strong>，属于<strong>低开销</strong>。</p>
+</blockquote>
+<h3 id="32-运行时额外开销">3.2 运行时额外开销</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>评估项</th><th>结论</th></tr></thead><tbody><tr><td><strong>是否频繁调用外部工具（MCP、API）</strong></td><td>✅ <strong>是。</strong> 该库的核心就是通过 Playwright 调用浏览器执行操作，每次执行都会产生实时交互。同时它会将 DOM 数据发送给 LLM 进行决策，每次 LLM 调用都消耗 Token。</td></tr><tr><td><strong>相比不使用该工具，单次对话额外增加多少 Token 成本？</strong></td><td><strong>中等至较高。</strong> 具体取决于任务复杂度：</td></tr><tr><td></td><td>• <strong>简单任务</strong>（如”搜索天气”）：~5k–15k tokens</td></tr><tr><td></td><td>• <strong>中等任务</strong>（如”填写表单并提交”）：~15k–50k tokens</td></tr><tr><td></td><td>• <strong>复杂任务</strong>（如”预订航班”）：~30k–100k+ tokens</td></tr><tr><td></td><td>每次 Agent 决策步骤的 DOM 快照解析也会消耗大量 Tokens（每步约 2k–10k tokens）</td></tr><tr><td><strong>是否有外部脚本需要动态加载</strong></td><td>❌ 不适用。库代码是安装时静态加载的，运行时通过 Python 调用。</td></tr></tbody></table>
+<h3 id="33-优化建议">3.3 优化建议</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>场景</th><th>建议</th></tr></thead><tbody><tr><td>降低 Token 消耗</td><td>使用优化的 DOM 快照提取（仅提取必要元素），减少不必要的视觉渲染</td></tr><tr><td>减少上下文占用</td><td>使用 gpt-4o-mini 等较小模型作中间步骤的判断</td></tr><tr><td>加速决策</td><td>设置自定义的 DOM 提取器，只提取关键交互元素</td></tr></tbody></table>
+<blockquote>
+<p>⚠️ <strong>Token 估算说明：基于官方文档和社区使用数据推断，实际消耗因任务复杂度、页面结构、LLM 模型等因素大幅波动。</strong> 参考来源：<a href="https://github.com/browser-use/browser-use?tab=readme-ov-file#token-cost">browser-use Token Cost 文档</a></p>
+</blockquote>
+<hr>
+<h2 id="-4-功能与技术解析">🧠 4. 功能与技术解析</h2>
+<h3 id="41-核心功能">4.1 核心功能</h3>
+<p>browser-use 是一个让 AI Agent 能够控制和操作网络浏览器的 Python 框架。它的核心功能是将 LLM 的决策能力与浏览器的操作能力相结合。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>功能</th><th>说明</th></tr></thead><tbody><tr><td><strong>浏览器控制</strong></td><td>AI 可以打开浏览器、导航页面、点击按钮、填写表单、滚动页面等</td></tr><tr><td><strong>多标签页管理</strong></td><td>支持同时管理多个标签页/窗口</td></tr><tr><td><strong>DOM 智能提取</strong></td><td>自动提取并结构化 DOM 数据供 LLM 理解和决策</td></tr><tr><td><strong>多模型支持</strong></td><td>兼容 OpenAI GPT-4o、Anthropic Claude、Google Gemini、DeepSeek 等</td></tr><tr><td><strong>自定义 Actions 系统</strong></td><td>开发者可使用 <code>@action</code> 装饰器注册自定义的浏览器操作，扩展 Agent 能力</td></tr><tr><td><strong>多 Agent 协作</strong></td><td>支持多个 Agent 共享上下文、并行或协同工作</td></tr><tr><td><strong>断点恢复</strong></td><td>支持任务保存和断点恢复</td></tr><tr><td><strong>CLI 工具</strong></td><td>提供命令行接口，直接从终端执行自动化任务</td></tr><tr><td><strong>本地部署</strong></td><td>全部在本地运行，数据不上传到第三方服务器</td></tr></tbody></table>
+<h4 id="与同类工具的核心差异">与同类工具的核心差异</h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>维度</th><th>browser-use</th><th>Playwright / Puppeteer</th><th>Selenium</th></tr></thead><tbody><tr><td><strong>核心驱动</strong></td><td>LLM Agent</td><td>代码脚本</td><td>代码脚本</td></tr><tr><td><strong>目标用户</strong></td><td>AI 开发者</td><td>传统 Web 开发者</td><td>传统 QA 开发者</td></tr><tr><td><strong>动态决策</strong></td><td>是（LLM 实时决策下一步）</td><td>否（固定脚本流程）</td><td>否（固定脚本流程）</td></tr><tr><td><strong>适应能力</strong></td><td>高（自动适应页面变化）</td><td>低（需手动更新选择器）</td><td>低（需手动更新选择器）</td></tr><tr><td><strong>E2E 测试</strong></td><td>辅助场景</td><td>主要场景</td><td>主要场景</td></tr><tr><td><strong>运行成本</strong></td><td>高 Token 消耗</td><td>低运行成本</td><td>低运行成本</td></tr></tbody></table>
+<h3 id="42-核心架构">4.2 核心架构</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>任务描述 → [Agent] → [Controller] → [DOM Service] → [Playwright] → 浏览器操作</span></span>
+<span class="line"><span>                ↑                      ↓</span></span>
+<span class="line"><span>                └── [LLM (GPT-4o/Claude等)] ←─── [DOM 快照/执行结果]</span></span></code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>组件</th><th>职责</th><th>技术实现</th></tr></thead><tbody><tr><td><strong>① Agent（代理）</strong></td><td>顶层协调器，接收任务并协调执行流程</td><td>负责任务分解、状态管理、与 LLM 的交互循环</td></tr><tr><td><strong>② Controller（控制器）</strong></td><td>动作注册与执行的中介层</td><td>管理可用动作列表、权限处理、动作执行结果的返回</td></tr><tr><td><strong>③ DOM Service（DOM 服务）</strong></td><td>提取页面结构和内容供 LLM 决策</td><td>生成简化 DOM 快照（Accessibility Tree），序列化为 LLM 可理解的格式</td></tr><tr><td><strong>④ Playwright</strong></td><td>底层浏览器自动化驱动</td><td>执行实际浏览器操作：点击、输入、导航等</td></tr></tbody></table>
+<h3 id="43-技术特点">4.3 技术特点</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>特性</th><th>说明</th></tr></thead><tbody><tr><td><strong>Playwright 驱动</strong></td><td>使用 Playwright 作为底层自动化引擎，跨浏览器支持（Chromium, Firefox, WebKit）</td></tr><tr><td><strong>模型无关架构</strong></td><td>通过 LangChain 接口支持多种 LLM，用户可选择最适合自己需求和预算的模型</td></tr><tr><td><strong>Action 注册机制</strong></td><td>开发者可自定义 <code>@action</code> 装饰器注册新的浏览器操作，扩展 Agent 能力</td></tr><tr><td><strong>多 Agent 协调</strong></td><td>支持 <code>MultiAgent</code> 系统，多个 Agent 可在不同浏览器上下文/标签中协同工作</td></tr><tr><td><strong>自定义 Skills 系统</strong></td><td>browser-use 有自己的 Skills 文档系统（非 Claude Code 格式），用于配置 Agent 的行为模式</td></tr></tbody></table>
+<h3 id="44-竞品--同类工具">4.4 竞品 / 同类工具</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>名称</th><th>差异点</th></tr></thead><tbody><tr><td><strong>Playwright / Puppeteer</strong></td><td>底层浏览器驱动，无 AI 决策能力，需手工编写完整脚本</td></tr><tr><td><strong>Selenium</strong></td><td>传统 Web 自动化框架，成熟但笨重，不适用于 AI Agent 场景</td></tr><tr><td><strong>Cypress</strong></td><td>E2E 测试框架，前端开发者友好，但不适合 AI 驱动自动化</td></tr><tr><td><strong>AutoGPT / BabyAGI</strong></td><td>通用 AI Agent 框架，但缺乏 browser-use 的浏览器深度集成能力</td></tr><tr><td><strong>Skyvern</strong></td><td>类似 browser-use 的 AI 浏览器自动化方案，但生态较小，社区活跃度低</td></tr></tbody></table>
+<p>browser-use 的核心优势在于<strong>将 LLM 的推理能力与浏览器操作无缝集成</strong>：开发者只需描述任务目标，Agent 自动决策每一步的操作。其弱点在于 <strong>Token 消耗较高</strong>和<strong>执行速度较慢</strong>（每次决策需要 LLM 调用），但相比手工编写自动化脚本的开发和维护成本，仍有显著优势。</p>
+<p><strong>参考来源：</strong> <a href="https://github.com/browser-use/browser-use">GitHub 仓库</a> · <a href="https://docs.browser-use.com/architecture">官方架构文档</a> · <a href="https://github.com/browser-use/browser-use/discussions">browser-use vs Playwright 讨论</a></p>
+<hr>
+<h2 id="-5-版本与更新">📅 5. 版本与更新</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>事件</th><th>日期</th><th>详情</th></tr></thead><tbody><tr><td><strong>仓库创建</strong></td><td>2024 年初</td><td>XHLLC 创建 browser-use 项目</td></tr><tr><td><strong>Star 破 8k</strong></td><td>2024 年 1 月</td><td>早期获得关注</td></tr><tr><td><strong>Star 破 43k</strong></td><td>2025 年 1 月</td><td>年增长约 5x，成为热门 AI 工具</td></tr><tr><td><strong>v2.0 发布</strong></td><td>2025 年 Q3</td><td>弃用 Selenium 依赖，完全基于 Playwright；引入多 Agent 协调；单周新增 15,000+ stars</td></tr><tr><td><strong>Agent 市场发布</strong></td><td>2025 年末</td><td>社区驱动的 Agent 市场，450+ 社区贡献的 Actions</td></tr><tr><td><strong>Star 破 132k</strong></td><td>2026 年初</td><td>持续高速增长，年增长率约 210%</td></tr><tr><td><strong>当前状态</strong></td><td>2026-07</td><td>活跃维护中，每周发布新版本</td></tr></tbody></table>
+<p><strong>参考来源：</strong> <a href="https://github.com/browser-use/browser-use">GitHub 仓库</a> · <a href="https://browser-use.github.io/browser-use/release-notes/">官方 Release Notes</a></p>
+<hr>
+<h2 id="总评">总评</h2>
+<p><strong>browser-use</strong> 是 2026 年最热门的 AI 浏览器自动化框架之一（~132k+ stars）。它是一个 <strong>Python 库</strong>，而非 Claude Code 的 SKILL.md 格式标准 Skill，但在功能上可以被视为 AI Agent 生态中最重要的”技能工具”之一。其核心价值在于让 LLM Agent 能够真实地操控 Web 浏览器，将自然语言任务转化为浏览器操作。Token 开销中等偏高（单次任务 5k–100k+ tokens），但相比手工编写自动化脚本的开发和维护成本，仍有显著优势。生态持续扩张中，社区活跃度极高。</p>
+<hr>
+<h2 id="附录参考链接汇总">附录：参考链接汇总</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>来源</th><th>链接</th></tr></thead><tbody><tr><td>GitHub 主仓库</td><td><a href="https://github.com/browser-use/browser-use">https://github.com/browser-use/browser-use</a></td></tr><tr><td>官方文档站</td><td><a href="https://docs.browser-use.com/">https://docs.browser-use.com/</a></td></tr><tr><td>PyPI 包页</td><td><a href="https://pypi.org/project/browser-use/">https://pypi.org/project/browser-use/</a></td></tr><tr><td>Agent Skills 文档</td><td><a href="https://browser-use.github.io/browser-use/agent/agent-skills/">https://browser-use.github.io/browser-use/agent/agent-skills/</a></td></tr><tr><td>社区 CLAUDE.md 适配</td><td><a href="https://github.com/jolpango/prompts/blob/main/browser-use-CLAUDE.md">https://github.com/jolpango/prompts/blob/main/browser-use-CLAUDE.md</a></td></tr><tr><td>架构文档</td><td><a href="https://docs.browser-use.com/architecture">https://docs.browser-use.com/architecture</a></td></tr><tr><td>Release Notes</td><td><a href="https://browser-use.github.io/browser-use/release-notes/">https://browser-use.github.io/browser-use/release-notes/</a></td></tr></tbody></table>  </div> <!-- Previous / Next navigation --> <nav class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-12 pt-8 border-t border-[var(--color-border)]" data-astro-cid-bvzihdzo> <a href="/blog/个人网站搭建全记录" class="card-hover p-4 no-underline group" data-astro-cid-bvzihdzo> <span class="text-xs text-[var(--color-text-tertiary)] block mb-1" data-astro-cid-bvzihdzo>&larr; 上一篇</span> <span class="text-sm font-medium text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors line-clamp-1" data-astro-cid-bvzihdzo>个人网站搭建全记录 — 从零到上线</span> </a> <a href="/blog/superpowers-skill-triggers" class="card-hover p-4 no-underline group text-right" data-astro-cid-bvzihdzo> <span class="text-xs text-[var(--color-text-tertiary)] block mb-1" data-astro-cid-bvzihdzo>下一篇 &rarr;</span> <span class="text-sm font-medium text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors line-clamp-1" data-astro-cid-bvzihdzo>Superpowers 技能触发方式全览</span> </a> </nav> <hr class="!mt-12 !mb-8" data-astro-cid-bvzihdzo> <div data-astro-cid-bvzihdzo> <a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-bvzihdzo>
+&larr; 返回博客列表
+</a> </div> </div> </div> </article> </div>  </main> <footer class="border-t border-[var(--color-border)] mt-24 py-8" data-astro-cid-pux6a34n><div class="max-w-content flex items-center justify-between" data-astro-cid-pux6a34n><span class="text-sm text-[var(--color-text-tertiary)]" data-astro-cid-pux6a34n>
+&copy; 2026 星游寰宇
+</span><div class="flex items-center gap-4" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>博客</a><a href="/about" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>关于</a></div></div></footer> <!-- Link preview tooltip --> <div id="link-preview" style="display:none;position:fixed;z-index:99;max-width:18rem;pointer-events:none;" data-astro-cid-dmqsi53g></div>  <script type="module">(async()=>{try{const c=await fetch("/posts.json");if(!c.ok)return;const u=await c.json(),p=new Map(u.map(t=>[t.href,t])),e=document.getElementById("link-preview");if(!e)return;let n="",d;document.addEventListener("mouseover",t=>{const s=t.target.closest("a[href^='/blog/']");if(!s){e.style.display="none",n="";return}const i=s.getAttribute("href");if(!i||i===n)return;const r=p.get(i);r&&(n=i,d=setTimeout(()=>{e.innerHTML=`<div class="lp-title">${r.title}</div><div class="lp-summary">${r.summary}</div>`;const o=s.getBoundingClientRect();let a=o.left,l=o.bottom+6;a+288>window.innerWidth&&(a=window.innerWidth-296),l+80>window.innerHeight&&(l=o.top-80),Object.assign(e.style,{left:a+"px",top:l+"px",display:"block"})},300))},{passive:!0}),document.addEventListener("mouseout",t=>{t.target.closest("a[href^='/blog/']")&&(clearTimeout(d),e.style.display="none",n="")},{passive:!0})}catch{}})();</script> </body> </html>  <script type="module">document.querySelectorAll("pre").forEach(o=>{const t=document.createElement("button");t.className="copy-btn",t.textContent="复制",t.addEventListener("click",async()=>{const e=o.querySelector("code")?.textContent||o.textContent||"";try{await navigator.clipboard.writeText(e),t.textContent="已复制",t.classList.add("copied"),setTimeout(()=>{t.textContent="复制",t.classList.remove("copied")},2e3)}catch{t.textContent="失败",setTimeout(()=>{t.textContent="复制"},2e3)}}),o.style.position="relative",o.appendChild(t)});const c=document.querySelectorAll(".toc-list a");if(c.length>0){const o=new IntersectionObserver(t=>{for(const e of t)e.isIntersecting&&c.forEach(n=>{n.classList.toggle("active",n.getAttribute("href")===`#${e.target.id}`)})},{rootMargin:"-80px 0px -80% 0px"});c.forEach(t=>{const e=t.getAttribute("href")?.slice(1);if(e){const n=document.getElementById(e);n&&o.observe(n)}})}const s=document.getElementById("back-to-top");s&&(window.addEventListener("scroll",()=>{s.classList.toggle("hidden",window.scrollY<400)},{passive:!0}),s.addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"})));</script>

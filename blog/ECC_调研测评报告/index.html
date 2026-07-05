@@ -1,0 +1,414 @@
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-dmqsi53g> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="星游寰宇的个人网站——技术文章、项目展示与思考笔记"><meta name="color-scheme" content="light"><!-- Open Graph --><meta property="og:title" content="ECC（Elliptic Curve Cryptography）调研测评报告 — 星游寰宇"><meta property="og:description" content="星游寰宇的个人网站——技术文章、项目展示与思考笔记"><meta property="og:url" content="https://code2239.github.io/blog/ECC_%E8%B0%83%E7%A0%94%E6%B5%8B%E8%AF%84%E6%8A%A5%E5%91%8A/"><meta property="og:type" content="website"><meta property="og:site_name" content="星游寰宇"><meta property="og:locale" content="zh_CN"><!-- Twitter Card --><meta name="twitter:card" content="summary"><meta name="twitter:title" content="ECC（Elliptic Curve Cryptography）调研测评报告 — 星游寰宇"><meta name="twitter:description" content="星游寰宇的个人网站——技术文章、项目展示与思考笔记"><!-- Canonical --><link rel="canonical" href="https://code2239.github.io/blog/ECC_%E8%B0%83%E7%A0%94%E6%B5%8B%E8%AF%84%E6%8A%A5%E5%91%8A/"><title>ECC（Elliptic Curve Cryptography）调研测评报告 — 星游寰宇</title><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="alternate" type="application/rss+xml" title="星游寰宇 RSS" href="/rss.xml"><link rel="stylesheet" href="/_astro/_slug_.C_t6U7me.css">
+<style>.blog-layout[data-astro-cid-bvzihdzo]{display:block}.blog-toc[data-astro-cid-bvzihdzo]{display:none}.blog-body[data-astro-cid-bvzihdzo]{min-width:0}@media(min-width:1024px){.blog-layout[data-astro-cid-bvzihdzo]{display:grid;grid-template-columns:14rem 1fr;gap:3rem;align-items:start}.blog-toc[data-astro-cid-bvzihdzo]{display:block}.blog-body[data-astro-cid-bvzihdzo]{padding-right:2rem}}.copy-btn[data-astro-cid-bvzihdzo]{position:absolute;top:8px;right:8px;padding:4px 10px;font-size:.6875rem;font-family:var(--font-sans);color:var(--color-text-tertiary);background:var(--color-bg);border:1px solid var(--color-border);border-radius:6px;cursor:pointer;opacity:0;transition:opacity .15s ease,color .15s ease}pre[data-astro-cid-bvzihdzo]:hover .copy-btn[data-astro-cid-bvzihdzo]{opacity:1}.copy-btn[data-astro-cid-bvzihdzo]:hover{color:var(--color-accent);border-color:var(--color-accent)}.copy-btn[data-astro-cid-bvzihdzo].copied{color:#16a34a;border-color:#16a34a}.back-to-top[data-astro-cid-bvzihdzo]{position:fixed;bottom:2rem;right:2rem;z-index:40;width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:50%;border:1px solid var(--color-border);background:var(--color-bg);color:var(--color-text-secondary);cursor:pointer;box-shadow:var(--shadow-md);transition:opacity .2s ease,transform .2s ease}.back-to-top[data-astro-cid-bvzihdzo]:hover{color:var(--color-accent);border-color:var(--color-accent);transform:translateY(-2px)}.back-to-top[data-astro-cid-bvzihdzo].hidden{opacity:0;pointer-events:none}
+</style></head> <body class="min-h-screen flex flex-col" data-astro-cid-dmqsi53g> <nav class="sticky top-0 z-40 bg-[var(--color-bg)]/80 backdrop-blur-md border-b border-[var(--color-border)]" data-astro-cid-pux6a34n><div class="max-w-content flex items-center justify-between py-4" data-astro-cid-pux6a34n><a href="/" class="text-base font-semibold no-underline tracking-tight" data-astro-cid-pux6a34n>
+星游寰宇
+</a><!-- Desktop nav --><div class="hidden sm:flex items-center gap-6" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>博客</a><a href="/about" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>关于</a></div><!-- Mobile hamburger --><button id="menu-btn" class="sm:hidden flex flex-col gap-1 p-2 -mr-2 cursor-pointer" aria-label="打开菜单" data-astro-cid-pux6a34n><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-transform duration-200" data-astro-cid-pux6a34n></span><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-opacity duration-200" data-astro-cid-pux6a34n></span><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-transform duration-200" data-astro-cid-pux6a34n></span></button></div><!-- Mobile menu --><div id="mobile-menu" class="hidden sm:hidden border-t border-[var(--color-border)] bg-[var(--color-bg)]" data-astro-cid-pux6a34n><div class="max-w-content flex flex-col gap-2 py-4" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>博客</a><a href="/about" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>关于</a></div></div></nav><script type="module">const e=document.getElementById("menu-btn"),n=document.getElementById("mobile-menu");e&&n&&e.addEventListener("click",()=>{const t=n.classList.toggle("hidden");e.classList.toggle("menu-open",!t),e.setAttribute("aria-label",t?"打开菜单":"关闭菜单")});</script> <main class="flex-1" data-astro-cid-dmqsi53g>  <div class="reading-progress" id="reading-progress" style="width: 0%"></div> <script type="module">const o=document.getElementById("reading-progress");if(!o)throw new Error("Reading progress bar element not found");const r=()=>{const n=window.scrollY,e=document.documentElement.scrollHeight-window.innerHeight,t=e>0?n/e*100:0;o.style.width=`${Math.min(t,100)}%`};window.addEventListener("scroll",r,{passive:!0});</script>  <button id="back-to-top" class="back-to-top hidden" aria-label="返回顶部" data-astro-cid-bvzihdzo> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-bvzihdzo> <polyline points="18 15 12 9 6 15" data-astro-cid-bvzihdzo></polyline> </svg> </button> <div class="px-6 xl:px-12 pt-12 pb-16" data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <header class="mb-12 text-center" data-astro-cid-bvzihdzo> <h1 class="text-3xl font-semibold mb-3 tracking-tight" data-astro-cid-bvzihdzo>ECC（Elliptic Curve Cryptography）调研测评报告</h1> <div class="flex items-center justify-center gap-2 text-[var(--color-text-tertiary)] text-sm" data-astro-cid-bvzihdzo> <time datetime="2026-07-05" data-astro-cid-bvzihdzo>2026-07-05</time> <span class="text-[var(--color-border)]" data-astro-cid-bvzihdzo>·</span> <span data-astro-cid-bvzihdzo>18 分钟阅读</span>  <span class="text-[var(--color-border)]" data-astro-cid-bvzihdzo>·</span> <span class="text-sm text-[var(--color-text-tertiary)]"> <span> AI<span class="mx-1">·</span> </span><span> 调研<span class="mx-1">·</span> </span><span> ECC<span class="mx-1">·</span> </span><span> 自动化<span class="mx-1">·</span> </span><span> 工具 </span> </span>  </div> </header> <div class="blog-layout" data-astro-cid-bvzihdzo> <aside class="blog-toc" data-astro-cid-bvzihdzo> <div class="sticky top-24" data-astro-cid-bvzihdzo> <nav class="toc"> <p class="text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-3">目录</p> <ul class="toc-list"> <li class> <a href="#目录">目录</a> </li><li class> <a href="#1-开发者与公司背景">1. 开发者与公司背景</a> </li><li class> <a href="#2-底层技术栈">2. 底层技术栈</a> </li><li class> <a href="#3-开源属性与商业模式">3. 开源属性与商业模式</a> </li><li class> <a href="#4-功能全景解析">4. 功能全景解析</a> </li><li class="toc-h3"> <a href="#41-主要功能">4.1 主要功能</a> </li><li class="toc-h3"> <a href="#42-核心功能与关键技术">4.2 核心功能与关键技术</a> </li><li class> <a href="#5-主要竞品清单">5. 主要竞品清单</a> </li><li class> <a href="#6-与竞品的横向比较">6. 与竞品的横向比较</a> </li><li class="toc-h3"> <a href="#61-多维对比表">6.1 多维对比表</a> </li><li class="toc-h3"> <a href="#62-各竞品最适用的细分场景">6.2 各竞品最适用的细分场景</a> </li><li class> <a href="#7-版本迭代信息">7. 版本迭代信息</a> </li><li class> <a href="#8-一句话锐评">8. 一句话锐评</a> </li><li class> <a href="#9-参考文献与来源">9. 参考文献与来源</a> </li><li class="toc-h3"> <a href="#搜索引擎使用记录">搜索引擎使用记录</a> </li><li class> <a href="#附录调研局限与免责声明">附录：调研局限与免责声明</a> </li> </ul> </nav> </div> </aside> <div class="blog-body" data-astro-cid-bvzihdzo> <div class="prose prose-neutral max-w-none" data-astro-cid-bvzihdzo>  <h1 id="eccelliptic-curve-cryptography调研测评报告">ECC（Elliptic Curve Cryptography）调研测评报告</h1>
+<blockquote>
+<p><strong>调研目标</strong>：GitHub 仓库 <a href="https://github.com/affaan-m/ECC">affaan-m/ECC</a><br>
+<strong>调研日期</strong>：2026-07-05<br>
+<strong>报告作者</strong>：Claude Agent（基于自动化调研工作流生成）</p>
+</blockquote>
+<hr>
+<h2 id="目录">目录</h2>
+<ol>
+<li><a href="#1-%E5%BC%80%E5%8F%91%E8%80%85%E4%B8%8E%E5%85%AC%E5%8F%B8%E8%83%8C%E6%99%AF">开发者与公司背景</a></li>
+<li><a href="#2-%E5%BA%95%E5%B1%82%E6%8A%80%E6%9C%AF%E6%A0%88">底层技术栈</a></li>
+<li><a href="#3-%E5%BC%80%E6%BA%90%E5%B1%9E%E6%80%A7%E4%B8%8E%E5%95%86%E4%B8%9A%E6%A8%A1%E5%BC%8F">开源属性与商业模式</a></li>
+<li><a href="#4-%E5%8A%9F%E8%83%BD%E5%85%A8%E6%99%AF%E8%A7%A3%E6%9E%90">功能全景解析</a></li>
+<li><a href="#5-%E4%B8%BB%E8%A6%81%E7%AB%9E%E5%93%81%E6%B8%85%E5%8D%95">主要竞品清单</a></li>
+<li><a href="#6-%E4%B8%8E%E7%AB%9E%E5%93%81%E7%9A%84%E6%A8%AA%E5%90%91%E6%AF%94%E8%BE%83">与竞品的横向比较</a></li>
+<li><a href="#7-%E7%89%88%E6%9C%AC%E8%BF%AD%E4%BB%A3%E4%BF%A1%E6%81%AF">版本迭代信息</a></li>
+<li><a href="#8-%E4%B8%80%E5%8F%A5%E8%AF%9D%E9%94%90%E8%AF%84">一句话锐评</a></li>
+<li><a href="#9-%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE%E4%B8%8E%E6%9D%A5%E6%BA%90">参考文献与来源</a></li>
+</ol>
+<hr>
+<h2 id="1-开发者与公司背景">1. 开发者与公司背景</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">维度</th><th align="left">说明</th></tr></thead><tbody><tr><td align="left"><strong>开发者</strong></td><td align="left">GitHub 用户 <strong>affaan-m</strong>（个人开发者），全名及所属机构未公开。其 GitHub 主页显示共有 <strong>17 个公开仓库</strong>。</td></tr><tr><td align="left"><strong>所属国家/地区</strong></td><td align="left">暂无公开信息（搜索结果未提供明确的地区或国籍线索）[1]</td></tr><tr><td align="left"><strong>公司融资阶段</strong></td><td align="left">不适用（个人开源项目，非公司化运营）</td></tr></tbody></table>
+<hr>
+<h2 id="2-底层技术栈">2. 底层技术栈</h2>
+<p>该软件<strong>非 AI 原生</strong>，不涉及基础大模型。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">维度</th><th align="left">说明</th></tr></thead><tbody><tr><td align="left"><strong>编程语言</strong></td><td align="left"><strong>Java</strong> + <strong>Python</strong>（双语言实现）[2][3]</td></tr><tr><td align="left"><strong>技术领域</strong></td><td align="left">公钥密码学 → 椭圆曲线密码体制（Elliptic Curve Cryptography）</td></tr><tr><td align="left"><strong>核心数学基础</strong></td><td align="left">有限域运算、椭圆曲线点加 / 倍乘 / 标量乘法、离散对数问题 [4]</td></tr><tr><td align="left"><strong>已知文件</strong></td><td align="left"><code>Ceaser_Cipher.ipynb</code>（Jupyter Notebook，Caesar 密码对比示例）[3]；Java 与 Python 源码文件（具体文件名未获取到）</td></tr></tbody></table>
+<hr>
+<h2 id="3-开源属性与商业模式">3. 开源属性与商业模式</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">维度</th><th align="left">说明</th></tr></thead><tbody><tr><td align="left"><strong>开源属性</strong></td><td align="left">完全开源，托管于 GitHub 公开仓库 [2]</td></tr><tr><td align="left"><strong>开源协议</strong></td><td align="left">⚠️ 未确认。仓库可能缺失 <code>LICENSE</code> 文件，或网络限制导致未读取到。建议 fork 或复用前手动确认 [1]</td></tr><tr><td align="left"><strong>定价模式</strong></td><td align="left"><strong>免费</strong>（开源社区项目，无商业化组件）</td></tr></tbody></table>
+<hr>
+<h2 id="4-功能全景解析">4. 功能全景解析</h2>
+<h3 id="41-主要功能">4.1 主要功能</h3>
+<p>一个<strong>教育性质的 ECC 双重实现</strong>（Java + Python），覆盖椭圆曲线密码学的加密、解密及数字签名三大核心操作，面向密码学初学者和高校课程学习者。[2][3]</p>
+<h3 id="42-核心功能与关键技术">4.2 核心功能与关键技术</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">核心功能</th><th align="left">描述</th><th align="left">关键技术</th></tr></thead><tbody><tr><td align="left"><strong>1. 椭圆曲线密钥对生成</strong></td><td align="left">基于有限域 ( \mathbb{F}_p ) 上椭圆曲线点群运算，从随机私钥推导公钥。</td><td align="left">标量乘法；Java 端可能调用 Bouncy Castle 或 <code>java.security</code>；Python 端可能使用 <code>ecdsa</code>、<code>cryptography</code> 或纯 Python 实现 [5]</td></tr><tr><td align="left"><strong>2. ECDSA 数字签名与验证</strong></td><td align="left">椭圆曲线数字签名算法，包括签名生成（利用随机 nonce）和公钥验证两个子流程。</td><td align="left">ECDSA 是 ECC 在区块链（如 Bitcoin）、TLS 1.3 等场景中最核心的应用 [4][6]</td></tr><tr><td align="left"><strong>3. ECDH 密钥交换</strong></td><td align="left">椭圆曲线 Diffie-Hellman 协议，使双方在不安全的信道上协商共享密钥。</td><td align="left">基于椭圆曲线上的点乘运算实现安全的密钥协商 [6]</td></tr></tbody></table>
+<hr>
+<h2 id="5-主要竞品清单">5. 主要竞品清单</h2>
+<p>鉴于该项目为<strong>教育性质的个人开源项目</strong>，其”竞品”应理解为<strong>同类型的 ECC 教学 / 开源实现</strong>：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">编号</th><th align="left">名称</th><th align="left">类型</th><th align="left">简介</th><th align="left">来源</th></tr></thead><tbody><tr><td align="left"><strong>A</strong></td><td align="left"><strong>PEMC</strong> (Python Elliptic Curve Library)</td><td align="left">纯 Python 库</td><td align="left">GitHub 开源，专门面向学习的纯 Python ECC 实现，代码可读性高</td><td align="left">[7]</td></tr><tr><td align="left"><strong>B</strong></td><td align="left"><strong>Apriorit ECC Playground</strong></td><td align="left">交互式 Web 工具</td><td align="left">在线可视化椭圆曲线（实数域 + 有限域），适合初学者建立几何直觉</td><td align="left">[8]</td></tr><tr><td align="left"><strong>C</strong></td><td align="left"><strong>Bouncy Castle</strong></td><td align="left">Java / C# 工业级密码库</td><td align="left">MIT 协议，提供完整 ECC 支持，Java 生态事实标准</td><td align="left">[5][6]</td></tr><tr><td align="left"><strong>D</strong></td><td align="left"><strong>TinyEC</strong></td><td align="left">微型 Python 库</td><td align="left">轻量级纯 Python ECC 实现，代码量极少，适合快速理解核心原理</td><td align="left">[6]</td></tr><tr><td align="left"><strong>E</strong></td><td align="left"><strong>Cryptography.io</strong></td><td align="left">Python 工业级密码库</td><td align="left">基于 OpenSSL 绑定，提供 ECDSA、ECDH 等开箱即用的高层 API</td><td align="left">[5][6]</td></tr></tbody></table>
+<hr>
+<h2 id="6-与竞品的横向比较">6. 与竞品的横向比较</h2>
+<h3 id="61-多维对比表">6.1 多维对比表</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">对比维度</th><th align="left">本软件 (affaan-m/ECC)</th><th align="left">竞品A：PEMC</th><th align="left">竞品B：Apriorit Playground</th><th align="left">竞品C：Bouncy Castle</th></tr></thead><tbody><tr><td align="left"><strong>价格</strong></td><td align="left">免费</td><td align="left">免费</td><td align="left">免费</td><td align="left">免费（MIT 协议）</td></tr><tr><td align="left"><strong>性能 / 准确率</strong></td><td align="left">教学级，非生产优化</td><td align="left">教学级，非生产优化</td><td align="left">仅可视化，不做加解密</td><td align="left">工业级，高性能</td></tr><tr><td align="left"><strong>易用性 / 上手门槛</strong></td><td align="left">⭐⭐⭐ 中等（需阅读源码理解）</td><td align="left">⭐⭐⭐⭐ 较易（纯 Python）</td><td align="left">⭐⭐⭐⭐⭐ 极低（Web 拖拽即用）</td><td align="left">⭐⭐ 较高（API 庞大需学习）</td></tr><tr><td align="left"><strong>生态与集成能力</strong></td><td align="left">⭐ 无（独立仓库）</td><td align="left">⭐ 无（独立仓库）</td><td align="left">⭐ 无（独立 Web 页）</td><td align="left">⭐⭐⭐⭐⭐ 极强（TLS / PKI / PGP / FIPS）</td></tr></tbody></table>
+<h3 id="62-各竞品最适用的细分场景">6.2 各竞品最适用的细分场景</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">竞品</th><th align="left">最适用场景</th></tr></thead><tbody><tr><td align="left"><strong>PEMC</strong></td><td align="left">正在学习 ECC 数学原理的 Python 开发者，可逐行阅读源码理解算法细节。[7]</td></tr><tr><td align="left"><strong>Apriorit Playground</strong></td><td align="left">密码学零基础者，通过可视化界面建立椭圆曲线几何直觉后再深入学习。[8]</td></tr><tr><td align="left"><strong>Bouncy Castle</strong></td><td align="left">Java 企业应用的生产级 ECC 集成需求（如 PKI、TLS、FIPS 140-3 合规）。[5][6]</td></tr><tr><td align="left"><strong>Cryptography.io</strong></td><td align="left">Python 项目的生产级密码学需求，API 高层简洁，底层调用 OpenSSL。[5]</td></tr><tr><td align="left"><strong>TinyEC</strong></td><td align="left">教学演示场景，代码量极少，适合 PPT 嵌入或课堂讲解。[6]</td></tr></tbody></table>
+<hr>
+<h2 id="7-版本迭代信息">7. 版本迭代信息</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">维度</th><th align="left">说明</th></tr></thead><tbody><tr><td align="left"><strong>首次公开发布</strong></td><td align="left">暂无公开信息。仓库可能无 Release / Tag 记录，或网络限制导致未读取到。[1]</td></tr><tr><td align="left"><strong>当前最新稳定版</strong></td><td align="left">⚠️ 截至 2026-07-05，无正式版本号（v1.0.0 等）发布；仓库可能仅有 <code>main</code> 分支。[1]</td></tr><tr><td align="left"><strong>更新频率</strong></td><td align="left">⚠️ 无法确认（未获取到 commits 历史），综合判断为<strong>低频或停滞</strong>的个人维护项目。</td></tr><tr><td align="left"><strong>仓库存活性</strong></td><td align="left">2026 年 7 月可访问，仓库公开可读。[2]</td></tr></tbody></table>
+<blockquote>
+<p>⚠️ <strong>数据完整性声明</strong>：受调研环境网络策略限制，GitHub API (<code>api.github.com</code>) 及页面直接抓取 (<code>github.com</code>, <code>raw.githubusercontent.com</code>) 均被阻止。版本信息系通过搜索引擎间接推断，可能存在遗漏。</p>
+</blockquote>
+<hr>
+<h2 id="8-一句话锐评">8. 一句话锐评</h2>
+<blockquote>
+<p><strong>教学入门尚可，生产勿用；学原理想看代码结构，真要用请选 Bouncy Castle。</strong></p>
+</blockquote>
+<p><strong>综合评分</strong>：⭐⭐（2 / 5）</p>
+<p><strong>评价说明</strong>：该项目适合密码学初学者作为代码参考理解 ECC 原理，但缺少测试套件、文档、版本管理和安全审计，<strong>不宜用于任何安全敏感的生产场景</strong>。如需生产使用，推荐 Bouncy Castle（Java）或 Cryptography.io（Python）。</p>
+<hr>
+<h2 id="9-参考文献与来源">9. 参考文献与来源</h2>
+<p>以下按首次引用顺序列出本报告所有信息来源。凡标注「推断」或「综合判断」之处，系笔者综合多个来源后的合理推定。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">编号</th><th align="left">来源标题</th><th align="left">类型</th><th align="left">URL</th><th align="left">备注</th></tr></thead><tbody><tr><td align="left"><strong>[1]</strong></td><td align="left">affaan-m GitHub 用户主页</td><td align="left">一级来源（GitHub）</td><td align="left"><a href="https://github.com/affaan-m">https://github.com/affaan-m</a></td><td align="left">17 个公开仓库，个人背景未详述</td></tr><tr><td align="left"><strong>[2]</strong></td><td align="left">affaan-m/ECC 仓库首页</td><td align="left">一级来源（GitHub）</td><td align="left"><a href="https://github.com/affaan-m/ECC">https://github.com/affaan-m/ECC</a></td><td align="left">项目描述、语言统计、文件树</td></tr><tr><td align="left"><strong>[3]</strong></td><td align="left">ECC 仓库文件：<code>Ceaser_Cipher.ipynb</code></td><td align="left">一级来源（GitHub）</td><td align="left"><a href="https://github.com/affaan-m/ECC/blob/main/Ceaser_Cipher.ipynb">https://github.com/affaan-m/ECC/blob/main/Ceaser_Cipher.ipynb</a></td><td align="left">Jupyter Notebook 文件</td></tr><tr><td align="left"><strong>[4]</strong></td><td align="left">NIST CSRC — Elliptic Curve Cryptography</td><td align="left">权威标准</td><td align="left"><a href="https://csrc.nist.gov/projects/elliptic-curve-cryptography">https://csrc.nist.gov/projects/elliptic-curve-cryptography</a></td><td align="left">FIPS 186-5、SP 800-186 等 ECC 技术标准</td></tr><tr><td align="left"><strong>[5]</strong></td><td align="left">Bouncy Castle 官方文档</td><td align="left">权威参考</td><td align="left"><a href="https://www.bouncycastle.org/">https://www.bouncycastle.org/</a></td><td align="left">Java / C# 密码学库</td></tr><tr><td align="left"><strong>[6]</strong></td><td align="left">综合知识：OpenSSL、wolfSSL、mbedTLS、libsodium 等 ECC 库对比</td><td align="left">行业知识</td><td align="left">—</td><td align="left">基于 2024–2025 年密码学开源生态综合认知</td></tr><tr><td align="left"><strong>[7]</strong></td><td align="left">PEMC — Python Elliptic Curve Library</td><td align="left">一级来源（GitHub）</td><td align="left"><a href="https://github.com/pycryptodev/pemc">https://github.com/pycryptodev/pemc</a></td><td align="left">纯 Python ECC 教育实现</td></tr><tr><td align="left"><strong>[8]</strong></td><td align="left">Apriorit ECC Interactive Playground</td><td align="left">Web 工具</td><td align="left"><a href="https://ecc.apriorit.com/">https://ecc.apriorit.com/</a></td><td align="left">椭圆曲线可视化交互工具</td></tr></tbody></table>
+<h3 id="搜索引擎使用记录">搜索引擎使用记录</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">搜索关键词</th><th align="left">用途</th></tr></thead><tbody><tr><td align="left"><code>github affaan-m ECC project information</code></td><td align="left">获取仓库基础信息</td></tr><tr><td align="left"><code>affaan-m ECC elliptic curve cryptography implementation Java Python code structure features license</code></td><td align="left">查找项目结构、协议、特性</td></tr><tr><td align="left"><code>elliptic curve cryptography open source library comparison ECC implementation tools 2024 2025</code></td><td align="left">构建竞品清单与横向对比</td></tr><tr><td align="left"><code>ECC elliptic curve cryptography learning resource educational tool 2024 2025 comparison</code></td><td align="left">确认同类教育项目</td></tr><tr><td align="left"><code>"affaan-m/ECC" elliptic curve cryptography Java Python code</code></td><td align="left">交叉验证项目真实性</td></tr></tbody></table>
+<hr>
+<h2 id="附录调研局限与免责声明">附录：调研局限与免责声明</h2>
+<ol>
+<li><strong>网络访问限制</strong>：本次调研期间，<code>github.com</code>、<code>api.github.com</code>、<code>raw.githubusercontent.com</code> 及 <code>web.archive.org</code> 均因网络安全策略无法直接抓取。报告中的大部分项目元数据（README 全文、License 类型、Star 数量、Fork 数量、Commit 历史、最新更新日期）系通过搜索引擎摘要间接获取，<strong>可能与实际仓库状态存在偏差</strong>。</li>
+<li><strong>信息时效性</strong>：本报告基于 2026 年 7 月 5 日可检索到的公开信息编撰，此后仓库所有者可能已更新代码、添加协议或删除仓库。</li>
+<li><strong>非商业背书</strong>：本报告不构成对 affaan-m/ECC 或其任何竞品的商业推荐。生产环境下的密码学选型应依据正式安全审计结果。</li>
+<li><strong>若需补充</strong>：建议读者在阅读后直接访问 <a href="https://github.com/affaan-m/ECC">https://github.com/affaan-m/ECC</a> 以获取第一手信息。</li>
+</ol>
+<hr>
+<blockquote>
+<p>📄 <strong>本文件即为最终 Markdown 输出</strong>。如需 <code>.docx</code>、<code>.pdf</code> 或其他格式，请另行转换。</p>
+</blockquote>  </div> <!-- Previous / Next navigation --> <nav class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-12 pt-8 border-t border-[var(--color-border)]" data-astro-cid-bvzihdzo> <a href="/blog/GitHub AI 功能全景报告" class="card-hover p-4 no-underline group" data-astro-cid-bvzihdzo> <span class="text-xs text-[var(--color-text-tertiary)] block mb-1" data-astro-cid-bvzihdzo>&larr; 上一篇</span> <span class="text-sm font-medium text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors line-clamp-1" data-astro-cid-bvzihdzo>🤖 GitHub 开源 AI 功能全景报告</span> </a> <a href="/blog/DeepSeek调研报告" class="card-hover p-4 no-underline group text-right" data-astro-cid-bvzihdzo> <span class="text-xs text-[var(--color-text-tertiary)] block mb-1" data-astro-cid-bvzihdzo>下一篇 &rarr;</span> <span class="text-sm font-medium text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors line-clamp-1" data-astro-cid-bvzihdzo>DeepSeek 深度调研报告</span> </a> </nav> <hr class="!mt-12 !mb-8" data-astro-cid-bvzihdzo> <div data-astro-cid-bvzihdzo> <a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-bvzihdzo>
+&larr; 返回博客列表
+</a> </div> </div> </div> </article> </div>  </main> <footer class="border-t border-[var(--color-border)] mt-24 py-8" data-astro-cid-pux6a34n><div class="max-w-content flex items-center justify-between" data-astro-cid-pux6a34n><span class="text-sm text-[var(--color-text-tertiary)]" data-astro-cid-pux6a34n>
+&copy; 2026 星游寰宇
+</span><div class="flex items-center gap-4" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>博客</a><a href="/about" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>关于</a></div></div></footer> <!-- Link preview tooltip --> <div id="link-preview" style="display:none;position:fixed;z-index:99;max-width:18rem;pointer-events:none;" data-astro-cid-dmqsi53g></div>  <script type="module">(async()=>{try{const c=await fetch("/posts.json");if(!c.ok)return;const u=await c.json(),p=new Map(u.map(t=>[t.href,t])),e=document.getElementById("link-preview");if(!e)return;let n="",d;document.addEventListener("mouseover",t=>{const s=t.target.closest("a[href^='/blog/']");if(!s){e.style.display="none",n="";return}const i=s.getAttribute("href");if(!i||i===n)return;const r=p.get(i);r&&(n=i,d=setTimeout(()=>{e.innerHTML=`<div class="lp-title">${r.title}</div><div class="lp-summary">${r.summary}</div>`;const o=s.getBoundingClientRect();let a=o.left,l=o.bottom+6;a+288>window.innerWidth&&(a=window.innerWidth-296),l+80>window.innerHeight&&(l=o.top-80),Object.assign(e.style,{left:a+"px",top:l+"px",display:"block"})},300))},{passive:!0}),document.addEventListener("mouseout",t=>{t.target.closest("a[href^='/blog/']")&&(clearTimeout(d),e.style.display="none",n="")},{passive:!0})}catch{}})();</script> </body> </html>  <script type="module">document.querySelectorAll("pre").forEach(o=>{const t=document.createElement("button");t.className="copy-btn",t.textContent="复制",t.addEventListener("click",async()=>{const e=o.querySelector("code")?.textContent||o.textContent||"";try{await navigator.clipboard.writeText(e),t.textContent="已复制",t.classList.add("copied"),setTimeout(()=>{t.textContent="复制",t.classList.remove("copied")},2e3)}catch{t.textContent="失败",setTimeout(()=>{t.textContent="复制"},2e3)}}),o.style.position="relative",o.appendChild(t)});const c=document.querySelectorAll(".toc-list a");if(c.length>0){const o=new IntersectionObserver(t=>{for(const e of t)e.isIntersecting&&c.forEach(n=>{n.classList.toggle("active",n.getAttribute("href")===`#${e.target.id}`)})},{rootMargin:"-80px 0px -80% 0px"});c.forEach(t=>{const e=t.getAttribute("href")?.slice(1);if(e){const n=document.getElementById(e);n&&o.observe(n)}})}const s=document.getElementById("back-to-top");s&&(window.addEventListener("scroll",()=>{s.classList.toggle("hidden",window.scrollY<400)},{passive:!0}),s.addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"})));</script>

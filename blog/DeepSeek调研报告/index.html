@@ -1,0 +1,441 @@
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-dmqsi53g> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="星游寰宇的个人网站——技术文章、项目展示与思考笔记"><meta name="color-scheme" content="light"><!-- Open Graph --><meta property="og:title" content="DeepSeek 深度调研报告 — 星游寰宇"><meta property="og:description" content="星游寰宇的个人网站——技术文章、项目展示与思考笔记"><meta property="og:url" content="https://code2239.github.io/blog/DeepSeek%E8%B0%83%E7%A0%94%E6%8A%A5%E5%91%8A/"><meta property="og:type" content="website"><meta property="og:site_name" content="星游寰宇"><meta property="og:locale" content="zh_CN"><!-- Twitter Card --><meta name="twitter:card" content="summary"><meta name="twitter:title" content="DeepSeek 深度调研报告 — 星游寰宇"><meta name="twitter:description" content="星游寰宇的个人网站——技术文章、项目展示与思考笔记"><!-- Canonical --><link rel="canonical" href="https://code2239.github.io/blog/DeepSeek%E8%B0%83%E7%A0%94%E6%8A%A5%E5%91%8A/"><title>DeepSeek 深度调研报告 — 星游寰宇</title><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="alternate" type="application/rss+xml" title="星游寰宇 RSS" href="/rss.xml"><link rel="stylesheet" href="/_astro/_slug_.C_t6U7me.css">
+<style>.blog-layout[data-astro-cid-bvzihdzo]{display:block}.blog-toc[data-astro-cid-bvzihdzo]{display:none}.blog-body[data-astro-cid-bvzihdzo]{min-width:0}@media(min-width:1024px){.blog-layout[data-astro-cid-bvzihdzo]{display:grid;grid-template-columns:14rem 1fr;gap:3rem;align-items:start}.blog-toc[data-astro-cid-bvzihdzo]{display:block}.blog-body[data-astro-cid-bvzihdzo]{padding-right:2rem}}.copy-btn[data-astro-cid-bvzihdzo]{position:absolute;top:8px;right:8px;padding:4px 10px;font-size:.6875rem;font-family:var(--font-sans);color:var(--color-text-tertiary);background:var(--color-bg);border:1px solid var(--color-border);border-radius:6px;cursor:pointer;opacity:0;transition:opacity .15s ease,color .15s ease}pre[data-astro-cid-bvzihdzo]:hover .copy-btn[data-astro-cid-bvzihdzo]{opacity:1}.copy-btn[data-astro-cid-bvzihdzo]:hover{color:var(--color-accent);border-color:var(--color-accent)}.copy-btn[data-astro-cid-bvzihdzo].copied{color:#16a34a;border-color:#16a34a}.back-to-top[data-astro-cid-bvzihdzo]{position:fixed;bottom:2rem;right:2rem;z-index:40;width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:50%;border:1px solid var(--color-border);background:var(--color-bg);color:var(--color-text-secondary);cursor:pointer;box-shadow:var(--shadow-md);transition:opacity .2s ease,transform .2s ease}.back-to-top[data-astro-cid-bvzihdzo]:hover{color:var(--color-accent);border-color:var(--color-accent);transform:translateY(-2px)}.back-to-top[data-astro-cid-bvzihdzo].hidden{opacity:0;pointer-events:none}
+</style></head> <body class="min-h-screen flex flex-col" data-astro-cid-dmqsi53g> <nav class="sticky top-0 z-40 bg-[var(--color-bg)]/80 backdrop-blur-md border-b border-[var(--color-border)]" data-astro-cid-pux6a34n><div class="max-w-content flex items-center justify-between py-4" data-astro-cid-pux6a34n><a href="/" class="text-base font-semibold no-underline tracking-tight" data-astro-cid-pux6a34n>
+星游寰宇
+</a><!-- Desktop nav --><div class="hidden sm:flex items-center gap-6" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>博客</a><a href="/about" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>关于</a></div><!-- Mobile hamburger --><button id="menu-btn" class="sm:hidden flex flex-col gap-1 p-2 -mr-2 cursor-pointer" aria-label="打开菜单" data-astro-cid-pux6a34n><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-transform duration-200" data-astro-cid-pux6a34n></span><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-opacity duration-200" data-astro-cid-pux6a34n></span><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-transform duration-200" data-astro-cid-pux6a34n></span></button></div><!-- Mobile menu --><div id="mobile-menu" class="hidden sm:hidden border-t border-[var(--color-border)] bg-[var(--color-bg)]" data-astro-cid-pux6a34n><div class="max-w-content flex flex-col gap-2 py-4" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>博客</a><a href="/about" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>关于</a></div></div></nav><script type="module">const e=document.getElementById("menu-btn"),n=document.getElementById("mobile-menu");e&&n&&e.addEventListener("click",()=>{const t=n.classList.toggle("hidden");e.classList.toggle("menu-open",!t),e.setAttribute("aria-label",t?"打开菜单":"关闭菜单")});</script> <main class="flex-1" data-astro-cid-dmqsi53g>  <div class="reading-progress" id="reading-progress" style="width: 0%"></div> <script type="module">const o=document.getElementById("reading-progress");if(!o)throw new Error("Reading progress bar element not found");const r=()=>{const n=window.scrollY,e=document.documentElement.scrollHeight-window.innerHeight,t=e>0?n/e*100:0;o.style.width=`${Math.min(t,100)}%`};window.addEventListener("scroll",r,{passive:!0});</script>  <button id="back-to-top" class="back-to-top hidden" aria-label="返回顶部" data-astro-cid-bvzihdzo> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-bvzihdzo> <polyline points="18 15 12 9 6 15" data-astro-cid-bvzihdzo></polyline> </svg> </button> <div class="px-6 xl:px-12 pt-12 pb-16" data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <header class="mb-12 text-center" data-astro-cid-bvzihdzo> <h1 class="text-3xl font-semibold mb-3 tracking-tight" data-astro-cid-bvzihdzo>DeepSeek 深度调研报告</h1> <div class="flex items-center justify-center gap-2 text-[var(--color-text-tertiary)] text-sm" data-astro-cid-bvzihdzo> <time datetime="2026-07-05" data-astro-cid-bvzihdzo>2026-07-05</time> <span class="text-[var(--color-border)]" data-astro-cid-bvzihdzo>·</span> <span data-astro-cid-bvzihdzo>16 分钟阅读</span>  <span class="text-[var(--color-border)]" data-astro-cid-bvzihdzo>·</span> <span class="text-sm text-[var(--color-text-tertiary)]"> <span> AI<span class="mx-1">·</span> </span><span> 调研<span class="mx-1">·</span> </span><span> DeepSeek<span class="mx-1">·</span> </span><span> 自动化<span class="mx-1">·</span> </span><span> 工具 </span> </span>  </div> </header> <div class="blog-layout" data-astro-cid-bvzihdzo> <aside class="blog-toc" data-astro-cid-bvzihdzo> <div class="sticky top-24" data-astro-cid-bvzihdzo> <nav class="toc"> <p class="text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-3">目录</p> <ul class="toc-list"> <li class> <a href="#1-开发者与公司背景">1. 开发者与公司背景</a> </li><li class> <a href="#2-底层技术栈">2. 底层技术栈</a> </li><li class="toc-h3"> <a href="#模型架构">模型架构</a> </li><li class="toc-h3"> <a href="#训练基础设施">训练基础设施</a> </li><li class="toc-h3"> <a href="#推理模式">推理模式</a> </li><li class> <a href="#3-开源属性与商业模式">3. 开源属性与商业模式</a> </li><li class="toc-h3"> <a href="#开源属性">开源属性</a> </li><li class="toc-h3"> <a href="#商业模式">商业模式</a> </li><li class> <a href="#4-功能全景解析">4. 功能全景解析</a> </li><li class="toc-h3"> <a href="#主要功能">主要功能</a> </li><li class="toc-h3"> <a href="#核心功能与核心技术">核心功能与核心技术</a> </li><li class> <a href="#5-主要竞品清单">5. 主要竞品清单</a> </li><li class> <a href="#6-与竞品的横向比较">6. 与竞品的横向比较</a> </li><li class="toc-h3"> <a href="#各竞品最适用场景">各竞品最适用场景</a> </li><li class> <a href="#7-版本迭代信息">7. 版本迭代信息</a> </li><li class="toc-h3"> <a href="#更新频率">更新频率</a> </li><li class="toc-h3"> <a href="#当前最新稳定版截至-2026-07-05">当前最新稳定版（截至 2026-07-05）</a> </li><li class> <a href="#附录v4-模型差异化使用指南">附录：V4 模型差异化使用指南</a> </li><li class> <a href="#一句话锐评">一句话锐评</a> </li> </ul> </nav> </div> </aside> <div class="blog-body" data-astro-cid-bvzihdzo> <div class="prose prose-neutral max-w-none" data-astro-cid-bvzihdzo>  <h1 id="deepseek-深度调研报告">DeepSeek 深度调研报告</h1>
+<blockquote>
+<p><strong>调研日期</strong>：2026-07-05<br>
+<strong>目标软件</strong>：DeepSeek（深度求索）<br>
+<strong>当前最新模型</strong>：DeepSeek-V4（2026-04-24 发布）</p>
+</blockquote>
+<hr>
+<h2 id="1-开发者与公司背景">1. 开发者与公司背景</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>项目</th><th>详情</th></tr></thead><tbody><tr><td><strong>公司全称</strong></td><td>深度求索人工智能基础技术研究有限公司（DeepSeek）</td></tr><tr><td><strong>创始人/CEO</strong></td><td>梁文锋（Liang Wenfeng）</td></tr><tr><td><strong>总部</strong></td><td>中国杭州（北京设有研发中心）</td></tr><tr><td><strong>成立时间</strong></td><td>2023 年</td></tr><tr><td><strong>背景关联</strong></td><td>从量化私募基金**幻方量化（High-Flyer）**的 AI 研究团队孵化而来，早期依托幻方积累的大量 GPU 算力资源（传闻上万张 NVIDIA A100/H800）进行模型训练</td></tr><tr><td><strong>融资阶段</strong></td><td>截至 2026 年中，主要依靠幻方量化自有资金和算力支持，尚未进行大规模外部融资。但 2024 年底 V3/R1 爆火后估值一度推至数十亿美元级别</td></tr></tbody></table>
+<p><strong>关键特点</strong>：与其他 AI 创业公司不同，DeepSeek 背靠量化金融的雄厚资金和算力，走”不差钱、重开源、极致低价”的差异化路线。2026 年 V4 发布时更战略性转向<strong>华为昇腾芯片</strong>，从英伟达 CUDA 生态迁移至国产算力，标志着中国 AI 在摆脱美国芯片依赖方面迈出关键一步。</p>
+<blockquote>
+<p><strong>来源</strong>：36氪、AP News、Lambda AI Blog、China Daily（2026 年 4 月）</p>
+</blockquote>
+<hr>
+<h2 id="2-底层技术栈">2. 底层技术栈</h2>
+<p>DeepSeek 完全自研基础大模型，<strong>不调用第三方大模型 API</strong>。其核心技术栈如下：</p>
+<h3 id="模型架构">模型架构</h3>
+<ul>
+<li><strong>MoE（混合专家）架构</strong>：V4-Pro 每层 384 个专家，每次推理激活 6 个（49B 活跃参数 / 1.6T 总参数）；V4-Flash 激活 13B / 284B 总参数</li>
+<li><strong>DSA2 混合注意力机制</strong>：整合 CSA（压缩稀疏注意力）+ HCA（重度压缩注意力），替代 V3 的 Multi-head Latent Attention，实现 90% KV 缓存缩减</li>
+<li><strong>mHC（流形约束超连接）</strong>：替代标准残差连接，提升深层网络训练稳定性</li>
+<li><strong>Muon 优化器</strong>：加速收敛</li>
+<li><strong>多 Token 预测（MTP）</strong>：延续 V3 的推理加速策略</li>
+<li><strong>FP4 + FP8 混合精度</strong>：显存需求在 FP8 基础上再降一半</li>
+</ul>
+<h3 id="训练基础设施">训练基础设施</h3>
+<ul>
+<li><strong>华为昇腾 910B/950PR 芯片</strong>：V4 是首个全面适配华为 CANN 架构的 DeepSeek 旗舰模型</li>
+<li>V4-Flash 预训练 32T tokens，V4-Pro 预训练 33T tokens</li>
+</ul>
+<h3 id="推理模式">推理模式</h3>
+<ul>
+<li><strong>Non-Think</strong>：单次直出，无思维链</li>
+<li><strong>Think-High</strong>：标准推理链</li>
+<li><strong>Think-Max</strong>：最大推理深度 + 自我纠错</li>
+</ul>
+<hr>
+<h2 id="3-开源属性与商业模式">3. 开源属性与商业模式</h2>
+<h3 id="开源属性">开源属性</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>项目</th><th>详情</th></tr></thead><tbody><tr><td><strong>开源/闭源</strong></td><td><strong>完全开源</strong>（模型权重）</td></tr><tr><td><strong>开源协议</strong></td><td><strong>MIT License</strong>（可商用、可修改、可分发）</td></tr><tr><td><strong>权重下载</strong></td><td>Hugging Face、ModelScope 均可下载</td></tr><tr><td><strong>技术报告</strong></td><td>arXiv 公开发布（论文编号 2606.19348）</td></tr></tbody></table>
+<h3 id="商业模式">商业模式</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>层级</th><th>定价</th><th>说明</th></tr></thead><tbody><tr><td><strong>免费层</strong></td><td>¥0</td><td>chat.deepseek.com 网页版 + iOS/Android App，无限制使用</td></tr><tr><td><strong>API - Flash</strong></td><td>输入 $0.14/M token，输出 $0.28/M token</td><td>适合高频调用、生产环境</td></tr><tr><td><strong>API - Pro</strong></td><td>输入 $0.435/M token，输出 $0.87/M token</td><td>适合复杂任务（2026 年 5 月起 75% 降价永久化）</td></tr><tr><td><strong>企业定制</strong></td><td>面议</td><td>私有化部署、专属微调、SLA 保障</td></tr></tbody></table>
+<blockquote>
+<p><strong>价格定位</strong>：V4-Pro 输出价格约为 GPT-5.5 的 <strong>1/34</strong>、Claude Opus 4.8 的 <strong>1/29</strong>。V4-Flash 更是一个数量级以上的差距。</p>
+</blockquote>
+<hr>
+<h2 id="4-功能全景解析">4. 功能全景解析</h2>
+<h3 id="主要功能">主要功能</h3>
+<p>以极低成本提供接近闭源顶流的大模型服务，面向开发者、中小企业、以及有国产化/私有化部署需求的企业用户。</p>
+<h3 id="核心功能与核心技术">核心功能与核心技术</h3>
+<h4 id="-百万-token-上下文处理核心技术dsa2-稀疏注意力">① 百万 Token 上下文处理（核心技术：DSA2 稀疏注意力）</h4>
+<ul>
+<li>1M token 上下文窗口，384K token 最大输出（业内最长，3 倍于竞品）</li>
+<li>KV 缓存仅为 V3.2 的 10%，推理 FLOPs 仅为 27%</li>
+<li><strong>适用场景</strong>：一次性加载整本技术手册、跨国并购合同、完整代码库</li>
+</ul>
+<h4 id="-多步-agent-自主编程核心技术think-max-推理--工具调用">② 多步 Agent 自主编程（核心技术：Think-Max 推理 + 工具调用）</h4>
+<ul>
+<li>SWE-bench Verified 80.6%，Codeforces 3206 分</li>
+<li>支持 30+ 步连续工具调用（浏览器、终端、文件系统、API）</li>
+<li>384K 输出能力支持单轮多文件重构</li>
+<li><strong>适用场景</strong>：全栈项目开发、代码审查、自动化测试、CI/CD 脚本</li>
+</ul>
+<h4 id="-fp4-精度--消费级部署核心技术int4-量化--华为昇腾适配">③ FP4 精度 + 消费级部署（核心技术：INT4 量化 + 华为昇腾适配）</h4>
+<ul>
+<li>V4-Flash 经 INT4 量化可在 RTX 4090（24GB 显存）上运行</li>
+<li>支持 llama.cpp 跨平台（Mac / Windows / 树莓派）</li>
+<li>已适配华为昇腾 910B/950PR，实现国产算力闭环</li>
+<li><strong>适用场景</strong>：金融终端本地推理、工业控制离线 AI、隐私敏感场景</li>
+</ul>
+<hr>
+<h2 id="5-主要竞品清单">5. 主要竞品清单</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>竞品</th><th>开发方</th><th>定位</th></tr></thead><tbody><tr><td><strong>GPT-5.5</strong></td><td>OpenAI（美国）</td><td>闭源旗舰，Agent 能力领先，SWE-bench 88.7%</td></tr><tr><td><strong>Claude Opus 4.8</strong></td><td>Anthropic（美国）</td><td>闭源旗舰，写作顶级，代码可靠，SWE-bench 88.6%</td></tr><tr><td><strong>Gemini 3.1 Pro</strong></td><td>Google DeepMind（美国）</td><td>闭源，多模态最强（文本+视觉+音频+视频），GPQA 94.3%</td></tr><tr><td><strong>Qwen3.5-Plus</strong></td><td>阿里通义（中国）</td><td>开源，国产替代，性价比路线</td></tr><tr><td><strong>MiniMax M3</strong></td><td>MiniMax（中国）</td><td>开源/API，1M 上下文，SWE-bench 80.5%</td></tr></tbody></table>
+<hr>
+<h2 id="6-与竞品的横向比较">6. 与竞品的横向比较</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>对比维度</th><th>DeepSeek V4</th><th>GPT-5.5</th><th>Claude Opus 4.8</th><th>Gemini 3.1 Pro</th><th>Qwen3.5-Plus</th></tr></thead><tbody><tr><td><strong>价格</strong>（输出$/M token）</td><td>🔥 $0.28~$0.87</td><td>$30</td><td>$25</td><td>$12</td><td>$2.40</td></tr><tr><td><strong>代码能力</strong>（SWE-bench）</td><td>⚠️ 80.6%（污染风险）</td><td>🔥 88.7%</td><td>🔥 88.6%</td><td>80.6%</td><td>中上</td></tr><tr><td><strong>长上下文</strong></td><td>🔥 1M 入 / 384K 出</td><td>1M / 128K</td><td>1M / 128K</td><td>1M / 65K</td><td>中等</td></tr><tr><td><strong>写作质量</strong></td><td>⚠️ 偏机械、易塞术语</td><td>🟢 良好</td><td>🔥 顶级</td><td>⚠️ 一般</td><td>🟢 中文优秀</td></tr><tr><td><strong>多模态</strong></td><td>❌ 纯文本</td><td>🟢 视觉+音频</td><td>🟢 视觉</td><td>🔥 视觉+音频+视频</td><td>🟢 视觉</td></tr><tr><td><strong>开源/私有化</strong></td><td>🔥 MIT 开源，可本地部署</td><td>❌ 闭源</td><td>❌ 闭源</td><td>❌ 闭源</td><td>🟢 开源</td></tr><tr><td><strong>易用性</strong></td><td>🔥 网页+App 免费 + API 极低价</td><td>🟢 生态成熟</td><td>🟢 生态成熟</td><td>🟢 Google 生态集成</td><td>🟢 阿里云集成</td></tr><tr><td><strong>生态集成</strong></td><td>⚠️ 第三方为主</td><td>🔥 Azure/GitHub/插件市场</td><td>🔥 AWS Bedrock/Claude Code</td><td>🔥 Google Cloud/Workspace</td><td>🟢 阿里云/ModelScope</td></tr></tbody></table>
+<h3 id="各竞品最适用场景">各竞品最适用场景</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>竞品</th><th>最适用场景</th></tr></thead><tbody><tr><td><strong>GPT-5.5</strong></td><td>Agent 终端操作（Terminal-Bench 82.7%）、复杂多步任务、微软/Azure 生态集成</td></tr><tr><td><strong>Claude Opus 4.8</strong></td><td>高质量写作与文案、高可靠性代码开发（SWE-bench 88.6%）、安全敏感应用</td></tr><tr><td><strong>Gemini 3.1 Pro</strong></td><td>多模态理解（视频/音频/图文混合）、Google 生态绑定、GPQA 学术推理</td></tr><tr><td><strong>Qwen3.5-Plus</strong></td><td>中文 NLP 任务、阿里云生态部署、预算有限的国产替代</td></tr><tr><td><strong>DeepSeek V4</strong>（本软件）</td><td><strong>极致成本场景</strong>（1/30 价格换 90% 性能）、开源私有化部署、国产芯片合规需求、百万级长文档处理</td></tr></tbody></table>
+<hr>
+<h2 id="7-版本迭代信息">7. 版本迭代信息</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>版本</th><th>发布时间</th><th>核心变化</th></tr></thead><tbody><tr><td><strong>DeepSeek-V2</strong></td><td>2024 年 5 月</td><td>MoE 架构首秀，API 价格战开启</td></tr><tr><td><strong>DeepSeek-Coder-V2</strong></td><td>2024 年 6 月</td><td>代码专用模型</td></tr><tr><td><strong>DeepSeek-V3</strong></td><td>2024 年 12 月</td><td>671B MoE，128K 上下文，对标 GPT-4o</td></tr><tr><td><strong>DeepSeek-R1</strong></td><td>2025 年 1 月</td><td>推理增强模型，对标 OpenAI o1，开源引爆全球关注</td></tr><tr><td><strong>DeepSeek-V3.1/V3.2</strong></td><td>2025 年中</td><td>V3 系列增量优化</td></tr><tr><td><strong>DeepSeek-V4（预览版）</strong></td><td><strong>2026 年 4 月 24 日</strong></td><td>1.6T MoE，1M 上下文，华为昇腾适配，MIT 开源</td></tr><tr><td><strong>DeepSeek-V4（75% 降价永久化）</strong></td><td>2026 年 5 月</td><td>Pro API 输出降至 $0.87/M token</td></tr></tbody></table>
+<h3 id="更新频率">更新频率</h3>
+<ul>
+<li><strong>大版本</strong>：约 6~15 个月（V2→V3 约 7 个月，V3→V4 约 16 个月）</li>
+<li><strong>小版本迭代</strong>：不定期推送（如 V3.1→V3.2）</li>
+<li><strong>API 策略调整</strong>：月度级别（定价、弃用旧端点等）</li>
+</ul>
+<h3 id="当前最新稳定版截至-2026-07-05">当前最新稳定版（截至 2026-07-05）</h3>
+<ul>
+<li><strong>DeepSeek-V4-Pro</strong>（<code>deepseek-v4-pro</code>）</li>
+<li><strong>DeepSeek-V4-Flash</strong>（<code>deepseek-v4-flash</code>）</li>
+<li>旧端点 <code>deepseek-chat</code> 和 <code>deepseek-reasoner</code> 将于 <strong>2026-07-24 弃用</strong>，自动路由至 V4</li>
+</ul>
+<hr>
+<h2 id="附录v4-模型差异化使用指南">附录：V4 模型差异化使用指南</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>场景</th><th>推荐模型</th><th>原因</th></tr></thead><tbody><tr><td>日常写代码 / Debug / CRUD</td><td><strong>Flash</strong></td><td>差距微乎其微，成本低 10 倍</td></tr><tr><td>复杂算法 / Agent 多步编程</td><td><strong>Pro</strong></td><td>Codeforces 3206 vs 3052，差距决定性的</td></tr><tr><td>普通报告 / 周报 / 翻译</td><td><strong>Flash</strong></td><td>质量感知不到差异</td></tr><tr><td>行业研究 / 法律 / 医疗</td><td><strong>Pro</strong></td><td>事实准确性领先 23.8 分</td></tr><tr><td>画图表（生成代码）</td><td><strong>Flash</strong>（简单）/ <strong>Pro</strong>（复杂可视化）</td><td>模板化用 Flash，D3.js 等用 Pro</td></tr><tr><td>做 PPT</td><td><strong>Flash</strong> 为主</td><td>结构化任务，Flash 足够</td></tr><tr><td>全栈项目开发</td><td><strong>Flash</strong> 日常 + <strong>Pro</strong> 救急</td><td>路由架构：95% Flash，5% Pro</td></tr><tr><td>客服 / RAG / 摘要 / 闲聊</td><td><strong>Flash</strong></td><td>成本效率碾压</td></tr><tr><td>私有化本地部署</td><td><strong>Flash</strong>（RTX 4090 可跑）</td><td>Pro 需要集群</td></tr></tbody></table>
+<blockquote>
+<p>⚠️ <strong>注意</strong>：DeepSeek V4 目前不支持多模态（图片/视频/音频），视觉版仍在规划中。需要多模态时建议使用 Gemini 3.1 Pro 或 GPT-5.5。</p>
+</blockquote>
+<hr>
+<h2 id="一句话锐评">一句话锐评</h2>
+<blockquote>
+<p><strong>1/30 价格换 90% 性能，成本敏感场景的首选，但别把长链 Agent 任务全押给它。</strong></p>
+</blockquote>  </div> <!-- Previous / Next navigation --> <nav class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-12 pt-8 border-t border-[var(--color-border)]" data-astro-cid-bvzihdzo> <a href="/blog/ECC_调研测评报告" class="card-hover p-4 no-underline group" data-astro-cid-bvzihdzo> <span class="text-xs text-[var(--color-text-tertiary)] block mb-1" data-astro-cid-bvzihdzo>&larr; 上一篇</span> <span class="text-sm font-medium text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors line-clamp-1" data-astro-cid-bvzihdzo>ECC（Elliptic Curve Cryptography）调研测评报告</span> </a> <a href="/blog/Claude Code Skills 生态全景报告" class="card-hover p-4 no-underline group text-right" data-astro-cid-bvzihdzo> <span class="text-xs text-[var(--color-text-tertiary)] block mb-1" data-astro-cid-bvzihdzo>下一篇 &rarr;</span> <span class="text-sm font-medium text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors line-clamp-1" data-astro-cid-bvzihdzo>🎯 Claude Code Skills 生态全景报告</span> </a> </nav> <hr class="!mt-12 !mb-8" data-astro-cid-bvzihdzo> <div data-astro-cid-bvzihdzo> <a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-bvzihdzo>
+&larr; 返回博客列表
+</a> </div> </div> </div> </article> </div>  </main> <footer class="border-t border-[var(--color-border)] mt-24 py-8" data-astro-cid-pux6a34n><div class="max-w-content flex items-center justify-between" data-astro-cid-pux6a34n><span class="text-sm text-[var(--color-text-tertiary)]" data-astro-cid-pux6a34n>
+&copy; 2026 星游寰宇
+</span><div class="flex items-center gap-4" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>博客</a><a href="/about" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>关于</a></div></div></footer> <!-- Link preview tooltip --> <div id="link-preview" style="display:none;position:fixed;z-index:99;max-width:18rem;pointer-events:none;" data-astro-cid-dmqsi53g></div>  <script type="module">(async()=>{try{const c=await fetch("/posts.json");if(!c.ok)return;const u=await c.json(),p=new Map(u.map(t=>[t.href,t])),e=document.getElementById("link-preview");if(!e)return;let n="",d;document.addEventListener("mouseover",t=>{const s=t.target.closest("a[href^='/blog/']");if(!s){e.style.display="none",n="";return}const i=s.getAttribute("href");if(!i||i===n)return;const r=p.get(i);r&&(n=i,d=setTimeout(()=>{e.innerHTML=`<div class="lp-title">${r.title}</div><div class="lp-summary">${r.summary}</div>`;const o=s.getBoundingClientRect();let a=o.left,l=o.bottom+6;a+288>window.innerWidth&&(a=window.innerWidth-296),l+80>window.innerHeight&&(l=o.top-80),Object.assign(e.style,{left:a+"px",top:l+"px",display:"block"})},300))},{passive:!0}),document.addEventListener("mouseout",t=>{t.target.closest("a[href^='/blog/']")&&(clearTimeout(d),e.style.display="none",n="")},{passive:!0})}catch{}})();</script> </body> </html>  <script type="module">document.querySelectorAll("pre").forEach(o=>{const t=document.createElement("button");t.className="copy-btn",t.textContent="复制",t.addEventListener("click",async()=>{const e=o.querySelector("code")?.textContent||o.textContent||"";try{await navigator.clipboard.writeText(e),t.textContent="已复制",t.classList.add("copied"),setTimeout(()=>{t.textContent="复制",t.classList.remove("copied")},2e3)}catch{t.textContent="失败",setTimeout(()=>{t.textContent="复制"},2e3)}}),o.style.position="relative",o.appendChild(t)});const c=document.querySelectorAll(".toc-list a");if(c.length>0){const o=new IntersectionObserver(t=>{for(const e of t)e.isIntersecting&&c.forEach(n=>{n.classList.toggle("active",n.getAttribute("href")===`#${e.target.id}`)})},{rootMargin:"-80px 0px -80% 0px"});c.forEach(t=>{const e=t.getAttribute("href")?.slice(1);if(e){const n=document.getElementById(e);n&&o.observe(n)}})}const s=document.getElementById("back-to-top");s&&(window.addEventListener("scroll",()=>{s.classList.toggle("hidden",window.scrollY<400)},{passive:!0}),s.addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"})));</script>

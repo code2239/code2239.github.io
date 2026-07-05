@@ -1,0 +1,928 @@
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-dmqsi53g> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="星游寰宇的个人网站——技术文章、项目展示与思考笔记"><meta name="color-scheme" content="light"><!-- Open Graph --><meta property="og:title" content="玻尔（Bohrium）AI 科研平台 — 全面调研报告 — 星游寰宇"><meta property="og:description" content="星游寰宇的个人网站——技术文章、项目展示与思考笔记"><meta property="og:url" content="https://code2239.github.io/blog/%E7%8E%BB%E5%B0%94_Bohrium_%E8%B0%83%E7%A0%94%E6%8A%A5%E5%91%8A/"><meta property="og:type" content="website"><meta property="og:site_name" content="星游寰宇"><meta property="og:locale" content="zh_CN"><!-- Twitter Card --><meta name="twitter:card" content="summary"><meta name="twitter:title" content="玻尔（Bohrium）AI 科研平台 — 全面调研报告 — 星游寰宇"><meta name="twitter:description" content="星游寰宇的个人网站——技术文章、项目展示与思考笔记"><!-- Canonical --><link rel="canonical" href="https://code2239.github.io/blog/%E7%8E%BB%E5%B0%94_Bohrium_%E8%B0%83%E7%A0%94%E6%8A%A5%E5%91%8A/"><title>玻尔（Bohrium）AI 科研平台 — 全面调研报告 — 星游寰宇</title><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="alternate" type="application/rss+xml" title="星游寰宇 RSS" href="/rss.xml"><link rel="stylesheet" href="/_astro/_slug_.C_t6U7me.css">
+<style>.blog-layout[data-astro-cid-bvzihdzo]{display:block}.blog-toc[data-astro-cid-bvzihdzo]{display:none}.blog-body[data-astro-cid-bvzihdzo]{min-width:0}@media(min-width:1024px){.blog-layout[data-astro-cid-bvzihdzo]{display:grid;grid-template-columns:14rem 1fr;gap:3rem;align-items:start}.blog-toc[data-astro-cid-bvzihdzo]{display:block}.blog-body[data-astro-cid-bvzihdzo]{padding-right:2rem}}.copy-btn[data-astro-cid-bvzihdzo]{position:absolute;top:8px;right:8px;padding:4px 10px;font-size:.6875rem;font-family:var(--font-sans);color:var(--color-text-tertiary);background:var(--color-bg);border:1px solid var(--color-border);border-radius:6px;cursor:pointer;opacity:0;transition:opacity .15s ease,color .15s ease}pre[data-astro-cid-bvzihdzo]:hover .copy-btn[data-astro-cid-bvzihdzo]{opacity:1}.copy-btn[data-astro-cid-bvzihdzo]:hover{color:var(--color-accent);border-color:var(--color-accent)}.copy-btn[data-astro-cid-bvzihdzo].copied{color:#16a34a;border-color:#16a34a}.back-to-top[data-astro-cid-bvzihdzo]{position:fixed;bottom:2rem;right:2rem;z-index:40;width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:50%;border:1px solid var(--color-border);background:var(--color-bg);color:var(--color-text-secondary);cursor:pointer;box-shadow:var(--shadow-md);transition:opacity .2s ease,transform .2s ease}.back-to-top[data-astro-cid-bvzihdzo]:hover{color:var(--color-accent);border-color:var(--color-accent);transform:translateY(-2px)}.back-to-top[data-astro-cid-bvzihdzo].hidden{opacity:0;pointer-events:none}
+</style></head> <body class="min-h-screen flex flex-col" data-astro-cid-dmqsi53g> <nav class="sticky top-0 z-40 bg-[var(--color-bg)]/80 backdrop-blur-md border-b border-[var(--color-border)]" data-astro-cid-pux6a34n><div class="max-w-content flex items-center justify-between py-4" data-astro-cid-pux6a34n><a href="/" class="text-base font-semibold no-underline tracking-tight" data-astro-cid-pux6a34n>
+星游寰宇
+</a><!-- Desktop nav --><div class="hidden sm:flex items-center gap-6" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>博客</a><a href="/about" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>关于</a></div><!-- Mobile hamburger --><button id="menu-btn" class="sm:hidden flex flex-col gap-1 p-2 -mr-2 cursor-pointer" aria-label="打开菜单" data-astro-cid-pux6a34n><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-transform duration-200" data-astro-cid-pux6a34n></span><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-opacity duration-200" data-astro-cid-pux6a34n></span><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-transform duration-200" data-astro-cid-pux6a34n></span></button></div><!-- Mobile menu --><div id="mobile-menu" class="hidden sm:hidden border-t border-[var(--color-border)] bg-[var(--color-bg)]" data-astro-cid-pux6a34n><div class="max-w-content flex flex-col gap-2 py-4" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>博客</a><a href="/about" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>关于</a></div></div></nav><script type="module">const e=document.getElementById("menu-btn"),n=document.getElementById("mobile-menu");e&&n&&e.addEventListener("click",()=>{const t=n.classList.toggle("hidden");e.classList.toggle("menu-open",!t),e.setAttribute("aria-label",t?"打开菜单":"关闭菜单")});</script> <main class="flex-1" data-astro-cid-dmqsi53g>  <div class="reading-progress" id="reading-progress" style="width: 0%"></div> <script type="module">const o=document.getElementById("reading-progress");if(!o)throw new Error("Reading progress bar element not found");const r=()=>{const n=window.scrollY,e=document.documentElement.scrollHeight-window.innerHeight,t=e>0?n/e*100:0;o.style.width=`${Math.min(t,100)}%`};window.addEventListener("scroll",r,{passive:!0});</script>  <button id="back-to-top" class="back-to-top hidden" aria-label="返回顶部" data-astro-cid-bvzihdzo> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-bvzihdzo> <polyline points="18 15 12 9 6 15" data-astro-cid-bvzihdzo></polyline> </svg> </button> <div class="px-6 xl:px-12 pt-12 pb-16" data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <header class="mb-12 text-center" data-astro-cid-bvzihdzo> <h1 class="text-3xl font-semibold mb-3 tracking-tight" data-astro-cid-bvzihdzo>玻尔（Bohrium）AI 科研平台 — 全面调研报告</h1> <div class="flex items-center justify-center gap-2 text-[var(--color-text-tertiary)] text-sm" data-astro-cid-bvzihdzo> <time datetime="2026-07-05" data-astro-cid-bvzihdzo>2026-07-05</time> <span class="text-[var(--color-border)]" data-astro-cid-bvzihdzo>·</span> <span data-astro-cid-bvzihdzo>47 分钟阅读</span>  <span class="text-[var(--color-border)]" data-astro-cid-bvzihdzo>·</span> <span class="text-sm text-[var(--color-text-tertiary)]"> <span> Bohrium<span class="mx-1">·</span> </span><span> AI<span class="mx-1">·</span> </span><span> 科研<span class="mx-1">·</span> </span><span> 调研 </span> </span>  </div> </header> <div class="blog-layout" data-astro-cid-bvzihdzo> <aside class="blog-toc" data-astro-cid-bvzihdzo> <div class="sticky top-24" data-astro-cid-bvzihdzo> <nav class="toc"> <p class="text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-3">目录</p> <ul class="toc-list"> <li class> <a href="#1-玻尔是哪一家公司开发的-ai-软件">1. 玻尔是哪一家公司开发的 AI 软件？</a> </li><li class> <a href="#2-玻尔使用的大模型是什么">2. 玻尔使用的大模型是什么？</a> </li><li class="toc-h3"> <a href="#外部通用大模型用于自然语言交互层">外部通用大模型（用于自然语言交互层）</a> </li><li class="toc-h3"> <a href="#自研科学大模型体系深势宇知">自研科学大模型体系（“深势·宇知”）</a> </li><li class="toc-h3"> <a href="#策略总结">策略总结</a> </li><li class> <a href="#3-玻尔开源了吗">3. 玻尔开源了吗？</a> </li><li class> <a href="#4-玻尔的核心功能是什么支撑这些核心功能的核心技术是什么">4. 玻尔的核心功能是什么？支撑这些核心功能的核心技术是什么？</a> </li><li class="toc-h3"> <a href="#核心功能">核心功能</a> </li><li class="toc-h3"> <a href="#核心技术">核心技术</a> </li><li class> <a href="#5-玻尔如何获得这么多期刊的权限是靠号主的图书馆账号吗">5. 玻尔如何获得这么多期刊的权限？是靠号主的图书馆账号吗？</a> </li><li class="toc-h3"> <a href="#获取机制">获取机制</a> </li><li class="toc-h3"> <a href="#关键点">关键点</a> </li><li class> <a href="#6-玻尔运作的核心数据源在哪是访问图书馆的所有文献吗">6. 玻尔运作的核心数据源在哪？是访问图书馆的所有文献吗？</a> </li><li class="toc-h3"> <a href="#核心数据源">核心数据源</a> </li><li class="toc-h3"> <a href="#数据源机制">数据源机制</a> </li><li class> <a href="#7-玻尔的数据源如何及时更新">7. 玻尔的数据源如何及时更新？</a> </li><li class="toc-h3"> <a href="#技术实现推估">技术实现推估</a> </li><li class> <a href="#8-玻尔是如何处理数据的是将期刊的-pdf-转化为-markdown-进行处理吗还是说其他方案">8. 玻尔是如何处理数据的？是将期刊的 PDF 转化为 markdown 进行处理吗？还是说其他方案？</a> </li><li class="toc-h3"> <a href="#数据处理金字塔">数据处理金字塔</a> </li><li class="toc-h3"> <a href="#官方描述">官方描述</a> </li><li class> <a href="#9-玻尔用什么样的技术进行数据可视化的">9. 玻尔用什么样的技术进行数据可视化的？</a> </li><li class="toc-h3"> <a href="#可视化功能矩阵">可视化功能矩阵</a> </li><li class="toc-h3"> <a href="#前端可视化技术堆栈推测">前端可视化技术堆栈推测</a> </li><li class="toc-h3"> <a href="#架构层次">架构层次</a> </li><li class> <a href="#10-玻尔第一版发布的日期是什么时候版本号是多少目前最新产品发布的日期是什么版本号是多少">10. 玻尔第一版发布的日期是什么时候？版本号是多少？目前最新产品发布的日期是什么？版本号是多少？</a> </li><li class="toc-h3"> <a href="#产品演进时间线">产品演进时间线</a> </li><li class="toc-h3"> <a href="#版本号信息">版本号信息</a> </li><li class="toc-h3"> <a href="#关于第一版版本号的说明">关于”第一版版本号”的说明</a> </li><li class> <a href="#11-玻尔的知识库模型是如何处理知识的">11. 玻尔的知识库模型是如何处理知识的？</a> </li><li class="toc-h3"> <a href="#第一层文档结构化解析">第一层：文档结构化解析</a> </li><li class="toc-h3"> <a href="#第二层实体与关系抽取">第二层：实体与关系抽取</a> </li><li class="toc-h3"> <a href="#第三层知识图谱构建与融合">第三层：知识图谱构建与融合</a> </li><li class="toc-h3"> <a href="#第四层知识库层级树raptor-类方法">第四层：知识库层级树（RAPTOR 类方法）</a> </li><li class="toc-h3"> <a href="#第五层混合检索与增强生成">第五层：混合检索与增强生成</a> </li><li class="toc-h3"> <a href="#架构总览">架构总览</a> </li><li class="toc-h3"> <a href="#sciencepedia科学百科">SciencePedia（科学百科）</a> </li><li class> <a href="#12-玻尔使用了哪些可以让读者更好理解知识的技术">12. 玻尔使用了哪些可以让读者更好理解知识的技术？</a> </li><li class="toc-h3"> <a href="#一ai-驱动的文献精读与交互">一、AI 驱动的文献精读与交互</a> </li><li class="toc-h3"> <a href="#二多媒体内容生成">二、多媒体内容生成</a> </li><li class="toc-h3"> <a href="#三知识体系化与概念解析">三、知识体系化与概念解析</a> </li><li class="toc-h3"> <a href="#四智能科研辅助">四、智能科研辅助</a> </li><li class="toc-h3"> <a href="#五反幻觉与可信度保障">五、反幻觉与可信度保障</a> </li><li class> <a href="#附录核心参考来源汇总">附录：核心参考来源汇总</a> </li> </ul> </nav> </div> </aside> <div class="blog-body" data-astro-cid-bvzihdzo> <div class="prose prose-neutral max-w-none" data-astro-cid-bvzihdzo>  <h1 id="玻尔bohriumai-科研平台--全面调研报告">玻尔（Bohrium）AI 科研平台 —— 全面调研报告</h1>
+<blockquote>
+<p>调研日期：2026-07-04<br>
+说明：本报告基于公开可查的网页资料整理，力求准确，但部分信息受限于公开披露程度，可能存在未尽之处。每个答案末尾均标注了参考文献。</p>
+</blockquote>
+<hr>
+<h2 id="1-玻尔是哪一家公司开发的-ai-软件">1. 玻尔是哪一家公司开发的 AI 软件？</h2>
+<p><strong>玻尔（Bohrium）</strong> 由 <strong>深势科技（DP Technology）</strong> 联合 <strong>北京科学智能研究院（AISI）</strong> 共同研发。</p>
+<ul>
+<li><strong>深势科技</strong> 成立于 2018 年，创始人为北京大学元培学院校友、普林斯顿大学应用数学博士 <strong>张林峰</strong>，中国科学院院士 <strong>鄂维南</strong> 担任首席科学顾问。公司是全球 “AI for Science” 研究范式的引领者，致力于运用 AI 和分子模拟算法求解重要科学问题，覆盖生物医药、能源、材料等领域。</li>
+<li><strong>北京科学智能研究院（AISI）</strong> 是深势科技在学术侧的协同机构。</li>
+</ul>
+<p>玻尔以量子力学先驱尼尔斯·玻尔（Niels Bohr）命名，被誉为 <strong>“科研界的 Hugging Face”</strong>，定位为全球首个覆盖「读文献—做计算—做实验—多学科协同」全流程的 AI for Science 旗舰平台。</p>
+<p><strong>参考文献：</strong></p>
+<ul>
+<li>新华网报道《智瞰AI｜AI for Science进阶：从工具的革命到革命的工具》（2025年4月17日），<a href="https://app.xinhuanet.com/news/article.html?articleId=1ad1f5c084a9c9d5e86003a5d9168e48">https://app.xinhuanet.com/news/article.html?articleId=1ad1f5c084a9c9d5e86003a5d9168e48</a></li>
+<li>北京大数据研究院官方报道《科研”读、算、做”全流程智能化升级 玻尔科研空间站正式发布》，<a href="http://m.bibdr.org/nd.jsp?mid=5&#x26;id=325">http://m.bibdr.org/nd.jsp?mid=5&#x26;id=325</a></li>
+<li>张林峰百度百科，<a href="https://baike.baidu.com/item/%E5%BC%A0%E6%9E%97%E5%B3%B0/61923033">https://baike.baidu.com/item/%E5%BC%A0%E6%9E%97%E5%B3%B0/61923033</a></li>
+</ul>
+<hr>
+<h2 id="2-玻尔使用的大模型是什么">2. 玻尔使用的大模型是什么？</h2>
+<p>玻尔采用 <strong>“外部通用大模型 + 自研科学专用大模型”</strong> 的混合路线：</p>
+<h3 id="外部通用大模型用于自然语言交互层">外部通用大模型（用于自然语言交互层）</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>模型选项</th><th>说明</th></tr></thead><tbody><tr><td><strong>Auto</strong></td><td>自动选择最优模型</td></tr><tr><td><strong>DeepSeek</strong></td><td>已接入，作为核心底层推理模型之一</td></tr><tr><td><strong>GPT-4o（4o）</strong></td><td>接入 OpenAI 模型</td></tr><tr><td><strong>Pro</strong></td><td>高级模型选项</td></tr></tbody></table>
+<p>资料明确提到平台”整合万方、知网等科研库、语料库、学者库 &#x26; DeepSeek、OpenAI 等大模型”。</p>
+<h3 id="自研科学大模型体系深势宇知">自研科学大模型体系（“深势·宇知”）</h3>
+<p>这是面向科学研究的垂直领域专用大模型体系，包括：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>模型</th><th>说明</th></tr></thead><tbody><tr><td><strong>Uni-Mol</strong></td><td>通用 3D 分子表示学习预训练框架（ICLR 2023）</td></tr><tr><td><strong>DeePMD（Deep Potential Molecular Dynamics）</strong></td><td>深度学习驱动分子动力学模拟工具，获 2020 年 ACM 戈登贝尔奖</td></tr><tr><td><strong>DPA 系列（DPA-1, DPA-2）</strong></td><td>覆盖近 70 种元素的深度势能原子间势函数预训练大模型</td></tr><tr><td><strong>Uni-RNA / Uni-Fold</strong></td><td>RNA 结构与蛋白质折叠预测模型</td></tr><tr><td><strong>OpenLAM</strong></td><td>大原子模型计划</td></tr></tbody></table>
+<h3 id="策略总结">策略总结</h3>
+<blockquote>
+<p><strong>通用大模型做交互入口，自研模型做科学深度。</strong> 此外玻尔平台支持高校/机构接入自研科学大模型，提供私有化部署能力。</p>
+</blockquote>
+<p><strong>参考文献：</strong></p>
+<ul>
+<li>哈尔滨工业大学（威海）图书馆《AI技术讲座：AI4S打造面向科研新范式》，<a href="http://lib.hitwh.edu.cn/2025/1121/c3549a207559/page.htm">http://lib.hitwh.edu.cn/2025/1121/c3549a207559/page.htm</a></li>
+<li>北京软件和信息服务业协会报道《“新质生产力探索实践系列活动”走进深势科技》，<a href="https://www.bsia.org.cn/site/content/29370.html">https://www.bsia.org.cn/site/content/29370.html</a></li>
+<li>玻尔官网功能页面，<a href="https://www.bohrium.com/api/workspace">https://www.bohrium.com/api/workspace</a></li>
+</ul>
+<hr>
+<h2 id="3-玻尔开源了吗">3. 玻尔开源了吗？</h2>
+<p><strong>玻尔平台本身是闭源的商业化 SaaS 产品</strong>，但深势科技在 AI for Science 领域孵化了大量开源项目。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>维度</th><th>状态</th></tr></thead><tbody><tr><td>玻尔平台（Bohrium）整体</td><td><strong>闭源 SaaS</strong>，商业产品</td></tr><tr><td>DeePMD-kit（深度势能分子动力学）</td><td><strong>开源</strong>，<a href="https://github.com/deepmodeling/deepmd-kit">https://github.com/deepmodeling/deepmd-kit</a></td></tr><tr><td>Uni-Mol（通用分子预训练框架）</td><td><strong>开源</strong>，<a href="https://github.com/dptech-corp/Uni-Mol">https://github.com/dptech-corp/Uni-Mol</a></td></tr><tr><td>ABACUS（国产第一性原理电子结构计算）</td><td><strong>开源</strong></td></tr><tr><td>DMFF（可微分子力场框架）</td><td><strong>开源</strong></td></tr><tr><td>AIS-Square（AI for Science 数据/模型共享平台）</td><td><strong>开源</strong>，<a href="https://github.com/deepmodeling/AIS-Square">https://github.com/deepmodeling/AIS-Square</a></td></tr><tr><td>Uni-Lab-OS（实验室设备连接框架）</td><td><strong>开源</strong>（深势主导）</td></tr><tr><td>DeepModeling 开源社区</td><td><a href="https://github.com/deepmodeling">https://github.com/deepmodeling</a></td></tr></tbody></table>
+<p><strong>简言之：</strong> 玻尔平台是商业闭源产品，但其生态中包含多个由深势主导或贡献的开源项目，形成了 “上层 SaaS 闭源 + 底层部分组件开源” 的模式。被称为”科研界的 Hugging Face”指的是其平台化、社区化的生态定位，而非平台本身开源。</p>
+<p><strong>参考文献：</strong></p>
+<ul>
+<li>深势科技微信公众号《企业风采｜深势科技发布Deploy-Master并上线玻尔》，<a href="https://www.bsia.org.cn/site/content/31550.html">https://www.bsia.org.cn/site/content/31550.html</a></li>
+<li>DeepModeling 开源社区，<a href="https://github.com/deepmodeling">https://github.com/deepmodeling</a></li>
+<li>Uni-Mol GitHub，<a href="https://github.com/dptech-corp/Uni-Mol">https://github.com/dptech-corp/Uni-Mol</a></li>
+</ul>
+<hr>
+<h2 id="4-玻尔的核心功能是什么支撑这些核心功能的核心技术是什么">4. 玻尔的核心功能是什么？支撑这些核心功能的核心技术是什么？</h2>
+<h3 id="核心功能">核心功能</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>功能模块</th><th>说明</th></tr></thead><tbody><tr><td><strong>科学导航（Science Navigator）</strong></td><td>自然语言提问，从 1.6 亿+论文/专利/学者中聚合检索，AI 摘要 + 原文链接，每项引用带 DOI</td></tr><tr><td><strong>Deep Research（深度研究）</strong></td><td>一键自动生成长达 10,000+ 词的结构化文献综述</td></tr><tr><td><strong>知识库（Knowledge Base）</strong></td><td>支持 Zotero/EndNote 一键导入，可对 PDF 进行 AI 解释、改写、提问，支持多篇文献批量对话</td></tr><tr><td><strong>文献伴读</strong></td><td>AI 精读论文结构，自动提取研究方法、关键结论、实验图表数据</td></tr><tr><td><strong>期刊订阅（Journals）</strong></td><td>覆盖 14 万+ 期刊，关键词组合订阅，AI 速览最新进展</td></tr><tr><td><strong>SciDraw</strong></td><td>文本描述生成可发表的科学插图</td></tr><tr><td><strong>AI Poster</strong></td><td>60 秒内将 PDF 论文转为会议海报</td></tr><tr><td><strong>Scholar（学者库）</strong></td><td>2000 万+ 研究者档案，含引用地图与学术谱系树</td></tr><tr><td><strong>SciencePedia（科学百科）</strong></td><td>42 万+ 已验证科学概念的零幻觉解释</td></tr><tr><td><strong>批量文献问答</strong></td><td>百篇论文一键解码，提取整合多篇文献精华</td></tr><tr><td><strong>AI 音频概览</strong></td><td>根据 PDF 原文自动生成音频概览（支持中英文）</td></tr><tr><td><strong>Notebook</strong></td><td>交互式开发环境，支持 CPU/GPU 在线运行</td></tr><tr><td><strong>Apps 应用商店</strong></td><td>200+ 科研应用工具</td></tr></tbody></table>
+<h3 id="核心技术">核心技术</h3>
+<p>玻尔的核心技术架构基于 <strong>RAG（检索增强生成） + 知识图谱 + 向量嵌入</strong> 的深度融合：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>技术层面</th><th>具体方案</th></tr></thead><tbody><tr><td><strong>RAG 架构</strong></td><td>意图识别 → 混合检索（BM25 关键词 + 向量相似度）→ 倒数排序融合（RRF）→ LLM 生成</td></tr><tr><td><strong>反幻觉机制</strong></td><td>100% 引用可追溯，模型在近零温度（near-zero temperature）下生成，严格约束于检索到的真实来源</td></tr><tr><td><strong>向量嵌入</strong></td><td>使用 RoBERTa 模型进行语义解析；BiLSTM-Attention-CRF 网络进行实体识别</td></tr><tr><td><strong>知识图谱</strong></td><td>实体识别 → 关系抽取 → 图谱融合（与 DBpedia 等对齐）→ TransE 向量化 → 倒排索引库</td></tr><tr><td><strong>知识库层级树</strong></td><td>UMAP 降维 + GMM 软聚类（RAPTOR 类方法），LLM 对每个聚簇生成摘要，递归向上构建，支持从高层摘要到叶子节点的逐层遍历</td></tr><tr><td><strong>多模态检索</strong></td><td>支持文本、图表、分子结构、化学结构、实验数据等多模态搜索</td></tr><tr><td><strong>引用准确率</strong></td><td>内置引文校验模块，引用准确率高达 99.2%</td></tr></tbody></table>
+<p><strong>参考文献：</strong></p>
+<ul>
+<li>玻尔官方博客《What Is Bohrium AI? The Complete Guide to AI-Powered Scientific Research》，<a href="https://www.bohrium.com/en/blog/industry-insights/what-is-bohrium-ai-complete-guide/">https://www.bohrium.com/en/blog/industry-insights/what-is-bohrium-ai-complete-guide/</a></li>
+<li>玻尔知识图谱构建页面，<a href="https://www.bohrium.com/sciencepedia/feynman/keyword/knowledge_graph_construction">https://www.bohrium.com/sciencepedia/feynman/keyword/knowledge_graph_construction</a></li>
+<li>上海大学图书馆《AI 科研工具+1！玻尔科学导航开通试用》，<a href="https://lib.shu.edu.cn/info/1023/6204.htm">https://lib.shu.edu.cn/info/1023/6204.htm</a></li>
+</ul>
+<hr>
+<h2 id="5-玻尔如何获得这么多期刊的权限是靠号主的图书馆账号吗">5. 玻尔如何获得这么多期刊的权限？是靠号主的图书馆账号吗？</h2>
+<p><strong>玻尔并非通过单一用户的图书馆账号获取期刊权限</strong>，而是通过以下多种机制组合：</p>
+<h3 id="获取机制">获取机制</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>机制</th><th>说明</th></tr></thead><tbody><tr><td><strong>公开元数据聚合</strong></td><td>玻尔索引了 1.6-1.7 亿篇学术论文、1.6 亿+ 项专利的元数据（标题、摘要、作者、DOI、引用关系等），这些信息本身是公开可获取的</td></tr><tr><td><strong>CARSI 联邦认证</strong></td><td>玻尔已全面接入 CARSI（中国教育和科研计算机网联邦认证与资源共享基础设施），全国 1000+ 所高校师生可使用校园统一身份认证登录</td></tr><tr><td><strong>校园 IP 绑定</strong></td><td>高校开通专属子域名（如 <code>bupt.bohrium.com</code>、<code>sustech.bohrium.com</code>），校园网内访问自动识别机构身份</td></tr><tr><td><strong>数据库合作</strong></td><td>与 SpringerLink、Wiley Online Library 等主流数据库建立接入关系，机构已订购的内容在玻尔内显示”已订阅”标签，可跳转获取全文</td></tr><tr><td><strong>OA 资源直达</strong></td><td>开放获取（Open Access）论文可直接查看原文</td></tr><tr><td><strong>机构正式采购</strong></td><td>如深圳国际科技信息中心已正式订购玻尔科学导航，南方科技大学等可通过 CAS 认证使用</td></tr></tbody></table>
+<h3 id="关键点">关键点</h3>
+<p><strong>玻尔平台本身不直接提供全部期刊全文</strong>，而是作为 <strong>元数据检索 + AI 辅助平台</strong>：</p>
+<ul>
+<li>OA 资源可直接查看</li>
+<li>非 OA 资源：通过 CARSI 登录后，点击文献的官网链接（如跳转至 Wiley、SpringerLink），若学校已采购该数据库，可获取全文</li>
+<li>目前绝大多数高校处于 <strong>“试用期”</strong> 阶段（通常 6 个月至 1 年），试用期结束后可能转为正式采购</li>
+</ul>
+<p><strong>参考文献：</strong></p>
+<ul>
+<li>北京邮电大学图书馆《【资源试用】玻尔科学导航》，<a href="https://libportal.bupt.edu.cn/a/zuixinziyuan/2025/0609/4931.html">https://libportal.bupt.edu.cn/a/zuixinziyuan/2025/0609/4931.html</a></li>
+<li>超星数据库《玻尔科学导航》详情页，<a href="https://wisdom.chaoxing.com/newwisdom/doordatabase/databasedetail.html?wfwfid=23463">https://wisdom.chaoxing.com/newwisdom/doordatabase/databasedetail.html?wfwfid=23463</a></li>
+<li>上海交通大学数据库详情页，<a href="https://www.lib.sjtu.edu.cn/f/database/database_detail.shtml?id=445">https://www.lib.sjtu.edu.cn/f/database/database_detail.shtml?id=445</a></li>
+<li>南方科技大学 LibGuides《图书馆订购 AI 工具》，<a href="https://sustech.libguides.com/c.php?g=975786&#x26;p=7111552">https://sustech.libguides.com/c.php?g=975786&#x26;p=7111552</a></li>
+</ul>
+<hr>
+<h2 id="6-玻尔运作的核心数据源在哪是访问图书馆的所有文献吗">6. 玻尔运作的核心数据源在哪？是访问图书馆的所有文献吗？</h2>
+<h3 id="核心数据源">核心数据源</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>数据类别</th><th>规模</th></tr></thead><tbody><tr><td>英文学术论文</td><td><strong>1.7 亿+篇</strong></td></tr><tr><td>中文学术文献</td><td><strong>0.8 亿+篇</strong></td></tr><tr><td>专利数据</td><td><strong>1.6 亿+项</strong></td></tr><tr><td>全球活跃学者</td><td><strong>2,000 万+名</strong></td></tr><tr><td>收录期刊</td><td><strong>14 万+本</strong></td></tr><tr><td>科研图表</td><td><strong>2 亿+张</strong></td></tr><tr><td>覆盖学科</td><td><strong>26 大学科领域</strong>、1,000+ 研究主题</td></tr></tbody></table>
+<h3 id="数据源机制">数据源机制</h3>
+<p><strong>并非直接访问某个图书馆的馆藏文献</strong>。玻尔的数据来源包括：</p>
+<ul>
+<li><strong>公开学术索引数据库</strong>：聚合全球主要学术文献数据库的元数据索引</li>
+<li><strong>DOI 验证的同行评审论文</strong>：所有论文均为 DOI 验证，经结构化解析</li>
+<li><strong>近 5 年覆盖率约 95%，近 20 年覆盖率约 90%</strong>（根据官方博客）</li>
+<li><strong>与万方、知网、SpringerLink、Wiley Online Library 等数据库合作接入</strong></li>
+<li>来源可信层级：同行评审论文/专利 > SciencePedia 已验证条目 > 网页/新闻</li>
+</ul>
+<p><strong>参考文献：</strong></p>
+<ul>
+<li>玻尔官方博客《What Is Bohrium AI? The Complete Guide to AI-Powered Scientific Research》，<a href="https://www.bohrium.com/en/blog/industry-insights/what-is-bohrium-ai-complete-guide/">https://www.bohrium.com/en/blog/industry-insights/what-is-bohrium-ai-complete-guide/</a></li>
+<li>光明区图书馆报道《玻尔科学导航在光明区图书馆上线，整合全球1.6亿件文献》，<a href="https://www.dutenews.com/n/article/10358786">https://www.dutenews.com/n/article/10358786</a></li>
+<li>华南理工大学图书馆试用通知，<a href="https://inf.muhn.edu.cn/databaseguide/detail/1214">https://inf.muhn.edu.cn/databaseguide/detail/1214</a></li>
+</ul>
+<hr>
+<h2 id="7-玻尔的数据源如何及时更新">7. 玻尔的数据源如何及时更新？</h2>
+<p>根据多个高校图书馆试用说明及官方宣传，玻尔的数据更新机制如下：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>更新维度</th><th>说明</th></tr></thead><tbody><tr><td><strong>整体更新频率</strong></td><td><strong>每日更新</strong>，实时追踪全球最新科研成果</td></tr><tr><td><strong>订阅推送</strong></td><td>按期刊、关键词、学者、机构等维度订阅后 <strong>实时更新推送</strong></td></tr><tr><td><strong>官方宣传语</strong></td><td>”更新快：实时追踪全球最新科研成果”、“终结「知识更新滞后」“</td></tr><tr><td><strong>更新时间</strong></td><td>超星数据库页面标注 “更新时间: 2025-12-26”（每日刷新级别）</td></tr><tr><td><strong>AI 速览功能</strong></td><td>新文献入库后自动触发处理流水线，生成 AI 提炼要点</td></tr></tbody></table>
+<h3 id="技术实现推估">技术实现推估</h3>
+<p>搜索结果中未找到底层增量更新技术的详细公开文档（如是否使用 CDC、Elasticsearch、流式处理等），但从功能特征推断：</p>
+<ul>
+<li>多维度订阅 + 实时推送机制，表明平台具备增量索引与消息推送能力</li>
+<li>每日全量刷新 + AI 自动处理流水线</li>
+<li>元数据自动标注（作者/时间/期刊/DOI）</li>
+</ul>
+<p><strong>参考文献：</strong></p>
+<ul>
+<li>超星数据库《玻尔科学导航》，<a href="https://wisdom.chaoxing.com/newwisdom/doordatabase/databasedetail.html?wfwfid=23463">https://wisdom.chaoxing.com/newwisdom/doordatabase/databasedetail.html?wfwfid=23463</a></li>
+<li>华南理工大学图书馆资源试用通知，<a href="https://inf.muhn.edu.cn/databaseguide/detail/1214">https://inf.muhn.edu.cn/databaseguide/detail/1214</a></li>
+<li>北京邮电大学图书馆《【资源试用】玻尔科学导航》，<a href="https://libportal.bupt.edu.cn/a/zuixinziyuan/2025/0609/4931.html">https://libportal.bupt.edu.cn/a/zuixinziyuan/2025/0609/4931.html</a></li>
+</ul>
+<hr>
+<h2 id="8-玻尔是如何处理数据的是将期刊的-pdf-转化为-markdown-进行处理吗还是说其他方案">8. 玻尔是如何处理数据的？是将期刊的 PDF 转化为 markdown 进行处理吗？还是说其他方案？</h2>
+<p><strong>玻尔的数据处理方案远不止 PDF 转 Markdown，而是一个多层次的结构化解析与知识提取流水线：</strong></p>
+<h3 id="数据处理金字塔">数据处理金字塔</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>处理层次</th><th>技术方案</th></tr></thead><tbody><tr><td><strong>结构化解析</strong></td><td>不仅提取文本，还提取图表、表格、公式、化学结构、分子结构等多模态信息</td></tr><tr><td><strong>实体识别</strong></td><td>使用 BiLSTM-Attention-CRF 网络 + Seq2Seq 框架进行命名实体识别</td></tr><tr><td><strong>关系抽取</strong></td><td>基于句法依存分析，获取实体对之间的最短依存路径，构建关系模板（专利 CN119129722A）</td></tr><tr><td><strong>语义向量化</strong></td><td>RoBERTa 模型进行文本语义解析，生成语义表示向量</td></tr><tr><td><strong>知识图谱构建</strong></td><td>实体识别 → 关系抽取 → 图谱融合（与 DBpedia 等结构化数据库对齐）→ TransE 三元组向量化 → 倒排索引库</td></tr><tr><td><strong>知识库层级树</strong></td><td>UMAP 降维 + GMM 软聚类（RAPTOR 类方法），LLM 逐层生成摘要，构建多层知识结构</td></tr><tr><td><strong>RAG 检索增强</strong></td><td>BM25 关键词检索 + 向量相似度检索 → 倒数排序融合（RRF）→ LLM 生成</td></tr></tbody></table>
+<h3 id="官方描述">官方描述</h3>
+<p>根据玻尔官方博客：平台对论文进行 <strong>“结构化解析（not just text extraction — charts, tables, formulas, chemical structures are all parsed）“</strong>。这是远超简单 PDF 转 Markdown 的方案：</p>
+<ul>
+<li>多模态数据提取（文本 + 图表 + 公式 + 化学结构）</li>
+<li>知识图谱关联建模</li>
+<li>向量化存储与混合检索</li>
+<li>引用关系网络构建</li>
+</ul>
+<p><strong>参考文献：</strong></p>
+<ul>
+<li>玻尔官方博客《What Is Bohrium AI? The Complete Guide》，<a href="https://www.bohrium.com/en/blog/industry-insights/what-is-bohrium-ai-complete-guide/">https://www.bohrium.com/en/blog/industry-insights/what-is-bohrium-ai-complete-guide/</a></li>
+<li>专利 CN119129722A《基于大语言模型及向量库构建知识图谱的方法》（深势科技），<a href="https://patentimages.storage.googleapis.com/9c/35/03/d0229757d65203/CN119129722A.pdf">https://patentimages.storage.googleapis.com/9c/35/03/d0229757d65203/CN119129722A.pdf</a></li>
+<li>专利 CN118861088A（知识库层级树相关），<a href="https://patentimages.storage.googleapis.com/b1/65/6f/f0a441cfd2084f/CN118861088A.pdf">https://patentimages.storage.googleapis.com/b1/65/6f/f0a441cfd2084f/CN118861088A.pdf</a></li>
+<li>玻尔 App 小米应用商店页面，<a href="https://app.mi.com/details?id=com.bohrium.mobile">https://app.mi.com/details?id=com.bohrium.mobile</a></li>
+</ul>
+<hr>
+<h2 id="9-玻尔用什么样的技术进行数据可视化的">9. 玻尔用什么样的技术进行数据可视化的？</h2>
+<p>玻尔在数据可视化方面采用了多层次的技术方案：</p>
+<h3 id="可视化功能矩阵">可视化功能矩阵</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>可视化类型</th><th>技术方案</th></tr></thead><tbody><tr><td><strong>知识图谱可视化</strong></td><td>通过图表、图谱等形式直观呈现研究关系网络、作者合作网络、主题关联</td></tr><tr><td><strong>科研图表数据提取与展示</strong></td><td>自动提取论文中的图表数据并可视化呈现</td></tr><tr><td><strong>学术海报生成</strong></td><td>根据 PDF 原文 AI 自动生成学术海报（中英文）</td></tr><tr><td><strong>SciDraw 科研插图</strong></td><td>文本描述 → AI 生成可发表的科学矢量插图</td></tr><tr><td><strong>引用地图与学术谱系树</strong></td><td>学者模块中的引用关系可视化</td></tr><tr><td><strong>Apps 应用商店</strong></td><td>200+ 科研工具中涵盖数据可视化、材料可视化、分子可视化、知识图谱等子类</td></tr></tbody></table>
+<h3 id="前端可视化技术堆栈推测">前端可视化技术堆栈推测</h3>
+<p>基于搜索结果中华南理工大学论文对玻尔平台的技术参照，平台前端的可视化技术可能包括：</p>
+<ul>
+<li><strong>ECharts</strong>：标准图表、数据看板、统计图表（声明式配置，内置丰富交互组件）</li>
+<li><strong>D3.js</strong>：高度定制的知识图谱可视化（力导向布局、树图、弦图等复杂网络关系）</li>
+<li>力导向布局（Force）、径向布局、树图等图布局算法</li>
+<li>多模态数据融合可视化（文本/图表/分子结构/实验数据）</li>
+</ul>
+<h3 id="架构层次">架构层次</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>前端可视化层（ECharts + D3.js + 自定义组件）</span></span>
+<span class="line"><span>    ↕</span></span>
+<span class="line"><span>数据处理与布局层（力导向布局 / 树图 / 弦图）</span></span>
+<span class="line"><span>    ↕</span></span>
+<span class="line"><span>知识图谱引擎（本体构建 → 语义标注 → 信息抽取）</span></span>
+<span class="line"><span>    ↕</span></span>
+<span class="line"><span>数据源层（论文数据库 / 专利数据库 / 实验数据）</span></span></code></pre>
+<p><strong>参考文献：</strong></p>
+<ul>
+<li>玻尔 Apps 应用商店，<a href="https://www.bohrium.com/apps?type=all&#x26;tag=15291&#x26;sort=default">https://www.bohrium.com/apps?type=all&#x26;tag=15291&#x26;sort=default</a></li>
+<li>玻尔知识图谱构建页面，<a href="https://www.bohrium.com/sciencepedia/feynman/keyword/knowledge_graph_construction">https://www.bohrium.com/sciencepedia/feynman/keyword/knowledge_graph_construction</a></li>
+<li>ECharts 官网，<a href="https://echarts.apache.org">https://echarts.apache.org</a></li>
+<li>D3.js 官网，<a href="https://d3js.org">https://d3js.org</a></li>
+</ul>
+<hr>
+<h2 id="10-玻尔第一版发布的日期是什么时候版本号是多少目前最新产品发布的日期是什么版本号是多少">10. 玻尔第一版发布的日期是什么时候？版本号是多少？目前最新产品发布的日期是什么？版本号是多少？</h2>
+<h3 id="产品演进时间线">产品演进时间线</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>时间</th><th>事件</th></tr></thead><tbody><tr><td><strong>2022 年</strong></td><td>深势科技识别到 AI for Science 推进瓶颈，开始规划玻尔空间站产品体系</td></tr><tr><td><strong>2023 年 6-9 月</strong></td><td>Bohrium 算力平台初步上线：DP Combo APP 在 Bohrium 上线；与九韶智能达成战略合作，联合开发云服务</td></tr><tr><td><strong>2025 年 3 月 29 日</strong></td><td><strong>全新版本「玻尔科研空间站」正式发布</strong> — 在 2025 中关村论坛年会 AI for Science 青年科学主题论坛上发布，核心升级为「科学导航（Science Navigator）」</td></tr><tr><td><strong>2025 年下半年</strong></td><td>多所高校陆续开通试用（中山大学、南方科技大学、吉林大学等）；2025 年 8 月，深圳市光明区图书馆成为首家上线玻尔的公共图书馆</td></tr><tr><td><strong>2026 年</strong></td><td>产品持续迭代，多所高校试用期延续</td></tr></tbody></table>
+<h3 id="版本号信息">版本号信息</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>平台</th><th>最新版本号</th><th>更新时间</th></tr></thead><tbody><tr><td><strong>Android（小米应用商店）</strong></td><td><strong>v2.2.2</strong></td><td>2026-06-15</td></tr><tr><td><strong>Android（第三方渠道）</strong></td><td>v2.0.3</td><td>2026-06-04</td></tr><tr><td><strong>Android（历史版本）</strong></td><td>v1.16.1</td><td>2025-11-23</td></tr><tr><td><strong>iOS（App Store）</strong></td><td>已上线</td><td>2025 年上线</td></tr></tbody></table>
+<h3 id="关于第一版版本号的说明">关于”第一版版本号”的说明</h3>
+<p>公开报道中<strong>未明确提及玻尔科研空间站发布时的具体版本号</strong>（如 v1.0.0、v2.0 等）。官方表述为”全新版本的玻尔科研空间站”。从移动端 App 的版本号推断，v1.x 系列可能对应 2025 年初版，v2.x 系列对应 2026 年重大升级版本。网页端平台未公开数字版本号。</p>
+<p><strong>参考文献：</strong></p>
+<ul>
+<li>北京大数据研究院《科研”读、算、做”全流程智能化升级 玻尔科研空间站正式发布》，<a href="http://m.bibdr.org/nd.jsp?mid=5&#x26;id=325">http://m.bibdr.org/nd.jsp?mid=5&#x26;id=325</a></li>
+<li>小米应用商店《玻尔-AI学术搜索,期刊订阅》，<a href="https://app.mi.com/details?id=com.bohrium.mobile">https://app.mi.com/details?id=com.bohrium.mobile</a></li>
+<li>脚本之家《玻尔(AI科研平台) v2.0.3 安卓版》，<a href="https://www.jb51.net/softs/1006169.html">https://www.jb51.net/softs/1006169.html</a></li>
+<li>玻尔 App Store 页面，<a href="https://apps.apple.com/sg/app/%E7%8E%BB%E5%B0%94/id6739486655">https://apps.apple.com/sg/app/%E7%8E%BB%E5%B0%94/id6739486655</a></li>
+</ul>
+<hr>
+<h2 id="11-玻尔的知识库模型是如何处理知识的">11. 玻尔的知识库模型是如何处理知识的？</h2>
+<p>玻尔的知识库采用 <strong>多层知识处理架构</strong>，核心是基于 <strong>RAG + 知识图谱 + 向量嵌入 + 层级树</strong> 的深度融合方案：</p>
+<h3 id="第一层文档结构化解析">第一层：文档结构化解析</h3>
+<ul>
+<li>论文全文结构化解析：提取文本、图表、表格、公式、化学结构</li>
+<li>文档语义分块 → 向量化（RoBERTa 嵌入）</li>
+</ul>
+<h3 id="第二层实体与关系抽取">第二层：实体与关系抽取</h3>
+<ul>
+<li>命名实体识别：BiLSTM-Attention-CRF 网络 + Seq2Seq 框架</li>
+<li>关系抽取：基于句法依存分析，构建实体关系模板</li>
+<li>形成 <code>(命名实体, 属性, 实体关系)</code> 三元组</li>
+</ul>
+<h3 id="第三层知识图谱构建与融合">第三层：知识图谱构建与融合</h3>
+<ul>
+<li>三元组向量化：TransE 算法 — 满足 <code>h + r ≈ t</code></li>
+<li>图谱融合：与 DBpedia 等结构化数据库对齐，通过字符串匹配与语义相似度计算进行实体对齐</li>
+<li>构建倒排索引库</li>
+</ul>
+<h3 id="第四层知识库层级树raptor-类方法">第四层：知识库层级树（RAPTOR 类方法）</h3>
+<ul>
+<li><strong>叶子层</strong>：文档语义分块 → 向量化</li>
+<li><strong>聚类层</strong>：UMAP 降维 + 高斯混合模型（GMM）软聚类（一个文本块可属于多个主题簇）</li>
+<li><strong>摘要层</strong>：LLM 对每个聚簇生成摘要，递归向上构建</li>
+<li><strong>检索策略</strong>：双阶段查询扩展（一级泛化 → 二级定向）+ 从高层摘要到叶子节点的逐层遍历</li>
+</ul>
+<h3 id="第五层混合检索与增强生成">第五层：混合检索与增强生成</h3>
+<ul>
+<li>混合检索：BM25 关键词检索 + 向量相似度检索（余弦相似度）→ 倒数排序融合（RRF）</li>
+<li>LLM 生成：在近零温度下生成，严格约束于检索到的真实来源</li>
+<li>引用校验：每一条回答均内置引文校验，引用准确率 99.2%</li>
+</ul>
+<h3 id="架构总览">架构总览</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>应用层（AI搜索 / 文献伴读 / 知识库问答 / 智能体）</span></span>
+<span class="line"><span>    ↕</span></span>
+<span class="line"><span>RAG 引擎（意图识别 → 混合检索 BM25+向量 → LLM生成）</span></span>
+<span class="line"><span>    ↕</span></span>
+<span class="line"><span>知识组织（知识图谱三元组 + 知识库层级树向量聚类）</span></span>
+<span class="line"><span>    ↕</span></span>
+<span class="line"><span>向量层（RoBERTa嵌入 / TransE图谱向量 / 倒排索引库）</span></span>
+<span class="line"><span>    ↕</span></span>
+<span class="line"><span>数据层（1.7亿论文 / 1.6亿专利 / 2000万学者 / 14万期刊）</span></span></code></pre>
+<h3 id="sciencepedia科学百科">SciencePedia（科学百科）</h3>
+<ul>
+<li>42 万+ 个经过验证的科学概念条目</li>
+<li>提供零幻觉的概念解释</li>
+<li>作为 RAG 检索中的可信来源层级之一</li>
+</ul>
+<p><strong>参考文献：</strong></p>
+<ul>
+<li>专利 CN119129722A《基于大语言模型及向量库构建知识图谱的方法》，<a href="https://patentimages.storage.googleapis.com/9c/35/03/d0229757d65203/CN119129722A.pdf">https://patentimages.storage.googleapis.com/9c/35/03/d0229757d65203/CN119129722A.pdf</a></li>
+<li>专利 CN118861088A（知识库层级树相关），<a href="https://patentimages.storage.googleapis.com/b1/65/6f/f0a441cfd2084f/CN118861088A.pdf">https://patentimages.storage.googleapis.com/b1/65/6f/f0a441cfd2084f/CN118861088A.pdf</a></li>
+<li>玻尔知识图谱构建页面，<a href="https://www.bohrium.com/sciencepedia/feynman/keyword/knowledge_graph_construction">https://www.bohrium.com/sciencepedia/feynman/keyword/knowledge_graph_construction</a></li>
+<li>玻尔官方博客，<a href="https://www.bohrium.com/en/blog/industry-insights/what-is-bohrium-ai-complete-guide/">https://www.bohrium.com/en/blog/industry-insights/what-is-bohrium-ai-complete-guide/</a></li>
+</ul>
+<hr>
+<h2 id="12-玻尔使用了哪些可以让读者更好理解知识的技术">12. 玻尔使用了哪些可以让读者更好理解知识的技术？</h2>
+<p>玻尔为提升读者对科学知识的理解深度，构建了多层次的技术矩阵：</p>
+<h3 id="一ai-驱动的文献精读与交互">一、AI 驱动的文献精读与交互</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>技术功能</th><th>对读者的价值</th></tr></thead><tbody><tr><td><strong>AI 文献精读</strong></td><td>智能解析论文结构，自动提炼研究方法、关键结论、实验设计，降低阅读门槛</td></tr><tr><td><strong>AI 问答与对话</strong></td><td>支持与文献”对话”，提出深度问题并获得基于原文的精准回答</td></tr><tr><td><strong>智能翻译</strong></td><td>文献内容的中英文智能翻译 + 关键信息高亮标注</td></tr><tr><td><strong>批量文献问答</strong></td><td>百篇论文一键解码，提取整合多篇文献精华，支持快速课题调研</td></tr></tbody></table>
+<h3 id="二多媒体内容生成">二、多媒体内容生成</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>技术功能</th><th>对读者的价值</th></tr></thead><tbody><tr><td><strong>学术海报自动生成</strong></td><td>根据 PDF 原文 60 秒内自动生成学术海报（中英文），可视化学术成果</td></tr><tr><td><strong>音频概览</strong></td><td>根据 PDF 原文自动生成音频概览（中英文），支持”听论文”</td></tr><tr><td><strong>SciDraw 科研插图</strong></td><td>文本描述即可生成可发表的科学插图，降低制图门槛</td></tr></tbody></table>
+<h3 id="三知识体系化与概念解析">三、知识体系化与概念解析</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>技术功能</th><th>对读者的价值</th></tr></thead><tbody><tr><td><strong>SciencePedia 科学百科</strong></td><td>42 万+ 已验证科学概念条目，零幻觉解释，快速理解陌生领域术语</td></tr><tr><td><strong>AI 伴学</strong></td><td>通过 SciencePedia 快速拆解学科知识点，思维链式讲解，智能规划学习路径</td></tr><tr><td><strong>知识图谱导航</strong></td><td>可视化的知识关联网络，帮助理解概念间的关系与演进脉络</td></tr><tr><td><strong>引用地图与学术谱系树</strong></td><td>学者模块中展示引用关系与学术传承图谱</td></tr></tbody></table>
+<h3 id="四智能科研辅助">四、智能科研辅助</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>技术功能</th><th>对读者的价值</th></tr></thead><tbody><tr><td><strong>AI Mentor（AI 小导师）</strong></td><td>精准、权威、专业的文献搜索问答体验，适合新手入门</td></tr><tr><td><strong>学者 AI 分身</strong></td><td>可基于真实学者成果打造 AI 分身进行专业对话，近距离理解前沿研究</td></tr><tr><td><strong>Deep Research</strong></td><td>一键自动生成 10,000+ 词结构化文献综述，快速了解一个领域全貌</td></tr><tr><td><strong>AI 速览</strong></td><td>对订阅期刊/关键词自动提炼关键要点，高效追踪前沿</td></tr><tr><td><strong>《AI 科研素养基础课》</strong></td><td>系统性课程讲解平台在选题、读文献、写作等真实场景中的使用</td></tr></tbody></table>
+<h3 id="五反幻觉与可信度保障">五、反幻觉与可信度保障</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>技术</th><th>对读者的价值</th></tr></thead><tbody><tr><td><strong>100% 引用可追溯</strong></td><td>每一条回答均可溯源至原文片段，一键跳转 PDF 高亮位置</td></tr><tr><td><strong>近零温度生成</strong></td><td>LLM 在严格约束下生成内容，大幅降低 AI 幻觉和引用编造</td></tr><tr><td><strong>来源信任层级</strong></td><td>系统性地优先使用同行评审论文，保障学术可信度</td></tr></tbody></table>
+<p><strong>参考文献：</strong></p>
+<ul>
+<li>南方科技大学图书馆《AI科研平台 | 南科大专属”玻尔-深圳科学导航”上线》，<a href="https://sustech.libguides.com/">https://sustech.libguides.com/</a></li>
+<li>哈尔滨工业大学图书馆《玻尔科学导航》，<a href="https://lib.hit.edu.cn/2026/0205/c14783a387407/page.htm">https://lib.hit.edu.cn/2026/0205/c14783a387407/page.htm</a></li>
+<li>上海师范大学《AI科学导航上线》，<a href="https://xxb.shnu.edu.cn/f3/65/c120a848741/page.htm">https://xxb.shnu.edu.cn/f3/65/c120a848741/page.htm</a></li>
+<li>玻尔官方博客，<a href="https://www.bohrium.com/en/blog/industry-insights/what-is-bohrium-ai-complete-guide/">https://www.bohrium.com/en/blog/industry-insights/what-is-bohrium-ai-complete-guide/</a></li>
+</ul>
+<hr>
+<h2 id="附录核心参考来源汇总">附录：核心参考来源汇总</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>序号</th><th>来源名称</th><th>URL</th></tr></thead><tbody><tr><td>1</td><td>玻尔官网</td><td><a href="https://www.bohrium.com/">https://www.bohrium.com/</a></td></tr><tr><td>2</td><td>玻尔官方博客（英文）</td><td><a href="https://www.bohrium.com/en/blog/industry-insights/what-is-bohrium-ai-complete-guide/">https://www.bohrium.com/en/blog/industry-insights/what-is-bohrium-ai-complete-guide/</a></td></tr><tr><td>3</td><td>玻尔知识图谱构建页面</td><td><a href="https://www.bohrium.com/sciencepedia/feynman/keyword/knowledge_graph_construction">https://www.bohrium.com/sciencepedia/feynman/keyword/knowledge_graph_construction</a></td></tr><tr><td>4</td><td>玻尔 Apps 应用商店</td><td><a href="https://www.bohrium.com/apps">https://www.bohrium.com/apps</a></td></tr><tr><td>5</td><td>玻尔开发者文档</td><td><a href="https://bohrium-doc.dp.tech/docs/">https://bohrium-doc.dp.tech/docs/</a></td></tr><tr><td>6</td><td>新华网报道</td><td><a href="https://app.xinhuanet.com/news/article.html?articleId=1ad1f5c084a9c9d5e86003a5d9168e48">https://app.xinhuanet.com/news/article.html?articleId=1ad1f5c084a9c9d5e86003a5d9168e48</a></td></tr><tr><td>7</td><td>北京大数据研究院报道</td><td><a href="http://m.bibdr.org/nd.jsp?mid=5&#x26;id=325">http://m.bibdr.org/nd.jsp?mid=5&#x26;id=325</a></td></tr><tr><td>8</td><td>深势科技官网</td><td><a href="https://www.dp.tech/product/bohrium/workspace">https://www.dp.tech/product/bohrium/workspace</a></td></tr><tr><td>9</td><td>DeepModeling 开源社区</td><td><a href="https://github.com/deepmodeling">https://github.com/deepmodeling</a></td></tr><tr><td>10</td><td>Uni-Mol GitHub</td><td><a href="https://github.com/dptech-corp/Uni-Mol">https://github.com/dptech-corp/Uni-Mol</a></td></tr><tr><td>11</td><td>专利 CN119129722A</td><td><a href="https://patentimages.storage.googleapis.com/9c/35/03/d0229757d65203/CN119129722A.pdf">https://patentimages.storage.googleapis.com/9c/35/03/d0229757d65203/CN119129722A.pdf</a></td></tr><tr><td>12</td><td>专利 CN118861088A</td><td><a href="https://patentimages.storage.googleapis.com/b1/65/6f/f0a441cfd2084f/CN118861088A.pdf">https://patentimages.storage.googleapis.com/b1/65/6f/f0a441cfd2084f/CN118861088A.pdf</a></td></tr><tr><td>13</td><td>北京邮电大学图书馆试用通知</td><td><a href="https://libportal.bupt.edu.cn/a/zuixinziyuan/2025/0609/4931.html">https://libportal.bupt.edu.cn/a/zuixinziyuan/2025/0609/4931.html</a></td></tr><tr><td>14</td><td>上海交通大学数据库详情</td><td><a href="https://www.lib.sjtu.edu.cn/f/database/database_detail.shtml?id=445">https://www.lib.sjtu.edu.cn/f/database/database_detail.shtml?id=445</a></td></tr><tr><td>15</td><td>深圳光明区报道</td><td><a href="https://www.dutenews.com/n/article/10358786">https://www.dutenews.com/n/article/10358786</a></td></tr><tr><td>16</td><td>超星数据库玻尔页面</td><td><a href="https://wisdom.chaoxing.com/newwisdom/doordatabase/databasedetail.html?wfwfid=23463">https://wisdom.chaoxing.com/newwisdom/doordatabase/databasedetail.html?wfwfid=23463</a></td></tr><tr><td>17</td><td>小米应用商店玻尔页面</td><td><a href="https://app.mi.com/details?id=com.bohrium.mobile">https://app.mi.com/details?id=com.bohrium.mobile</a></td></tr><tr><td>18</td><td>玻尔 App Store 页面</td><td><a href="https://apps.apple.com/sg/app/%E7%8E%BB%E5%B0%94/id6739486655">https://apps.apple.com/sg/app/%E7%8E%BB%E5%B0%94/id6739486655</a></td></tr><tr><td>19</td><td>张林峰百度百科</td><td><a href="https://baike.baidu.com/item/%E5%BC%A0%E6%9E%97%E5%B3%B0/61923033">https://baike.baidu.com/item/%E5%BC%A0%E6%9E%97%E5%B3%B0/61923033</a></td></tr><tr><td>20</td><td>北京软件和信息服务业协会报道</td><td><a href="https://www.bsia.org.cn/site/content/31550.html">https://www.bsia.org.cn/site/content/31550.html</a></td></tr><tr><td>21</td><td>南方科技大学LibGuides</td><td><a href="https://sustech.libguides.com/c.php?g=975786&#x26;p=7111552">https://sustech.libguides.com/c.php?g=975786&#x26;p=7111552</a></td></tr></tbody></table>
+<hr>
+<blockquote>
+<p><strong>免责声明：</strong> 本报告所有信息均来源于截至 2026 年 7 月 4 日的公开网页资料。部分技术细节（如底层增量更新的具体架构、PDF 解析的具体引擎等）未在公开渠道完整披露，本报告基于可获取的信息和合理推断进行了整理。如需最准确的技术细节，建议参考深势科技官方技术文档或直接联系 <a href="mailto:support@bohrium.com">support@bohrium.com</a>。</p>
+</blockquote>  </div> <!-- Previous / Next navigation --> <nav class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-12 pt-8 border-t border-[var(--color-border)]" data-astro-cid-bvzihdzo> <a href="/blog/multi-agent-collaboration-frontend-tools" class="card-hover p-4 no-underline group" data-astro-cid-bvzihdzo> <span class="text-xs text-[var(--color-text-tertiary)] block mb-1" data-astro-cid-bvzihdzo>&larr; 上一篇</span> <span class="text-sm font-medium text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors line-clamp-1" data-astro-cid-bvzihdzo>多代理「开会」模式 — 开源前端应用汇总</span> </a> <a href="/blog/superpowers-test-plan" class="card-hover p-4 no-underline group text-right" data-astro-cid-bvzihdzo> <span class="text-xs text-[var(--color-text-tertiary)] block mb-1" data-astro-cid-bvzihdzo>下一篇 &rarr;</span> <span class="text-sm font-medium text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors line-clamp-1" data-astro-cid-bvzihdzo>Superpowers 技能测试方案</span> </a> </nav> <hr class="!mt-12 !mb-8" data-astro-cid-bvzihdzo> <div data-astro-cid-bvzihdzo> <a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-bvzihdzo>
+&larr; 返回博客列表
+</a> </div> </div> </div> </article> </div>  </main> <footer class="border-t border-[var(--color-border)] mt-24 py-8" data-astro-cid-pux6a34n><div class="max-w-content flex items-center justify-between" data-astro-cid-pux6a34n><span class="text-sm text-[var(--color-text-tertiary)]" data-astro-cid-pux6a34n>
+&copy; 2026 星游寰宇
+</span><div class="flex items-center gap-4" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>博客</a><a href="/about" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>关于</a></div></div></footer> <!-- Link preview tooltip --> <div id="link-preview" style="display:none;position:fixed;z-index:99;max-width:18rem;pointer-events:none;" data-astro-cid-dmqsi53g></div>  <script type="module">(async()=>{try{const c=await fetch("/posts.json");if(!c.ok)return;const u=await c.json(),p=new Map(u.map(t=>[t.href,t])),e=document.getElementById("link-preview");if(!e)return;let n="",d;document.addEventListener("mouseover",t=>{const s=t.target.closest("a[href^='/blog/']");if(!s){e.style.display="none",n="";return}const i=s.getAttribute("href");if(!i||i===n)return;const r=p.get(i);r&&(n=i,d=setTimeout(()=>{e.innerHTML=`<div class="lp-title">${r.title}</div><div class="lp-summary">${r.summary}</div>`;const o=s.getBoundingClientRect();let a=o.left,l=o.bottom+6;a+288>window.innerWidth&&(a=window.innerWidth-296),l+80>window.innerHeight&&(l=o.top-80),Object.assign(e.style,{left:a+"px",top:l+"px",display:"block"})},300))},{passive:!0}),document.addEventListener("mouseout",t=>{t.target.closest("a[href^='/blog/']")&&(clearTimeout(d),e.style.display="none",n="")},{passive:!0})}catch{}})();</script> </body> </html>  <script type="module">document.querySelectorAll("pre").forEach(o=>{const t=document.createElement("button");t.className="copy-btn",t.textContent="复制",t.addEventListener("click",async()=>{const e=o.querySelector("code")?.textContent||o.textContent||"";try{await navigator.clipboard.writeText(e),t.textContent="已复制",t.classList.add("copied"),setTimeout(()=>{t.textContent="复制",t.classList.remove("copied")},2e3)}catch{t.textContent="失败",setTimeout(()=>{t.textContent="复制"},2e3)}}),o.style.position="relative",o.appendChild(t)});const c=document.querySelectorAll(".toc-list a");if(c.length>0){const o=new IntersectionObserver(t=>{for(const e of t)e.isIntersecting&&c.forEach(n=>{n.classList.toggle("active",n.getAttribute("href")===`#${e.target.id}`)})},{rootMargin:"-80px 0px -80% 0px"});c.forEach(t=>{const e=t.getAttribute("href")?.slice(1);if(e){const n=document.getElementById(e);n&&o.observe(n)}})}const s=document.getElementById("back-to-top");s&&(window.addEventListener("scroll",()=>{s.classList.toggle("hidden",window.scrollY<400)},{passive:!0}),s.addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"})));</script>

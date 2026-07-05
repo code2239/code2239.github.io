@@ -1,0 +1,274 @@
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-dmqsi53g> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="星游寰宇的个人网站——技术文章、项目展示与思考笔记"><meta name="color-scheme" content="light"><!-- Open Graph --><meta property="og:title" content="个人网站搭建全记录 — 从零到上线 — 星游寰宇"><meta property="og:description" content="星游寰宇的个人网站——技术文章、项目展示与思考笔记"><meta property="og:url" content="https://code2239.github.io/blog/%E4%B8%AA%E4%BA%BA%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA%E5%85%A8%E8%AE%B0%E5%BD%95/"><meta property="og:type" content="website"><meta property="og:site_name" content="星游寰宇"><meta property="og:locale" content="zh_CN"><!-- Twitter Card --><meta name="twitter:card" content="summary"><meta name="twitter:title" content="个人网站搭建全记录 — 从零到上线 — 星游寰宇"><meta name="twitter:description" content="星游寰宇的个人网站——技术文章、项目展示与思考笔记"><!-- Canonical --><link rel="canonical" href="https://code2239.github.io/blog/%E4%B8%AA%E4%BA%BA%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA%E5%85%A8%E8%AE%B0%E5%BD%95/"><title>个人网站搭建全记录 — 从零到上线 — 星游寰宇</title><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="alternate" type="application/rss+xml" title="星游寰宇 RSS" href="/rss.xml"><link rel="stylesheet" href="/_astro/_slug_.C_t6U7me.css">
+<style>.blog-layout[data-astro-cid-bvzihdzo]{display:block}.blog-toc[data-astro-cid-bvzihdzo]{display:none}.blog-body[data-astro-cid-bvzihdzo]{min-width:0}@media(min-width:1024px){.blog-layout[data-astro-cid-bvzihdzo]{display:grid;grid-template-columns:14rem 1fr;gap:3rem;align-items:start}.blog-toc[data-astro-cid-bvzihdzo]{display:block}.blog-body[data-astro-cid-bvzihdzo]{padding-right:2rem}}.copy-btn[data-astro-cid-bvzihdzo]{position:absolute;top:8px;right:8px;padding:4px 10px;font-size:.6875rem;font-family:var(--font-sans);color:var(--color-text-tertiary);background:var(--color-bg);border:1px solid var(--color-border);border-radius:6px;cursor:pointer;opacity:0;transition:opacity .15s ease,color .15s ease}pre[data-astro-cid-bvzihdzo]:hover .copy-btn[data-astro-cid-bvzihdzo]{opacity:1}.copy-btn[data-astro-cid-bvzihdzo]:hover{color:var(--color-accent);border-color:var(--color-accent)}.copy-btn[data-astro-cid-bvzihdzo].copied{color:#16a34a;border-color:#16a34a}.back-to-top[data-astro-cid-bvzihdzo]{position:fixed;bottom:2rem;right:2rem;z-index:40;width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:50%;border:1px solid var(--color-border);background:var(--color-bg);color:var(--color-text-secondary);cursor:pointer;box-shadow:var(--shadow-md);transition:opacity .2s ease,transform .2s ease}.back-to-top[data-astro-cid-bvzihdzo]:hover{color:var(--color-accent);border-color:var(--color-accent);transform:translateY(-2px)}.back-to-top[data-astro-cid-bvzihdzo].hidden{opacity:0;pointer-events:none}
+</style></head> <body class="min-h-screen flex flex-col" data-astro-cid-dmqsi53g> <nav class="sticky top-0 z-40 bg-[var(--color-bg)]/80 backdrop-blur-md border-b border-[var(--color-border)]" data-astro-cid-pux6a34n><div class="max-w-content flex items-center justify-between py-4" data-astro-cid-pux6a34n><a href="/" class="text-base font-semibold no-underline tracking-tight" data-astro-cid-pux6a34n>
+星游寰宇
+</a><!-- Desktop nav --><div class="hidden sm:flex items-center gap-6" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>博客</a><a href="/about" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>关于</a></div><!-- Mobile hamburger --><button id="menu-btn" class="sm:hidden flex flex-col gap-1 p-2 -mr-2 cursor-pointer" aria-label="打开菜单" data-astro-cid-pux6a34n><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-transform duration-200" data-astro-cid-pux6a34n></span><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-opacity duration-200" data-astro-cid-pux6a34n></span><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-transform duration-200" data-astro-cid-pux6a34n></span></button></div><!-- Mobile menu --><div id="mobile-menu" class="hidden sm:hidden border-t border-[var(--color-border)] bg-[var(--color-bg)]" data-astro-cid-pux6a34n><div class="max-w-content flex flex-col gap-2 py-4" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>博客</a><a href="/about" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>关于</a></div></div></nav><script type="module">const e=document.getElementById("menu-btn"),n=document.getElementById("mobile-menu");e&&n&&e.addEventListener("click",()=>{const t=n.classList.toggle("hidden");e.classList.toggle("menu-open",!t),e.setAttribute("aria-label",t?"打开菜单":"关闭菜单")});</script> <main class="flex-1" data-astro-cid-dmqsi53g>  <div class="reading-progress" id="reading-progress" style="width: 0%"></div> <script type="module">const o=document.getElementById("reading-progress");if(!o)throw new Error("Reading progress bar element not found");const r=()=>{const n=window.scrollY,e=document.documentElement.scrollHeight-window.innerHeight,t=e>0?n/e*100:0;o.style.width=`${Math.min(t,100)}%`};window.addEventListener("scroll",r,{passive:!0});</script>  <button id="back-to-top" class="back-to-top hidden" aria-label="返回顶部" data-astro-cid-bvzihdzo> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-bvzihdzo> <polyline points="18 15 12 9 6 15" data-astro-cid-bvzihdzo></polyline> </svg> </button> <div class="px-6 xl:px-12 pt-12 pb-16" data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <header class="mb-12 text-center" data-astro-cid-bvzihdzo> <h1 class="text-3xl font-semibold mb-3 tracking-tight" data-astro-cid-bvzihdzo>个人网站搭建全记录 — 从零到上线</h1> <div class="flex items-center justify-center gap-2 text-[var(--color-text-tertiary)] text-sm" data-astro-cid-bvzihdzo> <time datetime="2026-07-05" data-astro-cid-bvzihdzo>2026-07-05</time> <span class="text-[var(--color-border)]" data-astro-cid-bvzihdzo>·</span> <span data-astro-cid-bvzihdzo>10 分钟阅读</span>  <span class="text-[var(--color-border)]" data-astro-cid-bvzihdzo>·</span> <span class="text-sm text-[var(--color-text-tertiary)]"> <span> 网站<span class="mx-1">·</span> </span><span> GitHub Pages<span class="mx-1">·</span> </span><span> Astro<span class="mx-1">·</span> </span><span> 部署 </span> </span>  </div> </header> <div class="blog-layout" data-astro-cid-bvzihdzo> <aside class="blog-toc" data-astro-cid-bvzihdzo> <div class="sticky top-24" data-astro-cid-bvzihdzo> <nav class="toc"> <p class="text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-3">目录</p> <ul class="toc-list"> <li class> <a href="#一技术选型">一、技术选型</a> </li><li class="toc-h3"> <a href="#选用技术栈">选用技术栈</a> </li><li class="toc-h3"> <a href="#文件结构">文件结构</a> </li><li class> <a href="#二部署流程">二、部署流程</a> </li><li class="toc-h3"> <a href="#github-pages-配置">GitHub Pages 配置</a> </li><li class="toc-h3"> <a href="#部署工作流">部署工作流</a> </li><li class="toc-h3"> <a href="#部署踩坑">部署踩坑</a> </li><li class> <a href="#三内容管理">三、内容管理</a> </li><li class="toc-h3"> <a href="#博客文章格式">博客文章格式</a> </li><li class="toc-h3"> <a href="#上传文章流程">上传文章流程</a> </li><li class="toc-h3"> <a href="#上传-html-文件">上传 HTML 文件</a> </li><li class="toc-h3"> <a href="#论文日报">论文日报</a> </li><li class> <a href="#四自定义域名">四、自定义域名</a> </li><li class="toc-h3"> <a href="#购买">购买</a> </li><li class="toc-h3"> <a href="#绑定">绑定</a> </li><li class> <a href="#五网站优化建议">五、网站优化建议</a> </li><li class> <a href="#六常用命令速查">六、常用命令速查</a> </li> </ul> </nav> </div> </aside> <div class="blog-body" data-astro-cid-bvzihdzo> <div class="prose prose-neutral max-w-none" data-astro-cid-bvzihdzo>  <blockquote>
+<p>本文记录了搭建「星游寰宇」个人网站的全过程，涵盖从设计到上线的每一步。</p>
+</blockquote>
+<hr>
+<h2 id="一技术选型">一、技术选型</h2>
+<h3 id="选用技术栈">选用技术栈</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>层</th><th>选型</th><th>理由</th></tr></thead><tbody><tr><td>框架</td><td><strong>Astro 5</strong></td><td>原生 Markdown 支持、零 JS 默认输出、构建极轻</td></tr><tr><td>样式</td><td><strong>Tailwind CSS 4</strong></td><td>与设计 tokens 配合、按需生成</td></tr><tr><td>部署</td><td><strong>GitHub Pages</strong></td><td>免费、推送即部署、支持自定义域名</td></tr><tr><td>设计风格</td><td><strong>极简黑白</strong></td><td>纯黑白灰、无强调色，类似 Linear 风格</td></tr></tbody></table>
+<h3 id="文件结构">文件结构</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>xingyouhuanyu-site/</span></span>
+<span class="line"><span>├── src/</span></span>
+<span class="line"><span>│   ├── pages/           # 页面（.astro）</span></span>
+<span class="line"><span>│   ├── components/      # 组件（Layout, Navigation, ArticleCard 等）</span></span>
+<span class="line"><span>│   ├── content/blog/    # 博客文章（.md）</span></span>
+<span class="line"><span>│   ├── lib/config.ts    # 站点配置</span></span>
+<span class="line"><span>│   └── styles/global.css # 设计 tokens + 全局样式</span></span>
+<span class="line"><span>├── public/             # 静态文件（favicon、自包含 HTML）</span></span>
+<span class="line"><span>├── .github/workflows/  # GitHub Actions 自动部署</span></span>
+<span class="line"><span>└── astro.config.mjs    # Astro 配置</span></span></code></pre>
+<hr>
+<h2 id="二部署流程">二、部署流程</h2>
+<h3 id="github-pages-配置">GitHub Pages 配置</h3>
+<ol>
+<li>创建仓库名为 <code>用户名.github.io</code>（用户主页）</li>
+<li>Settings → Pages → Source 选 <strong>“GitHub Actions”</strong></li>
+<li>推送代码后 Actions 自动构建部署</li>
+</ol>
+<h3 id="部署工作流">部署工作流</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="yaml"><code><span class="line"><span style="color:var(--astro-code-token-keyword)">name</span><span style="color:var(--astro-code-token-keyword)">:</span><span style="color:var(--astro-code-token-string-expression)"> Deploy to GitHub Pages</span></span>
+<span class="line"><span style="color:var(--astro-code-token-constant)">on</span><span style="color:var(--astro-code-token-keyword)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">  push</span><span style="color:var(--astro-code-token-keyword)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">    branches</span><span style="color:var(--astro-code-token-keyword)">:</span><span style="color:var(--astro-code-foreground)"> [</span><span style="color:var(--astro-code-token-string)">main</span><span style="color:var(--astro-code-foreground)">]</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">permissions</span><span style="color:var(--astro-code-token-keyword)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">  contents</span><span style="color:var(--astro-code-token-keyword)">:</span><span style="color:var(--astro-code-token-string-expression)"> read</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">  pages</span><span style="color:var(--astro-code-token-keyword)">:</span><span style="color:var(--astro-code-token-string-expression)"> write</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">  id-token</span><span style="color:var(--astro-code-token-keyword)">:</span><span style="color:var(--astro-code-token-string-expression)"> write</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">jobs</span><span style="color:var(--astro-code-token-keyword)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">  build-and-deploy</span><span style="color:var(--astro-code-token-keyword)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">    runs-on</span><span style="color:var(--astro-code-token-keyword)">:</span><span style="color:var(--astro-code-token-string-expression)"> ubuntu-latest</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">    environment</span><span style="color:var(--astro-code-token-keyword)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">      name</span><span style="color:var(--astro-code-token-keyword)">:</span><span style="color:var(--astro-code-token-string-expression)"> github-pages</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">      url</span><span style="color:var(--astro-code-token-keyword)">:</span><span style="color:var(--astro-code-token-string-expression)"> ${{ steps.deployment.outputs.page_url }}</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">    steps</span><span style="color:var(--astro-code-token-keyword)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">      - </span><span style="color:var(--astro-code-token-keyword)">uses</span><span style="color:var(--astro-code-token-keyword)">:</span><span style="color:var(--astro-code-token-string-expression)"> actions/checkout@v4</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">      - </span><span style="color:var(--astro-code-token-keyword)">uses</span><span style="color:var(--astro-code-token-keyword)">:</span><span style="color:var(--astro-code-token-string-expression)"> actions/setup-node@v4</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">        with</span><span style="color:var(--astro-code-token-keyword)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">          node-version</span><span style="color:var(--astro-code-token-keyword)">:</span><span style="color:var(--astro-code-token-constant)"> 22</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">      - </span><span style="color:var(--astro-code-token-keyword)">run</span><span style="color:var(--astro-code-token-keyword)">:</span><span style="color:var(--astro-code-token-string-expression)"> npm ci</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">      - </span><span style="color:var(--astro-code-token-keyword)">run</span><span style="color:var(--astro-code-token-keyword)">:</span><span style="color:var(--astro-code-token-string-expression)"> npm run build</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">      - </span><span style="color:var(--astro-code-token-keyword)">uses</span><span style="color:var(--astro-code-token-keyword)">:</span><span style="color:var(--astro-code-token-string-expression)"> actions/configure-pages@v5</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">      - </span><span style="color:var(--astro-code-token-keyword)">uses</span><span style="color:var(--astro-code-token-keyword)">:</span><span style="color:var(--astro-code-token-string-expression)"> actions/upload-pages-artifact@v3</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">        with</span><span style="color:var(--astro-code-token-keyword)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">          path</span><span style="color:var(--astro-code-token-keyword)">:</span><span style="color:var(--astro-code-token-string-expression)"> './dist'</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">      - </span><span style="color:var(--astro-code-token-keyword)">uses</span><span style="color:var(--astro-code-token-keyword)">:</span><span style="color:var(--astro-code-token-string-expression)"> actions/deploy-pages@v5</span></span></code></pre>
+<h3 id="部署踩坑">部署踩坑</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>问题</th><th>原因</th><th>解决</th></tr></thead><tbody><tr><td>YAML 日期解析错误</td><td><code>date: 2026-07-04</code> 被解析为 Date 而非 string</td><td>加引号：<code>date: "2026-07-04"</code></td></tr><tr><td><code>gh-pages</code> 分支部署无效</td><td>用户主页（<code>username.github.io</code>）只支持 main 分支或 Actions</td><td>用官方 <code>actions/deploy-pages</code> 方案</td></tr><tr><td>推送 <code>gh-pages</code> 分支 403</td><td>缺少 <code>contents: write</code> 权限</td><td>Actions 默认权限为 read-only</td></tr><tr><td>部署成功但网站 404</td><td>Pages Source 选错（<code>gh-pages</code> 分支不被用户主页支持）</td><td>Source 切回 “GitHub Actions”</td></tr></tbody></table>
+<hr>
+<h2 id="三内容管理">三、内容管理</h2>
+<h3 id="博客文章格式">博客文章格式</h3>
+<p>每篇文章需要 YAML Frontmatter：</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="markdown"><code><span class="line"><span style="color:var(--astro-code-foreground)">---</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">title</span><span style="color:var(--astro-code-token-keyword)">:</span><span style="color:var(--astro-code-token-string-expression)"> "文章标题"</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">date</span><span style="color:var(--astro-code-token-keyword)">:</span><span style="color:var(--astro-code-token-string-expression)"> "2026-07-05"</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">tags</span><span style="color:var(--astro-code-token-keyword)">:</span><span style="color:var(--astro-code-foreground)"> [</span><span style="color:var(--astro-code-token-string-expression)">"标签1"</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-token-string-expression)"> "标签2"</span><span style="color:var(--astro-code-foreground)">]</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">summary</span><span style="color:var(--astro-code-token-keyword)">:</span><span style="color:var(--astro-code-token-string-expression)"> "一句话摘要"</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">---</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">正文内容...</span></span></code></pre>
+<p><strong>注意：日期必须加引号</strong>，否则 Ubuntu CI 上 YAML 会解析为 Date 对象导致构建失败。</p>
+<h3 id="上传文章流程">上传文章流程</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:var(--astro-code-token-comment)"># 把 .md 文件放到 src/content/blog/</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">cd</span><span style="color:var(--astro-code-token-string-expression)"> "Documents\Website\xingyouhuanyu-site"</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">git</span><span style="color:var(--astro-code-token-string)"> add</span><span style="color:var(--astro-code-token-string)"> .</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">git</span><span style="color:var(--astro-code-token-string)"> commit</span><span style="color:var(--astro-code-token-string)"> -m</span><span style="color:var(--astro-code-token-string-expression)"> "新文章：xxx"</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">git</span><span style="color:var(--astro-code-token-string)"> push</span><span style="color:var(--astro-code-token-string)"> origin</span><span style="color:var(--astro-code-token-string)"> main</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 等 1-2 分钟，Actions 自动部署</span></span></code></pre>
+<h3 id="上传-html-文件">上传 HTML 文件</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>方式</th><th>放哪</th><th>访问</th></tr></thead><tbody><tr><td>自包含 HTML（有自己设计）</td><td><code>public/</code></td><td><code>域名/文件名.html</code></td></tr><tr><td>套网站壳、带导航</td><td>转成 <code>.astro</code> 放 <code>src/pages/</code></td><td><code>域名/页面名</code></td></tr></tbody></table>
+<h3 id="论文日报">论文日报</h3>
+<p>论文日报是自包含 HTML，放在 <code>public/papers/</code> 下：</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public/papers/</span></span>
+<span class="line"><span>├── papers_2026-07-02.html</span></span>
+<span class="line"><span>├── papers_2026-07-03.html</span></span>
+<span class="line"><span>├── papers_2026-07-04.html</span></span>
+<span class="line"><span>└── papers_2026-07-05.html</span></span></code></pre>
+<p>另建 <code>src/pages/papers.astro</code> 作为索引页面，导航栏加”论文”链接。</p>
+<hr>
+<h2 id="四自定义域名">四、自定义域名</h2>
+<h3 id="购买">购买</h3>
+<p>推荐平台：Cloudflare（成本价）、Namecheap、Porkbun。<code>.com</code> 年费约 60-80 元。</p>
+<h3 id="绑定">绑定</h3>
+<ol>
+<li>Settings → Pages → Custom domain → 填入域名 → Save</li>
+<li>DNS 添加 CNAME 记录指向 <code>用户名.github.io</code></li>
+<li>勾选 <strong>Enforce HTTPS</strong></li>
+</ol>
+<hr>
+<h2 id="五网站优化建议">五、网站优化建议</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="center">优先级</th><th>项目</th><th>说明</th></tr></thead><tbody><tr><td align="center">🔥</td><td>RSS 订阅</td><td>读者可用 RSS 阅读器订阅</td></tr><tr><td align="center">🔥</td><td>标签聚合页</td><td>点击标签看同类文章</td></tr><tr><td align="center">🔥</td><td>sitemap.xml</td><td>让 Google 收录</td></tr><tr><td align="center">🔥</td><td>目录导航 TOC</td><td>长文章右侧目录</td></tr><tr><td align="center">⚡</td><td>代码高亮</td><td>语法着色</td></tr><tr><td align="center">⚡</td><td>深色模式</td><td>白/黑一键切换</td></tr><tr><td align="center">⚡</td><td>上/下篇文章链接</td><td>文章底部导航</td></tr><tr><td align="center">⚡</td><td>阅读时长</td><td>”约 5 分钟”</td></tr><tr><td align="center">🧊</td><td>全文搜索</td><td>搜索框</td></tr><tr><td align="center">🧊</td><td>评论系统</td><td>Giscus</td></tr><tr><td align="center">🧊</td><td>访问统计</td><td>Plausible</td></tr><tr><td align="center">🧊</td><td>独立域名</td><td>自定义域名</td></tr></tbody></table>
+<hr>
+<h2 id="六常用命令速查">六、常用命令速查</h2>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:var(--astro-code-token-comment)"># 本地预览</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">cd</span><span style="color:var(--astro-code-token-string-expression)"> "Documents\Website\xingyouhuanyu-site"</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">npm</span><span style="color:var(--astro-code-token-string)"> run</span><span style="color:var(--astro-code-token-string)"> dev</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 本地构建</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">npm</span><span style="color:var(--astro-code-token-string)"> run</span><span style="color:var(--astro-code-token-string)"> build</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 推送上线</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">git</span><span style="color:var(--astro-code-token-string)"> add</span><span style="color:var(--astro-code-token-string)"> .</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">git</span><span style="color:var(--astro-code-token-string)"> commit</span><span style="color:var(--astro-code-token-string)"> -m</span><span style="color:var(--astro-code-token-string-expression)"> "更新"</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">git</span><span style="color:var(--astro-code-token-string)"> push</span><span style="color:var(--astro-code-token-string)"> origin</span><span style="color:var(--astro-code-token-string)"> main</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 查看 Actions</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># https://github.com/code2239/code2239.github.io/actions</span></span></code></pre>  </div> <!-- Previous / Next navigation --> <nav class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-12 pt-8 border-t border-[var(--color-border)]" data-astro-cid-bvzihdzo> <a href="/blog/superpowers-test-plan" class="card-hover p-4 no-underline group" data-astro-cid-bvzihdzo> <span class="text-xs text-[var(--color-text-tertiary)] block mb-1" data-astro-cid-bvzihdzo>&larr; 上一篇</span> <span class="text-sm font-medium text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors line-clamp-1" data-astro-cid-bvzihdzo>Superpowers 技能测试方案</span> </a> <a href="/blog/browser-use-调研报告" class="card-hover p-4 no-underline group text-right" data-astro-cid-bvzihdzo> <span class="text-xs text-[var(--color-text-tertiary)] block mb-1" data-astro-cid-bvzihdzo>下一篇 &rarr;</span> <span class="text-sm font-medium text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors line-clamp-1" data-astro-cid-bvzihdzo>深度调研报告：browser-use（AI 浏览器代理框架）</span> </a> </nav> <hr class="!mt-12 !mb-8" data-astro-cid-bvzihdzo> <div data-astro-cid-bvzihdzo> <a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-bvzihdzo>
+&larr; 返回博客列表
+</a> </div> </div> </div> </article> </div>  </main> <footer class="border-t border-[var(--color-border)] mt-24 py-8" data-astro-cid-pux6a34n><div class="max-w-content flex items-center justify-between" data-astro-cid-pux6a34n><span class="text-sm text-[var(--color-text-tertiary)]" data-astro-cid-pux6a34n>
+&copy; 2026 星游寰宇
+</span><div class="flex items-center gap-4" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>博客</a><a href="/about" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>关于</a></div></div></footer> <!-- Link preview tooltip --> <div id="link-preview" style="display:none;position:fixed;z-index:99;max-width:18rem;pointer-events:none;" data-astro-cid-dmqsi53g></div>  <script type="module">(async()=>{try{const c=await fetch("/posts.json");if(!c.ok)return;const u=await c.json(),p=new Map(u.map(t=>[t.href,t])),e=document.getElementById("link-preview");if(!e)return;let n="",d;document.addEventListener("mouseover",t=>{const s=t.target.closest("a[href^='/blog/']");if(!s){e.style.display="none",n="";return}const i=s.getAttribute("href");if(!i||i===n)return;const r=p.get(i);r&&(n=i,d=setTimeout(()=>{e.innerHTML=`<div class="lp-title">${r.title}</div><div class="lp-summary">${r.summary}</div>`;const o=s.getBoundingClientRect();let a=o.left,l=o.bottom+6;a+288>window.innerWidth&&(a=window.innerWidth-296),l+80>window.innerHeight&&(l=o.top-80),Object.assign(e.style,{left:a+"px",top:l+"px",display:"block"})},300))},{passive:!0}),document.addEventListener("mouseout",t=>{t.target.closest("a[href^='/blog/']")&&(clearTimeout(d),e.style.display="none",n="")},{passive:!0})}catch{}})();</script> </body> </html>  <script type="module">document.querySelectorAll("pre").forEach(o=>{const t=document.createElement("button");t.className="copy-btn",t.textContent="复制",t.addEventListener("click",async()=>{const e=o.querySelector("code")?.textContent||o.textContent||"";try{await navigator.clipboard.writeText(e),t.textContent="已复制",t.classList.add("copied"),setTimeout(()=>{t.textContent="复制",t.classList.remove("copied")},2e3)}catch{t.textContent="失败",setTimeout(()=>{t.textContent="复制"},2e3)}}),o.style.position="relative",o.appendChild(t)});const c=document.querySelectorAll(".toc-list a");if(c.length>0){const o=new IntersectionObserver(t=>{for(const e of t)e.isIntersecting&&c.forEach(n=>{n.classList.toggle("active",n.getAttribute("href")===`#${e.target.id}`)})},{rootMargin:"-80px 0px -80% 0px"});c.forEach(t=>{const e=t.getAttribute("href")?.slice(1);if(e){const n=document.getElementById(e);n&&o.observe(n)}})}const s=document.getElementById("back-to-top");s&&(window.addEventListener("scroll",()=>{s.classList.toggle("hidden",window.scrollY<400)},{passive:!0}),s.addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"})));</script>

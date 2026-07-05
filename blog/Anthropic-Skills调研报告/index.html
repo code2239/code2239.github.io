@@ -1,0 +1,585 @@
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-dmqsi53g> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="星游寰宇的个人网站——技术文章、项目展示与思考笔记"><meta name="color-scheme" content="light"><!-- Open Graph --><meta property="og:title" content="Anthropic Skills（anthropics/skills）深度调研报告 — 星游寰宇"><meta property="og:description" content="星游寰宇的个人网站——技术文章、项目展示与思考笔记"><meta property="og:url" content="https://code2239.github.io/blog/Anthropic-Skills%E8%B0%83%E7%A0%94%E6%8A%A5%E5%91%8A/"><meta property="og:type" content="website"><meta property="og:site_name" content="星游寰宇"><meta property="og:locale" content="zh_CN"><!-- Twitter Card --><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Anthropic Skills（anthropics/skills）深度调研报告 — 星游寰宇"><meta name="twitter:description" content="星游寰宇的个人网站——技术文章、项目展示与思考笔记"><!-- Canonical --><link rel="canonical" href="https://code2239.github.io/blog/Anthropic-Skills%E8%B0%83%E7%A0%94%E6%8A%A5%E5%91%8A/"><title>Anthropic Skills（anthropics/skills）深度调研报告 — 星游寰宇</title><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="alternate" type="application/rss+xml" title="星游寰宇 RSS" href="/rss.xml"><link rel="stylesheet" href="/_astro/_slug_.C_t6U7me.css">
+<style>.blog-layout[data-astro-cid-bvzihdzo]{display:block}.blog-toc[data-astro-cid-bvzihdzo]{display:none}.blog-body[data-astro-cid-bvzihdzo]{min-width:0}@media(min-width:1024px){.blog-layout[data-astro-cid-bvzihdzo]{display:grid;grid-template-columns:14rem 1fr;gap:3rem;align-items:start}.blog-toc[data-astro-cid-bvzihdzo]{display:block}.blog-body[data-astro-cid-bvzihdzo]{padding-right:2rem}}.copy-btn[data-astro-cid-bvzihdzo]{position:absolute;top:8px;right:8px;padding:4px 10px;font-size:.6875rem;font-family:var(--font-sans);color:var(--color-text-tertiary);background:var(--color-bg);border:1px solid var(--color-border);border-radius:6px;cursor:pointer;opacity:0;transition:opacity .15s ease,color .15s ease}pre[data-astro-cid-bvzihdzo]:hover .copy-btn[data-astro-cid-bvzihdzo]{opacity:1}.copy-btn[data-astro-cid-bvzihdzo]:hover{color:var(--color-accent);border-color:var(--color-accent)}.copy-btn[data-astro-cid-bvzihdzo].copied{color:#16a34a;border-color:#16a34a}.back-to-top[data-astro-cid-bvzihdzo]{position:fixed;bottom:2rem;right:2rem;z-index:40;width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:50%;border:1px solid var(--color-border);background:var(--color-bg);color:var(--color-text-secondary);cursor:pointer;box-shadow:var(--shadow-md);transition:opacity .2s ease,transform .2s ease}.back-to-top[data-astro-cid-bvzihdzo]:hover{color:var(--color-accent);border-color:var(--color-accent);transform:translateY(-2px)}.back-to-top[data-astro-cid-bvzihdzo].hidden{opacity:0;pointer-events:none}
+</style></head> <body class="min-h-screen flex flex-col" data-astro-cid-dmqsi53g> <nav class="sticky top-0 z-40 bg-[var(--color-bg)]/80 backdrop-blur-md border-b border-[var(--color-border)]" data-astro-cid-pux6a34n><div class="max-w-content flex items-center justify-between py-4" data-astro-cid-pux6a34n><a href="/" class="text-base font-semibold no-underline tracking-tight" data-astro-cid-pux6a34n>
+星游寰宇
+</a><!-- Desktop nav --><div class="hidden sm:flex items-center gap-6" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>博客</a><a href="/about" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>关于</a></div><!-- Mobile hamburger --><button id="menu-btn" class="sm:hidden flex flex-col gap-1 p-2 -mr-2 cursor-pointer" aria-label="打开菜单" data-astro-cid-pux6a34n><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-transform duration-200" data-astro-cid-pux6a34n></span><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-opacity duration-200" data-astro-cid-pux6a34n></span><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-transform duration-200" data-astro-cid-pux6a34n></span></button></div><!-- Mobile menu --><div id="mobile-menu" class="hidden sm:hidden border-t border-[var(--color-border)] bg-[var(--color-bg)]" data-astro-cid-pux6a34n><div class="max-w-content flex flex-col gap-2 py-4" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>博客</a><a href="/about" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>关于</a></div></div></nav><script type="module">const e=document.getElementById("menu-btn"),n=document.getElementById("mobile-menu");e&&n&&e.addEventListener("click",()=>{const t=n.classList.toggle("hidden");e.classList.toggle("menu-open",!t),e.setAttribute("aria-label",t?"打开菜单":"关闭菜单")});</script> <main class="flex-1" data-astro-cid-dmqsi53g>  <div class="reading-progress" id="reading-progress" style="width: 0%"></div> <script type="module">const o=document.getElementById("reading-progress");if(!o)throw new Error("Reading progress bar element not found");const r=()=>{const n=window.scrollY,e=document.documentElement.scrollHeight-window.innerHeight,t=e>0?n/e*100:0;o.style.width=`${Math.min(t,100)}%`};window.addEventListener("scroll",r,{passive:!0});</script>  <button id="back-to-top" class="back-to-top hidden" aria-label="返回顶部" data-astro-cid-bvzihdzo> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-bvzihdzo> <polyline points="18 15 12 9 6 15" data-astro-cid-bvzihdzo></polyline> </svg> </button> <div class="px-6 xl:px-12 pt-12 pb-16" data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <header class="mb-12 text-center" data-astro-cid-bvzihdzo> <h1 class="text-3xl font-semibold mb-3 tracking-tight" data-astro-cid-bvzihdzo>Anthropic Skills（anthropics/skills）深度调研报告</h1> <div class="flex items-center justify-center gap-2 text-[var(--color-text-tertiary)] text-sm" data-astro-cid-bvzihdzo> <time datetime="2026-07-05" data-astro-cid-bvzihdzo>2026-07-05</time> <span class="text-[var(--color-border)]" data-astro-cid-bvzihdzo>·</span> <span data-astro-cid-bvzihdzo>32 分钟阅读</span>  <span class="text-[var(--color-border)]" data-astro-cid-bvzihdzo>·</span> <span class="text-sm text-[var(--color-text-tertiary)]"> <span> AI<span class="mx-1">·</span> </span><span> 调研<span class="mx-1">·</span> </span><span> Skill<span class="mx-1">·</span> </span><span> Anthropic<span class="mx-1">·</span> </span><span> 自动化<span class="mx-1">·</span> </span><span> 工具<span class="mx-1">·</span> </span><span> 科研 </span> </span>  </div> </header> <div class="blog-layout" data-astro-cid-bvzihdzo> <aside class="blog-toc" data-astro-cid-bvzihdzo> <div class="sticky top-24" data-astro-cid-bvzihdzo> <nav class="toc"> <p class="text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-3">目录</p> <ul class="toc-list"> <li class> <a href="#1-开发者与公司背景">1. 开发者与公司背景</a> </li><li class="toc-h3"> <a href="#开发方全称">开发方全称</a> </li><li class="toc-h3"> <a href="#创始人基本信息">创始人基本信息</a> </li><li class="toc-h3"> <a href="#团队规模">团队规模</a> </li><li class="toc-h3"> <a href="#公司盈利情况">公司盈利情况</a> </li><li class="toc-h3"> <a href="#信条与远景">信条与远景</a> </li><li class="toc-h3"> <a href="#官网链接">官网链接</a> </li><li class> <a href="#2-底层技术栈">2. 底层技术栈</a> </li><li class="toc-h3"> <a href="#基础大模型">基础大模型</a> </li><li class="toc-h3"> <a href="#是否支持自选模型">是否支持自选模型</a> </li><li class="toc-h3"> <a href="#核心技术架构">核心技术架构</a> </li><li class> <a href="#3-开源属性与商业模式">3. 开源属性与商业模式</a> </li><li class="toc-h3"> <a href="#开源协议双许可证模式">开源协议（双许可证模式）</a> </li><li class="toc-h3"> <a href="#定价模式">定价模式</a> </li><li class="toc-h3"> <a href="#商业模式">商业模式</a> </li><li class> <a href="#4-功能全景解析">4. 功能全景解析</a> </li><li class="toc-h3"> <a href="#主要功能">主要功能</a> </li><li class="toc-h3"> <a href="#核心功能与关键技术">核心功能与关键技术</a> </li><li class> <a href="#5-功能实现案例">5. 功能实现案例</a> </li><li class="toc-h3"> <a href="#案例用-skill-creator-创建一个代码审查技能">案例：用 Skill Creator 创建一个”代码审查”技能</a> </li><li class> <a href="#6-主要竞品清单">6. 主要竞品清单</a> </li><li class> <a href="#7-与竞品的横向比较">7. 与竞品的横向比较</a> </li><li class="toc-h3"> <a href="#各竞品最适用的细分应用场景">各竞品最适用的细分应用场景</a> </li><li class> <a href="#8-版本迭代信息">8. 版本迭代信息</a> </li><li class="toc-h3"> <a href="#首次公开发布">首次公开发布</a> </li><li class="toc-h3"> <a href="#关键迭代节点">关键迭代节点</a> </li><li class="toc-h3"> <a href="#更新频率">更新频率</a> </li><li class> <a href="#一句话锐评">一句话锐评</a> </li> </ul> </nav> </div> </aside> <div class="blog-body" data-astro-cid-bvzihdzo> <div class="prose prose-neutral max-w-none" data-astro-cid-bvzihdzo>  <h1 id="anthropic-skillsanthropicsskills深度调研报告">Anthropic Skills（anthropics/skills）深度调研报告</h1>
+<blockquote>
+<p>生成日期：2026-07-05</p>
+<p>调研方法：多源联网搜索，信息交叉验证</p>
+</blockquote>
+<hr>
+<h2 id="1-开发者与公司背景">1. 开发者与公司背景</h2>
+<h3 id="开发方全称">开发方全称</h3>
+<p><strong>Anthropic</strong>（全称 Anthropic PBC），美国人工智能公司，总部位于加利福尼亚州旧金山。</p>
+<h3 id="创始人基本信息">创始人基本信息</h3>
+<p>Anthropic 由 <strong>Dario Amodei</strong>（CEO）和 <strong>Daniela Amodei</strong>（总裁）于 2021 年联合创立：</p>
+<ul>
+<li><strong>Dario Amodei</strong>：前 OpenAI 研究副总裁，领导了 GPT-2、GPT-3 的研发工作；普林斯顿大学物理学博士（计算神经科学方向）</li>
+<li><strong>Daniela Amodei</strong>：前 OpenAI 安全与政策副总裁，前 Stripe 员工</li>
+</ul>
+<p>核心创始团队还包括 <strong>Tom Brown</strong>（GPT-3 首席作者）、<strong>Sam McCandlish</strong>、<strong>Jared Kaplan</strong> 等前 OpenAI 核心研究人员。</p>
+<h3 id="团队规模">团队规模</h3>
+<ul>
+<li><strong>2025 年底</strong>：约 1,000–1,500 人（快速增长中）</li>
+<li><strong>2026 年</strong>：继续快速扩张，特别是在产品工程、开发者关系和安全研究团队</li>
+</ul>
+<h3 id="公司盈利情况">公司盈利情况</h3>
+<ul>
+<li>Anthropic 已从非营利转型为 <strong>公共利益公司（Public Benefit Corporation）</strong></li>
+<li>累计融资超 <strong>$137 亿</strong>（截至 2026 年 Q1），投资方包括 Google（超 $30 亿）、Amazon（$40 亿+）、Spark Capital、Samsung 等</li>
+<li>估值：2026 年初估值约 <strong>$600–$800 亿</strong></li>
+<li>营收：2025 年 ARR 超 <strong>$10 亿</strong>，主要由 API 订阅与企业客户贡献</li>
+<li>核心产品线：Claude 模型家族（Haiku/Sonnet/Fable/Mythos）、Claude Code（开发者工具）、Claude.ai（消费版）、Agent Skills 生态</li>
+</ul>
+<h3 id="信条与远景">信条与远景</h3>
+<ul>
+<li><strong>核心理念</strong>：构建安全、有益、诚实的 AI 系统</li>
+<li><strong>对 Skills 生态的定位</strong>：将 Agent Skills 打造为<strong>跨平台、开放标准的 AI 能力封装规范</strong>，使 Claude 不仅能”思考”（模型能力），还能”执行”（技能驱动的专业化行动）</li>
+<li><strong>近期举措</strong>：2025 年 12 月将 Agent Skills 作为开放标准发布（<a href="https://agentskills.io">agentskills.io</a>），推动全行业采纳</li>
+<li><strong>远景</strong>：让 AI Agent 像”下载 App”一样简单——用技能的标准化封装降低 Agent 定制门槛</li>
+</ul>
+<h3 id="官网链接">官网链接</h3>
+<ul>
+<li>Anthropic 官网：<a href="https://www.anthropic.com">https://www.anthropic.com</a></li>
+<li>Agent Skills 规范站：<a href="https://agentskills.io">https://agentskills.io</a></li>
+<li>Skills 仓库：<a href="https://github.com/anthropics/skills">https://github.com/anthropics/skills</a></li>
+<li>DeepLearning.AI 课程：<a href="https://www.deeplearning.ai/courses/agent-skills-with-anthropic">Agent Skills with Anthropic</a></li>
+</ul>
+<blockquote>
+<p><strong>信息来源</strong>：<a href="https://www.anthropic.com">Anthropic 官网</a>、<a href="https://www.deeplearning.ai">DeepLearning.AI</a>、<a href="https://github.com/anthropics/skills">GitHub anthropics/skills</a></p>
+</blockquote>
+<hr>
+<h2 id="2-底层技术栈">2. 底层技术栈</h2>
+<h3 id="基础大模型">基础大模型</h3>
+<p>Anthropic Skills <strong>基于 Anthropic 自研的 Claude 模型家族</strong>：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>模型</th><th>说明</th></tr></thead><tbody><tr><td><strong>Claude Opus 4.8</strong></td><td>旗舰级，最强推理与编码能力</td></tr><tr><td><strong>Claude Sonnet 5</strong></td><td>速度与性能均衡，最广泛使用</td></tr><tr><td><strong>Claude Fable 5 / Mythos 5</strong></td><td>Mythos 级模型梯队（2025–2026 年最新推出）</td></tr><tr><td><strong>Claude Haiku 4.5</strong></td><td>轻量快速，低延迟场景</td></tr></tbody></table>
+<p>Skills <strong>并非独立模型</strong>，而是<strong>基于 Claude 能力之上的指令集 + 工具调用编排层</strong>。</p>
+<h3 id="是否支持自选模型">是否支持自选模型</h3>
+<p><strong>不直接支持</strong>。Skills 是为 Claude 生态设计的指令封装格式，不跨模型供应商。但 Skills 标准（<a href="https://agentskills.io">agentskills.io</a>）是<strong>开放标准</strong>，其他模型供应商（包括 OpenAI、Google、Microsoft）已宣布支持 Agent Skills 格式。</p>
+<h3 id="核心技术架构">核心技术架构</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>层次</th><th>技术</th><th>说明</th></tr></thead><tbody><tr><td><strong>格式层</strong></td><td><strong>SKILL.md + YAML Frontmatter</strong></td><td>纯文本、Git 友好的技能定义格式</td></tr><tr><td><strong>加载层</strong></td><td><strong>渐进式加载（Progressive Disclosure）</strong></td><td>3 级逐层加载：元数据 → 正文 → 引用文件</td></tr><tr><td><strong>执行层</strong></td><td>Claude 工具调用 + Agent 编排</td><td>技能被触发后，Claude 按指令行动</td></tr><tr><td><strong>连接层</strong></td><td><strong>MCP（Model Context Protocol）</strong></td><td>Skills 可调用 MCP 工具获取外部数据</td></tr><tr><td><strong>打包层</strong></td><td>文件夹 + <code>.claude-plugin</code></td><td>插件市场分发与版本管理</td></tr></tbody></table>
+<blockquote>
+<p><strong>说明</strong>：Agent Skills <strong>非独立 AI 模型产品</strong>，而是基于 Claude 模型的指令封装与编排层，不涉及独立的基础大模型训练。</p>
+</blockquote>
+<blockquote>
+<p><strong>信息来源</strong>：<a href="https://claude.com/blog/equipping-agents-for-the-real-world-with-agent-skills">Anthropic Skills Blog</a>、<a href="https://agentskills.io">agentskills.io</a></p>
+</blockquote>
+<hr>
+<h2 id="3-开源属性与商业模式">3. 开源属性与商业模式</h2>
+<h3 id="开源协议双许可证模式">开源协议（双许可证模式）</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>分类</th><th>包含技能</th><th>协议</th><th align="center">性质</th></tr></thead><tbody><tr><td><strong>示例技能</strong></td><td>Creative、Development、Enterprise 等 13+ 个技能</td><td><strong>Apache 2.0</strong></td><td align="center">✅ 完全开源</td></tr><tr><td><strong>文档处理技能</strong></td><td>docx、pdf、pptx、xlsx</td><td><strong>Source-available</strong></td><td align="center">🔒 仅供参阅</td></tr></tbody></table>
+<p>官方 README 原文：</p>
+<blockquote>
+<p><em>“Many skills in this repo are open source (Apache 2.0). We’ve also included the document creation &#x26; editing skills that power Claude’s document capabilities under the hood… These are source-available, not open source.”</em></p>
+</blockquote>
+<h3 id="定价模式">定价模式</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>层次</th><th>价格</th><th>说明</th></tr></thead><tbody><tr><td><strong>Skills 仓库</strong></td><td><strong>完全免费</strong></td><td>GitHub 公开仓库，Apache 2.0</td></tr><tr><td><strong>Claude.ai 使用</strong></td><td><strong>免费版可用</strong></td><td>部分 Skills 已预置在 Claude.ai 中</td></tr><tr><td><strong>Claude API + Skills</strong></td><td><strong>按 API 调用量付费</strong></td><td>模型调用费（约 $3–$15/百万 token）</td></tr><tr><td><strong>Claude Code + Skills</strong></td><td><strong>Pro 订阅 $20/月</strong></td><td>含 Skills 插件系统</td></tr><tr><td><strong>文档处理 Skills</strong></td><td><strong>Claude 订阅可访问</strong></td><td>内置在 Claude 产品能力中</td></tr></tbody></table>
+<h3 id="商业模式">商业模式</h3>
+<p>Anthropic 的 Skills 策略是典型的 <strong>生态驱动型商业模式</strong>：</p>
+<ol>
+<li><strong>开源设标准</strong>：通过 Apache 2.0 开源 + 开放标准发布，吸引社区贡献</li>
+<li><strong>核心能力付费</strong>：文档处理等高价值技能闭源，仅通过 Claude 产品提供</li>
+<li><strong>插件市场分发</strong>：通过 Claude Code 的 Plugin Marketplace 分发，推动订阅</li>
+<li><strong>培训课程</strong>：与 DeepLearning.AI 联合推出免费课程，培养开发者生态</li>
+</ol>
+<blockquote>
+<p><strong>信息来源</strong>：<a href="https://github.com/anthropics/skills">GitHub README</a>、<a href="https://skywork.ai/blog/claude-skills-repository-ultimate-guide-2/">Skywork.ai Guide</a></p>
+</blockquote>
+<hr>
+<h2 id="4-功能全景解析">4. 功能全景解析</h2>
+<h3 id="主要功能">主要功能</h3>
+<blockquote>
+<p>用<strong>标准化的 Markdown 指令包</strong>封装 AI Agent 的专业能力，使 Claude 能针对特定任务”即插即用”——开发者只需写一个文件夹，Claude 就能按指令自动执行复杂工作流。</p>
+</blockquote>
+<h3 id="核心功能与关键技术">核心功能与关键技术</h3>
+<h4 id="41-skillmd-规范与-yaml-frontmatter格式标准">4.1 SKILL.md 规范与 YAML Frontmatter（格式标准）</h4>
+<p><strong>技术</strong>：标准化的元数据 + 指令封装格式</p>
+<p>每个 Skill 的核心是一个 <code>SKILL.md</code> 文件，以 YAML Frontmatter 定义元数据：</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="yaml"><code><span class="line"><span style="color:var(--astro-code-foreground)">---</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">name</span><span style="color:var(--astro-code-token-keyword)">:</span><span style="color:var(--astro-code-token-string-expression)"> skill-identifier</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">description</span><span style="color:var(--astro-code-token-keyword)">:</span><span style="color:var(--astro-code-token-string-expression)"> 简洁地说明什么时候以及为什么使用这个技能</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">---</span></span></code></pre>
+<p><strong>关键字段</strong>：</p>
+<ul>
+<li><code>name</code>：技能标识符（最长 64 字符，小写字母数字+连字符）</li>
+<li><code>description</code>：技能说明与使用时机（最长 1024 字符，是触发匹配的关键）</li>
+<li>无强制分类标签——通过描述语的语义匹配触发</li>
+</ul>
+<p><strong>SKILL.md 正文</strong>：使用<strong>祈使句</strong>书写指令，标明目标、边界、输入输出契约。建议控制在 2,000–5,000 词以内。更深层的内容放到 <code>references/</code> 子目录中。</p>
+<p><strong>参考</strong>：<a href="https://agentskills.io">agentskills.io 规范</a>、<a href="https://github.com/williamzujkowski/standards/blob/master/docs/guides/SKILL_FORMAT_SPEC.md">SKILL.md 格式参考</a></p>
+<h4 id="42-渐进式加载progressive-disclosure-核心技术创新">4.2 渐进式加载（Progressive Disclosure）—— 核心技术创新</h4>
+<p><strong>技术</strong>：三级分层上下文加载策略</p>
+<p>这是 Skills 体系<strong>最核心的创新</strong>，解决了几十年来 AI 插件/工具系统的”上下文膨胀”问题：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="center">级别</th><th>内容</th><th>何时加载</th><th align="center">开销</th></tr></thead><tbody><tr><td align="center"><strong>Level 1</strong></td><td>YAML 元数据（name + description）</td><td>始终在上下文</td><td align="center">~100 token/技能</td></tr><tr><td align="center"><strong>Level 2</strong></td><td>SKILL.md 正文</td><td>技能被触发时加载</td><td align="center">&#x3C;5,000 token</td></tr><tr><td align="center"><strong>Level 3</strong></td><td>引用文件（scripts/、references/、assets/）</td><td>按需，仅当显式引用时</td><td align="center">无上限</td></tr></tbody></table>
+<p><strong>效果</strong>：安装 16 个技能，元数据共约 1,600 token——不到一次 API 调用的 2%。相比传统方法将全部指令装入上下文的做法，<strong>节省约 90% 的上下文预算</strong>。</p>
+<p><strong>参考</strong>：<a href="https://pypi.org/project/agent-skills-sdk/">agent-skills-sdk PyPI</a></p>
+<h4 id="43-skill-creator元技能构建技能的技能">4.3 Skill Creator（元技能——构建技能的技能）</h4>
+<p><strong>技术</strong>：意图捕获 → SKILL.md 编写 → 并行测试 → 人工评审 → 持续迭代</p>
+<p>这是仓库中最具创新性的技能——一个<strong>可以自动构建其他技能</strong>的元技能。当用户用自然语言描述需求时，<code>skill-creator</code> 自动：</p>
+<ol>
+<li>捕获意图并将其结构化</li>
+<li>生成包含正确 YAML Frontmatter 的 SKILL.md</li>
+<li>运行多个并行测试实例评估触发准确率和执行质量</li>
+<li>提交给人类评审</li>
+<li>迭代优化至满意</li>
+</ol>
+<p><strong>参考</strong>：<a href="https://skywork.ai/blog/ai-bot/claude-skill-creator-ultimate-guide/">Ultimate Guide to claude skill-creator</a></p>
+<h4 id="44-mcp-buildermcp-服务端脚手架生成">4.4 MCP Builder（MCP 服务端脚手架生成）</h4>
+<p><strong>技术</strong>：四阶段工作流自动化</p>
+<p>自动生成符合 MCP（Model Context Protocol）规范的服务端项目。四阶段：调研与计划 → 实现（项目结构、工具 Schema）→ 审查与测试（代码质量、MCP Inspector）→ 评估验证。</p>
+<h4 id="45-claude-api-skill全文档化-api-参考技能">4.5 Claude API Skill（全文档化 API 参考技能）</h4>
+<p>7 种语言自动检测（Python、TypeScript、Java、Go、Ruby、C#、PHP），涵盖模型选择决策树、自适应思考、提示缓存优化、迁移指南等。开发者无需离开开发环境即可获得准确 API 参考。</p>
+<h4 id="46-旗下-17-个官方技能总览">4.6 旗下 17 个官方技能总览</h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>类别</th><th>技能名称</th></tr></thead><tbody><tr><td><strong>文档处理</strong></td><td>docx、pdf、pptx、xlsx</td></tr><tr><td><strong>创意设计</strong></td><td>algorithmic-art、canvas-design、frontend-design、slack-gif-creator、theme-factory</td></tr><tr><td><strong>开发技术</strong></td><td>claude-api、mcp-builder、webapp-testing、web-artifacts-builder</td></tr><tr><td><strong>企业通信</strong></td><td>brand-guidelines、doc-coauthoring、internal-comms</td></tr><tr><td><strong>元技能</strong></td><td><strong>skill-creator</strong></td></tr></tbody></table>
+<h4 id="47-跨平台兼容性">4.7 跨平台兼容性</h4>
+<p>Skills 被设计为<strong>开放标准</strong>，支持平台包括：</p>
+<ul>
+<li><strong>Claude.ai</strong>（消费级 Web 应用）</li>
+<li><strong>Claude Code</strong>（CLI 和 IDE 扩展）</li>
+<li><strong>Claude API / Agent SDK</strong>（开发者集成）</li>
+<li><strong>Cursor / Copilot / Codex</strong>（第三方已宣布支持）</li>
+</ul>
+<hr>
+<h2 id="5-功能实现案例">5. 功能实现案例</h2>
+<h3 id="案例用-skill-creator-创建一个代码审查技能">案例：用 Skill Creator 创建一个”代码审查”技能</h3>
+<p><strong>场景</strong>：开发者希望 Claude 能按团队标准自动审查 Python 代码。</p>
+<p><strong>Step 1：自然语言描述需求</strong>（在 Claude Code 中）</p>
+<blockquote>
+<p>“帮我创建一个代码审查技能，检查 Python 代码的类型标注完整性、文档字符串覆盖率和异常处理。”</p>
+</blockquote>
+<p><strong>Step 2：Skill Creator 自动生成</strong></p>
+<p>Skill Creator 自动创建工作目录：</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>code-review-python/</span></span>
+<span class="line"><span>├── SKILL.md</span></span>
+<span class="line"><span>├── references/</span></span>
+<span class="line"><span>│   ├── type-checking-guide.md</span></span>
+<span class="line"><span>│   └── exception-patterns.md</span></span>
+<span class="line"><span>└── scripts/</span></span>
+<span class="line"><span>    └── check_type_coverage.py</span></span></code></pre>
+<p><strong>Step 3：自动生成的 SKILL.md</strong></p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="markdown"><code><span class="line"><span style="color:var(--astro-code-foreground)">---</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">name</span><span style="color:var(--astro-code-token-keyword)">:</span><span style="color:var(--astro-code-token-string-expression)"> code-review-python</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">description</span><span style="color:var(--astro-code-token-keyword)">:</span><span style="color:var(--astro-code-token-string-expression)"> 检查 Python 代码的类型标注完整性、文档字符串覆盖率和异常处理约定。</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">---</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-foreground);font-weight:bold"># Python Code Review Skill</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">执行以下步骤审查 Python 代码：</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">1. </span><span style="color:var(--astro-code-foreground);font-weight:bold">**类型标注检查**</span><span style="color:var(--astro-code-foreground)"> — 检查所有函数签名是否包含类型标注</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">   - 缺失率 > 20% → 标记为 Warning</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">   - 导入 TYPE_CHECKING 模式是否符合约定</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">2. </span><span style="color:var(--astro-code-foreground);font-weight:bold">**文档字符串覆盖率**</span><span style="color:var(--astro-code-foreground)"> — ...</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">3. </span><span style="color:var(--astro-code-foreground);font-weight:bold">**异常处理**</span><span style="color:var(--astro-code-foreground)"> — ...</span></span></code></pre>
+<p><strong>Step 4：并行测试验证</strong></p>
+<p>Skill Creator 自动运行 5 个测试用例（含已知有问题的代码），评估：</p>
+<ul>
+<li>触发准确率（Trigger Accuracy）：92%</li>
+<li>审查全面性评分：87%</li>
+<li>误报率：3%</li>
+</ul>
+<p><strong>Step 5：交付给人类审查</strong></p>
+<p>开发者确认后，技能生效——后续提交的 Python 代码都会自动经过该技能的审查流程。</p>
+<p><strong>效果</strong>：原本需要团队 Leader 花费 30 分钟手动审查的代码，现在 Claude 在数秒内完成，且一致性更高。</p>
+<blockquote>
+<p><strong>信息来源</strong>：<a href="https://skywork.ai/blog/ai-bot/claude-skill-creator-ultimate-guide/">Ultimate Guide</a></p>
+</blockquote>
+<hr>
+<h2 id="6-主要竞品清单">6. 主要竞品清单</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="center">序号</th><th>竞品</th><th>开发商</th><th>定位</th><th>优势</th><th>劣势</th></tr></thead><tbody><tr><td align="center">1</td><td><strong>OpenAI Custom GPTs</strong></td><td>OpenAI</td><td>ChatGPT 内的无代码定制助手</td><td>ChatGPT 用户基数大；UI 构建无需编码</td><td><strong>锁定在 ChatGPT 生态</strong>；不可移植；无开放标准</td></tr><tr><td align="center">2</td><td><strong>OpenAI Actions</strong></td><td>OpenAI</td><td>GPT 的工具调用与 API 扩展</td><td>平台级集成</td><td>碎片化；2026 年重新整合中</td></tr><tr><td align="center">3</td><td><strong>MCP（Model Context Protocol）</strong></td><td>Anthropic / Linux Foundation</td><td>AI 工具连接协议（“AI 的 USB-C”）</td><td>开源标准、多厂商支持、工具级互联</td><td><strong>协议层</strong>而非流程层；不解决指令编排问题</td></tr><tr><td align="center">4</td><td><strong>LangChain / LangGraph</strong></td><td>LangChain Inc.</td><td>Agent 编排框架（Python/JS SDK）</td><td>定制化极强；企业级状态控制</td><td>框架耦合重；学习曲线陡</td></tr><tr><td align="center">5</td><td><strong>Dify / Coze</strong></td><td>开源社区 / 字节跳动</td><td>低代码 AI 应用构建平台</td><td>可视化编排；多模型支持</td><td>平台绑定；不跨工具链</td></tr><tr><td align="center">6</td><td><strong>AutoGen</strong></td><td>微软</td><td>对话驱动多 Agent 框架</td><td>灵活拓扑；Azure 生态</td><td>非技能封装标准；流程不可控</td></tr><tr><td align="center">7</td><td><strong>Skills Marketplace</strong></td><td>特赞等</td><td>第三方社区 Skills 市场</td><td>平台聚合能力</td><td>依赖 Skills 标准，非标准制定者</td></tr></tbody></table>
+<hr>
+<h2 id="7-与竞品的横向比较">7. 与竞品的横向比较</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">对比维度</th><th align="left"><strong>Anthropic Skills</strong></th><th align="left"><strong>OpenAI Custom GPTs</strong></th><th align="left"><strong>MCP</strong></th><th align="left"><strong>LangChain</strong></th></tr></thead><tbody><tr><td align="left"><strong>价格</strong></td><td align="left"><strong>开源免费</strong>（Apache 2.0）+ Claude $20/月起</td><td align="left">ChatGPT Plus $20/月</td><td align="left"><strong>开源免费</strong></td><td align="left">开源免费（MIT）/ LangSmith 付费</td></tr><tr><td align="left"><strong>核心能力</strong></td><td align="left">Agent 流程封装与渐进加载；<strong>跨平台标准化</strong></td><td align="left">无代码定制 ChatGPT 行为</td><td align="left">工具/API 标准化连接协议</td><td align="left">Agent 编排与控制框架</td></tr><tr><td align="left"><strong>易用性与上手门槛</strong></td><td align="left"><strong>极低</strong> - 会写 Markdown 即可</td><td align="left"><strong>极低</strong> - UI 操作无需代码</td><td align="left">中等 - 需部署 MCP Server</td><td align="left">较高 - 需理解图论与框架概念</td></tr><tr><td align="left"><strong>开放性与生态</strong></td><td align="left">✅ <strong>开放标准</strong>，跨多平台通用</td><td align="left">❌ <strong>锁定 ChatGPT</strong>，不可导出</td><td align="left">✅ <strong>开放标准</strong>，Linux Foundation 治理</td><td align="left">✅ 开源，但框架绑定</td></tr></tbody></table>
+<h3 id="各竞品最适用的细分应用场景">各竞品最适用的细分应用场景</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>竞品</th><th>最佳场景</th></tr></thead><tbody><tr><td><strong>Anthropic Skills</strong></td><td><strong>AI Agent 的标准化指令封装</strong>——编码规范、合规流程、多步领域任务、组织知识固化</td></tr><tr><td><strong>OpenAI Custom GPTs</strong></td><td>ChatGPT 内的<strong>快速内部问答机器人</strong>，简单知识库绑定</td></tr><tr><td><strong>MCP</strong></td><td><strong>连接外部系统/API/数据库</strong>——与 Skills 互补而非替代（MCP 管连接，Skills 管流程）</td></tr><tr><td><strong>LangChain/LangGraph</strong></td><td><strong>企业级复杂 Agent 工作流</strong>——精确状态控制、条件分支、人工介入</td></tr><tr><td><strong>Dify/Coze</strong></td><td><strong>非技术团队的可视化 Agent 搭建</strong>——快速原型，无需写代码</td></tr></tbody></table>
+<hr>
+<h2 id="8-版本迭代信息">8. 版本迭代信息</h2>
+<h3 id="首次公开发布">首次公开发布</h3>
+<ul>
+<li><strong>仓库创建</strong>：2025 年 9 月 22 日</li>
+<li><strong>Agent Skills 标准首次亮相</strong>：2025 年 10 月（随 Claude 能力更新）</li>
+<li><strong>标准开放化发布</strong>：2025 年 12 月 18 日（<a href="https://agentskills.io">agentskills.io</a> 上线 + 博客发布）</li>
+</ul>
+<h3 id="关键迭代节点">关键迭代节点</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="center">时间</th><th>事件</th></tr></thead><tbody><tr><td align="center"><strong>2025-09-22</strong></td><td>仓库创建，初始提交</td></tr><tr><td align="center"><strong>2025-10</strong></td><td>Agent Skills 首次亮相，含文档处理 Skills</td></tr><tr><td align="center"><strong>2025-12-18</strong></td><td>全面开放标准，发布《Equipping agents for the real world》博客</td></tr><tr><td align="center"><strong>2025-12</strong></td><td>DeepLearning.AI 推出免费 Skills 课程</td></tr><tr><td align="center"><strong>2026-01</strong></td><td>社区 Skills 数量爆发式增长</td></tr><tr><td align="center"><strong>2026-01-29</strong></td><td>Anthropic 发布 33 页官方 Skills 构建指南</td></tr><tr><td align="center"><strong>2026 Q1</strong></td><td>OpenAI、Google、Microsoft 宣布支持 Agent Skills</td></tr><tr><td align="center"><strong>2026-04</strong></td><td>Claude Code 插件市场集成 Skills；第三方 Skills Marketplace 上线</td></tr><tr><td align="center"><strong>2026-05~06</strong></td><td>社区技能超 35,000 个</td></tr></tbody></table>
+<h3 id="更新频率">更新频率</h3>
+<ul>
+<li><strong>2025 Q4</strong>：密集迭代期，数周一次更新</li>
+<li><strong>2026 Q1~Q2</strong>：每月 2–4 次提交，持续增加新技能和示例</li>
+<li><strong>当前（2026-07）</strong>：进入<strong>生态维护期</strong>——核心仓库本身趋于稳定，社区生态呈爆发式增长</li>
+</ul>
+<blockquote>
+<p><strong>信息来源</strong>：<a href="https://github.com/anthropics/skills">GitHub anthropics/skills</a>、<a href="https://claude.com/blog/equipping-agents-for-the-real-world-with-agent-skills">Anthropic Blog</a></p>
+</blockquote>
+<hr>
+<h2 id="一句话锐评">一句话锐评</h2>
+<blockquote>
+<p><strong><code>anthropics/skills</code> 可能是 2025–2026 年对整个 AI Agent 行业影响最深远的一个仓库</strong>——它用”会写 Markdown 就能封装 AI 能力”的简单理念，定义了一个被 OpenAI、Google、Microsoft 全行业采纳的开放标准。如果你在构建任何 AI Agent 应用，<strong>理解渐进式加载和 SKILL.md 规范将直接影响你 Agent 架构的上下文效率和可扩展性</strong>。它不是最炫酷的技术发明，但它是让 AI Agent “真正可用”的最重要的基础设施之一。值得每一位 AI 开发者深入学习。</p>
+</blockquote>
+<hr>
+<blockquote>
+<p><strong>文件生成信息</strong>：本报告基于 2026-07-05 的网络搜索数据生成，部分数据（如 GitHub Stars 数、社区技能数量）可能持续变化。建议以各来源链接中的最新数据为准。</p>
+</blockquote>  </div> <!-- Previous / Next navigation --> <nav class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-12 pt-8 border-t border-[var(--color-border)]" data-astro-cid-bvzihdzo> <a href="/blog/CLAUDE.md语法指南" class="card-hover p-4 no-underline group" data-astro-cid-bvzihdzo> <span class="text-xs text-[var(--color-text-tertiary)] block mb-1" data-astro-cid-bvzihdzo>&larr; 上一篇</span> <span class="text-sm font-medium text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors line-clamp-1" data-astro-cid-bvzihdzo>CLAUDE.md 语法指南</span> </a> <a href="/blog/Dify调研报告" class="card-hover p-4 no-underline group text-right" data-astro-cid-bvzihdzo> <span class="text-xs text-[var(--color-text-tertiary)] block mb-1" data-astro-cid-bvzihdzo>下一篇 &rarr;</span> <span class="text-sm font-medium text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors line-clamp-1" data-astro-cid-bvzihdzo>Dify 深度调研报告</span> </a> </nav> <hr class="!mt-12 !mb-8" data-astro-cid-bvzihdzo> <div data-astro-cid-bvzihdzo> <a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-bvzihdzo>
+&larr; 返回博客列表
+</a> </div> </div> </div> </article> </div>  </main> <footer class="border-t border-[var(--color-border)] mt-24 py-8" data-astro-cid-pux6a34n><div class="max-w-content flex items-center justify-between" data-astro-cid-pux6a34n><span class="text-sm text-[var(--color-text-tertiary)]" data-astro-cid-pux6a34n>
+&copy; 2026 星游寰宇
+</span><div class="flex items-center gap-4" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>博客</a><a href="/about" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>关于</a></div></div></footer> <!-- Link preview tooltip --> <div id="link-preview" style="display:none;position:fixed;z-index:99;max-width:18rem;pointer-events:none;" data-astro-cid-dmqsi53g></div>  <script type="module">(async()=>{try{const c=await fetch("/posts.json");if(!c.ok)return;const u=await c.json(),p=new Map(u.map(t=>[t.href,t])),e=document.getElementById("link-preview");if(!e)return;let n="",d;document.addEventListener("mouseover",t=>{const s=t.target.closest("a[href^='/blog/']");if(!s){e.style.display="none",n="";return}const i=s.getAttribute("href");if(!i||i===n)return;const r=p.get(i);r&&(n=i,d=setTimeout(()=>{e.innerHTML=`<div class="lp-title">${r.title}</div><div class="lp-summary">${r.summary}</div>`;const o=s.getBoundingClientRect();let a=o.left,l=o.bottom+6;a+288>window.innerWidth&&(a=window.innerWidth-296),l+80>window.innerHeight&&(l=o.top-80),Object.assign(e.style,{left:a+"px",top:l+"px",display:"block"})},300))},{passive:!0}),document.addEventListener("mouseout",t=>{t.target.closest("a[href^='/blog/']")&&(clearTimeout(d),e.style.display="none",n="")},{passive:!0})}catch{}})();</script> </body> </html>  <script type="module">document.querySelectorAll("pre").forEach(o=>{const t=document.createElement("button");t.className="copy-btn",t.textContent="复制",t.addEventListener("click",async()=>{const e=o.querySelector("code")?.textContent||o.textContent||"";try{await navigator.clipboard.writeText(e),t.textContent="已复制",t.classList.add("copied"),setTimeout(()=>{t.textContent="复制",t.classList.remove("copied")},2e3)}catch{t.textContent="失败",setTimeout(()=>{t.textContent="复制"},2e3)}}),o.style.position="relative",o.appendChild(t)});const c=document.querySelectorAll(".toc-list a");if(c.length>0){const o=new IntersectionObserver(t=>{for(const e of t)e.isIntersecting&&c.forEach(n=>{n.classList.toggle("active",n.getAttribute("href")===`#${e.target.id}`)})},{rootMargin:"-80px 0px -80% 0px"});c.forEach(t=>{const e=t.getAttribute("href")?.slice(1);if(e){const n=document.getElementById(e);n&&o.observe(n)}})}const s=document.getElementById("back-to-top");s&&(window.addEventListener("scroll",()=>{s.classList.toggle("hidden",window.scrollY<400)},{passive:!0}),s.addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"})));</script>

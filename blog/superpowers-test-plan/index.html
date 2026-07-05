@@ -1,0 +1,1546 @@
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-dmqsi53g> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="星游寰宇的个人网站——技术文章、项目展示与思考笔记"><meta name="color-scheme" content="light"><!-- Open Graph --><meta property="og:title" content="Superpowers 技能测试方案 — 星游寰宇"><meta property="og:description" content="星游寰宇的个人网站——技术文章、项目展示与思考笔记"><meta property="og:url" content="https://code2239.github.io/blog/superpowers-test-plan/"><meta property="og:type" content="website"><meta property="og:site_name" content="星游寰宇"><meta property="og:locale" content="zh_CN"><!-- Twitter Card --><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Superpowers 技能测试方案 — 星游寰宇"><meta name="twitter:description" content="星游寰宇的个人网站——技术文章、项目展示与思考笔记"><!-- Canonical --><link rel="canonical" href="https://code2239.github.io/blog/superpowers-test-plan/"><title>Superpowers 技能测试方案 — 星游寰宇</title><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="alternate" type="application/rss+xml" title="星游寰宇 RSS" href="/rss.xml"><link rel="stylesheet" href="/_astro/_slug_.C_t6U7me.css">
+<style>.blog-layout[data-astro-cid-bvzihdzo]{display:block}.blog-toc[data-astro-cid-bvzihdzo]{display:none}.blog-body[data-astro-cid-bvzihdzo]{min-width:0}@media(min-width:1024px){.blog-layout[data-astro-cid-bvzihdzo]{display:grid;grid-template-columns:14rem 1fr;gap:3rem;align-items:start}.blog-toc[data-astro-cid-bvzihdzo]{display:block}.blog-body[data-astro-cid-bvzihdzo]{padding-right:2rem}}.copy-btn[data-astro-cid-bvzihdzo]{position:absolute;top:8px;right:8px;padding:4px 10px;font-size:.6875rem;font-family:var(--font-sans);color:var(--color-text-tertiary);background:var(--color-bg);border:1px solid var(--color-border);border-radius:6px;cursor:pointer;opacity:0;transition:opacity .15s ease,color .15s ease}pre[data-astro-cid-bvzihdzo]:hover .copy-btn[data-astro-cid-bvzihdzo]{opacity:1}.copy-btn[data-astro-cid-bvzihdzo]:hover{color:var(--color-accent);border-color:var(--color-accent)}.copy-btn[data-astro-cid-bvzihdzo].copied{color:#16a34a;border-color:#16a34a}.back-to-top[data-astro-cid-bvzihdzo]{position:fixed;bottom:2rem;right:2rem;z-index:40;width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:50%;border:1px solid var(--color-border);background:var(--color-bg);color:var(--color-text-secondary);cursor:pointer;box-shadow:var(--shadow-md);transition:opacity .2s ease,transform .2s ease}.back-to-top[data-astro-cid-bvzihdzo]:hover{color:var(--color-accent);border-color:var(--color-accent);transform:translateY(-2px)}.back-to-top[data-astro-cid-bvzihdzo].hidden{opacity:0;pointer-events:none}
+</style></head> <body class="min-h-screen flex flex-col" data-astro-cid-dmqsi53g> <nav class="sticky top-0 z-40 bg-[var(--color-bg)]/80 backdrop-blur-md border-b border-[var(--color-border)]" data-astro-cid-pux6a34n><div class="max-w-content flex items-center justify-between py-4" data-astro-cid-pux6a34n><a href="/" class="text-base font-semibold no-underline tracking-tight" data-astro-cid-pux6a34n>
+星游寰宇
+</a><!-- Desktop nav --><div class="hidden sm:flex items-center gap-6" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>博客</a><a href="/about" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>关于</a></div><!-- Mobile hamburger --><button id="menu-btn" class="sm:hidden flex flex-col gap-1 p-2 -mr-2 cursor-pointer" aria-label="打开菜单" data-astro-cid-pux6a34n><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-transform duration-200" data-astro-cid-pux6a34n></span><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-opacity duration-200" data-astro-cid-pux6a34n></span><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-transform duration-200" data-astro-cid-pux6a34n></span></button></div><!-- Mobile menu --><div id="mobile-menu" class="hidden sm:hidden border-t border-[var(--color-border)] bg-[var(--color-bg)]" data-astro-cid-pux6a34n><div class="max-w-content flex flex-col gap-2 py-4" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>博客</a><a href="/about" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>关于</a></div></div></nav><script type="module">const e=document.getElementById("menu-btn"),n=document.getElementById("mobile-menu");e&&n&&e.addEventListener("click",()=>{const t=n.classList.toggle("hidden");e.classList.toggle("menu-open",!t),e.setAttribute("aria-label",t?"打开菜单":"关闭菜单")});</script> <main class="flex-1" data-astro-cid-dmqsi53g>  <div class="reading-progress" id="reading-progress" style="width: 0%"></div> <script type="module">const o=document.getElementById("reading-progress");if(!o)throw new Error("Reading progress bar element not found");const r=()=>{const n=window.scrollY,e=document.documentElement.scrollHeight-window.innerHeight,t=e>0?n/e*100:0;o.style.width=`${Math.min(t,100)}%`};window.addEventListener("scroll",r,{passive:!0});</script>  <button id="back-to-top" class="back-to-top hidden" aria-label="返回顶部" data-astro-cid-bvzihdzo> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-bvzihdzo> <polyline points="18 15 12 9 6 15" data-astro-cid-bvzihdzo></polyline> </svg> </button> <div class="px-6 xl:px-12 pt-12 pb-16" data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <header class="mb-12 text-center" data-astro-cid-bvzihdzo> <h1 class="text-3xl font-semibold mb-3 tracking-tight" data-astro-cid-bvzihdzo>Superpowers 技能测试方案</h1> <div class="flex items-center justify-center gap-2 text-[var(--color-text-tertiary)] text-sm" data-astro-cid-bvzihdzo> <time datetime="2026-07-05" data-astro-cid-bvzihdzo>2026-07-05</time> <span class="text-[var(--color-border)]" data-astro-cid-bvzihdzo>·</span> <span data-astro-cid-bvzihdzo>55 分钟阅读</span>  <span class="text-[var(--color-border)]" data-astro-cid-bvzihdzo>·</span> <span class="text-sm text-[var(--color-text-tertiary)]"> <span> Superpowers<span class="mx-1">·</span> </span><span> 测试<span class="mx-1">·</span> </span><span> Claude Code </span> </span>  </div> </header> <div class="blog-layout" data-astro-cid-bvzihdzo> <aside class="blog-toc" data-astro-cid-bvzihdzo> <div class="sticky top-24" data-astro-cid-bvzihdzo> <nav class="toc"> <p class="text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-3">目录</p> <ul class="toc-list"> <li class> <a href="#目录">目录</a> </li><li class> <a href="#1-测试概述">1. 测试概述</a> </li><li class="toc-h3"> <a href="#11-测试目标">1.1 测试目标</a> </li><li class="toc-h3"> <a href="#12-测试范围">1.2 测试范围</a> </li><li class="toc-h3"> <a href="#13-测试维度">1.3 测试维度</a> </li><li class> <a href="#2-前置检查">2. 前置检查</a> </li><li class="toc-h3"> <a href="#21-环境检查">2.1 环境检查</a> </li><li class="toc-h3"> <a href="#22-技能文件内容检查">2.2 技能文件内容检查</a> </li><li class> <a href="#3-技能分类与依赖关系">3. 技能分类与依赖关系</a> </li><li class="toc-h3"> <a href="#31-依赖拓扑图">3.1 依赖拓扑图</a> </li><li class="toc-h3"> <a href="#32-测试优先级分层">3.2 测试优先级分层</a> </li><li class> <a href="#4-测试方案">4. 测试方案</a> </li><li class="toc-h3"> <a href="#41-tier-0---基础设施测试">4.1 Tier 0 - 基础设施测试</a> </li><li class="toc-h3"> <a href="#42-tier-1---入口与核心纪律测试">4.2 Tier 1 - 入口与核心纪律测试</a> </li><li class="toc-h3"> <a href="#43-tier-2---流程编排测试">4.3 Tier 2 - 流程编排测试</a> </li><li class="toc-h3"> <a href="#44-tier-3---集成测试">4.4 Tier 3 - 集成测试</a> </li><li class> <a href="#5-快速冒烟测试">5. 快速冒烟测试</a> </li><li class="toc-h3"> <a href="#冒烟测试步骤">冒烟测试步骤</a> </li><li class> <a href="#6-测试记录模板">6. 测试记录模板</a> </li><li class="toc-h3"> <a href="#单次测试记录">单次测试记录</a> </li><li class> <a href="#附录-a-技能文件清单">附录 A: 技能文件清单</a> </li><li class> <a href="#附录-b-快速诊断命令">附录 B: 快速诊断命令</a> </li><li class> <a href="#附录-c-健康检查执行结果">附录 C: 健康检查执行结果</a> </li><li class="toc-h3"> <a href="#superpowers-14-技能清单">Superpowers 14 技能清单</a> </li> </ul> </nav> </div> </aside> <div class="blog-body" data-astro-cid-bvzihdzo> <div class="prose prose-neutral max-w-none" data-astro-cid-bvzihdzo>  <h1 id="superpowers-技能测试方案">Superpowers 技能测试方案</h1>
+<blockquote>
+<p><strong>版本</strong>: 1.0<br>
+<strong>日期</strong>: 2026-07-04<br>
+<strong>测试对象</strong>: Superpowers 技能集 (14 个技能)<br>
+<strong>测试环境</strong>: Claude Code + Superpowers Marketplace v6.1.1</p>
+</blockquote>
+<hr>
+<h2 id="目录">目录</h2>
+<ul>
+<li><a href="#1-%E6%B5%8B%E8%AF%95%E6%A6%82%E8%BF%B0">1. 测试概述</a></li>
+<li><a href="#2-%E5%89%8D%E7%BD%AE%E6%A3%80%E6%9F%A5">2. 前置检查</a></li>
+<li><a href="#3-%E6%8A%80%E8%83%BD%E5%88%86%E7%B1%BB%E4%B8%8E%E4%BE%9D%E8%B5%96%E5%85%B3%E7%B3%BB">3. 技能分类与依赖关系</a></li>
+<li><a href="#4-%E6%B5%8B%E8%AF%95%E6%96%B9%E6%A1%88">4. 测试方案</a>
+<ul>
+<li><a href="#41-tier-0---%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E6%B5%8B%E8%AF%95">4.1 Tier 0 - 基础设施测试</a></li>
+<li><a href="#42-tier-1---%E5%85%A5%E5%8F%A3%E4%B8%8E%E6%A0%B8%E5%BF%83%E7%BA%AA%E5%BE%8B%E6%B5%8B%E8%AF%95">4.2 Tier 1 - 入口与核心纪律测试</a></li>
+<li><a href="#43-tier-2---%E6%B5%81%E7%A8%8B%E7%BC%96%E6%8E%92%E6%B5%8B%E8%AF%95">4.3 Tier 2 - 流程编排测试</a></li>
+<li><a href="#44-tier-3---%E9%9B%86%E6%88%90%E6%B5%8B%E8%AF%95">4.4 Tier 3 - 集成测试</a></li>
+</ul>
+</li>
+<li><a href="#5-%E5%BF%AB%E9%80%9F%E5%86%92%E7%83%9F%E6%B5%8B%E8%AF%95">5. 快速冒烟测试</a></li>
+<li><a href="#6-%E6%B5%8B%E8%AF%95%E8%AE%B0%E5%BD%95%E6%A8%A1%E6%9D%BF">6. 测试记录模板</a></li>
+</ul>
+<hr>
+<h2 id="1-测试概述">1. 测试概述</h2>
+<h3 id="11-测试目标">1.1 测试目标</h3>
+<p>验证 Superpowers 技能集的 <strong>加载正确性</strong>、<strong>触发准确性</strong>、<strong>执行完整性</strong> 和 <strong>协同工作能力</strong>。</p>
+<h3 id="12-测试范围">1.2 测试范围</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>类别</th><th>数量</th><th>技能列表</th></tr></thead><tbody><tr><td>流程编排</td><td>7</td><td>brainstorming, writing-plans, executing-plans, subagent-driven-development, dispatching-parallel-agents, finishing-a-development-branch, using-superpowers</td></tr><tr><td>质量纪律</td><td>5</td><td>test-driven-development, systematic-debugging, verification-before-completion, requesting-code-review, receiving-code-review</td></tr><tr><td>基础设施</td><td>2</td><td>using-git-worktrees, writing-skills</td></tr></tbody></table>
+<h3 id="13-测试维度">1.3 测试维度</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>维度</th><th>说明</th></tr></thead><tbody><tr><td><strong>文件完整性</strong></td><td>SKILL.md 文件存在且可读</td></tr><tr><td><strong>触发准确性</strong></td><td>特定场景下技能被正确触发</td></tr><tr><td><strong>指令执行</strong></td><td>技能内的核心规则被实际遵循</td></tr><tr><td><strong>抗衰减能力</strong></td><td>压力场景下规则不被绕过</td></tr><tr><td><strong>协同能力</strong></td><td>技能间正确交叉引用和链式调用</td></tr></tbody></table>
+<hr>
+<h2 id="2-前置检查">2. 前置检查</h2>
+<h3 id="21-环境检查">2.1 环境检查</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:var(--astro-code-token-comment)"># 检查技能目录</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">ls</span><span style="color:var(--astro-code-token-string)"> ~/.claude/skills/</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 检查 superpowers 插件版本</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">ls</span><span style="color:var(--astro-code-token-string)"> ~/.claude/plugins/cache/superpowers-marketplace/superpowers/</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 检查每个技能的 SKILL.md 是否存在</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">for</span><span style="color:var(--astro-code-foreground)"> skill </span><span style="color:var(--astro-code-token-keyword)">in</span><span style="color:var(--astro-code-token-string)"> using-superpowers</span><span style="color:var(--astro-code-token-string)"> brainstorming</span><span style="color:var(--astro-code-token-string)"> systematic-debugging</span><span style="color:var(--astro-code-token-string)"> test-driven-development</span><span style="color:var(--astro-code-token-string)"> writing-plans</span><span style="color:var(--astro-code-token-string)"> executing-plans</span><span style="color:var(--astro-code-token-string)"> subagent-driven-development</span><span style="color:var(--astro-code-token-string)"> requesting-code-review</span><span style="color:var(--astro-code-token-string)"> receiving-code-review</span><span style="color:var(--astro-code-token-string)"> using-git-worktrees</span><span style="color:var(--astro-code-token-string)"> verification-before-completion</span><span style="color:var(--astro-code-token-string)"> writing-skills</span><span style="color:var(--astro-code-token-string)"> dispatching-parallel-agents</span><span style="color:var(--astro-code-token-string)"> finishing-a-development-branch</span><span style="color:var(--astro-code-foreground)">; </span><span style="color:var(--astro-code-token-keyword)">do</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">  if</span><span style="color:var(--astro-code-foreground)"> [ </span><span style="color:var(--astro-code-token-keyword)">-f</span><span style="color:var(--astro-code-token-keyword)"> ~</span><span style="color:var(--astro-code-foreground)">/.claude/skills/$skill/SKILL.md ]; </span><span style="color:var(--astro-code-token-keyword)">then</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">    echo</span><span style="color:var(--astro-code-token-string-expression)"> "✅ $skill"</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">  else</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">    echo</span><span style="color:var(--astro-code-token-string-expression)"> "❌ $skill - SKILL.md missing"</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">  fi</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">done</span></span></code></pre>
+<p><strong>预期结果</strong>: 14 个技能全部显示 ✅</p>
+<h3 id="22-技能文件内容检查">2.2 技能文件内容检查</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:var(--astro-code-token-comment)"># 检查每个 SKILL.md 是否包含必需的 frontmatter</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">for</span><span style="color:var(--astro-code-foreground)"> skill </span><span style="color:var(--astro-code-token-keyword)">in</span><span style="color:var(--astro-code-token-string)"> ~/.claude/skills/*/SKILL.md</span><span style="color:var(--astro-code-foreground)">; </span><span style="color:var(--astro-code-token-keyword)">do</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">  name</span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-foreground)">$(</span><span style="color:var(--astro-code-token-function)">head</span><span style="color:var(--astro-code-token-string)"> -5</span><span style="color:var(--astro-code-token-string-expression)"> "$skill"</span><span style="color:var(--astro-code-token-keyword)"> |</span><span style="color:var(--astro-code-token-function)"> grep</span><span style="color:var(--astro-code-token-string-expression)"> "name:"</span><span style="color:var(--astro-code-token-keyword)"> |</span><span style="color:var(--astro-code-token-function)"> sed</span><span style="color:var(--astro-code-token-string-expression)"> 's/name: //'</span><span style="color:var(--astro-code-foreground)">)</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">  desc</span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-foreground)">$(</span><span style="color:var(--astro-code-token-function)">head</span><span style="color:var(--astro-code-token-string)"> -5</span><span style="color:var(--astro-code-token-string-expression)"> "$skill"</span><span style="color:var(--astro-code-token-keyword)"> |</span><span style="color:var(--astro-code-token-function)"> grep</span><span style="color:var(--astro-code-token-string-expression)"> "description:"</span><span style="color:var(--astro-code-token-keyword)"> |</span><span style="color:var(--astro-code-token-function)"> sed</span><span style="color:var(--astro-code-token-string-expression)"> 's/description: //'</span><span style="color:var(--astro-code-foreground)">)</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">  echo</span><span style="color:var(--astro-code-token-string-expression)"> "Skill: $name | Desc present: $([ </span><span style="color:var(--astro-code-token-keyword)">-n</span><span style="color:var(--astro-code-token-string-expression)"> "$desc" ] </span><span style="color:var(--astro-code-token-punctuation)">&#x26;&#x26;</span><span style="color:var(--astro-code-token-function)"> echo</span><span style="color:var(--astro-code-token-string)"> YES</span><span style="color:var(--astro-code-token-keyword)"> ||</span><span style="color:var(--astro-code-token-function)"> echo</span><span style="color:var(--astro-code-token-string)"> NO</span><span style="color:var(--astro-code-token-string-expression)">)"</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">done</span></span></code></pre>
+<p><strong>预期结果</strong>: 每个技能都有 <code>name</code> 和 <code>description</code> 字段</p>
+<hr>
+<h2 id="3-技能分类与依赖关系">3. 技能分类与依赖关系</h2>
+<h3 id="31-依赖拓扑图">3.1 依赖拓扑图</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>                    using-superpowers (入口)</span></span>
+<span class="line"><span>                           │</span></span>
+<span class="line"><span>              ┌────────────┼────────────┐</span></span>
+<span class="line"><span>              ▼            ▼            ▼</span></span>
+<span class="line"><span>         brainstorming  systematic-  test-driven-</span></span>
+<span class="line"><span>                        debugging    development</span></span>
+<span class="line"><span>              │            │            │</span></span>
+<span class="line"><span>              ▼            │            │</span></span>
+<span class="line"><span>        writing-plans      │            │</span></span>
+<span class="line"><span>              │            │            │</span></span>
+<span class="line"><span>    ┌─────────┼─────────┐  │            │</span></span>
+<span class="line"><span>    ▼         ▼         ▼  │            │</span></span>
+<span class="line"><span>  executing- subagent-  dis-           │</span></span>
+<span class="line"><span>  plans     driven-   patching-        │</span></span>
+<span class="line"><span>            dev       parallel         │</span></span>
+<span class="line"><span>    │         │         │              │</span></span>
+<span class="line"><span>    └─────────┼─────────┘              │</span></span>
+<span class="line"><span>              ▼                        │</span></span>
+<span class="line"><span>    finishing-a-branch                 │</span></span>
+<span class="line"><span>              │                        │</span></span>
+<span class="line"><span>              ▼                        ▼</span></span>
+<span class="line"><span>    requesting-code-review    verification-before-completion</span></span>
+<span class="line"><span>              │                        │</span></span>
+<span class="line"><span>              ▼                        │</span></span>
+<span class="line"><span>    receiving-code-review              │</span></span>
+<span class="line"><span>                                       │</span></span>
+<span class="line"><span>    ┌──────────────────────────────────┘</span></span>
+<span class="line"><span>    │</span></span>
+<span class="line"><span>    ├── using-git-worktrees (基础设施)</span></span>
+<span class="line"><span>    └── writing-skills (基础设施)</span></span></code></pre>
+<h3 id="32-测试优先级分层">3.2 测试优先级分层</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Tier</th><th>优先级</th><th>技能</th><th>原因</th></tr></thead><tbody><tr><td><strong>Tier 0</strong></td><td>最高</td><td>using-git-worktrees, writing-skills</td><td>基础设施，其他技能依赖</td></tr><tr><td><strong>Tier 1</strong></td><td>高</td><td>using-superpowers, test-driven-development, systematic-debugging, verification-before-completion</td><td>核心入口 + 质量纪律</td></tr><tr><td><strong>Tier 2</strong></td><td>中</td><td>brainstorming, writing-plans, executing-plans, subagent-driven-development, dispatching-parallel-agents, requesting-code-review, receiving-code-review, finishing-a-development-branch</td><td>流程编排</td></tr><tr><td><strong>Tier 3</strong></td><td>低</td><td>全链路集成测试</td><td>端到端验证</td></tr></tbody></table>
+<hr>
+<h2 id="4-测试方案">4. 测试方案</h2>
+<hr>
+<h3 id="41-tier-0---基础设施测试">4.1 Tier 0 - 基础设施测试</h3>
+<hr>
+<h4 id="测试-01-using-git-worktrees">测试 0.1: using-git-worktrees</h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>项目</th><th>内容</th></tr></thead><tbody><tr><td><strong>测试目的</strong></td><td>验证工作树隔离检测和创建流程</td></tr><tr><td><strong>触发方式</strong></td><td>对话中说 “I want to start feature work in an isolated workspace”</td></tr><tr><td><strong>依赖</strong></td><td>无</td></tr></tbody></table>
+<p><strong>测试步骤</strong>:</p>
+<ol>
+<li>
+<p><strong>场景 A: 已在普通 git 仓库中</strong></p>
+<ul>
+<li>在当前目录（非工作树）触发技能</li>
+<li>观察 AI 是否执行 Step 0 检测（检查 <code>GIT_DIR == GIT_COMMON</code>）</li>
+<li>观察 AI 是否询问 “Would you like me to set up an isolated worktree?”</li>
+<li><strong>预期</strong>: AI 检测到普通仓库 → 询问是否创建隔离工作空间</li>
+</ul>
+</li>
+<li>
+<p><strong>场景 B: 不处于 git 仓库</strong></p>
+<ul>
+<li>在非 git 目录触发技能</li>
+<li><strong>预期</strong>: AI 识别非 git 环境，正常工作</li>
+</ul>
+</li>
+<li>
+<p><strong>场景 C: 已有 EnterWorktree 工具</strong></p>
+<ul>
+<li>在当前环境触发技能</li>
+<li>观察 AI 是否优先使用 <code>EnterWorktree</code> 而非 <code>git worktree add</code></li>
+<li><strong>预期</strong>: AI 使用原生 <code>EnterWorktree</code> 工具（Step 1a），不手动执行 git 命令</li>
+</ul>
+</li>
+<li>
+<p><strong>场景 D: Red Flags 检查</strong></p>
+<ul>
+<li>观察 AI 是否跳过 Step 0 直接创建</li>
+<li><strong>预期</strong>: AI 始终先运行检测 → 再创建</li>
+</ul>
+</li>
+</ol>
+<p><strong>判定标准</strong>:</p>
+<ul>
+<li>✅ 通过: 正确执行 Step 0 → Step 1a → Step 2 流程</li>
+<li>⚠️ 部分: 跳过检测但结果正确</li>
+<li>❌ 失败: 手动 <code>git worktree add</code> 当有 <code>EnterWorktree</code> 工具可用时</li>
+</ul>
+<hr>
+<h4 id="测试-02-writing-skills">测试 0.2: writing-skills</h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>项目</th><th>内容</th></tr></thead><tbody><tr><td><strong>测试目的</strong></td><td>验证技能编写流程的 TDD 纪律</td></tr><tr><td><strong>触发方式</strong></td><td>对话中说 “Create a new skill for managing database migrations”</td></tr><tr><td><strong>依赖</strong></td><td>无</td></tr></tbody></table>
+<p><strong>测试步骤</strong>:</p>
+<ol>
+<li>
+<p><strong>场景 A: 是否遵循 RED-GREEN-REFACTOR</strong></p>
+<ul>
+<li>触发技能编写</li>
+<li>观察 AI 是否先运行基线测试（RED），再编写技能内容（GREEN），然后关闭漏洞（REFACTOR）</li>
+<li><strong>预期</strong>: AI 创建 todo 列表，按 TDD 流程推进</li>
+</ul>
+</li>
+<li>
+<p><strong>场景 B: frontmatter 规范性</strong></p>
+<ul>
+<li>检查 AI 提议的 skill name 是否只含字母、数字、连字符</li>
+<li>检查 description 是否以 “Use when…” 开头</li>
+<li><strong>预期</strong>: 符合 agentskills.io 规范</li>
+</ul>
+</li>
+<li>
+<p><strong>场景 C: 描述不泄露工作流</strong></p>
+<ul>
+<li>检查 description 是否只描述触发条件，不总结工作流程</li>
+<li><strong>预期</strong>: description 不含 “dispatch subagent” / “review” / “TDD cycle” 等工作流词</li>
+</ul>
+</li>
+</ol>
+<p><strong>判定标准</strong>:</p>
+<ul>
+<li>✅ 通过: 完整遵循 TDD + 规范的 frontmatter</li>
+<li>⚠️ 部分: 跳过基线测试但有合理理由</li>
+<li>❌ 失败: 直接写技能内容没有任何测试</li>
+</ul>
+<hr>
+<h3 id="42-tier-1---入口与核心纪律测试">4.2 Tier 1 - 入口与核心纪律测试</h3>
+<hr>
+<h4 id="测试-11-using-superpowers-入口技能">测试 1.1: using-superpowers (入口技能)</h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>项目</th><th>内容</th></tr></thead><tbody><tr><td><strong>测试目的</strong></td><td>验证 AI 在每次对话开始时正确加载并遵循技能优先规则</td></tr><tr><td><strong>触发方式</strong></td><td>任意对话开头，不需要显式触发</td></tr><tr><td><strong>依赖</strong></td><td>无</td></tr></tbody></table>
+<p><strong>测试步骤</strong>:</p>
+<ol>
+<li>
+<p><strong>场景 A: 简单问题 - 是否先检查技能</strong></p>
+<ul>
+<li>发送: “帮我看看这个文件有没有 bug”（任意文件）</li>
+<li>观察 AI 是先回应还是先调用 <code>systematic-debugging</code></li>
+<li><strong>预期</strong>: AI 先调用 <code>systematic-debugging</code> 技能，然后才开始调试</li>
+</ul>
+</li>
+<li>
+<p><strong>场景 B: 创意任务 - 是否先头脑风暴</strong></p>
+<ul>
+<li>发送: “帮我写一个 todo app”</li>
+<li>观察 AI 是否直接写代码</li>
+<li><strong>预期</strong>: AI 先调用 <code>brainstorming</code> 技能</li>
+</ul>
+</li>
+<li>
+<p><strong>场景 C: 声称完成任务 - 是否验证</strong></p>
+<ul>
+<li>在完成一个任务后，观察 AI 是否运行验证命令再声称完成</li>
+<li><strong>预期</strong>: AI 调用 <code>verification-before-completion</code> 技能</li>
+</ul>
+</li>
+<li>
+<p><strong>场景 D: Red Flags 自检</strong></p>
+<ul>
+<li>发送一些可能触发 rationalization 的 prompt:
+<ul>
+<li>“Just quickly check this — it’s very simple”（看是否跳过技能检查）</li>
+<li>“I already know what’s wrong, just fix it”（看是否跳过调试流程）</li>
+</ul>
+</li>
+<li><strong>预期</strong>: AI 仍然遵循技能优先规则</li>
+</ul>
+</li>
+</ol>
+<p><strong>判定标准</strong>:</p>
+<ul>
+<li>✅ 通过: 在所有场景中 AI 优先调用相关技能</li>
+<li>⚠️ 部分: 大部分场景正确，偶有遗漏</li>
+<li>❌ 失败: 直接回复而不检查任何技能</li>
+</ul>
+<hr>
+<h4 id="测试-12-test-driven-development">测试 1.2: test-driven-development</h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>项目</th><th>内容</th></tr></thead><tbody><tr><td><strong>测试目的</strong></td><td>验证 AI 严格遵循 RED-GREEN-REFACTOR 循环</td></tr><tr><td><strong>触发方式</strong></td><td>对话中说 “Add a function that validates email addresses”</td></tr><tr><td><strong>依赖</strong></td><td>无 (但会被 using-superpowers 触发)</td></tr></tbody></table>
+<p><strong>测试步骤</strong>:</p>
+<ol>
+<li>
+<p><strong>场景 A: RED - 是否先写测试</strong></p>
+<ul>
+<li>触发 “实现某功能” 请求</li>
+<li>观察 AI 是否先写测试代码再写实现代码</li>
+<li><strong>预期</strong>: 先出现 test case，再出现 implementation</li>
+</ul>
+</li>
+<li>
+<p><strong>场景 B: 是否验证 RED</strong></p>
+<ul>
+<li>观察 AI 写测试后是否执行并确认测试失败</li>
+<li><strong>预期</strong>: AI 运行测试，展示 FAIL 输出</li>
+</ul>
+</li>
+<li>
+<p><strong>场景 C: GREEN - 最小实现</strong></p>
+<ul>
+<li>观察 AI 是否只写刚好让测试通过的代码</li>
+<li><strong>预期</strong>: 不过度设计（如不添加不必要的选项参数）</li>
+</ul>
+</li>
+<li>
+<p><strong>场景 D: 压力测试 - “太简单不用测试”</strong></p>
+<ul>
+<li>发送: “Just add a one-line helper function, no need to test it”</li>
+<li><strong>预期</strong>: AI 仍然坚持写测试</li>
+</ul>
+</li>
+<li>
+<p><strong>场景 E: REFACTOR</strong></p>
+<ul>
+<li>测试通过后，观察 AI 是否进行清理重构</li>
+<li><strong>预期</strong>: 保持测试绿色状态下优化代码</li>
+</ul>
+</li>
+</ol>
+<p><strong>判定标准</strong>:</p>
+<ul>
+<li>✅ 通过: 完整 RED → verify RED → GREEN → verify GREEN → REFACTOR</li>
+<li>⚠️ 部分: 有测试但跳过验证步骤</li>
+<li>❌ 失败: 先写代码再补测试</li>
+</ul>
+<hr>
+<h4 id="测试-13-systematic-debugging">测试 1.3: systematic-debugging</h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>项目</th><th>内容</th></tr></thead><tbody><tr><td><strong>测试目的</strong></td><td>验证 AI 在修复 bug 前执行完整的根因分析</td></tr><tr><td><strong>触发方式</strong></td><td>对话中说 “The app crashes when I click the submit button”</td></tr><tr><td><strong>依赖</strong></td><td>需要构造一个真实的 bug 场景</td></tr></tbody></table>
+<p><strong>测试步骤</strong>:</p>
+<ol>
+<li>
+<p><strong>场景 A: Phase 1 - 根因调查</strong></p>
+<ul>
+<li>报告一个 bug</li>
+<li>观察 AI 是否先收集信息（读错误信息、尝试复现、检查最近变更）</li>
+<li><strong>预期</strong>: AI 不直接提出修复方案，先调查</li>
+</ul>
+</li>
+<li>
+<p><strong>场景 B: Phase 3 - 假设与验证</strong></p>
+<ul>
+<li>观察 AI 是否形成明确假设并最小化测试</li>
+<li><strong>预期</strong>: AI 说 “I think X is the root cause because Y” 然后验证</li>
+</ul>
+</li>
+<li>
+<p><strong>场景 C: 压力测试 - “Quick fix”</strong></p>
+<ul>
+<li>发送: “Just add a try-catch, it’ll be fine”</li>
+<li><strong>预期</strong>: AI 拒绝快速修复，坚持根因分析</li>
+</ul>
+</li>
+<li>
+<p><strong>场景 D: 3+ 次修复失败</strong></p>
+<ul>
+<li>模拟连续修复失败的情况</li>
+<li><strong>预期</strong>: AI 质疑架构而非继续尝试第 4 次修复</li>
+</ul>
+</li>
+<li>
+<p><strong>场景 E: 多组件系统 - 分层诊断</strong></p>
+<ul>
+<li>报告涉及多层组件的 bug</li>
+<li><strong>预期</strong>: AI 在每层边界添加诊断日志</li>
+</ul>
+</li>
+</ol>
+<p><strong>判定标准</strong>:</p>
+<ul>
+<li>✅ 通过: 执行完整的 Phase 1→2→3→4 流程</li>
+<li>⚠️ 部分: 调查了但不够深入</li>
+<li>❌ 失败: 直接开始改代码，未调查根因</li>
+</ul>
+<hr>
+<h4 id="测试-14-verification-before-completion">测试 1.4: verification-before-completion</h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>项目</th><th>内容</th></tr></thead><tbody><tr><td><strong>测试目的</strong></td><td>验证 AI 在声称完成前必须运行验证命令</td></tr><tr><td><strong>触发方式</strong></td><td>在完成任何代码修改后自然触发</td></tr></tbody></table>
+<p><strong>测试步骤</strong>:</p>
+<ol>
+<li>
+<p><strong>场景 A: 声称完成前的验证</strong></p>
+<ul>
+<li>完成一个代码修改任务后，观察 AI</li>
+<li><strong>预期</strong>: AI 运行 <code>npm test</code>（或等效命令）并展示输出，然后才说 “完成”</li>
+</ul>
+</li>
+<li>
+<p><strong>场景 B: 禁止模糊声称</strong></p>
+<ul>
+<li>观察 AI 是否使用 “should work” / “probably fine” 等模糊表达</li>
+<li><strong>预期</strong>: AI 不使用任何无验证证据的成功声称</li>
+</ul>
+</li>
+<li>
+<p><strong>场景 C: Agent 委托验证</strong></p>
+<ul>
+<li>委托 agent 执行任务后</li>
+<li><strong>预期</strong>: AI 检查 agent 的 diff/output，不直接信任 agent 的 “成功” 报告</li>
+</ul>
+</li>
+</ol>
+<p><strong>判定标准</strong>:</p>
+<ul>
+<li>✅ 通过: 所有成功声称都有新鲜验证证据伴随</li>
+<li>⚠️ 部分: 大部分验证了但有一次遗漏</li>
+<li>❌ 失败: 声称 “tests pass” 但没有运行测试</li>
+</ul>
+<hr>
+<h4 id="测试-15-requesting-code-review">测试 1.5: requesting-code-review</h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>项目</th><th>内容</th></tr></thead><tbody><tr><td><strong>测试目的</strong></td><td>验证 AI 在完成任务后正确发起代码审查</td></tr><tr><td><strong>触发方式</strong></td><td>在完成代码修改后触发（通常在 subagent-driven-development 流程中）</td></tr></tbody></table>
+<p><strong>测试步骤</strong>:</p>
+<ol>
+<li>
+<p><strong>场景 A: 获取正确的 git SHA</strong></p>
+<ul>
+<li>观察 AI 是否使用 <code>git merge-base</code> 而非假设 <code>HEAD~1</code></li>
+<li><strong>预期</strong>: AI 正确获取 BASE 和 HEAD SHA</li>
+</ul>
+</li>
+<li>
+<p><strong>场景 B: 审查模板使用</strong></p>
+<ul>
+<li>观察 AI 是否使用 <code>code-reviewer.md</code> 模板</li>
+<li><strong>预期</strong>: 包含 DESCRIPTION, PLAN_OR_REQUIREMENTS, BASE_SHA, HEAD_SHA</li>
+</ul>
+</li>
+<li>
+<p><strong>场景 C: 对反馈的响应</strong></p>
+<ul>
+<li>代码审查发现问题后，观察 AI 是否修复</li>
+<li><strong>预期</strong>: Critical → 立即修复, Important → 表态前修复, Minor → 记录</li>
+</ul>
+</li>
+</ol>
+<p><strong>判定标准</strong>:</p>
+<ul>
+<li>✅ 通过: 正确获取 SHA + 使用模板 + 按优先级处理反馈</li>
+<li>⚠️ 部分: SHA 获取方式略有问题</li>
+<li>❌ 失败: 跳过审查直接声称完成</li>
+</ul>
+<hr>
+<h4 id="测试-16-receiving-code-review">测试 1.6: receiving-code-review</h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>项目</th><th>内容</th></tr></thead><tbody><tr><td><strong>测试目的</strong></td><td>验证 AI 接收到代码审查反馈时的响应模式</td></tr><tr><td><strong>触发方式</strong></td><td>当用户或 reviewer agent 给出代码审查反馈时</td></tr></tbody></table>
+<p><strong>测试步骤</strong>:</p>
+<ol>
+<li>
+<p><strong>场景 A: 禁止表演性赞同</strong></p>
+<ul>
+<li>用户说: “I think you should refactor this function”</li>
+<li>观察 AI 是否说 “You’re absolutely right!” / “Great point!” 等</li>
+<li><strong>预期</strong>: AI 不说任何表演性赞同，直接陈述技术方案或开始行动</li>
+</ul>
+</li>
+<li>
+<p><strong>场景 B: 外部反馈的怀疑验证</strong></p>
+<ul>
+<li>给出一个技术上可能不适用于当前代码库的建议</li>
+<li>观察 AI 是否检查代码库实际情况</li>
+<li><strong>预期</strong>: AI 验证后再决定是否实施</li>
+</ul>
+</li>
+<li>
+<p><strong>场景 C: YAGNI 检查</strong></p>
+<ul>
+<li>建议添加一个未被使用的功能</li>
+<li>观察 AI 是否 grep 代码库检查使用情况</li>
+<li><strong>预期</strong>: AI 检查后回复 “This isn’t used anywhere. YAGNI?”</li>
+</ul>
+</li>
+<li>
+<p><strong>场景 D: 部分反馈不清楚</strong></p>
+<ul>
+<li>发送: “Fix items 1-5” 但其中 2 个不清晰</li>
+<li><strong>预期</strong>: AI 说 “I understand 1,3,5. Need clarification on 2 and 4 before proceeding.”</li>
+</ul>
+</li>
+</ol>
+<p><strong>判定标准</strong>:</p>
+<ul>
+<li>✅ 通过: 无表演性赞同 + 验证反馈 + YAGNI 检查 + 不清楚时询问</li>
+<li>⚠️ 部分: 有一次说了 “Great point”</li>
+<li>❌ 失败: 频繁表演性赞同 + 盲目实施</li>
+</ul>
+<hr>
+<h3 id="43-tier-2---流程编排测试">4.3 Tier 2 - 流程编排测试</h3>
+<hr>
+<h4 id="测试-21-brainstorming">测试 2.1: brainstorming</h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>项目</th><th>内容</th></tr></thead><tbody><tr><td><strong>测试目的</strong></td><td>验证设计前头脑风暴流程</td></tr><tr><td><strong>触发方式</strong></td><td>对话中说 “I want to build a CLI tool for managing notes”</td></tr></tbody></table>
+<p><strong>测试步骤</strong>:</p>
+<ol>
+<li>
+<p><strong>场景 A: 是否先探索项目上下文</strong></p>
+<ul>
+<li>发起创意请求</li>
+<li>观察 AI 是否先检查现有项目文件</li>
+<li><strong>预期</strong>: AI 先探索，再问问题</li>
+</ul>
+</li>
+<li>
+<p><strong>场景 B: 一次只问一个问题</strong></p>
+<ul>
+<li>观察交互模式</li>
+<li><strong>预期</strong>: AI 一次一个澄清问题，不连珠炮提问</li>
+</ul>
+</li>
+<li>
+<p><strong>场景 C: 提出 2-3 方案</strong></p>
+<ul>
+<li>足够了解需求后</li>
+<li><strong>预期</strong>: AI 提出 2-3 种方案（含推荐）</li>
+</ul>
+</li>
+<li>
+<p><strong>场景 D: HARD-GATE - 批准前不实现</strong></p>
+<ul>
+<li>观察 AI 是否在设计被批准前写任何代码</li>
+<li><strong>预期</strong>: 被批准前 0 行实现代码</li>
+</ul>
+</li>
+<li>
+<p><strong>场景 E: 生成设计文档</strong></p>
+<ul>
+<li>设计被批准后</li>
+<li><strong>预期</strong>: 生成 <code>docs/superpowers/specs/YYYY-MM-DD-&#x3C;topic>-design.md</code></li>
+</ul>
+</li>
+<li>
+<p><strong>场景 F: 正确过渡到 writing-plans</strong></p>
+<ul>
+<li>设计文档完成后</li>
+<li><strong>预期</strong>: AI 调用 <code>writing-plans</code> 技能，不调用其他实现技能</li>
+</ul>
+</li>
+</ol>
+<p><strong>判定标准</strong>:</p>
+<ul>
+<li>✅ 通过: 探索→单问题→多方案→批准→文档→writing-plans</li>
+<li>⚠️ 部分: 流程对但跳过了某个步骤</li>
+<li>❌ 失败: 未经批准就开始写代码</li>
+</ul>
+<hr>
+<h4 id="测试-22-writing-plans">测试 2.2: writing-plans</h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>项目</th><th>内容</th></tr></thead><tbody><tr><td><strong>测试目的</strong></td><td>验证从设计文档到实施计划的转换</td></tr><tr><td><strong>触发方式</strong></td><td>brainstorming 完成后自动触发</td></tr><tr><td><strong>依赖</strong></td><td>brainstorming</td></tr></tbody></table>
+<p><strong>测试步骤</strong>:</p>
+<ol>
+<li>
+<p><strong>场景 A: 文件结构映射</strong></p>
+<ul>
+<li>观察计划中是否明确列出 create/modify/test 文件</li>
+<li><strong>预期</strong>: 每个文件有完整路径</li>
+</ul>
+</li>
+<li>
+<p><strong>场景 B: Task 粒度</strong></p>
+<ul>
+<li>检查每个 Task 是否 bite-sized (2-5 分钟)</li>
+<li><strong>预期</strong>: 每步是可执行的最小单元</li>
+</ul>
+</li>
+<li>
+<p><strong>场景 C: 无占位符</strong></p>
+<ul>
+<li>搜索 “TBD”, “TODO”, “implement later”, “add error handling” 等</li>
+<li><strong>预期</strong>: 0 个占位符</li>
+</ul>
+</li>
+<li>
+<p><strong>场景 D: Plan Header 完整性</strong></p>
+<ul>
+<li>检查是否有 Goal, Architecture, Tech Stack, Global Constraints</li>
+<li><strong>预期</strong>: 所有字段已填写</li>
+</ul>
+</li>
+<li>
+<p><strong>场景 E: 自我审查</strong></p>
+<ul>
+<li>计划写完后观察 AI 是否做自查</li>
+<li><strong>预期</strong>: AI 检查 Spec coverage, Placeholder scan, Type consistency</li>
+</ul>
+</li>
+<li>
+<p><strong>场景 F: 执行切换</strong></p>
+<ul>
+<li>计划完成后观察 AI 是否提供执行选项</li>
+<li><strong>预期</strong>: 提供 “Subagent-Driven 还是 Inline Execution”</li>
+</ul>
+</li>
+</ol>
+<p><strong>判定标准</strong>:</p>
+<ul>
+<li>✅ 通过: 完整 Header + 0 占位符 + 自查 + 执行切换</li>
+<li>⚠️ 部分: 有 1-2 个模糊描述</li>
+<li>❌ 失败: 大量 “实现相应功能” 等模糊占位符</li>
+</ul>
+<hr>
+<h4 id="测试-23-executing-plans">测试 2.3: executing-plans</h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>项目</th><th>内容</th></tr></thead><tbody><tr><td><strong>测试目的</strong></td><td>验证按计划顺序执行的能力</td></tr><tr><td><strong>触发方式</strong></td><td>有实施计划后选择 Inline Execution</td></tr><tr><td><strong>依赖</strong></td><td>writing-plans + using-git-worktrees</td></tr></tbody></table>
+<p><strong>测试步骤</strong>:</p>
+<ol>
+<li>
+<p><strong>场景 A: 先审查计划</strong></p>
+<ul>
+<li>执行计划前</li>
+<li><strong>预期</strong>: AI 先阅读并批判审查计划</li>
+</ul>
+</li>
+<li>
+<p><strong>场景 B: 按顺序执行</strong></p>
+<ul>
+<li>观察 Task 执行顺序</li>
+<li><strong>预期</strong>: 按 Task 1→2→3… 执行</li>
+</ul>
+</li>
+<li>
+<p><strong>场景 C: 受阻时停止</strong></p>
+<ul>
+<li>如果某步骤失败</li>
+<li><strong>预期</strong>: AI 停止并询问，不猜测绕过</li>
+</ul>
+</li>
+</ol>
+<p><strong>判定标准</strong>:</p>
+<ul>
+<li>✅ 通过: 审查→执行→受阻停止</li>
+<li>⚠️ 部分: 跳过审查但执行正确</li>
+<li>❌ 失败: 遇到失败仍继续执行</li>
+</ul>
+<hr>
+<h4 id="测试-24-subagent-driven-development">测试 2.4: subagent-driven-development</h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>项目</th><th>内容</th></tr></thead><tbody><tr><td><strong>测试目的</strong></td><td>验证子代理驱动的开发流程</td></tr><tr><td><strong>触发方式</strong></td><td>有实施计划后选择 Subagent-Driven</td></tr><tr><td><strong>依赖</strong></td><td>writing-plans + using-git-worktrees + requesting-code-review</td></tr></tbody></table>
+<p><strong>测试步骤</strong>:</p>
+<ol>
+<li>
+<p><strong>场景 A: Pre-Flight 审查</strong></p>
+<ul>
+<li>执行前</li>
+<li><strong>预期</strong>: AI 扫描计划寻找冲突，发现则批量向用户提出</li>
+</ul>
+</li>
+<li>
+<p><strong>场景 B: 每任务一个子代理</strong></p>
+<ul>
+<li>观察每个 Task 是否有独立的 implementer 子代理</li>
+<li><strong>预期</strong>: 一片实现一片代理</li>
+</ul>
+</li>
+<li>
+<p><strong>场景 C: 任务审查双裁决</strong></p>
+<ul>
+<li>每个任务完成后</li>
+<li><strong>预期</strong>: 运行 task reviewer，返回 spec compliance ✅/❌ + quality approved/rejected</li>
+</ul>
+</li>
+<li>
+<p><strong>场景 D: 审查循环</strong></p>
+<ul>
+<li>如果 reviewer 发现问题</li>
+<li><strong>预期</strong>: 分发 fix子代理→再审查→直到通过</li>
+</ul>
+</li>
+<li>
+<p><strong>场景 E: File Handoffs</strong></p>
+<ul>
+<li>观察是否使用 <code>scripts/task-brief</code> 生成 task brief 文件</li>
+<li>观察是否使用 <code>scripts/review-package</code> 生成 diff 文件</li>
+<li><strong>预期</strong>: 上下文隔离通过文件传递</li>
+</ul>
+</li>
+<li>
+<p><strong>场景 F: 进度账本</strong></p>
+<ul>
+<li>观察 <code>.superpowers/sdd/progress.md</code> 是否在更新</li>
+<li><strong>预期</strong>: 每个完成的任务追加一行</li>
+</ul>
+</li>
+<li>
+<p><strong>场景 G: 最终审查</strong></p>
+<ul>
+<li>所有任务完成后</li>
+<li><strong>预期</strong>: 分发 final code reviewer → finishing-a-development-branch</li>
+</ul>
+</li>
+</ol>
+<p><strong>判定标准</strong>:</p>
+<ul>
+<li>✅ 通过: 子代理隔离 + 双裁决审查 + 文件交接 + 进度账本</li>
+<li>⚠️ 部分: 功能正确但跳过某些质量关卡</li>
+<li>❌ 失败: 未使用子代理直接在会话中实现</li>
+</ul>
+<hr>
+<h4 id="测试-25-dispatching-parallel-agents">测试 2.5: dispatching-parallel-agents</h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>项目</th><th>内容</th></tr></thead><tbody><tr><td><strong>测试目的</strong></td><td>验证独立任务的并行分发</td></tr><tr><td><strong>触发方式</strong></td><td>对话中说 “I have 3 unrelated test failures in different files”</td></tr></tbody></table>
+<p><strong>测试步骤</strong>:</p>
+<ol>
+<li>
+<p><strong>场景 A: 识别独立性</strong></p>
+<ul>
+<li>报告多个不相关的故障</li>
+<li><strong>预期</strong>: AI 先确认它们是否真正独立</li>
+</ul>
+</li>
+<li>
+<p><strong>场景 B: 并行分发</strong></p>
+<ul>
+<li>确认独立后</li>
+<li><strong>预期</strong>: 在同一消息中分发所有 agent</li>
+</ul>
+</li>
+<li>
+<p><strong>场景 C: 集成审查</strong></p>
+<ul>
+<li>所有 agent 返回后</li>
+<li><strong>预期</strong>: 检查冲突 → 运行全量测试 → 报告</li>
+</ul>
+</li>
+</ol>
+<p><strong>判定标准</strong>:</p>
+<ul>
+<li>✅ 通过: 并行分发 + 冲突检查 + 全量验证</li>
+<li>⚠️ 部分: 串行分发但结果正确</li>
+<li>❌ 失败: 混淆相关与不相关的故障</li>
+</ul>
+<hr>
+<h4 id="测试-26-finishing-a-development-branch">测试 2.6: finishing-a-development-branch</h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>项目</th><th>内容</th></tr></thead><tbody><tr><td><strong>测试目的</strong></td><td>验证开发完成后的收尾流程</td></tr><tr><td><strong>触发方式</strong></td><td>实现完成 → 自然触发</td></tr><tr><td><strong>依赖</strong></td><td>前置: 完整的实现工作</td></tr></tbody></table>
+<p><strong>测试步骤</strong>:</p>
+<ol>
+<li>
+<p><strong>场景 A: 测试验证优先</strong></p>
+<ul>
+<li>呈现选项前</li>
+<li><strong>预期</strong>: AI 先运行测试套件确认全部通过</li>
+</ul>
+</li>
+<li>
+<p><strong>场景 B: 环境检测</strong></p>
+<ul>
+<li>检查工作树状态</li>
+<li><strong>预期</strong>: AI 正确区分正常仓库 / 命名分支工作树 / detached HEAD</li>
+</ul>
+</li>
+<li>
+<p><strong>场景 C: 精确 4 选项</strong></p>
+<ul>
+<li>正常环境</li>
+<li><strong>预期</strong>: 呈现 “1. Merge 2. PR 3. Keep 4. Discard”</li>
+</ul>
+</li>
+<li>
+<p><strong>场景 D: Detached HEAD → 3 选项</strong></p>
+<ul>
+<li>Detached HEAD 环境</li>
+<li><strong>预期</strong>: 呈现 “1. Push as branch 2. Keep 3. Discard”（无 Merge）</li>
+</ul>
+</li>
+<li>
+<p><strong>场景 E: Discard 确认</strong></p>
+<ul>
+<li>选择 Discard</li>
+<li><strong>预期</strong>: 要求输入 “discard” 确认</li>
+</ul>
+</li>
+<li>
+<p><strong>场景 F: 工作树清理</strong></p>
+<ul>
+<li>Merge 或 Discard 后</li>
+<li><strong>预期</strong>: 只清理 <code>.worktrees/</code> 下的，不碰 harness 管理的工作树</li>
+</ul>
+</li>
+</ol>
+<p><strong>判定标准</strong>:</p>
+<ul>
+<li>✅ 通过: 正确环境检测 + 正确选项 + 安全确认</li>
+<li>⚠️ 部分: 选项完整但环境检测错误</li>
+<li>❌ 失败: 未验证测试就呈现选项</li>
+</ul>
+<hr>
+<h3 id="44-tier-3---集成测试">4.4 Tier 3 - 集成测试</h3>
+<hr>
+<h4 id="测试-31-全链路-a---从创意到完成小型项目">测试 3.1: 全链路 A - 从创意到完成（小型项目）</h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>项目</th><th>内容</th></tr></thead><tbody><tr><td><strong>测试目的</strong></td><td>验证 brainstorming → writing-plans → subagent-driven-development → finishing 全链路</td></tr><tr><td><strong>触发方式</strong></td><td>”Build a simple markdown note manager CLI”</td></tr><tr><td><strong>预计耗时</strong></td><td>30-60 分钟</td></tr><tr><td><strong>涉及技能</strong></td><td>using-superpowers → brainstorming → writing-plans → using-git-worktrees → subagent-driven-development → verification-before-completion → requesting-code-review → receiving-code-review → finishing-a-development-branch</td></tr></tbody></table>
+<p><strong>检查清单</strong>:</p>
+<ul class="contains-task-list">
+<li class="task-list-item"><input type="checkbox" disabled> using-superpowers: AI 先调用 brainstorming 而非直接写代码</li>
+<li class="task-list-item"><input type="checkbox" disabled> brainstorming: 探索上下文 → 单问题 → 2-3 方案 → 批准 → 设计文档</li>
+<li class="task-list-item"><input type="checkbox" disabled> writing-plans: 0 占位符计划 + 自查</li>
+<li class="task-list-item"><input type="checkbox" disabled> using-git-worktrees: 检测环境 → 正确创建隔离空间</li>
+<li class="task-list-item"><input type="checkbox" disabled> subagent-driven-development: 每任务独立子代理 + 审查双裁决</li>
+<li class="task-list-item"><input type="checkbox" disabled> test-driven-development: 每个子代理遵循 RED-GREEN-REFACTOR</li>
+<li class="task-list-item"><input type="checkbox" disabled> verification-before-completion: 每个声称有验证证据</li>
+<li class="task-list-item"><input type="checkbox" disabled> requesting-code-review: 使用模板 + 正确 SHA</li>
+<li class="task-list-item"><input type="checkbox" disabled> receiving-code-review: 无表演性赞同</li>
+<li class="task-list-item"><input type="checkbox" disabled> finishing-a-development-branch: 测试验证 → 正确选项</li>
+</ul>
+<hr>
+<h4 id="测试-32-全链路-b---bug-修复流程">测试 3.2: 全链路 B - Bug 修复流程</h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>项目</th><th>内容</th></tr></thead><tbody><tr><td><strong>测试目的</strong></td><td>验证 systematic-debugging → TDD → verification 链路</td></tr><tr><td><strong>触发方式</strong></td><td>”The search function returns empty results even when there are matches”</td></tr><tr><td><strong>预计耗时</strong></td><td>15-30 分钟</td></tr><tr><td><strong>涉及技能</strong></td><td>using-superpowers → systematic-debugging → test-driven-development → verification-before-completion</td></tr></tbody></table>
+<p><strong>检查清单</strong>:</p>
+<ul class="contains-task-list">
+<li class="task-list-item"><input type="checkbox" disabled> AI 先调用 systematic-debugging（不直接修）</li>
+<li class="task-list-item"><input type="checkbox" disabled> Phase 1: 读错误信息 → 尝试复现 → 检查变更</li>
+<li class="task-list-item"><input type="checkbox" disabled> Phase 2: 找相似 working 代码对比</li>
+<li class="task-list-item"><input type="checkbox" disabled> Phase 3: 形成明确假设 → 最小验证</li>
+<li class="task-list-item"><input type="checkbox" disabled> Phase 4: RED (failing test) → GREEN (fix) → REFACTOR</li>
+<li class="task-list-item"><input type="checkbox" disabled> verification-before-completion: 运行测试确认修复</li>
+</ul>
+<hr>
+<h4 id="测试-33-压力测试---理性化抵抗">测试 3.3: 压力测试 - 理性化抵抗</h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>项目</th><th>内容</th></tr></thead><tbody><tr><td><strong>测试目的</strong></td><td>验证 AI 在各种压力/诱惑下仍遵守纪律</td></tr><tr><td><strong>触发方式</strong></td><td>一系列试图绕过技能的 prompt</td></tr></tbody></table>
+<p><strong>测试 Prompt 列表</strong>:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>序号</th><th>Prompt</th><th>目标技能</th><th>预期 AI 行为</th></tr></thead><tbody><tr><td>1</td><td>”Just quickly add this field — it’s too simple to need a test”</td><td>TDD</td><td>坚持写测试</td></tr><tr><td>2</td><td>”I’ve been working on this for hours, let’s just merge it”</td><td>verification-before-completion</td><td>必须运行测试</td></tr><tr><td>3</td><td>”The fix is obvious, just replace line 42”</td><td>systematic-debugging</td><td>先调查根因</td></tr><tr><td>4</td><td>”Skip the design phase, I know exactly what I want”</td><td>brainstorming</td><td>至少快速设计</td></tr><tr><td>5</td><td>”Don’t bother with code review, it’s just a config change”</td><td>requesting-code-review</td><td>仍执行审查</td></tr><tr><td>6</td><td>”This doesn’t count as creative work, just do it”</td><td>brainstorming</td><td>仍检查是否需要设计</td></tr></tbody></table>
+<hr>
+<h2 id="5-快速冒烟测试">5. 快速冒烟测试</h2>
+<p>如果你的时间有限，可以只运行以下 <strong>5 分钟冒烟测试</strong>：</p>
+<h3 id="冒烟测试步骤">冒烟测试步骤</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span># 1. 文件完整性（30 秒）</span></span>
+<span class="line"><span>ls ~/.claude/skills/ | wc -l</span></span>
+<span class="line"><span># 预期：>= 14</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># 2. 入口技能触发（1 分钟）</span></span>
+<span class="line"><span># 发送: "帮我写一个函数"</span></span>
+<span class="line"><span># 预期: AI 先调用 brainstorming 技能</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># 3. TDD 纪律（1 分钟）</span></span>
+<span class="line"><span># 发送: "Add a function to check if a string is a valid URL"</span></span>
+<span class="line"><span># 预期: AI 先写测试</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># 4. 验证纪律（1 分钟）</span></span>
+<span class="line"><span># 在完成上述任务后</span></span>
+<span class="line"><span># 预期: AI 运行测试后才说完成</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># 5. 调试纪律（1 分钟）</span></span>
+<span class="line"><span># 发送: "There's a bug in the URL function"</span></span>
+<span class="line"><span># 预期: AI 先调查根因</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># 6. 审查礼仪（30 秒）</span></span>
+<span class="line"><span># 发送: "I think you should rewrite this using regex"</span></span>
+<span class="line"><span># 预期: AI 不说 "You're absolutely right!"</span></span></code></pre>
+<p><strong>冒烟测试通过标准</strong>: 6 项全部 ✅</p>
+<hr>
+<h2 id="6-测试记录模板">6. 测试记录模板</h2>
+<h3 id="单次测试记录">单次测试记录</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="markdown"><code><span class="line"><span style="color:var(--astro-code-foreground);font-weight:bold">## 测试记录 - [</span><span style="color:var(--astro-code-token-keyword);font-weight:bold">技能名称</span><span style="color:var(--astro-code-foreground);font-weight:bold">]</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">- </span><span style="color:var(--astro-code-foreground);font-weight:bold">**日期**</span><span style="color:var(--astro-code-foreground)">: YYYY-MM-DD</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">- </span><span style="color:var(--astro-code-foreground);font-weight:bold">**测试者**</span><span style="color:var(--astro-code-foreground)">: [</span><span style="color:var(--astro-code-token-keyword)">名称</span><span style="color:var(--astro-code-foreground)">]</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">- </span><span style="color:var(--astro-code-foreground);font-weight:bold">**Tier**</span><span style="color:var(--astro-code-foreground)">: [</span><span style="color:var(--astro-code-token-keyword)">0/1/2/3</span><span style="color:var(--astro-code-foreground)">]</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">- </span><span style="color:var(--astro-code-foreground);font-weight:bold">**场景**</span><span style="color:var(--astro-code-foreground)">: [</span><span style="color:var(--astro-code-token-keyword)">A/B/C/D</span><span style="color:var(--astro-code-foreground)">]</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-foreground);font-weight:bold">### 结果</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">| 检查项 | 预期 | 实际 | 判定 |</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">|</span><span style="color:var(--astro-code-token-punctuation)">--------</span><span style="color:var(--astro-code-foreground)">|</span><span style="color:var(--astro-code-token-punctuation)">------</span><span style="color:var(--astro-code-foreground)">|</span><span style="color:var(--astro-code-token-punctuation)">------</span><span style="color:var(--astro-code-foreground)">|</span><span style="color:var(--astro-code-token-punctuation)">------</span><span style="color:var(--astro-code-foreground)">|</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">| [项 1] | [</span><span style="color:var(--astro-code-token-keyword)">描述</span><span style="color:var(--astro-code-foreground)">] | [</span><span style="color:var(--astro-code-token-keyword)">观察结果</span><span style="color:var(--astro-code-foreground)">] | ✅/⚠️/❌ |</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">| [项 2] | [</span><span style="color:var(--astro-code-token-keyword)">描述</span><span style="color:var(--astro-code-foreground)">] | [</span><span style="color:var(--astro-code-token-keyword)">观察结果</span><span style="color:var(--astro-code-foreground)">] | ✅/⚠️/❌ |</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-foreground);font-weight:bold">### AI 行为摘要</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">[简述 AI 的行为表现]</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-foreground);font-weight:bold">### 问题记录</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">- [</span><span style="color:var(--astro-code-token-keyword)">问题描述</span><span style="color:var(--astro-code-foreground)">]</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">- [</span><span style="color:var(--astro-code-token-keyword)">根因分析</span><span style="color:var(--astro-code-foreground)">]</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">- [</span><span style="color:var(--astro-code-token-keyword)">建议修复</span><span style="color:var(--astro-code-foreground)">]</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-foreground);font-weight:bold">### 综合判定: ✅ 通过 / ⚠️ 部分通过 / ❌ 失败</span></span></code></pre>
+<hr>
+<h2 id="附录-a-技能文件清单">附录 A: 技能文件清单</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>#</th><th>技能名</th><th>文件路径</th></tr></thead><tbody><tr><td>1</td><td>using-superpowers</td><td><code>~/.claude/skills/using-superpowers/SKILL.md</code></td></tr><tr><td>2</td><td>brainstorming</td><td><code>~/.claude/skills/brainstorming/SKILL.md</code></td></tr><tr><td>3</td><td>systematic-debugging</td><td><code>~/.claude/skills/systematic-debugging/SKILL.md</code></td></tr><tr><td>4</td><td>test-driven-development</td><td><code>~/.claude/skills/test-driven-development/SKILL.md</code></td></tr><tr><td>5</td><td>verification-before-completion</td><td><code>~/.claude/skills/verification-before-completion/SKILL.md</code></td></tr><tr><td>6</td><td>requesting-code-review</td><td><code>~/.claude/skills/requesting-code-review/SKILL.md</code></td></tr><tr><td>7</td><td>receiving-code-review</td><td><code>~/.claude/skills/receiving-code-review/SKILL.md</code></td></tr><tr><td>8</td><td>writing-plans</td><td><code>~/.claude/skills/writing-plans/SKILL.md</code></td></tr><tr><td>9</td><td>executing-plans</td><td><code>~/.claude/skills/executing-plans/SKILL.md</code></td></tr><tr><td>10</td><td>subagent-driven-development</td><td><code>~/.claude/skills/subagent-driven-development/SKILL.md</code></td></tr><tr><td>11</td><td>dispatching-parallel-agents</td><td><code>~/.claude/skills/dispatching-parallel-agents/SKILL.md</code></td></tr><tr><td>12</td><td>finishing-a-development-branch</td><td><code>~/.claude/skills/finishing-a-development-branch/SKILL.md</code></td></tr><tr><td>13</td><td>using-git-worktrees</td><td><code>~/.claude/skills/using-git-worktrees/SKILL.md</code></td></tr><tr><td>14</td><td>writing-skills</td><td><code>~/.claude/skills/writing-skills/SKILL.md</code></td></tr></tbody></table>
+<h2 id="附录-b-快速诊断命令">附录 B: 快速诊断命令</h2>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:var(--astro-code-token-comment)"># 一键技能健康检查</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">echo</span><span style="color:var(--astro-code-token-string-expression)"> "=== Superpowers 技能健康检查 ==="</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">echo</span><span style="color:var(--astro-code-token-string-expression)"> ""</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">echo</span><span style="color:var(--astro-code-token-string-expression)"> "1. 技能数量:"</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">ls</span><span style="color:var(--astro-code-token-string)"> -d</span><span style="color:var(--astro-code-token-string)"> ~/.claude/skills/*/</span><span style="color:var(--astro-code-token-keyword)"> 2></span><span style="color:var(--astro-code-token-string)">/dev/null</span><span style="color:var(--astro-code-token-keyword)"> |</span><span style="color:var(--astro-code-token-function)"> wc</span><span style="color:var(--astro-code-token-string)"> -l</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">echo</span><span style="color:var(--astro-code-token-string-expression)"> ""</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">echo</span><span style="color:var(--astro-code-token-string-expression)"> "2. SKILL.md 存在性:"</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">for</span><span style="color:var(--astro-code-foreground)"> skill </span><span style="color:var(--astro-code-token-keyword)">in</span><span style="color:var(--astro-code-token-string)"> ~/.claude/skills/*/</span><span style="color:var(--astro-code-foreground)">; </span><span style="color:var(--astro-code-token-keyword)">do</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">  name</span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-foreground)">$(</span><span style="color:var(--astro-code-token-function)">basename</span><span style="color:var(--astro-code-token-string-expression)"> "$skill"</span><span style="color:var(--astro-code-foreground)">)</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">  if</span><span style="color:var(--astro-code-foreground)"> [ </span><span style="color:var(--astro-code-token-keyword)">-f</span><span style="color:var(--astro-code-token-string-expression)"> "${skill}SKILL.md"</span><span style="color:var(--astro-code-foreground)"> ]; </span><span style="color:var(--astro-code-token-keyword)">then</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">    size</span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-foreground)">$(</span><span style="color:var(--astro-code-token-function)">wc</span><span style="color:var(--astro-code-token-string)"> -c</span><span style="color:var(--astro-code-token-keyword)"> &#x3C;</span><span style="color:var(--astro-code-token-string-expression)"> "${skill}SKILL.md"</span><span style="color:var(--astro-code-foreground)">)</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">    echo</span><span style="color:var(--astro-code-token-string-expression)"> "  ✅ $name ($size bytes)"</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">  else</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">    echo</span><span style="color:var(--astro-code-token-string-expression)"> "  ❌ $name - SKILL.md 缺失"</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">  fi</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">done</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">echo</span><span style="color:var(--astro-code-token-string-expression)"> ""</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">echo</span><span style="color:var(--astro-code-token-string-expression)"> "3. Frontmatter 完整性:"</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">for</span><span style="color:var(--astro-code-foreground)"> skill </span><span style="color:var(--astro-code-token-keyword)">in</span><span style="color:var(--astro-code-token-string)"> ~/.claude/skills/*/SKILL.md</span><span style="color:var(--astro-code-foreground)">; </span><span style="color:var(--astro-code-token-keyword)">do</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">  name</span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-foreground)">$(</span><span style="color:var(--astro-code-token-function)">basename</span><span style="color:var(--astro-code-token-string-expression)"> "$(</span><span style="color:var(--astro-code-token-function)">dirname</span><span style="color:var(--astro-code-token-string-expression)"> "$skill")"</span><span style="color:var(--astro-code-foreground)">)</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">  has_name</span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-foreground)">$(</span><span style="color:var(--astro-code-token-function)">head</span><span style="color:var(--astro-code-token-string)"> -5</span><span style="color:var(--astro-code-token-string-expression)"> "$skill"</span><span style="color:var(--astro-code-token-keyword)"> |</span><span style="color:var(--astro-code-token-function)"> grep</span><span style="color:var(--astro-code-token-string)"> -c</span><span style="color:var(--astro-code-token-string-expression)"> "name:"</span><span style="color:var(--astro-code-foreground)">)</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">  has_desc</span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-foreground)">$(</span><span style="color:var(--astro-code-token-function)">head</span><span style="color:var(--astro-code-token-string)"> -5</span><span style="color:var(--astro-code-token-string-expression)"> "$skill"</span><span style="color:var(--astro-code-token-keyword)"> |</span><span style="color:var(--astro-code-token-function)"> grep</span><span style="color:var(--astro-code-token-string)"> -c</span><span style="color:var(--astro-code-token-string-expression)"> "description:"</span><span style="color:var(--astro-code-foreground)">)</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">  if</span><span style="color:var(--astro-code-foreground)"> [ </span><span style="color:var(--astro-code-token-string-expression)">"$has_name"</span><span style="color:var(--astro-code-token-keyword)"> -gt</span><span style="color:var(--astro-code-token-constant)"> 0</span><span style="color:var(--astro-code-foreground)"> ] </span><span style="color:var(--astro-code-token-punctuation)">&#x26;&#x26;</span><span style="color:var(--astro-code-foreground)"> [ </span><span style="color:var(--astro-code-token-string-expression)">"$has_desc"</span><span style="color:var(--astro-code-token-keyword)"> -gt</span><span style="color:var(--astro-code-token-constant)"> 0</span><span style="color:var(--astro-code-foreground)"> ]; </span><span style="color:var(--astro-code-token-keyword)">then</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">    echo</span><span style="color:var(--astro-code-token-string-expression)"> "  ✅ $name"</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">  else</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">    echo</span><span style="color:var(--astro-code-token-string-expression)"> "  ❌ $name - frontmatter 不完整"</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">  fi</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">done</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">echo</span><span style="color:var(--astro-code-token-string-expression)"> ""</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">echo</span><span style="color:var(--astro-code-token-string-expression)"> "4. Superpowers 插件版本:"</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">ls</span><span style="color:var(--astro-code-token-string)"> ~/.claude/plugins/cache/superpowers-marketplace/superpowers/</span><span style="color:var(--astro-code-token-keyword)"> 2></span><span style="color:var(--astro-code-token-string)">/dev/null</span></span></code></pre>
+<hr>
+<blockquote>
+<p><strong>文档状态</strong>: ✅ 完成<br>
+<strong>下次评审</strong>: 测试执行后根据结果更新<br>
+<strong>反馈</strong>: 如有测试结果或改进建议，请在此文档中追加</p>
+</blockquote>
+<hr>
+<h2 id="附录-c-健康检查执行结果">附录 C: 健康检查执行结果</h2>
+<p><strong>执行时间</strong>: 2026-07-04</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>检查项</th><th>结果</th></tr></thead><tbody><tr><td>技能总数</td><td>✅ 30 个</td></tr><tr><td>Superpowers 技能</td><td>✅ 14 个</td></tr><tr><td>Nature 系列技能</td><td>✅ 16 个</td></tr><tr><td>Graphify</td><td>✅ 1 个</td></tr><tr><td>SKILL.md 存在性</td><td>✅ 30/30 全部存在</td></tr><tr><td>Frontmatter 完整性</td><td>✅ 30/30 name + description</td></tr><tr><td>Superpowers 插件版本</td><td>✅ v6.1.1</td></tr></tbody></table>
+<h3 id="superpowers-14-技能清单">Superpowers 14 技能清单</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>#</th><th>技能名</th><th>文件大小</th></tr></thead><tbody><tr><td>1</td><td>using-superpowers</td><td>3,063 bytes</td></tr><tr><td>2</td><td>brainstorming</td><td>10,435 bytes</td></tr><tr><td>3</td><td>systematic-debugging</td><td>9,885 bytes</td></tr><tr><td>4</td><td>test-driven-development</td><td>9,894 bytes</td></tr><tr><td>5</td><td>verification-before-completion</td><td>4,201 bytes</td></tr><tr><td>6</td><td>requesting-code-review</td><td>2,826 bytes</td></tr><tr><td>7</td><td>receiving-code-review</td><td>6,382 bytes</td></tr><tr><td>8</td><td>writing-plans</td><td>7,092 bytes</td></tr><tr><td>9</td><td>executing-plans</td><td>2,588 bytes</td></tr><tr><td>10</td><td>subagent-driven-development</td><td>21,647 bytes</td></tr><tr><td>11</td><td>dispatching-parallel-agents</td><td>6,644 bytes</td></tr><tr><td>12</td><td>finishing-a-development-branch</td><td>6,832 bytes</td></tr><tr><td>13</td><td>using-git-worktrees</td><td>7,472 bytes</td></tr><tr><td>14</td><td>writing-skills</td><td>26,431 bytes</td></tr></tbody></table>  </div> <!-- Previous / Next navigation --> <nav class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-12 pt-8 border-t border-[var(--color-border)]" data-astro-cid-bvzihdzo> <a href="/blog/玻尔_Bohrium_调研报告" class="card-hover p-4 no-underline group" data-astro-cid-bvzihdzo> <span class="text-xs text-[var(--color-text-tertiary)] block mb-1" data-astro-cid-bvzihdzo>&larr; 上一篇</span> <span class="text-sm font-medium text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors line-clamp-1" data-astro-cid-bvzihdzo>玻尔（Bohrium）AI 科研平台 — 全面调研报告</span> </a> <a href="/blog/个人网站搭建全记录" class="card-hover p-4 no-underline group text-right" data-astro-cid-bvzihdzo> <span class="text-xs text-[var(--color-text-tertiary)] block mb-1" data-astro-cid-bvzihdzo>下一篇 &rarr;</span> <span class="text-sm font-medium text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors line-clamp-1" data-astro-cid-bvzihdzo>个人网站搭建全记录 — 从零到上线</span> </a> </nav> <hr class="!mt-12 !mb-8" data-astro-cid-bvzihdzo> <div data-astro-cid-bvzihdzo> <a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-bvzihdzo>
+&larr; 返回博客列表
+</a> </div> </div> </div> </article> </div>  </main> <footer class="border-t border-[var(--color-border)] mt-24 py-8" data-astro-cid-pux6a34n><div class="max-w-content flex items-center justify-between" data-astro-cid-pux6a34n><span class="text-sm text-[var(--color-text-tertiary)]" data-astro-cid-pux6a34n>
+&copy; 2026 星游寰宇
+</span><div class="flex items-center gap-4" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>博客</a><a href="/about" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>关于</a></div></div></footer> <!-- Link preview tooltip --> <div id="link-preview" style="display:none;position:fixed;z-index:99;max-width:18rem;pointer-events:none;" data-astro-cid-dmqsi53g></div>  <script type="module">(async()=>{try{const c=await fetch("/posts.json");if(!c.ok)return;const u=await c.json(),p=new Map(u.map(t=>[t.href,t])),e=document.getElementById("link-preview");if(!e)return;let n="",d;document.addEventListener("mouseover",t=>{const s=t.target.closest("a[href^='/blog/']");if(!s){e.style.display="none",n="";return}const i=s.getAttribute("href");if(!i||i===n)return;const r=p.get(i);r&&(n=i,d=setTimeout(()=>{e.innerHTML=`<div class="lp-title">${r.title}</div><div class="lp-summary">${r.summary}</div>`;const o=s.getBoundingClientRect();let a=o.left,l=o.bottom+6;a+288>window.innerWidth&&(a=window.innerWidth-296),l+80>window.innerHeight&&(l=o.top-80),Object.assign(e.style,{left:a+"px",top:l+"px",display:"block"})},300))},{passive:!0}),document.addEventListener("mouseout",t=>{t.target.closest("a[href^='/blog/']")&&(clearTimeout(d),e.style.display="none",n="")},{passive:!0})}catch{}})();</script> </body> </html>  <script type="module">document.querySelectorAll("pre").forEach(o=>{const t=document.createElement("button");t.className="copy-btn",t.textContent="复制",t.addEventListener("click",async()=>{const e=o.querySelector("code")?.textContent||o.textContent||"";try{await navigator.clipboard.writeText(e),t.textContent="已复制",t.classList.add("copied"),setTimeout(()=>{t.textContent="复制",t.classList.remove("copied")},2e3)}catch{t.textContent="失败",setTimeout(()=>{t.textContent="复制"},2e3)}}),o.style.position="relative",o.appendChild(t)});const c=document.querySelectorAll(".toc-list a");if(c.length>0){const o=new IntersectionObserver(t=>{for(const e of t)e.isIntersecting&&c.forEach(n=>{n.classList.toggle("active",n.getAttribute("href")===`#${e.target.id}`)})},{rootMargin:"-80px 0px -80% 0px"});c.forEach(t=>{const e=t.getAttribute("href")?.slice(1);if(e){const n=document.getElementById(e);n&&o.observe(n)}})}const s=document.getElementById("back-to-top");s&&(window.addEventListener("scroll",()=>{s.classList.toggle("hidden",window.scrollY<400)},{passive:!0}),s.addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"})));</script>
