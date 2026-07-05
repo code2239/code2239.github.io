@@ -6,28 +6,46 @@ interface Props {
 const { allTags } = Astro.props;
 ---
 
-<div class="flex flex-wrap gap-2 mb-8" id="tag-filters">
-  <button
-    class="tag-filter-btn active text-xs font-medium px-3 py-1.5 rounded-full border transition-colors duration-150 cursor-pointer"
-    data-tag=""
-  >
-    全部
-  </button>
-  {allTags.map((tag) => (
-    <button
-      class="tag-filter-btn text-xs font-medium px-3 py-1.5 rounded-full border transition-colors duration-150 cursor-pointer"
-      data-tag={tag}
+<!-- Search + Tag filter -->
+<div class="flex flex-col gap-6 mb-10">
+  <!-- Search input -->
+  <div class="relative">
+    <svg
+      class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--color-text-tertiary)]"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
     >
-      {tag}
-    </button>
-  ))}
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+    </svg>
+    <input
+      type="text"
+      id="post-search"
+      placeholder="搜索文章标题或摘要..."
+      class="w-full pl-10 pr-4 py-2.5 text-sm bg-[var(--color-bg)] border border-[var(--color-border)] rounded-lg text-[var(--color-text)] placeholder:text-[var(--color-text-tertiary)] focus:outline-none focus:border-[var(--color-accent)] transition-colors duration-150"
+    />
+  </div>
+
+  <!-- Tag filter buttons -->
+  <div class="flex flex-wrap gap-2" id="tag-filters">
+    <button class="tag-filter-btn active" data-tag="">全部</button>
+    {allTags.map((tag) => (
+      <button class="tag-filter-btn" data-tag={tag}>{tag}</button>
+    ))}
+  </div>
 </div>
 
 <style>
   .tag-filter-btn {
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 0.375rem 0.75rem;
+    border-radius: 9999px;
+    border: 1px solid var(--color-border);
+    cursor: pointer;
     color: var(--color-text-secondary);
     background: var(--color-bg);
-    border-color: var(--color-border);
+    transition: all 150ms ease;
   }
   .tag-filter-btn:hover {
     color: var(--color-accent);
@@ -38,61 +56,92 @@ const { allTags } = Astro.props;
     background: var(--color-text);
     border-color: var(--color-text);
   }
-  .post-item {
-    transition: opacity 200ms ease, transform 200ms ease;
-  }
-  .post-item.filtered-out {
-    opacity: 0;
-    transform: scale(0.97);
-    pointer-events: none;
-    position: absolute;
+  .post-item.hidden-post {
+    display: none;
   }
 </style>
 
 <script>
-  const buttons = document.querySelectorAll<HTMLButtonElement>(".tag-filter-btn");
-  const posts = document.querySelectorAll<HTMLElement>(".post-item");
-
-  const updateFilter = (activeTag: string) => {
-    buttons.forEach((btn) => {
-      btn.classList.toggle("active", btn.dataset.tag === activeTag);
-    });
-
-    let visibleCount = 0;
-    posts.forEach((post) => {
-      const tags = post.dataset.tags || "";
-      const matches = !activeTag || tags.split(",").includes(activeTag);
-      if (matches) {
-        post.classList.remove("filtered-out");
-        visibleCount++;
-      } else {
-        post.classList.add("filtered-out");
-      }
-    });
-
+  function initFilter() {
+    const buttons = document.querySelectorAll(".tag-filter-btn");
+    const posts = document.querySelectorAll(".post-item");
+    const searchInput = document.getElementById("post-search") as HTMLInputElement | null;
     const emptyEl = document.getElementById("filter-empty");
-    if (emptyEl) {
-      emptyEl.style.display = visibleCount === 0 ? "block" : "none";
-    }
-  };
 
-  buttons.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const tag = btn.dataset.tag || "";
-      updateFilter(tag);
-      const url = new URL(window.location.href);
-      if (tag) {
-        url.searchParams.set("tag", tag);
-      } else {
-        url.searchParams.delete("tag");
+    let activeTag = "";
+
+    function updateVisibility() {
+      const query = searchInput?.value.trim().toLowerCase() || "";
+      let visibleCount = 0;
+
+      posts.forEach((post) => {
+        const tags = post.getAttribute("data-tags") || "";
+        const text = post.textContent?.toLowerCase() || "";
+
+        const tagMatch = !activeTag || tags.split(",").includes(activeTag);
+        const searchMatch =
+          !query || text.includes(query);
+
+        if (tagMatch && searchMatch) {
+          post.classList.remove("hidden-post");
+          visibleCount++;
+        } else {
+          post.classList.add("hidden-post");
+        }
+      });
+
+      if (emptyEl) {
+        emptyEl.style.display = visibleCount === 0 ? "block" : "none";
       }
-      window.history.replaceState({}, "", url.toString());
-    });
-  });
+    }
 
-  const params = new URLSearchParams(window.location.search);
-  const initialTag = params.get("tag") || "";
-  if (initialTag) {
-    updateFilter(initialTag);
+    // Tag button clicks
+    buttons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        activeTag = btn.getAttribute("data-tag") || "";
+        buttons.forEach((b) =>
+          b.classList.toggle("active", b.getAttribute("data-tag") === activeTag)
+        );
+
+        // Update URL
+        const url = new URL(window.location.href);
+        if (activeTag) {
+          url.searchParams.set("tag", activeTag);
+        } else {
+          url.searchParams.delete("tag");
+        }
+        window.history.replaceState({}, "", url.toString());
+
+        updateVisibility();
+      });
+    });
+
+    // Search input
+    if (searchInput) {
+      searchInput.addEventListener("input", () => {
+        updateVisibility();
+      });
+    }
+
+    // Check URL for initial tag
+    const params = new URLSearchParams(window.location.search);
+    const initialTag = params.get("tag") || "";
+    if (initialTag) {
+      activeTag = initialTag;
+      buttons.forEach((b) =>
+        b.classList.toggle("active", b.getAttribute("data-tag") === activeTag)
+      );
+      if (searchInput && initialTag) {
+        searchInput.placeholder = `搜索"${initialTag}"相关文章...`;
+      }
+    }
+    updateVisibility();
+  }
+
+  // Run after DOM ready
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initFilter);
+  } else {
+    initFilter();
   }
 </script>
