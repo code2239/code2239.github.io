@@ -8,31 +8,39 @@ export interface CategoryDef {
 
 export const categoryTree: CategoryDef[] = [
   {
+    slug: "claude",
+    label: "Claude",
+    description: "Anthropic Claude 生态相关文章，包括 Skills、CLAUDE.md、Agent 等。",
+  },
+  {
     slug: "ai-tools",
-    label: "AI 工具",
-    description: "各类 AI 工具的介绍、使用指南与能力边界分析。",
-    children: [
-      {
-        slug: "claude-code",
-        label: "Claude Code",
-        description: "Anthropic 推出的命令行 AI 编码助手，支持 Skills、Hook、Agent 等高级功能。",
-      },
-      {
-        slug: "dify",
-        label: "Dify",
-        description: "开源 LLM 应用开发平台，支持可视化编排 AI 工作流。",
-      },
-    ],
+    label: "AI 工具报告",
+    description: "各类 AI 工具的调研与测评报告。",
   },
   {
-    slug: "research",
-    label: "研究调研",
-    description: "针对 AI Agent、Skills 生态、开发工具链等方向的技术调研报告。",
+    slug: "github",
+    label: "GitHub",
+    description: "GitHub AI 功能、星标项目分析等。",
   },
   {
-    slug: "guides",
-    label: "指南教程",
-    description: "工具使用教程、环境搭建指南、最佳实践总结。",
+    slug: "superpowers",
+    label: "Superpowers",
+    description: "Superpowers Skills 生态、触发条件与测试计划。",
+  },
+  {
+    slug: "ppt-master",
+    label: "PPT-Master",
+    description: "PPT-Master 的调研、美化指南与 Token 分析。",
+  },
+  {
+    slug: "agent-skills",
+    label: "Agent 与 Skills",
+    description: "AI Agent 协作、Agent-Skills 调用与 QA 总结。",
+  },
+  {
+    slug: "misc",
+    label: "其他",
+    description: "其他技术与工具相关的文章。",
   },
   {
     slug: "program-0",
