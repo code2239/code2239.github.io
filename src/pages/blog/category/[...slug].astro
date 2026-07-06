@@ -1,0 +1,108 @@
+---
+// src/pages/blog/category/[...slug].astro
+import { getCollection } from "astro:content";
+import Layout from "../../../components/Layout.astro";
+import ArticleCard from "../../../components/ArticleCard.astro";
+import { flatCategories } from "../../../lib/categoryTree";
+
+export async function getStaticPaths() {
+  const flat = flatCategories();
+  return [...flat.keys()].map((slug) => ({ params: { slug } }));
+}
+
+const { slug } = Astro.params;
+const flat = flatCategories();
+const cat = flat.get(slug!);
+
+if (!cat) return Astro.redirect("/blog");
+
+const allPosts = await getCollection("blog");
+const candidateSlugs = [slug!];
+for (const [s] of flat) {
+  if (s.startsWith(slug! + "/")) candidateSlugs.push(s);
+}
+
+const posts = allPosts
+  .filter((p) =>
+    (p.data.categories ?? []).some((c) =>
+      candidateSlugs.some((cs) => c.startsWith(cs))
+    )
+  )
+  .sort(
+    (a, b) =>
+      new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+  );
+
+const slugParts = slug!.split("/");
+const breadcrumbs = slugParts.map((part, i) => {
+  const href = "/blog/category/" + slugParts.slice(0, i + 1).join("/");
+  const node = flat.get(slugParts.slice(0, i + 1).join("/"));
+  return { label: node?.label ?? part, href };
+});
+
+const subcategories = cat.children ?? [];
+---
+
+<Layout title={`${cat.label} — 分类`}>
+  <div class="px-6 xl:px-12 pt-12 pb-16">
+    <nav class="mb-4 flex items-center gap-1.5 text-sm text-[var(--color-text-tertiary)]">
+      <a href="/blog" class="no-underline hover:text-[var(--color-accent)] transition-colors">博客</a>
+      {breadcrumbs.map((b, i) => (
+        <>
+          <span>/</span>
+          {i < breadcrumbs.length - 1 ? (
+            <a href={b.href} class="no-underline hover:text-[var(--color-accent)] transition-colors">{b.label}</a>
+          ) : (
+            <span class="text-[var(--color-text)] font-medium">{b.label}</span>
+          )}
+        </>
+      ))}
+    </nav>
+
+    <h1 class="text-3xl font-semibold mb-2">{cat.label}</h1>
+    {cat.description && (
+      <p class="text-[var(--color-text-secondary)] mb-6 leading-relaxed">{cat.description}</p>
+    )}
+
+    {subcategories.length > 0 && (
+      <section class="mb-10">
+        <h2 class="text-lg font-semibold mb-4">子分类</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {subcategories.map((sub) => (
+            <a href={`/blog/category/${slug}/${sub.slug}`} class="card-hover p-4 no-underline group">
+              <h3 class="text-sm font-semibold text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors mb-1">
+                {sub.label}
+              </h3>
+              {sub.description && (
+                <p class="text-xs text-[var(--color-text-tertiary)] leading-relaxed line-clamp-2 m-0">
+                  {sub.description}
+                </p>
+              )}
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+
+    <section>
+      <h2 class="text-lg font-semibold mb-4">文章 ({posts.length} 篇)</h2>
+      {posts.length === 0 ? (
+        <p class="text-[var(--color-text-tertiary)] py-8 text-center">该分类下暂无文章。</p>
+      ) : (
+        <div class="flex flex-col gap-4">
+          {posts.map((post) => (
+            <div class="post-item" data-tags={post.data.tags.join(",")}>
+              <ArticleCard
+                title={post.data.title}
+                date={post.data.date}
+                summary={post.data.summary}
+                tags={post.data.tags}
+                href={`/blog/${post.id.replace(/\.md$/, "")}`}
+              />
+            </div>
+          ))}
+        </div>
+      )}
+    </section>
+  </div>
+</Layout>
