@@ -75,7 +75,7 @@ const allTags = [...new Set(posts.flatMap((p) => p.data.tags))].sort();
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       {latestPosts.map((post) => (
-        <div class="fade-in">
+        <div class="fade-in h-full">
           <ArticleCard
             title={post.data.title}
             date={post.data.date}

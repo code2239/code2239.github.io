@@ -12,15 +12,17 @@ interface Props {
 const { title, date, summary, tags, href } = Astro.props;
 ---
 
-<article class="card-hover p-6">
-  <a href={href} class="no-underline block group">
-    <h3 class="text-lg font-semibold mb-1.5 text-[var(--color-text)]">
+<article class="card-hover p-6 h-full">
+  <a href={href} class="no-underline flex flex-col h-full group">
+    <h3 class="text-lg font-semibold mb-1.5 text-[var(--color-text)] line-clamp-2">
       {title}
     </h3>
     <p class="text-sm text-[var(--color-text-tertiary)] mb-2">{date}</p>
     <p class="text-[var(--color-text-secondary)] text-sm leading-relaxed mb-3 line-clamp-2">
       {summary}
     </p>
-    <TagList tags={tags} />
+    <div class="mt-auto">
+      <TagList tags={tags} />
+    </div>
   </a>
 </article>
