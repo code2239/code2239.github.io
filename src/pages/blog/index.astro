@@ -3,6 +3,7 @@ import { getCollection } from "astro:content";
 import Layout from "../../components/Layout.astro";
 import ArticleCard from "../../components/ArticleCard.astro";
 import PostFilter from "../../components/PostFilter.astro";
+import { buildCategoryTree, flattenTree } from "../../lib/categoryTree";
 
 const posts = await getCollection("blog");
 
@@ -16,6 +17,10 @@ const tagCounts = new Map<string, number>();
 posts.forEach((p) => p.data.tags.forEach((t) => tagCounts.set(t, (tagCounts.get(t) || 0) + 1)));
 const allTags = [...tagCounts.entries()]
   .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
+
+const categoryNodes = flattenTree(
+  buildCategoryTree(posts.map((p) => ({ categories: p.data.categories ?? [] })))
+);
 ---
 
 <Layout title="博客">
@@ -27,7 +32,7 @@ const allTags = [...tagCounts.entries()]
       <!-- Left sidebar: search + tags -->
       <aside class="blog-sidebar">
         <div class="sticky top-20 space-y-6">
-          <PostFilter allTags={allTags} totalPosts={posts.length} />
+          <PostFilter allTags={allTags} totalPosts={posts.length} categoryNodes={categoryNodes} />
         </div>
       </aside>
 
