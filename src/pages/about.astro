@@ -2,18 +2,6 @@
 import Layout from "../components/Layout.astro";
 import { siteConfig } from "../lib/config";
 
-const skills = [
-  "Claude Code", "Agent Orchestration", "TypeScript", "Python", "Astro",
-  "React", "Tailwind CSS", "GitHub Actions", "Multi-Agent Systems", "LLM Application Design",
-];
-
-const timeline = [
-  { year: "2026", text: "开始系统研究 AI Agent 协作与 Skills 生态，搭建个人技术博客" },
-  { year: "2025", text: "深入 LLM 应用开发，探索多代理系统与 Agent 工作流" },
-  { year: "2024", text: "开始从事 AI 相关开发工作，专注于工具链与人机交互" },
-];
----
-
 <Layout title="关于">
   <div class="max-w-content py-16">
     <h1 class="text-3xl font-semibold mb-2">关于</h1>
@@ -22,35 +10,9 @@ const timeline = [
     <section class="mb-14">
       <h2 class="text-lg font-semibold mb-4">关于我</h2>
       <div class="card-hover p-6">
-        <p class="text-[var(--color-text-secondary)] leading-relaxed mb-4">
-          你好，我是<strong class="text-[var(--color-text)]">星游寰宇</strong>。我专注于探索 <strong class="text-[var(--color-text)]">AI Agent 协作</strong>、<strong class="text-[var(--color-text)]">软件工程工具链</strong> 以及 <strong class="text-[var(--color-text)]">人机交互的新范式</strong>。
+        <p class="text-[var(--color-text-secondary)] leading-relaxed">
+          你好，我是<strong class="text-[var(--color-text)]">星游寰宇</strong>，这是我的个人网站，专注于探索 <strong class="text-[var(--color-text)]">AI Agent 协作</strong>、<strong class="text-[var(--color-text)]">AI技术分享</strong> 以及 <strong class="text-[var(--color-text)]">个人的学习笔记</strong>。
         </p>
-        <p class="text-[var(--color-text-secondary)] leading-relaxed m-0">
-          我热衷于研究如何让 AI 工具更好地服务于开发者——从单个 Skill 的使用技巧，到多 Agent 协作系统的架构设计。这个网站记录了我在这些方向上的思考、调研与实践。
-        </p>
-      </div>
-    </section>
-
-    <section class="mb-14">
-      <h2 class="text-lg font-semibold mb-4">经历</h2>
-      <div class="flex flex-col gap-4">
-        {timeline.map((item) => (
-          <div class="card-hover p-4 flex items-start gap-4">
-            <span class="text-sm font-semibold text-[var(--color-accent)] shrink-0 w-10">{item.year}</span>
-            <p class="text-[var(--color-text-secondary)] text-sm leading-relaxed m-0">{item.text}</p>
-          </div>
-        ))}
-      </div>
-    </section>
-
-    <section class="mb-14">
-      <h2 class="text-lg font-semibold mb-4">技能</h2>
-      <div class="flex flex-wrap gap-2">
-        {skills.map((skill) => (
-          <span class="text-sm text-[var(--color-text-secondary)] bg-[var(--color-bg-secondary)] border border-[var(--color-border)] px-3 py-1.5 rounded-full">
-            {skill}
-          </span>
-        ))}
       </div>
     </section>
 
