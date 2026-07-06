@@ -3,7 +3,7 @@ title: "咨询问题分类总结"
 date: "2026-07-06"
 tags: ["科研AI", "Program-0", "技术调研"]
 summary: "咨询问题分类总结"
-categories: ["program-0"]
+categories: ["program-0/questions"]
 ---
 
 

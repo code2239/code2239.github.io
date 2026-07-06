@@ -3,7 +3,7 @@ title: "模块 2.1：文档理解模块 · 技术发现与选型"
 date: "2026-07-06"
 tags: ["科研AI", "Program-0", "技术调研"]
 summary: "模块 2.1：文档理解模块 · 技术发现与选型"
-categories: ["program-0"]
+categories: ["program-0/tech-report"]
 ---
 
 

@@ -3,7 +3,7 @@ title: "科研AI系统：输入输出定义 · 桌面应用可行性分析"
 date: "2026-07-06"
 tags: ["科研AI", "Program-0", "技术调研"]
 summary: "科研AI系统：输入输出定义 · 桌面应用可行性分析"
-categories: ["program-0"]
+categories: ["program-0/final-output"]
 ---
 
 

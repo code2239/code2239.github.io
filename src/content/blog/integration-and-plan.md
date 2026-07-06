@@ -3,7 +3,7 @@ title: "第三章：跨模块数据流与集成方案"
 date: "2026-07-06"
 tags: ["科研AI", "Program-0", "技术调研"]
 summary: "第三章：跨模块数据流与集成方案"
-categories: ["program-0"]
+categories: ["program-0/tech-report"]
 ---
 
 
