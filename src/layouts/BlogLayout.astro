@@ -1,0 +1,45 @@
+---
+import Layout from "../components/Layout.astro";
+import PostFilter from "../components/PostFilter.astro";
+import type { FlatNode } from "../lib/categoryTree";
+
+interface Props {
+  title?: string;
+  allTags: Array<[string, number]>;
+  totalPosts: number;
+  categoryNodes: FlatNode[];
+}
+
+const { title, allTags, totalPosts, categoryNodes } = Astro.props;
+---
+
+<Layout title={title ?? "博客"}>
+  <div class="px-6 xl:px-12 pt-12 pb-16">
+    <div class="blog-layout">
+      <aside class="blog-sidebar">
+        <div class="sticky top-20 space-y-6">
+          <PostFilter allTags={allTags} totalPosts={totalPosts} categoryNodes={categoryNodes} />
+        </div>
+      </aside>
+      <div class="blog-content">
+        <slot />
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .blog-layout { display: block; }
+  .blog-sidebar { margin-bottom: 2rem; }
+  .blog-content { min-width: 0; }
+
+  @media (min-width: 768px) {
+    .blog-layout {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+    .blog-sidebar { margin-bottom: 0; }
+  }
+</style>
