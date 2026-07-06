@@ -10,6 +10,8 @@ interface Props {
 }
 
 const { allTags, totalPosts } = Astro.props;
+const INITIAL_VISIBLE = 5;
+const hasMore = allTags.length > INITIAL_VISIBLE;
 ---
 
 <!-- Search -->
@@ -29,13 +31,22 @@ const { allTags, totalPosts } = Astro.props;
       <span>全部文章</span>
       <span class="sidebar-tag-count">{totalPosts}</span>
     </button>
-    {allTags.map(([tag, count]) => (
-      <button class="sidebar-tag" data-tag={tag}>
+    {allTags.map(([tag, count], i) => (
+      <button class={`sidebar-tag${i >= INITIAL_VISIBLE ? " sidebar-tag-collapsed" : ""}`} data-tag={tag}>
         <span class="truncate">{tag}</span>
         <span class="sidebar-tag-count">{count}</span>
       </button>
     ))}
   </div>
+
+  {hasMore && (
+    <button id="tag-expand-btn" class="tag-expand-btn">
+      <span id="tag-expand-text">展开全部 ({allTags.length} 个标签)</span>
+      <svg id="tag-expand-arrow" class="tag-expand-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="m4 6 4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+  )}
 </div>
 
 <style>
@@ -68,6 +79,34 @@ const { allTags, totalPosts } = Astro.props;
     flex-shrink: 0;
   }
   .sidebar-tag.active .sidebar-tag-count { background: var(--color-accent); color: #fff; }
+
+  .sidebar-tag-collapsed { display: none; }
+  .sidebar-tag-collapsed.expanded { display: flex; }
+
+  .tag-expand-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0.375rem 0.625rem;
+    font-size: 0.75rem;
+    font-family: var(--font-sans);
+    color: var(--color-text-tertiary);
+    background: transparent;
+    border: none;
+    border-top: 1px solid var(--color-border);
+    margin-top: 0.25rem;
+    padding-top: 0.5rem;
+    cursor: pointer;
+    transition: color 150ms ease;
+  }
+  .tag-expand-btn:hover { color: var(--color-accent); }
+  .tag-expand-arrow {
+    width: 14px;
+    height: 14px;
+    transition: transform 200ms ease;
+  }
+  .tag-expand-arrow.open { transform: rotate(180deg); }
 </style>
 
 <script>
@@ -138,5 +177,27 @@ const { allTags, totalPosts } = Astro.props;
     document.addEventListener("DOMContentLoaded", initFilter);
   } else {
     initFilter();
+  }
+
+  // Tag collapse/expand
+  function initTagExpand() {
+    const expandBtn = document.getElementById("tag-expand-btn");
+    if (!expandBtn) return;
+    const textEl = document.getElementById("tag-expand-text");
+    const arrowEl = document.getElementById("tag-expand-arrow");
+    const collapsedTags = document.querySelectorAll<HTMLElement>(".sidebar-tag-collapsed");
+    let expanded = false;
+
+    expandBtn.addEventListener("click", () => {
+      expanded = !expanded;
+      collapsedTags.forEach((el) => el.classList.toggle("expanded", expanded));
+      if (textEl) textEl.textContent = expanded ? "收起" : `展开全部 (${collapsedTags.length + 5} 个标签)`;
+      if (arrowEl) arrowEl.classList.toggle("open", expanded);
+    });
+  }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initTagExpand);
+  } else {
+    initTagExpand();
   }
 </script>
