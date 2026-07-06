@@ -34,4 +34,9 @@ export const categoryTree: CategoryDef[] = [
     label: "指南教程",
     description: "工具使用教程、环境搭建指南、最佳实践总结。",
   },
+  {
+    slug: "program-0",
+    label: "Program 0",
+    description: "科研 AI 系统——从论文到假设的全自动研究操作系统技术方案。",
+  },
 ];
