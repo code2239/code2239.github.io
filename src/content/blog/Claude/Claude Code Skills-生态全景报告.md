@@ -2,6 +2,7 @@
 title: "🎯 Claude Code Skills 生态全景报告"
 date: "2026-07-05"
 tags: ["AI","调研","Claude Code","Skill","全景","生态","自动化","工具"]
+categories: ["claude"]
 summary: "| 排名  | 工具                      | ⭐ Stars | 简介                                   | GitHub                               "
 ---
 

@@ -2,6 +2,7 @@
 title: "Superpowers 技能触发方式全览"
 date: "2026-07-05"
 tags: ["Superpowers", "Skill", "Claude Code"]
+categories: ["superpowers"]
 summary: "Superpowers 14 个技能的触发机制全解析——语义匹配、关键词匹配与手动调用。"
 ---
 

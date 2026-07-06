@@ -2,6 +2,7 @@
 title: "Dify 深度调研报告"
 date: "2026-7-5"
 tags: ["AI","调研","Dify","自动化","工具","科研"]
+categories: ["ai-tools"]
 summary: "- **运营实体**：苏州语灵人工智能科技有限公司（Suzhou Yuling Artificial Intelligence Technology Co., Ltd.）"
 ---
 

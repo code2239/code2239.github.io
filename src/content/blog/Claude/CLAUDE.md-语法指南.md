@@ -2,6 +2,7 @@
 title: "CLAUDE.md 语法指南"
 date: "2026-07-05"
 tags: ["AI","CLAUDE.md"]
+categories: ["claude"]
 summary: "纯 Markdown，没有特殊头部要求，直接书写即可："
 ---
 

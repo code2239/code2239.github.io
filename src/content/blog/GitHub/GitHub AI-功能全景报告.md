@@ -2,6 +2,7 @@
 title: "🤖 GitHub 开源 AI 功能全景报告"
 date: "2026-07-05"
 tags: ["AI","调研","GitHub","全景","自动化","工具"]
+categories: ["github"]
 summary: "| 排名 | 工具 | ⭐ Stars | 简介 | GitHub |"
 ---
 

@@ -2,6 +2,7 @@
 title: "Hook（钩子）完整解读 — 它是什么，能做什么？"
 date: "2026-07-05"
 tags: ["AI","调研","Hook","自动化","工具"]
+categories: ["misc"]
 summary: "正常流程：   A  →  B  →  C  →  D"
 ---
 

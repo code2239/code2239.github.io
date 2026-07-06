@@ -2,6 +2,7 @@
 title: "多代理「开会」模式 — 开源前端应用汇总"
 date: "2026-07-04"
 tags: ["Agent", "开源", "前端", "ChatDev", "AutoGen"]
+categories: ["agent-skills"]
 summary: "ChatDev / MetaGPT / AutoGen Studio / AgentVerse / CrewAI / LangGraph / OpenAgents 七大多代理开源前端应用逐一详解与选型建议。"
 ---
 

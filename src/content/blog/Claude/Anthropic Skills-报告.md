@@ -2,6 +2,7 @@
 title: "Anthropic Skills（anthropics/skills）深度调研报告"
 date: "2026-07-05"
 tags: ["AI","调研","Skill","Anthropic","自动化","工具","科研"]
+categories: ["claude"]
 summary: "Anthropic 由 **Dario Amodei**（CEO）和 **Daniela Amodei**（总裁）于 2021 年联合创立："
 ---
 

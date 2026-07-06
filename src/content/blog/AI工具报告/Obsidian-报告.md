@@ -2,6 +2,7 @@
 title: "🔮 Obsidian 深度调研报告"
 date: "2026-07-05"
 tags: ["AI","调研","Obsidian","工具","科研"]
+categories: ["ai-tools"]
 summary: "- **Shida Li（李世达）** 与 **Erica Xu** 联合创立。二人均为加拿大滑铁卢大学毕业生，本科同学。在创办 Obsidian 之前，二人曾开发大纲工具 **Dynalist**。"
 ---
 

@@ -2,6 +2,7 @@
 title: "🌟 GitHub 星标前 20 的 AI 相关开源项目"
 date: "2026-07-05"
 tags: ["AI","GitHub","排行","自动化","工具"]
+categories: ["github"]
 summary: "[GitHub 链接](https://github.com/tensorflow/tensorflow)"
 ---
 

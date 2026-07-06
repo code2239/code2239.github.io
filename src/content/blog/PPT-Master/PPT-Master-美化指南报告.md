@@ -2,6 +2,7 @@
 title: "ppt-master 制作更美观 PPT 的完整指南"
 date: "2026-07-05"
 tags: ["AI","调研","PPT"]
+categories: ["ppt-master"]
 summary: "ppt-master 的三角色协作工作流为你提供了**三个美学控制点**："
 ---
 

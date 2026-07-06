@@ -2,6 +2,7 @@
 title: "DeepSeek 深度调研报告"
 date: "2026-07-05"
 tags: ["AI","调研","DeepSeek","自动化","工具"]
+categories: ["ai-tools"]
 summary: "| **公司全称** | 深度求索人工智能基础技术研究有限公司（DeepSeek） |"
 ---
 

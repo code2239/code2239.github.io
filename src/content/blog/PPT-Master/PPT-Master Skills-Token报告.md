@@ -2,6 +2,7 @@
 title: "深度调研报告：ppt-master（AI PPT 生成 Skill）"
 date: "2026-07-05"
 tags: ["AI","调研","Skill","PPT","自动化","工具"]
+categories: ["ppt-master"]
 summary: "| **名称** | `ppt-master` |"
 ---
 

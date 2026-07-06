@@ -2,6 +2,7 @@
 title: "LangGraph 调研报告"
 date: "2026-7-5"
 tags: ["AI","调研","LangGraph","自动化","工具","科研"]
+categories: ["ai-tools"]
 summary: "- **开发方全称**：LangChain Inc."
 ---
 

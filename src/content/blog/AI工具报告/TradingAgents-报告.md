@@ -2,6 +2,7 @@
 title: "TradingAgents 调研报告"
 date: "2026-7-5"
 tags: ["AI","调研","Agent","Trading","自动化","科研"]
+categories: ["ai-tools"]
 summary: "- **开发方全称**：Tauric Research（塔乌里克研究）"
 ---
 

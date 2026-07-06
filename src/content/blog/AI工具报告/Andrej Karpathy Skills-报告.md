@@ -2,6 +2,7 @@
 title: "Andrej Karpathy Skills（multica-ai/andrej-karpathy-skills）深度调研报告"
 date: "2026-07-05"
 tags: ["AI","调研","Skill","Karpathy","工具"]
+categories: ["ai-tools"]
 summary: "- **张佳源（Forrest Chang / Jiayuan Zhang）**，Multica AI 创始人兼 CEO"
 ---
 

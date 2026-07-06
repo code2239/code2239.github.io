@@ -2,6 +2,7 @@
 title: "Skill 调用清晰化指南 — 如何让 Skill 的触发变得精准可控"
 date: "2026-07-05"
 tags: ["AI","调研","Skill","工具"]
+categories: ["agent-skills"]
 summary: "Skill 的触发依赖 **AI 模型对用户意图的匹配**，这个过程天然存在不确定性："
 ---
 

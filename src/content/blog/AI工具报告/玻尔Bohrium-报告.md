@@ -2,6 +2,7 @@
 title: "玻尔（Bohrium）AI 科研平台 — 全面调研报告"
 date: "2026-07-05"
 tags: ["Bohrium", "AI", "科研", "调研"]
+categories: ["ai-tools"]
 summary: "玻尔 Bohrium AI 科研平台全面调研——公司背景、核心功能、技术架构与应用场景。"
 ---
 

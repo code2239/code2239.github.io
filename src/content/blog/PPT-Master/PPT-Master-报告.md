@@ -2,6 +2,7 @@
 title: "PPT Master（ppt-master）深度调研报告"
 date: "2026-07-05"
 tags: ["AI","调研","PPT","自动化","工具"]
+categories: ["ppt-master"]
 summary: "| **开发方** | **Hugo He（何雨果）**，独立开发者 |"
 ---
 

@@ -2,6 +2,7 @@
 title: "scientific-agent-skills 深度调研报告"
 date: "2026-07-05"
 tags: ["AI","调研","Skill","自动化","工具","科研"]
+categories: ["ai-tools"]
 summary: "- **开发方**：**K-Dense Inc.**，由 Timothy Kassis 与 David Zhang 联合创立，最初从 Biostate AI 内部数据基础设施孵化而来，后独立为公司实体"
 ---
 

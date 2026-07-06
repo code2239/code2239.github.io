@@ -2,6 +2,7 @@
 title: "深度调研报告：karpathy-guidelines（Andrej Karpathy Skills）"
 date: "2026-07-05"
 tags: ["AI","调研","Skill","Karpathy","工具"]
+categories: ["ai-tools"]
 summary: "| **名称** | `karpathy-guidelines` |"
 ---
 

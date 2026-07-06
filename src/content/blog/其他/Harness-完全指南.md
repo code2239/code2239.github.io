@@ -2,6 +2,7 @@
 title: "Harness 工程完全指南"
 date: "2026-07-05"
 tags: ["Harness", "工程", "Claude Code"]
+categories: ["misc"]
 summary: "Harness 工程概念、主流开源项目与小型项目实践方法系统梳理。"
 ---
 

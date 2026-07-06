@@ -2,6 +2,7 @@
 title: "深度调研报告：browser-use（AI 浏览器代理框架）"
 date: "2026-07-05"
 tags: ["AI","调研","Browser","自动化","工具"]
+categories: ["ai-tools"]
 summary: "| **名称** | `browser-use`（Python 库/框架，非严格意义上的 Claude Skill） |"
 ---
 

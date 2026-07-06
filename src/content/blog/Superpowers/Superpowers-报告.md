@@ -2,6 +2,7 @@
 title: "⚡ Superpowers 深度调研报告"
 date: "2026-07-05"
 tags: ["AI","调研","Superpowers","自动化","工具"]
+categories: ["superpowers"]
 summary: "- **作者全称**：**Jesse Vincent**（GitHub 账号 **@obra**）"
 ---
 

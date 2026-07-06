@@ -2,6 +2,7 @@
 title: "ECC（Elliptic Curve Cryptography）调研测评报告"
 date: "2026-07-05"
 tags: ["AI","调研","ECC","自动化","工具"]
+categories: ["misc"]
 summary: "1. [开发者与公司背景](#1-开发者与公司背景)"
 ---
 

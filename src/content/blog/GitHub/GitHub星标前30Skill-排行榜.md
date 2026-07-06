@@ -2,6 +2,7 @@
 title: "🏆 GitHub 星标前 30 的 Claude Code Skills 排行榜"
 date: "2026-07-05"
 tags: ["AI","Claude Code","GitHub","Skill","排行","自动化","工具"]
+categories: ["github"]
 summary: "- **开发者**：Jesse Vincent（Prime Radiant，前 Anthropic 工程师 / Perl 前负责人 / RT 工单系统创建者）"
 ---
 

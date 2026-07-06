@@ -2,6 +2,7 @@
 title: "MetaGPT 深度调研报告"
 date: "2026-07-05"
 tags: ["AI","调研","MetaGPT","自动化","工具","科研"]
+categories: ["ai-tools"]
 summary: "- **华为 2012 实验室**（获十佳新员工）"
 ---
 

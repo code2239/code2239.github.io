@@ -2,6 +2,7 @@
 title: "Superpowers 技能测试方案"
 date: "2026-07-05"
 tags: ["Superpowers", "测试", "Claude Code"]
+categories: ["superpowers"]
 summary: "Superpowers 14 个技能的完整测试方案——测试环境、用例设计与评估标准。"
 ---
 
