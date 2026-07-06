@@ -49,9 +49,8 @@ export function buildCategoryTree(
     return nodes.map((node) => {
       const slug = parentSlug ? `${parentSlug}/${node.slug}` : node.slug;
       const children = node.children?.length ? toTree(node.children, slug) : [];
-      const childrenCount = children.reduce((s, c) => s + c.count, 0);
       const ownCount = countMap.get(slug) ?? 0;
-      return { label: node.label, slug, count: ownCount + childrenCount, children };
+      return { label: node.label, slug, count: ownCount, children };
     });
   }
 

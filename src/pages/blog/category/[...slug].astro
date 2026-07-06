@@ -25,7 +25,7 @@ for (const [s] of flat) {
 const posts = allPosts
   .filter((p) =>
     (p.data.categories ?? []).some((c) =>
-      candidateSlugs.some((cs) => c.startsWith(cs))
+      candidateSlugs.some((cs) => c === cs || c.startsWith(cs + "/"))
     )
   )
   .sort(
