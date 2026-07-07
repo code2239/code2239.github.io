@@ -46,13 +46,12 @@ if (isSubArticle) {
   backLabel={isSubArticle ? "返回 Program 0 概览" : "返回项目列表"}
 >
   {isSubArticle && (
-    <slot name="sidebar">
-      <ProjectSidebar
-        articles={sidebarArticles}
-        currentSlug={slugParts[slugParts.length - 1]}
-        groupName={parentGroup!}
-      />
-    </slot>
+    <ProjectSidebar
+      slot="sidebar"
+      articles={sidebarArticles}
+      currentSlug={slugParts[slugParts.length - 1]}
+      groupName={parentGroup!}
+    />
   )}
   <Content />
 </ProjectLayout>
