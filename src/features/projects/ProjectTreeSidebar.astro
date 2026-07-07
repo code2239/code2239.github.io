@@ -1,0 +1,119 @@
+---
+interface ArticleItem {
+  slug: string;
+  title: string;
+  date: string;
+}
+
+interface TreeNode {
+  type: "folder" | "article";
+  name: string;
+  slug?: string;
+  title?: string;
+  children: TreeNode[];
+}
+
+interface Props {
+  articles: ArticleItem[];
+  currentSlug: string;
+  groupName: string;
+}
+
+const { articles, currentSlug, groupName } = Astro.props;
+
+function buildTree(articles: ArticleItem[]): TreeNode[] {
+  const root: TreeNode[] = [];
+  for (const article of articles) {
+    const parts = article.slug.split("/");
+    if (parts.length <= 1) {
+      root.push({ type: "article", name: article.title, slug: article.slug, title: article.title, children: [] });
+    } else {
+      let current = root;
+      for (let i = 0; i < parts.length; i++) {
+        const isLast = i === parts.length - 1;
+        const segment = parts[i];
+        if (isLast) {
+          current.push({ type: "article", name: article.title, slug: article.slug, title: article.title, children: [] });
+        } else {
+          let folder = current.find((n) => n.type === "folder" && n.name === segment) as TreeNode | undefined;
+          if (!folder) {
+            folder = { type: "folder", name: segment, children: [] };
+            current.push(folder);
+          }
+          current = folder.children;
+        }
+      }
+    }
+  }
+  return root;
+}
+
+const folderLabels: Record<string, string> = {
+  prompts: "提示词",
+  references: "项目参考文献",
+  summary: "项目文献总结",
+};
+
+const tree = buildTree(articles);
+---
+
+<nav class="space-y-3">
+  <div class="pb-3 mb-3 border-b border-[var(--color-border)]">
+    <a
+      href={`/projects/${groupName}`}
+      class="text-sm font-semibold text-[var(--color-text)] no-underline hover:text-[var(--color-accent)] transition-colors flex items-center gap-1.5"
+    >
+      <svg class="w-4 h-4 text-[var(--color-text-tertiary)]" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M10 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/>
+      </svg>
+      金刚石绝缘化
+    </a>
+  </div>
+
+  <div class="space-y-0">
+    {tree.map((node) => {
+      if (node.type === "folder") {
+        return (
+          <div class="mb-2">
+            <div class="text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider py-1.5 px-2 flex items-center gap-1">
+              <svg class="w-3 h-3 shrink-0" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M10 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/>
+              </svg>
+              {folderLabels[node.name] || node.name}
+            </div>
+            <div class="ml-2 pl-2 border-l border-[var(--color-border)]">
+              {node.children.map((child) => {
+                const isActive = child.slug === currentSlug;
+                return (
+                  <a
+                    href={`/projects/${groupName}/${child.slug}`}
+                    class={`block text-xs py-1.5 px-2.5 rounded-md no-underline transition-colors border-l-2 ${
+                      isActive
+                        ? "bg-[var(--color-accent-soft)] text-[var(--color-accent)] font-medium border-l-[var(--color-accent)]"
+                        : "text-[var(--color-text-secondary)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg-secondary)] border-l-transparent"
+                    }`}
+                  >
+                    {child.title || child.name}
+                  </a>
+                );
+              })}
+            </div>
+          </div>
+        );
+      }
+      const isActive = node.slug === currentSlug;
+      return (
+        <a
+          href={`/projects/${groupName}/${node.slug}`}
+          class={`block text-xs py-1.5 px-2.5 rounded-md no-underline transition-colors border-l-2 ${
+            isActive
+              ? "bg-[var(--color-accent-soft)] text-[var(--color-accent)] font-medium border-l-[var(--color-accent)]"
+              : "text-[var(--color-text-secondary)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg-secondary)] border-l-transparent"
+          }`}
+        >
+          {node.title || node.name}
+        </a>
+      );
+    })}
+  </div>
+</nav>

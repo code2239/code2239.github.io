@@ -2,6 +2,7 @@
 import { getCollection, render } from "astro:content";
 import ProjectLayout from "../../layouts/ProjectLayout.astro";
 import ProjectSidebar from "../../features/projects/ProjectSidebar.astro";
+import ProjectTreeSidebar from "../../features/projects/ProjectTreeSidebar.astro";
 
 export async function getStaticPaths() {
   const projects = await getCollection("projects");
@@ -22,6 +23,8 @@ const parentGroup = isSubArticle ? slugParts[0] : null;
 
 // Fetch sibling articles for sidebar
 let sidebarArticles: Array<{ slug: string; title: string; date: string }> = [];
+const hasSubfolder = isSubArticle && slugParts.length > 2;
+
 if (isSubArticle) {
   const allProjects = await getCollection("projects");
   sidebarArticles = allProjects
@@ -43,13 +46,21 @@ if (isSubArticle) {
   demo={project.data.demo}
   image={project.data.image}
   backHref={isSubArticle ? `/projects/${parentGroup}` : "/projects"}
-  backLabel={isSubArticle ? "返回 Program 0 概览" : "返回项目列表"}
+  backLabel={isSubArticle ? `返回 ${parentGroup} 概览` : "返回项目列表"}
 >
-  {isSubArticle && (
+  {isSubArticle && !hasSubfolder && (
     <ProjectSidebar
       slot="sidebar"
       articles={sidebarArticles}
       currentSlug={slugParts[slugParts.length - 1]}
+      groupName={parentGroup!}
+    />
+  )}
+  {hasSubfolder && (
+    <ProjectTreeSidebar
+      slot="sidebar"
+      articles={sidebarArticles}
+      currentSlug={slugParts.slice(1).join("/")}
       groupName={parentGroup!}
     />
   )}

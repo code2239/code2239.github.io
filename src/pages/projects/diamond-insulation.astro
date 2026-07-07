@@ -1,0 +1,87 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/ProjectLayout.astro";
+
+const allProjects = await getCollection("projects");
+const subArticles = allProjects
+  .filter((p) => p.id.startsWith("diamond-insulation/"))
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+
+const groups: Record<string, typeof subArticles> = {};
+for (const article of subArticles) {
+  const parts = article.id.replace(/^diamond-insulation\//, "").split("/");
+  const folder = parts.length > 1 ? parts[0] : "_root";
+  if (!groups[folder]) groups[folder] = [];
+  groups[folder].push(article);
+}
+
+const folderNames: Record<string, string> = {
+  prompts: "提示词",
+  references: "项目参考文献",
+  summary: "项目文献总结",
+};
+---
+
+<Layout
+  title="金刚石绝缘化 · 技术调研"
+  date="2026-07-07"
+  tags={["金刚石", "绝缘化", "异质集成", "半导体", "技术调研"]}
+  backHref="/projects"
+  backLabel="&larr; 返回项目列表"
+>
+  <div class="mb-10">
+    <p class="text-[var(--color-text-secondary)] leading-relaxed">
+      金刚石与硅的高质量异质集成技术调研项目。金刚石拥有超宽禁带（5.47 eV）、极高击穿电场（&gt;10 MV/cm）、极高热导率（&gt;2200 W/mK），
+      同时具备<strong>优异绝缘体</strong>和<strong>卓越热管理材料</strong>的双重角色。本调研覆盖三大主攻方向（MPCVD直接生长、薄膜直接键合、
+      低温介电层生长）和两条对标路线（hBN异质结FET、Diamane二维金刚石）。
+    </p>
+  </div>
+
+  <div class="grid grid-cols-3 gap-4 mb-10">
+    <div class="text-center p-4 rounded-lg bg-[var(--color-bg-secondary)] border border-[var(--color-border)]">
+      <div class="text-2xl font-bold text-[var(--color-accent)]">{subArticles.length}</div>
+      <div class="text-xs text-[var(--color-text-tertiary)] mt-1">文章总数</div>
+    </div>
+    <div class="text-center p-4 rounded-lg bg-[var(--color-bg-secondary)] border border-[var(--color-border)]">
+      <div class="text-2xl font-bold text-[var(--color-accent)]">{Object.keys(groups).length}</div>
+      <div class="text-xs text-[var(--color-text-tertiary)] mt-1">文件夹</div>
+    </div>
+    <div class="text-center p-4 rounded-lg bg-[var(--color-bg-secondary)] border border-[var(--color-border)]">
+      <div class="text-2xl font-bold text-[var(--color-accent)]">8</div>
+      <div class="text-xs text-[var(--color-text-tertiary)] mt-1">原始文献</div>
+    </div>
+  </div>
+
+  {
+    Object.entries(groups).sort(([a], [b]) => {
+      const order = ["summary", "references", "prompts"];
+      const ia = order.indexOf(a), ib = order.indexOf(b);
+      return (ia === -1 ? 99 : ia) - (ib === -1 ? 99 : ib);
+    }).map(([folder, articles]) => (
+      <div class="mb-8">
+        <h2 class="text-lg font-semibold mb-3 flex items-center gap-2">
+          <svg class="w-5 h-5 text-[var(--color-accent)]" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M10 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/>
+          </svg>
+          {folderNames[folder] || folder}
+          <span class="text-xs text-[var(--color-text-tertiary)] font-normal">({articles.length} 篇)</span>
+        </h2>
+        <div class="flex flex-col gap-2 ml-4 pl-4 border-l-2 border-[var(--color-border)]">
+          {articles.map((article) => (
+            <a
+              href={`/projects/${article.id.replace(/\.md$/, "")}`}
+              class="no-underline block p-3 rounded-lg border border-[var(--color-border)] hover:border-[var(--color-accent)] hover:shadow-[var(--shadow-sm)] transition-all duration-200"
+            >
+              <h3 class="text-sm font-semibold text-[var(--color-text)] mb-1 hover:text-[var(--color-accent)] transition-colors">
+                {article.data.title}
+              </h3>
+              <p class="text-xs text-[var(--color-text-tertiary)]">
+                {article.data.date}
+              </p>
+            </a>
+          ))}
+        </div>
+      </div>
+    ))
+  }
+</Layout>
