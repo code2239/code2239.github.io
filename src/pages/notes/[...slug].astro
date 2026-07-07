@@ -1,0 +1,47 @@
+---
+import { getCollection, render } from "astro:content";
+import BlogPost from "../../layouts/BlogPost.astro";
+
+export async function getStaticPaths() {
+  const notes = await getCollection("notes");
+  return notes.map((n) => ({
+    params: { slug: n.id.replace(/\.md$/, "") },
+    props: { note: n },
+  }));
+}
+
+const { note } = Astro.props;
+const { Content, headings } = await render(note);
+
+const bodyText = note.body || "";
+const wordCount = bodyText.length;
+---
+
+<BlogPost
+  title={note.data.title}
+  date={note.data.date}
+  tags={note.data.tags}
+  headings={headings}
+  wordCount={wordCount}
+  prevPost={null}
+  nextPost={null}
+>
+  <!-- Source info line -->
+  {note.data.source && (
+    <div class="mb-6 px-4 py-2.5 rounded-lg bg-[var(--color-accent-soft)] border border-[var(--color-border)] text-sm text-[var(--color-text-secondary)]">
+      <span class="text-[var(--color-text-tertiary)]">来源：</span>
+      {note.data.source}
+    </div>
+  )}
+
+  <Content />
+
+  <div>
+    <a
+      href="/notes"
+      class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150"
+    >
+      &larr; 返回笔记列表
+    </a>
+  </div>
+</BlogPost>
