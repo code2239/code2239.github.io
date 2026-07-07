@@ -66,7 +66,7 @@ function renderTree(nodes: FileNode[], depth: number): string {
       html += '<span class="tree-toggle"></span>';
       const icon = node.ext === "pdf" ? "📄" : node.ext === "md" ? "📝" : node.ext === "py" ? "🐍" : "📄";
       html += '<span class="tree-icon">' + icon + '</span>';
-      html += '<a class="tree-name" href="' + node.webPath + '" target="_blank">' + escapeHtml(node.name) + '</a>';
+      html += '<a class="tree-name" href="' + node.webPath + '">' + escapeHtml(node.name) + '</a>';
       if (node.ext) html += '<span class="tree-badge tree-badge-' + node.ext + '">' + node.ext.toUpperCase() + '</span>';
       if (node.size) html += '<span class="tree-size">' + node.size + '</span>';
       html += '</div></li>';
@@ -89,7 +89,7 @@ const treeHtml = renderTree(tree, 0);
       金刚石/硅异质集成绝缘化技术深度调研项目。覆盖低温 MPCVD 生长、Diamane（双层金刚石烯）、单晶膜键合三大技术路线。
     </p>
     <p class="text-sm text-[var(--color-text-tertiary)] mt-3">
-      以下列出项目全部文件（保持原始文件夹结构）。点击文件名可在新标签页中打开 PDF 或 Markdown 原文。
+      以下列出项目全部文件（保持原始文件夹结构）。点击文件名即可直接阅读，左侧自动显示项目文件导航。
     </p>
   </div>
 
