@@ -1,0 +1,154 @@
+---
+interface TagEntry {
+  0: string;
+  1: number;
+}
+
+interface Props {
+  allTags: TagEntry[];
+  totalNotes: number;
+  categoryCounts: Record<string, number>;
+}
+
+const { allTags, totalNotes, categoryCounts } = Astro.props;
+
+const categories = [
+  { value: "", label: "全部", count: totalNotes },
+  { value: "reading", label: "读书笔记", count: categoryCounts.reading || 0 },
+  { value: "learning", label: "学习笔记", count: categoryCounts.learning || 0 },
+  { value: "research", label: "研究记录", count: categoryCounts.research || 0 },
+];
+---
+
+<div class="space-y-5">
+  <!-- Category filter -->
+  <div>
+    <h3 class="text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-2">笔记类型</h3>
+    <div class="flex flex-wrap gap-1.5">
+      {categories.map((cat) => (
+        <button
+          class={`note-cat-btn text-xs px-2.5 py-1 rounded-full border border-[var(--color-border)] hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] transition-colors cursor-pointer ${
+            cat.value === "" ? "active bg-[var(--color-accent)] text-white border-[var(--color-accent)]" : "bg-transparent text-[var(--color-text-secondary)]"
+          }`}
+          data-category={cat.value}
+        >
+          {cat.label} ({cat.count})
+        </button>
+      ))}
+    </div>
+  </div>
+
+  <!-- Tag filter -->
+  <div>
+    <h3 class="text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-2">标签</h3>
+    <div class="flex flex-wrap gap-1.5">
+      {allTags.map(([tag, count]) => (
+        <button
+          class="note-tag-btn text-xs px-2.5 py-1 rounded-full bg-transparent border border-[var(--color-border)] text-[var(--color-text-secondary)] hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] transition-colors cursor-pointer"
+          data-tag={tag}
+        >
+          {tag} ({count})
+        </button>
+      ))}
+    </div>
+  </div>
+</div>
+
+<script>
+  function initNotesFilter() {
+    const catBtns = document.querySelectorAll<HTMLButtonElement>(".note-cat-btn");
+    const tagBtns = document.querySelectorAll<HTMLButtonElement>(".note-tag-btn");
+    const items = document.querySelectorAll<HTMLElement>(".note-item");
+    const emptyEl = document.getElementById("notes-filter-empty");
+
+    let activeCategory = "";
+    let activeTag = "";
+
+    function updateVisibility() {
+      let visibleCount = 0;
+
+      items.forEach((item) => {
+        const itemCategory = item.getAttribute("data-category") || "";
+        const itemTags = item.getAttribute("data-tags") || "";
+
+        const catMatch = !activeCategory || itemCategory === activeCategory;
+        const tagMatch = !activeTag || itemTags.split(",").includes(activeTag);
+
+        if (catMatch && tagMatch) {
+          item.style.display = "";
+          visibleCount++;
+        } else {
+          item.style.display = "none";
+        }
+      });
+
+      if (emptyEl) emptyEl.style.display = visibleCount === 0 ? "block" : "none";
+    }
+
+    catBtns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        activeCategory = btn.getAttribute("data-category") || "";
+        catBtns.forEach((b) => {
+          const isActive = b.getAttribute("data-category") === activeCategory;
+          if (isActive) {
+            b.className = b.className.replace(/bg-transparent text-\[var\(--color-text-secondary\)\]/, "bg-[var(--color-accent)] text-white border-[var(--color-accent)]");
+          } else {
+            b.className = b.className.replace(/bg-\[var\(--color-accent\)\] text-white border-\[var\(--color-accent\)\]/, "bg-transparent text-[var(--color-text-secondary)]");
+          }
+        });
+        const url = new URL(window.location.href);
+        activeCategory ? url.searchParams.set("category", activeCategory) : url.searchParams.delete("category");
+        window.history.replaceState({}, "", url.toString());
+        updateVisibility();
+      });
+    });
+
+    tagBtns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const tag = btn.getAttribute("data-tag") || "";
+        if (activeTag === tag) {
+          activeTag = "";
+          const allTagBtns = document.querySelectorAll<HTMLButtonElement>(".note-tag-btn");
+          allTagBtns.forEach((b) => {
+            b.classList.remove("active");
+            b.classList.remove("bg-[var(--color-accent)]", "text-white", "border-[var(--color-accent)]");
+          });
+        } else {
+          activeTag = tag;
+          tagBtns.forEach((b) => {
+            const match = b.getAttribute("data-tag") === activeTag;
+            if (match) {
+              b.classList.add("active", "bg-[var(--color-accent)]", "text-white", "border-[var(--color-accent)]");
+            } else {
+              b.classList.remove("active", "bg-[var(--color-accent)]", "text-white", "border-[var(--color-accent)]");
+            }
+          });
+        }
+        const url = new URL(window.location.href);
+        activeTag ? url.searchParams.set("tag", activeTag) : url.searchParams.delete("tag");
+        window.history.replaceState({}, "", url.toString());
+        updateVisibility();
+      });
+    });
+
+    // Handle initial URL params
+    const params = new URLSearchParams(window.location.search);
+    const initialCategory = params.get("category") || "";
+    const initialTag = params.get("tag") || "";
+    if (initialCategory) {
+      activeCategory = initialCategory;
+      catBtns.forEach((b) => b.classList.toggle("active", b.getAttribute("data-category") === activeCategory));
+    }
+    if (initialTag) {
+      activeTag = initialTag;
+      tagBtns.forEach((b) => b.classList.toggle("active", b.getAttribute("data-tag") === activeTag));
+    }
+    updateVisibility();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initNotesFilter);
+  } else {
+    initNotesFilter();
+  }
+</script>
