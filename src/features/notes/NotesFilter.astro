@@ -27,8 +27,8 @@ const categories = [
     <div class="flex flex-wrap gap-1.5">
       {categories.map((cat) => (
         <button
-          class={`note-cat-btn text-xs px-2.5 py-1 rounded-full border border-[var(--color-border)] hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] transition-colors cursor-pointer ${
-            cat.value === "" ? "active bg-[var(--color-accent)] text-white border-[var(--color-accent)]" : "bg-transparent text-[var(--color-text-secondary)]"
+          class={`note-cat-btn text-xs px-2.5 py-1 rounded-full bg-transparent text-[var(--color-text-secondary)] border border-[var(--color-border)] hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] transition-colors cursor-pointer ${
+            cat.value === "" ? "active" : ""
           }`}
           data-category={cat.value}
         >
@@ -53,6 +53,15 @@ const categories = [
     </div>
   </div>
 </div>
+
+<style>
+  .note-cat-btn.active,
+  .note-tag-btn.active {
+    background: var(--color-accent);
+    color: white;
+    border-color: var(--color-accent);
+  }
+</style>
 
 <script>
   function initNotesFilter() {
@@ -89,12 +98,7 @@ const categories = [
       btn.addEventListener("click", () => {
         activeCategory = btn.getAttribute("data-category") || "";
         catBtns.forEach((b) => {
-          const isActive = b.getAttribute("data-category") === activeCategory;
-          if (isActive) {
-            b.className = b.className.replace(/bg-transparent text-\[var\(--color-text-secondary\)\]/, "bg-[var(--color-accent)] text-white border-[var(--color-accent)]");
-          } else {
-            b.className = b.className.replace(/bg-\[var\(--color-accent\)\] text-white border-\[var\(--color-accent\)\]/, "bg-transparent text-[var(--color-text-secondary)]");
-          }
+          b.classList.toggle("active", b.getAttribute("data-category") === activeCategory);
         });
         const url = new URL(window.location.href);
         activeCategory ? url.searchParams.set("category", activeCategory) : url.searchParams.delete("category");
@@ -108,20 +112,13 @@ const categories = [
         const tag = btn.getAttribute("data-tag") || "";
         if (activeTag === tag) {
           activeTag = "";
-          const allTagBtns = document.querySelectorAll<HTMLButtonElement>(".note-tag-btn");
-          allTagBtns.forEach((b) => {
+          tagBtns.forEach((b) => {
             b.classList.remove("active");
-            b.classList.remove("bg-[var(--color-accent)]", "text-white", "border-[var(--color-accent)]");
           });
         } else {
           activeTag = tag;
           tagBtns.forEach((b) => {
-            const match = b.getAttribute("data-tag") === activeTag;
-            if (match) {
-              b.classList.add("active", "bg-[var(--color-accent)]", "text-white", "border-[var(--color-accent)]");
-            } else {
-              b.classList.remove("active", "bg-[var(--color-accent)]", "text-white", "border-[var(--color-accent)]");
-            }
+            b.classList.toggle("active", b.getAttribute("data-tag") === activeTag);
           });
         }
         const url = new URL(window.location.href);
