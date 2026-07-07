@@ -9,79 +9,90 @@ interface Props {
   github?: string;
   demo?: string;
   image?: string;
+  backHref?: string;
+  backLabel?: string;
 }
 
-const { title, date, tags, github, demo, image } = Astro.props;
+const { title, date, tags, github, demo, image, backHref = "/projects", backLabel = "返回项目列表" } = Astro.props;
+
+const hasSidebar = !!Astro.slots.sidebar;
 ---
 
 <Layout title={title}>
   <div class="px-6 xl:px-12 pt-12 pb-16">
-    <article class="max-w-content">
-      <header class="mb-10 text-center">
-        <h1 class="text-3xl font-semibold mb-3 tracking-tight">{title}</h1>
-        <div class="flex items-center justify-center gap-2 text-[var(--color-text-tertiary)] text-sm">
-          <time datetime={date}>{date}</time>
-          {tags.length > 0 && (
-            <>
-              <span class="text-[var(--color-border)]">·</span>
-              <TagList tags={tags} />
-            </>
-          )}
-        </div>
-      </header>
-
-      <!-- Cover image -->
-      {image && (
-        <div class="mb-10 -mx-6 sm:mx-0 rounded-none sm:rounded-xl overflow-hidden border border-[var(--color-border)]">
-          <img
-            src={image}
-            alt={title}
-            class="w-full h-auto object-cover"
-          />
-        </div>
+    <div class={hasSidebar ? "project-detail-layout" : ""}>
+      {hasSidebar && (
+        <aside class="project-detail-sidebar">
+          <div class="sticky top-20">
+            <slot name="sidebar" />
+          </div>
+        </aside>
       )}
 
-      <!-- Markdown body -->
-      <div class="prose prose-neutral max-w-none">
-        <slot />
-      </div>
+      <article class={hasSidebar ? "project-detail-content" : "max-w-content"}>
+        <header class="mb-10 text-center">
+          <h1 class="text-3xl font-semibold mb-3 tracking-tight">{title}</h1>
+          <div class="flex items-center justify-center gap-2 text-[var(--color-text-tertiary)] text-sm">
+            <time datetime={date}>{date}</time>
+            {tags.length > 0 && (
+              <>
+                <span class="text-[var(--color-border)]">·</span>
+                <TagList tags={tags} />
+              </>
+            )}
+          </div>
+        </header>
 
-      <!-- Action buttons -->
-      {(github || demo) && (
-        <div class="flex items-center justify-center gap-4 mt-12 pt-8 border-t border-[var(--color-border)]">
-          {github && (
-            <a
-              href={github}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[var(--color-bg-secondary)] border border-[var(--color-border)] text-sm font-medium no-underline hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] transition-colors"
-            >
-              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
-              GitHub
-            </a>
-          )}
-          {demo && (
-            <a
-              href={demo}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[var(--color-accent)] text-white text-sm font-medium no-underline hover:opacity-90 transition-opacity"
-            >
-              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-              Live Demo
-            </a>
-          )}
+        {image && (
+          <div class="mb-10 -mx-6 sm:mx-0 rounded-none sm:rounded-xl overflow-hidden border border-[var(--color-border)]">
+            <img src={image} alt={title} class="w-full h-auto object-cover" />
+          </div>
+        )}
+
+        <div class="prose prose-neutral max-w-none">
+          <slot />
         </div>
-      )}
 
-      <div class="mt-12 pt-8 border-t border-[var(--color-border)]">
-        <a
-          href="/projects"
-          class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150"
-        >
-          &larr; 返回项目列表
-        </a>
-      </div>
-    </article>
+        {(github || demo) && (
+          <div class="flex items-center justify-center gap-4 mt-12 pt-8 border-t border-[var(--color-border)]">
+            {github && (
+              <a href={github} target="_blank" rel="noopener noreferrer"
+                class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[var(--color-bg-secondary)] border border-[var(--color-border)] text-sm font-medium no-underline hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] transition-colors">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+                GitHub
+              </a>
+            )}
+            {demo && (
+              <a href={demo} target="_blank" rel="noopener noreferrer"
+                class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[var(--color-accent)] text-white text-sm font-medium no-underline hover:opacity-90 transition-opacity">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                Live Demo
+              </a>
+            )}
+          </div>
+        )}
+
+        <div class="mt-12 pt-8 border-t border-[var(--color-border)]">
+          <a href={backHref} class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150">
+            &larr; {backLabel}
+          </a>
+        </div>
+      </article>
+    </div>
   </div>
 </Layout>
+
+<style>
+  .project-detail-layout { display: block; }
+  .project-detail-sidebar { margin-bottom: 2rem; }
+  .project-detail-content { min-width: 0; }
+  @media (min-width: 768px) {
+    .project-detail-layout {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+    .project-detail-sidebar { margin-bottom: 0; }
+  }
+</style>

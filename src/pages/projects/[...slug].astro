@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from "astro:content";
 import ProjectLayout from "../../layouts/ProjectLayout.astro";
+import ProjectSidebar from "../../features/projects/ProjectSidebar.astro";
 
 export async function getStaticPaths() {
   const projects = await getCollection("projects");
@@ -12,6 +13,26 @@ export async function getStaticPaths() {
 
 const { project } = Astro.props;
 const { Content } = await render(project);
+
+// Detect if this is a sub-article (has parent group)
+const slug = project.id.replace(/\.md$/, "");
+const slugParts = slug.split("/");
+const isSubArticle = slugParts.length > 1;
+const parentGroup = isSubArticle ? slugParts[0] : null;
+
+// Fetch sibling articles for sidebar
+let sidebarArticles: Array<{ slug: string; title: string; date: string }> = [];
+if (isSubArticle) {
+  const allProjects = await getCollection("projects");
+  sidebarArticles = allProjects
+    .filter((p) => p.id.startsWith(parentGroup + "/"))
+    .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
+    .map((p) => ({
+      slug: p.id.replace(/\.md$/, "").replace(parentGroup + "/", ""),
+      title: p.data.title,
+      date: p.data.date,
+    }));
+}
 ---
 
 <ProjectLayout
@@ -21,6 +42,17 @@ const { Content } = await render(project);
   github={project.data.github}
   demo={project.data.demo}
   image={project.data.image}
+  backHref={isSubArticle ? `/projects/${parentGroup}` : "/projects"}
+  backLabel={isSubArticle ? "返回 Program 0 概览" : "返回项目列表"}
 >
+  {isSubArticle && (
+    <slot name="sidebar">
+      <ProjectSidebar
+        articles={sidebarArticles}
+        currentSlug={slugParts[slugParts.length - 1]}
+        groupName={parentGroup!}
+      />
+    </slot>
+  )}
   <Content />
 </ProjectLayout>
