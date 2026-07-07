@@ -3,7 +3,6 @@ title: "claude.md（Tech Discovery Driven Research OS Agent）"
 date: "2026-07-06"
 tags: ["科研AI", "Program-0", "技术调研"]
 summary: "claude.md（Tech Discovery Driven Research OS Agent）"
-categories: ["program-0/claude-md"]
 ---
 
 

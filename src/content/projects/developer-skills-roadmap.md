@@ -3,7 +3,6 @@ title: "科研AI系统：开发者技能路线图"
 date: "2026-07-06"
 tags: ["科研AI", "Program-0", "技术调研"]
 summary: "科研AI系统：开发者技能路线图"
-categories: ["program-0/learning-curve"]
 ---
 
 

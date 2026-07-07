@@ -3,7 +3,6 @@ title: "科研AI系统：可视化与调试方案（全开源版）"
 date: "2026-07-06"
 tags: ["科研AI", "Program-0", "技术调研"]
 summary: "科研AI系统：可视化与调试方案（全开源版）"
-categories: ["program-0/final-output"]
 ---
 
 

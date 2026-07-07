@@ -3,7 +3,6 @@ title: "科研AI系统 · 技术可行性分析报告"
 date: "2026-07-06"
 tags: ["科研AI", "Program-0", "技术调研"]
 summary: "科研AI系统 · 技术可行性分析报告"
-categories: ["program-0/tech-report"]
 ---
 
 

@@ -3,7 +3,6 @@ title: "已有集成方案调研：有哪些现成的开源工程？"
 date: "2026-07-06"
 tags: ["科研AI", "Program-0", "技术调研"]
 summary: "已有集成方案调研：有哪些现成的开源工程？"
-categories: ["program-0/existing-solutions"]
 ---
 
 
