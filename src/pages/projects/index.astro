@@ -45,6 +45,9 @@ const groupEntries = [...groups.entries()];
             const dates = sorted.map((i) => i.data.date);
             const earliest = dates.sort()[0];
             const latest = dates.sort().reverse()[0];
+            const firstSummary = sorted[0]?.data.summary || "";
+            const displayName = groupName.replace(/-/g, " ");
+            const allTags = [...new Set(items.flatMap((i) => i.data.tags))].slice(0, 5);
             return (
               <div class="fade-in h-full">
                 <article class="card-hover overflow-hidden h-full flex flex-col">
@@ -58,12 +61,12 @@ const groupEntries = [...groups.entries()];
                       </span>
                     </div>
                     <div class="p-5 flex flex-col flex-1">
-                      <h3 class="text-base font-semibold mb-1 text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors">
-                        {groupName === "program-0" ? "Program 0 · 科研AI系统" : groupName}
+                      <h3 class="text-base font-semibold mb-1 text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors capitalize">
+                        {displayName}
                       </h3>
                       <p class="text-xs text-[var(--color-text-tertiary)] mb-2">{earliest} ~ {latest}</p>
-                      <p class="text-[var(--color-text-secondary)] text-sm leading-relaxed">
-                        从论文到假设的全自动研究操作系统技术方案，包含{items.length}篇技术文档。
+                      <p class="text-[var(--color-text-secondary)] text-sm leading-relaxed line-clamp-2">
+                        {firstSummary}
                       </p>
                     </div>
                   </a>

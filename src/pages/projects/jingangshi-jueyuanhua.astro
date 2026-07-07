@@ -1,0 +1,37 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/ProjectLayout.astro";
+
+const allProjects = await getCollection("projects");
+const subArticles = allProjects
+  .filter((p) => p.id.startsWith("jingangshi-jueyuanhua/"))
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+---
+
+<Layout title="金刚石绝缘化" date="2026-07-07" tags={["金刚石", "半导体", "绝缘化", "MPCVD"]}>
+  <div class="mb-10">
+    <p class="text-[var(--color-text-secondary)] leading-relaxed">
+      金刚石/硅异质集成绝缘化技术深度调研。覆盖低温 MPCVD 生长、Diamane 合成、单晶膜键合三大技术路线，
+      从绝缘能力、界面质量、CMOS 兼容性等多维度进行横向对标，梳理 SOTA 天花板与未来研究空白。
+    </p>
+  </div>
+
+  <h2 class="text-xl font-semibold mb-4">技术文档 ({subArticles.length} 篇)</h2>
+
+  <div class="flex flex-col gap-3">
+    {subArticles.map((article) => (
+      <a
+        href={`/projects/${article.id.replace(/\.md$/, "")}`}
+        class="no-underline block p-4 rounded-lg border border-[var(--color-border)] hover:border-[var(--color-accent)] hover:shadow-[var(--shadow-md)] transition-all duration-200"
+      >
+        <h3 class="text-sm font-semibold text-[var(--color-text)] mb-1 hover:text-[var(--color-accent)] transition-colors">
+          {article.data.title}
+        </h3>
+        <p class="text-xs text-[var(--color-text-tertiary)] mb-2">{article.data.date}</p>
+        <p class="text-[var(--color-text-secondary)] text-sm leading-relaxed line-clamp-2">
+          {article.data.summary}
+        </p>
+      </a>
+    ))}
+  </div>
+</Layout>
