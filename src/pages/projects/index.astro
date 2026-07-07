@@ -3,11 +3,28 @@ import { getCollection } from "astro:content";
 import Layout from "../../components/Layout.astro";
 import ProjectCard from "../../components/ProjectCard.astro";
 
-const projects = await getCollection("projects");
-const sortedProjects = projects.sort(
-  (a, b) =>
-    new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+const allProjects = await getCollection("projects");
+
+// Split into root-level and subdirectory entries
+const rootProjects: typeof allProjects = [];
+const groups = new Map<string, typeof allProjects>();
+
+for (const p of allProjects) {
+  const parts = p.id.split("/");
+  if (parts.length === 1) {
+    rootProjects.push(p);
+  } else {
+    const groupName = parts[0];
+    if (!groups.has(groupName)) groups.set(groupName, []);
+    groups.get(groupName)!.push(p);
+  }
+}
+
+const sortedRoot = rootProjects.sort(
+  (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
 );
+
+const groupEntries = [...groups.entries()];
 ---
 
 <Layout title="项目">
@@ -15,15 +32,47 @@ const sortedProjects = projects.sort(
     <div class="max-w-content">
       <h1 class="text-3xl font-semibold mb-2">
         项目
-        {projects.length > 0 && (
-          <span class="text-[var(--color-text-tertiary)] text-xl font-normal"> ({projects.length} 个)</span>
+        {(rootProjects.length + groups.size) > 0 && (
+          <span class="text-[var(--color-text-tertiary)] text-xl font-normal"> ({rootProjects.length + groups.size} 个)</span>
         )}
       </h1>
       <p class="text-[var(--color-text-secondary)] mb-10">项目作品展示</p>
 
-      {projects.length > 0 ? (
+      {(rootProjects.length + groups.size) > 0 ? (
         <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-          {sortedProjects.map((project) => (
+          {groupEntries.map(([groupName, items]) => {
+            const sorted = items.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+            const dates = sorted.map((i) => i.data.date);
+            const earliest = dates.sort()[0];
+            const latest = dates.sort().reverse()[0];
+            return (
+              <div class="fade-in h-full">
+                <article class="card-hover overflow-hidden h-full flex flex-col">
+                  <a href={`/projects/${groupName}`} class="no-underline flex flex-col h-full group">
+                    <div class="aspect-[16/9] bg-gradient-to-br from-[var(--color-accent-soft)] to-[var(--color-bg-tertiary)] flex items-center justify-center relative">
+                      <svg class="w-14 h-14 text-[var(--color-accent)]/30" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M10 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/>
+                      </svg>
+                      <span class="absolute bottom-4 right-4 text-xs font-mono text-[var(--color-text-tertiary)] bg-[var(--color-bg)]/80 px-2 py-1 rounded">
+                        {items.length} 篇文章
+                      </span>
+                    </div>
+                    <div class="p-5 flex flex-col flex-1">
+                      <h3 class="text-base font-semibold mb-1 text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors">
+                        {groupName === "program-0" ? "Program 0 · 科研AI系统" : groupName}
+                      </h3>
+                      <p class="text-xs text-[var(--color-text-tertiary)] mb-2">{earliest} ~ {latest}</p>
+                      <p class="text-[var(--color-text-secondary)] text-sm leading-relaxed">
+                        从论文到假设的全自动研究操作系统技术方案，包含{items.length}篇技术文档。
+                      </p>
+                    </div>
+                  </a>
+                </article>
+              </div>
+            );}
+          )}
+
+          {sortedRoot.map((project) => (
             <div class="fade-in h-full">
               <ProjectCard
                 title={project.data.title}

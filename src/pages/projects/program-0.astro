@@ -1,0 +1,37 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/ProjectLayout.astro";
+
+const allProjects = await getCollection("projects");
+const subArticles = allProjects
+  .filter((p) => p.id.startsWith("program-0/"))
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+---
+
+<Layout title="Program 0 · 科研AI系统" date="2026-07-06" tags={["科研AI", "Python", "LLM"]}>
+  <div class="mb-10">
+    <p class="text-[var(--color-text-secondary)] leading-relaxed">
+      一个从科研论文（PDF）到科研灵感（可验证假设）的全自动 AI 系统。包含 7 个核心模块：
+      文档理解、信息抽取、实验流程抽取、知识图谱、认知压缩、灵感生成、多智能体评估。
+    </p>
+  </div>
+
+  <h2 class="text-xl font-semibold mb-4">技术文档 ({subArticles.length} 篇)</h2>
+
+  <div class="flex flex-col gap-3">
+    {subArticles.map((article) => (
+      <a
+        href={`/projects/${article.id.replace(/\.md$/, "")}`}
+        class="no-underline block p-4 rounded-lg border border-[var(--color-border)] hover:border-[var(--color-accent)] hover:shadow-[var(--shadow-md)] transition-all duration-200"
+      >
+        <h3 class="text-sm font-semibold text-[var(--color-text)] mb-1 hover:text-[var(--color-accent)] transition-colors">
+          {article.data.title}
+        </h3>
+        <p class="text-xs text-[var(--color-text-tertiary)] mb-2">{article.data.date}</p>
+        <p class="text-[var(--color-text-secondary)] text-sm leading-relaxed line-clamp-2">
+          {article.data.summary}
+        </p>
+      </a>
+    ))}
+  </div>
+</Layout>
