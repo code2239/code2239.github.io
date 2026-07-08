@@ -1,6 +1,4 @@
 ---
-import "../../styles/calendar-theme.css";
-
 interface TagEntry {
   0: string;
   1: number;
@@ -44,8 +42,15 @@ const categories = [
   <!-- Calendar -->
   <div>
     <h3 class="text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-2">日期</h3>
-    <div id="notes-calendar" data-dates={noteDates.join(",")}></div>
-    <button id="cal-clear" class="mt-2 text-[10px] text-[var(--color-text-tertiary)] hover:text-[var(--color-accent)] transition-colors hidden">清除日期筛选</button>
+    <div id="notes-calendar" class="text-xs" data-dates={noteDates.join(",")}>
+      <div class="flex items-center justify-between mb-1.5">
+        <button id="cal-prev" class="text-[var(--color-text-tertiary)] hover:text-[var(--color-accent)] transition-colors leading-none p-0.5" aria-label="上个月">&larr;</button>
+        <span id="cal-label" class="font-medium text-[var(--color-text)]"></span>
+        <button id="cal-next" class="text-[var(--color-text-tertiary)] hover:text-[var(--color-accent)] transition-colors leading-none p-0.5" aria-label="下个月">&rarr;</button>
+      </div>
+      <div id="cal-grid"></div>
+      <button id="cal-clear" class="mt-1.5 text-[10px] text-[var(--color-text-tertiary)] hover:text-[var(--color-accent)] transition-colors hidden">清除日期筛选</button>
+    </div>
   </div>
 
   <!-- Tag filter -->
@@ -72,66 +77,53 @@ const categories = [
     border-color: var(--color-accent);
   }
 
-  /* color-calendar theme — CSS custom properties */
-  :global(:root) {
-    --cal-color-primary: var(--color-accent);
-    --cal-font-family-header: var(--font-sans);
-    --cal-font-family-weekdays: var(--font-sans);
-    --cal-font-family-body: var(--font-sans);
+  /* ── Calendar ── */
+  #cal-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+    text-align: center;
   }
-
-  /* calendar container tweaks */
-  :global(#notes-calendar) {
-    width: 100%;
-  }
-  :global(#notes-calendar .color-calendar) {
-    background: transparent;
-  }
-  :global(#notes-calendar .calendar__header) {
+  .cal-day-name {
+    padding: 2px 0 4px;
     color: var(--color-text-tertiary);
-  }
-  :global(#notes-calendar .calendar__monthyear) {
-    font-size: 13px;
-    color: var(--color-text);
-  }
-  :global(#notes-calendar .calendar__day) {
-    font-size: 11px;
-    font-weight: 300;
-    color: var(--color-text);
-  }
-  /* prev/next month → extra faint */
-  :global(#notes-calendar .calendar__day.prev-month),
-  :global(#notes-calendar .calendar__day.next-month) {
-    color: color-mix(in srgb, var(--color-text-tertiary) 25%, transparent);
-  }
-  /* all day text → light; has-note → bold */
-  :global(#notes-calendar .calendar__day-text) {
-    font-weight: 300 !important;
-  }
-  :global(#notes-calendar .calendar__day.has-note .calendar__day-text) {
-    font-weight: 700 !important;
-  }
-  /* arrows */
-  :global(#notes-calendar .calendar__arrow) {
-    opacity: 0.5;
-  }
-  :global(#notes-calendar .calendar__arrow:hover) {
-    opacity: 0.8;
-  }
-  :global(#notes-calendar .calendar__weekday) {
     font-size: 10px;
-    height: 28px;
   }
-  :global(#notes-calendar .calendar__day-text) {
+  .cal-day {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    cursor: default;
+    font-weight: 300;
     font-size: 11px;
+    color: var(--color-text);
+    transition: background 0.15s, box-shadow 0.15s;
+    position: relative;
   }
-  :global(#notes-calendar .calendar__day-bullet) {
-    display: none;
+  .cal-day:hover {
+    box-shadow: inset 0 0 0 1.5px var(--color-accent);
+  }
+  .cal-day.has-note {
+    cursor: pointer;
+    font-weight: 700;
+  }
+  .cal-day.has-note:hover {
+    background: color-mix(in srgb, var(--color-accent) 12%, transparent);
+  }
+  .cal-day.active {
+    background: var(--color-accent);
+    color: white;
+    font-weight: 600;
+  }
+  .cal-day.other-month {
+    color: color-mix(in srgb, var(--color-text-tertiary) 25%, transparent);
   }
 </style>
 
 <script>
-  async function initNotesFilter() {
+  function initNotesFilter() {
     const catBtns = document.querySelectorAll<HTMLButtonElement>(".note-cat-btn");
     const tagBtns = document.querySelectorAll<HTMLButtonElement>(".note-tag-btn");
     const items = document.querySelectorAll<HTMLElement>(".note-item");
@@ -188,94 +180,87 @@ const categories = [
       });
     });
 
-    // ===== color-calendar =====
-    const calRoot = document.getElementById("notes-calendar")!;
+    // ===== Hand-rolled Calendar =====
+    const calGrid = document.getElementById("cal-grid")!;
+    const calLabel = document.getElementById("cal-label")!;
     const calClear = document.getElementById("cal-clear")!;
+    const prevBtn = document.getElementById("cal-prev")!;
+    const nextBtn = document.getElementById("cal-next")!;
+    const calRoot = document.getElementById("notes-calendar")!;
     const rawDates: string[] = (calRoot.dataset.dates || "").split(",").filter((d) => d);
+    const noteSet = new Set(rawDates);
+    const DAY_NAMES = ["一","二","三","四","五","六","日"];
 
-    const { default: Calendar } = await import("color-calendar");
+    let calYear: number, calMonth: number;
 
-    const initialDate = activeDate ? new Date(activeDate + "T00:00:00") : null;
+    // Start on newest note's month
+    if (rawDates.length > 0) {
+      const newest = new Date([...rawDates].sort().reverse()[0] + "T00:00:00");
+      calYear = newest.getFullYear();
+      calMonth = newest.getMonth();
+    } else {
+      const now = new Date();
+      calYear = now.getFullYear();
+      calMonth = now.getMonth();
+    }
 
-    const calendar = new Calendar({
-      container: calRoot,
-      theme: "basic",
-      calendarSize: "small",
-      primaryColor: getComputedStyle(document.documentElement).getPropertyValue("--color-accent").trim(),
-      headerColor: getComputedStyle(document.documentElement).getPropertyValue("--color-text").trim(),
-      headerBackgroundColor: "transparent",
-      weekdaysColor: getComputedStyle(document.documentElement).getPropertyValue("--color-text-tertiary").trim(),
-      weekdayDisplayType: "long-lower",
-      startWeekday: 1,  // Monday
-      borderRadius: "0.5rem",
-      fontFamilyBody: getComputedStyle(document.documentElement).getPropertyValue("--font-sans").trim(),
-      fontFamilyHeader: getComputedStyle(document.documentElement).getPropertyValue("--font-sans").trim(),
-      fontFamilyWeekdays: getComputedStyle(document.documentElement).getPropertyValue("--font-sans").trim(),
-      disableMonthYearPickers: true,
-      eventsData: rawDates.map((d) => ({ start: d })),
-      selectedDate: initialDate,
-      onMonthChange() {
-        // Re-apply has-note classes after render
-        setTimeout(() => markNoteDays(), 0);
-      },
-      onSelectedDateClick(currentDate: Date | undefined) {
-        if (!currentDate) return;
-        const y = currentDate.getFullYear();
-        const m = String(currentDate.getMonth() + 1).padStart(2, "0");
-        const d = String(currentDate.getDate()).padStart(2, "0");
-        const ds = `${y}-${m}-${d}`;
-        const previousDate = calendar.getSelectedDate();
-        if (previousDate) {
-          const py = previousDate.getFullYear();
-          const pm = String(previousDate.getMonth() + 1).padStart(2, "0");
-          const pd = String(previousDate.getDate()).padStart(2, "0");
-          const ps = `${py}-${pm}-${pd}`;
-          if (ds === ps) {
-            // Toggle off
-            activeDate = "";
-            calendar.setSelectedDate(null);
-            calClear.classList.add("hidden");
-            const url = new URL(window.location.href);
-            url.searchParams.delete("date");
-            window.history.replaceState({}, "", url.toString());
-            updateVisibility();
-            return;
-          }
+    function renderCalendar() {
+      calLabel.textContent = `${calYear}年${calMonth + 1}月`;
+      let html = "";
+      DAY_NAMES.forEach((d) => { html += `<div class="cal-day-name">${d}</div>`; });
+
+      const firstDay = new Date(calYear, calMonth, 1).getDay(); // 0=Sun
+      const offset = firstDay === 0 ? 6 : firstDay - 1; // Mon=0
+      const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
+
+      // Prev month tail
+      const prevDays = new Date(calYear, calMonth, 0).getDate();
+      for (let i = offset - 1; i >= 0; i--) {
+        html += `<div class="cal-day other-month">${prevDays - i}</div>`;
+      }
+      // Current month
+      for (let d = 1; d <= daysInMonth; d++) {
+        const ds = `${calYear}-${String(calMonth + 1).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
+        const has = noteSet.has(ds);
+        const sel = ds === activeDate ? " active" : "";
+        const note = has ? " has-note" : "";
+        html += `<div class="cal-day${note}${sel}" data-date="${ds}"${has ? ' role="button" tabindex="0"' : ""}>${d}</div>`;
+      }
+      // Next month head
+      const tail = 7 - ((offset + daysInMonth) % 7);
+      if (tail < 7) {
+        for (let d = 1; d <= tail; d++) {
+          html += `<div class="cal-day other-month">${d}</div>`;
         }
-        activeDate = ds;
-        calClear.classList.remove("hidden");
-        const url = new URL(window.location.href);
-        url.searchParams.set("date", ds);
-        window.history.replaceState({}, "", url.toString());
-        updateVisibility();
-      },
-    });
+      }
+      calGrid.innerHTML = html;
 
-    // Tag days that have notes so CSS can style them
-    function markNoteDays() {
-      calRoot.querySelectorAll(".calendar__day").forEach((el) => el.classList.remove("has-note"));
-      calRoot.querySelectorAll(".calendar__day-bullet").forEach((b) => {
-        b.closest(".calendar__day")?.classList.add("has-note");
+      // Bind day clicks
+      calGrid.querySelectorAll<HTMLElement>(".cal-day.has-note").forEach((el) => {
+        el.addEventListener("click", () => {
+          const d = el.dataset.date!;
+          activeDate = activeDate === d ? "" : d;
+          calClear.classList.toggle("hidden", !activeDate);
+          renderCalendar();
+          const url = new URL(window.location.href);
+          activeDate ? url.searchParams.set("date", activeDate) : url.searchParams.delete("date");
+          window.history.replaceState({}, "", url.toString());
+          updateVisibility();
+        });
       });
     }
-    markNoteDays();
 
+    prevBtn.addEventListener("click", () => { calMonth--; if (calMonth < 0) { calMonth = 11; calYear--; } renderCalendar(); });
+    nextBtn.addEventListener("click", () => { calMonth++; if (calMonth > 11) { calMonth = 0; calYear++; } renderCalendar(); });
     calClear.addEventListener("click", () => {
       activeDate = "";
-      calendar.setSelectedDate(null);
-      calClear.classList.add("hidden");
+      renderCalendar();
       const url = new URL(window.location.href);
       url.searchParams.delete("date");
       window.history.replaceState({}, "", url.toString());
       updateVisibility();
     });
-
-    if (rawDates.length > 0 && !activeDate) {
-      // Navigate to newest note's month
-      const newest = new Date([...rawDates].sort().reverse()[0] + "T00:00:00");
-      calendar.currentViewDate = newest;
-      calendar.updateCalendar(true);
-    }
+    renderCalendar();
 
     // Handle initial URL params
     const params = new URLSearchParams(window.location.search);
@@ -288,10 +273,10 @@ const categories = [
     }
     if (iDate) {
       activeDate = iDate;
-      const d = new Date(iDate + "T00:00:00");
-      calendar.setSelectedDate(d);
-      calendar.currentViewDate = d;
-      calendar.updateCalendar(true);
+      const [y, m] = iDate.split("-");
+      calYear = parseInt(y);
+      calMonth = parseInt(m) - 1;
+      renderCalendar();
       calClear.classList.remove("hidden");
     }
     if (iTag) {
