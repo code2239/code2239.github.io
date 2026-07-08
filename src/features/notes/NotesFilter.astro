@@ -1,5 +1,5 @@
 ---
-import "vanilla-calendar-pro/styles/index.css";
+import "../../styles/calendar-theme.css";
 
 interface TagEntry {
   0: string;
@@ -72,104 +72,49 @@ const categories = [
     border-color: var(--color-accent);
   }
 
-  /* ── VCP overrides :global() ── escape Astro scoping so rules match
-     VCP's dynamically-generated DOM that has no data-astro-cid attribute. */
+  /* color-calendar theme — CSS custom properties */
+  :global(:root) {
+    --cal-color-primary: var(--color-accent);
+    --cal-font-family-header: var(--font-sans);
+    --cal-font-family-weekdays: var(--font-sans);
+    --cal-font-family-body: var(--font-sans);
+  }
 
+  /* calendar container tweaks */
   :global(#notes-calendar) {
-    min-width: unset !important;
-    padding: 0 !important;
-    border-radius: 0 !important;
-    background: transparent !important;
-    color: var(--color-text);
+    width: 100%;
   }
-
-  :global([data-vc-theme=light] #notes-calendar .vc-date__btn) {
-    background: transparent !important;
-    color: var(--color-text);
-    font-weight: 300;
-    font-size: 11px;
+  :global(#notes-calendar .color-calendar) {
+    background: transparent;
   }
-  :global([data-vc-theme=light] #notes-calendar .vc-date__btn:hover) {
-    background-color: color-mix(in srgb, var(--color-accent) 8%, transparent) !important;
-  }
-
-  /* prev / next month → extra faint */
-  :global([data-vc-theme=light] #notes-calendar .vc-date[data-vc-date-month="prev"] .vc-date__btn),
-  :global([data-vc-theme=light] #notes-calendar .vc-date[data-vc-date-month="next"] .vc-date__btn) {
-    color: color-mix(in srgb, var(--color-text-tertiary) 25%, transparent) !important;
-  }
-
-  /* today */
-  :global([data-vc-theme=light] #notes-calendar .vc-date[data-vc-date-today] .vc-date__btn) {
-    background-color: color-mix(in srgb, var(--color-accent) 8%, transparent) !important;
-    color: var(--color-accent) !important;
-  }
-
-  /* holiday (has-note) → accent blue + bold */
-  :global([data-vc-theme=light] #notes-calendar .vc-date[data-vc-date-holiday] .vc-date__btn) {
-    color: var(--color-accent) !important;
-    font-weight: 700;
-  }
-  :global([data-vc-theme=light] #notes-calendar .vc-date[data-vc-date-holiday] .vc-date__btn:hover) {
-    background-color: color-mix(in srgb, var(--color-accent) 12%, transparent) !important;
-  }
-
-  /* holiday on prev/next month */
-  :global([data-vc-theme=light] #notes-calendar .vc-date[data-vc-date-holiday][data-vc-date-month="prev"] .vc-date__btn),
-  :global([data-vc-theme=light] #notes-calendar .vc-date[data-vc-date-holiday][data-vc-date-month="next"] .vc-date__btn) {
-    color: color-mix(in srgb, var(--color-accent) 45%, transparent) !important;
-    font-weight: 600;
-  }
-
-  /* selected date */
-  :global([data-vc-theme=light] #notes-calendar .vc-date[data-vc-date-selected] .vc-date__btn),
-  :global([data-vc-theme=light] #notes-calendar .vc-date[data-vc-date-selected="middle"] .vc-date__btn) {
-    background-color: var(--color-accent) !important;
-    color: #fff !important;
-  }
-
-  /* holiday + selected */
-  :global([data-vc-theme=light] #notes-calendar .vc-date[data-vc-date-holiday][data-vc-date-selected] .vc-date__btn) {
-    background-color: var(--color-accent) !important;
-    color: #fff !important;
-  }
-
-  /* focus */
-  :global([data-vc-theme=light] #notes-calendar [tabindex="0"]:focus-visible),
-  :global([data-vc-theme=light] #notes-calendar button:focus-visible),
-  :global([data-vc-theme=light] #notes-calendar:focus-visible) {
-    outline-color: var(--color-accent) !important;
-  }
-
-  /* weekday / header */
-  :global([data-vc-theme=light] #notes-calendar .vc-week__day) {
+  :global(#notes-calendar .calendar__header) {
     color: var(--color-text-tertiary);
-    font-size: 10px;
-    font-weight: 400;
   }
-  :global([data-vc-theme=light] #notes-calendar .vc-header__content) {
-    color: var(--color-text);
+  :global(#notes-calendar .calendar__monthyear) {
     font-size: 13px;
+    color: var(--color-text);
   }
-
+  :global(#notes-calendar .calendar__day) {
+    font-size: 11px;
+    font-weight: 300;
+    color: var(--color-text);
+  }
+  /* prev/next month → extra faint */
+  :global(#notes-calendar .calendar__day.prev-month),
+  :global(#notes-calendar .calendar__day.next-month) {
+    color: color-mix(in srgb, var(--color-text-tertiary) 25%, transparent);
+  }
+  /* has event → bold accent */
+  :global(#notes-calendar .calendar__day.has-event) {
+    font-weight: 700;
+    color: var(--color-accent);
+  }
   /* arrows */
-  :global([data-vc-theme=light] #notes-calendar .vc-arrow) {
-    height: 1.25rem;
-    width: 1.25rem;
-  }
-  :global([data-vc-theme=light] #notes-calendar .vc-arrow:before) {
+  :global(#notes-calendar .calendar__arrow) {
     opacity: 0.5;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%235c5b55' d='M12 16c-.3 0-.5-.1-.7-.3l-6-6c-.4-.4-.4-1 0-1.4s1-.4 1.4 0l5.3 5.3 5.3-5.3c.4-.4 1-.4 1.4 0s.4 1 0 1.4l-6 6c-.2.2-.4.3-.7.3'/%3E%3C/svg%3E") !important;
   }
-  :global([data-vc-theme=light] #notes-calendar .vc-arrow:hover:before) {
+  :global(#notes-calendar .calendar__arrow:hover) {
     opacity: 0.8;
-  }
-
-  :global(#notes-calendar [data-vc="controls"]) {
-    padding-top: 0.5rem;
-  }
-  :global(#notes-calendar [data-vc="grid"]) {
-    gap: 0.75rem;
   }
 </style>
 
@@ -231,54 +176,80 @@ const categories = [
       });
     });
 
-    // ===== VanillaCalendar Pro =====
+    // ===== color-calendar =====
     const calRoot = document.getElementById("notes-calendar")!;
     const calClear = document.getElementById("cal-clear")!;
     const rawDates: string[] = (calRoot.dataset.dates || "").split(",").filter((d) => d);
 
-    const { Calendar } = await import("vanilla-calendar-pro");
+    const { default: Calendar } = await import("color-calendar");
 
-    const calendar = new Calendar(calRoot, {
-      type: "default",
-      displayMonthsCount: 1,
-      selectedHolidays: rawDates,
-      selectedWeekend: false,
-      selectedDates: activeDate ? [activeDate] : [],
-      selectedYear: rawDates.length > 0
-        ? new Date([...rawDates].sort().reverse()[0]).getFullYear()
-        : new Date().getFullYear(),
-      selectedMonth: rawDates.length > 0
-        ? new Date([...rawDates].sort().reverse()[0]).getMonth()
-        : new Date().getMonth(),
-      onClickDate(_self, _ev) {
-        const sel = calendar.context.selectedDates;
-        if (sel.length > 0) {
-          const d = sel[0];
-          activeDate = activeDate === d ? "" : d;
-          if (activeDate) {
-            calendar.set({ selectedDates: [activeDate] });
-          } else {
-            calendar.set({ selectedDates: [] });
+    const initialDate = activeDate ? new Date(activeDate + "T00:00:00") : null;
+
+    const calendar = new Calendar({
+      container: calRoot,
+      theme: "basic",
+      primaryColor: getComputedStyle(document.documentElement).getPropertyValue("--color-accent").trim(),
+      headerColor: getComputedStyle(document.documentElement).getPropertyValue("--color-text").trim(),
+      headerBackgroundColor: "transparent",
+      weekdaysColor: getComputedStyle(document.documentElement).getPropertyValue("--color-text-tertiary").trim(),
+      weekdayDisplayType: "long-lower",
+      startWeekday: 1,  // Monday
+      borderRadius: "0.5rem",
+      fontFamilyBody: getComputedStyle(document.documentElement).getPropertyValue("--font-sans").trim(),
+      fontFamilyHeader: getComputedStyle(document.documentElement).getPropertyValue("--font-sans").trim(),
+      fontFamilyWeekdays: getComputedStyle(document.documentElement).getPropertyValue("--font-sans").trim(),
+      disableMonthYearPickers: true,
+      eventsData: rawDates.map((d) => ({ start: d })),
+      selectedDate: initialDate,
+      onSelectedDateClick(currentDate: Date | undefined) {
+        if (!currentDate) return;
+        const y = currentDate.getFullYear();
+        const m = String(currentDate.getMonth() + 1).padStart(2, "0");
+        const d = String(currentDate.getDate()).padStart(2, "0");
+        const ds = `${y}-${m}-${d}`;
+        const previousDate = calendar.getSelectedDate();
+        if (previousDate) {
+          const py = previousDate.getFullYear();
+          const pm = String(previousDate.getMonth() + 1).padStart(2, "0");
+          const pd = String(previousDate.getDate()).padStart(2, "0");
+          const ps = `${py}-${pm}-${pd}`;
+          if (ds === ps) {
+            // Toggle off
+            activeDate = "";
+            calendar.setSelectedDate(null);
+            calClear.classList.add("hidden");
+            const url = new URL(window.location.href);
+            url.searchParams.delete("date");
+            window.history.replaceState({}, "", url.toString());
+            updateVisibility();
+            return;
           }
         }
-        calClear.classList.toggle("hidden", !activeDate);
+        activeDate = ds;
+        calClear.classList.remove("hidden");
         const url = new URL(window.location.href);
-        activeDate ? url.searchParams.set("date", activeDate) : url.searchParams.delete("date");
+        url.searchParams.set("date", ds);
         window.history.replaceState({}, "", url.toString());
         updateVisibility();
       },
     });
-    calendar.init();
 
     calClear.addEventListener("click", () => {
       activeDate = "";
-      calendar.set({ selectedDates: [] });
+      calendar.setSelectedDate(null);
       calClear.classList.add("hidden");
       const url = new URL(window.location.href);
       url.searchParams.delete("date");
       window.history.replaceState({}, "", url.toString());
       updateVisibility();
     });
+
+    if (rawDates.length > 0 && !activeDate) {
+      // Navigate to newest note's month
+      const newest = new Date([...rawDates].sort().reverse()[0] + "T00:00:00");
+      calendar.currentViewDate = newest;
+      calendar.updateCalendar(true);
+    }
 
     // Handle initial URL params
     const params = new URLSearchParams(window.location.search);
@@ -291,9 +262,10 @@ const categories = [
     }
     if (iDate) {
       activeDate = iDate;
-      calendar.set({ selectedDates: [iDate] });
-      const [y, m] = iDate.split("-");
-      calendar.set({ selectedYear: parseInt(y), selectedMonth: parseInt(m) - 1 });
+      const d = new Date(iDate + "T00:00:00");
+      calendar.setSelectedDate(d);
+      calendar.currentViewDate = d;
+      calendar.updateCalendar(true);
       calClear.classList.remove("hidden");
     }
     if (iTag) {
