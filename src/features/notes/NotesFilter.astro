@@ -8,9 +8,10 @@ interface Props {
   allTags: TagEntry[];
   totalNotes: number;
   categoryCounts: Record<string, number>;
+  months: Array<[string, number]>;
 }
 
-const { allTags, totalNotes, categoryCounts } = Astro.props;
+const { allTags, totalNotes, categoryCounts, months } = Astro.props;
 
 const categories = [
   { value: "", label: "全部", count: totalNotes },
@@ -38,6 +39,33 @@ const categories = [
     </div>
   </div>
 
+  <!-- Month filter -->
+  {months.length > 0 && (
+    <div>
+      <h3 class="text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-2">日期</h3>
+      <div class="flex flex-wrap gap-1.5">
+        <button
+          class="note-month-btn text-xs px-2.5 py-1 rounded-full bg-transparent text-[var(--color-text-secondary)] border border-[var(--color-border)] hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] transition-colors cursor-pointer active"
+          data-month=""
+        >
+          全部 ({totalNotes})
+        </button>
+        {months.map(([month, count]) => {
+          const [y, m] = month.split("-");
+          const label = `${parseInt(y)}年${parseInt(m)}月`;
+          return (
+            <button
+              class="note-month-btn text-xs px-2.5 py-1 rounded-full bg-transparent text-[var(--color-text-secondary)] border border-[var(--color-border)] hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] transition-colors cursor-pointer"
+              data-month={month}
+            >
+              {label} ({count})
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  )}
+
   <!-- Tag filter -->
   <div>
     <h3 class="text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-2">标签</h3>
@@ -56,7 +84,8 @@ const categories = [
 
 <style>
   .note-cat-btn.active,
-  .note-tag-btn.active {
+  .note-tag-btn.active,
+  .note-month-btn.active {
     background: var(--color-accent);
     color: white;
     border-color: var(--color-accent);
@@ -67,11 +96,13 @@ const categories = [
   function initNotesFilter() {
     const catBtns = document.querySelectorAll<HTMLButtonElement>(".note-cat-btn");
     const tagBtns = document.querySelectorAll<HTMLButtonElement>(".note-tag-btn");
+    const monthBtns = document.querySelectorAll<HTMLButtonElement>(".note-month-btn");
     const items = document.querySelectorAll<HTMLElement>(".note-item");
     const emptyEl = document.getElementById("notes-filter-empty");
 
     let activeCategory = "";
     let activeTag = "";
+    let activeMonth = "";
 
     function updateVisibility() {
       let visibleCount = 0;
@@ -79,11 +110,13 @@ const categories = [
       items.forEach((item) => {
         const itemCategory = item.getAttribute("data-category") || "";
         const itemTags = item.getAttribute("data-tags") || "";
+        const itemMonth = item.getAttribute("data-month") || "";
 
         const catMatch = !activeCategory || itemCategory === activeCategory;
         const tagMatch = !activeTag || itemTags.split(",").includes(activeTag);
+        const monthMatch = !activeMonth || itemMonth === activeMonth;
 
-        if (catMatch && tagMatch) {
+        if (catMatch && tagMatch && monthMatch) {
           item.style.display = "";
           visibleCount++;
         } else {
@@ -102,6 +135,19 @@ const categories = [
         });
         const url = new URL(window.location.href);
         activeCategory ? url.searchParams.set("category", activeCategory) : url.searchParams.delete("category");
+        window.history.replaceState({}, "", url.toString());
+        updateVisibility();
+      });
+    });
+
+    monthBtns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        activeMonth = btn.getAttribute("data-month") || "";
+        monthBtns.forEach((b) => {
+          b.classList.toggle("active", b.getAttribute("data-month") === activeMonth);
+        });
+        const url = new URL(window.location.href);
+        activeMonth ? url.searchParams.set("month", activeMonth) : url.searchParams.delete("month");
         window.history.replaceState({}, "", url.toString());
         updateVisibility();
       });
@@ -132,9 +178,14 @@ const categories = [
     const params = new URLSearchParams(window.location.search);
     const initialCategory = params.get("category") || "";
     const initialTag = params.get("tag") || "";
+    const initialMonth = params.get("month") || "";
     if (initialCategory) {
       activeCategory = initialCategory;
       catBtns.forEach((b) => b.classList.toggle("active", b.getAttribute("data-category") === activeCategory));
+    }
+    if (initialMonth) {
+      activeMonth = initialMonth;
+      monthBtns.forEach((b) => b.classList.toggle("active", b.getAttribute("data-month") === activeMonth));
     }
     if (initialTag) {
       activeTag = initialTag;
