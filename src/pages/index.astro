@@ -2,8 +2,8 @@
 import { getCollection } from "astro:content";
 import Layout from "../components/Layout.astro";
 import ArticleCard from "../components/ArticleCard.astro";
-import TagList from "../components/TagList.astro";
 import { siteConfig } from "../lib/config";
+import { getTagCounts } from "../lib/tagUtils";
 
 const posts = await getCollection("blog");
 const latestPosts = posts
@@ -13,8 +13,8 @@ const latestPosts = posts
   )
   .slice(0, 6);
 
-// Collect all unique tags from all posts
-const allTags = [...new Set(posts.flatMap((p) => p.data.tags))].sort();
+// Tags sorted by post count (descending), then alphabetically
+const allTags = getTagCounts(posts);
 ---
 
 <Layout title={siteConfig.name} description={siteConfig.description}>
@@ -92,12 +92,12 @@ const allTags = [...new Set(posts.flatMap((p) => p.data.tags))].sort();
   <section class="max-w-content pb-24">
     <h2 class="text-lg font-semibold mb-4">话题标签</h2>
     <div class="flex flex-wrap gap-2">
-      {allTags.map((tag) => (
+      {allTags.map(([tag, count]) => (
         <a
           href={`/blog?tag=${encodeURIComponent(tag)}`}
           class="text-xs text-[var(--color-text-secondary)] bg-[var(--color-bg-secondary)] border border-[var(--color-border)] px-3 py-1 rounded-full no-underline hover:text-[var(--color-accent)] hover:border-[var(--color-accent)] transition-colors duration-150"
         >
-          {tag}
+          {tag}<span class="ml-1 text-[var(--color-text-tertiary)]">({count})</span>
         </a>
       ))}
     </div>

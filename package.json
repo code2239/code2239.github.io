@@ -4,7 +4,8 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "validate": "node scripts/validate-categories.mjs",
+    "build": "npm run validate && astro build",
     "preview": "astro preview"
   },
   "dependencies": {

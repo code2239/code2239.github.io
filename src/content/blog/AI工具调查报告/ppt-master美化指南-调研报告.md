@@ -3,7 +3,7 @@ title: "PPT-Master 美化指南调研报告"
 date: "2026-07-05"
 tags: ["ppt-master", "视觉设计", "色彩理论", "排版", "模板选择", "AI PPT"]
 summary: "深入了解 ppt-master 的美学控制机制，涵盖视觉设计、色彩理论、排版和模板选择等方面，帮助用户在「八项确认」阶段给出高质量的设计指令。"
-categories: ["AI工具调查报告"]
+categories: ["ppt-master"]
 ---
 
 > **报告日期**：2026-07-05  

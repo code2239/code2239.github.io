@@ -4,24 +4,25 @@ import BlogPost from "../../layouts/BlogPost.astro";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
-  return posts.map((post) => ({
-    params: { slug: post.id.replace(/\.md$/, "") },
-    props: { post },
-  }));
+  const sorted = posts.sort(
+    (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+  );
+  return posts.map((post) => {
+    const idx = sorted.findIndex((p) => p.id === post.id);
+    const prevPost = idx < sorted.length - 1 ? sorted[idx + 1] : null;
+    const nextPost = idx > 0 ? sorted[idx - 1] : null;
+    return {
+      params: { slug: post.id.replace(/\.md$/, "") },
+      props: { post, prevPost, nextPost },
+    };
+  });
 }
 
-const { post } = Astro.props;
+const { post, prevPost, nextPost } = Astro.props;
 const { title, date, tags } = post.data;
 const { Content, headings } = await post.render();
-const wordCount = post.body?.replace(/\s+/g, "").length ?? 0;
-
-const allPosts = await getCollection("blog");
-const sorted = allPosts.sort(
-  (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
-);
-const currentIndex = sorted.findIndex((p) => p.id === post.id);
-const prevPost = currentIndex < sorted.length - 1 ? sorted[currentIndex + 1] : null;
-const nextPost = currentIndex > 0 ? sorted[currentIndex - 1] : null;
+// Chinese character count (not word count) — 300 chars/min reading speed
+const charCount = post.body?.replace(/\s+/g, "").length ?? 0;
 ---
 
 <BlogPost
@@ -29,7 +30,7 @@ const nextPost = currentIndex > 0 ? sorted[currentIndex - 1] : null;
   date={date}
   tags={tags}
   headings={headings}
-  wordCount={wordCount}
+  charCount={charCount}
   prevPost={prevPost ? { title: prevPost.data.title, href: `/blog/${prevPost.id.replace(/\.md$/, "")}` } : null}
   nextPost={nextPost ? { title: nextPost.data.title, href: `/blog/${nextPost.id.replace(/\.md$/, "")}` } : null}
 >

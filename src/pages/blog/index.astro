@@ -3,6 +3,7 @@ import { getCollection } from "astro:content";
 import BlogLayout from "../../layouts/BlogLayout.astro";
 import ArticleCard from "../../components/ArticleCard.astro";
 import { buildCategoryTree, flattenTree } from "../../lib/categoryTree";
+import { getTagCounts } from "../../lib/tagUtils";
 
 const posts = await getCollection("blog");
 
@@ -11,11 +12,7 @@ const sortedPosts = posts.sort(
     new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
 );
 
-// Compute tag counts
-const tagCounts = new Map<string, number>();
-posts.forEach((p) => p.data.tags.forEach((t) => tagCounts.set(t, (tagCounts.get(t) || 0) + 1)));
-const allTags = [...tagCounts.entries()]
-  .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
+const allTags = getTagCounts(posts);
 
 const categoryNodes = flattenTree(
   buildCategoryTree(posts.map((p) => ({ categories: p.data.categories ?? [] })))
