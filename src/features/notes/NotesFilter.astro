@@ -8,10 +8,10 @@ interface Props {
   allTags: TagEntry[];
   totalNotes: number;
   categoryCounts: Record<string, number>;
-  months: Array<[string, number]>;
+  noteDates: string[];
 }
 
-const { allTags, totalNotes, categoryCounts, months } = Astro.props;
+const { allTags, totalNotes, categoryCounts, noteDates } = Astro.props;
 
 const categories = [
   { value: "", label: "全部", count: totalNotes },
@@ -39,32 +39,19 @@ const categories = [
     </div>
   </div>
 
-  <!-- Month filter -->
-  {months.length > 0 && (
-    <div>
-      <h3 class="text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-2">日期</h3>
-      <div class="flex flex-wrap gap-1.5">
-        <button
-          class="note-month-btn text-xs px-2.5 py-1 rounded-full bg-transparent text-[var(--color-text-secondary)] border border-[var(--color-border)] hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] transition-colors cursor-pointer active"
-          data-month=""
-        >
-          全部 ({totalNotes})
-        </button>
-        {months.map(([month, count]) => {
-          const [y, m] = month.split("-");
-          const label = `${parseInt(y)}年${parseInt(m)}月`;
-          return (
-            <button
-              class="note-month-btn text-xs px-2.5 py-1 rounded-full bg-transparent text-[var(--color-text-secondary)] border border-[var(--color-border)] hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] transition-colors cursor-pointer"
-              data-month={month}
-            >
-              {label} ({count})
-            </button>
-          );
-        })}
+  <!-- Calendar -->
+  <div>
+    <h3 class="text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-2">日期</h3>
+    <div id="notes-calendar" class="text-xs" data-dates={JSON.stringify(noteDates)}>
+      <div class="flex items-center justify-between mb-2">
+        <button id="cal-prev" class="text-[var(--color-text-tertiary)] hover:text-[var(--color-accent)] transition-colors leading-none p-0.5" aria-label="上个月">&larr;</button>
+        <span id="cal-label" class="font-medium text-[var(--color-text)]"></span>
+        <button id="cal-next" class="text-[var(--color-text-tertiary)] hover:text-[var(--color-accent)] transition-colors leading-none p-0.5" aria-label="下个月">&rarr;</button>
       </div>
+      <div id="cal-grid"></div>
+      <button id="cal-clear" class="mt-2 text-[10px] text-[var(--color-text-tertiary)] hover:text-[var(--color-accent)] transition-colors hidden">清除日期筛选</button>
     </div>
-  )}
+  </div>
 
   <!-- Tag filter -->
   <div>
@@ -84,11 +71,48 @@ const categories = [
 
 <style>
   .note-cat-btn.active,
-  .note-tag-btn.active,
-  .note-month-btn.active {
+  .note-tag-btn.active {
     background: var(--color-accent);
     color: white;
     border-color: var(--color-accent);
+  }
+  #cal-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+    text-align: center;
+  }
+  .cal-day-name {
+    padding: 2px 0 4px;
+    color: var(--color-text-tertiary);
+    font-size: 10px;
+  }
+  .cal-day {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    cursor: default;
+    color: var(--color-text-secondary);
+    transition: background 0.15s, color 0.15s;
+    position: relative;
+  }
+  .cal-day.has-note {
+    cursor: pointer;
+    font-weight: 500;
+    color: var(--color-accent);
+    background: color-mix(in srgb, var(--color-accent) 10%, transparent);
+  }
+  .cal-day.has-note:hover {
+    background: color-mix(in srgb, var(--color-accent) 25%, transparent);
+  }
+  .cal-day.active {
+    background: var(--color-accent);
+    color: white;
+  }
+  .cal-day.other-month {
+    color: var(--color-border);
   }
 </style>
 
@@ -96,58 +120,38 @@ const categories = [
   function initNotesFilter() {
     const catBtns = document.querySelectorAll<HTMLButtonElement>(".note-cat-btn");
     const tagBtns = document.querySelectorAll<HTMLButtonElement>(".note-tag-btn");
-    const monthBtns = document.querySelectorAll<HTMLButtonElement>(".note-month-btn");
     const items = document.querySelectorAll<HTMLElement>(".note-item");
     const emptyEl = document.getElementById("notes-filter-empty");
 
     let activeCategory = "";
     let activeTag = "";
-    let activeMonth = "";
+    let activeDate = "";
 
     function updateVisibility() {
       let visibleCount = 0;
-
       items.forEach((item) => {
         const itemCategory = item.getAttribute("data-category") || "";
         const itemTags = item.getAttribute("data-tags") || "";
-        const itemMonth = item.getAttribute("data-month") || "";
-
+        const itemDate = item.getAttribute("data-date") || "";
         const catMatch = !activeCategory || itemCategory === activeCategory;
         const tagMatch = !activeTag || itemTags.split(",").includes(activeTag);
-        const monthMatch = !activeMonth || itemMonth === activeMonth;
-
-        if (catMatch && tagMatch && monthMatch) {
+        const dateMatch = !activeDate || itemDate === activeDate;
+        if (catMatch && tagMatch && dateMatch) {
           item.style.display = "";
           visibleCount++;
         } else {
           item.style.display = "none";
         }
       });
-
       if (emptyEl) emptyEl.style.display = visibleCount === 0 ? "block" : "none";
     }
 
     catBtns.forEach((btn) => {
       btn.addEventListener("click", () => {
         activeCategory = btn.getAttribute("data-category") || "";
-        catBtns.forEach((b) => {
-          b.classList.toggle("active", b.getAttribute("data-category") === activeCategory);
-        });
+        catBtns.forEach((b) => b.classList.toggle("active", b.getAttribute("data-category") === activeCategory));
         const url = new URL(window.location.href);
         activeCategory ? url.searchParams.set("category", activeCategory) : url.searchParams.delete("category");
-        window.history.replaceState({}, "", url.toString());
-        updateVisibility();
-      });
-    });
-
-    monthBtns.forEach((btn) => {
-      btn.addEventListener("click", () => {
-        activeMonth = btn.getAttribute("data-month") || "";
-        monthBtns.forEach((b) => {
-          b.classList.toggle("active", b.getAttribute("data-month") === activeMonth);
-        });
-        const url = new URL(window.location.href);
-        activeMonth ? url.searchParams.set("month", activeMonth) : url.searchParams.delete("month");
         window.history.replaceState({}, "", url.toString());
         updateVisibility();
       });
@@ -158,14 +162,10 @@ const categories = [
         const tag = btn.getAttribute("data-tag") || "";
         if (activeTag === tag) {
           activeTag = "";
-          tagBtns.forEach((b) => {
-            b.classList.remove("active");
-          });
+          tagBtns.forEach((b) => b.classList.remove("active"));
         } else {
           activeTag = tag;
-          tagBtns.forEach((b) => {
-            b.classList.toggle("active", b.getAttribute("data-tag") === activeTag);
-          });
+          tagBtns.forEach((b) => b.classList.toggle("active", b.getAttribute("data-tag") === activeTag));
         }
         const url = new URL(window.location.href);
         activeTag ? url.searchParams.set("tag", activeTag) : url.searchParams.delete("tag");
@@ -174,21 +174,105 @@ const categories = [
       });
     });
 
+    // ===== Calendar =====
+    const calGrid = document.getElementById("cal-grid")!;
+    const calLabel = document.getElementById("cal-label")!;
+    const calClear = document.getElementById("cal-clear")!;
+    const prevBtn = document.getElementById("cal-prev")!;
+    const nextBtn = document.getElementById("cal-next")!;
+    const calRoot = document.getElementById("notes-calendar")!;
+    const rawDates: string[] = JSON.parse(calRoot.dataset.dates || "[]");
+    const noteSet = new Set(rawDates.filter((d) => d));
+    const DAY_NAMES = ["一","二","三","四","五","六","日"];
+
+    let calYear: number, calMonth: number;
+
+    // Start on newest note's month
+    if (rawDates.length > 0) {
+      const newest = new Date([...rawDates].sort().reverse()[0]);
+      calYear = newest.getFullYear();
+      calMonth = newest.getMonth();
+    } else {
+      const now = new Date();
+      calYear = now.getFullYear();
+      calMonth = now.getMonth();
+    }
+
+    function renderCalendar() {
+      calLabel.textContent = `${calYear}年${calMonth + 1}月`;
+      let html = "";
+      DAY_NAMES.forEach((d) => { html += `<div class="cal-day-name">${d}</div>`; });
+
+      const firstDay = new Date(calYear, calMonth, 1).getDay(); // 0=Sun
+      const offset = firstDay === 0 ? 6 : firstDay - 1; // Mon=0
+      const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
+
+      // Prev month tail
+      const prevDays = new Date(calYear, calMonth, 0).getDate();
+      for (let i = offset - 1; i >= 0; i--) {
+        html += `<div class="cal-day other-month">${prevDays - i}</div>`;
+      }
+      // Current month
+      for (let d = 1; d <= daysInMonth; d++) {
+        const ds = `${calYear}-${String(calMonth + 1).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
+        const has = noteSet.has(ds);
+        const active = ds === activeDate ? " active" : "";
+        html += `<div class="cal-day${has ? ` has-note${active}` : ""}" data-date="${ds}"${has ? ' role="button" tabindex="0"' : ""}>${d}</div>`;
+      }
+      // Next month head
+      const tail = 7 - ((offset + daysInMonth) % 7);
+      if (tail < 7) {
+        for (let d = 1; d <= tail; d++) {
+          html += `<div class="cal-day other-month">${d}</div>`;
+        }
+      }
+      calGrid.innerHTML = html;
+
+      // Bind day clicks
+      calGrid.querySelectorAll<HTMLElement>(".cal-day.has-note").forEach((el) => {
+        el.addEventListener("click", () => {
+          const d = el.dataset.date!;
+          activeDate = activeDate === d ? "" : d;
+          renderCalendar();
+          const url = new URL(window.location.href);
+          activeDate ? url.searchParams.set("date", activeDate) : url.searchParams.delete("date");
+          window.history.replaceState({}, "", url.toString());
+          updateVisibility();
+        });
+      });
+      calClear.classList.toggle("hidden", !activeDate);
+    }
+
+    prevBtn.addEventListener("click", () => { calMonth--; if (calMonth < 0) { calMonth = 11; calYear--; } renderCalendar(); });
+    nextBtn.addEventListener("click", () => { calMonth++; if (calMonth > 11) { calMonth = 0; calYear++; } renderCalendar(); });
+    calClear.addEventListener("click", () => {
+      activeDate = "";
+      renderCalendar();
+      const url = new URL(window.location.href);
+      url.searchParams.delete("date");
+      window.history.replaceState({}, "", url.toString());
+      updateVisibility();
+    });
+    renderCalendar();
+
     // Handle initial URL params
     const params = new URLSearchParams(window.location.search);
-    const initialCategory = params.get("category") || "";
-    const initialTag = params.get("tag") || "";
-    const initialMonth = params.get("month") || "";
-    if (initialCategory) {
-      activeCategory = initialCategory;
+    const iCat = params.get("category") || "";
+    const iTag = params.get("tag") || "";
+    const iDate = params.get("date") || "";
+    if (iCat) {
+      activeCategory = iCat;
       catBtns.forEach((b) => b.classList.toggle("active", b.getAttribute("data-category") === activeCategory));
     }
-    if (initialMonth) {
-      activeMonth = initialMonth;
-      monthBtns.forEach((b) => b.classList.toggle("active", b.getAttribute("data-month") === activeMonth));
+    if (iDate) {
+      activeDate = iDate;
+      const [y, m] = iDate.split("-");
+      calYear = parseInt(y);
+      calMonth = parseInt(m) - 1;
+      renderCalendar();
     }
-    if (initialTag) {
-      activeTag = initialTag;
+    if (iTag) {
+      activeTag = iTag;
       tagBtns.forEach((b) => b.classList.toggle("active", b.getAttribute("data-tag") === activeTag));
     }
     updateVisibility();

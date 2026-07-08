@@ -24,41 +24,32 @@ notes.forEach((n) => {
   categoryCounts[cat] = (categoryCounts[cat] || 0) + 1;
 });
 
-// Compute month groups for date filter (YYYY-MM, newest first)
-const monthCounts = new Map<string, number>();
-notes.forEach((n) => {
-  const date = new Date(n.data.date);
-  if (!isNaN(date.getTime())) {
-    const key = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}`;
-    monthCounts.set(key, (monthCounts.get(key) || 0) + 1);
-  }
-});
-const months = [...monthCounts.entries()]
-  .sort((a, b) => b[0].localeCompare(a[0]));
+// Collect all note dates for calendar
+const noteDates: string[] = notes.map((n) => n.data.date);
 ---
 
 <Layout
-  title="笔记"
-  description="读书笔记、学习笔记与研究记录"
+  title="日记"
+  description="每日日记与学习记录"
 >
   <div class="px-6 xl:px-12 pt-12 pb-16">
     <div class="blog-layout">
       <!-- Sidebar -->
       <aside class="blog-sidebar">
         <div class="sticky top-20 space-y-6">
-          <NotesFilter allTags={allTags} totalNotes={notes.length} categoryCounts={categoryCounts} months={months} />
+          <NotesFilter allTags={allTags} totalNotes={notes.length} categoryCounts={categoryCounts} noteDates={noteDates} />
         </div>
       </aside>
 
       <!-- Main content -->
       <div class="blog-content">
         <h1 class="text-3xl font-semibold mb-2">
-          笔记
+          日记
           {notes.length > 0 && (
             <span class="text-[var(--color-text-tertiary)] text-xl font-normal"> ({notes.length} 篇)</span>
           )}
         </h1>
-        <p class="text-[var(--color-text-secondary)] mb-10">读书笔记、学习笔记与研究记录</p>
+        <p class="text-[var(--color-text-secondary)] mb-10">每日日记与学习记录</p>
 
         {notes.length > 0 ? (
           <div class="flex flex-col gap-4">
@@ -67,7 +58,7 @@ const months = [...monthCounts.entries()]
                 class="note-item"
                 data-category={note.data.category || ""}
                 data-tags={note.data.tags.join(",")}
-                data-month={note.data.date.slice(0, 7)}
+                data-date={note.data.date}
               >
                 <ArticleCard
                   title={note.data.title}
