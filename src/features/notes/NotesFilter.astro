@@ -104,10 +104,14 @@ const categories = [
   :global(#notes-calendar .calendar__day.next-month) {
     color: color-mix(in srgb, var(--color-text-tertiary) 25%, transparent);
   }
-  /* has event → bold accent */
-  :global(#notes-calendar .calendar__day.has-event) {
+  /* has note → bold accent on the text span */
+  :global(#notes-calendar .calendar__day.has-note .calendar__day-text) {
     font-weight: 700;
     color: var(--color-accent);
+  }
+  /* override theme default 600 → 300 */
+  :global(#notes-calendar .calendar__day) {
+    font-weight: 300 !important;
   }
   /* arrows */
   :global(#notes-calendar .calendar__arrow) {
@@ -212,6 +216,10 @@ const categories = [
       disableMonthYearPickers: true,
       eventsData: rawDates.map((d) => ({ start: d })),
       selectedDate: initialDate,
+      onMonthChange() {
+        // Re-apply has-note classes after render
+        setTimeout(() => markNoteDays(), 0);
+      },
       onSelectedDateClick(currentDate: Date | undefined) {
         if (!currentDate) return;
         const y = currentDate.getFullYear();
@@ -244,6 +252,15 @@ const categories = [
         updateVisibility();
       },
     });
+
+    // Tag days that have notes so CSS can style them
+    function markNoteDays() {
+      calRoot.querySelectorAll(".calendar__day").forEach((el) => el.classList.remove("has-note"));
+      calRoot.querySelectorAll(".calendar__day-bullet").forEach((b) => {
+        b.closest(".calendar__day")?.classList.add("has-note");
+      });
+    }
+    markNoteDays();
 
     calClear.addEventListener("click", () => {
       activeDate = "";
