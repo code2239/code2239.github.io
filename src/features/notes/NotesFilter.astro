@@ -72,7 +72,8 @@ const categories = [
     border-color: var(--color-accent);
   }
 
-  /* VanillaCalendar Pro — theme overrides for design system */
+  /* VanillaCalendar Pro — theme overrides for design system              */
+  /* All color rules use [data-vc-theme=light] prefix to beat VCP specificity */
   #notes-calendar {
     min-width: unset !important;
     padding: 0 !important;
@@ -81,70 +82,78 @@ const categories = [
     color: var(--color-text);
   }
   /* selected date → accent */
-  #notes-calendar .vc-date[data-vc-date-selected] .vc-date__btn,
-  #notes-calendar .vc-date[data-vc-date-selected="middle"] .vc-date__btn {
+  [data-vc-theme=light] #notes-calendar .vc-date[data-vc-date-selected] .vc-date__btn,
+  [data-vc-theme=light] #notes-calendar .vc-date[data-vc-date-selected="middle"] .vc-date__btn {
     background-color: var(--color-accent) !important;
     color: #fff !important;
   }
-  /* holiday (has-note) → accent tint */
-  #notes-calendar .vc-date[data-vc-date-holiday] .vc-date__btn {
-    color: var(--color-accent);
-    font-weight: 600;
+  /* holiday (has-note) → accent + bold */
+  [data-vc-theme=light] #notes-calendar .vc-date[data-vc-date-holiday] .vc-date__btn {
+    color: var(--color-accent) !important;
+    font-weight: 700;
   }
-  #notes-calendar .vc-date[data-vc-date-holiday] .vc-date__btn:hover {
+  [data-vc-theme=light] #notes-calendar .vc-date[data-vc-date-holiday] .vc-date__btn:hover {
     background-color: color-mix(in srgb, var(--color-accent) 12%, transparent) !important;
   }
+  /* holiday prev/next month → faded accent */
+  [data-vc-theme=light] #notes-calendar .vc-date[data-vc-date-holiday][data-vc-date-month="prev"] .vc-date__btn,
+  [data-vc-theme=light] #notes-calendar .vc-date[data-vc-date-holiday][data-vc-date-month="next"] .vc-date__btn {
+    color: color-mix(in srgb, var(--color-accent) 45%, transparent) !important;
+    font-weight: 600;
+  }
+  /* holiday + selected → white on accent */
+  [data-vc-theme=light] #notes-calendar .vc-date[data-vc-date-holiday][data-vc-date-selected] .vc-date__btn {
+    background-color: var(--color-accent) !important;
+    color: #fff !important;
+  }
   /* today → subtle */
-  #notes-calendar .vc-date[data-vc-date-today] .vc-date__btn {
+  [data-vc-theme=light] #notes-calendar .vc-date[data-vc-date-today] .vc-date__btn {
     background-color: color-mix(in srgb, var(--color-accent) 8%, transparent) !important;
     color: var(--color-accent) !important;
   }
   /* prev/next month → extra faint */
-  #notes-calendar .vc-date[data-vc-date-month="prev"] .vc-date__btn,
-  #notes-calendar .vc-date[data-vc-date-month="next"] .vc-date__btn {
+  [data-vc-theme=light] #notes-calendar .vc-date[data-vc-date-month="prev"] .vc-date__btn,
+  [data-vc-theme=light] #notes-calendar .vc-date[data-vc-date-month="next"] .vc-date__btn {
     color: color-mix(in srgb, var(--color-text-tertiary) 25%, transparent) !important;
   }
   /* focus → accent ring */
-  #notes-calendar [tabindex="0"]:focus-visible,
-  #notes-calendar button:focus-visible,
-  #notes-calendar:focus-visible {
+  [data-vc-theme=light] #notes-calendar [tabindex="0"]:focus-visible,
+  [data-vc-theme=light] #notes-calendar button:focus-visible,
+  [data-vc-theme=light] #notes-calendar:focus-visible {
     outline-color: var(--color-accent) !important;
   }
   /* base date button */
-  #notes-calendar .vc-date__btn {
+  [data-vc-theme=light] #notes-calendar .vc-date__btn {
     background: transparent !important;
     color: var(--color-text);
     font-weight: 300;
     font-size: 11px;
   }
-  #notes-calendar .vc-date__btn:hover {
+  [data-vc-theme=light] #notes-calendar .vc-date__btn:hover {
     background-color: color-mix(in srgb, var(--color-accent) 8%, transparent) !important;
   }
   /* weekday headers */
-  #notes-calendar .vc-week__day {
+  [data-vc-theme=light] #notes-calendar .vc-week__day {
     color: var(--color-text-tertiary);
     font-size: 10px;
     font-weight: 400;
   }
   /* month/year headers */
-  #notes-calendar .vc-header__content {
+  [data-vc-theme=light] #notes-calendar .vc-header__content {
     color: var(--color-text);
     font-size: 13px;
   }
   /* arrows */
-  #notes-calendar .vc-arrow {
+  [data-vc-theme=light] #notes-calendar .vc-arrow {
     height: 1.25rem;
     width: 1.25rem;
   }
-  #notes-calendar .vc-arrow:before {
+  [data-vc-theme=light] #notes-calendar .vc-arrow:before {
     opacity: 0.5;
-  }
-  #notes-calendar .vc-arrow:hover:before {
-    opacity: 0.8;
-  }
-  /* arrows color */
-  #notes-calendar .vc-arrow:before {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%235c5b55' d='M12 16c-.3 0-.5-.1-.7-.3l-6-6c-.4-.4-.4-1 0-1.4s1-.4 1.4 0l5.3 5.3 5.3-5.3c.4-.4 1-.4 1.4 0s.4 1 0 1.4l-6 6c-.2.2-.4.3-.7.3'/%3E%3C/svg%3E") !important;
+  }
+  [data-vc-theme=light] #notes-calendar .vc-arrow:hover:before {
+    opacity: 0.8;
   }
   /* controls padding */
   #notes-calendar [data-vc="controls"] {
