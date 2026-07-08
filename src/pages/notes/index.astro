@@ -24,8 +24,12 @@ notes.forEach((n) => {
   categoryCounts[cat] = (categoryCounts[cat] || 0) + 1;
 });
 
-// Collect all note dates for calendar
-const noteDates: string[] = notes.map((n) => n.data.date);
+// Collect note date info for calendar popups
+const noteDatesInfo = notes.map((n) => ({
+  date: n.data.date,
+  title: n.data.title,
+  slug: n.id.replace(/\.md$/, ""),
+}));
 ---
 
 <Layout
@@ -37,7 +41,7 @@ const noteDates: string[] = notes.map((n) => n.data.date);
       <!-- Sidebar -->
       <aside class="blog-sidebar">
         <div class="sticky top-20 space-y-6">
-          <NotesFilter allTags={allTags} totalNotes={notes.length} categoryCounts={categoryCounts} noteDates={noteDates} />
+          <NotesFilter allTags={allTags} totalNotes={notes.length} categoryCounts={categoryCounts} noteDatesInfo={noteDatesInfo} />
         </div>
       </aside>
 
