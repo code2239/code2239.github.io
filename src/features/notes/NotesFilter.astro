@@ -104,13 +104,12 @@ const categories = [
   :global(#notes-calendar .calendar__day.next-month) {
     color: color-mix(in srgb, var(--color-text-tertiary) 25%, transparent);
   }
-  /* has note → bold on the text span */
-  :global(#notes-calendar .calendar__day.has-note .calendar__day-text) {
-    font-weight: 700;
-  }
-  /* override theme default 600 → 300 */
-  :global(#notes-calendar .calendar__day) {
+  /* all day text → light; has-note → bold */
+  :global(#notes-calendar .calendar__day-text) {
     font-weight: 300 !important;
+  }
+  :global(#notes-calendar .calendar__day.has-note .calendar__day-text) {
+    font-weight: 700 !important;
   }
   /* arrows */
   :global(#notes-calendar .calendar__arrow) {
