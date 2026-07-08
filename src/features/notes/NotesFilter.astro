@@ -116,6 +116,13 @@ const categories = [
   :global(#notes-calendar .calendar__arrow:hover) {
     opacity: 0.8;
   }
+  :global(#notes-calendar .calendar__weekday) {
+    font-size: 10px;
+    height: 28px;
+  }
+  :global(#notes-calendar .calendar__day-text) {
+    font-size: 11px;
+  }
   :global(#notes-calendar .calendar__day-bullet) {
     display: none;
   }
@@ -191,6 +198,7 @@ const categories = [
     const calendar = new Calendar({
       container: calRoot,
       theme: "basic",
+      calendarSize: "small",
       primaryColor: getComputedStyle(document.documentElement).getPropertyValue("--color-accent").trim(),
       headerColor: getComputedStyle(document.documentElement).getPropertyValue("--color-text").trim(),
       headerBackgroundColor: "transparent",
