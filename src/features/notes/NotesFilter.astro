@@ -78,6 +78,11 @@ const categories = [
   }
 
   /* ── Calendar ── */
+  #notes-calendar {
+    background: var(--color-bg-secondary);
+    border-radius: 8px;
+    padding: 10px 8px 8px;
+  }
   #cal-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
@@ -92,33 +97,51 @@ const categories = [
   .cal-day {
     aspect-ratio: 1;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    border-radius: 4px;
+    border-radius: 6px;
     cursor: default;
     font-weight: 300;
     font-size: 11px;
     color: var(--color-text);
     transition: background 0.15s, box-shadow 0.15s;
     position: relative;
+    gap: 1px;
   }
   .cal-day:hover {
-    box-shadow: inset 0 0 0 1.5px var(--color-accent);
+    background: color-mix(in srgb, var(--color-accent) 6%, transparent);
   }
   .cal-day.has-note {
     cursor: pointer;
     font-weight: 700;
   }
+  .cal-day.has-note::after {
+    content: "";
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--color-accent);
+  }
   .cal-day.has-note:hover {
-    background: color-mix(in srgb, var(--color-accent) 12%, transparent);
+    background: color-mix(in srgb, var(--color-accent) 15%, transparent);
   }
   .cal-day.active {
     background: var(--color-accent);
     color: white;
     font-weight: 600;
   }
+  .cal-day.active::after {
+    background: white;
+  }
+  .cal-day.today {
+    box-shadow: inset 0 0 0 1.5px var(--color-accent);
+  }
+  .cal-day.active.today {
+    box-shadow: inset 0 0 0 1.5px white;
+  }
   .cal-day.other-month {
-    color: color-mix(in srgb, var(--color-text-tertiary) 25%, transparent);
+    opacity: 0.18;
   }
 </style>
 
@@ -206,6 +229,7 @@ const categories = [
 
     function renderCalendar() {
       calLabel.textContent = `${calYear}年${calMonth + 1}月`;
+      const todayStr = new Date().toISOString().slice(0, 10);
       let html = "";
       DAY_NAMES.forEach((d) => { html += `<div class="cal-day-name">${d}</div>`; });
 
@@ -224,7 +248,8 @@ const categories = [
         const has = noteSet.has(ds);
         const sel = ds === activeDate ? " active" : "";
         const note = has ? " has-note" : "";
-        html += `<div class="cal-day${note}${sel}" data-date="${ds}"${has ? ' role="button" tabindex="0"' : ""}>${d}</div>`;
+        const today = ds === todayStr ? " today" : "";
+        html += `<div class="cal-day${note}${sel}${today}" data-date="${ds}"${has ? ' role="button" tabindex="0"' : ""}>${d}</div>`;
       }
       // Next month head
       const tail = 7 - ((offset + daysInMonth) % 7);
