@@ -30,10 +30,20 @@ const hasSidebar = !!Astro.slots.sidebar;
     canonicalURL={canonicalURL}
   >
   <div class="px-6 xl:px-12 pt-12 pb-16">
-    <div class={hasSidebar ? "project-detail-layout" : ""}>
+    <div class={hasSidebar ? "project-detail-layout" : ""} id="project-detail-layout">
       {hasSidebar && (
-        <aside class="project-detail-sidebar">
-          <div class="sticky top-14 max-h-[calc(100vh-3.5rem)] overflow-y-auto">
+        <aside class="project-detail-sidebar" id="project-sidebar">
+          <div class="sticky top-[57px] max-h-[calc(100vh-57px)] overflow-y-auto relative">
+            <button
+              id="project-collapse-btn"
+              class="project-collapse-btn"
+              aria-label="折叠侧边栏"
+              title="折叠侧边栏"
+            >
+              <svg id="project-collapse-icon" class="w-4 h-4 transition-transform duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="15 18 9 12 15 6"/>
+              </svg>
+            </button>
             <slot name="sidebar" />
           </div>
         </aside>
@@ -88,21 +98,127 @@ const hasSidebar = !!Astro.slots.sidebar;
           </a>
         </div>
       </article>
+
+      <!-- Expand button (visible when sidebar collapsed) -->
+      {hasSidebar && (
+        <button
+          id="project-expand-btn"
+          class="project-expand-btn"
+          aria-label="展开侧边栏"
+          title="展开侧边栏"
+        >
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="9 18 15 12 9 6"/>
+          </svg>
+        </button>
+      )}
     </div>
   </div>
 </Layout>
 
 <style>
-  .project-detail-layout { display: block; }
-  .project-detail-sidebar { margin-bottom: 2rem; }
+  .project-detail-layout {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 3rem;
+    align-items: start;
+    transition: grid-template-columns 300ms ease;
+  }
+  @media (max-width: 767px) {
+    .project-detail-layout { display: block; }
+  }
+
+  .project-detail-sidebar {
+    overflow: hidden;
+    transition: width 300ms ease, opacity 300ms ease;
+  }
+
+  .project-detail-layout.sidebar-collapsed {
+    grid-template-columns: 0px 1fr;
+    gap: 1rem;
+  }
+  .project-detail-layout.sidebar-collapsed .project-detail-sidebar {
+    opacity: 0;
+    pointer-events: none;
+  }
+
   .project-detail-content { min-width: 0; }
+
+  /* Collapse button */
+  .project-collapse-btn {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.75rem;
+    height: 1.75rem;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    background: var(--color-bg);
+    color: var(--color-text-tertiary);
+    cursor: pointer;
+    transition: border-color 150ms, color 150ms;
+  }
+  @media (max-width: 767px) {
+    .project-collapse-btn { display: none; }
+  }
+  .project-collapse-btn:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+  }
+
+  /* Expand button */
+  .project-expand-btn {
+    display: none;
+  }
   @media (min-width: 768px) {
-    .project-detail-layout {
-      display: grid;
-      grid-template-columns: 220px 1fr;
-      gap: 3rem;
-      align-items: start;
+    .project-expand-btn {
+      position: fixed;
+      top: calc(57px + 1rem);
+      left: max(1rem, calc((100vw - 48rem) / 2 + 1rem));
+      z-index: 50;
+      align-items: center;
+      justify-content: center;
+      width: 1.75rem;
+      height: 1.75rem;
+      border: 1px solid var(--color-border);
+      border-radius: 6px;
+      background: var(--color-bg);
+      color: var(--color-text-tertiary);
+      cursor: pointer;
+      transition: border-color 150ms, color 150ms;
+      box-shadow: var(--shadow-sm);
     }
-    .project-detail-sidebar { margin-bottom: 0; }
+    .project-expand-btn.visible { display: flex; }
+  }
+  .project-expand-btn:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
   }
 </style>
+
+<script>
+  const projLayout = document.getElementById("project-detail-layout");
+  const projCollapseBtn = document.getElementById("project-collapse-btn");
+  const projExpandBtn = document.getElementById("project-expand-btn");
+  const PROJ_KEY = "project-sidebar-collapsed";
+
+  if (projLayout && projCollapseBtn && projExpandBtn) {
+    function collapseProj() {
+      projLayout.classList.add("sidebar-collapsed");
+      projExpandBtn.classList.add("visible");
+      localStorage.setItem(PROJ_KEY, "1");
+    }
+    function expandProj() {
+      projLayout.classList.remove("sidebar-collapsed");
+      projExpandBtn.classList.remove("visible");
+      localStorage.setItem(PROJ_KEY, "0");
+    }
+    projCollapseBtn.addEventListener("click", collapseProj);
+    projExpandBtn.addEventListener("click", expandProj);
+    if (localStorage.getItem(PROJ_KEY) === "1") collapseProj();
+  }
+</script>

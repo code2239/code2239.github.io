@@ -59,13 +59,29 @@ const hasToc = headings.length > 0;
         </div>
       </header>
 
-      <div class="blog-layout">
+      <div class="blog-layout" id="blog-layout">
         {
           hasToc && (
-            <aside class="blog-toc">
-              <div class="sticky top-14 max-h-[calc(100vh-3.5rem)] overflow-y-auto">
+            <aside class="blog-toc" id="blog-toc">
+              <div class="sticky top-[57px] max-h-[calc(100vh-57px)] overflow-y-auto relative">
                 <button
-                  id="toc-toggle"
+                  id="toc-collapse-btn"
+                  class="toc-collapse-btn"
+                  aria-label="折叠目录"
+                  title="折叠目录"
+                >
+                  <svg id="toc-collapse-icon" class="w-4 h-4 transition-transform duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="15 18 9 12 15 6"/>
+                  </svg>
+                </button>
+
+                <div id="toc-header" class="flex items-center justify-between mb-3">
+                  <span class="text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider max-md:hidden">目录</span>
+                </div>
+
+                <!-- Mobile toggle -->
+                <button
+                  id="toc-mobile-toggle"
                   class="hidden max-md:flex items-center gap-1 text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-3 cursor-pointer border-none bg-transparent p-0"
                   aria-expanded="false"
                   aria-controls="toc-list"
@@ -73,7 +89,7 @@ const hasToc = headings.length > 0;
                   目录
                   <svg id="toc-chevron" class="w-3 h-3 transition-transform duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
                 </button>
-                <span class="text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-3 max-md:hidden">目录</span>
+
                 <div id="toc-list" class="max-md:hidden">
                   <TableOfContents headings={headings} />
                 </div>
@@ -117,6 +133,22 @@ const hasToc = headings.length > 0;
           </div>
         </div>
       </div>
+
+      <!-- Expand button (visible when TOC collapsed) -->
+      {
+        hasToc && (
+          <button
+            id="toc-expand-btn"
+            class="toc-expand-btn"
+            aria-label="展开目录"
+            title="展开目录"
+          >
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="9 18 15 12 9 6"/>
+            </svg>
+          </button>
+        )
+      }
     </article>
   </div>
 </Layout>
@@ -125,10 +157,27 @@ const hasToc = headings.length > 0;
   .blog-layout { display: block; }
   .blog-toc { display: none; }
   .blog-body { min-width: 0; }
+
   @media (min-width: 1024px) {
-    .blog-layout { display: grid; grid-template-columns: 14rem 1fr; gap: 3rem; align-items: start; }
-    .blog-toc { display: block; }
+    .blog-layout {
+      display: grid;
+      grid-template-columns: 14rem 1fr;
+      gap: 3rem;
+      align-items: start;
+      transition: grid-template-columns 300ms ease;
+    }
+    .blog-toc { display: block; overflow: hidden; }
     .blog-body { padding-right: 2rem; }
+
+    /* TOC collapse */
+    .blog-layout.toc-collapsed {
+      grid-template-columns: 0px 1fr;
+      gap: 1rem;
+    }
+    .blog-layout.toc-collapsed .blog-toc {
+      opacity: 0;
+      pointer-events: none;
+    }
   }
 
   /* Mobile TOC toggle */
@@ -136,11 +185,86 @@ const hasToc = headings.length > 0;
     .blog-toc { display: block; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--color-border); }
   }
 
+  /* Collapse button (desktop only) */
+  .toc-collapse-btn {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    z-index: 10;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 1.75rem;
+    height: 1.75rem;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    background: var(--color-bg);
+    color: var(--color-text-tertiary);
+    cursor: pointer;
+    transition: border-color 150ms, color 150ms;
+  }
+  @media (min-width: 1024px) {
+    .toc-collapse-btn { display: flex; }
+  }
+  .toc-collapse-btn:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+  }
+
+  /* Expand button (desktop, visible when collapsed) */
+  .toc-expand-btn {
+    display: none;
+    position: fixed;
+    top: calc(57px + 1rem);
+    left: max(1rem, calc((100vw - 48rem) / 2 + 1rem));
+    z-index: 50;
+    align-items: center;
+    justify-content: center;
+    width: 1.75rem;
+    height: 1.75rem;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    background: var(--color-bg);
+    color: var(--color-text-tertiary);
+    cursor: pointer;
+    transition: border-color 150ms, color 150ms;
+    box-shadow: var(--shadow-sm);
+  }
+  @media (min-width: 1024px) {
+    .toc-expand-btn.visible { display: flex; }
+  }
+  .toc-expand-btn:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+  }
 </style>
 
 <script>
+  // --- Desktop TOC collapse ---
+  const tocLayout = document.getElementById("blog-layout");
+  const tocAside = document.getElementById("blog-toc");
+  const tocCollapseBtn = document.getElementById("toc-collapse-btn");
+  const tocExpandBtn = document.getElementById("toc-expand-btn");
+  const TOC_KEY = "blog-toc-collapsed";
+
+  if (tocLayout && tocAside && tocCollapseBtn && tocExpandBtn) {
+    function collapseToc() {
+      tocLayout.classList.add("toc-collapsed");
+      tocExpandBtn.classList.add("visible");
+      localStorage.setItem(TOC_KEY, "1");
+    }
+    function expandToc() {
+      tocLayout.classList.remove("toc-collapsed");
+      tocExpandBtn.classList.remove("visible");
+      localStorage.setItem(TOC_KEY, "0");
+    }
+    tocCollapseBtn.addEventListener("click", collapseToc);
+    tocExpandBtn.addEventListener("click", expandToc);
+    if (localStorage.getItem(TOC_KEY) === "1") collapseToc();
+  }
+
   // --- Mobile TOC toggle ---
-  const tocToggle = document.getElementById("toc-toggle");
+  const tocToggle = document.getElementById("toc-mobile-toggle");
   const tocList = document.getElementById("toc-list");
   const tocChevron = document.getElementById("toc-chevron");
   if (tocToggle && tocList && tocChevron) {
@@ -171,5 +295,4 @@ const hasToc = headings.length > 0;
       if (id) { const target = document.getElementById(id); if (target) observer.observe(target); }
     });
   }
-
 </script>
