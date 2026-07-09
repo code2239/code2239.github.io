@@ -125,7 +125,23 @@ const links = [
   const searchTrigger = document.getElementById("search-trigger");
   if (searchTrigger) {
     searchTrigger.addEventListener("click", () => {
-      (window as any).__searchOpen?.();
+      if ((window as any).__searchOpen) {
+        (window as any).__searchOpen();
+      } else {
+        import("../features/search/search-init.ts").then((m) => m.initSearchModal());
+      }
     });
   }
+
+  // Ctrl+K — dynamic import only when triggered
+  document.addEventListener("keydown", (e) => {
+    if ((e.ctrlKey || e.metaKey) && e.key === "k") {
+      e.preventDefault();
+      if ((window as any).__searchOpen) {
+        (window as any).__searchOpen();
+      } else {
+        import("../features/search/search-init.ts").then((m) => m.initSearchModal());
+      }
+    }
+  });
 </script>

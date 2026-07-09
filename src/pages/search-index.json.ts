@@ -1,6 +1,4 @@
 import { getCollection } from "astro:content";
-import { create, insertMultiple, save } from "@orama/orama";
-import { createTokenizer } from "@orama/tokenizers/mandarin";
 
 export async function GET() {
   const [blog, projects, notes, resources] = await Promise.all([
@@ -10,7 +8,6 @@ export async function GET() {
     getCollection("resources"),
   ]);
 
-  // Lowercase all searchable text for case-insensitive matching
   const entries = [
     ...blog.map((p) => ({
       title: p.data.title.toLowerCase(),
@@ -58,27 +55,7 @@ export async function GET() {
     })),
   ];
 
-  const tokenizer = await createTokenizer({ language: "mandarin" });
-
-  const db = await create({
-    schema: {
-      title: "string",
-      summary: "string",
-      displayTitle: "string",
-      displaySummary: "string",
-      href: "string",
-      type: "string",
-      tags: "string",
-      displayTags: "string",
-      date: "string",
-    } as const,
-    components: { tokenizer },
-  });
-
-  await insertMultiple(db, entries);
-
-  const raw = await save(db);
-  return new Response(JSON.stringify(raw), {
+  return new Response(JSON.stringify(entries), {
     headers: { "Content-Type": "application/json" },
   });
 }
