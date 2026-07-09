@@ -1,38 +1,53 @@
 ---
-// SearchModal.astro — Global search overlay triggered from Navigation bar
-// Fetches /search-index.json on first open, searches client-side with weighted scoring.
+// SearchModal.astro — Orama-powered global search overlay
+// Fetches pre-built /search-index.json, searches with @orama/orama client-side.
 ---
 
-<div id="search-overlay" class="search-overlay" role="dialog" aria-modal="true" aria-label="全局搜索">
-  <div id="search-backdrop" class="search-backdrop"></div>
-  <div class="search-panel" id="search-panel">
+<div id="search-overlay" class="srch-overlay" role="dialog" aria-modal="true" aria-label="全局搜索">
+  <div id="search-backdrop" class="srch-backdrop"></div>
+  <div class="srch-panel" id="srch-panel">
     <!-- Search input -->
-    <div class="search-input-wrapper">
-      <svg class="search-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <div class="srch-input-row">
+      <svg class="srch-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
       </svg>
       <input
         type="text"
         id="search-input"
-        class="search-input"
+        class="srch-input"
         placeholder="搜索文章、项目、日记、资源..."
         autocomplete="off"
         autocapitalize="off"
         spellcheck="false"
+        enterkeyhint="go"
       />
-      <kbd class="search-kbd" id="search-close-hint">Esc</kbd>
+      <kbd class="srch-kbd">Esc</kbd>
     </div>
 
     <!-- Results area -->
-    <div id="search-results" class="search-results">
-      <p class="search-empty-hint" id="search-empty-hint">输入关键词开始搜索</p>
+    <div id="search-results" class="srch-results">
+      <p class="srch-empty" id="search-empty-hint">输入关键词开始搜索</p>
+    </div>
+
+    <!-- Footer hints -->
+    <div class="srch-footer">
+      <div class="srch-footer-hints">
+        <span><kbd>↑</kbd><kbd>↓</kbd> 导航</span>
+        <span><kbd>↵</kbd> 打开</span>
+        <span><kbd>Ctrl</kbd>+<kbd>K</kbd> 切换</span>
+      </div>
+      <div class="srch-footer-brand">
+        powered by Orama
+      </div>
     </div>
   </div>
 </div>
 
 <style>
-  /* ---- Overlay ---- */
-  .search-overlay {
+  /* ==============================
+     Search Overlay
+     ============================== */
+  .srch-overlay {
     position: fixed;
     inset: 0;
     z-index: 100;
@@ -41,145 +56,193 @@
     justify-content: center;
     padding: 5rem 1rem 2rem;
   }
-  .search-overlay.open {
+  .srch-overlay.open {
     display: flex;
   }
 
-  .search-backdrop {
+  .srch-backdrop {
     position: absolute;
     inset: 0;
     background: rgba(0, 0, 0, 0.35);
-    backdrop-filter: blur(2px);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
   }
 
-  /* ---- Panel ---- */
-  .search-panel {
+  /* ==============================
+     Panel
+     ============================== */
+  .srch-panel {
     position: relative;
     width: 100%;
     max-width: 640px;
     max-height: 80vh;
     background: var(--color-bg);
     border: 1px solid var(--color-border);
-    border-radius: 14px;
-    box-shadow: var(--shadow-lg);
+    border-radius: 16px;
+    box-shadow:
+      0 0 0 1px rgba(0,0,0,0.03),
+      0 4px 24px rgba(0,0,0,0.08),
+      0 12px 48px rgba(0,0,0,0.06);
     display: flex;
     flex-direction: column;
     overflow: hidden;
   }
 
-  /* ---- Input ---- */
-  .search-input-wrapper {
+  /* ==============================
+     Input Row
+     ============================== */
+  .srch-input-row {
     display: flex;
     align-items: center;
-    gap: 0.625rem;
-    padding: 0.875rem 1rem;
+    gap: 0.75rem;
+    padding: 1rem 1.125rem;
     border-bottom: 1px solid var(--color-border);
+    position: relative;
   }
-  .search-input-icon {
-    width: 1.125rem;
-    height: 1.125rem;
+
+  .srch-input-icon {
+    width: 1.25rem;
+    height: 1.25rem;
     color: var(--color-text-tertiary);
     flex-shrink: 0;
+    transition: color 200ms ease;
   }
-  .search-input {
+  .srch-input-row:focus-within .srch-input-icon {
+    color: var(--color-accent);
+  }
+
+  .srch-input {
     flex: 1;
     min-width: 0;
     border: none;
     outline: none;
     background: transparent;
-    font-size: 0.9375rem;
+    font-size: 1rem;
     font-family: var(--font-sans);
     color: var(--color-text);
     line-height: 1.5;
+    caret-color: var(--color-accent);
   }
-  .search-input::placeholder {
+  .srch-input::placeholder {
     color: var(--color-text-tertiary);
   }
-  .search-kbd {
+
+  .srch-kbd {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-width: 1.75rem;
-    height: 1.375rem;
-    padding: 0 0.375rem;
-    font-size: 0.625rem;
+    min-width: 1.875rem;
+    height: 1.5rem;
+    padding: 0 0.5rem;
+    font-size: 0.6875rem;
     font-family: var(--font-mono);
     color: var(--color-text-tertiary);
     background: var(--color-bg-tertiary);
     border: 1px solid var(--color-border);
-    border-radius: 4px;
+    border-radius: 5px;
     flex-shrink: 0;
+    transition: opacity 200ms ease;
   }
 
-  /* ---- Results ---- */
-  .search-results {
+  /* ==============================
+     Results
+     ============================== */
+  .srch-results {
     flex: 1;
     overflow-y: auto;
-    padding: 0.5rem;
+    padding: 0.375rem;
   }
-  .search-results:empty {
-    display: none;
-  }
+  .srch-results:empty { display: none; }
 
-  .search-empty-hint,
-  .search-no-results {
+  .srch-empty,
+  .srch-no-results {
     text-align: center;
     color: var(--color-text-tertiary);
-    font-size: 0.8125rem;
-    padding: 2rem 1rem;
+    font-size: 0.875rem;
+    padding: 3rem 1rem;
     margin: 0;
   }
 
-  /* ---- Result item ---- */
-  .search-result-item {
+  /* Group header */
+  .srch-group {
+    padding: 0.5rem 0.75rem 0.25rem;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    color: var(--color-text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-family: var(--font-sans);
+  }
+  .srch-group:first-child { padding-top: 0.375rem; }
+
+  /* Result count badge */
+  .srch-group-count {
+    font-weight: 400;
+    opacity: 0.6;
+    margin-left: 0.375rem;
+  }
+
+  /* ==============================
+     Result Item
+     ============================== */
+  .srch-item {
     display: flex;
     align-items: flex-start;
     gap: 0.75rem;
     padding: 0.625rem 0.75rem;
-    border-radius: 8px;
+    margin: 0.0625rem 0;
+    border-radius: 10px;
     cursor: pointer;
     text-decoration: none;
-    transition: background 100ms ease;
+    transition: background 120ms ease, box-shadow 120ms ease;
   }
-  .search-result-item:hover,
-  .search-result-item.active {
+  .srch-item:hover,
+  .srch-item.active {
     background: var(--color-accent-soft);
   }
+  .srch-item.active {
+    box-shadow: inset 0 0 0 1.5px var(--color-accent);
+  }
 
-  .search-result-type {
+  /* Type badge */
+  .srch-item-badge {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     width: 2rem;
     height: 2rem;
-    border-radius: 6px;
+    border-radius: 8px;
     background: var(--color-bg-tertiary);
     font-size: 0.6875rem;
     font-weight: 600;
     color: var(--color-text-tertiary);
     flex-shrink: 0;
+    transition: background 120ms ease, color 120ms ease;
   }
-  .search-result-item:hover .search-result-type,
-  .search-result-item.active .search-result-type {
+  .srch-item:hover .srch-item-badge,
+  .srch-item.active .srch-item-badge {
     background: var(--color-accent);
     color: #fff;
   }
 
-  .search-result-body {
+  .srch-item-body {
     flex: 1;
     min-width: 0;
   }
-  .search-result-title {
+
+  .srch-item-title {
     font-size: 0.875rem;
     font-weight: 500;
     color: var(--color-text);
     line-height: 1.4;
-    margin-bottom: 0.125rem;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    margin-bottom: 0.0625rem;
   }
-  .search-result-summary {
+  .srch-item:hover .srch-item-title,
+  .srch-item.active .srch-item-title {
+    color: var(--color-accent);
+  }
+
+  .srch-item-summary {
     font-size: 0.75rem;
     color: var(--color-text-tertiary);
     line-height: 1.4;
@@ -189,13 +252,14 @@
     overflow: hidden;
   }
 
-  .search-result-tags {
+  .srch-item-tags {
     display: flex;
     flex-wrap: wrap;
     gap: 0.25rem;
     margin-top: 0.25rem;
   }
-  .search-result-tag {
+
+  .srch-item-tag {
     font-size: 0.625rem;
     padding: 0.0625rem 0.375rem;
     border-radius: 4px;
@@ -204,26 +268,26 @@
     font-family: var(--font-mono);
   }
 
-  /* ---- Highlight ---- */
-  .search-highlight {
-    background: var(--color-accent-soft);
-    color: var(--color-accent);
-    font-weight: 500;
-    border-radius: 2px;
-    padding: 0 0.0625rem;
-  }
-
-  /* ---- Footer hint ---- */
-  .search-footer-hint {
+  /* ==============================
+     Footer
+     ============================== */
+  .srch-footer {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-    padding: 0.5rem 1rem;
+    justify-content: space-between;
+    padding: 0.5rem 1.125rem;
     border-top: 1px solid var(--color-border);
     font-size: 0.6875rem;
     color: var(--color-text-tertiary);
   }
-  .search-footer-hint kbd {
+
+  .srch-footer-hints {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .srch-footer-hints kbd {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -235,14 +299,23 @@
     background: var(--color-bg-tertiary);
     border: 1px solid var(--color-border);
     border-radius: 3px;
+    margin: 0 0.125rem;
   }
 
-  /* ---- Mobile ---- */
+  .srch-footer-brand {
+    font-size: 0.625rem;
+    opacity: 0.5;
+  }
+
+  /* ==============================
+     Mobile
+     ============================== */
   @media (max-width: 640px) {
-    .search-overlay {
+    .srch-overlay {
       padding: 0;
+      align-items: stretch;
     }
-    .search-panel {
+    .srch-panel {
       max-width: none;
       max-height: none;
       height: 100%;
@@ -253,21 +326,19 @@
 </style>
 
 <script>
+  import { create, insertMultiple, search } from "@orama/orama";
+
   function initSearchModal() {
     const overlay = document.getElementById("search-overlay")!;
     const backdrop = document.getElementById("search-backdrop")!;
     const input = document.getElementById("search-input") as HTMLInputElement;
     const resultsContainer = document.getElementById("search-results")!;
     const emptyHint = document.getElementById("search-empty-hint")!;
-    const closeHint = document.getElementById("search-close-hint")!;
 
-    let index: Array<{
-      title: string; summary: string; href: string;
-      type: string; tags: string[]; date: string;
-    }> | null = null;
+    let db: Awaited<ReturnType<typeof create>> | null = null;
     let loading = false;
     let activeIdx = -1;
-    let visibleResults: typeof index = [];
+    let resultItems: Array<{ el: HTMLElement; href: string }> = [];
     let debounceTimer: ReturnType<typeof setTimeout>;
 
     const TYPE_LABELS: Record<string, string> = {
@@ -277,24 +348,50 @@
       resources: "资",
     };
 
+    const TYPE_NAMES: Record<string, string> = {
+      blog: "博客",
+      projects: "项目",
+      notes: "日记",
+      resources: "资源",
+    };
+
     // ---- Open / Close ----
     function open() {
       overlay.classList.add("open");
       input.value = "";
       activeIdx = -1;
-      visibleResults = [];
+      resultItems = [];
       emptyHint.textContent = "输入关键词开始搜索";
-      emptyHint.classList.remove("search-no-results");
-      renderResults();
-      setTimeout(() => input.focus(), 50);
+      emptyHint.className = "srch-empty";
+      resultsContainer.innerHTML = "";
+      resultsContainer.appendChild(emptyHint);
+      setTimeout(() => input.focus(), 60);
 
       // Lazy-load index
-      if (!index && !loading) {
+      if (!db && !loading) {
         loading = true;
         fetch("/search-index.json")
           .then((r) => r.json())
-          .then((data) => { index = data; })
-          .catch(() => { emptyHint.textContent = "搜索不可用"; })
+          .then(async (raw) => {
+            db = await create({
+              schema: {
+                title: "string",
+                summary: "string",
+                href: "string",
+                type: "string",
+                tags: "string",
+                date: "string",
+              } as const,
+            });
+            // Restore pre-built index from raw data
+            // Orama's save/load pair: load receives the raw object
+            if (raw?.docs) {
+              await insertMultiple(db, raw.docs as any);
+            }
+          })
+          .catch(() => {
+            emptyHint.textContent = "搜索暂不可用，请稍后重试";
+          })
           .finally(() => { loading = false; });
       }
     }
@@ -304,130 +401,129 @@
     }
 
     // ---- Search ----
-    function tokenize(q: string): string[] {
-      return q.trim().toLowerCase().split(/\s+/).filter(Boolean);
-    }
-
-    function score(item: typeof index[0], tokens: string[]): number {
-      const titleLower = item.title.toLowerCase();
-      const summaryLower = item.summary.toLowerCase();
-      const tagsLower = item.tags.join(" ").toLowerCase();
-      let s = 0;
-      for (const t of tokens) {
-        if (titleLower === t) s += 10;
-        else if (titleLower.includes(t)) s += 8;
-        if (summaryLower.includes(t)) s += 4;
-        if (tagsLower.includes(t)) s += 2;
-      }
-      return s;
-    }
-
-    function highlight(text: string, tokens: string[]): string {
-      if (tokens.length === 0) return text;
-      const escaped = tokens.map((t) => t.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
-      const re = new RegExp(`(${escaped.join("|")})`, "gi");
-      return text.replace(re, '<mark class="search-highlight">$1</mark>');
-    }
-
-    function renderResults() {
-      if (visibleResults.length === 0) {
+    async function doSearch() {
+      const q = input.value.trim();
+      if (!q || !db) {
+        resultItems = [];
+        activeIdx = -1;
         resultsContainer.innerHTML = "";
+        emptyHint.textContent = db ? "输入关键词开始搜索" : "正在加载搜索索引...";
+        emptyHint.className = "srch-empty";
         resultsContainer.appendChild(emptyHint);
         return;
       }
 
-      const tokens = tokenize(input.value);
-      const fragment = document.createDocumentFragment();
-
-      visibleResults.forEach((item, i) => {
-        const el = document.createElement("a");
-        el.href = item.href;
-        el.className = "search-result-item" + (i === activeIdx ? " active" : "");
-        el.setAttribute("data-idx", String(i));
-
-        el.innerHTML = `
-          <span class="search-result-type">${TYPE_LABELS[item.type] || item.type}</span>
-          <div class="search-result-body">
-            <div class="search-result-title">${highlight(item.title, tokens)}</div>
-            <div class="search-result-summary">${highlight(item.summary, tokens)}</div>
-            ${item.tags.length > 0 ? `<div class="search-result-tags">${item.tags.slice(0, 4).map((t) => `<span class="search-result-tag">${t}</span>`).join("")}</div>` : ""}
-          </div>
-        `;
-
-        el.addEventListener("click", close);
-        el.addEventListener("mouseenter", () => {
-          activeIdx = i;
-          updateActiveClass();
-        });
-
-        fragment.appendChild(el);
+      const rawResults = await search(db, {
+        term: q,
+        properties: ["title", "summary", "tags"],
+        limit: 20,
       });
+
+      const hits = rawResults.hits.map((h) => ({
+        title: h.document.title as string,
+        summary: h.document.summary as string,
+        href: h.document.href as string,
+        type: h.document.type as string,
+        tags: (h.document.tags as string).split(", ").filter(Boolean),
+      }));
+
+      if (hits.length === 0) {
+        resultItems = [];
+        activeIdx = -1;
+        resultsContainer.innerHTML = "";
+        emptyHint.textContent = `没有找到与「${q}」相关的结果`;
+        emptyHint.className = "srch-no-results";
+        resultsContainer.appendChild(emptyHint);
+        return;
+      }
+
+      // Group by type
+      const grouped = new Map<string, typeof hits>();
+      for (const hit of hits) {
+        if (!grouped.has(hit.type)) grouped.set(hit.type, []);
+        grouped.get(hit.type)!.push(hit);
+      }
+
+      // Type order: blog, projects, notes, resources
+      const typeOrder = ["blog", "projects", "notes", "resources"];
 
       resultsContainer.innerHTML = "";
-      resultsContainer.appendChild(fragment);
+      resultItems = [];
+
+      for (const type of typeOrder) {
+        const group = grouped.get(type);
+        if (!group || group.length === 0) continue;
+
+        // Group header
+        const header = document.createElement("div");
+        header.className = "srch-group";
+        header.innerHTML = `${TYPE_NAMES[type] || type}<span class="srch-group-count">(${group.length})</span>`;
+        resultsContainer.appendChild(header);
+
+        for (const hit of group) {
+          const el = document.createElement("a");
+          el.href = hit.href;
+          el.className = "srch-item";
+          el.dataset.idx = String(resultItems.length);
+
+          const tagsHTML = hit.tags.length > 0
+            ? `<div class="srch-item-tags">${hit.tags.slice(0, 4).map((t) => `<span class="srch-item-tag">${t}</span>`).join("")}</div>`
+            : "";
+
+          el.innerHTML = `
+            <span class="srch-item-badge">${TYPE_LABELS[hit.type] || hit.type}</span>
+            <div class="srch-item-body">
+              <div class="srch-item-title">${hit.title}</div>
+              <div class="srch-item-summary">${hit.summary}</div>
+              ${tagsHTML}
+            </div>
+          `;
+
+          el.addEventListener("click", close);
+          el.addEventListener("mouseenter", () => {
+            activeIdx = Number(el.dataset.idx);
+            updateActive();
+          });
+
+          resultsContainer.appendChild(el);
+          resultItems.push({ el, href: hit.href });
+        }
+      }
+
+      // Default highlight first item
+      activeIdx = 0;
+      updateActive();
     }
 
-    function updateActiveClass() {
-      resultsContainer.querySelectorAll(".search-result-item").forEach((el) => {
-        const idx = Number((el as HTMLElement).dataset.idx);
-        el.classList.toggle("active", idx === activeIdx);
+    function updateActive() {
+      resultItems.forEach(({ el }) => {
+        el.classList.toggle("active", Number(el.dataset.idx) === activeIdx);
       });
-      // Scroll active into view
-      const active = resultsContainer.querySelector(".search-result-item.active");
-      active?.scrollIntoView({ block: "nearest" });
-    }
-
-    function doSearch() {
-      const tokens = tokenize(input.value);
-      if (tokens.length === 0 || !index) {
-        visibleResults = [];
-        emptyHint.textContent = index == null ? "正在加载索引..." : "输入关键词开始搜索";
-        emptyHint.classList.remove("search-no-results");
-        activeIdx = -1;
-        renderResults();
-        return;
-      }
-
-      visibleResults = index
-        .map((item) => ({ item, s: score(item, tokens) }))
-        .filter(({ s }) => s > 0)
-        .sort((a, b) => b.s - a.s || new Date(b.item.date).getTime() - new Date(a.item.date).getTime())
-        .slice(0, 20)
-        .map(({ item }) => item);
-
-      if (visibleResults.length === 0) {
-        emptyHint.textContent = "没有找到匹配的结果";
-        emptyHint.classList.add("search-no-results");
-        resultsContainer.innerHTML = "";
-        resultsContainer.appendChild(emptyHint);
-        activeIdx = -1;
-      } else {
-        activeIdx = 0;
-        renderResults();
-      }
+      const active = resultItems.find(({ el }) => Number(el.dataset.idx) === activeIdx);
+      active?.el.scrollIntoView({ block: "nearest" });
     }
 
     // ---- Events ----
     input.addEventListener("input", () => {
       clearTimeout(debounceTimer);
-      debounceTimer = setTimeout(doSearch, 200);
+      debounceTimer = setTimeout(doSearch, 150);
     });
 
     input.addEventListener("keydown", (e) => {
       if (e.key === "ArrowDown") {
         e.preventDefault();
-        if (visibleResults.length === 0) return;
-        activeIdx = Math.min(activeIdx + 1, visibleResults.length - 1);
-        updateActiveClass();
+        if (resultItems.length === 0) return;
+        activeIdx = Math.min(activeIdx + 1, resultItems.length - 1);
+        updateActive();
       } else if (e.key === "ArrowUp") {
         e.preventDefault();
-        if (visibleResults.length === 0) return;
+        if (resultItems.length === 0) return;
         activeIdx = Math.max(activeIdx - 1, 0);
-        updateActiveClass();
+        updateActive();
       } else if (e.key === "Enter") {
         e.preventDefault();
-        if (activeIdx >= 0 && activeIdx < visibleResults.length) {
-          const item = visibleResults[activeIdx];
+        if (activeIdx >= 0 && activeIdx < resultItems.length) {
+          const item = resultItems[activeIdx];
           window.location.href = item.href;
           close();
         }
@@ -438,7 +534,6 @@
 
     backdrop.addEventListener("click", close);
 
-    // Global Ctrl+K / Cmd+K shortcut
     document.addEventListener("keydown", (e) => {
       if ((e.ctrlKey || e.metaKey) && e.key === "k") {
         e.preventDefault();
@@ -446,7 +541,6 @@
       }
     });
 
-    // Expose open() for Navigation's search icon
     (window as any).__searchOpen = open;
   }
 

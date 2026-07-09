@@ -1,4 +1,5 @@
 import { getCollection } from "astro:content";
+import { create, insertMultiple, save } from "@orama/orama";
 
 export async function GET() {
   const [blog, projects, notes, resources] = await Promise.all([
@@ -14,7 +15,7 @@ export async function GET() {
       summary: p.data.summary,
       href: `/blog/${p.id.replace(/\.md$/, "")}`,
       type: "blog" as const,
-      tags: p.data.tags,
+      tags: p.data.tags.join(", "),
       date: p.data.date,
     })),
     ...projects.map((p) => ({
@@ -22,7 +23,7 @@ export async function GET() {
       summary: p.data.summary,
       href: `/projects/${p.id.replace(/\.md$/, "")}`,
       type: "projects" as const,
-      tags: p.data.tags,
+      tags: p.data.tags.join(", "),
       date: p.data.date,
     })),
     ...notes.map((n) => ({
@@ -30,7 +31,7 @@ export async function GET() {
       summary: n.data.summary,
       href: `/notes/${n.id.replace(/\.md$/, "")}`,
       type: "notes" as const,
-      tags: n.data.tags,
+      tags: n.data.tags.join(", "),
       date: n.data.date,
     })),
     ...resources.map((r) => ({
@@ -38,12 +39,26 @@ export async function GET() {
       summary: r.data.summary,
       href: `/resources/${r.id.replace(/\.md$/, "")}`,
       type: "resources" as const,
-      tags: r.data.tags,
+      tags: r.data.tags.join(", "),
       date: r.data.date,
     })),
   ];
 
-  return new Response(JSON.stringify(entries), {
+  const db = await create({
+    schema: {
+      title: "string",
+      summary: "string",
+      href: "string",
+      type: "string",
+      tags: "string",
+      date: "string",
+    } as const,
+  });
+
+  await insertMultiple(db, entries);
+
+  const raw = await save(db);
+  return new Response(JSON.stringify(raw), {
     headers: { "Content-Type": "application/json" },
   });
 }
