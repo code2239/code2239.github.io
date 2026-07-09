@@ -1,4 +1,6 @@
 ---
+import SearchModal from "../features/search/SearchModal.astro";
+
 interface Props {
   variant?: "header" | "footer";
 }
@@ -31,7 +33,7 @@ const links = [
         </a>
 
         <!-- Desktop nav -->
-        <div class="hidden sm:flex items-center gap-6">
+        <div class="hidden sm:flex items-center gap-5">
           {links.map((link) => (
             <a
               href={link.href}
@@ -40,6 +42,18 @@ const links = [
               {link.label}
             </a>
           ))}
+          <button
+            id="search-trigger"
+            class="flex items-center gap-1.5 text-sm text-[var(--color-text-tertiary)] hover:text-[var(--color-text)] transition-colors duration-150 bg-transparent border border-[var(--color-border)] rounded-md px-2.5 py-1 cursor-pointer"
+            aria-label="搜索 (Ctrl+K)"
+            title="搜索 (Ctrl+K)"
+          >
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+            </svg>
+            <span class="hidden lg:inline">搜索</span>
+            <kbd class="hidden lg:inline-flex items-center text-[0.625rem] font-mono text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1 py-px rounded">Ctrl+K</kbd>
+          </button>
         </div>
 
         <!-- Mobile hamburger -->
@@ -68,6 +82,7 @@ const links = [
         </div>
       </div>
     </nav>
+    <SearchModal />
   ) : (
     <footer class="border-t border-[var(--color-border)] mt-24 py-8">
       <div class="max-w-content flex items-center justify-between">
@@ -104,6 +119,13 @@ const links = [
       const open = menu.classList.toggle("hidden");
       btn.classList.toggle("menu-open", !open);
       btn.setAttribute("aria-label", open ? "打开菜单" : "关闭菜单");
+    });
+  }
+
+  const searchTrigger = document.getElementById("search-trigger");
+  if (searchTrigger) {
+    searchTrigger.addEventListener("click", () => {
+      (window as any).__searchOpen?.();
     });
   }
 </script>
