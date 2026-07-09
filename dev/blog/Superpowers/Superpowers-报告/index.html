@@ -1,0 +1,479 @@
+<!DOCTYPE html><html lang="zh-CN"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="- **作者全称**：**Jesse Vincent**（GitHub 账号 **@obra**）"><meta name="color-scheme" content="light"><!-- Open Graph --><meta property="og:title" content="⚡ Superpowers 深度调研报告 — 星游寰宇"><meta property="og:description" content="- **作者全称**：**Jesse Vincent**（GitHub 账号 **@obra**）"><meta property="og:url" content="https://code2239.github.io/blog/Superpowers/Superpowers-报告"><meta property="og:type" content="article"><meta property="og:site_name" content="星游寰宇"><meta property="og:locale" content="zh_CN"><meta property="article:published_time" content="2026-07-05"><meta property="article:tag" content="AI"><meta property="article:tag" content="调研"><meta property="article:tag" content="Superpowers"><meta property="article:tag" content="自动化"><meta property="article:tag" content="工具"><!-- Twitter Card --><meta name="twitter:card" content="summary"><meta name="twitter:title" content="⚡ Superpowers 深度调研报告 — 星游寰宇"><meta name="twitter:description" content="- **作者全称**：**Jesse Vincent**（GitHub 账号 **@obra**）"><!-- Canonical --><link rel="canonical" href="https://code2239.github.io/blog/Superpowers/Superpowers-报告"><title>⚡ Superpowers 深度调研报告 — 星游寰宇</title><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="alternate" type="application/rss+xml" title="星游寰宇 RSS" href="/rss.xml"><!-- Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"星游寰宇","url":"https://code2239.github.io","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://code2239.github.io/search?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://code2239.github.io"},{"@type":"ListItem","position":2,"name":"博客","item":"https://code2239.github.io/blog"},{"@type":"ListItem","position":3,"name":"Superpowers","item":"https://code2239.github.io/blog/Superpowers"},{"@type":"ListItem","position":4,"name":"Superpowers 报告"}]},{"@context":"https://schema.org","@type":"BlogPosting","headline":"⚡ Superpowers 深度调研报告","description":"- **作者全称**：**Jesse Vincent**（GitHub 账号 **@obra**）","datePublished":"2026-07-05","url":"https://code2239.github.io/blog/Superpowers/Superpowers-报告","keywords":"AI, 调研, Superpowers, 自动化, 工具"}]}</script><link rel="stylesheet" href="/dev/_astro/_slug_.BlQX3qwK.css">
+<style>.back-to-top[data-astro-cid-gzprr2dq]{position:fixed;bottom:2rem;right:2rem;z-index:40;width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:50%;border:1px solid var(--color-border);background:var(--color-bg);color:var(--color-text-secondary);cursor:pointer;box-shadow:var(--shadow-md);transition:opacity .2s ease,transform .2s ease}.back-to-top[data-astro-cid-gzprr2dq]:hover{color:var(--color-accent);border-color:var(--color-accent);transform:translateY(-2px)}.back-to-top[data-astro-cid-gzprr2dq].hidden{opacity:0;pointer-events:none}.copy-btn[data-astro-cid-qqybitij]{position:absolute;top:8px;right:8px;padding:4px 10px;font-size:.6875rem;font-family:var(--font-sans);color:var(--color-text-tertiary);background:var(--color-bg);border:1px solid var(--color-border);border-radius:6px;cursor:pointer;opacity:0;transition:opacity .15s ease,color .15s ease}pre[data-astro-cid-qqybitij]:hover .copy-btn[data-astro-cid-qqybitij]{opacity:1}.copy-btn[data-astro-cid-qqybitij]:hover{color:var(--color-accent);border-color:var(--color-accent)}.copy-btn[data-astro-cid-qqybitij].copied{color:#16a34a;border-color:#16a34a}.blog-layout[data-astro-cid-bvzihdzo]{display:block}.blog-toc[data-astro-cid-bvzihdzo]{display:none}.blog-body[data-astro-cid-bvzihdzo]{min-width:0}@media(min-width:1024px){.blog-layout[data-astro-cid-bvzihdzo]{display:grid;grid-template-columns:14rem 1fr;gap:3rem;align-items:start}.blog-toc[data-astro-cid-bvzihdzo]{display:block}.blog-body[data-astro-cid-bvzihdzo]{padding-right:2rem}}@media(max-width:1023px){.blog-toc[data-astro-cid-bvzihdzo]{display:block;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid var(--color-border)}}
+</style></head> <body class="min-h-screen flex flex-col"> <nav class="sticky top-0 z-40 bg-[var(--color-bg)]/80 backdrop-blur-md border-b border-[var(--color-border)]" data-astro-cid-pux6a34n><div class="max-w-content flex items-center justify-between py-4" data-astro-cid-pux6a34n><a href="/" class="flex items-center gap-2.5 text-base font-semibold no-underline tracking-tight" data-astro-cid-pux6a34n><svg class="w-7 h-7" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" data-astro-cid-pux6a34n><circle cx="16" cy="16" r="15" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-pux6a34n></circle><circle cx="16" cy="16" r="3" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="16" cy="5" r="1.5" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="24" cy="10" r="1" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="8" cy="22" r="1" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="25" cy="21" r="0.8" fill="currentColor" data-astro-cid-pux6a34n></circle></svg>
+星游寰宇
+</a><!-- Desktop nav --><div class="hidden sm:flex items-center gap-5" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>博客</a><a href="/projects" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>项目</a><a href="/notes" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>日记</a><a href="/resources" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>资源</a><a href="/about" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>关于</a><button id="search-trigger" class="flex items-center gap-1.5 text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] bg-[var(--color-bg-secondary)] hover:bg-[var(--color-bg-tertiary)] border border-[var(--color-border)] hover:border-[var(--color-accent)]/30 rounded-lg px-3 py-1.5 cursor-pointer shadow-sm hover:shadow-md transition-all duration-200" aria-label="搜索 (Ctrl+K)" title="搜索 (Ctrl+K)" data-astro-cid-pux6a34n><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-pux6a34n><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" data-astro-cid-pux6a34n></path></svg><span class="hidden lg:inline" data-astro-cid-pux6a34n>搜索</span><kbd class="hidden lg:inline-flex items-center text-[0.625rem] font-mono text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1 py-px rounded" data-astro-cid-pux6a34n>Ctrl+K</kbd></button></div><!-- Mobile hamburger --><button id="menu-btn" class="sm:hidden flex flex-col gap-1 p-2 -mr-2 cursor-pointer" aria-label="打开菜单" data-astro-cid-pux6a34n><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-transform duration-200" data-astro-cid-pux6a34n></span><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-opacity duration-200" data-astro-cid-pux6a34n></span><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-transform duration-200" data-astro-cid-pux6a34n></span></button></div><!-- Mobile menu --><div id="mobile-menu" class="hidden sm:hidden border-t border-[var(--color-border)] bg-[var(--color-bg)]" data-astro-cid-pux6a34n><div class="max-w-content flex flex-col gap-2 py-4" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>博客</a><a href="/projects" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>项目</a><a href="/notes" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>日记</a><a href="/resources" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>资源</a><a href="/about" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>关于</a></div></div></nav>
+    <div id="search-overlay" class="srch-overlay" role="dialog" aria-modal="true" aria-label="全局搜索" data-astro-cid-mn7pezny> <div id="search-backdrop" class="srch-backdrop" data-astro-cid-mn7pezny></div> <div class="srch-panel" id="srch-panel" data-astro-cid-mn7pezny> <!-- Search input --> <div class="srch-input-row" data-astro-cid-mn7pezny> <svg class="srch-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-mn7pezny> <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" data-astro-cid-mn7pezny></path> </svg> <input type="text" id="search-input" class="srch-input" placeholder="搜索文章、项目、日记、资源..." autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="go" data-astro-cid-mn7pezny> <kbd class="srch-kbd" data-astro-cid-mn7pezny>Esc</kbd> </div> <!-- Results area --> <div id="search-results" class="srch-results" data-astro-cid-mn7pezny> <p class="srch-empty" id="search-empty-hint" data-astro-cid-mn7pezny>输入关键词开始搜索</p> </div> <!-- Skeleton loading --> <div id="search-skeleton" class="srch-skeleton" style="display:none;" aria-hidden="true" data-astro-cid-mn7pezny> <div class="srch-skeleton-line" style="width:75%" data-astro-cid-mn7pezny></div> <div class="srch-skeleton-line" style="width:50%" data-astro-cid-mn7pezny></div> <div class="srch-skeleton-line" style="width:60%" data-astro-cid-mn7pezny></div> </div> <!-- Footer hints --> <div class="srch-footer" data-astro-cid-mn7pezny> <div class="srch-footer-hints" data-astro-cid-mn7pezny> <span data-astro-cid-mn7pezny><kbd data-astro-cid-mn7pezny>↑</kbd><kbd data-astro-cid-mn7pezny>↓</kbd> 导航</span> <span data-astro-cid-mn7pezny><kbd data-astro-cid-mn7pezny>↵</kbd> 打开</span> <span data-astro-cid-mn7pezny><kbd data-astro-cid-mn7pezny>Ctrl</kbd>+<kbd data-astro-cid-mn7pezny>K</kbd> 切换</span> </div> <div class="srch-footer-brand" data-astro-cid-mn7pezny>
+powered by Orama
+</div> </div> </div> </div> <script type="module" src="/dev/_astro/Navigation.astro_astro_type_script_index_0_lang.B7cQAlyY.js"></script> <main class="flex-1">  <div class="reading-progress" id="reading-progress" style="width: 0%"></div> <script type="module">const o=document.getElementById("reading-progress");if(!o)throw new Error("Reading progress bar element not found");const r=()=>{const n=window.scrollY,e=document.documentElement.scrollHeight-window.innerHeight,t=e>0?n/e*100:0;o.style.width=`${Math.min(t,100)}%`};window.addEventListener("scroll",r,{passive:!0});</script> <button id="back-to-top" class="back-to-top hidden" aria-label="返回顶部" data-astro-cid-gzprr2dq> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-gzprr2dq> <polyline points="18 15 12 9 6 15" data-astro-cid-gzprr2dq></polyline> </svg> </button>  <script type="module">const o=document.getElementById("back-to-top");o&&(window.addEventListener("scroll",()=>{o.classList.toggle("hidden",window.scrollY<400)},{passive:!0}),o.addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"})));</script> <script type="module">document.querySelectorAll("pre").forEach(e=>{const t=document.createElement("button");t.className="copy-btn",t.textContent="复制",t.addEventListener("click",async()=>{const n=e.querySelector("code")?.textContent||e.textContent||"";try{await navigator.clipboard.writeText(n),t.textContent="已复制",t.classList.add("copied"),setTimeout(()=>{t.textContent="复制",t.classList.remove("copied")},2e3)}catch{t.textContent="失败",setTimeout(()=>{t.textContent="复制"},2e3)}}),e.style.position="relative",e.appendChild(t)});</script> <div class="px-6 xl:px-12 pt-12 pb-16" data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <header class="mb-12 text-center" data-astro-cid-bvzihdzo> <h1 class="text-3xl font-semibold mb-3 tracking-tight" data-astro-cid-bvzihdzo>⚡ Superpowers 深度调研报告</h1> <div class="flex items-center justify-center gap-2 text-[var(--color-text-tertiary)] text-sm" data-astro-cid-bvzihdzo> <time datetime="2026-07-05" data-astro-cid-bvzihdzo>2026-07-05</time> <span class="text-[var(--color-border)]" data-astro-cid-bvzihdzo>·</span> <span data-astro-cid-bvzihdzo>25 分钟阅读</span>  <span class="text-[var(--color-border)]" data-astro-cid-bvzihdzo>·</span> <span class="text-sm text-[var(--color-text-tertiary)]"> <span> AI<span class="mx-1">·</span> </span><span> 调研<span class="mx-1">·</span> </span><span> Superpowers<span class="mx-1">·</span> </span><span> 自动化<span class="mx-1">·</span> </span><span> 工具 </span> </span>  </div> </header> <div class="blog-layout" data-astro-cid-bvzihdzo> <aside class="blog-toc" data-astro-cid-bvzihdzo> <div class="sticky top-24" data-astro-cid-bvzihdzo> <button id="toc-toggle" class="hidden max-md:flex items-center gap-1 text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-3 cursor-pointer border-none bg-transparent p-0" aria-expanded="false" aria-controls="toc-list" data-astro-cid-bvzihdzo>
+目录
+<svg id="toc-chevron" class="w-3 h-3 transition-transform duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-bvzihdzo><polyline points="6 9 12 15 18 9" data-astro-cid-bvzihdzo></polyline></svg> </button> <span class="text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-3 max-md:hidden" data-astro-cid-bvzihdzo>目录</span> <div id="toc-list" class="max-md:hidden" data-astro-cid-bvzihdzo> <nav class="toc"> <p class="text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-3">目录</p> <ul class="toc-list"> <li class> <a href="#1-开发者与公司背景">1. 开发者与公司背景</a> </li><li class> <a href="#2-底层技术栈">2. 底层技术栈</a> </li><li class> <a href="#3-开源属性与商业模式">3. 开源属性与商业模式</a> </li><li class="toc-h3"> <a href="#开源属性">开源属性</a> </li><li class="toc-h3"> <a href="#定价模式">定价模式</a> </li><li class> <a href="#4-功能全景解析">4. 功能全景解析</a> </li><li class="toc-h3"> <a href="#主要功能50-字概括">主要功能（50 字概括）</a> </li><li class="toc-h3"> <a href="#核心功能与核心技术">核心功能与核心技术</a> </li><li class="toc-h3"> <a href="#14-个核心技能skills">14 个核心技能（Skills）</a> </li><li class="toc-h3"> <a href="#实战案例chardet-重写">实战案例：chardet 重写</a> </li><li class> <a href="#5-主要竞品清单">5. 主要竞品清单</a> </li><li class> <a href="#6-与竞品的横向比较">6. 与竞品的横向比较</a> </li><li class> <a href="#7-版本迭代信息">7. 版本迭代信息</a> </li><li class="toc-h3"> <a href="#主要版本里程碑">主要版本里程碑</a> </li><li class="toc-h3"> <a href="#github-统计截至-2026-07-05">GitHub 统计（截至 2026-07-05）</a> </li><li class> <a href="#一句话锐评">一句话锐评</a> </li><li class> <a href="#参考来源">参考来源</a> </li> </ul> </nav> </div> </div> </aside> <div class="blog-body" data-astro-cid-bvzihdzo> <div class="prose prose-neutral max-w-none" data-astro-cid-bvzihdzo>  <h1 id="-superpowers-深度调研报告">⚡ Superpowers 深度调研报告</h1>
+<blockquote>
+<p><strong>调研日期</strong>：2026-07-05<br>
+<strong>项目地址</strong>：<a href="https://github.com/obra/superpowers">https://github.com/obra/superpowers</a></p>
+</blockquote>
+<hr>
+<h2 id="1-开发者与公司背景">1. 开发者与公司背景</h2>
+<p><strong>开发方信息</strong>：</p>
+<ul>
+<li><strong>作者全称</strong>：<strong>Jesse Vincent</strong>（GitHub 账号 <strong>@obra</strong>）</li>
+<li><strong>所属公司</strong>：<strong>Prime Radiant</strong>（2025 年创立，位于美国加州伯克利）</li>
+<li><strong>国籍</strong>：🇺🇸 美国</li>
+</ul>
+<p><strong>创始人简历</strong>：
+Jesse Vincent 是一位拥有 25+ 年经验的开源软件老兵：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>时期</th><th>成就</th></tr></thead><tbody><tr><td><strong>1994 年</strong></td><td>在 Wesleyan 大学创建 <strong>Request Tracker (RT)</strong>，全球最广泛使用的开源工单系统</td></tr><tr><td><strong>2001 年</strong></td><td>创立 <strong>Best Practical Solutions</strong> 公司，为 RT 提供商业支持</td></tr><tr><td><strong>2005–2008 年</strong></td><td>担任 <strong>Perl 5 项目负责人（Pumpking）</strong>，发布 Perl 5.12 和 5.14，将 Perl 从无规律发布改为固定周期发布</td></tr><tr><td><strong>2010 年代</strong></td><td>创建 <strong>K-9 Mail</strong> Android 客户端（后被 Mozilla 收购，成为 Thunderbird for Android 的前身）</td></tr><tr><td><strong>2010 年代</strong></td><td>联合创办 <strong>Keyboardio</strong>，设计制造高端人体工学机械键盘</td></tr><tr><td><strong>2021 年</strong></td><td>联合创办 <strong>VaccinateCA</strong>，帮助美国人寻找疫苗</td></tr><tr><td><strong>2025 年</strong></td><td>创办 <strong>Prime Radiant</strong>，聚焦 AI Agent 工具链；<strong>2025 年 10 月 9 日</strong>发布 Superpowers</td></tr></tbody></table>
+<p><strong>团队规模</strong>：目前为个人项目，由 Jesse Vincent 主导开发，社区贡献者持续参与。</p>
+<p><strong>盈利情况</strong>：<strong>完全免费 + 开源</strong>，通过 GitHub Sponsors 接受赞助。无付费版本、无企业版。</p>
+<p><strong>信条与理念</strong>：</p>
+<blockquote>
+<p><em>“AI 编码代理缺少的不是能力——而是纪律。”</em></p>
+</blockquote>
+<p>核心理念：<strong>Process over Prompt（流程优于提示词）</strong>。通过编码化的工程方法论让 AI 遵循有纪律的开发流程，而不是靠更聪明的提示词。</p>
+<p><strong>信息源</strong>：</p>
+<ul>
+<li><a href="https://github.com/obra/superpowers">GitHub: obra/superpowers</a></li>
+<li><a href="https://rywalker.com/research/superpowers-skills-framework">Superpowers Skills Framework | Ry Walker Research</a></li>
+<li><a href="https://cloud.tencent.com.cn/developer/article/2671288">腾讯云：Superpowers 深度解析</a></li>
+<li><a href="https://pub.towardsai.net/i-tested-jesse-vincents-175k-star-plugin-plain-markdown-makes-sonnet-4-6-cheat-past-opus-4-7-04687feac7c0">Towards AI 评测</a></li>
+</ul>
+<hr>
+<h2 id="2-底层技术栈">2. 底层技术栈</h2>
+<p>该软件<strong>非 AI 原生</strong>，不涉及基础大模型。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>层级</th><th>技术</th></tr></thead><tbody><tr><td><strong>核心技术</strong></td><td><strong>纯 Markdown 指令集</strong>（14+ 个 SKILL.md 文件）</td></tr><tr><td><strong>注入机制</strong></td><td>通过 Claude Code Hooks / Plugin 系统在会话启动时注入 ~2000 token 的引导指令</td></tr><tr><td><strong>运行环境</strong></td><td>Claude Code（首选）/ Cursor / Codex CLI / OpenCode / Gemini CLI / GitHub Copilot CLI / Kimi Code / Pi / Antigravity 等 8+ 平台</td></tr><tr><td><strong>实现语言</strong></td><td>Markdown（SKILL.md）+ 少量 JSON（配置文件）</td></tr><tr><td><strong>存储</strong></td><td>无服务器 / 无数据库 —— 纯文件系统</td></tr></tbody></table>
+<p><strong>架构说明</strong>：Superpowers 不是一个独立的应用程序或库，而是一套<strong>方法论即代码</strong>的 Markdown 指令文件。它在 AI 编程助手的会话上下文注入工程流程，引导 AI 遵循结构化的开发步骤（头脑风暴 → 规划 → 执行 → 测试 → 审查）。</p>
+<p><strong>信息源</strong>：</p>
+<ul>
+<li><a href="https://newreleases.io/project/github/obra/superpowers/release/v6.0.0">Superpowers v6.0.0 Release</a></li>
+<li><a href="http://mp.weixin.qq.com/s?__biz=MzA3MDg1NTg0OQ==&#x26;mid=2649301772&#x26;idx=1&#x26;sn=be889eaa18e2585fbb2c22a0b28ae694">Superpowers 深度分析</a></li>
+</ul>
+<hr>
+<h2 id="3-开源属性与商业模式">3. 开源属性与商业模式</h2>
+<h3 id="开源属性">开源属性</h3>
+<p><strong>MIT 协议</strong> —— 完全开源，代码托管于 <a href="https://github.com/obra/superpowers">GitHub: obra/superpowers</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>项目</th><th>详情</th></tr></thead><tbody><tr><td><strong>开源协议</strong></td><td><strong>MIT License</strong>（完全开放，商业/个人均可免费使用）</td></tr><tr><td><strong>源代码</strong></td><td>公开且完整（核心 14+ 个 SKILL.md 文件及配置文件）</td></tr><tr><td><strong>是否需要账户</strong></td><td>不需要 —— 无账户、无登录、无需 License Key</td></tr></tbody></table>
+<h3 id="定价模式">定价模式</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>层级</th><th>价格</th><th>说明</th></tr></thead><tbody><tr><td>🆓 <strong>社区版</strong></td><td><strong>免费</strong></td><td>完整功能，无任何限制</td></tr><tr><td>💰 <strong>付费版</strong></td><td>❌ 不存在</td><td>无企业版、无付费功能、无订阅</td></tr><tr><td>🤝 <strong>赞助</strong></td><td>可选</td><td>通过 GitHub Sponsors 支持作者</td></tr></tbody></table>
+<p><strong>模式本质</strong>：<strong>开源 + 赞助模式（Open Source + Sponsorship）</strong>。项目 100% 免费，作者通过社区认可的品牌效应获得咨询和赞助收入。</p>
+<p><strong>信息源</strong>：</p>
+<ul>
+<li><a href="https://github.com/obra/superpowers">GitHub: obra/superpowers（查看 LICENSE）</a></li>
+<li><a href="https://dupple.com/learn/best-claude-code-skills-2026">Dupple: Best Claude Code Skills 2026</a></li>
+<li><a href="https://rywalker.com/research/superpowers-skills-framework">Ry Walker Research</a></li>
+</ul>
+<hr>
+<h2 id="4-功能全景解析">4. 功能全景解析</h2>
+<h3 id="主要功能50-字概括">主要功能（50 字概括）</h3>
+<blockquote>
+<p>为 Claude Code 等 AI 编程助手注入<strong>工程纪律</strong>的开源技能框架，通过结构化工作流将 AI 从”代码生成器”进化为”资深工程师”。</p>
+</blockquote>
+<h3 id="核心功能与核心技术">核心功能与核心技术</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>#</th><th>核心功能</th><th>背后关键技术/方法论</th></tr></thead><tbody><tr><td><strong>1</strong></td><td><strong>7 阶段开发工作流</strong></td><td>全局性的开发流程管控：<strong>头脑风暴 → 编写计划 → Git 隔离 → 子代理开发 → TDD 强制 → 代码审查 → 分支完成</strong>。每个阶段都有对应的 SKILL.md 文件定义 AI 的行为规范。</td></tr><tr><td><strong>2</strong></td><td><strong>TDD 强制（红/绿/重构）</strong></td><td>采用测试驱动开发的核心约束：“<strong>没有失败的测试，不允许写生产代码</strong>”。三个阶段强制检查：RED（写测试）- GREEN（写代码）- REFACTOR（优化）。</td></tr><tr><td><strong>3</strong></td><td><strong>子代理隔离开发（Subagent）</strong></td><td>每个原子任务分配给一个<strong>独立的 AI 会话（fresh context）</strong> 去完成，避免长会话中的上下文退化（context decay）问题。这是 v4.0.0 引入的重大革新。</td></tr><tr><td><strong>4</strong></td><td><strong>Git Worktree 隔离</strong></td><td>自动创建独立的 Git Worktree 分支工作区，确保主分支代码不受实验性修改干扰。</td></tr><tr><td><strong>5</strong></td><td><strong>分阶段代码审查</strong></td><td>每个交付物经过两轮审查：<strong>规范合规审查（Spec Compliance）→ 代码质量审查（Code Quality）</strong>。v6.0.0 优化为单审查人以降低 token 消耗。</td></tr></tbody></table>
+<h3 id="14-个核心技能skills">14 个核心技能（Skills）</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>类别</th><th>技能</th></tr></thead><tbody><tr><td><strong>初始化与规划</strong></td><td><code>brainstorming</code>（头脑风暴）、<code>writing-plans</code>（编写计划）、<code>executing-plans</code>（执行计划）</td></tr><tr><td><strong>开发</strong></td><td><code>subagent-driven-development</code>（子代理开发）、<code>test-driven-development</code>（TDD）</td></tr><tr><td><strong>代码质量</strong></td><td><code>code-review</code>（代码审查）、<code>requesting-code-review</code>（请求审查）、<code>receiving-code-review</code>（接收审查）</td></tr><tr><td><strong>工程流程</strong></td><td><code>using-git-worktrees</code>（Git 隔离）、<code>verification-before-completion</code>（完成前验证）</td></tr><tr><td><strong>辅助</strong></td><td><code>using-superpowers</code>（使用引导）、<code>writing-skills</code>（编写自定义技能）</td></tr></tbody></table>
+<h3 id="实战案例chardet-重写">实战案例：chardet 重写</h3>
+<p>Superpowers 的典型效能展示是 <strong>chardet 编码检测库的完全重写（v7.0.0）</strong>：</p>
+<ul>
+<li><strong>性能提升 41 倍</strong></li>
+<li>准确率从 <strong>94.5% → 96.8%</strong></li>
+<li>创建 <strong>2,161 个测试文件</strong></li>
+<li>覆盖 <strong>99 种编码格式</strong></li>
+</ul>
+<p>这个案例被广泛引用，证明结构化工作流对 AI 代码质量的显著提升。</p>
+<p><strong>信息源</strong>：</p>
+<ul>
+<li><a href="https://newreleases.io/project/github/obra/superpowers/release/v6.0.0">Superpowers v6.0.0 Release Notes</a></li>
+<li><a href="https://cloud.tencent.com.cn/developer/article/2676405">204K Star 的 Superpowers 框架保姆级教程</a></li>
+<li><a href="https://cloud.tencent.com.cn/developer/article/2650750">Superpowers 让 AI 从”游侠”变成”将军”</a></li>
+</ul>
+<hr>
+<h2 id="5-主要竞品清单">5. 主要竞品清单</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>竞品</th><th>开发商</th><th>定位</th><th>对比本产品优势</th><th>对比本产品劣势</th></tr></thead><tbody><tr><td><strong>GSD (Get Shit Done)</strong></td><td>gsd-build 社区</td><td>有状态的工作流编排系统，支持长任务持久化、崩溃恢复</td><td>支持状态持久化、并行任务、崩溃恢复</td><td>社区规模小（51K stars）、无 TDD 强制、认知复杂度高</td></tr><tr><td><strong>mattpocock/skills</strong></td><td>Matt Pocock（个人）</td><td>TypeScript 类型安全技能库，手动触发</td><td>TypeScript 原生类型安全、无侵入、按需调用</td><td>无自动化工作流、无子代理隔离、无 Git worktree 管理</td></tr><tr><td><strong>anthropics/skills</strong></td><td>Anthropic（官方）</td><td>Claude 官方参考技能集，含演示和文档技能</td><td>官方维护、稳定可靠、与 Claude 版本最贴合</td><td>功能较基础、无工程方法论强制、无 TDD</td></tr><tr><td><strong>gstack</strong></td><td>gstack 社区</td><td>多视角决策评审框架（23 个角色）</td><td>多角色评审视角丰富、适合架构决策</td><td>不提供完整开发工作流、侧重评审而非全过程</td></tr></tbody></table>
+<p><strong>信息源</strong>：</p>
+<ul>
+<li><a href="https://cloud.tencent.com.cn/developer/article/2689449">Superpowers 和 GSD：两套方案对比</a></li>
+<li><a href="https://cloud.tencent.cn/developer/article/2671303">GitHub 上 1400+ Claude Code Skills 真正在用的就这几个</a></li>
+</ul>
+<hr>
+<h2 id="6-与竞品的横向比较">6. 与竞品的横向比较</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>对比维度</th><th><strong>Superpowers</strong></th><th><strong>GSD (Get Shit Done)</strong></th><th><strong>mattpocock/skills</strong></th><th><strong>anthropics/skills</strong></th></tr></thead><tbody><tr><td><strong>价格</strong></td><td>🆓 完全免费（MIT）</td><td>🆓 免费（MIT）</td><td>🆓 免费（MIT）</td><td>🆓 免费（MIT）</td></tr><tr><td><strong>工程质量</strong></td><td>⭐⭐⭐⭐⭐ TDD 强制 + 双轮审查</td><td>⭐⭐⭐ 强在编排，非工程纪律</td><td>⭐⭐⭐ TypeScript 安全</td><td>⭐⭐ 基础示范性技能</td></tr><tr><td><strong>易用性与上手门槛</strong></td><td>⭐⭐⭐ 全流程较重，简单任务过重</td><td>⭐⭐ 概念复杂，学习曲线陡峭</td><td>⭐⭐⭐⭐⭐ 轻量按需调用</td><td>⭐⭐⭐⭐ 简单易懂</td></tr><tr><td><strong>生态影响力</strong></td><td>⭐⭐⭐⭐⭐ 200K+ stars，68K+ 安装</td><td>⭐⭐⭐ 51K stars</td><td>⭐⭐⭐ 97K stars</td><td>⭐⭐⭐⭐ 138K stars</td></tr></tbody></table>
+<p><strong>各竞品最适用场景</strong>：</p>
+<ul>
+<li><strong>Superpowers</strong>：复杂多文件功能开发、需要长期维护的生产代码、对测试覆盖有刚性要求的项目</li>
+<li><strong>GSD</strong>：长时间运行的 AI 编码会话、需要状态持久化和崩溃恢复的复杂场景</li>
+<li><strong>mattpocock/skills</strong>：TypeScript 项目中的轻量级按需技能调用，不想引入繁重工作流的团队</li>
+<li><strong>anthropics/skills</strong>：学习如何编写 Claude Code 技能的参考模板、文档处理等官方基础技能</li>
+</ul>
+<hr>
+<h2 id="7-版本迭代信息">7. 版本迭代信息</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>项目</th><th>详情</th></tr></thead><tbody><tr><td><strong>首次公开发布</strong></td><td><strong>2025 年 10 月 9 日</strong>（与 Anthropic Claude Code Plugin 系统同日上线）</td></tr><tr><td><strong>当前最新版本</strong>（截至 2026-07-05）</td><td><strong>v6.0.0+</strong>（2026 年 6 月发布）</td></tr><tr><td><strong>更新频率</strong></td><td><strong>周更</strong> —— 社区 PR 活跃，作者持续高频迭代</td></tr></tbody></table>
+<h3 id="主要版本里程碑">主要版本里程碑</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>版本</th><th>日期</th><th>重点内容</th></tr></thead><tbody><tr><td>v1.0.0</td><td>2025-10-09</td><td>初始发布，7 个核心技能</td></tr><tr><td>v4.0.0</td><td>2025-12</td><td><strong>子代理驱动开发</strong>（Subagent-Driven Development）引入</td></tr><tr><td>v5.0.0</td><td>2026-04</td><td>平台扩展，支持 Cursor、Codex 等</td></tr><tr><td>v5.1.0</td><td>2026-05-04</td><td>稳定性改进</td></tr><tr><td>v6.0.0</td><td>2026-06</td><td><strong>重大重构</strong>：单审查人模式（降低~50% token消耗）、计划预检、各平台兼容性重写</td></tr></tbody></table>
+<h3 id="github-统计截至-2026-07-05">GitHub 统计（截至 2026-07-05）</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>指标</th><th>数值</th></tr></thead><tbody><tr><td><strong>Stars</strong></td><td>~200K–230K+</td></tr><tr><td><strong>Forks</strong></td><td>~19K–20K</td></tr><tr><td><strong>Marketplace 安装量</strong></td><td>68K+（官方市场）/ 300K+（总估计）</td></tr><tr><td><strong>核心技能数</strong></td><td>14+</td></tr></tbody></table>
+<p><strong>信息源</strong>：</p>
+<ul>
+<li><a href="https://github.com/obra/superpowers/releases">GitHub Releases: obra/superpowers</a></li>
+<li><a href="https://newreleases.io/project/github/obra/superpowers/release/v6.0.0">newreleases.io: superpowers v6.0.0</a></li>
+</ul>
+<hr>
+<h2 id="一句话锐评">一句话锐评</h2>
+<blockquote>
+<p><strong>Claude Code 生态中影响力最大的开源技能框架——用 2000 token 的 Markdown 指令把 AI 编程从”快”变成”可靠”，适合生产级代码和 TDD 必选项，但简单脚本慎用以免被流程压垮。</strong> 如果”快”比”稳”重要，请跳过。</p>
+</blockquote>
+<hr>
+<h2 id="参考来源">参考来源</h2>
+<ol>
+<li><a href="https://github.com/obra/superpowers">GitHub: obra/superpowers</a></li>
+<li><a href="https://cloud.tencent.com.cn/developer/article/2671288">腾讯云：Superpowers 深度解析</a></li>
+<li><a href="https://cloud.tencent.com.cn/developer/article/2676405">腾讯云：204K Star 保姆级教程</a></li>
+<li><a href="https://cloud.tencent.com.cn/developer/article/2689449">腾讯云：Superpowers 和 GSD 对比</a></li>
+<li><a href="https://cloud.tencent.cn/developer/article/2671303">腾讯云：1400+ Skills 真正在用的就这几个</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/2030628504719639855">知乎：Superpowers 全面技术教程</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/2032415548605194334">知乎：给 Claude Code 装上方法论</a></li>
+<li><a href="https://rywalker.com/research/superpowers-skills-framework">Ry Walker Research</a></li>
+<li><a href="https://pub.towardsai.net/i-tested-jesse-vincents-175k-star-plugin-plain-markdown-makes-sonnet-4-6-cheat-past-opus-4-7-04687feac7c0">Towards AI 评测</a></li>
+<li><a href="https://dupple.com/learn/best-claude-code-skills-2026">Dupple: Best Claude Code Skills 2026</a></li>
+<li><a href="https://newreleases.io/project/github/obra/superpowers/release/v6.0.0">newreleases.io: Superpowers v6.0.0</a></li>
+</ol>  </div> <!-- Previous / Next navigation --> <nav class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-12 pt-8 border-t border-[var(--color-border)]" data-astro-cid-bvzihdzo> <a href="/blog/Superpowers/Superpowers-测试计划" class="card-hover p-4 no-underline group" data-astro-cid-bvzihdzo> <span class="text-xs text-[var(--color-text-tertiary)] block mb-1" data-astro-cid-bvzihdzo>&larr; 上一篇</span> <span class="text-sm font-medium text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors line-clamp-1" data-astro-cid-bvzihdzo>Superpowers 技能测试方案</span> </a> <a href="/blog/Superpowers/Superpowers-Skill触发条件" class="card-hover p-4 no-underline group text-right" data-astro-cid-bvzihdzo> <span class="text-xs text-[var(--color-text-tertiary)] block mb-1" data-astro-cid-bvzihdzo>下一篇 &rarr;</span> <span class="text-sm font-medium text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors line-clamp-1" data-astro-cid-bvzihdzo>Superpowers 技能触发方式全览</span> </a> </nav> <hr class="!mt-12 !mb-8" data-astro-cid-bvzihdzo> <div data-astro-cid-bvzihdzo> <a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-bvzihdzo>
+&larr; 返回博客列表
+</a> </div> </div> </div> </article> </div>  </main> <footer class="border-t border-[var(--color-border)] mt-24 py-8" data-astro-cid-pux6a34n><div class="max-w-content flex items-center justify-between" data-astro-cid-pux6a34n><span class="text-sm text-[var(--color-text-tertiary)]" data-astro-cid-pux6a34n>
+&copy; 2026 星游寰宇
+</span><div class="flex items-center gap-4" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>博客</a><a href="/projects" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>项目</a><a href="/notes" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>日记</a><a href="/resources" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>资源</a><a href="/about" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>关于</a></div></div></footer> <div id="link-preview" style="display:none;position:fixed;z-index:99;max-width:18rem;pointer-events:none;" data-astro-cid-t7vshrbh></div>  <script type="module">(async()=>{try{const c=await fetch("/posts.json");if(!c.ok)return;const u=await c.json(),p=new Map(u.map(t=>[t.href,t])),e=document.getElementById("link-preview");if(!e)return;let n="",d;document.addEventListener("mouseover",t=>{const i=t.target.closest("a[href^='/blog/']");if(!i){e.style.display="none",n="";return}const s=i.getAttribute("href");if(!s||s===n)return;const o=p.get(s);o&&(n=s,d=setTimeout(()=>{e.innerHTML=`<div class="lp-title">${o.title}</div><div class="lp-summary">${o.summary}</div>`;const r=i.getBoundingClientRect();let a=r.left,l=r.bottom+6;a+288>window.innerWidth&&(a=window.innerWidth-296),l+80>window.innerHeight&&(l=r.top-80),Object.assign(e.style,{left:a+"px",top:l+"px",display:"block"})},300))},{passive:!0}),document.addEventListener("mouseout",t=>{t.target.closest("a[href^='/blog/']")&&(clearTimeout(d),e.style.display="none",n="")},{passive:!0})}catch{}})();</script> </body></html>  <script type="module">const c=document.getElementById("toc-toggle"),s=document.getElementById("toc-list"),i=document.getElementById("toc-chevron");c&&s&&i&&c.addEventListener("click",()=>{const o=s.classList.toggle("hidden");c.setAttribute("aria-expanded",String(o)),i.style.transform=o?"rotate(180deg)":""});const r=document.querySelectorAll(".toc-list a");if(r.length>0){const o=new IntersectionObserver(n=>{for(const t of n)t.isIntersecting&&r.forEach(e=>{e.classList.toggle("active",e.getAttribute("href")===`#${t.target.id}`)})},{rootMargin:"-80px 0px -80% 0px"});r.forEach(n=>{const t=n.getAttribute("href")?.slice(1);if(t){const e=document.getElementById(t);e&&o.observe(e)}})}</script>

@@ -1,0 +1,343 @@
+<!DOCTYPE html><html lang="zh-CN"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="科研AI系统：输入输出定义 · 桌面应用可行性分析"><meta name="color-scheme" content="light"><!-- Open Graph --><meta property="og:title" content="科研AI系统：输入输出定义 · 桌面应用可行性分析 — 星游寰宇"><meta property="og:description" content="科研AI系统：输入输出定义 · 桌面应用可行性分析"><meta property="og:url" content="https://code2239.github.io/projects/program-0/input-output-desktop-feasibility"><meta property="og:type" content="article"><meta property="og:site_name" content="星游寰宇"><meta property="og:locale" content="zh_CN"><meta property="article:published_time" content="2026-07-06"><meta property="article:tag" content="科研AI"><meta property="article:tag" content="Program-0"><meta property="article:tag" content="技术调研"><!-- Twitter Card --><meta name="twitter:card" content="summary"><meta name="twitter:title" content="科研AI系统：输入输出定义 · 桌面应用可行性分析 — 星游寰宇"><meta name="twitter:description" content="科研AI系统：输入输出定义 · 桌面应用可行性分析"><!-- Canonical --><link rel="canonical" href="https://code2239.github.io/projects/program-0/input-output-desktop-feasibility"><title>科研AI系统：输入输出定义 · 桌面应用可行性分析 — 星游寰宇</title><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="alternate" type="application/rss+xml" title="星游寰宇 RSS" href="/rss.xml"><!-- Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"星游寰宇","url":"https://code2239.github.io","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://code2239.github.io/search?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://code2239.github.io"},{"@type":"ListItem","position":2,"name":"项目","item":"https://code2239.github.io/projects"},{"@type":"ListItem","position":3,"name":"program 0","item":"https://code2239.github.io/projects/program-0"},{"@type":"ListItem","position":4,"name":"input output desktop feasibility"}]},{"@context":"https://schema.org","@type":"BlogPosting","headline":"科研AI系统：输入输出定义 · 桌面应用可行性分析","description":"科研AI系统：输入输出定义 · 桌面应用可行性分析","datePublished":"2026-07-06","url":"https://code2239.github.io/projects/program-0/input-output-desktop-feasibility","keywords":"科研AI, Program-0, 技术调研"}]}</script><style>.project-detail-layout[data-astro-cid-eo3wme6m]{display:block}.project-detail-sidebar[data-astro-cid-eo3wme6m]{margin-bottom:2rem}.project-detail-content[data-astro-cid-eo3wme6m]{min-width:0}@media(min-width:768px){.project-detail-layout[data-astro-cid-eo3wme6m]{display:grid;grid-template-columns:220px 1fr;gap:3rem;align-items:start}.project-detail-sidebar[data-astro-cid-eo3wme6m]{margin-bottom:0}}
+</style>
+<link rel="stylesheet" href="/dev/_astro/_slug_.BlQX3qwK.css"></head> <body class="min-h-screen flex flex-col"> <nav class="sticky top-0 z-40 bg-[var(--color-bg)]/80 backdrop-blur-md border-b border-[var(--color-border)]" data-astro-cid-pux6a34n><div class="max-w-content flex items-center justify-between py-4" data-astro-cid-pux6a34n><a href="/" class="flex items-center gap-2.5 text-base font-semibold no-underline tracking-tight" data-astro-cid-pux6a34n><svg class="w-7 h-7" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" data-astro-cid-pux6a34n><circle cx="16" cy="16" r="15" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-pux6a34n></circle><circle cx="16" cy="16" r="3" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="16" cy="5" r="1.5" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="24" cy="10" r="1" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="8" cy="22" r="1" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="25" cy="21" r="0.8" fill="currentColor" data-astro-cid-pux6a34n></circle></svg>
+星游寰宇
+</a><!-- Desktop nav --><div class="hidden sm:flex items-center gap-5" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>博客</a><a href="/projects" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>项目</a><a href="/notes" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>日记</a><a href="/resources" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>资源</a><a href="/about" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>关于</a><button id="search-trigger" class="flex items-center gap-1.5 text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] bg-[var(--color-bg-secondary)] hover:bg-[var(--color-bg-tertiary)] border border-[var(--color-border)] hover:border-[var(--color-accent)]/30 rounded-lg px-3 py-1.5 cursor-pointer shadow-sm hover:shadow-md transition-all duration-200" aria-label="搜索 (Ctrl+K)" title="搜索 (Ctrl+K)" data-astro-cid-pux6a34n><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-pux6a34n><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" data-astro-cid-pux6a34n></path></svg><span class="hidden lg:inline" data-astro-cid-pux6a34n>搜索</span><kbd class="hidden lg:inline-flex items-center text-[0.625rem] font-mono text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1 py-px rounded" data-astro-cid-pux6a34n>Ctrl+K</kbd></button></div><!-- Mobile hamburger --><button id="menu-btn" class="sm:hidden flex flex-col gap-1 p-2 -mr-2 cursor-pointer" aria-label="打开菜单" data-astro-cid-pux6a34n><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-transform duration-200" data-astro-cid-pux6a34n></span><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-opacity duration-200" data-astro-cid-pux6a34n></span><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-transform duration-200" data-astro-cid-pux6a34n></span></button></div><!-- Mobile menu --><div id="mobile-menu" class="hidden sm:hidden border-t border-[var(--color-border)] bg-[var(--color-bg)]" data-astro-cid-pux6a34n><div class="max-w-content flex flex-col gap-2 py-4" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>博客</a><a href="/projects" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>项目</a><a href="/notes" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>日记</a><a href="/resources" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>资源</a><a href="/about" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>关于</a></div></div></nav>
+    <div id="search-overlay" class="srch-overlay" role="dialog" aria-modal="true" aria-label="全局搜索" data-astro-cid-mn7pezny> <div id="search-backdrop" class="srch-backdrop" data-astro-cid-mn7pezny></div> <div class="srch-panel" id="srch-panel" data-astro-cid-mn7pezny> <!-- Search input --> <div class="srch-input-row" data-astro-cid-mn7pezny> <svg class="srch-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-mn7pezny> <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" data-astro-cid-mn7pezny></path> </svg> <input type="text" id="search-input" class="srch-input" placeholder="搜索文章、项目、日记、资源..." autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="go" data-astro-cid-mn7pezny> <kbd class="srch-kbd" data-astro-cid-mn7pezny>Esc</kbd> </div> <!-- Results area --> <div id="search-results" class="srch-results" data-astro-cid-mn7pezny> <p class="srch-empty" id="search-empty-hint" data-astro-cid-mn7pezny>输入关键词开始搜索</p> </div> <!-- Skeleton loading --> <div id="search-skeleton" class="srch-skeleton" style="display:none;" aria-hidden="true" data-astro-cid-mn7pezny> <div class="srch-skeleton-line" style="width:75%" data-astro-cid-mn7pezny></div> <div class="srch-skeleton-line" style="width:50%" data-astro-cid-mn7pezny></div> <div class="srch-skeleton-line" style="width:60%" data-astro-cid-mn7pezny></div> </div> <!-- Footer hints --> <div class="srch-footer" data-astro-cid-mn7pezny> <div class="srch-footer-hints" data-astro-cid-mn7pezny> <span data-astro-cid-mn7pezny><kbd data-astro-cid-mn7pezny>↑</kbd><kbd data-astro-cid-mn7pezny>↓</kbd> 导航</span> <span data-astro-cid-mn7pezny><kbd data-astro-cid-mn7pezny>↵</kbd> 打开</span> <span data-astro-cid-mn7pezny><kbd data-astro-cid-mn7pezny>Ctrl</kbd>+<kbd data-astro-cid-mn7pezny>K</kbd> 切换</span> </div> <div class="srch-footer-brand" data-astro-cid-mn7pezny>
+powered by Orama
+</div> </div> </div> </div> <script type="module" src="/dev/_astro/Navigation.astro_astro_type_script_index_0_lang.B7cQAlyY.js"></script> <main class="flex-1">  <div class="px-6 xl:px-12 pt-12 pb-16" data-astro-cid-eo3wme6m> <div class="project-detail-layout" data-astro-cid-eo3wme6m> <aside class="project-detail-sidebar" data-astro-cid-eo3wme6m> <div class="sticky top-20" data-astro-cid-eo3wme6m> <nav class="space-y-3"> <div class="pb-3 mb-3 border-b border-[var(--color-border)]"> <a href="/projects/program-0" class="text-sm font-semibold text-[var(--color-text)] no-underline hover:text-[var(--color-accent)] transition-colors flex items-center gap-1.5"> <svg class="w-4 h-4 text-[var(--color-text-tertiary)]" viewBox="0 0 24 24" fill="currentColor"> <path d="M10 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"></path> </svg>
+Program 0
+</a> </div> <ul class="space-y-0.5 list-none p-0 m-0"> <li> <a href="/projects/program-0/claude-gpt-generate" class="block text-xs py-1.5 px-2.5 rounded-md no-underline transition-colors border-l-2 text-[var(--color-text-secondary)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg-secondary)] border-l-transparent"> claude.md（Tech Discovery Driven Research OS Agent） </a> </li><li> <a href="/projects/program-0/final-report" class="block text-xs py-1.5 px-2.5 rounded-md no-underline transition-colors border-l-2 text-[var(--color-text-secondary)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg-secondary)] border-l-transparent"> 科研AI系统 · 技术可行性分析报告 </a> </li><li> <a href="/projects/program-0/module-1-doc-understanding" class="block text-xs py-1.5 px-2.5 rounded-md no-underline transition-colors border-l-2 text-[var(--color-text-secondary)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg-secondary)] border-l-transparent"> 模块 2.1：文档理解模块 · 技术发现与选型 </a> </li><li> <a href="/projects/program-0/existing-solutions-survey" class="block text-xs py-1.5 px-2.5 rounded-md no-underline transition-colors border-l-2 text-[var(--color-text-secondary)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg-secondary)] border-l-transparent"> 已有集成方案调研：有哪些现成的开源工程？ </a> </li><li> <a href="/projects/program-0/developer-skills-roadmap" class="block text-xs py-1.5 px-2.5 rounded-md no-underline transition-colors border-l-2 text-[var(--color-text-secondary)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg-secondary)] border-l-transparent"> 科研AI系统：开发者技能路线图 </a> </li><li> <a href="/projects/program-0/integration-and-plan" class="block text-xs py-1.5 px-2.5 rounded-md no-underline transition-colors border-l-2 text-[var(--color-text-secondary)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg-secondary)] border-l-transparent"> 第三章：跨模块数据流与集成方案 </a> </li><li> <a href="/projects/program-0/domain-config-data-sources" class="block text-xs py-1.5 px-2.5 rounded-md no-underline transition-colors border-l-2 text-[var(--color-text-secondary)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg-secondary)] border-l-transparent"> 领域配置数据来源地图 </a> </li><li> <a href="/projects/program-0/input-output-desktop-feasibility" class="block text-xs py-1.5 px-2.5 rounded-md no-underline transition-colors border-l-2 bg-[var(--color-accent-soft)] text-[var(--color-accent)] font-medium border-l-[var(--color-accent)]"> 科研AI系统：输入输出定义 · 桌面应用可行性分析 </a> </li><li> <a href="/projects/program-0/module-2-info-extraction" class="block text-xs py-1.5 px-2.5 rounded-md no-underline transition-colors border-l-2 text-[var(--color-text-secondary)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg-secondary)] border-l-transparent"> 模块 2.2：信息抽取模块 · 技术发现与选型 </a> </li><li> <a href="/projects/program-0/module-3-experiment-flow" class="block text-xs py-1.5 px-2.5 rounded-md no-underline transition-colors border-l-2 text-[var(--color-text-secondary)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg-secondary)] border-l-transparent"> 模块 2.3：实验流程抽取模块 · 技术发现与选型 </a> </li><li> <a href="/projects/program-0/module-4-knowledge-graph" class="block text-xs py-1.5 px-2.5 rounded-md no-underline transition-colors border-l-2 text-[var(--color-text-secondary)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg-secondary)] border-l-transparent"> 模块 2.4：科研知识图谱模块 · 技术发现与选型 </a> </li><li> <a href="/projects/program-0/module-5-cognitive-compression" class="block text-xs py-1.5 px-2.5 rounded-md no-underline transition-colors border-l-2 text-[var(--color-text-secondary)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg-secondary)] border-l-transparent"> 模块 2.5：认知压缩模块 · 技术发现与选型 </a> </li><li> <a href="/projects/program-0/module-7-multi-agent-eval" class="block text-xs py-1.5 px-2.5 rounded-md no-underline transition-colors border-l-2 text-[var(--color-text-secondary)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg-secondary)] border-l-transparent"> 模块 2.7：多智能体评估模块 · 技术发现与选型 </a> </li><li> <a href="/projects/program-0/module-6-inspiration-gen" class="block text-xs py-1.5 px-2.5 rounded-md no-underline transition-colors border-l-2 text-[var(--color-text-secondary)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg-secondary)] border-l-transparent"> 模块 2.6：灵感生成模块 · 技术发现与选型 </a> </li><li> <a href="/projects/program-0/observability-debugging-guide" class="block text-xs py-1.5 px-2.5 rounded-md no-underline transition-colors border-l-2 text-[var(--color-text-secondary)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg-secondary)] border-l-transparent"> 科研AI系统：可视化与调试方案（全开源版） </a> </li><li> <a href="/projects/program-0/question-summary" class="block text-xs py-1.5 px-2.5 rounded-md no-underline transition-colors border-l-2 text-[var(--color-text-secondary)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg-secondary)] border-l-transparent"> 咨询问题分类总结 </a> </li> </ul> </nav> </div> </aside> <article class="project-detail-content" data-astro-cid-eo3wme6m> <header class="mb-10 text-center" data-astro-cid-eo3wme6m> <h1 class="text-3xl font-semibold mb-3 tracking-tight" data-astro-cid-eo3wme6m>科研AI系统：输入输出定义 · 桌面应用可行性分析</h1> <div class="flex items-center justify-center gap-2 text-[var(--color-text-tertiary)] text-sm" data-astro-cid-eo3wme6m> <time datetime="2026-07-06" data-astro-cid-eo3wme6m>2026-07-06</time>  <span class="text-[var(--color-border)]" data-astro-cid-eo3wme6m>·</span> <span class="text-sm text-[var(--color-text-tertiary)]"> <span> 科研AI<span class="mx-1">·</span> </span><span> Program-0<span class="mx-1">·</span> </span><span> 技术调研 </span> </span>  </div> </header>  <div class="prose prose-neutral max-w-none" data-astro-cid-eo3wme6m> <hr>
+<h2 id="一输入你喂给它什么">一、输入：你喂给它什么？</h2>
+<h3 id="必选输入">必选输入</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">输入</th><th align="left">格式</th><th align="left">说明</th></tr></thead><tbody><tr><td align="left"><strong>科研论文</strong></td><td align="left">PDF / DOCX / PPTX / HTML / LaTeX / 扫描件</td><td align="left">单篇或批量拖入</td></tr><tr><td align="left"><strong>领域配置</strong></td><td align="left">YAML（一次性）</td><td align="left">定义关注的实体类型和关系类型</td></tr></tbody></table>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="yaml"><code><span class="line"><span style="color:var(--astro-code-token-comment)"># domain_config.yaml — 一次性配置</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">domain</span><span style="color:var(--astro-code-token-keyword)">:</span><span style="color:var(--astro-code-token-string-expression)"> biomedical</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">entity_types</span><span style="color:var(--astro-code-token-keyword)">:</span><span style="color:var(--astro-code-foreground)"> [</span><span style="color:var(--astro-code-token-string)">Gene</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-token-string)"> Protein</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-token-string)"> Compound</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-token-string)"> Disease</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-token-string)"> Method</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-token-string)"> Dataset</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-token-string)"> Pathway</span><span style="color:var(--astro-code-foreground)">]</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">relation_types</span><span style="color:var(--astro-code-token-keyword)">:</span><span style="color:var(--astro-code-foreground)"> [</span><span style="color:var(--astro-code-token-string)">inhibits</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-token-string)"> activates</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-token-string)"> binds_to</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-token-string)"> treats</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-token-string)"> causes</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-token-string)"> expresses</span><span style="color:var(--astro-code-foreground)">]</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">review_dimensions</span><span style="color:var(--astro-code-token-keyword)">:</span><span style="color:var(--astro-code-foreground)"> [</span><span style="color:var(--astro-code-token-string)">novelty</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-token-string)"> feasibility</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-token-string)"> methodological_rigor</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-token-string)"> potential_impact</span><span style="color:var(--astro-code-foreground)">]</span></span></code></pre>
+<h3 id="可选输入">可选输入</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">输入</th><th align="left">格式</th><th align="left">用途</th></tr></thead><tbody><tr><td align="left">实验数据</td><td align="left">CSV / Excel</td><td align="left">论文补充数据，增强认知压缩</td></tr><tr><td align="left">科研笔记</td><td align="left">Markdown / 文本</td><td align="left">个性化假设生成</td></tr><tr><td align="left">已有知识库</td><td align="left">RDF / OWL / Neo4j dump</td><td align="left">导入已有领域图谱</td></tr><tr><td align="left">人工反馈</td><td align="left">UI 操作</td><td align="left">对假设点赞/踩，反馈到 Elo 系统</td></tr></tbody></table>
+<h3 id="输入生命周期">输入生命周期</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>拖入 PDF → 模块1 解析 → 模块2 抽取 → 模块4 入图谱</span></span>
+<span class="line"><span>                                          ↓</span></span>
+<span class="line"><span>          （更多论文 → 图谱增长 → 模块5 认知压缩 → 模块6 假设 → 模块7 评审）</span></span></code></pre>
+<hr>
+<h2 id="二输出你从它那里得到什么">二、输出：你从它那里得到什么？</h2>
+<h3 id="11-项输出清单">11 项输出清单</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="center">#</th><th align="left">输出</th><th align="left">格式</th><th align="center">模块</th><th align="left">用途</th></tr></thead><tbody><tr><td align="center">1</td><td align="left">结构化文档</td><td align="left">Markdown + JSON（段落/表格/公式）</td><td align="center">1</td><td align="left">替代手动阅读</td></tr><tr><td align="center">2</td><td align="left">实体列表</td><td align="left">JSON（类型/位置/置信度）</td><td align="center">2</td><td align="left">快速定位关键实体</td></tr><tr><td align="center">3</td><td align="left">关系三元组</td><td align="left">JSON（含来源段落编号）</td><td align="center">2</td><td align="left">知识图谱原料</td></tr><tr><td align="center">4</td><td align="left">实验步骤 DAG</td><td align="left">JSON + Mermaid.js 可视化</td><td align="center">3</td><td align="left">复现实验</td></tr><tr><td align="center">5</td><td align="left">知识图谱</td><td align="left">Neo4j 数据库</td><td align="center">4</td><td align="left">跨论文知识网络</td></tr><tr><td align="center">6</td><td align="left">图谱可视化</td><td align="left">交互式 HTML（社区着色）</td><td align="center">4</td><td align="left">一眼看到知识结构</td></tr><tr><td align="center">7</td><td align="left">主题聚类报告</td><td align="left">JSON（簇/主题词/代表论文）</td><td align="center">5</td><td align="left">领域全景图</td></tr><tr><td align="center">8</td><td align="left">矛盾/空白报告</td><td align="left">JSON（矛盾/空白/趋势）</td><td align="center">5</td><td align="left">决定下一步研究方向</td></tr><tr><td align="center">9</td><td align="left">假设排名列表</td><td align="left">JSON（排序/评分/证据）</td><td align="center">6</td><td align="left">指导实验设计</td></tr><tr><td align="center">10</td><td align="left">评审报告</td><td align="left">JSON（多维度评分/审稿意见）</td><td align="center">7</td><td align="left">筛选高价值假设</td></tr><tr><td align="center">11</td><td align="left">管道健康报告</td><td align="left">Streamlit 仪表盘</td><td align="center">全局</td><td align="left">确认系统正常</td></tr></tbody></table>
+<h3 id="单篇论文的完整输出目录">单篇论文的完整输出目录</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>data/paper_tgfb_2025/</span></span>
+<span class="line"><span>├── 00_raw.pdf</span></span>
+<span class="line"><span>├── 01_docling_output.json          # 结构化文档</span></span>
+<span class="line"><span>├── 02a_scibert_entities.json       # 47个实体</span></span>
+<span class="line"><span>├── 02b_llmie_relations.json        # 31条关系</span></span>
+<span class="line"><span>├── 03_experiment_dag.json + .html  # 实验DAG + 可视化</span></span>
+<span class="line"><span>├── 04_neo4j_import_log.json        # 入库日志</span></span>
+<span class="line"><span>├── 05_bertopic_cluster.json        # 归入簇 #7</span></span>
+<span class="line"><span>├── 06_hypotheses.json              # 3个假设</span></span>
+<span class="line"><span>├── 07_review_report.json           # 评审报告</span></span>
+<span class="line"><span>└── _pipeline_metadata.json         # 耗时/版本/状态</span></span></code></pre>
+<hr>
+<h2 id="三桌面应用可行性三条路线">三、桌面应用可行性：三条路线</h2>
+<h3 id="核心矛盾">核心矛盾</h3>
+<p>你的系统依赖多个服务进程，不是单个可执行文件：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">服务</th><th align="center">内存</th><th align="center">是否必须</th></tr></thead><tbody><tr><td align="left">Python 管道进程</td><td align="center">4-16 GB</td><td align="center">✅ 核心</td></tr><tr><td align="left">Neo4j 图数据库 (Java)</td><td align="center">2-8 GB</td><td align="center">✅ 核心</td></tr><tr><td align="left">LangFuse</td><td align="center">1-2 GB</td><td align="center">🔶 可降级</td></tr><tr><td align="left">Dagster</td><td align="center">1 GB</td><td align="center">🔶 可降级</td></tr><tr><td align="left">Prometheus + Grafana</td><td align="center">1.5 GB</td><td align="center">🔶 Phase 2</td></tr><tr><td align="left">Streamlit</td><td align="center">0.5 GB</td><td align="center">🔶 可嵌入桌面壳</td></tr></tbody></table>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>路线 A                           路线 B                         路线 C</span></span>
+<span class="line"><span>壳子包装 (推荐 MVP)               瘦客户端+云端                  纯桌面 (最理想最贵)</span></span>
+<span class="line"><span>┌────────────────────┐     ┌──────────────────┐         ┌──────────────────────┐</span></span>
+<span class="line"><span>│ Tauri / Electron   │     │ Tauri + 前端 UI  │         │ 原生桌面              │</span></span>
+<span class="line"><span>│ ┌────────────────┐ │     │ ┌──────────────┐ │         │ Python embedded      │</span></span>
+<span class="line"><span>│ │ Streamlit UI   │ │     │ │ Vue/React UI │ │         │ Neo4j→SQLite(轻量)   │</span></span>
+<span class="line"><span>│ └───────┬────────┘ │     │ └──────┬───────┘ │         │ Cytoscape.js 可视化   │</span></span>
+<span class="line"><span>│ ┌───────▼────────┐ │     │ ┌──────▼───────┐ │         │ 全功能本地            │</span></span>
+<span class="line"><span>│ │ Docker Desktop │ │     │ │ REST API     │ │         │ 100% 离线            │</span></span>
+<span class="line"><span>│ │ 后台运行全部   │ │     │ │ 云端 GPU     │ │         │ 零配置                │</span></span>
+<span class="line"><span>│ │ 7 个服务       │ │     │ └──────────────┘ │         │ 安装包 ~500 MB        │</span></span>
+<span class="line"><span>│ └────────────────┘ │     │ 客户端极轻·可协作│         │ 需 16GB+ 内存         │</span></span>
+<span class="line"><span>│ 开发成本：最低     │     └──────────────────┘         └──────────────────────┘</span></span>
+<span class="line"><span>└────────────────────┘</span></span></code></pre>
+<h3 id="路线对比">路线对比</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">维度</th><th align="center">A: 壳子包装</th><th align="center">B: 瘦客户端</th><th align="center">C: 纯桌面</th></tr></thead><tbody><tr><td align="left">开发成本</td><td align="center">⭐⭐⭐⭐⭐ 最低</td><td align="center">⭐⭐⭐</td><td align="center">⭐ 最高</td></tr><tr><td align="left">离线可用</td><td align="center">首次联网拉镜像</td><td align="center">❌ 需联网</td><td align="center">✅ 完全离线</td></tr><tr><td align="left">用户安装难度</td><td align="center">需 Docker Desktop</td><td align="center">无需任何依赖</td><td align="center">双击安装</td></tr><tr><td align="left">性能上限</td><td align="center">全功能</td><td align="center">云端 GPU 更强</td><td align="center">受限于本地硬件</td></tr><tr><td align="left">多用户协作</td><td align="center">❌</td><td align="center">✅ 天然支持</td><td align="center">❌</td></tr><tr><td align="left">隐私</td><td align="center">✅ 全本地</td><td align="center">⚠️ PDF 上传云端</td><td align="center">✅ 全本地</td></tr><tr><td align="left">安装包大小</td><td align="center">~200 MB + Docker</td><td align="center">~20 MB</td><td align="center">~500 MB</td></tr></tbody></table>
+<hr>
+<h2 id="四推荐分阶段路线">四、推荐分阶段路线</h2>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Phase 1（3 个月）Web 优先</span></span>
+<span class="line"><span>  └─ Streamlit Web UI，浏览器访问 localhost:8501</span></span>
+<span class="line"><span>  └─ 功能已可用，只是不像"桌面应用"</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Phase 2（+1 个月）桌面壳</span></span>
+<span class="line"><span>  └─ Tauri 壳 + 内嵌 Streamlit</span></span>
+<span class="line"><span>  └─ 自动管理 docker-compose 启停</span></span>
+<span class="line"><span>  └─ 系统托盘图标 + 通知</span></span>
+<span class="line"><span>  └─ 用户感受：双击图标 → 窗口 → 和 Web 版一模一样</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Phase 3（+3 个月）云+端混合</span></span>
+<span class="line"><span>  └─ Tauri + 原生前端 UI (Vue)</span></span>
+<span class="line"><span>  └─ 本地模式：SQLite + Cytoscape.js (&#x3C;100篇)</span></span>
+<span class="line"><span>  └─ 云端模式：一键切换远程 GPU</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Phase 4（+6 个月）纯桌面</span></span>
+<span class="line"><span>  └─ Nuitka 编译 Python → 单文件 exe</span></span>
+<span class="line"><span>  └─ 所有服务进程内嵌</span></span>
+<span class="line"><span>  └─ 完全离线，双击即用</span></span></code></pre>
+<hr>
+<h2 id="五一句话总结">五、一句话总结</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">问题</th><th align="left">答案</th></tr></thead><tbody><tr><td align="left">输入</td><td align="left">PDF/DOCX 论文 + 领域配置 YAML + 可选数据/笔记/已有图谱</td></tr><tr><td align="left">输出</td><td align="left">结构化文档 · 知识图谱 · 实验DAG · 认知地图 · 排序假设 · 评审报告 · 健康仪表盘</td></tr><tr><td align="left">能做桌面吗</td><td align="left">✅ 能。推荐先用 Web 版跑通 MVP，+1 个月加 Tauri 壳，就能体验”桌面应用”的感觉</td></tr></tbody></table>
+<hr>
+<p><em>编写日期：2026-07-06</em></p>  </div>  <div class="mt-12 pt-8 border-t border-[var(--color-border)]" data-astro-cid-eo3wme6m> <a href="/projects/program-0" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-eo3wme6m>
+&larr; 返回 program-0 概览 </a> </div> </article> </div> </div>  </main> <footer class="border-t border-[var(--color-border)] mt-24 py-8" data-astro-cid-pux6a34n><div class="max-w-content flex items-center justify-between" data-astro-cid-pux6a34n><span class="text-sm text-[var(--color-text-tertiary)]" data-astro-cid-pux6a34n>
+&copy; 2026 星游寰宇
+</span><div class="flex items-center gap-4" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>博客</a><a href="/projects" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>项目</a><a href="/notes" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>日记</a><a href="/resources" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>资源</a><a href="/about" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>关于</a></div></div></footer> <div id="link-preview" style="display:none;position:fixed;z-index:99;max-width:18rem;pointer-events:none;" data-astro-cid-t7vshrbh></div>  <script type="module">(async()=>{try{const c=await fetch("/posts.json");if(!c.ok)return;const u=await c.json(),p=new Map(u.map(t=>[t.href,t])),e=document.getElementById("link-preview");if(!e)return;let n="",d;document.addEventListener("mouseover",t=>{const i=t.target.closest("a[href^='/blog/']");if(!i){e.style.display="none",n="";return}const s=i.getAttribute("href");if(!s||s===n)return;const o=p.get(s);o&&(n=s,d=setTimeout(()=>{e.innerHTML=`<div class="lp-title">${o.title}</div><div class="lp-summary">${o.summary}</div>`;const r=i.getBoundingClientRect();let a=r.left,l=r.bottom+6;a+288>window.innerWidth&&(a=window.innerWidth-296),l+80>window.innerHeight&&(l=r.top-80),Object.assign(e.style,{left:a+"px",top:l+"px",display:"block"})},300))},{passive:!0}),document.addEventListener("mouseout",t=>{t.target.closest("a[href^='/blog/']")&&(clearTimeout(d),e.style.display="none",n="")},{passive:!0})}catch{}})();</script> </body></html> 

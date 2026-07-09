@@ -1,0 +1,271 @@
+<!DOCTYPE html><html lang="zh-CN"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="- **开发方**：**K-Dense Inc.**，由 Timothy Kassis 与 David Zhang 联合创立，最初从 Biostate AI 内部数据基础设施孵化而来，后独立为公司实体"><meta name="color-scheme" content="light"><!-- Open Graph --><meta property="og:title" content="scientific-agent-skills 深度调研报告 — 星游寰宇"><meta property="og:description" content="- **开发方**：**K-Dense Inc.**，由 Timothy Kassis 与 David Zhang 联合创立，最初从 Biostate AI 内部数据基础设施孵化而来，后独立为公司实体"><meta property="og:url" content="https://code2239.github.io/blog/AI工具报告/Scientific Agent Skills-报告"><meta property="og:type" content="article"><meta property="og:site_name" content="星游寰宇"><meta property="og:locale" content="zh_CN"><meta property="article:published_time" content="2026-07-05"><meta property="article:tag" content="AI"><meta property="article:tag" content="调研"><meta property="article:tag" content="Skill"><meta property="article:tag" content="自动化"><meta property="article:tag" content="工具"><meta property="article:tag" content="科研"><!-- Twitter Card --><meta name="twitter:card" content="summary"><meta name="twitter:title" content="scientific-agent-skills 深度调研报告 — 星游寰宇"><meta name="twitter:description" content="- **开发方**：**K-Dense Inc.**，由 Timothy Kassis 与 David Zhang 联合创立，最初从 Biostate AI 内部数据基础设施孵化而来，后独立为公司实体"><!-- Canonical --><link rel="canonical" href="https://code2239.github.io/blog/AI工具报告/Scientific Agent Skills-报告"><title>scientific-agent-skills 深度调研报告 — 星游寰宇</title><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="alternate" type="application/rss+xml" title="星游寰宇 RSS" href="/rss.xml"><!-- Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"星游寰宇","url":"https://code2239.github.io","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://code2239.github.io/search?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://code2239.github.io"},{"@type":"ListItem","position":2,"name":"博客","item":"https://code2239.github.io/blog"},{"@type":"ListItem","position":3,"name":"AI工具报告","item":"https://code2239.github.io/blog/AI工具报告"},{"@type":"ListItem","position":4,"name":"Scientific Agent Skills 报告"}]},{"@context":"https://schema.org","@type":"BlogPosting","headline":"scientific-agent-skills 深度调研报告","description":"- **开发方**：**K-Dense Inc.**，由 Timothy Kassis 与 David Zhang 联合创立，最初从 Biostate AI 内部数据基础设施孵化而来，后独立为公司实体","datePublished":"2026-07-05","url":"https://code2239.github.io/blog/AI工具报告/Scientific Agent Skills-报告","keywords":"AI, 调研, Skill, 自动化, 工具, 科研"}]}</script><link rel="stylesheet" href="/dev/_astro/_slug_.BlQX3qwK.css">
+<style>.back-to-top[data-astro-cid-gzprr2dq]{position:fixed;bottom:2rem;right:2rem;z-index:40;width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:50%;border:1px solid var(--color-border);background:var(--color-bg);color:var(--color-text-secondary);cursor:pointer;box-shadow:var(--shadow-md);transition:opacity .2s ease,transform .2s ease}.back-to-top[data-astro-cid-gzprr2dq]:hover{color:var(--color-accent);border-color:var(--color-accent);transform:translateY(-2px)}.back-to-top[data-astro-cid-gzprr2dq].hidden{opacity:0;pointer-events:none}.copy-btn[data-astro-cid-qqybitij]{position:absolute;top:8px;right:8px;padding:4px 10px;font-size:.6875rem;font-family:var(--font-sans);color:var(--color-text-tertiary);background:var(--color-bg);border:1px solid var(--color-border);border-radius:6px;cursor:pointer;opacity:0;transition:opacity .15s ease,color .15s ease}pre[data-astro-cid-qqybitij]:hover .copy-btn[data-astro-cid-qqybitij]{opacity:1}.copy-btn[data-astro-cid-qqybitij]:hover{color:var(--color-accent);border-color:var(--color-accent)}.copy-btn[data-astro-cid-qqybitij].copied{color:#16a34a;border-color:#16a34a}.blog-layout[data-astro-cid-bvzihdzo]{display:block}.blog-toc[data-astro-cid-bvzihdzo]{display:none}.blog-body[data-astro-cid-bvzihdzo]{min-width:0}@media(min-width:1024px){.blog-layout[data-astro-cid-bvzihdzo]{display:grid;grid-template-columns:14rem 1fr;gap:3rem;align-items:start}.blog-toc[data-astro-cid-bvzihdzo]{display:block}.blog-body[data-astro-cid-bvzihdzo]{padding-right:2rem}}@media(max-width:1023px){.blog-toc[data-astro-cid-bvzihdzo]{display:block;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid var(--color-border)}}
+</style></head> <body class="min-h-screen flex flex-col"> <nav class="sticky top-0 z-40 bg-[var(--color-bg)]/80 backdrop-blur-md border-b border-[var(--color-border)]" data-astro-cid-pux6a34n><div class="max-w-content flex items-center justify-between py-4" data-astro-cid-pux6a34n><a href="/" class="flex items-center gap-2.5 text-base font-semibold no-underline tracking-tight" data-astro-cid-pux6a34n><svg class="w-7 h-7" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" data-astro-cid-pux6a34n><circle cx="16" cy="16" r="15" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-pux6a34n></circle><circle cx="16" cy="16" r="3" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="16" cy="5" r="1.5" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="24" cy="10" r="1" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="8" cy="22" r="1" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="25" cy="21" r="0.8" fill="currentColor" data-astro-cid-pux6a34n></circle></svg>
+星游寰宇
+</a><!-- Desktop nav --><div class="hidden sm:flex items-center gap-5" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>博客</a><a href="/projects" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>项目</a><a href="/notes" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>日记</a><a href="/resources" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>资源</a><a href="/about" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>关于</a><button id="search-trigger" class="flex items-center gap-1.5 text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] bg-[var(--color-bg-secondary)] hover:bg-[var(--color-bg-tertiary)] border border-[var(--color-border)] hover:border-[var(--color-accent)]/30 rounded-lg px-3 py-1.5 cursor-pointer shadow-sm hover:shadow-md transition-all duration-200" aria-label="搜索 (Ctrl+K)" title="搜索 (Ctrl+K)" data-astro-cid-pux6a34n><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-pux6a34n><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" data-astro-cid-pux6a34n></path></svg><span class="hidden lg:inline" data-astro-cid-pux6a34n>搜索</span><kbd class="hidden lg:inline-flex items-center text-[0.625rem] font-mono text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1 py-px rounded" data-astro-cid-pux6a34n>Ctrl+K</kbd></button></div><!-- Mobile hamburger --><button id="menu-btn" class="sm:hidden flex flex-col gap-1 p-2 -mr-2 cursor-pointer" aria-label="打开菜单" data-astro-cid-pux6a34n><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-transform duration-200" data-astro-cid-pux6a34n></span><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-opacity duration-200" data-astro-cid-pux6a34n></span><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-transform duration-200" data-astro-cid-pux6a34n></span></button></div><!-- Mobile menu --><div id="mobile-menu" class="hidden sm:hidden border-t border-[var(--color-border)] bg-[var(--color-bg)]" data-astro-cid-pux6a34n><div class="max-w-content flex flex-col gap-2 py-4" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>博客</a><a href="/projects" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>项目</a><a href="/notes" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>日记</a><a href="/resources" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>资源</a><a href="/about" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>关于</a></div></div></nav>
+    <div id="search-overlay" class="srch-overlay" role="dialog" aria-modal="true" aria-label="全局搜索" data-astro-cid-mn7pezny> <div id="search-backdrop" class="srch-backdrop" data-astro-cid-mn7pezny></div> <div class="srch-panel" id="srch-panel" data-astro-cid-mn7pezny> <!-- Search input --> <div class="srch-input-row" data-astro-cid-mn7pezny> <svg class="srch-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-mn7pezny> <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" data-astro-cid-mn7pezny></path> </svg> <input type="text" id="search-input" class="srch-input" placeholder="搜索文章、项目、日记、资源..." autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="go" data-astro-cid-mn7pezny> <kbd class="srch-kbd" data-astro-cid-mn7pezny>Esc</kbd> </div> <!-- Results area --> <div id="search-results" class="srch-results" data-astro-cid-mn7pezny> <p class="srch-empty" id="search-empty-hint" data-astro-cid-mn7pezny>输入关键词开始搜索</p> </div> <!-- Skeleton loading --> <div id="search-skeleton" class="srch-skeleton" style="display:none;" aria-hidden="true" data-astro-cid-mn7pezny> <div class="srch-skeleton-line" style="width:75%" data-astro-cid-mn7pezny></div> <div class="srch-skeleton-line" style="width:50%" data-astro-cid-mn7pezny></div> <div class="srch-skeleton-line" style="width:60%" data-astro-cid-mn7pezny></div> </div> <!-- Footer hints --> <div class="srch-footer" data-astro-cid-mn7pezny> <div class="srch-footer-hints" data-astro-cid-mn7pezny> <span data-astro-cid-mn7pezny><kbd data-astro-cid-mn7pezny>↑</kbd><kbd data-astro-cid-mn7pezny>↓</kbd> 导航</span> <span data-astro-cid-mn7pezny><kbd data-astro-cid-mn7pezny>↵</kbd> 打开</span> <span data-astro-cid-mn7pezny><kbd data-astro-cid-mn7pezny>Ctrl</kbd>+<kbd data-astro-cid-mn7pezny>K</kbd> 切换</span> </div> <div class="srch-footer-brand" data-astro-cid-mn7pezny>
+powered by Orama
+</div> </div> </div> </div> <script type="module" src="/dev/_astro/Navigation.astro_astro_type_script_index_0_lang.B7cQAlyY.js"></script> <main class="flex-1">  <div class="reading-progress" id="reading-progress" style="width: 0%"></div> <script type="module">const o=document.getElementById("reading-progress");if(!o)throw new Error("Reading progress bar element not found");const r=()=>{const n=window.scrollY,e=document.documentElement.scrollHeight-window.innerHeight,t=e>0?n/e*100:0;o.style.width=`${Math.min(t,100)}%`};window.addEventListener("scroll",r,{passive:!0});</script> <button id="back-to-top" class="back-to-top hidden" aria-label="返回顶部" data-astro-cid-gzprr2dq> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-gzprr2dq> <polyline points="18 15 12 9 6 15" data-astro-cid-gzprr2dq></polyline> </svg> </button>  <script type="module">const o=document.getElementById("back-to-top");o&&(window.addEventListener("scroll",()=>{o.classList.toggle("hidden",window.scrollY<400)},{passive:!0}),o.addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"})));</script> <script type="module">document.querySelectorAll("pre").forEach(e=>{const t=document.createElement("button");t.className="copy-btn",t.textContent="复制",t.addEventListener("click",async()=>{const n=e.querySelector("code")?.textContent||e.textContent||"";try{await navigator.clipboard.writeText(n),t.textContent="已复制",t.classList.add("copied"),setTimeout(()=>{t.textContent="复制",t.classList.remove("copied")},2e3)}catch{t.textContent="失败",setTimeout(()=>{t.textContent="复制"},2e3)}}),e.style.position="relative",e.appendChild(t)});</script> <div class="px-6 xl:px-12 pt-12 pb-16" data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <header class="mb-12 text-center" data-astro-cid-bvzihdzo> <h1 class="text-3xl font-semibold mb-3 tracking-tight" data-astro-cid-bvzihdzo>scientific-agent-skills 深度调研报告</h1> <div class="flex items-center justify-center gap-2 text-[var(--color-text-tertiary)] text-sm" data-astro-cid-bvzihdzo> <time datetime="2026-07-05" data-astro-cid-bvzihdzo>2026-07-05</time> <span class="text-[var(--color-border)]" data-astro-cid-bvzihdzo>·</span> <span data-astro-cid-bvzihdzo>18 分钟阅读</span>  <span class="text-[var(--color-border)]" data-astro-cid-bvzihdzo>·</span> <span class="text-sm text-[var(--color-text-tertiary)]"> <span> AI<span class="mx-1">·</span> </span><span> 调研<span class="mx-1">·</span> </span><span> Skill<span class="mx-1">·</span> </span><span> 自动化<span class="mx-1">·</span> </span><span> 工具<span class="mx-1">·</span> </span><span> 科研 </span> </span>  </div> </header> <div class="blog-layout" data-astro-cid-bvzihdzo> <aside class="blog-toc" data-astro-cid-bvzihdzo> <div class="sticky top-24" data-astro-cid-bvzihdzo> <button id="toc-toggle" class="hidden max-md:flex items-center gap-1 text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-3 cursor-pointer border-none bg-transparent p-0" aria-expanded="false" aria-controls="toc-list" data-astro-cid-bvzihdzo>
+目录
+<svg id="toc-chevron" class="w-3 h-3 transition-transform duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-bvzihdzo><polyline points="6 9 12 15 18 9" data-astro-cid-bvzihdzo></polyline></svg> </button> <span class="text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-3 max-md:hidden" data-astro-cid-bvzihdzo>目录</span> <div id="toc-list" class="max-md:hidden" data-astro-cid-bvzihdzo> <nav class="toc"> <p class="text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-3">目录</p> <ul class="toc-list"> <li class> <a href="#1-开发者与公司背景">1. 开发者与公司背景</a> </li><li class> <a href="#2-底层技术栈">2. 底层技术栈</a> </li><li class> <a href="#3-开源属性与商业模式">3. 开源属性与商业模式</a> </li><li class> <a href="#4-功能全景解析">4. 功能全景解析</a> </li><li class="toc-h3"> <a href="#核心价值">核心价值</a> </li><li class="toc-h3"> <a href="#技能分类矩阵140-skills">技能分类矩阵（140+ Skills）</a> </li><li class="toc-h3"> <a href="#覆盖-17-个科学领域">覆盖 17 个科学领域</a> </li><li class="toc-h3"> <a href="#三大核心技术优势">三大核心技术优势</a> </li><li class> <a href="#5-主要竞品清单">5. 主要竞品清单</a> </li><li class> <a href="#6-与竞品的横向比较">6. 与竞品的横向比较</a> </li><li class> <a href="#7-版本迭代信息">7. 版本迭代信息</a> </li><li class> <a href="#8-关联生态k-dense-全家桶">8. 关联生态（K-Dense 全家桶）</a> </li><li class="toc-h3"> <a href="#安装方式">安装方式</a> </li><li class> <a href="#一句话锐评">一句话锐评</a> </li> </ul> </nav> </div> </div> </aside> <div class="blog-body" data-astro-cid-bvzihdzo> <div class="prose prose-neutral max-w-none" data-astro-cid-bvzihdzo>  <h1 id="scientific-agent-skills-深度调研报告">scientific-agent-skills 深度调研报告</h1>
+<blockquote>
+<p><strong>调研时间</strong>：2026-07-05 | <strong>调研对象</strong>：<code>K-Dense-AI/scientific-agent-skills</code> | <strong>来源</strong>：GitHub 仓库、Web 搜索、公开报道</p>
+</blockquote>
+<hr>
+<h2 id="1-开发者与公司背景">1. 开发者与公司背景</h2>
+<ul>
+<li><strong>开发方</strong>：<strong>K-Dense Inc.</strong>，由 Timothy Kassis 与 David Zhang 联合创立，最初从 Biostate AI 内部数据基础设施孵化而来，后独立为公司实体</li>
+<li><strong>所属国家/地区</strong>：美国（硅谷），但创始团队有印度/华人背景；入选 2026 年 Accel Atoms AI Cohort 的 5 家印度 AI 初创之一</li>
+<li><strong>融资阶段</strong>：
+<ul>
+<li><strong>2026 年 3 月</strong>入选 <strong>Accel Atoms × Google AI Futures Fund 联合 AI Cohort</strong>（从 4000+ 全球申请者中遴选 5 家）</li>
+<li>获得 Accel 与 Google AI Futures Fund 各 50% 的 <strong>高达 $2M 联合投资</strong></li>
+<li>额外获得 Google Cloud / Gemini / DeepMind <strong>$350K 算力额度</strong></li>
+<li>已获 <strong>GSK、Zeiss、Ford、MIT、Harvard Medical School、Stanford、UPenn</strong> 等顶级机构采用</li>
+</ul>
+</li>
+<li><strong>来源依据</strong>：Accel Atoms 官方公告 (2026.03.16)、Moneycontrol、Business Standard 等媒体报道</li>
+</ul>
+<hr>
+<h2 id="2-底层技术栈">2. 底层技术栈</h2>
+<ul>
+<li><code>scientific-agent-skills</code> <strong>不是 AI 模型本身</strong>，而是基于 <strong>Agent Skills 开放标准</strong>（由 Anthropic 于 2025 年 10 月发布，12 月开源规范）构建的 <strong>可组合 Skill 目录</strong></li>
+<li><strong>运行在 Claude Code / Cursor / Codex / Pi / Antigravity / Hermes / Goose / OpenHands</strong> 等 40+ 种 AI Agent 宿主机上，底层推理能力由各宿主的大模型提供（Claude、GPT、Gemini 等）</li>
+<li>每个 Skill 是一个包含 <code>SKILL.md</code>（YAML frontmatter + Markdown 指令）+ <code>references/</code>（按需加载文档）+ <code>scripts/</code>（可执行脚本）+ <code>assets/</code>（模板资源）的目录</li>
+<li>采用 <strong>Progressive Disclosure（渐进式加载）</strong> 架构：Level 1（name + description ~100 tokens）→ Level 2（SKILL.md &#x3C;500 行 ~5K tokens）→ Level 3（references/ 按需加载，无上限）</li>
+<li>含 <strong>100+ 个科学数据库 MCP 连接器</strong>：PubChem、ChEMBL、UniProt、COSMIC、ClinicalTrials.gov、USPTO 等</li>
+<li>安全审计层：<strong>Cisco AI Defense Skill Scanner</strong> 每周全量扫描 + 每 PR 增量扫描，结果写入 <code>SECURITY.md</code>（3644 行）</li>
+</ul>
+<p><strong>结论</strong>：该软件非 AI 原生模型，而是基于 Agent Skills 开放标准的「科学领域可复用技能包市场」。</p>
+<hr>
+<h2 id="3-开源属性与商业模式">3. 开源属性与商业模式</h2>
+<ul>
+<li><strong>开源/闭源</strong>：<strong>完全开源</strong>，托管于 <code>https://github.com/K-Dense-AI/scientific-agent-skills</code></li>
+<li><strong>开源协议</strong>：基于 Agent Skills 开放标准（Apache 2.0 兼容）；技能本身与 GitHub 仓库均公开可 Fork</li>
+<li><strong>定价模式</strong>：
+<ul>
+<li><strong>Skills 免费</strong> — <code>npx skills add K-Dense-AI/scientific-agent-skills</code> 一键安装</li>
+<li><strong>K-Dense BYOK</strong> — 免费开源的桌面端 AI Co-Scientist（自带 API Key 使用），内置全部 140+ 技能 + 326 工作流模板</li>
+<li><strong>企业定制</strong> — 面向 GSK、Zeiss 等大客户的合规/安全部署服务（推测为企业收入来源）</li>
+<li><strong>商业化路径</strong> — 类似 npm registry 的「平台型」思路：技能免费 → 生态锁定 → 企业增值服务</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="4-功能全景解析">4. 功能全景解析</h2>
+<h3 id="核心价值">核心价值</h3>
+<p><strong>将任何 AI Agent 升级为领域感知的「AI Scientist」</strong>——提供 140+ 个可组合的科研技能包，覆盖 17 个科学领域，被 160,000+ 科学家使用。</p>
+<h3 id="技能分类矩阵140-skills">技能分类矩阵（140+ Skills）</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">技能类别</th><th align="left">数量</th><th align="left">典型案例</th></tr></thead><tbody><tr><td align="left"><strong>科学数据库连接器</strong></td><td align="left">100+</td><td align="left">PubChem、ChEMBL、UniProt、COSMIC、ClinicalTrials.gov、FRED、USPTO；BioServices（~40 服务）、BioPython（38 NCBI 子库）、gget（20+ 基因组数据库）</td></tr><tr><td align="left"><strong>Python 科研包优化技能</strong></td><td align="left">70+</td><td align="left">RDKit、Scanpy、PyTorch Lightning、scikit-learn、OpenMM、MDAnalysis、scVelo、TimesFM、PennyLane、Qiskit</td></tr><tr><td align="left"><strong>科学平台集成技能</strong></td><td align="left">9+</td><td align="left">Benchling、DNAnexus、LatchBio、OMERO、Protocols.io、Opentrons</td></tr><tr><td align="left"><strong>分析与交流工具</strong></td><td align="left">30+</td><td align="left">文献综述、科学写作、同行评审、学术海报、幻灯片、Mermaid 图表</td></tr><tr><td align="left"><strong>研究与临床工具</strong></td><td align="left">10+</td><td align="left">假设生成、基金申请书写作、临床决策支持、法规合规</td></tr></tbody></table>
+<h3 id="覆盖-17-个科学领域">覆盖 17 个科学领域</h3>
+<p>🧬 生物信息学与基因组学 · 🧪 化学信息学与药物发现 · 🔬 蛋白质组学与质谱 · 🏥 临床研究与精准医学 · 🖼️ 医学影像与数字病理 · 🤖 机器学习与 AI · 🔮 材料科学与化学 · 🌌 物理学与天文学 · ⚙️ 工程与仿真 · 🌍 地理空间科学与遥感 · 🧪 实验室自动化 · 🔬 多组学与系统生物学 · 🧬 蛋白工程与设计 · 🎓 科研方法论</p>
+<h3 id="三大核心技术优势">三大核心技术优势</h3>
+<ol>
+<li><strong>Progressive Disclosure（渐进式加载）</strong>：147 个技能通过三级加载机制管理上下文窗口——100 tokens 发现（全部技能）→ 5000 tokens 激活（单一技能）→ 无限 tokens 执行（按需引用），避免上下文窗口爆炸</li>
+<li><strong>双源安全审计</strong>：Cisco AI Defense Skill Scanner 三层扫描器（行为扫描 + 触发器扫描 + LLM-as-judge 评估），每周全量 + 每 PR 增量扫描，产出的 <code>SECURITY.md</code> 达 3644 行，满足 GxP / ISO 13485 合规要求</li>
+<li><strong>文件级溯源（Provenance）</strong>：三层版本控制 —— package 级（<code>pyproject.toml</code> version）→ Skill 级（<code>metadata.version</code>）→ 安全级（Git tag/SHA pin），支持可复现安装</li>
+</ol>
+<hr>
+<h2 id="5-主要竞品清单">5. 主要竞品清单</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">竞品</th><th align="left">GitHub Stars</th><th align="left">定位</th><th align="left">与 scientific-agent-skills 的关系</th></tr></thead><tbody><tr><td align="left"><strong>anthropics/skills</strong></td><td align="left">~151K</td><td align="left">Anthropic 官方 Agent Skills 示例（~10 个通用技能：pptx/pdf/docx）</td><td align="left">同标准，但无科学垂直深度；最大威胁（若 Anthropic 扩展科学领域）</td></tr><tr><td align="left"><strong>obra/superpowers</strong></td><td align="left">~228K</td><td align="left">软件工程 Agent 方法论与技能框架</td><td align="left">不同领域竞品——科学 vs 软件工程</td></tr><tr><td align="left"><strong>deepanalyze</strong></td><td align="left">~4.2K</td><td align="left">端到端数据科学 Agent</td><td align="left">单体架构，非模块化技能库</td></tr><tr><td align="left"><strong>paper-search-mcp</strong></td><td align="left">~1.7K</td><td align="left">MCP 论文检索</td><td align="left">单一功能，非全链路</td></tr><tr><td align="left"><strong>huggingface/skills</strong></td><td align="left">~10.6K</td><td align="left">Hugging Face 生态 Agent Skills</td><td align="left">机器学习/模型生态，非全科学领域</td></tr></tbody></table>
+<p><strong>注</strong>：在「科学领域 Agent Skills 市场」中，scientific-agent-skills 目前<strong>无直接同等体量的竞品</strong>——通用库（如 anthropics/skills）缺乏科学垂直深度，而科学工具（如 DeepAnalyze）缺乏模块化技能生态。</p>
+<hr>
+<h2 id="6-与竞品的横向比较">6. 与竞品的横向比较</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">对比维度</th><th align="left">scientific-agent-skills</th><th align="left">anthropics/skills</th><th align="left">superpowers</th><th align="left">deepanalyze</th><th align="left">huggingface/skills</th></tr></thead><tbody><tr><td align="left">价格</td><td align="left"><strong>免费</strong></td><td align="left"><strong>免费</strong></td><td align="left"><strong>免费</strong></td><td align="left">免费</td><td align="left"><strong>免费</strong></td></tr><tr><td align="left">技能数量</td><td align="left"><strong>147 个科学技能</strong></td><td align="left">~10 个通用技能</td><td align="left">~30 个工程技能</td><td align="left">单体 Agent</td><td align="left">~50 个 ML 技能</td></tr><tr><td align="left">易用性</td><td align="left"><code>npx</code> 一键安装，40+ 宿主兼容</td><td align="left">Claude Code 原生</td><td align="left">Hermes/Superpowers 生态</td><td align="left">pip install</td><td align="left">Hugging Face 生态</td></tr><tr><td align="left">生态与集成能力</td><td align="left"><strong>极强</strong>：100+ 数据库 + 40+ Agent 宿主 + 326 工作流模板</td><td align="left">中：仅 Anthropic 生态</td><td align="left">强：软件工程全链路</td><td align="left">弱：独立 Agent</td><td align="left">强：HF 模型/数据集生态</td></tr><tr><td align="left">安全合规</td><td align="left"><strong>独有</strong>：Cisco 扫描 + SECURITY.md + GxP 就绪</td><td align="left">无</td><td align="left">无</td><td align="left">无</td><td align="left">无</td></tr></tbody></table>
+<p><strong>各竞品最佳适用场景</strong>：</p>
+<ul>
+<li><strong>scientific-agent-skills</strong>：生命科学/化学/医学/AI 跨领域科研 Agent，需要数据库连接 + 包技能 + 合规审计 + 多宿主部署</li>
+<li><strong>anthropics/skills</strong>：基础文档生成（PPT/PDF/DOCX），无科学深度需求</li>
+<li><strong>superpowers</strong>：软件工程全流程（TDD/Code Review/Bug Fix），不适配科研</li>
+<li><strong>deepanalyze</strong>：单一数据分析任务，不需要模块化技能生态</li>
+<li><strong>huggingface/skills</strong>：ML 模型训练/部署/推理，HF 生态绑定</li>
+</ul>
+<hr>
+<h2 id="7-版本迭代信息">7. 版本迭代信息</h2>
+<ul>
+<li><strong>首次公开发布</strong>：约 <strong>2025 年 10-11 月</strong>（Agent Skills 标准发布后不久，仓库创建）</li>
+<li><strong>当前最新稳定版</strong>（截至 2026-07-05）：<strong>v2.53.0</strong>（频繁更新）</li>
+<li><strong>更新频率</strong>：<strong>极高</strong>——几乎每周都有新 release，持续添加新技能与改进已有技能</li>
+<li><strong>关键里程碑</strong>：
+<ul>
+<li><strong>半年内</strong>从 0 到 <strong>27,000+ GitHub Stars</strong></li>
+<li>从初始几十个技能扩展到 <strong>147 个技能 + 100+ 数据库连接器</strong></li>
+<li><strong>2026 年 3 月</strong>入选 Accel × Google AI Futures Fund Cohort</li>
+</ul>
+</li>
+<li><strong>仓库活跃度</strong>：高活跃度（社区 PR 频繁，如 feat: add Exa AI-powered search tool #143）</li>
+</ul>
+<hr>
+<h2 id="8-关联生态k-dense-全家桶">8. 关联生态（K-Dense 全家桶）</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">项目</th><th align="left">用途</th></tr></thead><tbody><tr><td align="left"><strong>K-Dense BYOK</strong></td><td align="left">免费开源的桌面 AI Co-Scientist（“Kady”），内置全部 140+ 技能 + 326 工作流模板 + 229 数据库，本地运行 + 自带 API Key</td></tr><tr><td align="left"><strong>scientific-agents</strong></td><td align="left">503 个 AGENTS.md 专家 Profile（如 Bayesian Statistician、Causal Inference Scientist），教 Agent 以资深科学家方式推理</td></tr><tr><td align="left"><strong>science-superpowers</strong></td><td align="left">可组合的计算科学方法论技能——预注册（Pre-registration）方法论（科学的 TDD）</td></tr><tr><td align="left"><strong>mimeo</strong></td><td align="left">将专家思维克隆为 SKILL.md 或 AGENTS.md 的工具</td></tr><tr><td align="left"><strong>karpathy</strong></td><td align="left">基于 Claude Agent SDK + Google ADK 的 Agentic ML Engineer</td></tr></tbody></table>
+<h3 id="安装方式">安装方式</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:var(--astro-code-token-function)">npx</span><span style="color:var(--astro-code-token-string)"> skills</span><span style="color:var(--astro-code-token-string)"> add</span><span style="color:var(--astro-code-token-string)"> K-Dense-AI/scientific-agent-skills</span><span style="color:var(--astro-code-token-comment)">  # 标准方式（所有平台）</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">gh</span><span style="color:var(--astro-code-token-string)"> skill</span><span style="color:var(--astro-code-token-string)"> install</span><span style="color:var(--astro-code-token-string)"> K-Dense-AI/scientific-agent-skills</span><span style="color:var(--astro-code-token-comment)"> # GitHub CLI</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">git</span><span style="color:var(--astro-code-token-string)"> clone</span><span style="color:var(--astro-code-token-string)"> https://github.com/K-Dense-AI/scientific-agent-skills.git</span><span style="color:var(--astro-code-token-string)"> ~/.agents/skills/scientific-agent-skills</span><span style="color:var(--astro-code-token-comment)">  # 手动</span></span></code></pre>
+<hr>
+<h2 id="一句话锐评">一句话锐评</h2>
+<blockquote>
+<p><strong>科学领域的 npm registry</strong>——147 技能 + 100 数据库 + 40 宿主，合规就绪的全栈「AI Scientist」基础设施。</p>
+</blockquote>  </div> <!-- Previous / Next navigation --> <nav class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-12 pt-8 border-t border-[var(--color-border)]" data-astro-cid-bvzihdzo> <a href="/blog/AI工具报告/Browser Use-报告" class="card-hover p-4 no-underline group" data-astro-cid-bvzihdzo> <span class="text-xs text-[var(--color-text-tertiary)] block mb-1" data-astro-cid-bvzihdzo>&larr; 上一篇</span> <span class="text-sm font-medium text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors line-clamp-1" data-astro-cid-bvzihdzo>深度调研报告：browser-use（AI 浏览器代理框架）</span> </a> <a href="/blog/AI工具报告/Andrej Karpathy Skills-报告" class="card-hover p-4 no-underline group text-right" data-astro-cid-bvzihdzo> <span class="text-xs text-[var(--color-text-tertiary)] block mb-1" data-astro-cid-bvzihdzo>下一篇 &rarr;</span> <span class="text-sm font-medium text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors line-clamp-1" data-astro-cid-bvzihdzo>Andrej Karpathy Skills（multica-ai/andrej-karpathy-skills）深度调研报告</span> </a> </nav> <hr class="!mt-12 !mb-8" data-astro-cid-bvzihdzo> <div data-astro-cid-bvzihdzo> <a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-bvzihdzo>
+&larr; 返回博客列表
+</a> </div> </div> </div> </article> </div>  </main> <footer class="border-t border-[var(--color-border)] mt-24 py-8" data-astro-cid-pux6a34n><div class="max-w-content flex items-center justify-between" data-astro-cid-pux6a34n><span class="text-sm text-[var(--color-text-tertiary)]" data-astro-cid-pux6a34n>
+&copy; 2026 星游寰宇
+</span><div class="flex items-center gap-4" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>博客</a><a href="/projects" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>项目</a><a href="/notes" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>日记</a><a href="/resources" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>资源</a><a href="/about" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>关于</a></div></div></footer> <div id="link-preview" style="display:none;position:fixed;z-index:99;max-width:18rem;pointer-events:none;" data-astro-cid-t7vshrbh></div>  <script type="module">(async()=>{try{const c=await fetch("/posts.json");if(!c.ok)return;const u=await c.json(),p=new Map(u.map(t=>[t.href,t])),e=document.getElementById("link-preview");if(!e)return;let n="",d;document.addEventListener("mouseover",t=>{const i=t.target.closest("a[href^='/blog/']");if(!i){e.style.display="none",n="";return}const s=i.getAttribute("href");if(!s||s===n)return;const o=p.get(s);o&&(n=s,d=setTimeout(()=>{e.innerHTML=`<div class="lp-title">${o.title}</div><div class="lp-summary">${o.summary}</div>`;const r=i.getBoundingClientRect();let a=r.left,l=r.bottom+6;a+288>window.innerWidth&&(a=window.innerWidth-296),l+80>window.innerHeight&&(l=r.top-80),Object.assign(e.style,{left:a+"px",top:l+"px",display:"block"})},300))},{passive:!0}),document.addEventListener("mouseout",t=>{t.target.closest("a[href^='/blog/']")&&(clearTimeout(d),e.style.display="none",n="")},{passive:!0})}catch{}})();</script> </body></html>  <script type="module">const c=document.getElementById("toc-toggle"),s=document.getElementById("toc-list"),i=document.getElementById("toc-chevron");c&&s&&i&&c.addEventListener("click",()=>{const o=s.classList.toggle("hidden");c.setAttribute("aria-expanded",String(o)),i.style.transform=o?"rotate(180deg)":""});const r=document.querySelectorAll(".toc-list a");if(r.length>0){const o=new IntersectionObserver(n=>{for(const t of n)t.isIntersecting&&r.forEach(e=>{e.classList.toggle("active",e.getAttribute("href")===`#${t.target.id}`)})},{rootMargin:"-80px 0px -80% 0px"});r.forEach(n=>{const t=n.getAttribute("href")?.slice(1);if(t){const e=document.getElementById(t);e&&o.observe(e)}})}</script>

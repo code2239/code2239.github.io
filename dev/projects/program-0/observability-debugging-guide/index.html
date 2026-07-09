@@ -1,0 +1,511 @@
+<!DOCTYPE html><html lang="zh-CN"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="科研AI系统：可视化与调试方案（全开源版）"><meta name="color-scheme" content="light"><!-- Open Graph --><meta property="og:title" content="科研AI系统：可视化与调试方案（全开源版） — 星游寰宇"><meta property="og:description" content="科研AI系统：可视化与调试方案（全开源版）"><meta property="og:url" content="https://code2239.github.io/projects/program-0/observability-debugging-guide"><meta property="og:type" content="article"><meta property="og:site_name" content="星游寰宇"><meta property="og:locale" content="zh_CN"><meta property="article:published_time" content="2026-07-06"><meta property="article:tag" content="科研AI"><meta property="article:tag" content="Program-0"><meta property="article:tag" content="技术调研"><!-- Twitter Card --><meta name="twitter:card" content="summary"><meta name="twitter:title" content="科研AI系统：可视化与调试方案（全开源版） — 星游寰宇"><meta name="twitter:description" content="科研AI系统：可视化与调试方案（全开源版）"><!-- Canonical --><link rel="canonical" href="https://code2239.github.io/projects/program-0/observability-debugging-guide"><title>科研AI系统：可视化与调试方案（全开源版） — 星游寰宇</title><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="alternate" type="application/rss+xml" title="星游寰宇 RSS" href="/rss.xml"><!-- Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"星游寰宇","url":"https://code2239.github.io","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://code2239.github.io/search?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://code2239.github.io"},{"@type":"ListItem","position":2,"name":"项目","item":"https://code2239.github.io/projects"},{"@type":"ListItem","position":3,"name":"program 0","item":"https://code2239.github.io/projects/program-0"},{"@type":"ListItem","position":4,"name":"observability debugging guide"}]},{"@context":"https://schema.org","@type":"BlogPosting","headline":"科研AI系统：可视化与调试方案（全开源版）","description":"科研AI系统：可视化与调试方案（全开源版）","datePublished":"2026-07-06","url":"https://code2239.github.io/projects/program-0/observability-debugging-guide","keywords":"科研AI, Program-0, 技术调研"}]}</script><style>.project-detail-layout[data-astro-cid-eo3wme6m]{display:block}.project-detail-sidebar[data-astro-cid-eo3wme6m]{margin-bottom:2rem}.project-detail-content[data-astro-cid-eo3wme6m]{min-width:0}@media(min-width:768px){.project-detail-layout[data-astro-cid-eo3wme6m]{display:grid;grid-template-columns:220px 1fr;gap:3rem;align-items:start}.project-detail-sidebar[data-astro-cid-eo3wme6m]{margin-bottom:0}}
+</style>
+<link rel="stylesheet" href="/dev/_astro/_slug_.BlQX3qwK.css"></head> <body class="min-h-screen flex flex-col"> <nav class="sticky top-0 z-40 bg-[var(--color-bg)]/80 backdrop-blur-md border-b border-[var(--color-border)]" data-astro-cid-pux6a34n><div class="max-w-content flex items-center justify-between py-4" data-astro-cid-pux6a34n><a href="/" class="flex items-center gap-2.5 text-base font-semibold no-underline tracking-tight" data-astro-cid-pux6a34n><svg class="w-7 h-7" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" data-astro-cid-pux6a34n><circle cx="16" cy="16" r="15" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-pux6a34n></circle><circle cx="16" cy="16" r="3" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="16" cy="5" r="1.5" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="24" cy="10" r="1" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="8" cy="22" r="1" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="25" cy="21" r="0.8" fill="currentColor" data-astro-cid-pux6a34n></circle></svg>
+星游寰宇
+</a><!-- Desktop nav --><div class="hidden sm:flex items-center gap-5" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>博客</a><a href="/projects" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>项目</a><a href="/notes" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>日记</a><a href="/resources" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>资源</a><a href="/about" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>关于</a><button id="search-trigger" class="flex items-center gap-1.5 text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] bg-[var(--color-bg-secondary)] hover:bg-[var(--color-bg-tertiary)] border border-[var(--color-border)] hover:border-[var(--color-accent)]/30 rounded-lg px-3 py-1.5 cursor-pointer shadow-sm hover:shadow-md transition-all duration-200" aria-label="搜索 (Ctrl+K)" title="搜索 (Ctrl+K)" data-astro-cid-pux6a34n><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-pux6a34n><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" data-astro-cid-pux6a34n></path></svg><span class="hidden lg:inline" data-astro-cid-pux6a34n>搜索</span><kbd class="hidden lg:inline-flex items-center text-[0.625rem] font-mono text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1 py-px rounded" data-astro-cid-pux6a34n>Ctrl+K</kbd></button></div><!-- Mobile hamburger --><button id="menu-btn" class="sm:hidden flex flex-col gap-1 p-2 -mr-2 cursor-pointer" aria-label="打开菜单" data-astro-cid-pux6a34n><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-transform duration-200" data-astro-cid-pux6a34n></span><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-opacity duration-200" data-astro-cid-pux6a34n></span><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-transform duration-200" data-astro-cid-pux6a34n></span></button></div><!-- Mobile menu --><div id="mobile-menu" class="hidden sm:hidden border-t border-[var(--color-border)] bg-[var(--color-bg)]" data-astro-cid-pux6a34n><div class="max-w-content flex flex-col gap-2 py-4" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>博客</a><a href="/projects" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>项目</a><a href="/notes" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>日记</a><a href="/resources" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>资源</a><a href="/about" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>关于</a></div></div></nav>
+    <div id="search-overlay" class="srch-overlay" role="dialog" aria-modal="true" aria-label="全局搜索" data-astro-cid-mn7pezny> <div id="search-backdrop" class="srch-backdrop" data-astro-cid-mn7pezny></div> <div class="srch-panel" id="srch-panel" data-astro-cid-mn7pezny> <!-- Search input --> <div class="srch-input-row" data-astro-cid-mn7pezny> <svg class="srch-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-mn7pezny> <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" data-astro-cid-mn7pezny></path> </svg> <input type="text" id="search-input" class="srch-input" placeholder="搜索文章、项目、日记、资源..." autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="go" data-astro-cid-mn7pezny> <kbd class="srch-kbd" data-astro-cid-mn7pezny>Esc</kbd> </div> <!-- Results area --> <div id="search-results" class="srch-results" data-astro-cid-mn7pezny> <p class="srch-empty" id="search-empty-hint" data-astro-cid-mn7pezny>输入关键词开始搜索</p> </div> <!-- Skeleton loading --> <div id="search-skeleton" class="srch-skeleton" style="display:none;" aria-hidden="true" data-astro-cid-mn7pezny> <div class="srch-skeleton-line" style="width:75%" data-astro-cid-mn7pezny></div> <div class="srch-skeleton-line" style="width:50%" data-astro-cid-mn7pezny></div> <div class="srch-skeleton-line" style="width:60%" data-astro-cid-mn7pezny></div> </div> <!-- Footer hints --> <div class="srch-footer" data-astro-cid-mn7pezny> <div class="srch-footer-hints" data-astro-cid-mn7pezny> <span data-astro-cid-mn7pezny><kbd data-astro-cid-mn7pezny>↑</kbd><kbd data-astro-cid-mn7pezny>↓</kbd> 导航</span> <span data-astro-cid-mn7pezny><kbd data-astro-cid-mn7pezny>↵</kbd> 打开</span> <span data-astro-cid-mn7pezny><kbd data-astro-cid-mn7pezny>Ctrl</kbd>+<kbd data-astro-cid-mn7pezny>K</kbd> 切换</span> </div> <div class="srch-footer-brand" data-astro-cid-mn7pezny>
+powered by Orama
+</div> </div> </div> </div> <script type="module" src="/dev/_astro/Navigation.astro_astro_type_script_index_0_lang.B7cQAlyY.js"></script> <main class="flex-1">  <div class="px-6 xl:px-12 pt-12 pb-16" data-astro-cid-eo3wme6m> <div class="project-detail-layout" data-astro-cid-eo3wme6m> <aside class="project-detail-sidebar" data-astro-cid-eo3wme6m> <div class="sticky top-20" data-astro-cid-eo3wme6m> <nav class="space-y-3"> <div class="pb-3 mb-3 border-b border-[var(--color-border)]"> <a href="/projects/program-0" class="text-sm font-semibold text-[var(--color-text)] no-underline hover:text-[var(--color-accent)] transition-colors flex items-center gap-1.5"> <svg class="w-4 h-4 text-[var(--color-text-tertiary)]" viewBox="0 0 24 24" fill="currentColor"> <path d="M10 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"></path> </svg>
+Program 0
+</a> </div> <ul class="space-y-0.5 list-none p-0 m-0"> <li> <a href="/projects/program-0/claude-gpt-generate" class="block text-xs py-1.5 px-2.5 rounded-md no-underline transition-colors border-l-2 text-[var(--color-text-secondary)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg-secondary)] border-l-transparent"> claude.md（Tech Discovery Driven Research OS Agent） </a> </li><li> <a href="/projects/program-0/final-report" class="block text-xs py-1.5 px-2.5 rounded-md no-underline transition-colors border-l-2 text-[var(--color-text-secondary)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg-secondary)] border-l-transparent"> 科研AI系统 · 技术可行性分析报告 </a> </li><li> <a href="/projects/program-0/module-1-doc-understanding" class="block text-xs py-1.5 px-2.5 rounded-md no-underline transition-colors border-l-2 text-[var(--color-text-secondary)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg-secondary)] border-l-transparent"> 模块 2.1：文档理解模块 · 技术发现与选型 </a> </li><li> <a href="/projects/program-0/existing-solutions-survey" class="block text-xs py-1.5 px-2.5 rounded-md no-underline transition-colors border-l-2 text-[var(--color-text-secondary)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg-secondary)] border-l-transparent"> 已有集成方案调研：有哪些现成的开源工程？ </a> </li><li> <a href="/projects/program-0/developer-skills-roadmap" class="block text-xs py-1.5 px-2.5 rounded-md no-underline transition-colors border-l-2 text-[var(--color-text-secondary)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg-secondary)] border-l-transparent"> 科研AI系统：开发者技能路线图 </a> </li><li> <a href="/projects/program-0/integration-and-plan" class="block text-xs py-1.5 px-2.5 rounded-md no-underline transition-colors border-l-2 text-[var(--color-text-secondary)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg-secondary)] border-l-transparent"> 第三章：跨模块数据流与集成方案 </a> </li><li> <a href="/projects/program-0/domain-config-data-sources" class="block text-xs py-1.5 px-2.5 rounded-md no-underline transition-colors border-l-2 text-[var(--color-text-secondary)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg-secondary)] border-l-transparent"> 领域配置数据来源地图 </a> </li><li> <a href="/projects/program-0/input-output-desktop-feasibility" class="block text-xs py-1.5 px-2.5 rounded-md no-underline transition-colors border-l-2 text-[var(--color-text-secondary)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg-secondary)] border-l-transparent"> 科研AI系统：输入输出定义 · 桌面应用可行性分析 </a> </li><li> <a href="/projects/program-0/module-2-info-extraction" class="block text-xs py-1.5 px-2.5 rounded-md no-underline transition-colors border-l-2 text-[var(--color-text-secondary)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg-secondary)] border-l-transparent"> 模块 2.2：信息抽取模块 · 技术发现与选型 </a> </li><li> <a href="/projects/program-0/module-3-experiment-flow" class="block text-xs py-1.5 px-2.5 rounded-md no-underline transition-colors border-l-2 text-[var(--color-text-secondary)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg-secondary)] border-l-transparent"> 模块 2.3：实验流程抽取模块 · 技术发现与选型 </a> </li><li> <a href="/projects/program-0/module-4-knowledge-graph" class="block text-xs py-1.5 px-2.5 rounded-md no-underline transition-colors border-l-2 text-[var(--color-text-secondary)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg-secondary)] border-l-transparent"> 模块 2.4：科研知识图谱模块 · 技术发现与选型 </a> </li><li> <a href="/projects/program-0/module-5-cognitive-compression" class="block text-xs py-1.5 px-2.5 rounded-md no-underline transition-colors border-l-2 text-[var(--color-text-secondary)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg-secondary)] border-l-transparent"> 模块 2.5：认知压缩模块 · 技术发现与选型 </a> </li><li> <a href="/projects/program-0/module-7-multi-agent-eval" class="block text-xs py-1.5 px-2.5 rounded-md no-underline transition-colors border-l-2 text-[var(--color-text-secondary)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg-secondary)] border-l-transparent"> 模块 2.7：多智能体评估模块 · 技术发现与选型 </a> </li><li> <a href="/projects/program-0/module-6-inspiration-gen" class="block text-xs py-1.5 px-2.5 rounded-md no-underline transition-colors border-l-2 text-[var(--color-text-secondary)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg-secondary)] border-l-transparent"> 模块 2.6：灵感生成模块 · 技术发现与选型 </a> </li><li> <a href="/projects/program-0/observability-debugging-guide" class="block text-xs py-1.5 px-2.5 rounded-md no-underline transition-colors border-l-2 bg-[var(--color-accent-soft)] text-[var(--color-accent)] font-medium border-l-[var(--color-accent)]"> 科研AI系统：可视化与调试方案（全开源版） </a> </li><li> <a href="/projects/program-0/question-summary" class="block text-xs py-1.5 px-2.5 rounded-md no-underline transition-colors border-l-2 text-[var(--color-text-secondary)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg-secondary)] border-l-transparent"> 咨询问题分类总结 </a> </li> </ul> </nav> </div> </aside> <article class="project-detail-content" data-astro-cid-eo3wme6m> <header class="mb-10 text-center" data-astro-cid-eo3wme6m> <h1 class="text-3xl font-semibold mb-3 tracking-tight" data-astro-cid-eo3wme6m>科研AI系统：可视化与调试方案（全开源版）</h1> <div class="flex items-center justify-center gap-2 text-[var(--color-text-tertiary)] text-sm" data-astro-cid-eo3wme6m> <time datetime="2026-07-06" data-astro-cid-eo3wme6m>2026-07-06</time>  <span class="text-[var(--color-border)]" data-astro-cid-eo3wme6m>·</span> <span class="text-sm text-[var(--color-text-tertiary)]"> <span> 科研AI<span class="mx-1">·</span> </span><span> Program-0<span class="mx-1">·</span> </span><span> 技术调研 </span> </span>  </div> </header>  <div class="prose prose-neutral max-w-none" data-astro-cid-eo3wme6m> <blockquote>
+<p>所有推荐工具均为 <strong>OSI 认证开源许可证</strong>，可免费自托管，无商业依赖。</p>
+</blockquote>
+<hr>
+<h2 id="一方案总览6-层全开源可视化栈">一、方案总览：6 层全开源可视化栈</h2>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>┌─────────────────────────────────────────────────────────┐</span></span>
+<span class="line"><span>│ 第 6 层：业务仪表盘       Streamlit (Apache 2.0)          │</span></span>
+<span class="line"><span>│         论文列表 · 模块状态 · 健康告警 · 假设排名          │</span></span>
+<span class="line"><span>├─────────────────────────────────────────────────────────┤</span></span>
+<span class="line"><span>│ 第 5 层：知识图谱可视化    Neo4j Browser + Graphify (MIT) │</span></span>
+<span class="line"><span>│         节点-边浏览 · 社区检测着色 · 交互式 HTML           │</span></span>
+<span class="line"><span>├─────────────────────────────────────────────────────────┤</span></span>
+<span class="line"><span>│ 第 4 层：指标监控          Grafana + Prometheus           │</span></span>
+<span class="line"><span>│         延迟分布 · 吞吐量 · 错误率 · 资源使用              │</span></span>
+<span class="line"><span>├─────────────────────────────────────────────────────────┤</span></span>
+<span class="line"><span>│ 第 3 层：数据快照          自建 @snapshot (30行, 自持)     │</span></span>
+<span class="line"><span>│         每个模块的输入/输出 · 版本化存储 · 可回溯           │</span></span>
+<span class="line"><span>├─────────────────────────────────────────────────────────┤</span></span>
+<span class="line"><span>│ 第 2 层：LLM 调用的 Trace   LangFuse (MIT)                │</span></span>
+<span class="line"><span>│         Prompt → LLM → Response · Token 消耗 · 延迟分解    │</span></span>
+<span class="line"><span>├─────────────────────────────────────────────────────────┤</span></span>
+<span class="line"><span>│ 第 1 层：管道 DAG 编排      Dagster (MIT) 或 LangGraph     │</span></span>
+<span class="line"><span>│         模块依赖图 · 运行状态着色 · 资产谱系                │</span></span>
+<span class="line"><span>└─────────────────────────────────────────────────────────┘</span></span></code></pre>
+<p><strong>全部 6 层均可免费自托管，总成本 = 一台 8GB 内存的 VPS（约 $40/月）。</strong></p>
+<hr>
+<h2 id="二逐层详解">二、逐层详解</h2>
+<h3 id="第-1-层管道-dag-可视化--dagster-mit">第 1 层：管道 DAG 可视化 —— Dagster (MIT)</h3>
+<p><strong>LangGraph 管流程，Dagster 管可视化。</strong> 二者互补：LangGraph 负责运行，Dagster 负责”让人看到”.</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Dagster 的资产谱系（Asset Lineage）视图：</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>         ┌──────────┐</span></span>
+<span class="line"><span>         │ raw_pdf  │  ← 原始 PDF</span></span>
+<span class="line"><span>         └────┬─────┘</span></span>
+<span class="line"><span>              │</span></span>
+<span class="line"><span>         ┌────▼─────┐</span></span>
+<span class="line"><span>         │ docling  │  ← 模块1：DoclingDocument</span></span>
+<span class="line"><span>         └────┬─────┘</span></span>
+<span class="line"><span>              │</span></span>
+<span class="line"><span>    ┌─────────┼─────────┐</span></span>
+<span class="line"><span>    │         │         │</span></span>
+<span class="line"><span>┌───▼───┐ ┌──▼───┐ ┌───▼──────┐</span></span>
+<span class="line"><span>│entities│ │rels  │ │methods_md│  ← 模块2：实体+关系，模块3：Methods</span></span>
+<span class="line"><span>└───┬───┘ └──┬───┘ └───┬──────┘</span></span>
+<span class="line"><span>    │        │         │</span></span>
+<span class="line"><span>┌───▼────────▼───┐ ┌──▼──────────┐</span></span>
+<span class="line"><span>│   neo4j_kg     │ │  exp_dag    │  ← 模块4：图谱，模块3：DAG</span></span>
+<span class="line"><span>└───────┬────────┘ └─────────────┘</span></span>
+<span class="line"><span>        │</span></span>
+<span class="line"><span>  ┌─────▼──────┐</span></span>
+<span class="line"><span>  │ bertopic   │  ← 模块5：认知压缩</span></span>
+<span class="line"><span>  └─────┬──────┘</span></span>
+<span class="line"><span>        │</span></span>
+<span class="line"><span>  ┌─────▼──────┐</span></span>
+<span class="line"><span>  │ hypotheses │  ← 模块6：灵感生成</span></span>
+<span class="line"><span>  └─────┬──────┘</span></span>
+<span class="line"><span>        │</span></span>
+<span class="line"><span>  ┌─────▼──────┐</span></span>
+<span class="line"><span>  │  reviews   │  ← 模块7：多智能体评估</span></span>
+<span class="line"><span>  └────────────┘</span></span></code></pre>
+<p><strong>集成方式（嵌入 Dagster，不改 LangGraph 逻辑）：</strong></p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:var(--astro-code-token-keyword)">from</span><span style="color:var(--astro-code-foreground)"> dagster </span><span style="color:var(--astro-code-token-keyword)">import</span><span style="color:var(--astro-code-foreground)"> asset</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-foreground)"> AssetExecutionContext</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">from</span><span style="color:var(--astro-code-foreground)"> langgraph</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-foreground)">graph </span><span style="color:var(--astro-code-token-keyword)">import</span><span style="color:var(--astro-code-foreground)"> StateGraph</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">@asset</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">def</span><span style="color:var(--astro-code-token-function)"> docling_output</span><span style="color:var(--astro-code-foreground)">(</span><span style="color:var(--astro-code-token-parameter)">context</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-foreground)"> AssetExecutionContext) </span><span style="color:var(--astro-code-token-punctuation)">-></span><span style="color:var(--astro-code-token-constant)"> dict</span><span style="color:var(--astro-code-foreground)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">    """模块1：文档解析"""</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">    result </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-foreground)"> docling</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">convert</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-string-expression)">"paper.pdf"</span><span style="color:var(--astro-code-token-punctuation)">)</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">    context</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">add_output_metadata</span><span style="color:var(--astro-code-token-punctuation)">({</span><span style="color:var(--astro-code-token-string-expression)">"paragraphs"</span><span style="color:var(--astro-code-token-punctuation)">: </span><span style="color:var(--astro-code-token-function)">len</span><span style="color:var(--astro-code-token-punctuation)">(result[</span><span style="color:var(--astro-code-token-string-expression)">"paragraphs"</span><span style="color:var(--astro-code-token-punctuation)">])})</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">    return</span><span style="color:var(--astro-code-foreground)"> result</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">@asset</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">def</span><span style="color:var(--astro-code-token-function)"> entities_and_relations</span><span style="color:var(--astro-code-foreground)">(</span><span style="color:var(--astro-code-token-parameter)">context</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-foreground)"> AssetExecutionContext</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-token-parameter)"> docling_output</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-token-constant)"> dict</span><span style="color:var(--astro-code-foreground)">) </span><span style="color:var(--astro-code-token-punctuation)">-></span><span style="color:var(--astro-code-token-constant)"> dict</span><span style="color:var(--astro-code-foreground)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">    """模块2：信息抽取，依赖模块1的输出"""</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">    entities </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-function)"> scibert_ner</span><span style="color:var(--astro-code-token-punctuation)">(docling_output[</span><span style="color:var(--astro-code-token-string-expression)">"markdown"</span><span style="color:var(--astro-code-token-punctuation)">])</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">    relations </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-function)"> llmie_extract</span><span style="color:var(--astro-code-token-punctuation)">(docling_output[</span><span style="color:var(--astro-code-token-string-expression)">"markdown"</span><span style="color:var(--astro-code-token-punctuation)">], entities)</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">    context</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">add_output_metadata</span><span style="color:var(--astro-code-token-punctuation)">({</span><span style="color:var(--astro-code-token-string-expression)">"entities"</span><span style="color:var(--astro-code-token-punctuation)">: </span><span style="color:var(--astro-code-token-function)">len</span><span style="color:var(--astro-code-token-punctuation)">(entities), </span><span style="color:var(--astro-code-token-string-expression)">"relations"</span><span style="color:var(--astro-code-token-punctuation)">: </span><span style="color:var(--astro-code-token-function)">len</span><span style="color:var(--astro-code-token-punctuation)">(relations)})</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">    return</span><span style="color:var(--astro-code-token-punctuation)"> {</span><span style="color:var(--astro-code-token-string-expression)">"entities"</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-foreground)"> entities</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-token-string-expression)"> "relations"</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-foreground)"> relations</span><span style="color:var(--astro-code-token-punctuation)">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">@asset</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">def</span><span style="color:var(--astro-code-token-function)"> neo4j_knowledge_graph</span><span style="color:var(--astro-code-foreground)">(</span><span style="color:var(--astro-code-token-parameter)">entities_and_relations</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-token-constant)"> dict</span><span style="color:var(--astro-code-foreground)">) </span><span style="color:var(--astro-code-token-punctuation)">-></span><span style="color:var(--astro-code-token-constant)"> str</span><span style="color:var(--astro-code-foreground)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">    """模块4：写入 Neo4j"""</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">    written </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-function)"> write_to_neo4j</span><span style="color:var(--astro-code-token-punctuation)">(entities_and_relations)</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">    return</span><span style="color:var(--astro-code-token-keyword)"> f</span><span style="color:var(--astro-code-token-string-expression)">"Written </span><span style="color:var(--astro-code-token-constant)">{</span><span style="color:var(--astro-code-foreground)">written</span><span style="color:var(--astro-code-token-constant)">}</span><span style="color:var(--astro-code-token-string-expression)"> nodes"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 启动：dagster dev → 浏览器打开 http://localhost:3000 → 看到上面的资产谱系图</span></span></code></pre>
+<p><strong>为什么选 Dagster 而非 Airflow/Prefect？</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left"></th><th align="center">Dagster</th><th align="center">Airflow</th><th align="center">Prefect</th></tr></thead><tbody><tr><td align="left">DAG 可视化</td><td align="center">✅ 原生资产谱系</td><td align="center">✅ DAG 图</td><td align="center">❌ 静态 Graphviz</td></tr><tr><td align="left">数据血缘追踪</td><td align="center">✅ 自动追踪</td><td align="center">❌ 无</td><td align="center">❌ 无</td></tr><tr><td align="left">许可证</td><td align="center">MIT</td><td align="center">Apache 2.0</td><td align="center">Apache 2.0</td></tr><tr><td align="left">学习曲线</td><td align="center">中</td><td align="center">高</td><td align="center">低</td></tr><tr><td align="left">适合本场景</td><td align="center">⭐⭐⭐⭐⭐</td><td align="center">⭐⭐⭐</td><td align="center">⭐⭐</td></tr></tbody></table>
+<hr>
+<h3 id="第-2-层llm-调用的-trace--langfuse-mit">第 2 层：LLM 调用的 Trace —— LangFuse (MIT)</h3>
+<p><strong>LangSmith 的开源替代。</strong> 2026年被 ClickHouse 收购，MIT 许可证不变。29,844 Stars。</p>
+<p><strong>对比：</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left"></th><th align="left">LangFuse</th><th align="left">LangSmith</th></tr></thead><tbody><tr><td align="left">许可证</td><td align="left"><strong>MIT</strong></td><td align="left">闭源商业</td></tr><tr><td align="left">自托管</td><td align="left">✅ Docker 一键部署</td><td align="left">❌ 仅企业版</td></tr><tr><td align="left">免费额度</td><td align="left"><strong>50K obs/月</strong> (自托管=无限)</td><td align="left">5K traces/月</td></tr><tr><td align="left">1M events/月成本</td><td align="left"><strong>~$101</strong> (云) / <strong>$0</strong> (自托管)</td><td align="left">~$2,514</td></tr><tr><td align="left">框架绑定</td><td align="left">无绑定（原生 OpenTelemetry）</td><td align="left">LangChain/LangGraph</td></tr><tr><td align="left">Prompt 管理</td><td align="left">✅</td><td align="left">✅</td></tr><tr><td align="left">评估/数据集</td><td align="left">✅</td><td align="left">✅</td></tr></tbody></table>
+<p><strong>5 分钟自托管部署：</strong></p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:var(--astro-code-token-comment)"># 克隆仓库</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">git</span><span style="color:var(--astro-code-token-string)"> clone</span><span style="color:var(--astro-code-token-string)"> https://github.com/langfuse/langfuse.git</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">cd</span><span style="color:var(--astro-code-token-string)"> langfuse</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># Docker Compose 一键启动（Postgres + ClickHouse + Redis + LangFuse）</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">docker</span><span style="color:var(--astro-code-token-string)"> compose</span><span style="color:var(--astro-code-token-string)"> up</span><span style="color:var(--astro-code-token-string)"> -d</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 访问 http://localhost:3000</span></span></code></pre>
+<p><strong>Python 集成（仅需 3 行，替换 LangSmith）：</strong></p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:var(--astro-code-token-comment)"># 将之前的 LangSmith 3 行替换为这 3 行</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">os</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-foreground)">environ</span><span style="color:var(--astro-code-token-punctuation)">[</span><span style="color:var(--astro-code-token-string-expression)">"LANGFUSE_SECRET_KEY"</span><span style="color:var(--astro-code-token-punctuation)">]</span><span style="color:var(--astro-code-token-keyword)"> =</span><span style="color:var(--astro-code-token-string-expression)"> "sk-lf-..."</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">os</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-foreground)">environ</span><span style="color:var(--astro-code-token-punctuation)">[</span><span style="color:var(--astro-code-token-string-expression)">"LANGFUSE_PUBLIC_KEY"</span><span style="color:var(--astro-code-token-punctuation)">]</span><span style="color:var(--astro-code-token-keyword)"> =</span><span style="color:var(--astro-code-token-string-expression)"> "pk-lf-..."</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">os</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-foreground)">environ</span><span style="color:var(--astro-code-token-punctuation)">[</span><span style="color:var(--astro-code-token-string-expression)">"LANGFUSE_HOST"</span><span style="color:var(--astro-code-token-punctuation)">]</span><span style="color:var(--astro-code-token-keyword)"> =</span><span style="color:var(--astro-code-token-string-expression)"> "http://localhost:3000"</span><span style="color:var(--astro-code-token-comment)">  # 自托管地址</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># LangChain callback 自动生效，无需改任何业务代码</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">from</span><span style="color:var(--astro-code-foreground)"> langfuse</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-foreground)">langchain </span><span style="color:var(--astro-code-token-keyword)">import</span><span style="color:var(--astro-code-foreground)"> CallbackHandler</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">langfuse_handler </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-function)"> CallbackHandler</span><span style="color:var(--astro-code-token-punctuation)">()</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 在 LangChain/LangGraph 调用时传入</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">chain</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">invoke</span><span style="color:var(--astro-code-token-punctuation)">({</span><span style="color:var(--astro-code-token-string-expression)">"input"</span><span style="color:var(--astro-code-token-punctuation)">: </span><span style="color:var(--astro-code-token-string-expression)">"..."</span><span style="color:var(--astro-code-token-punctuation)">}, config</span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-punctuation)">{</span><span style="color:var(--astro-code-token-string-expression)">"callbacks"</span><span style="color:var(--astro-code-token-punctuation)">: [langfuse_handler]})</span></span></code></pre>
+<p><strong>Trace 视图效果：</strong></p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>┌──────────────────────────────────────────────────────┐</span></span>
+<span class="line"><span>│ 📄 paper_123.pdf                      [总耗时 28.1s]  │</span></span>
+<span class="line"><span>│  ├─ ✅ Docling.convert()   [1.2s]   12段落 3表格      │</span></span>
+<span class="line"><span>│  ├─ ✅ SciBERT NER         [0.8s]   47实体            │</span></span>
+<span class="line"><span>│  │   └─ 📊 Token: 2,341 in → 156 out                  │</span></span>
+<span class="line"><span>│  ├─ ✅ GPT-4o-mini RE      [2.1s]   31关系            │</span></span>
+<span class="line"><span>│  │   └─ 📊 Token: 3,892 in → 412 out   Cost: $0.0007  │</span></span>
+<span class="line"><span>│  ├─ ✅ Neo4j MERGE         [0.3s]   78节点写入         │</span></span>
+<span class="line"><span>│  ├─ ⚠️ GPT-4o-mini Gap     [12s]   超时重试1次         │</span></span>
+<span class="line"><span>│  │   └─ 📊 Token: 15,234 in → 89 out   Cost: $0.0023  │</span></span>
+<span class="line"><span>│  └─ ✅ MARS Evaluate       [8s]    3假设评分完成       │</span></span>
+<span class="line"><span>│      ├─ 📊 审稿人A: Token 4,201 → 234                  │</span></span>
+<span class="line"><span>│      ├─ 📊 审稿人B: Token 4,198 → 256                  │</span></span>
+<span class="line"><span>│      └─ 📊 Meta-Reviewer: Token 2,891 → 312            │</span></span>
+<span class="line"><span>└──────────────────────────────────────────────────────┘</span></span></code></pre>
+<hr>
+<h3 id="第-3-层数据快照--自建30行代码零依赖">第 3 层：数据快照 —— 自建（30行代码，零依赖）</h3>
+<p>与之前方案相同，继续使用 <code>@snapshot</code> 装饰器。它不依赖任何外部服务，纯文件系统。</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:var(--astro-code-token-comment)"># 代码见上一版本，此处省略</span></span></code></pre>
+<hr>
+<h3 id="第-4-层指标监控--grafana--prometheusagplv3--apache-20">第 4 层：指标监控 —— Grafana + Prometheus（AGPLv3 / Apache 2.0）</h3>
+<p>当管道从”单篇论文处理”扩展到”批量处理 1000 篇”时，需要时序指标。</p>
+<p><strong>监控的指标：</strong></p>
+<ul>
+<li>每篇论文的总处理时间</li>
+<li>每个模块的 P50/P95/P99 延迟</li>
+<li>每小时处理的论文数（吞吐量）</li>
+<li>错误率（按模块拆分）</li>
+<li>LLM API Token 消耗趋势</li>
+<li>Neo4j 查询延迟和连接池</li>
+</ul>
+<p><strong>Prometheus 埋点（15行）：</strong></p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:var(--astro-code-token-keyword)">from</span><span style="color:var(--astro-code-foreground)"> prometheus_client </span><span style="color:var(--astro-code-token-keyword)">import</span><span style="color:var(--astro-code-foreground)"> Counter</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-foreground)"> Histogram</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-foreground)"> Gauge</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 定义指标</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">papers_processed </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-function)"> Counter</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-string-expression)">'papers_total'</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-string-expression)">'Total papers processed'</span><span style="color:var(--astro-code-token-punctuation)">, [</span><span style="color:var(--astro-code-token-string-expression)">'status'</span><span style="color:var(--astro-code-token-punctuation)">])</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">module_latency </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-function)"> Histogram</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-string-expression)">'module_duration_seconds'</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-string-expression)">'Module latency'</span><span style="color:var(--astro-code-token-punctuation)">, [</span><span style="color:var(--astro-code-token-string-expression)">'module'</span><span style="color:var(--astro-code-token-punctuation)">])</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">llm_tokens </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-function)"> Counter</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-string-expression)">'llm_tokens_total'</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-string-expression)">'LLM token usage'</span><span style="color:var(--astro-code-token-punctuation)">, [</span><span style="color:var(--astro-code-token-string-expression)">'model'</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-string-expression)">'direction'</span><span style="color:var(--astro-code-token-punctuation)">])</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">neo4j_nodes </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-function)"> Gauge</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-string-expression)">'neo4j_total_nodes'</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-string-expression)">'Total nodes in KG'</span><span style="color:var(--astro-code-token-punctuation)">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 在模块中埋点</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">@module_latency</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">labels</span><span style="color:var(--astro-code-token-punctuation)">(module</span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-string-expression)">"docling"</span><span style="color:var(--astro-code-token-punctuation)">)</span><span style="color:var(--astro-code-foreground)">.time()</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">def</span><span style="color:var(--astro-code-token-function)"> run_docling</span><span style="color:var(--astro-code-foreground)">(</span><span style="color:var(--astro-code-token-parameter)">pdf_path</span><span style="color:var(--astro-code-foreground)">):</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">    result </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-foreground)"> docling</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">convert</span><span style="color:var(--astro-code-token-punctuation)">(pdf_path)</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">    papers_processed</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">labels</span><span style="color:var(--astro-code-token-punctuation)">(status</span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-string-expression)">"success"</span><span style="color:var(--astro-code-token-punctuation)">).</span><span style="color:var(--astro-code-token-function)">inc</span><span style="color:var(--astro-code-token-punctuation)">()</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">    return</span><span style="color:var(--astro-code-foreground)"> result</span></span></code></pre>
+<p><strong>Grafana 仪表盘（JSON 导入即可）：</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">面板</th><th align="left">图表类型</th><th align="left">内容</th></tr></thead><tbody><tr><td align="left">论文处理吞吐量</td><td align="left">时序折线图</td><td align="left">每小时处理数</td></tr><tr><td align="left">模块延迟分布</td><td align="left">热力图</td><td align="left">各模块 P50/P95/P99</td></tr><tr><td align="left">LLM 成本趋势</td><td align="left">堆叠面积图</td><td align="left">Token 消耗 × 模型</td></tr><tr><td align="left">错误率</td><td align="left">状态时间线</td><td align="left">按模块拆分</td></tr><tr><td align="left">KG 规模</td><td align="left">单值 + 趋势</td><td align="left">节点数/关系数增长</td></tr></tbody></table>
+<hr>
+<h3 id="第-5-层知识图谱可视化--neo4j-browser--graphify">第 5 层：知识图谱可视化 —— Neo4j Browser + Graphify</h3>
+<p><strong>Neo4j Browser</strong>（随 Community Edition 免费提供）：</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="cypher"><code><span class="line"><span style="color:var(--astro-code-token-comment)">// 在 Neo4j Browser 中执行，直接看到交互式图</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">MATCH</span><span style="color:var(--astro-code-foreground)"> p</span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-foreground)">(gene:Gene </span><span style="color:var(--astro-code-token-keyword)">{</span><span style="color:var(--astro-code-foreground)">name</span><span style="color:var(--astro-code-token-keyword)">:</span><span style="color:var(--astro-code-token-string-expression)"> "TGFB1"</span><span style="color:var(--astro-code-token-keyword)">}</span><span style="color:var(--astro-code-foreground)">)</span><span style="color:var(--astro-code-token-function)">-</span><span style="color:var(--astro-code-token-keyword)">[</span><span style="color:var(--astro-code-foreground)">r</span><span style="color:var(--astro-code-token-function)">*1..3</span><span style="color:var(--astro-code-token-keyword)">]</span><span style="color:var(--astro-code-token-function)">-</span><span style="color:var(--astro-code-foreground)">(target)</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">RETURN</span><span style="color:var(--astro-code-foreground)"> p </span><span style="color:var(--astro-code-token-keyword)">LIMIT</span><span style="color:var(--astro-code-token-constant)"> 100</span></span></code></pre>
+<p><strong>Graphify</strong>（来自 AI Research Toolkit，MIT）：</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:var(--astro-code-token-comment)"># 导出为带社区检测着色的交互式 HTML</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">from</span><span style="color:var(--astro-code-foreground)"> graphify </span><span style="color:var(--astro-code-token-keyword)">import</span><span style="color:var(--astro-code-foreground)"> GraphExporter</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">exporter </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-function)"> GraphExporter</span><span style="color:var(--astro-code-token-punctuation)">(neo4j_driver)</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">exporter</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">export_html</span><span style="color:var(--astro-code-token-punctuation)">(</span></span>
+<span class="line"><span style="color:var(--astro-code-token-punctuation)">    query</span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-string-expression)">"MATCH (n)-[r]->(m) RETURN n, r, m LIMIT 500"</span><span style="color:var(--astro-code-token-punctuation)">,</span></span>
+<span class="line"><span style="color:var(--astro-code-token-punctuation)">    output</span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-string-expression)">"data/kg_2026-07-06.html"</span><span style="color:var(--astro-code-token-punctuation)">,</span></span>
+<span class="line"><span style="color:var(--astro-code-token-punctuation)">    community_detection</span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-constant)">True</span><span style="color:var(--astro-code-token-punctuation)">,   </span><span style="color:var(--astro-code-token-comment)"># Leiden 算法自动着色</span></span>
+<span class="line"><span style="color:var(--astro-code-token-punctuation)">    title</span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-string-expression)">"科研知识图谱 — TGF-β 信号通路"</span></span>
+<span class="line"><span style="color:var(--astro-code-token-punctuation)">)</span></span></code></pre>
+<p><strong>替代方案：</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">工具</th><th align="left">许可证</th><th align="left">特点</th></tr></thead><tbody><tr><td align="left"><strong>Cytoscape.js</strong></td><td align="left">MIT</td><td align="left">JS 库，可嵌入 Streamlit</td></tr><tr><td align="left"><strong>vis-network</strong></td><td align="left">MIT</td><td align="left">JS 库，力导向布局</td></tr><tr><td align="left"><strong>Gephi</strong></td><td align="left">GPLv3</td><td align="left">桌面应用，大规模图分析</td></tr></tbody></table>
+<hr>
+<h3 id="第-6-层业务仪表盘--streamlit-apache-20">第 6 层：业务仪表盘 —— Streamlit (Apache 2.0)</h3>
+<p>（代码同上一版本，此处省略 Streamlit 100 行仪表盘代码）</p>
+<hr>
+<h2 id="三全开源与半开源的对比">三、全开源与半开源的对比</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">需求</th><th align="left">商业方案</th><th align="left">全开源方案</th><th align="left">许可证</th></tr></thead><tbody><tr><td align="left">管道追踪 (Trace)</td><td align="left">LangSmith</td><td align="left"><strong>LangFuse</strong></td><td align="left">MIT</td></tr><tr><td align="left">管道 DAG 可视化</td><td align="left">LangGraph (无UI)</td><td align="left"><strong>Dagster</strong></td><td align="left">MIT</td></tr><tr><td align="left">LLM 调用监控</td><td align="left">LangSmith</td><td align="left"><strong>LangFuse</strong></td><td align="left">MIT</td></tr><tr><td align="left">时序指标</td><td align="left">Datadog</td><td align="left"><strong>Grafana + Prometheus</strong></td><td align="left">AGPLv3 / Apache 2.0</td></tr><tr><td align="left">日志聚合</td><td align="left">Datadog</td><td align="left"><strong>Grafana Loki</strong> (可选)</td><td align="left">AGPLv3</td></tr><tr><td align="left">图可视化</td><td align="left">Neo4j Aura</td><td align="left"><strong>Neo4j Community + Graphify</strong></td><td align="left">GPLv3 / MIT</td></tr><tr><td align="left">业务仪表盘</td><td align="left">—</td><td align="left"><strong>Streamlit</strong></td><td align="left">Apache 2.0</td></tr><tr><td align="left">数据快照</td><td align="left">—</td><td align="left"><strong>自建 30行</strong></td><td align="left">自持</td></tr><tr><td align="left">健康检查</td><td align="left">—</td><td align="left"><strong>自建 60行</strong></td><td align="left">自持</td></tr></tbody></table>
+<p><strong>全部加起来，自托管月成本：一台 8GB VPS + 200GB 磁盘 ≈ $40/月。</strong></p>
+<hr>
+<h2 id="四部署方案docker-compose-一键启动全部">四、部署方案：docker-compose 一键启动全部</h2>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="yaml"><code><span class="line"><span style="color:var(--astro-code-token-comment)"># docker-compose.yml — 科研AI系统可视化基础设施</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">version</span><span style="color:var(--astro-code-token-keyword)">:</span><span style="color:var(--astro-code-token-string-expression)"> '3.8'</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">services</span><span style="color:var(--astro-code-token-keyword)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">  # 1. 管道追踪</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">  langfuse</span><span style="color:var(--astro-code-token-keyword)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">    image</span><span style="color:var(--astro-code-token-keyword)">:</span><span style="color:var(--astro-code-token-string-expression)"> langfuse/langfuse:latest</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">    ports</span><span style="color:var(--astro-code-token-keyword)">:</span><span style="color:var(--astro-code-foreground)"> [</span><span style="color:var(--astro-code-token-string-expression)">"3000:3000"</span><span style="color:var(--astro-code-foreground)">]</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">    environment</span><span style="color:var(--astro-code-token-keyword)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">      DATABASE_URL</span><span style="color:var(--astro-code-token-keyword)">:</span><span style="color:var(--astro-code-token-string-expression)"> postgresql://postgres:postgres@postgres:5432/langfuse</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">      CLICKHOUSE_URL</span><span style="color:var(--astro-code-token-keyword)">:</span><span style="color:var(--astro-code-token-string-expression)"> http://clickhouse:8123</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">    depends_on</span><span style="color:var(--astro-code-token-keyword)">:</span><span style="color:var(--astro-code-foreground)"> [</span><span style="color:var(--astro-code-token-string)">postgres</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-token-string)"> clickhouse</span><span style="color:var(--astro-code-foreground)">]</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">  # 2. 管道编排可视化</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">  dagster</span><span style="color:var(--astro-code-token-keyword)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">    image</span><span style="color:var(--astro-code-token-keyword)">:</span><span style="color:var(--astro-code-token-string-expression)"> dagster/dagster:latest</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">    ports</span><span style="color:var(--astro-code-token-keyword)">:</span><span style="color:var(--astro-code-foreground)"> [</span><span style="color:var(--astro-code-token-string-expression)">"3001:3000"</span><span style="color:var(--astro-code-foreground)">]</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">    volumes</span><span style="color:var(--astro-code-token-keyword)">:</span><span style="color:var(--astro-code-foreground)"> [</span><span style="color:var(--astro-code-token-string-expression)">"./pipelines:/opt/dagster/app"</span><span style="color:var(--astro-code-foreground)">]</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">  # 3. 指标监控</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">  prometheus</span><span style="color:var(--astro-code-token-keyword)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">    image</span><span style="color:var(--astro-code-token-keyword)">:</span><span style="color:var(--astro-code-token-string-expression)"> prom/prometheus:latest</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">    ports</span><span style="color:var(--astro-code-token-keyword)">:</span><span style="color:var(--astro-code-foreground)"> [</span><span style="color:var(--astro-code-token-string-expression)">"9090:9090"</span><span style="color:var(--astro-code-foreground)">]</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">    volumes</span><span style="color:var(--astro-code-token-keyword)">:</span><span style="color:var(--astro-code-foreground)"> [</span><span style="color:var(--astro-code-token-string-expression)">"./prometheus.yml:/etc/prometheus/prometheus.yml"</span><span style="color:var(--astro-code-foreground)">]</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">  grafana</span><span style="color:var(--astro-code-token-keyword)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">    image</span><span style="color:var(--astro-code-token-keyword)">:</span><span style="color:var(--astro-code-token-string-expression)"> grafana/grafana:latest</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">    ports</span><span style="color:var(--astro-code-token-keyword)">:</span><span style="color:var(--astro-code-foreground)"> [</span><span style="color:var(--astro-code-token-string-expression)">"3002:3000"</span><span style="color:var(--astro-code-foreground)">]</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">    environment</span><span style="color:var(--astro-code-token-keyword)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">      GF_AUTH_ANONYMOUS_ENABLED</span><span style="color:var(--astro-code-token-keyword)">:</span><span style="color:var(--astro-code-token-string-expression)"> "true"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">  # 4. 知识图谱</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">  neo4j</span><span style="color:var(--astro-code-token-keyword)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">    image</span><span style="color:var(--astro-code-token-keyword)">:</span><span style="color:var(--astro-code-token-string-expression)"> neo4j:2025.06-community</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">    ports</span><span style="color:var(--astro-code-token-keyword)">:</span><span style="color:var(--astro-code-foreground)"> [</span><span style="color:var(--astro-code-token-string-expression)">"7474:7474"</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-token-string-expression)"> "7687:7687"</span><span style="color:var(--astro-code-foreground)">]</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">    environment</span><span style="color:var(--astro-code-token-keyword)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">      NEO4J_AUTH</span><span style="color:var(--astro-code-token-keyword)">:</span><span style="color:var(--astro-code-token-string-expression)"> neo4j/password</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">  # 5. 业务仪表盘</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">  streamlit</span><span style="color:var(--astro-code-token-keyword)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">    build</span><span style="color:var(--astro-code-token-keyword)">:</span><span style="color:var(--astro-code-token-string-expression)"> ./dashboard</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">    ports</span><span style="color:var(--astro-code-token-keyword)">:</span><span style="color:var(--astro-code-foreground)"> [</span><span style="color:var(--astro-code-token-string-expression)">"8501:8501"</span><span style="color:var(--astro-code-foreground)">]</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">    volumes</span><span style="color:var(--astro-code-token-keyword)">:</span><span style="color:var(--astro-code-foreground)"> [</span><span style="color:var(--astro-code-token-string-expression)">"./data:/app/data"</span><span style="color:var(--astro-code-foreground)">]</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">  # 基础设施</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">  postgres</span><span style="color:var(--astro-code-token-keyword)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">    image</span><span style="color:var(--astro-code-token-keyword)">:</span><span style="color:var(--astro-code-token-string-expression)"> postgres:16</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">    environment</span><span style="color:var(--astro-code-token-keyword)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">      POSTGRES_PASSWORD</span><span style="color:var(--astro-code-token-keyword)">:</span><span style="color:var(--astro-code-token-string-expression)"> postgres</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">  clickhouse</span><span style="color:var(--astro-code-token-keyword)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">    image</span><span style="color:var(--astro-code-token-keyword)">:</span><span style="color:var(--astro-code-token-string-expression)"> clickhouse/clickhouse-server:latest</span></span></code></pre>
+<p><strong>启动：</strong></p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:var(--astro-code-token-function)">docker</span><span style="color:var(--astro-code-token-string)"> compose</span><span style="color:var(--astro-code-token-string)"> up</span><span style="color:var(--astro-code-token-string)"> -d</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 然后访问：</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># LangFuse:  http://localhost:3000  (管道 Trace)</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># Dagster:   http://localhost:3001  (DAG 可视化)</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># Grafana:   http://localhost:3002  (指标监控)</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># Neo4j:     http://localhost:7474  (图谱浏览)</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># Streamlit: http://localhost:8501  (业务仪表盘)</span></span></code></pre>
+<hr>
+<h2 id="五总结">五、总结</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">你之前的担忧</th><th align="left">全开源答案</th></tr></thead><tbody><tr><td align="left">”没有 LangSmith 怎么追踪？“</td><td align="left">LangFuse (MIT)，功能对等，自托管零成本</td></tr><tr><td align="left">”管道流程怎么可视化？“</td><td align="left">Dagster (MIT)，原生资产谱系图，比 LangSmith 还直观</td></tr><tr><td align="left">”LLM 调用和成本怎么监控？“</td><td align="left">LangFuse 自动记录每笔调用的 Token 和成本</td></tr><tr><td align="left">”知识图谱怎么可视化？“</td><td align="left">Neo4j Browser 免费 + Graphify 导出交互式 HTML</td></tr><tr><td align="left">”服务器指标怎么看？“</td><td align="left">Grafana + Prometheus，业界标准</td></tr><tr><td align="left">”全部要多少钱？“</td><td align="left"><strong>$0 软件许可费 + ~$40/月 VPS = 纯开源</strong></td></tr></tbody></table>
+<hr>
+<p><em>更新日期：2026-07-06 | 基于 LangFuse 2026年被 ClickHouse 收购后的最新状态</em></p>  </div>  <div class="mt-12 pt-8 border-t border-[var(--color-border)]" data-astro-cid-eo3wme6m> <a href="/projects/program-0" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-eo3wme6m>
+&larr; 返回 program-0 概览 </a> </div> </article> </div> </div>  </main> <footer class="border-t border-[var(--color-border)] mt-24 py-8" data-astro-cid-pux6a34n><div class="max-w-content flex items-center justify-between" data-astro-cid-pux6a34n><span class="text-sm text-[var(--color-text-tertiary)]" data-astro-cid-pux6a34n>
+&copy; 2026 星游寰宇
+</span><div class="flex items-center gap-4" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>博客</a><a href="/projects" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>项目</a><a href="/notes" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>日记</a><a href="/resources" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>资源</a><a href="/about" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>关于</a></div></div></footer> <div id="link-preview" style="display:none;position:fixed;z-index:99;max-width:18rem;pointer-events:none;" data-astro-cid-t7vshrbh></div>  <script type="module">(async()=>{try{const c=await fetch("/posts.json");if(!c.ok)return;const u=await c.json(),p=new Map(u.map(t=>[t.href,t])),e=document.getElementById("link-preview");if(!e)return;let n="",d;document.addEventListener("mouseover",t=>{const i=t.target.closest("a[href^='/blog/']");if(!i){e.style.display="none",n="";return}const s=i.getAttribute("href");if(!s||s===n)return;const o=p.get(s);o&&(n=s,d=setTimeout(()=>{e.innerHTML=`<div class="lp-title">${o.title}</div><div class="lp-summary">${o.summary}</div>`;const r=i.getBoundingClientRect();let a=r.left,l=r.bottom+6;a+288>window.innerWidth&&(a=window.innerWidth-296),l+80>window.innerHeight&&(l=r.top-80),Object.assign(e.style,{left:a+"px",top:l+"px",display:"block"})},300))},{passive:!0}),document.addEventListener("mouseout",t=>{t.target.closest("a[href^='/blog/']")&&(clearTimeout(d),e.style.display="none",n="")},{passive:!0})}catch{}})();</script> </body></html> 

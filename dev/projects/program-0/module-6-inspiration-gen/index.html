@@ -1,0 +1,269 @@
+<!DOCTYPE html><html lang="zh-CN"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="模块 2.6：灵感生成模块 · 技术发现与选型"><meta name="color-scheme" content="light"><!-- Open Graph --><meta property="og:title" content="模块 2.6：灵感生成模块 · 技术发现与选型 — 星游寰宇"><meta property="og:description" content="模块 2.6：灵感生成模块 · 技术发现与选型"><meta property="og:url" content="https://code2239.github.io/projects/program-0/module-6-inspiration-gen"><meta property="og:type" content="article"><meta property="og:site_name" content="星游寰宇"><meta property="og:locale" content="zh_CN"><meta property="article:published_time" content="2026-07-06"><meta property="article:tag" content="科研AI"><meta property="article:tag" content="Program-0"><meta property="article:tag" content="技术调研"><!-- Twitter Card --><meta name="twitter:card" content="summary"><meta name="twitter:title" content="模块 2.6：灵感生成模块 · 技术发现与选型 — 星游寰宇"><meta name="twitter:description" content="模块 2.6：灵感生成模块 · 技术发现与选型"><!-- Canonical --><link rel="canonical" href="https://code2239.github.io/projects/program-0/module-6-inspiration-gen"><title>模块 2.6：灵感生成模块 · 技术发现与选型 — 星游寰宇</title><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="alternate" type="application/rss+xml" title="星游寰宇 RSS" href="/rss.xml"><!-- Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"星游寰宇","url":"https://code2239.github.io","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://code2239.github.io/search?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://code2239.github.io"},{"@type":"ListItem","position":2,"name":"项目","item":"https://code2239.github.io/projects"},{"@type":"ListItem","position":3,"name":"program 0","item":"https://code2239.github.io/projects/program-0"},{"@type":"ListItem","position":4,"name":"module 6 inspiration gen"}]},{"@context":"https://schema.org","@type":"BlogPosting","headline":"模块 2.6：灵感生成模块 · 技术发现与选型","description":"模块 2.6：灵感生成模块 · 技术发现与选型","datePublished":"2026-07-06","url":"https://code2239.github.io/projects/program-0/module-6-inspiration-gen","keywords":"科研AI, Program-0, 技术调研"}]}</script><style>.project-detail-layout[data-astro-cid-eo3wme6m]{display:block}.project-detail-sidebar[data-astro-cid-eo3wme6m]{margin-bottom:2rem}.project-detail-content[data-astro-cid-eo3wme6m]{min-width:0}@media(min-width:768px){.project-detail-layout[data-astro-cid-eo3wme6m]{display:grid;grid-template-columns:220px 1fr;gap:3rem;align-items:start}.project-detail-sidebar[data-astro-cid-eo3wme6m]{margin-bottom:0}}
+</style>
+<link rel="stylesheet" href="/dev/_astro/_slug_.BlQX3qwK.css"></head> <body class="min-h-screen flex flex-col"> <nav class="sticky top-0 z-40 bg-[var(--color-bg)]/80 backdrop-blur-md border-b border-[var(--color-border)]" data-astro-cid-pux6a34n><div class="max-w-content flex items-center justify-between py-4" data-astro-cid-pux6a34n><a href="/" class="flex items-center gap-2.5 text-base font-semibold no-underline tracking-tight" data-astro-cid-pux6a34n><svg class="w-7 h-7" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" data-astro-cid-pux6a34n><circle cx="16" cy="16" r="15" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-pux6a34n></circle><circle cx="16" cy="16" r="3" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="16" cy="5" r="1.5" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="24" cy="10" r="1" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="8" cy="22" r="1" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="25" cy="21" r="0.8" fill="currentColor" data-astro-cid-pux6a34n></circle></svg>
+星游寰宇
+</a><!-- Desktop nav --><div class="hidden sm:flex items-center gap-5" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>博客</a><a href="/projects" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>项目</a><a href="/notes" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>日记</a><a href="/resources" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>资源</a><a href="/about" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>关于</a><button id="search-trigger" class="flex items-center gap-1.5 text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] bg-[var(--color-bg-secondary)] hover:bg-[var(--color-bg-tertiary)] border border-[var(--color-border)] hover:border-[var(--color-accent)]/30 rounded-lg px-3 py-1.5 cursor-pointer shadow-sm hover:shadow-md transition-all duration-200" aria-label="搜索 (Ctrl+K)" title="搜索 (Ctrl+K)" data-astro-cid-pux6a34n><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-pux6a34n><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" data-astro-cid-pux6a34n></path></svg><span class="hidden lg:inline" data-astro-cid-pux6a34n>搜索</span><kbd class="hidden lg:inline-flex items-center text-[0.625rem] font-mono text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1 py-px rounded" data-astro-cid-pux6a34n>Ctrl+K</kbd></button></div><!-- Mobile hamburger --><button id="menu-btn" class="sm:hidden flex flex-col gap-1 p-2 -mr-2 cursor-pointer" aria-label="打开菜单" data-astro-cid-pux6a34n><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-transform duration-200" data-astro-cid-pux6a34n></span><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-opacity duration-200" data-astro-cid-pux6a34n></span><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-transform duration-200" data-astro-cid-pux6a34n></span></button></div><!-- Mobile menu --><div id="mobile-menu" class="hidden sm:hidden border-t border-[var(--color-border)] bg-[var(--color-bg)]" data-astro-cid-pux6a34n><div class="max-w-content flex flex-col gap-2 py-4" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>博客</a><a href="/projects" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>项目</a><a href="/notes" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>日记</a><a href="/resources" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>资源</a><a href="/about" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>关于</a></div></div></nav>
+    <div id="search-overlay" class="srch-overlay" role="dialog" aria-modal="true" aria-label="全局搜索" data-astro-cid-mn7pezny> <div id="search-backdrop" class="srch-backdrop" data-astro-cid-mn7pezny></div> <div class="srch-panel" id="srch-panel" data-astro-cid-mn7pezny> <!-- Search input --> <div class="srch-input-row" data-astro-cid-mn7pezny> <svg class="srch-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-mn7pezny> <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" data-astro-cid-mn7pezny></path> </svg> <input type="text" id="search-input" class="srch-input" placeholder="搜索文章、项目、日记、资源..." autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="go" data-astro-cid-mn7pezny> <kbd class="srch-kbd" data-astro-cid-mn7pezny>Esc</kbd> </div> <!-- Results area --> <div id="search-results" class="srch-results" data-astro-cid-mn7pezny> <p class="srch-empty" id="search-empty-hint" data-astro-cid-mn7pezny>输入关键词开始搜索</p> </div> <!-- Skeleton loading --> <div id="search-skeleton" class="srch-skeleton" style="display:none;" aria-hidden="true" data-astro-cid-mn7pezny> <div class="srch-skeleton-line" style="width:75%" data-astro-cid-mn7pezny></div> <div class="srch-skeleton-line" style="width:50%" data-astro-cid-mn7pezny></div> <div class="srch-skeleton-line" style="width:60%" data-astro-cid-mn7pezny></div> </div> <!-- Footer hints --> <div class="srch-footer" data-astro-cid-mn7pezny> <div class="srch-footer-hints" data-astro-cid-mn7pezny> <span data-astro-cid-mn7pezny><kbd data-astro-cid-mn7pezny>↑</kbd><kbd data-astro-cid-mn7pezny>↓</kbd> 导航</span> <span data-astro-cid-mn7pezny><kbd data-astro-cid-mn7pezny>↵</kbd> 打开</span> <span data-astro-cid-mn7pezny><kbd data-astro-cid-mn7pezny>Ctrl</kbd>+<kbd data-astro-cid-mn7pezny>K</kbd> 切换</span> </div> <div class="srch-footer-brand" data-astro-cid-mn7pezny>
+powered by Orama
+</div> </div> </div> </div> <script type="module" src="/dev/_astro/Navigation.astro_astro_type_script_index_0_lang.B7cQAlyY.js"></script> <main class="flex-1">  <div class="px-6 xl:px-12 pt-12 pb-16" data-astro-cid-eo3wme6m> <div class="project-detail-layout" data-astro-cid-eo3wme6m> <aside class="project-detail-sidebar" data-astro-cid-eo3wme6m> <div class="sticky top-20" data-astro-cid-eo3wme6m> <nav class="space-y-3"> <div class="pb-3 mb-3 border-b border-[var(--color-border)]"> <a href="/projects/program-0" class="text-sm font-semibold text-[var(--color-text)] no-underline hover:text-[var(--color-accent)] transition-colors flex items-center gap-1.5"> <svg class="w-4 h-4 text-[var(--color-text-tertiary)]" viewBox="0 0 24 24" fill="currentColor"> <path d="M10 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"></path> </svg>
+Program 0
+</a> </div> <ul class="space-y-0.5 list-none p-0 m-0"> <li> <a href="/projects/program-0/claude-gpt-generate" class="block text-xs py-1.5 px-2.5 rounded-md no-underline transition-colors border-l-2 text-[var(--color-text-secondary)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg-secondary)] border-l-transparent"> claude.md（Tech Discovery Driven Research OS Agent） </a> </li><li> <a href="/projects/program-0/final-report" class="block text-xs py-1.5 px-2.5 rounded-md no-underline transition-colors border-l-2 text-[var(--color-text-secondary)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg-secondary)] border-l-transparent"> 科研AI系统 · 技术可行性分析报告 </a> </li><li> <a href="/projects/program-0/module-1-doc-understanding" class="block text-xs py-1.5 px-2.5 rounded-md no-underline transition-colors border-l-2 text-[var(--color-text-secondary)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg-secondary)] border-l-transparent"> 模块 2.1：文档理解模块 · 技术发现与选型 </a> </li><li> <a href="/projects/program-0/existing-solutions-survey" class="block text-xs py-1.5 px-2.5 rounded-md no-underline transition-colors border-l-2 text-[var(--color-text-secondary)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg-secondary)] border-l-transparent"> 已有集成方案调研：有哪些现成的开源工程？ </a> </li><li> <a href="/projects/program-0/developer-skills-roadmap" class="block text-xs py-1.5 px-2.5 rounded-md no-underline transition-colors border-l-2 text-[var(--color-text-secondary)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg-secondary)] border-l-transparent"> 科研AI系统：开发者技能路线图 </a> </li><li> <a href="/projects/program-0/integration-and-plan" class="block text-xs py-1.5 px-2.5 rounded-md no-underline transition-colors border-l-2 text-[var(--color-text-secondary)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg-secondary)] border-l-transparent"> 第三章：跨模块数据流与集成方案 </a> </li><li> <a href="/projects/program-0/domain-config-data-sources" class="block text-xs py-1.5 px-2.5 rounded-md no-underline transition-colors border-l-2 text-[var(--color-text-secondary)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg-secondary)] border-l-transparent"> 领域配置数据来源地图 </a> </li><li> <a href="/projects/program-0/input-output-desktop-feasibility" class="block text-xs py-1.5 px-2.5 rounded-md no-underline transition-colors border-l-2 text-[var(--color-text-secondary)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg-secondary)] border-l-transparent"> 科研AI系统：输入输出定义 · 桌面应用可行性分析 </a> </li><li> <a href="/projects/program-0/module-2-info-extraction" class="block text-xs py-1.5 px-2.5 rounded-md no-underline transition-colors border-l-2 text-[var(--color-text-secondary)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg-secondary)] border-l-transparent"> 模块 2.2：信息抽取模块 · 技术发现与选型 </a> </li><li> <a href="/projects/program-0/module-3-experiment-flow" class="block text-xs py-1.5 px-2.5 rounded-md no-underline transition-colors border-l-2 text-[var(--color-text-secondary)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg-secondary)] border-l-transparent"> 模块 2.3：实验流程抽取模块 · 技术发现与选型 </a> </li><li> <a href="/projects/program-0/module-4-knowledge-graph" class="block text-xs py-1.5 px-2.5 rounded-md no-underline transition-colors border-l-2 text-[var(--color-text-secondary)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg-secondary)] border-l-transparent"> 模块 2.4：科研知识图谱模块 · 技术发现与选型 </a> </li><li> <a href="/projects/program-0/module-5-cognitive-compression" class="block text-xs py-1.5 px-2.5 rounded-md no-underline transition-colors border-l-2 text-[var(--color-text-secondary)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg-secondary)] border-l-transparent"> 模块 2.5：认知压缩模块 · 技术发现与选型 </a> </li><li> <a href="/projects/program-0/module-7-multi-agent-eval" class="block text-xs py-1.5 px-2.5 rounded-md no-underline transition-colors border-l-2 text-[var(--color-text-secondary)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg-secondary)] border-l-transparent"> 模块 2.7：多智能体评估模块 · 技术发现与选型 </a> </li><li> <a href="/projects/program-0/module-6-inspiration-gen" class="block text-xs py-1.5 px-2.5 rounded-md no-underline transition-colors border-l-2 bg-[var(--color-accent-soft)] text-[var(--color-accent)] font-medium border-l-[var(--color-accent)]"> 模块 2.6：灵感生成模块 · 技术发现与选型 </a> </li><li> <a href="/projects/program-0/observability-debugging-guide" class="block text-xs py-1.5 px-2.5 rounded-md no-underline transition-colors border-l-2 text-[var(--color-text-secondary)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg-secondary)] border-l-transparent"> 科研AI系统：可视化与调试方案（全开源版） </a> </li><li> <a href="/projects/program-0/question-summary" class="block text-xs py-1.5 px-2.5 rounded-md no-underline transition-colors border-l-2 text-[var(--color-text-secondary)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg-secondary)] border-l-transparent"> 咨询问题分类总结 </a> </li> </ul> </nav> </div> </aside> <article class="project-detail-content" data-astro-cid-eo3wme6m> <header class="mb-10 text-center" data-astro-cid-eo3wme6m> <h1 class="text-3xl font-semibold mb-3 tracking-tight" data-astro-cid-eo3wme6m>模块 2.6：灵感生成模块 · 技术发现与选型</h1> <div class="flex items-center justify-center gap-2 text-[var(--color-text-tertiary)] text-sm" data-astro-cid-eo3wme6m> <time datetime="2026-07-06" data-astro-cid-eo3wme6m>2026-07-06</time>  <span class="text-[var(--color-border)]" data-astro-cid-eo3wme6m>·</span> <span class="text-sm text-[var(--color-text-tertiary)]"> <span> 科研AI<span class="mx-1">·</span> </span><span> Program-0<span class="mx-1">·</span> </span><span> 技术调研 </span> </span>  </div> </header>  <div class="prose prose-neutral max-w-none" data-astro-cid-eo3wme6m> <hr>
+<h2 id="1-问题定义task-deconstruction">1. 问题定义（Task Deconstruction）</h2>
+<p><strong>本质工程问题：</strong> 基于已知的科学问题、已有方法论库、和已识别的研究空白（来自模块5），自动生成新颖的科研假设与实验方案——即”AI 科学家的创造力引擎”。</p>
+<p><strong>输入：</strong> 科学问题列表 + 方法库 + 研究空白（来自模块5）+ 知识图谱上下文（来自模块4）<br>
+<strong>输出：</strong> 排序后的科研假设列表，每个假设含：创新性评分、可行性评估、文献支持证据、建议实验方案<br>
+<strong>核心难点：</strong></p>
+<ul>
+<li>“新颖性”的可操作化——如何让机器判断一个想法是否真的”新”</li>
+<li>可行性约束——生成的假设必须在实验上可验证</li>
+<li>假设排序——100 个候选假设中，哪个值得优先投入实验资源</li>
+<li>跨领域迁移——最有价值的发现往往来自不同领域的类比</li>
+</ul>
+<hr>
+<h2 id="2-技术范式广泛搜索broad-search">2. 技术范式广泛搜索（Broad Search）</h2>
+<h3 id="21-基于组合搜索的方法">2.1 基于组合搜索的方法</h3>
+<ul>
+<li><strong>CHIMERA</strong> — 从科学文献中挖掘 28,000+ 个”idea recombination”实例。</li>
+<li><strong>知识图谱路径搜索</strong> — 在两个看似无关的实体间寻找最短路径。</li>
+</ul>
+<h3 id="22-基于-llm-的生成方法">2.2 基于 LLM 的生成方法</h3>
+<ul>
+<li><strong>IRIS (ACL 2025)</strong> — MCTS + Human-in-the-loop，自适应测试时计算。</li>
+<li><strong>UniScientist</strong> — 覆盖 50+ 学科的 30B 参数模型。</li>
+<li><strong>Theorizer (Allen AI, ACL 2026)</strong> — ~90% 准确率预测未来结果。</li>
+</ul>
+<h3 id="23-多智能体协作方法">2.3 多智能体协作方法</h3>
+<ul>
+<li><strong>Open AI Co-Scientist (LLNL)</strong> — MIT 开源，6 种 Agent 角色，Elo 评级系统排名假设。</li>
+<li><strong>Mantra.ai</strong> — LLM Agent Swarm。</li>
+<li><strong>The AI Scientist (Sakana AI)</strong> — 端到端全自动，~$15/论文。</li>
+</ul>
+<hr>
+<h2 id="3-候选技术清单candidate-technologies--3">3. 候选技术清单（Candidate Technologies ≥ 3）</h2>
+<h3 id="候选1open-ai-co-scientist-llnl">候选1：Open AI Co-Scientist (LLNL)</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">维度</th><th align="left">详情</th></tr></thead><tbody><tr><td align="left"><strong>全称</strong></td><td align="left">Open AI Co-Scientist — Hypothesis Evolution System</td></tr><tr><td align="left"><strong>功能描述</strong></td><td align="left">美国 Lawrence Livermore 国家实验室开发。多智能体架构，6 种角色：Generation（生成假设）、Reflection（自我反思）、Ranking（Elo 评级排名）、Evolution（迭代优化）、Proximity（查重避免重复）、Meta-Review（综合评审）。使用 Elo 评级系统对假设池进行动态排序。基于 OpenRouter API 灵活切换 LLM 后端。</td></tr><tr><td align="left"><strong>为什么适用</strong></td><td align="left"><strong>MIT 开源</strong>（无商业限制）；多智能体保证多样性和质量；Elo 排序解决”哪个假设最值得验证”的核心问题；Proximity Agent 查重避免生成已知结果。</td></tr><tr><td align="left"><strong>存在性验证</strong></td><td align="left">GitHub 公开；2025 年 4 月发布；OSTI/DOE 收录（DOE CODE 161519）。</td></tr><tr><td align="left"><strong>来源链接</strong></td><td align="left">GitHub: <a href="https://github.com/LLNL/open-ai-co-scientist">https://github.com/LLNL/open-ai-co-scientist</a></td></tr><tr><td align="left"><strong>许可证</strong></td><td align="left"><strong>MIT</strong></td></tr><tr><td align="left"><strong>活跃度</strong></td><td align="left">LLNL 维护；2025 年发布后持续更新。</td></tr></tbody></table>
+<hr>
+<h3 id="候选2iris-acl-2025">候选2：IRIS (ACL 2025)</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">维度</th><th align="left">详情</th></tr></thead><tbody><tr><td align="left"><strong>全称</strong></td><td align="left">Interactive Research Ideation System</td></tr><tr><td align="left"><strong>功能描述</strong></td><td align="left">ACL 2025 演示论文。MCTS 做自适应测试时计算，支持精细粒度人工反馈，查询文献库合成跨论文见解。多学科用户研究验证。</td></tr><tr><td align="left"><strong>为什么适用</strong></td><td align="left">Human-in-the-loop 意味着系统可与科研人员协同工作；MCTS 在探索-利用间平衡良好；ACL 2025 顶级会议背书。</td></tr><tr><td align="left"><strong>存在性验证</strong></td><td align="left">ACL 2025 发表；GitHub 公开。</td></tr><tr><td align="left"><strong>来源链接</strong></td><td align="left">GitHub: <a href="https://github.com/Anikethh/IRIS-Interactive-Research-Ideation-System">https://github.com/Anikethh/IRIS-Interactive-Research-Ideation-System</a></td></tr><tr><td align="left"><strong>许可证</strong></td><td align="left">经搜索未在 README 中明确标注（学术项目）</td></tr><tr><td align="left"><strong>活跃度</strong></td><td align="left">2025 年新的学术项目。</td></tr></tbody></table>
+<hr>
+<h3 id="候选3theorizer-allen-ai-acl-2026">候选3：Theorizer (Allen AI, ACL 2026)</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">维度</th><th align="left">详情</th></tr></thead><tbody><tr><td align="left"><strong>全称</strong></td><td align="left">Theorizer — Synthesizing Scientific Theories from Literature</td></tr><tr><td align="left"><strong>功能描述</strong></td><td align="left">Allen AI 开发。从 13,700 篇论文中合成 2,900+ 条科学理论（定性+定量），~90% 准确率预测未来科研结果。输出”可验证的科学定律”（如”当X增加时，Y随之线性下降”），而非开放式假设。适用任何 Semantic Scholar 索引学科。</td></tr><tr><td align="left"><strong>为什么适用</strong></td><td align="left">生成的理论具有明确可验证性（定量预测）；~90% 准确率；Allen AI (Semantic Scholar 母公司) 学术信誉。</td></tr><tr><td align="left"><strong>存在性验证</strong></td><td align="left">ACL 2026 接受；GitHub staging 仓库可见。</td></tr><tr><td align="left"><strong>来源链接</strong></td><td align="left">GitHub: <a href="https://github.com/allenai/asta-theorizer">https://github.com/allenai/asta-theorizer</a></td></tr><tr><td align="left"><strong>许可证</strong></td><td align="left">待正式发布确认</td></tr><tr><td align="left"><strong>活跃度</strong></td><td align="left">ACL 2026 新论文。</td></tr></tbody></table>
+<hr>
+<h2 id="4-横向对比分析comparative-matrix">4. 横向对比分析（Comparative Matrix）</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">维度</th><th align="center">Open AI Co-Scientist</th><th align="center">IRIS</th><th align="center">Theorizer</th></tr></thead><tbody><tr><td align="left"><strong>假设质量</strong></td><td align="center">⭐⭐⭐⭐ (Elo排序)</td><td align="center">⭐⭐⭐⭐ (MCTS搜索)</td><td align="center">⭐⭐⭐⭐⭐ (定量预测)</td></tr><tr><td align="left"><strong>新颖性保障</strong></td><td align="center">⭐⭐⭐⭐ (Proximity查重)</td><td align="center">⭐⭐⭐ (依赖人工)</td><td align="center">⭐⭐⭐⭐ (文献接地)</td></tr><tr><td align="left"><strong>多学科支持</strong></td><td align="center">⭐⭐⭐⭐⭐</td><td align="center">⭐⭐⭐⭐</td><td align="center">⭐⭐⭐⭐⭐</td></tr><tr><td align="left"><strong>人机协同</strong></td><td align="center">⭐⭐ (全自动)</td><td align="center">⭐⭐⭐⭐⭐ (HITL)</td><td align="center">⭐⭐ (全自动)</td></tr><tr><td align="left"><strong>工程复杂度</strong></td><td align="center">⭐⭐⭐ 中等</td><td align="center">⭐⭐⭐⭐ 较高</td><td align="center">⭐⭐⭐ 中等</td></tr><tr><td align="left"><strong>运行成本</strong></td><td align="center">⭐⭐⭐ LLM API</td><td align="center">⭐⭐⭐ LLM API</td><td align="center">⭐⭐⭐ 离线</td></tr><tr><td align="left"><strong>可解释性</strong></td><td align="center">⭐⭐⭐</td><td align="center">⭐⭐⭐⭐</td><td align="center">⭐⭐⭐⭐⭐</td></tr><tr><td align="left"><strong>开源可用性</strong></td><td align="center">⭐⭐⭐⭐⭐ MIT</td><td align="center">⭐⭐⭐⭐ 开源</td><td align="center">⭐⭐⭐ 待发布</td></tr><tr><td align="left"><strong>社区活跃度</strong></td><td align="center">⭐⭐⭐⭐ (DOE)</td><td align="center">⭐⭐ 学术</td><td align="center">⭐⭐ 学术</td></tr></tbody></table>
+<hr>
+<h2 id="5-推荐方案及理由selection--justification">5. 推荐方案及理由（Selection &#x26; Justification）</h2>
+<h3 id="-mvp-阶段推荐open-ai-co-scientist-llnl">🏆 MVP 阶段推荐：Open AI Co-Scientist (LLNL)</h3>
+<p><strong>核心理由：</strong></p>
+<ol>
+<li><strong>MIT 许可证</strong> — 美国能源部国家实验室发布，最友好的开源许可证，无商业顾虑。</li>
+<li><strong>多智能体架构可复用</strong> — 6 种 Agent 角色可直接对接模块7（多智能体评估）——Meta-Review Agent 和 Elo 机制可共享给评估智能体。</li>
+<li><strong>Elo 评级解决核心决策问题</strong> — “100 个候选假设中哪个值得做？“——博弈论验证的排序机制。</li>
+<li><strong>OpenRouter 后端灵活性</strong> — 可使用任何 LLM，避免供应商锁定。</li>
+</ol>
+<h3 id="淘汰其他方案的理由">淘汰其他方案的理由：</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">淘汰方案</th><th align="left">淘汰原因</th></tr></thead><tbody><tr><td align="left"><strong>IRIS</strong></td><td align="left">HITL 增加交互复杂度；MVP 应优先验证自动生成质量；许可证不明确</td></tr><tr><td align="left"><strong>Theorizer</strong></td><td align="left">代码未正式发布；偏向生成”定量定律”而非开放式”科研假设”（适用范围较窄）</td></tr></tbody></table>
+<h3 id="-进阶阶段建议">🔮 进阶阶段建议：</h3>
+<ul>
+<li><strong>Phase 2</strong>：引入 IRIS 的 MCTS 搜索方法作为搜索增强；集成 Theorizer 的文献接地能力。</li>
+<li><strong>Phase 3</strong>：与模块3打通——假设自动附带”可执行的实验方案 DAG”，实现灵感→实验全自动闭环。</li>
+<li><strong>Phase 4</strong>：引入 CHIMERA 的跨领域组合知识库做更大胆的跨学科 idea recombination。</li>
+</ul>
+<hr>
+<p><em>报告生成时间：2026-07-06 | 基于截至 2026 年 7 月的网络搜索结果</em></p>  </div>  <div class="mt-12 pt-8 border-t border-[var(--color-border)]" data-astro-cid-eo3wme6m> <a href="/projects/program-0" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-eo3wme6m>
+&larr; 返回 program-0 概览 </a> </div> </article> </div> </div>  </main> <footer class="border-t border-[var(--color-border)] mt-24 py-8" data-astro-cid-pux6a34n><div class="max-w-content flex items-center justify-between" data-astro-cid-pux6a34n><span class="text-sm text-[var(--color-text-tertiary)]" data-astro-cid-pux6a34n>
+&copy; 2026 星游寰宇
+</span><div class="flex items-center gap-4" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>博客</a><a href="/projects" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>项目</a><a href="/notes" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>日记</a><a href="/resources" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>资源</a><a href="/about" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>关于</a></div></div></footer> <div id="link-preview" style="display:none;position:fixed;z-index:99;max-width:18rem;pointer-events:none;" data-astro-cid-t7vshrbh></div>  <script type="module">(async()=>{try{const c=await fetch("/posts.json");if(!c.ok)return;const u=await c.json(),p=new Map(u.map(t=>[t.href,t])),e=document.getElementById("link-preview");if(!e)return;let n="",d;document.addEventListener("mouseover",t=>{const i=t.target.closest("a[href^='/blog/']");if(!i){e.style.display="none",n="";return}const s=i.getAttribute("href");if(!s||s===n)return;const o=p.get(s);o&&(n=s,d=setTimeout(()=>{e.innerHTML=`<div class="lp-title">${o.title}</div><div class="lp-summary">${o.summary}</div>`;const r=i.getBoundingClientRect();let a=r.left,l=r.bottom+6;a+288>window.innerWidth&&(a=window.innerWidth-296),l+80>window.innerHeight&&(l=r.top-80),Object.assign(e.style,{left:a+"px",top:l+"px",display:"block"})},300))},{passive:!0}),document.addEventListener("mouseout",t=>{t.target.closest("a[href^='/blog/']")&&(clearTimeout(d),e.style.display="none",n="")},{passive:!0})}catch{}})();</script> </body></html> 

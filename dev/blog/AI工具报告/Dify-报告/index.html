@@ -1,0 +1,784 @@
+<!DOCTYPE html><html lang="zh-CN"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="- **运营实体**：苏州语灵人工智能科技有限公司（Suzhou Yuling Artificial Intelligence Technology Co., Ltd.）"><meta name="color-scheme" content="light"><!-- Open Graph --><meta property="og:title" content="Dify 深度调研报告 — 星游寰宇"><meta property="og:description" content="- **运营实体**：苏州语灵人工智能科技有限公司（Suzhou Yuling Artificial Intelligence Technology Co., Ltd.）"><meta property="og:url" content="https://code2239.github.io/blog/AI工具报告/Dify-报告"><meta property="og:type" content="article"><meta property="og:site_name" content="星游寰宇"><meta property="og:locale" content="zh_CN"><meta property="article:published_time" content="2026-7-5"><meta property="article:tag" content="AI"><meta property="article:tag" content="调研"><meta property="article:tag" content="Dify"><meta property="article:tag" content="自动化"><meta property="article:tag" content="工具"><meta property="article:tag" content="科研"><!-- Twitter Card --><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Dify 深度调研报告 — 星游寰宇"><meta name="twitter:description" content="- **运营实体**：苏州语灵人工智能科技有限公司（Suzhou Yuling Artificial Intelligence Technology Co., Ltd.）"><!-- Canonical --><link rel="canonical" href="https://code2239.github.io/blog/AI工具报告/Dify-报告"><title>Dify 深度调研报告 — 星游寰宇</title><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="alternate" type="application/rss+xml" title="星游寰宇 RSS" href="/rss.xml"><!-- Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"星游寰宇","url":"https://code2239.github.io","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://code2239.github.io/search?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://code2239.github.io"},{"@type":"ListItem","position":2,"name":"博客","item":"https://code2239.github.io/blog"},{"@type":"ListItem","position":3,"name":"AI工具报告","item":"https://code2239.github.io/blog/AI工具报告"},{"@type":"ListItem","position":4,"name":"Dify 报告"}]},{"@context":"https://schema.org","@type":"BlogPosting","headline":"Dify 深度调研报告","description":"- **运营实体**：苏州语灵人工智能科技有限公司（Suzhou Yuling Artificial Intelligence Technology Co., Ltd.）","datePublished":"2026-7-5","url":"https://code2239.github.io/blog/AI工具报告/Dify-报告","keywords":"AI, 调研, Dify, 自动化, 工具, 科研"}]}</script><link rel="stylesheet" href="/dev/_astro/_slug_.BlQX3qwK.css">
+<style>.back-to-top[data-astro-cid-gzprr2dq]{position:fixed;bottom:2rem;right:2rem;z-index:40;width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:50%;border:1px solid var(--color-border);background:var(--color-bg);color:var(--color-text-secondary);cursor:pointer;box-shadow:var(--shadow-md);transition:opacity .2s ease,transform .2s ease}.back-to-top[data-astro-cid-gzprr2dq]:hover{color:var(--color-accent);border-color:var(--color-accent);transform:translateY(-2px)}.back-to-top[data-astro-cid-gzprr2dq].hidden{opacity:0;pointer-events:none}.copy-btn[data-astro-cid-qqybitij]{position:absolute;top:8px;right:8px;padding:4px 10px;font-size:.6875rem;font-family:var(--font-sans);color:var(--color-text-tertiary);background:var(--color-bg);border:1px solid var(--color-border);border-radius:6px;cursor:pointer;opacity:0;transition:opacity .15s ease,color .15s ease}pre[data-astro-cid-qqybitij]:hover .copy-btn[data-astro-cid-qqybitij]{opacity:1}.copy-btn[data-astro-cid-qqybitij]:hover{color:var(--color-accent);border-color:var(--color-accent)}.copy-btn[data-astro-cid-qqybitij].copied{color:#16a34a;border-color:#16a34a}.blog-layout[data-astro-cid-bvzihdzo]{display:block}.blog-toc[data-astro-cid-bvzihdzo]{display:none}.blog-body[data-astro-cid-bvzihdzo]{min-width:0}@media(min-width:1024px){.blog-layout[data-astro-cid-bvzihdzo]{display:grid;grid-template-columns:14rem 1fr;gap:3rem;align-items:start}.blog-toc[data-astro-cid-bvzihdzo]{display:block}.blog-body[data-astro-cid-bvzihdzo]{padding-right:2rem}}@media(max-width:1023px){.blog-toc[data-astro-cid-bvzihdzo]{display:block;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid var(--color-border)}}
+</style></head> <body class="min-h-screen flex flex-col"> <nav class="sticky top-0 z-40 bg-[var(--color-bg)]/80 backdrop-blur-md border-b border-[var(--color-border)]" data-astro-cid-pux6a34n><div class="max-w-content flex items-center justify-between py-4" data-astro-cid-pux6a34n><a href="/" class="flex items-center gap-2.5 text-base font-semibold no-underline tracking-tight" data-astro-cid-pux6a34n><svg class="w-7 h-7" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" data-astro-cid-pux6a34n><circle cx="16" cy="16" r="15" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-pux6a34n></circle><circle cx="16" cy="16" r="3" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="16" cy="5" r="1.5" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="24" cy="10" r="1" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="8" cy="22" r="1" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="25" cy="21" r="0.8" fill="currentColor" data-astro-cid-pux6a34n></circle></svg>
+星游寰宇
+</a><!-- Desktop nav --><div class="hidden sm:flex items-center gap-5" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>博客</a><a href="/projects" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>项目</a><a href="/notes" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>日记</a><a href="/resources" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>资源</a><a href="/about" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>关于</a><button id="search-trigger" class="flex items-center gap-1.5 text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] bg-[var(--color-bg-secondary)] hover:bg-[var(--color-bg-tertiary)] border border-[var(--color-border)] hover:border-[var(--color-accent)]/30 rounded-lg px-3 py-1.5 cursor-pointer shadow-sm hover:shadow-md transition-all duration-200" aria-label="搜索 (Ctrl+K)" title="搜索 (Ctrl+K)" data-astro-cid-pux6a34n><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-pux6a34n><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" data-astro-cid-pux6a34n></path></svg><span class="hidden lg:inline" data-astro-cid-pux6a34n>搜索</span><kbd class="hidden lg:inline-flex items-center text-[0.625rem] font-mono text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1 py-px rounded" data-astro-cid-pux6a34n>Ctrl+K</kbd></button></div><!-- Mobile hamburger --><button id="menu-btn" class="sm:hidden flex flex-col gap-1 p-2 -mr-2 cursor-pointer" aria-label="打开菜单" data-astro-cid-pux6a34n><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-transform duration-200" data-astro-cid-pux6a34n></span><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-opacity duration-200" data-astro-cid-pux6a34n></span><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-transform duration-200" data-astro-cid-pux6a34n></span></button></div><!-- Mobile menu --><div id="mobile-menu" class="hidden sm:hidden border-t border-[var(--color-border)] bg-[var(--color-bg)]" data-astro-cid-pux6a34n><div class="max-w-content flex flex-col gap-2 py-4" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>博客</a><a href="/projects" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>项目</a><a href="/notes" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>日记</a><a href="/resources" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>资源</a><a href="/about" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>关于</a></div></div></nav>
+    <div id="search-overlay" class="srch-overlay" role="dialog" aria-modal="true" aria-label="全局搜索" data-astro-cid-mn7pezny> <div id="search-backdrop" class="srch-backdrop" data-astro-cid-mn7pezny></div> <div class="srch-panel" id="srch-panel" data-astro-cid-mn7pezny> <!-- Search input --> <div class="srch-input-row" data-astro-cid-mn7pezny> <svg class="srch-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-mn7pezny> <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" data-astro-cid-mn7pezny></path> </svg> <input type="text" id="search-input" class="srch-input" placeholder="搜索文章、项目、日记、资源..." autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="go" data-astro-cid-mn7pezny> <kbd class="srch-kbd" data-astro-cid-mn7pezny>Esc</kbd> </div> <!-- Results area --> <div id="search-results" class="srch-results" data-astro-cid-mn7pezny> <p class="srch-empty" id="search-empty-hint" data-astro-cid-mn7pezny>输入关键词开始搜索</p> </div> <!-- Skeleton loading --> <div id="search-skeleton" class="srch-skeleton" style="display:none;" aria-hidden="true" data-astro-cid-mn7pezny> <div class="srch-skeleton-line" style="width:75%" data-astro-cid-mn7pezny></div> <div class="srch-skeleton-line" style="width:50%" data-astro-cid-mn7pezny></div> <div class="srch-skeleton-line" style="width:60%" data-astro-cid-mn7pezny></div> </div> <!-- Footer hints --> <div class="srch-footer" data-astro-cid-mn7pezny> <div class="srch-footer-hints" data-astro-cid-mn7pezny> <span data-astro-cid-mn7pezny><kbd data-astro-cid-mn7pezny>↑</kbd><kbd data-astro-cid-mn7pezny>↓</kbd> 导航</span> <span data-astro-cid-mn7pezny><kbd data-astro-cid-mn7pezny>↵</kbd> 打开</span> <span data-astro-cid-mn7pezny><kbd data-astro-cid-mn7pezny>Ctrl</kbd>+<kbd data-astro-cid-mn7pezny>K</kbd> 切换</span> </div> <div class="srch-footer-brand" data-astro-cid-mn7pezny>
+powered by Orama
+</div> </div> </div> </div> <script type="module" src="/dev/_astro/Navigation.astro_astro_type_script_index_0_lang.B7cQAlyY.js"></script> <main class="flex-1">  <div class="reading-progress" id="reading-progress" style="width: 0%"></div> <script type="module">const o=document.getElementById("reading-progress");if(!o)throw new Error("Reading progress bar element not found");const r=()=>{const n=window.scrollY,e=document.documentElement.scrollHeight-window.innerHeight,t=e>0?n/e*100:0;o.style.width=`${Math.min(t,100)}%`};window.addEventListener("scroll",r,{passive:!0});</script> <button id="back-to-top" class="back-to-top hidden" aria-label="返回顶部" data-astro-cid-gzprr2dq> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-gzprr2dq> <polyline points="18 15 12 9 6 15" data-astro-cid-gzprr2dq></polyline> </svg> </button>  <script type="module">const o=document.getElementById("back-to-top");o&&(window.addEventListener("scroll",()=>{o.classList.toggle("hidden",window.scrollY<400)},{passive:!0}),o.addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"})));</script> <script type="module">document.querySelectorAll("pre").forEach(e=>{const t=document.createElement("button");t.className="copy-btn",t.textContent="复制",t.addEventListener("click",async()=>{const n=e.querySelector("code")?.textContent||e.textContent||"";try{await navigator.clipboard.writeText(n),t.textContent="已复制",t.classList.add("copied"),setTimeout(()=>{t.textContent="复制",t.classList.remove("copied")},2e3)}catch{t.textContent="失败",setTimeout(()=>{t.textContent="复制"},2e3)}}),e.style.position="relative",e.appendChild(t)});</script> <div class="px-6 xl:px-12 pt-12 pb-16" data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <header class="mb-12 text-center" data-astro-cid-bvzihdzo> <h1 class="text-3xl font-semibold mb-3 tracking-tight" data-astro-cid-bvzihdzo>Dify 深度调研报告</h1> <div class="flex items-center justify-center gap-2 text-[var(--color-text-tertiary)] text-sm" data-astro-cid-bvzihdzo> <time datetime="2026-7-5" data-astro-cid-bvzihdzo>2026-7-5</time> <span class="text-[var(--color-border)]" data-astro-cid-bvzihdzo>·</span> <span data-astro-cid-bvzihdzo>42 分钟阅读</span>  <span class="text-[var(--color-border)]" data-astro-cid-bvzihdzo>·</span> <span class="text-sm text-[var(--color-text-tertiary)]"> <span> AI<span class="mx-1">·</span> </span><span> 调研<span class="mx-1">·</span> </span><span> Dify<span class="mx-1">·</span> </span><span> 自动化<span class="mx-1">·</span> </span><span> 工具<span class="mx-1">·</span> </span><span> 科研 </span> </span>  </div> </header> <div class="blog-layout" data-astro-cid-bvzihdzo> <aside class="blog-toc" data-astro-cid-bvzihdzo> <div class="sticky top-24" data-astro-cid-bvzihdzo> <button id="toc-toggle" class="hidden max-md:flex items-center gap-1 text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-3 cursor-pointer border-none bg-transparent p-0" aria-expanded="false" aria-controls="toc-list" data-astro-cid-bvzihdzo>
+目录
+<svg id="toc-chevron" class="w-3 h-3 transition-transform duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-bvzihdzo><polyline points="6 9 12 15 18 9" data-astro-cid-bvzihdzo></polyline></svg> </button> <span class="text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-3 max-md:hidden" data-astro-cid-bvzihdzo>目录</span> <div id="toc-list" class="max-md:hidden" data-astro-cid-bvzihdzo> <nav class="toc"> <p class="text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-3">目录</p> <ul class="toc-list"> <li class> <a href="#1-开发者与公司背景">1. 开发者与公司背景</a> </li><li class="toc-h3"> <a href="#开发方全称与所属国家地区">开发方全称与所属国家/地区</a> </li><li class="toc-h3"> <a href="#创始人基本信息">创始人基本信息</a> </li><li class="toc-h3"> <a href="#联合创始团队4位">联合创始团队（4位）</a> </li><li class="toc-h3"> <a href="#团队规模">团队规模</a> </li><li class="toc-h3"> <a href="#融资与盈利情况">融资与盈利情况</a> </li><li class="toc-h3"> <a href="#公司信条与发展规划">公司信条与发展规划</a> </li><li class="toc-h3"> <a href="#关键数据">关键数据</a> </li><li class> <a href="#2-底层技术栈">2. 底层技术栈</a> </li><li class="toc-h3"> <a href="#dify-不是基础大模型而是-ai-应用开发平台">Dify 不是基础大模型，而是 AI 应用开发平台</a> </li><li class="toc-h3"> <a href="#支持的模型类型">支持的模型类型</a> </li><li class="toc-h3"> <a href="#是否支持用户自己使用-api-调用大模型">是否支持用户自己使用 API 调用大模型</a> </li><li class="toc-h3"> <a href="#dify-自身核心技术栈">Dify 自身核心技术栈</a> </li><li class> <a href="#3-开源属性与商业模式">3. 开源属性与商业模式</a> </li><li class="toc-h3"> <a href="#许可证modified-apache-20非-osi-批准的开源许可证">许可证：Modified Apache 2.0（非 OSI 批准的开源许可证）</a> </li><li class="toc-h3"> <a href="#定价模式云服务版本">定价模式（云服务版本）</a> </li><li class="toc-h3"> <a href="#商业模式总结">商业模式总结</a> </li><li class> <a href="#4-功能全景解析">4. 功能全景解析</a> </li><li class="toc-h3"> <a href="#主要功能50字以内">主要功能（50字以内）</a> </li><li class="toc-h3"> <a href="#核心功能与核心技术">核心功能与核心技术</a> </li><li class> <a href="#5-功能实现案例">5. 功能实现案例</a> </li><li class="toc-h3"> <a href="#案例企业智能知识库客服机器人">案例：企业智能知识库客服机器人</a> </li><li class> <a href="#6-主要竞品清单">6. 主要竞品清单</a> </li><li class> <a href="#7-与竞品的横向比较">7. 与竞品的横向比较</a> </li><li class="toc-h3"> <a href="#各竞品最适用的细分场景">各竞品最适用的细分场景</a> </li><li class> <a href="#8-版本迭代信息">8. 版本迭代信息</a> </li><li class="toc-h3"> <a href="#首次公开发布">首次公开发布</a> </li><li class="toc-h3"> <a href="#关键版本里程碑">关键版本里程碑</a> </li><li class="toc-h3"> <a href="#更新频率">更新频率</a> </li><li class> <a href="#一句话锐评">一句话锐评</a> </li> </ul> </nav> </div> </div> </aside> <div class="blog-body" data-astro-cid-bvzihdzo> <div class="prose prose-neutral max-w-none" data-astro-cid-bvzihdzo>  <h1 id="dify-深度调研报告">Dify 深度调研报告</h1>
+<blockquote>
+<p><strong>调研日期</strong>：2026年7月5日
+<strong>目标软件</strong>：Dify（Dify.AI）—— 开源 LLM 应用开发平台</p>
+</blockquote>
+<hr>
+<h2 id="1-开发者与公司背景">1. 开发者与公司背景</h2>
+<h3 id="开发方全称与所属国家地区">开发方全称与所属国家/地区</h3>
+<ul>
+<li><strong>运营实体</strong>：苏州语灵人工智能科技有限公司（Suzhou Yuling Artificial Intelligence Technology Co., Ltd.）</li>
+<li><strong>全球品牌</strong>：Dify / Dify.AI / LangGenius</li>
+<li><strong>总部</strong>：美国加利福尼亚州门洛帕克（Menlo Park, CA），同时在东京、上海、苏州设有办公室</li>
+<li><strong>注册地</strong>：中国苏州工业园区</li>
+</ul>
+<h3 id="创始人基本信息">创始人基本信息</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>项目</th><th>内容</th></tr></thead><tbody><tr><td><strong>姓名</strong></td><td>张路宇（Luyu Zhang）</td></tr><tr><td><strong>出生年份</strong></td><td>1991年，安徽人</td></tr><tr><td><strong>教育背景</strong></td><td>初中毕业后辍学（未上高中和大学）</td></tr><tr><td><strong>早期经历</strong></td><td>12岁开始做个人网站，中学时月收入已达1000美元；后在一家苏州游戏公司工作，18岁成为20人团队技术负责人</td></tr><tr><td><strong>首次创业</strong></td><td>创立开发者测试/协作 SaaS 产品 <strong>“飞蛾”（Fei’e）</strong>，后被 CODING 收购；CODING 随后被腾讯收购</td></tr><tr><td><strong>腾讯经历</strong></td><td>随 CODING 加入腾讯云，担任产品领导职务数年</td></tr><tr><td><strong>创立 Dify</strong></td><td>2022年接触生成式 AI 后开始筹备，2023年3月正式创立 Dify</td></tr><tr><td><strong>现状</strong></td><td>已迁居美国 Menlo Park，致力于打造全球化公司</td></tr></tbody></table>
+<blockquote>
+<p>张路宇常被拿来与理想汽车创始人李想类比——两人都仅有初中/高中学历却创立了数十亿美元估值的科技公司。</p>
+</blockquote>
+<h3 id="联合创始团队4位">联合创始团队（4位）</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>角色</th><th>姓名</th><th>负责领域</th></tr></thead><tbody><tr><td>CEO</td><td>张路宇</td><td>技术、整体战略</td></tr><tr><td>COO</td><td>潘辉燕（潘潘）</td><td>运营、用户/市场</td></tr><tr><td>另两位联创</td><td>未公开</td><td>产品、商业化</td></tr></tbody></table>
+<h3 id="团队规模">团队规模</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>时间节点</th><th>员工数</th></tr></thead><tbody><tr><td>2023年2月（成立前）</td><td>~2人</td></tr><tr><td>2024年10月</td><td>~45人</td></tr><tr><td>2025–2026年</td><td><strong>~109人</strong>（年增长率约68%）</td></tr></tbody></table>
+<h3 id="融资与盈利情况">融资与盈利情况</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>轮次</th><th>时间</th><th>金额</th><th>投资方</th></tr></thead><tbody><tr><td>天使轮</td><td>2023年7月</td><td>未披露</td><td>华创资本、德联资本</td></tr><tr><td>战略入股</td><td>2024年</td><td>未披露</td><td>浙江阿里巴巴云计算有限公司</td></tr><tr><td><strong>Pre-A轮</strong></td><td><strong>2026年3月</strong></td><td><strong>3000万美元</strong></td><td>HSG（红杉中国）领投，GL Ventures、Alt-Alpha Capital、5Y Capital（五源资本）、瑞穗利合投资、NYX Ventures、Hillhouse 跟投</td></tr></tbody></table>
+<ul>
+<li><strong>Pre-A 轮估值</strong>：约 <strong>1.8亿美元</strong></li>
+<li><strong>累计融资</strong>：约 4150 万美元</li>
+<li><strong>盈利情况</strong>：未公开披露，但拥有 2000+ 付费团队和 280+ 企业客户，已进入商业化正轨</li>
+</ul>
+<h3 id="公司信条与发展规划">公司信条与发展规划</h3>
+<p><strong>核心理念</strong>：张路宇多次表示，Dify 的北极星指标不是 GitHub Stars 也不是收入，而是 <em>“有多少用户用 Dify 构建了应用并从中赚到了钱”</em>。</p>
+<p><strong>2026年资金使用方向</strong>：</p>
+<ol>
+<li><strong>生产级 Agent 与工作流</strong>——构建模块、调试能力、负载可预测性</li>
+<li><strong>企业级基础能力</strong>——性能、合规、权限、可审计性</li>
+<li><strong>降低使用门槛</strong>——让非开发者（领域专家）也能构建 AI 工作流</li>
+<li><strong>扩大开源生态</strong>——模板、插件、连接器、社区贡献</li>
+</ol>
+<h3 id="关键数据">关键数据</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>指标</th><th>数据</th></tr></thead><tbody><tr><td>GitHub Stars</td><td><strong>~144,000+</strong>（2026年7月）</td></tr><tr><td>全球装机量</td><td>运行在 <strong>140万+</strong> 台设备上</td></tr><tr><td>覆盖国家/地区</td><td><strong>175+</strong> 个</td></tr><tr><td>付费团队</td><td><strong>2,000+</strong> 个</td></tr><tr><td>企业客户</td><td><strong>280+</strong> 家（含马士基、ETS、安克创新、诺华等）</td></tr></tbody></table>
+<blockquote>
+<p><strong>信息源</strong>：</p>
+<ul>
+<li><a href="https://pitchbook.com/profiles/company/539409-43#overview">PitchBook: Dify Company Profile</a></li>
+<li><a href="https://dify.ai/blog/dify-raises-30m-tomorrow-s-organizations-will-be-built-by-people-and-agents">Dify Raises $30M Blog</a></li>
+<li><a href="https://e.vnexpress.net/news/tech/personalities/we-want-to-compete-at-the-highest-level-school-dropout-luyu-zhang-joins-wave-of-chinese-ai-founders-moving-to-us-5059218.html">VnExpress: School dropout Luyu Zhang</a></li>
+<li><a href="https://profiles.crustdata.com/company/difyai">Crustdata: Dify Headcount</a></li>
+<li><a href="https://cloud.tencent.cn/developer/article/2637419">腾讯云: Dify创始人张路宇</a></li>
+<li><a href="https://baike.baidu.com/item/Dify/66266114">百度百科: Dify</a></li>
+<li><a href="https://itbrief.co.uk/story/dify-raises-usd-30m-to-scale-open-source-ai-workflows">IT Brief: Dify Raises $30M</a></li>
+<li><a href="https://dify.ai/blog/100k-stars-on-thank-you-to-our-amazing-open-source-community">Dify Blog: 100K Stars</a></li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="2-底层技术栈">2. 底层技术栈</h2>
+<h3 id="dify-不是基础大模型而是-ai-应用开发平台">Dify 不是基础大模型，而是 AI 应用开发平台</h3>
+<p>Dify <strong>不开发基础大模型（LLM）</strong>，而是作为一个 <strong>LLM 应用编排层（orchestration layer）</strong>，将多种基础模型的能力抽象为统一的可视化开发体验。</p>
+<h3 id="支持的模型类型">支持的模型类型</h3>
+<p>Dify 采用 <strong>模型抽象层（Model Abstraction Layer）</strong> 架构，通过统一的 API 网关接入以下模型：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>接入方式</th><th>支持的模型/框架</th><th>说明</th></tr></thead><tbody><tr><td><strong>商业 API</strong></td><td>OpenAI (GPT-4o/4.1)、Anthropic (Claude 3.5/4)、Google Gemini、DeepSeek、智谱 GLM、百度文心、阿里通义千问、月之暗面 Moonshot</td><td>配置 API Key 即可使用</td></tr><tr><td><strong>本地推理引擎</strong></td><td>Ollama、vLLM、Xinference、LocalAI、LiteLLM、GPUStack</td><td>适用于私有化部署</td></tr><tr><td><strong>自定义供应商</strong></td><td>任何提供 OpenAI 兼容接口的自研/第三方模型</td><td>只需配置 API Base URL + API Key</td></tr><tr><td><strong>开源模型</strong></td><td>Llama、Mistral、Qwen、Yi、DeepSeek 等</td><td>通过 Ollama/vLLM 等接入</td></tr></tbody></table>
+<h3 id="是否支持用户自己使用-api-调用大模型">是否支持用户自己使用 API 调用大模型</h3>
+<p><strong>是，Dify 的核心设计哲学就是模型无关（Model-Agnostic）</strong>。用户可以：</p>
+<ul>
+<li>使用自己的 OpenAI / Anthropic / Google / DeepSeek API Key</li>
+<li>部署本地 Ollama 接入自管模型</li>
+<li>自定义内部 API 接入企业自研模型</li>
+<li>在多个模型之间做 A/B 测试和流量路由</li>
+</ul>
+<h3 id="dify-自身核心技术栈">Dify 自身核心技术栈</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>组件</th><th>技术选型</th></tr></thead><tbody><tr><td><strong>后端</strong></td><td>Python（Flask 框架）</td></tr><tr><td><strong>前端</strong></td><td>TypeScript + React（Next.js）</td></tr><tr><td><strong>数据库</strong></td><td>PostgreSQL（+ pgvector 向量扩展）</td></tr><tr><td><strong>向量存储</strong></td><td>PostgreSQL pgvector、MongoDB Atlas、Milvus、Pinecone、FAISS、Chroma（可切换）</td></tr><tr><td><strong>工作流引擎</strong></td><td>自研 DAG（有向无环图）图引擎</td></tr><tr><td><strong>消息队列</strong></td><td>Redis / Celery（异步任务）</td></tr><tr><td><strong>容器化</strong></td><td>Docker Compose / Kubernetes</td></tr><tr><td><strong>嵌入模型</strong></td><td>Voyage AI、BGE、E5 等</td></tr></tbody></table>
+<blockquote>
+<p><strong>信息源</strong>：</p>
+<ul>
+<li><a href="https://docs.dify.ai/zh/cloud/use-dify/workspace/model-providers">Dify 官方文档: 模型供应商</a></li>
+<li><a href="https://legacy-docs.dify.ai/zh-hans/development/models-integration">Dify 官方文档: 模型接入</a></li>
+<li><a href="https://developer.baidu.com/article/detail.html?id=7087685">Dify 技术全解析 - 百度开发者</a></li>
+<li><a href="https://developer.baidu.com/article/detail.html?id=5520587">Dify 私有化部署实践</a></li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="3-开源属性与商业模式">3. 开源属性与商业模式</h2>
+<h3 id="许可证modified-apache-20非-osi-批准的开源许可证">许可证：Modified Apache 2.0（非 OSI 批准的开源许可证）</h3>
+<p>Dify 使用的许可证是 <strong>基于 Apache 2.0 修改的版本</strong>，增加了商业使用限制，<strong>不被 OSI（开源促进会）认定为真正的开源许可证</strong>。安全分类为 <strong>“Commercial”（商业类）</strong>，而非 “Open Source”。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>使用场景</th><th>许可证要求</th></tr></thead><tbody><tr><td>个人/内部使用</td><td>✅ 免费（Modified Apache 2.0）</td></tr><tr><td>为自己的应用提供后端服务</td><td>✅ 免费</td></tr><tr><td><strong>运行多租户 SaaS（如 Dify Cloud 模式）</strong></td><td>❌ <strong>需要商业授权</strong></td></tr><tr><td><strong>移除前端 Dify Logo 和版权信息</strong></td><td>❌ <strong>需要商业授权</strong></td></tr><tr><td>Fork 并重新分发</td><td>✅ 允许（带限制）</td></tr></tbody></table>
+<p><strong>重要争议</strong>：2025年10月 OSI 邮件列表上对 Dify 许可证进行了激烈讨论：</p>
+<blockquote>
+<p><em>“该许可证包含有效禁止将软件作为 SaaS 提供的条款，这与 OSD #6 相冲突。我不认为这个许可证可以被视为开源。”</em> — Shuji Sado, OSI license-discuss</p>
+</blockquote>
+<h3 id="定价模式云服务版本">定价模式（云服务版本）</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>计划</th><th>价格</th><th>消息额度</th><th>应用数</th><th>用户数</th><th>知识库存储</th></tr></thead><tbody><tr><td><strong>Sandbox（免费）</strong></td><td>$0/月</td><td>200/月</td><td>5</td><td>1</td><td>50 MB</td></tr><tr><td><strong>Professional</strong></td><td><strong>$59/月</strong>（$590/年）</td><td>5,000/月</td><td>50</td><td>3</td><td>5 GB</td></tr><tr><td><strong>Team</strong></td><td><strong>$159/月</strong>（$1,590/年）</td><td>10,000/月</td><td>200</td><td>50</td><td>20 GB</td></tr><tr><td><strong>Enterprise</strong></td><td><strong>定制报价</strong>（约$150,000/年）</td><td>自定义</td><td>不限</td><td>不限</td><td>自定义</td></tr></tbody></table>
+<p><strong>重要说明</strong>：</p>
+<ul>
+<li><strong>自部署免费版（Community Edition）</strong>：无平台费用、无应用数限制、无存储限制，只需承担服务器费用 + LLM API 费用</li>
+<li><strong>LLM API 费用另计</strong>：Dify 不赚模型调用差价，用户直连模型供应商</li>
+<li>年付享受约 <strong>17% 折扣</strong></li>
+</ul>
+<h3 id="商业模式总结">商业模式总结</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>开源社区版（免费） → 获取用户基础与生态</span></span>
+<span class="line"><span>       ↓</span></span>
+<span class="line"><span>企业版（付费） → SSO、审计日志、多租户隔离、私有部署</span></span>
+<span class="line"><span>       ↓</span></span>
+<span class="line"><span>Dify Cloud（SaaS订阅） → Professional / Team / Enterprise</span></span>
+<span class="line"><span>       ↓</span></span>
+<span class="line"><span>商业授权 → 多租户 SaaS 运营、品牌去除</span></span></code></pre>
+<blockquote>
+<p><strong>信息源</strong>：</p>
+<ul>
+<li><a href="https://github.com/langgenius/dify/blob/main/LICENSE">Dify License（GitHub）</a></li>
+<li><a href="http://lists.opensource.org/pipermail/license-discuss_lists.opensource.org/2025-October/022424.html">OSI License-Discuss Archive</a></li>
+<li><a href="https://scancode-licensedb.aboutcode.org/dify-exception-apache-2.0.html">ScanCode LicenseDB: dify-exception-apache-2.0</a></li>
+<li><a href="https://dify.ai/pricing">Dify Pricing Page</a></li>
+<li><a href="https://marketplace.alibabacloud.com/products/56676003/sgcmgj00036277.html">阿里云 Marketplace</a></li>
+<li><a href="https://similarlabs.com/blog/dify-review">SimilarLabs: Dify Review 2026</a></li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="4-功能全景解析">4. 功能全景解析</h2>
+<h3 id="主要功能50字以内">主要功能（50字以内）</h3>
+<blockquote>
+<p>可视化构建、部署和运维 AI 应用的<strong>全栈低代码平台</strong>，支持 Chatbot、RAG、AI Agent 和工作流编排。</p>
+</blockquote>
+<h3 id="核心功能与核心技术">核心功能与核心技术</h3>
+<h4 id="-功能一可视化工作流编排引擎">🔹 功能一：可视化工作流编排引擎</h4>
+<p><strong>描述</strong>：提供基于 DAG（有向无环图）的可视化画布，用户通过拖拽方式编排 LLM 调用、数据处理、逻辑分支、循环、并行等节点，构建复杂 AI 工作流，<strong>无需编写后端代码</strong>。</p>
+<p><strong>关键技术</strong>：</p>
+<ul>
+<li><strong>自研 DAG 图引擎</strong>：支持顺序执行、条件分支、并行处理、循环迭代等多种流程模式</li>
+<li><strong>节点类型</strong>：LLM 推理、数据转换（JSON 解析/正则提取）、逻辑控制（条件/循环/异常处理）、外部 API 调用、数据库查询</li>
+<li><strong>错误处理</strong>：内置重试策略、熔断机制、人工介入（Human-in-the-Loop）</li>
+<li><strong>性能</strong>：单引擎支持 1000+ 并发请求/秒</li>
+</ul>
+<h4 id="-功能二rag检索增强生成管道">🔹 功能二：RAG（检索增强生成）管道</h4>
+<p><strong>描述</strong>：提供从文档导入 → 切片 → 向量化 → 混合检索 → 重排序的完整 RAG 管道，支持 20+ 文件格式，是企业级知识库应用的核心能力。</p>
+<p><strong>关键技术</strong>：</p>
+<ul>
+<li><strong>混合检索（Hybrid Search）</strong>：向量语义搜索 + BM25 关键词搜索的融合，平衡召回率与精准度</li>
+<li><strong>多路召回 + 重排序（Reranking）</strong>：Top-5 准确率在法务场景从 68% 提升至 89%</li>
+<li><strong>动态上下文窗口</strong>：支持最高 100K 字符的上下文拼接</li>
+<li><strong>查询扩展（Query Expansion）</strong>：自动生成同义词和上位词扩展搜索意图</li>
+<li><strong>文档预处理</strong>：OCR → NLP 章节结构识别 → 层级知识图谱</li>
+<li><strong>吞吐量</strong>：单节点 >500 页/分钟的文档处理速度</li>
+<li><strong>置信度评分</strong>：低于阈值自动触发人工审核（声称错误率 &#x3C;0.3%）</li>
+</ul>
+<h4 id="-功能三ai-agent-框架">🔹 功能三：AI Agent 框架</h4>
+<p><strong>描述</strong>：内置可扩展的 AI Agent 运行时，支持 ReAct、Function Calling、Plan-and-Execute 等多种推理模式，可调用 200+ 外部工具。</p>
+<p><strong>关键技术</strong>：</p>
+<ul>
+<li><strong>三层 Agent 架构</strong>：感知层（多模态输入）→ 决策层（工具调用 + 任务规划）→ 执行层（记忆管理 + 状态追踪）</li>
+<li><strong>推理模式</strong>：ReAct（思考-行动-观察循环）、Function Calling、Chain-of-Thought</li>
+<li><strong>工具调用引擎</strong>：自动生成 API 调用序列</li>
+<li><strong>记忆管理</strong>：短期对话上下文 + 长期知识库双存储</li>
+<li><strong>技能编辑器</strong>：通过 Prompt + 工具定义自定义 Agent 技能</li>
+</ul>
+<h4 id="-功能四多模态与插件生态">🔹 功能四：多模态与插件生态</h4>
+<p><strong>描述</strong>：支持文本、图像、音频等多模态输入，提供可扩展的插件框架和持续增长的市场。</p>
+<p><strong>关键技术</strong>：</p>
+<ul>
+<li><strong>MCP（Model Context Protocol）支持</strong>：v1.6.0+ 开始支持 Anthropic 的 MCP 协议标准</li>
+<li><strong>插件系统</strong>：数据源、模型、处理三类插件，Dify Marketplace 分发</li>
+<li><strong>OAuth 2.0 集成</strong>：v1.7.0+ 支持 OAuth 认证</li>
+<li><strong>200+预构建工具</strong>：数据库连接器、API 集成、文件处理等</li>
+<li><strong>MongoDB Atlas + Voyage AI 原生集成</strong>：2026年新增，无需胶水代码</li>
+</ul>
+<h4 id="-功能五llmops大模型运维">🔹 功能五：LLMOps（大模型运维）</h4>
+<p><strong>描述</strong>：提供生产级 AI 应用的全生命周期管理能力，包括监控、调试、版本控制、A/B 测试。</p>
+<p><strong>关键技术</strong>：</p>
+<ul>
+<li><strong>可观测性仪表盘</strong>：Token 用量、延迟、错误率实时监控</li>
+<li><strong>Prompt 管理与版本控制</strong>：类 Git 的版本管理机制</li>
+<li><strong>多模型 A/B 测试</strong>：路由数据流量，对比不同模型/ Prompt 的效果</li>
+<li><strong>日志与回溯</strong>：完整记录每次推理过程，支持调试和审计</li>
+</ul>
+<blockquote>
+<p><strong>信息源</strong>：</p>
+<ul>
+<li><a href="https://dify.ai/blog/grounding-dify-agents-in-real-data-mongodb-atlas-and-voyage-ai-are-now-native-to-dify-rag-workflows">Dify Blog: MongoDB + Voyage AI 原生集成</a></li>
+<li><a href="https://developer.baidu.com/article/detail.html?id=7087685">百度开发者: Dify 技术全解析</a></li>
+<li><a href="https://dify.ai/blog/dify-v1-0-building-a-vibrant-plugin-ecosystem">Dify v1.0 Blog: Plugin Ecosystem</a></li>
+<li><a href="https://docs.dify.ai/">Dify 官方文档</a></li>
+<li><a href="https://intl.cloud.tencent.com/document/product/409/80411">腾讯云: Dify + PostgreSQL</a></li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="5-功能实现案例">5. 功能实现案例</h2>
+<h3 id="案例企业智能知识库客服机器人">案例：企业智能知识库客服机器人</h3>
+<p><strong>背景</strong>：一家跨国公司希望构建一个 7x24 小时智能客服系统，基于其数千页的产品文档、技术手册和 FAQ 回答客户问题，且保证数据不出域。</p>
+<h4 id="使用-dify-的实现步骤">使用 Dify 的实现步骤</h4>
+<p><strong>第一步：知识库构建</strong></p>
+<ol>
+<li>在 Dify 中创建”知识库”应用</li>
+<li>上传 PDF、Word、Excel 格式的产品文档和技术手册</li>
+<li>Dify 自动执行文档预处理：OCR 扫描 → NLP 章节结构识别 → 文档切片（500-1000字符/块）</li>
+<li>选择嵌入模型（如 Voyage AI 或 BGE）进行向量化，选择 PostgreSQL pgvector 作为向量数据库</li>
+<li>配置混合检索（向量检索 + BM25 关键词检索）和重排序策略</li>
+</ol>
+<p><strong>第二步：Agent 配置</strong></p>
+<ol>
+<li>在可视化工作流中，拖入”LLM 节点”并选择 Claude 4 或 GPT-4o 作为推理模型</li>
+<li>连接”知识库检索节点”，配置 Top-K = 5，置信度阈值 = 0.7</li>
+<li>添加”条件分支”节点：置信度 ≥0.7 直接生成答案，&#x3C;0.7 转人工</li>
+<li>配置”外部工具节点”：对接企业 CRM 系统 API，用于查询订单状态</li>
+</ol>
+<p><strong>第三步：部署与发布</strong></p>
+<ol>
+<li>一键部署到 Docker/Kubernetes（或使用 Dify Cloud）</li>
+<li>通过 Dify 自动生成的 REST API 嵌入公司官网</li>
+<li>配置监控仪表盘：实时查看 Token 消耗、响应延迟、用户满意度</li>
+</ol>
+<h4 id="实现效果">实现效果</h4>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>用户提问："我的订单 #12345 什么时候发货？"</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>系统处理流程：</span></span>
+<span class="line"><span>1. Intent 识别 → "订单查询"</span></span>
+<span class="line"><span>2. 知识库检索 → 找到发货政策文档（相似度 0.85）</span></span>
+<span class="line"><span>3. 外部工具调用 → CRM API 查询 → "预计7月10日发货"</span></span>
+<span class="line"><span>4. LLM 综合生成 → "您好！您的订单 #12345 预计在7月10日发货。"</span></span>
+<span class="line"><span>5. 置信度评估：0.92 → 直接输出，无需转人工</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>系统效果：</span></span>
+<span class="line"><span>- 首答准确率：92%</span></span>
+<span class="line"><span>- 平均响应时间：1.2秒</span></span>
+<span class="line"><span>- 人工介入率：从原来的 65% 降至 8%</span></span>
+<span class="line"><span>- 客服效率提升：5倍</span></span></code></pre>
+<blockquote>
+<p><strong>信息源</strong>：</p>
+<ul>
+<li><a href="https://dify.ai/blog/grounding-dify-agents-in-real-data-mongodb-atlas-and-voyage-ai-are-now-native-to-dify-rag-workflows">Dify Blog: MongoDB-RAG 模板</a></li>
+<li><a href="https://developer.baidu.com/article/detail.html?id=7087685">百度开发者: Dify 实战指南</a></li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="6-主要竞品清单">6. 主要竞品清单</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>竞品名称</th><th>开发商</th><th>定位</th><th>优势</th><th>劣势</th></tr></thead><tbody><tr><td><strong>Flowise</strong></td><td>Flowise（开源社区）</td><td>轻量级 LLM 可视化构建器</td><td>Apache 2.0 纯开源、轻量级部署、JS/TS 生态友好</td><td>生产级能力弱（需外挂监控工具）、调试工具薄弱</td></tr><tr><td><strong>LangFlow</strong></td><td>DataStax</td><td>Python 原生 LangChain 可视化工具</td><td>MIT 许可证最灵活、MCP 原生支持、Python 开发者友好</td><td>节点过多画布卡顿、Agent 深度不如 Dify</td></tr><tr><td><strong>Coze（扣子）</strong></td><td>字节跳动</td><td>零代码 AI Bot 平台</td><td>最快上线速度（10分钟）、800+ 插件、一键发布到微信/飞书</td><td>闭源不可自部署、数据在字节跳动服务器、模型选择受限</td></tr><tr><td><strong>n8n</strong></td><td>n8n GmbH（德国）</td><td>开源工作流自动化引擎</td><td>400+ 原生集成、900+ 模板、最高代码灵活性</td><td>非 AI 原生、LLM 集成需手动配置、学习曲线高</td></tr><tr><td><strong>RAGFlow</strong></td><td>Infinity（开源社区）</td><td>深度文档理解 RAG 引擎</td><td>文档解析能力最强、PDF 排版保留好、中文友好</td><td>功能局限于 RAG、无 Agent 框架</td></tr><tr><td><strong>FastGPT</strong></td><td>labring（开源社区）</td><td>知识库问答机器人快速搭建</td><td>极低门槛、中文场景优秀、零到部署几分钟</td><td>功能单一（限知识库问答）、生态系统小</td></tr><tr><td><strong>Bisheng（毕昇）</strong></td><td>数据宝库</td><td>企业级 RAG 与 Agent 平台</td><td>企业级安全合规强、信创适配好</td><td>社区版功能受限、国际化不足</td></tr></tbody></table>
+<blockquote>
+<p><strong>信息源</strong>：</p>
+<ul>
+<li><a href="https://www.knowlee.ai/blog/dify-alternatives-2026">Knowlee: Dify Alternatives 2026</a></li>
+<li><a href="https://futureagi.com/blog/best-flowise-alternatives-2026/">FutureAGI: Best Flowise Alternatives 2026</a></li>
+<li><a href="https://www.youngju.dev/blog/culture/2026-05-16-no-code-ai-builders-2026-flowise-langflow-dify-coze-vectara-n8n-ai-rivet-promptflow-llamaindex-deep-dive.en">Dev.to: No-Code AI Builders 2026 Deep Dive</a></li>
+<li><a href="https://segmentfault.com/a/1190000047774699">SegmentFault: Dify vs Coze vs RAGflow vs n8n 2026</a></li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="7-与竞品的横向比较">7. 与竞品的横向比较</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">对比维度</th><th align="left"><strong>Dify</strong></th><th align="left"><strong>Flowise</strong></th><th align="left"><strong>LangFlow</strong></th><th align="left"><strong>Coze</strong></th><th align="left"><strong>n8n</strong></th></tr></thead><tbody><tr><td align="left"><strong>价格</strong></td><td align="left">社区版免费；云服务 $59-$159/月 + 企业定制</td><td align="left">开源免费（纯 Apache 2.0）</td><td align="left">开源免费（纯 MIT）</td><td align="left">SaaS 免费+付费（500次/天免费额度）</td><td align="left">开源社区免费；云服务 $20-$50/月</td></tr><tr><td align="left"><strong>性能/准确率</strong></td><td align="left">RAG 混合检索 + 重排序，Top-5 准确率 89%；支持 1000+ 并发/秒</td><td align="left">基础 RAG，无高级检索策略，准确率中等</td><td align="left">与 LangChain 等同，MCP 标准但无专用优化</td><td align="left">模型依赖大（仅限字节跳动生态），RAG 基础</td><td align="left">非 AI 原生，LLM 集成靠第三方节点</td></tr><tr><td align="left"><strong>易用性与上手门槛</strong></td><td align="left">低-中：可视化拖拽+Python/JS扩展；Docker 一键部署</td><td align="left">低：最简部署（1C/2GB），npm install 即用</td><td align="left">中：Python 数据科学家友好，一般开发者略难</td><td align="left"><strong>最低</strong>：无需任何技术背景，10分钟上线</td><td align="left">中-高：功能强大但需要理解自动化概念</td></tr><tr><td align="left"><strong>生态与集成能力</strong></td><td align="left">200+工具、MCP 支持、多向量数据库、Plugin Marketplace</td><td align="left">最大 LangChain.js 节点库 + 社区模板市场</td><td align="left">50+组件、DataStax 企业支持、MCP Client/Server</td><td align="left"><strong>800+ 插件</strong>、一键发布到微信/飞书/Telegram</td><td align="left"><strong>400+ 原生集成</strong>、900+ 模板、API 暴露</td></tr></tbody></table>
+<h3 id="各竞品最适用的细分场景">各竞品最适用的细分场景</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>竞品</th><th>最佳应用场景</th></tr></thead><tbody><tr><td><strong>Dify</strong></td><td>企业内部 AI 应用开发（RAG 知识库 + Agent + 工作流），尤其适合有数据合规需求的金融/医疗/政府行业</td></tr><tr><td><strong>Flowise</strong></td><td>JS/TS 技术团队快速原型开发 RAG 管道和 Chatbot，轻量级部署场景</td></tr><tr><td><strong>LangFlow</strong></td><td>Python 数据科学家可视化构建 LangChain 工作流，需要 MCP 跨工具互操作的场景</td></tr><tr><td><strong>Coze</strong></td><td>非技术人员快速创建营销机器人、社交媒体 Bot、微信聊天助手（最快上线）</td></tr><tr><td><strong>n8n</strong></td><td>跨系统业务流程自动化（CRM/ERP/邮件/Slack 集成），AI + 自动化混合场景的最佳”胶水”</td></tr></tbody></table>
+<blockquote>
+<p><strong>信息源</strong>：</p>
+<ul>
+<li><a href="https://news.qiniu.com/archives/post-1769740719396-0">AI 工作流三大神器对比 - 七牛云</a></li>
+<li><a href="https://cloud.tencent.cn/developer/article/2638657">Dify vs Coze vs n8n vs LangGraph - 腾讯云</a></li>
+<li><a href="https://cloud.tencent.cn/developer/article/2628207">主流智能体构建平台全景解析 - 腾讯云</a></li>
+<li><a href="https://www.youngju.dev/blog/culture/2026-05-16-no-code-ai-builders-2026-flowise-langflow-dify-coze-vectara-n8n-ai-rivet-promptflow-llamaindex-deep-dive.en">No-Code AI Builders 2026 Deep Dive</a></li>
+<li><a href="https://similarlabs.com/zh/blog/dify-review">Dify 深度评测 2026 - SimilarLabs</a></li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="8-版本迭代信息">8. 版本迭代信息</h2>
+<h3 id="首次公开发布">首次公开发布</h3>
+<ul>
+<li><strong>首次开源发布</strong>：2023年5月15日（GitHub）</li>
+<li><strong>初始定位</strong>：自托管的 LLMOps 平台</li>
+<li><strong>首个稳定版 v1.0.0</strong>：2025年2月28日（历时近2年达到 1.0）</li>
+</ul>
+<h3 id="关键版本里程碑">关键版本里程碑</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>版本</th><th>日期</th><th>亮点</th></tr></thead><tbody><tr><td><strong>v0.x</strong></td><td>2023年中-末</td><td>早期开发，可视化编排、Prompt 管理</td></tr><tr><td><strong>v1.0.0</strong></td><td>2025年2月28日</td><td>首个稳定版：Plugin 系统、Dify Marketplace、Agent 节点</td></tr><tr><td><strong>v1.6.0</strong></td><td>2026年初</td><td>MCP 协议支持、模型协议标准化</td></tr><tr><td><strong>v1.7.0</strong></td><td>2026年初</td><td>OAuth 2.0 集成、灰度发布、自动回滚</td></tr><tr><td><strong>v1.8.0</strong></td><td>2026年中</td><td>性能优化（延迟降40%、内存省25%）、ABAC 权限控制</td></tr><tr><td><strong>v1.9.0</strong></td><td>2026年中</td><td>队列图引擎、知识库管道更新</td></tr><tr><td><strong>v1.14.1</strong></td><td>2026年5月</td><td>安全加固、工作流稳定性提升</td></tr><tr><td><strong>v1.15.0</strong></td><td><strong>2026年6月25日</strong></td><td><strong>当前最新稳定版</strong>：difyctl CLI、新手体验重设计、搜索面板改进</td></tr><tr><td><strong>v2.0.0-beta</strong></td><td>2026年中</td><td>预发布：架构重构、模块化、可扩展性增强</td></tr></tbody></table>
+<h3 id="更新频率">更新频率</h3>
+<ul>
+<li><strong>常规版本</strong>：约每 <strong>2 周</strong>发布一次（功能更新 + 修复）</li>
+<li><strong>紧急补丁</strong>：关键问题 <strong>72小时内</strong> 修复</li>
+<li><strong>双轨策略</strong>：v1.x 稳定线 + v2.0.0-beta 先行体验线并行维护</li>
+</ul>
+<blockquote>
+<p><strong>信息源</strong>：</p>
+<ul>
+<li><a href="https://github.com/langgenius/dify/releases">GitHub: langgenius/dify 发布页</a></li>
+<li><a href="https://newreleases.io/project/github/langgenius/dify/release/1.15.0">NewReleases.io: Dify 1.15.0</a></li>
+<li><a href="https://dify.ai/blog/dify-v1-0-building-a-vibrant-plugin-ecosystem">Dify Blog: v1.0.0 发布</a></li>
+<li><a href="https://developer.baidu.com/article/detail.html?id=7083413">百度开发者: Dify 版本演进全解析</a></li>
+<li><a href="https://github.com/langgenius/dify/discussions/26181">GitHub Discussion: 版本号困惑</a></li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="一句话锐评">一句话锐评</h2>
+<blockquote>
+<p><strong>Dify 是目前最成熟的开源 LLM 应用全栈平台</strong>，在 RAG 准确性、工作流灵活性和企业级能力上显著领先同类竞品。适合有数据合规需求的<strong>中大型企业</strong>构建生产级 AI 应用，但对独立开发者而言，Flowise（纯开源）或 Coze（零门槛）可能更轻量。<strong>值得重点关注，尤其是需要自部署 + 全生命周期 AI 应用管理的场景。</strong></p>
+</blockquote>
+<hr>
+<p><em>本报告由 Claude 于 2026年7月5日生成，信息基于公开来源，如有更新请以官方信息为准。</em></p>  </div> <!-- Previous / Next navigation --> <nav class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-12 pt-8 border-t border-[var(--color-border)]" data-astro-cid-bvzihdzo> <a href="/blog/AI工具报告/Andrej Karpathy Skills-报告" class="card-hover p-4 no-underline group" data-astro-cid-bvzihdzo> <span class="text-xs text-[var(--color-text-tertiary)] block mb-1" data-astro-cid-bvzihdzo>&larr; 上一篇</span> <span class="text-sm font-medium text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors line-clamp-1" data-astro-cid-bvzihdzo>Andrej Karpathy Skills（multica-ai/andrej-karpathy-skills）深度调研报告</span> </a> <a href="/blog/AI工具报告/Obsidian-报告" class="card-hover p-4 no-underline group text-right" data-astro-cid-bvzihdzo> <span class="text-xs text-[var(--color-text-tertiary)] block mb-1" data-astro-cid-bvzihdzo>下一篇 &rarr;</span> <span class="text-sm font-medium text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors line-clamp-1" data-astro-cid-bvzihdzo>🔮 Obsidian 深度调研报告</span> </a> </nav> <hr class="!mt-12 !mb-8" data-astro-cid-bvzihdzo> <div data-astro-cid-bvzihdzo> <a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-bvzihdzo>
+&larr; 返回博客列表
+</a> </div> </div> </div> </article> </div>  </main> <footer class="border-t border-[var(--color-border)] mt-24 py-8" data-astro-cid-pux6a34n><div class="max-w-content flex items-center justify-between" data-astro-cid-pux6a34n><span class="text-sm text-[var(--color-text-tertiary)]" data-astro-cid-pux6a34n>
+&copy; 2026 星游寰宇
+</span><div class="flex items-center gap-4" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>博客</a><a href="/projects" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>项目</a><a href="/notes" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>日记</a><a href="/resources" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>资源</a><a href="/about" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>关于</a></div></div></footer> <div id="link-preview" style="display:none;position:fixed;z-index:99;max-width:18rem;pointer-events:none;" data-astro-cid-t7vshrbh></div>  <script type="module">(async()=>{try{const c=await fetch("/posts.json");if(!c.ok)return;const u=await c.json(),p=new Map(u.map(t=>[t.href,t])),e=document.getElementById("link-preview");if(!e)return;let n="",d;document.addEventListener("mouseover",t=>{const i=t.target.closest("a[href^='/blog/']");if(!i){e.style.display="none",n="";return}const s=i.getAttribute("href");if(!s||s===n)return;const o=p.get(s);o&&(n=s,d=setTimeout(()=>{e.innerHTML=`<div class="lp-title">${o.title}</div><div class="lp-summary">${o.summary}</div>`;const r=i.getBoundingClientRect();let a=r.left,l=r.bottom+6;a+288>window.innerWidth&&(a=window.innerWidth-296),l+80>window.innerHeight&&(l=r.top-80),Object.assign(e.style,{left:a+"px",top:l+"px",display:"block"})},300))},{passive:!0}),document.addEventListener("mouseout",t=>{t.target.closest("a[href^='/blog/']")&&(clearTimeout(d),e.style.display="none",n="")},{passive:!0})}catch{}})();</script> </body></html>  <script type="module">const c=document.getElementById("toc-toggle"),s=document.getElementById("toc-list"),i=document.getElementById("toc-chevron");c&&s&&i&&c.addEventListener("click",()=>{const o=s.classList.toggle("hidden");c.setAttribute("aria-expanded",String(o)),i.style.transform=o?"rotate(180deg)":""});const r=document.querySelectorAll(".toc-list a");if(r.length>0){const o=new IntersectionObserver(n=>{for(const t of n)t.isIntersecting&&r.forEach(e=>{e.classList.toggle("active",e.getAttribute("href")===`#${t.target.id}`)})},{rootMargin:"-80px 0px -80% 0px"});r.forEach(n=>{const t=n.getAttribute("href")?.slice(1);if(t){const e=document.getElementById(t);e&&o.observe(e)}})}</script>

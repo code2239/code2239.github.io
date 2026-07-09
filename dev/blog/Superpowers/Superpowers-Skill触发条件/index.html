@@ -1,0 +1,603 @@
+<!DOCTYPE html><html lang="zh-CN"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="Superpowers 14 个技能的触发机制全解析——语义匹配、关键词匹配与手动调用。"><meta name="color-scheme" content="light"><!-- Open Graph --><meta property="og:title" content="Superpowers 技能触发方式全览 — 星游寰宇"><meta property="og:description" content="Superpowers 14 个技能的触发机制全解析——语义匹配、关键词匹配与手动调用。"><meta property="og:url" content="https://code2239.github.io/blog/Superpowers/Superpowers-Skill触发条件"><meta property="og:type" content="article"><meta property="og:site_name" content="星游寰宇"><meta property="og:locale" content="zh_CN"><meta property="article:published_time" content="2026-07-05"><meta property="article:tag" content="Superpowers"><meta property="article:tag" content="Skill"><meta property="article:tag" content="Claude Code"><!-- Twitter Card --><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Superpowers 技能触发方式全览 — 星游寰宇"><meta name="twitter:description" content="Superpowers 14 个技能的触发机制全解析——语义匹配、关键词匹配与手动调用。"><!-- Canonical --><link rel="canonical" href="https://code2239.github.io/blog/Superpowers/Superpowers-Skill触发条件"><title>Superpowers 技能触发方式全览 — 星游寰宇</title><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="alternate" type="application/rss+xml" title="星游寰宇 RSS" href="/rss.xml"><!-- Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"星游寰宇","url":"https://code2239.github.io","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://code2239.github.io/search?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://code2239.github.io"},{"@type":"ListItem","position":2,"name":"博客","item":"https://code2239.github.io/blog"},{"@type":"ListItem","position":3,"name":"Superpowers","item":"https://code2239.github.io/blog/Superpowers"},{"@type":"ListItem","position":4,"name":"Superpowers Skill触发条件"}]},{"@context":"https://schema.org","@type":"BlogPosting","headline":"Superpowers 技能触发方式全览","description":"Superpowers 14 个技能的触发机制全解析——语义匹配、关键词匹配与手动调用。","datePublished":"2026-07-05","url":"https://code2239.github.io/blog/Superpowers/Superpowers-Skill触发条件","keywords":"Superpowers, Skill, Claude Code"}]}</script><link rel="stylesheet" href="/dev/_astro/_slug_.BlQX3qwK.css">
+<style>.back-to-top[data-astro-cid-gzprr2dq]{position:fixed;bottom:2rem;right:2rem;z-index:40;width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:50%;border:1px solid var(--color-border);background:var(--color-bg);color:var(--color-text-secondary);cursor:pointer;box-shadow:var(--shadow-md);transition:opacity .2s ease,transform .2s ease}.back-to-top[data-astro-cid-gzprr2dq]:hover{color:var(--color-accent);border-color:var(--color-accent);transform:translateY(-2px)}.back-to-top[data-astro-cid-gzprr2dq].hidden{opacity:0;pointer-events:none}.copy-btn[data-astro-cid-qqybitij]{position:absolute;top:8px;right:8px;padding:4px 10px;font-size:.6875rem;font-family:var(--font-sans);color:var(--color-text-tertiary);background:var(--color-bg);border:1px solid var(--color-border);border-radius:6px;cursor:pointer;opacity:0;transition:opacity .15s ease,color .15s ease}pre[data-astro-cid-qqybitij]:hover .copy-btn[data-astro-cid-qqybitij]{opacity:1}.copy-btn[data-astro-cid-qqybitij]:hover{color:var(--color-accent);border-color:var(--color-accent)}.copy-btn[data-astro-cid-qqybitij].copied{color:#16a34a;border-color:#16a34a}.blog-layout[data-astro-cid-bvzihdzo]{display:block}.blog-toc[data-astro-cid-bvzihdzo]{display:none}.blog-body[data-astro-cid-bvzihdzo]{min-width:0}@media(min-width:1024px){.blog-layout[data-astro-cid-bvzihdzo]{display:grid;grid-template-columns:14rem 1fr;gap:3rem;align-items:start}.blog-toc[data-astro-cid-bvzihdzo]{display:block}.blog-body[data-astro-cid-bvzihdzo]{padding-right:2rem}}@media(max-width:1023px){.blog-toc[data-astro-cid-bvzihdzo]{display:block;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid var(--color-border)}}
+</style></head> <body class="min-h-screen flex flex-col"> <nav class="sticky top-0 z-40 bg-[var(--color-bg)]/80 backdrop-blur-md border-b border-[var(--color-border)]" data-astro-cid-pux6a34n><div class="max-w-content flex items-center justify-between py-4" data-astro-cid-pux6a34n><a href="/" class="flex items-center gap-2.5 text-base font-semibold no-underline tracking-tight" data-astro-cid-pux6a34n><svg class="w-7 h-7" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" data-astro-cid-pux6a34n><circle cx="16" cy="16" r="15" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-pux6a34n></circle><circle cx="16" cy="16" r="3" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="16" cy="5" r="1.5" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="24" cy="10" r="1" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="8" cy="22" r="1" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="25" cy="21" r="0.8" fill="currentColor" data-astro-cid-pux6a34n></circle></svg>
+星游寰宇
+</a><!-- Desktop nav --><div class="hidden sm:flex items-center gap-5" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>博客</a><a href="/projects" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>项目</a><a href="/notes" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>日记</a><a href="/resources" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>资源</a><a href="/about" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>关于</a><button id="search-trigger" class="flex items-center gap-1.5 text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] bg-[var(--color-bg-secondary)] hover:bg-[var(--color-bg-tertiary)] border border-[var(--color-border)] hover:border-[var(--color-accent)]/30 rounded-lg px-3 py-1.5 cursor-pointer shadow-sm hover:shadow-md transition-all duration-200" aria-label="搜索 (Ctrl+K)" title="搜索 (Ctrl+K)" data-astro-cid-pux6a34n><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-pux6a34n><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" data-astro-cid-pux6a34n></path></svg><span class="hidden lg:inline" data-astro-cid-pux6a34n>搜索</span><kbd class="hidden lg:inline-flex items-center text-[0.625rem] font-mono text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1 py-px rounded" data-astro-cid-pux6a34n>Ctrl+K</kbd></button></div><!-- Mobile hamburger --><button id="menu-btn" class="sm:hidden flex flex-col gap-1 p-2 -mr-2 cursor-pointer" aria-label="打开菜单" data-astro-cid-pux6a34n><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-transform duration-200" data-astro-cid-pux6a34n></span><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-opacity duration-200" data-astro-cid-pux6a34n></span><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-transform duration-200" data-astro-cid-pux6a34n></span></button></div><!-- Mobile menu --><div id="mobile-menu" class="hidden sm:hidden border-t border-[var(--color-border)] bg-[var(--color-bg)]" data-astro-cid-pux6a34n><div class="max-w-content flex flex-col gap-2 py-4" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>博客</a><a href="/projects" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>项目</a><a href="/notes" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>日记</a><a href="/resources" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>资源</a><a href="/about" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>关于</a></div></div></nav>
+    <div id="search-overlay" class="srch-overlay" role="dialog" aria-modal="true" aria-label="全局搜索" data-astro-cid-mn7pezny> <div id="search-backdrop" class="srch-backdrop" data-astro-cid-mn7pezny></div> <div class="srch-panel" id="srch-panel" data-astro-cid-mn7pezny> <!-- Search input --> <div class="srch-input-row" data-astro-cid-mn7pezny> <svg class="srch-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-mn7pezny> <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" data-astro-cid-mn7pezny></path> </svg> <input type="text" id="search-input" class="srch-input" placeholder="搜索文章、项目、日记、资源..." autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="go" data-astro-cid-mn7pezny> <kbd class="srch-kbd" data-astro-cid-mn7pezny>Esc</kbd> </div> <!-- Results area --> <div id="search-results" class="srch-results" data-astro-cid-mn7pezny> <p class="srch-empty" id="search-empty-hint" data-astro-cid-mn7pezny>输入关键词开始搜索</p> </div> <!-- Skeleton loading --> <div id="search-skeleton" class="srch-skeleton" style="display:none;" aria-hidden="true" data-astro-cid-mn7pezny> <div class="srch-skeleton-line" style="width:75%" data-astro-cid-mn7pezny></div> <div class="srch-skeleton-line" style="width:50%" data-astro-cid-mn7pezny></div> <div class="srch-skeleton-line" style="width:60%" data-astro-cid-mn7pezny></div> </div> <!-- Footer hints --> <div class="srch-footer" data-astro-cid-mn7pezny> <div class="srch-footer-hints" data-astro-cid-mn7pezny> <span data-astro-cid-mn7pezny><kbd data-astro-cid-mn7pezny>↑</kbd><kbd data-astro-cid-mn7pezny>↓</kbd> 导航</span> <span data-astro-cid-mn7pezny><kbd data-astro-cid-mn7pezny>↵</kbd> 打开</span> <span data-astro-cid-mn7pezny><kbd data-astro-cid-mn7pezny>Ctrl</kbd>+<kbd data-astro-cid-mn7pezny>K</kbd> 切换</span> </div> <div class="srch-footer-brand" data-astro-cid-mn7pezny>
+powered by Orama
+</div> </div> </div> </div> <script type="module" src="/dev/_astro/Navigation.astro_astro_type_script_index_0_lang.B7cQAlyY.js"></script> <main class="flex-1">  <div class="reading-progress" id="reading-progress" style="width: 0%"></div> <script type="module">const o=document.getElementById("reading-progress");if(!o)throw new Error("Reading progress bar element not found");const r=()=>{const n=window.scrollY,e=document.documentElement.scrollHeight-window.innerHeight,t=e>0?n/e*100:0;o.style.width=`${Math.min(t,100)}%`};window.addEventListener("scroll",r,{passive:!0});</script> <button id="back-to-top" class="back-to-top hidden" aria-label="返回顶部" data-astro-cid-gzprr2dq> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-gzprr2dq> <polyline points="18 15 12 9 6 15" data-astro-cid-gzprr2dq></polyline> </svg> </button>  <script type="module">const o=document.getElementById("back-to-top");o&&(window.addEventListener("scroll",()=>{o.classList.toggle("hidden",window.scrollY<400)},{passive:!0}),o.addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"})));</script> <script type="module">document.querySelectorAll("pre").forEach(e=>{const t=document.createElement("button");t.className="copy-btn",t.textContent="复制",t.addEventListener("click",async()=>{const n=e.querySelector("code")?.textContent||e.textContent||"";try{await navigator.clipboard.writeText(n),t.textContent="已复制",t.classList.add("copied"),setTimeout(()=>{t.textContent="复制",t.classList.remove("copied")},2e3)}catch{t.textContent="失败",setTimeout(()=>{t.textContent="复制"},2e3)}}),e.style.position="relative",e.appendChild(t)});</script> <div class="px-6 xl:px-12 pt-12 pb-16" data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <header class="mb-12 text-center" data-astro-cid-bvzihdzo> <h1 class="text-3xl font-semibold mb-3 tracking-tight" data-astro-cid-bvzihdzo>Superpowers 技能触发方式全览</h1> <div class="flex items-center justify-center gap-2 text-[var(--color-text-tertiary)] text-sm" data-astro-cid-bvzihdzo> <time datetime="2026-07-05" data-astro-cid-bvzihdzo>2026-07-05</time> <span class="text-[var(--color-border)]" data-astro-cid-bvzihdzo>·</span> <span data-astro-cid-bvzihdzo>20 分钟阅读</span>  <span class="text-[var(--color-border)]" data-astro-cid-bvzihdzo>·</span> <span class="text-sm text-[var(--color-text-tertiary)]"> <span> Superpowers<span class="mx-1">·</span> </span><span> Skill<span class="mx-1">·</span> </span><span> Claude Code </span> </span>  </div> </header> <div class="blog-layout" data-astro-cid-bvzihdzo> <aside class="blog-toc" data-astro-cid-bvzihdzo> <div class="sticky top-24" data-astro-cid-bvzihdzo> <button id="toc-toggle" class="hidden max-md:flex items-center gap-1 text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-3 cursor-pointer border-none bg-transparent p-0" aria-expanded="false" aria-controls="toc-list" data-astro-cid-bvzihdzo>
+目录
+<svg id="toc-chevron" class="w-3 h-3 transition-transform duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-bvzihdzo><polyline points="6 9 12 15 18 9" data-astro-cid-bvzihdzo></polyline></svg> </button> <span class="text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-3 max-md:hidden" data-astro-cid-bvzihdzo>目录</span> <div id="toc-list" class="max-md:hidden" data-astro-cid-bvzihdzo> <nav class="toc"> <p class="text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-3">目录</p> <ul class="toc-list"> <li class> <a href="#一什么是触发">一、什么是”触发”</a> </li><li class> <a href="#二全部-14-个技能的触发条件">二、全部 14 个技能的触发条件</a> </li><li class="toc-h3"> <a href="#1-using-superpowers--入口技能">1. using-superpowers — 入口技能</a> </li><li class="toc-h3"> <a href="#2-brainstorming--设计前头脑风暴">2. brainstorming — 设计前头脑风暴</a> </li><li class="toc-h3"> <a href="#3-systematic-debugging--系统性调试">3. systematic-debugging — 系统性调试</a> </li><li class="toc-h3"> <a href="#4-test-driven-development--测试驱动开发">4. test-driven-development — 测试驱动开发</a> </li><li class="toc-h3"> <a href="#5-verification-before-completion--完成前验证">5. verification-before-completion — 完成前验证</a> </li><li class="toc-h3"> <a href="#6-requesting-code-review--请求代码审查">6. requesting-code-review — 请求代码审查</a> </li><li class="toc-h3"> <a href="#7-receiving-code-review--接收代码审查反馈">7. receiving-code-review — 接收代码审查反馈</a> </li><li class="toc-h3"> <a href="#8-writing-plans--编写实施计划">8. writing-plans — 编写实施计划</a> </li><li class="toc-h3"> <a href="#9-executing-plans--执行实施计划">9. executing-plans — 执行实施计划</a> </li><li class="toc-h3"> <a href="#10-subagent-driven-development--子代理驱动开发">10. subagent-driven-development — 子代理驱动开发</a> </li><li class="toc-h3"> <a href="#11-dispatching-parallel-agents--并行代理分发">11. dispatching-parallel-agents — 并行代理分发</a> </li><li class="toc-h3"> <a href="#12-finishing-a-development-branch--完成开发分支">12. finishing-a-development-branch — 完成开发分支</a> </li><li class="toc-h3"> <a href="#13-using-git-worktrees--git-工作树隔离">13. using-git-worktrees — Git 工作树隔离</a> </li><li class="toc-h3"> <a href="#14-writing-skills--编写技能">14. writing-skills — 编写技能</a> </li><li class> <a href="#三触发优先级规则">三、触发优先级规则</a> </li><li class> <a href="#四一句话速查表">四、一句话速查表</a> </li><li class> <a href="#五完整技能依赖拓扑图">五、完整技能依赖拓扑图</a> </li><li class> <a href="#六技能分类速查">六、技能分类速查</a> </li><li class="toc-h3"> <a href="#流程编排技能7-个">流程编排技能（7 个）</a> </li><li class="toc-h3"> <a href="#质量纪律技能5-个">质量纪律技能（5 个）</a> </li><li class="toc-h3"> <a href="#基础设施技能2-个">基础设施技能（2 个）</a> </li> </ul> </nav> </div> </div> </aside> <div class="blog-body" data-astro-cid-bvzihdzo> <div class="prose prose-neutral max-w-none" data-astro-cid-bvzihdzo>  <h1 id="superpowers-技能触发方式全览">Superpowers 技能触发方式全览</h1>
+<blockquote>
+<p><strong>日期</strong>: 2026-07-04<br>
+<strong>技能总数</strong>: 14 个<br>
+<strong>触发机制</strong>: 语义匹配 — AI 根据对话内容自动判断是否需要调用技能</p>
+</blockquote>
+<hr>
+<h2 id="一什么是触发">一、什么是”触发”</h2>
+<p>Superpowers 技能的触发机制是 <strong>语义匹配</strong> —— AI 会根据你的对话内容自动判断是否需要调用某个技能。技能文件中的 <code>description</code> 字段（必须以 <code>Use when...</code> 开头）定义了触发条件。</p>
+<p>你不需要精确地说某个命令，只需要描述你的需求，AI 就会匹配对应的技能。</p>
+<hr>
+<h2 id="二全部-14-个技能的触发条件">二、全部 14 个技能的触发条件</h2>
+<hr>
+<h3 id="1-using-superpowers--入口技能">1. <code>using-superpowers</code> — 入口技能</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>项目</th><th>说明</th></tr></thead><tbody><tr><td><strong>触发条件</strong></td><td><strong>每次对话开始时自动触发</strong></td></tr><tr><td><strong>典型 prompt</strong></td><td>任何对话的开头都触发，不需要你显式调用</td></tr></tbody></table>
+<p><strong>作用</strong>：建立”技能优先”规则——要求 AI 在任何回复或行动前先检查是否有适用的技能。</p>
+<hr>
+<h3 id="2-brainstorming--设计前头脑风暴">2. <code>brainstorming</code> — 设计前头脑风暴</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>项目</th><th>说明</th></tr></thead><tbody><tr><td><strong>触发条件</strong></td><td>任何创意工作：创建功能、构建组件、添加功能、修改行为</td></tr><tr><td><strong>关键词信号</strong></td><td><code>build</code>, <code>create</code>, <code>add a feature</code>, <code>make</code>, <code>develop</code>, <code>写一个</code>, <code>做一个</code>, <code>开发</code></td></tr></tbody></table>
+<p><strong>触发示例</strong>：</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>帮我写一个 todo app</span></span>
+<span class="line"><span>Build a CLI tool for managing notes</span></span>
+<span class="line"><span>Add a dark mode toggle to the settings</span></span>
+<span class="line"><span>Make a function that converts CSV to JSON</span></span>
+<span class="line"><span>我想做一个聊天机器人</span></span></code></pre>
+<p><strong>不触发</strong>：纯 bug 修复、纯代码审查、纯问题回答</p>
+<hr>
+<h3 id="3-systematic-debugging--系统性调试">3. <code>systematic-debugging</code> — 系统性调试</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>项目</th><th>说明</th></tr></thead><tbody><tr><td><strong>触发条件</strong></td><td>遇到任何 bug、测试失败、意外行为、性能问题、构建失败</td></tr><tr><td><strong>关键词信号</strong></td><td><code>bug</code>, <code>crash</code>, <code>error</code>, <code>fail</code>, <code>doesn't work</code>, <code>broken</code>, <code>报错</code>, <code>崩溃</code>, <code>不工作</code></td></tr></tbody></table>
+<p><strong>触发示例</strong>：</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>The app crashes when I click submit</span></span>
+<span class="line"><span>Tests are failing after the latest commit</span></span>
+<span class="line"><span>Search returns empty results even though data exists</span></span>
+<span class="line"><span>Why does this function return undefined?</span></span>
+<span class="line"><span>点击按钮后页面直接崩溃了</span></span></code></pre>
+<hr>
+<h3 id="4-test-driven-development--测试驱动开发">4. <code>test-driven-development</code> — 测试驱动开发</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>项目</th><th>说明</th></tr></thead><tbody><tr><td><strong>触发条件</strong></td><td>实现任何功能或修复 bug 时，在写实现代码之前</td></tr><tr><td><strong>关键词信号</strong></td><td><code>implement</code>, <code>add function</code>, <code>fix bug</code>（与实现相关）</td></tr></tbody></table>
+<p><strong>触发示例</strong>：</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>Add a function that validates email addresses</span></span>
+<span class="line"><span>Implement retry logic for API calls</span></span>
+<span class="line"><span>Fix the login bug</span></span>
+<span class="line"><span>创建一个用户注册功能</span></span></code></pre>
+<hr>
+<h3 id="5-verification-before-completion--完成前验证">5. <code>verification-before-completion</code> — 完成前验证</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>项目</th><th>说明</th></tr></thead><tbody><tr><td><strong>触发条件</strong></td><td>AI 即将声称工作完成、修复成功、测试通过时，提交或创建 PR 前</td></tr><tr><td><strong>关键词信号</strong></td><td>任何表示”完成/成功”的陈述之前</td></tr></tbody></table>
+<p>你不需要显式触发它——这是一个<strong>内部纪律检查</strong>。当 AI 准备说”完成了”时，它必须先运行验证命令。</p>
+<hr>
+<h3 id="6-requesting-code-review--请求代码审查">6. <code>requesting-code-review</code> — 请求代码审查</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>项目</th><th>说明</th></tr></thead><tbody><tr><td><strong>触发条件</strong></td><td>完成任务后、实现主要功能后、合并前</td></tr><tr><td><strong>关键词信号</strong></td><td><code>review</code>, <code>check my code</code>, <code>before merge</code>, <code>审查</code>, <code>检查代码</code></td></tr></tbody></table>
+<p><strong>触发示例</strong>：</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>Review my changes before I merge</span></span>
+<span class="line"><span>Check the code quality</span></span>
+<span class="line"><span>合并前帮我审查一下</span></span>
+<span class="line"><span>I just finished the feature, can you review?</span></span></code></pre>
+<hr>
+<h3 id="7-receiving-code-review--接收代码审查反馈">7. <code>receiving-code-review</code> — 接收代码审查反馈</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>项目</th><th>说明</th></tr></thead><tbody><tr><td><strong>触发条件</strong></td><td>接收到代码审查反馈时，特别是在实施建议之前</td></tr><tr><td><strong>关键词信号</strong></td><td>用户或 reviewer agent 给出代码反馈/建议时</td></tr></tbody></table>
+<p>不需要你显式触发——当有人给你代码反馈时自动生效。</p>
+<hr>
+<h3 id="8-writing-plans--编写实施计划">8. <code>writing-plans</code> — 编写实施计划</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>项目</th><th>说明</th></tr></thead><tbody><tr><td><strong>触发条件</strong></td><td>已有 spec 或需求，需要进行多步骤任务，在写代码之前</td></tr><tr><td><strong>关键词信号</strong></td><td>brainstorming 完成后自然触发，<code>plan</code>, <code>计划</code></td></tr></tbody></table>
+<p><strong>触发示例</strong>：</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>Write an implementation plan for the authentication feature</span></span>
+<span class="line"><span>为这个功能写一个实施计划</span></span>
+<span class="line"><span>（brainstorming 完成设计后自动触发）</span></span></code></pre>
+<hr>
+<h3 id="9-executing-plans--执行实施计划">9. <code>executing-plans</code> — 执行实施计划</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>项目</th><th>说明</th></tr></thead><tbody><tr><td><strong>触发条件</strong></td><td>有书面实施计划，需要在独立会话中执行</td></tr><tr><td><strong>关键词信号</strong></td><td><code>execute the plan</code>, <code>follow the plan</code>, <code>执行计划</code></td></tr></tbody></table>
+<p><strong>触发示例</strong>：</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>Execute the plan in docs/superpowers/plans/auth-plan.md</span></span>
+<span class="line"><span>按照计划文件执行</span></span></code></pre>
+<hr>
+<h3 id="10-subagent-driven-development--子代理驱动开发">10. <code>subagent-driven-development</code> — 子代理驱动开发</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>项目</th><th>说明</th></tr></thead><tbody><tr><td><strong>触发条件</strong></td><td>在当前会话中执行包含独立任务的实施计划</td></tr><tr><td><strong>关键词信号</strong></td><td>writing-plans 完成后选择 “Subagent-Driven” 模式</td></tr></tbody></table>
+<p><strong>触发示例</strong>：</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>（writing-plans 生成计划后）</span></span>
+<span class="line"><span>Use subagent-driven development to execute this plan</span></span></code></pre>
+<hr>
+<h3 id="11-dispatching-parallel-agents--并行代理分发">11. <code>dispatching-parallel-agents</code> — 并行代理分发</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>项目</th><th>说明</th></tr></thead><tbody><tr><td><strong>触发条件</strong></td><td>面对 2+ 个独立任务（不共享状态、无顺序依赖）</td></tr><tr><td><strong>关键词信号</strong></td><td><code>multiple failures</code>, <code>unrelated</code>, <code>independent</code>, <code>in parallel</code>, <code>多个</code>, <code>同时</code></td></tr></tbody></table>
+<p><strong>触发示例</strong>：</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>I have 3 unrelated test failures in different files</span></span>
+<span class="line"><span>Fix these independent issues simultaneously</span></span>
+<span class="line"><span>这 3 个 bug 互不相关，帮我同时修</span></span>
+<span class="line"><span>这些文件之间没有依赖，可以并行处理</span></span></code></pre>
+<hr>
+<h3 id="12-finishing-a-development-branch--完成开发分支">12. <code>finishing-a-development-branch</code> — 完成开发分支</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>项目</th><th>说明</th></tr></thead><tbody><tr><td><strong>触发条件</strong></td><td>实现完成、所有测试通过、需要决定如何集成工作</td></tr><tr><td><strong>关键词信号</strong></td><td><code>finish</code>, <code>complete</code>, <code>merge</code>, <code>PR</code>, <code>done with</code>, <code>开发完了</code>, <code>完成</code></td></tr></tbody></table>
+<p><strong>触发示例</strong>：</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>I'm done with the feature, what should I do next?</span></span>
+<span class="line"><span>All tests pass, ready to merge</span></span>
+<span class="line"><span>开发完成了，下一步是什么？</span></span></code></pre>
+<hr>
+<h3 id="13-using-git-worktrees--git-工作树隔离">13. <code>using-git-worktrees</code> — Git 工作树隔离</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>项目</th><th>说明</th></tr></thead><tbody><tr><td><strong>触发条件</strong></td><td>开始需要环境隔离的功能工作，或在执行实施计划之前</td></tr><tr><td><strong>关键词信号</strong></td><td><code>worktree</code>, <code>isolated</code>, <code>workspace</code>, <code>隔离</code>, <code>干净环境</code></td></tr></tbody></table>
+<p><strong>触发示例</strong>：</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>I want to start feature work in an isolated workspace</span></span>
+<span class="line"><span>Set up a clean environment for this feature</span></span>
+<span class="line"><span>帮我在隔离环境中开发这个功能</span></span></code></pre>
+<hr>
+<h3 id="14-writing-skills--编写技能">14. <code>writing-skills</code> — 编写技能</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>项目</th><th>说明</th></tr></thead><tbody><tr><td><strong>触发条件</strong></td><td>创建新技能、编辑已有技能、部署前验证技能</td></tr><tr><td><strong>关键词信号</strong></td><td><code>create a skill</code>, <code>write a skill</code>, <code>edit skill</code>, <code>new skill</code>, <code>写一个技能</code></td></tr></tbody></table>
+<p><strong>触发示例</strong>：</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>Create a new skill for database migration workflows</span></span>
+<span class="line"><span>Edit the brainstorming skill to add a new step</span></span>
+<span class="line"><span>帮我写一个 CI/CD 部署的技能</span></span></code></pre>
+<hr>
+<h2 id="三触发优先级规则">三、触发优先级规则</h2>
+<p>当多个技能同时匹配时，按以下优先级：</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>1. using-superpowers （总是最先加载，建立"技能优先"规则）</span></span>
+<span class="line"><span>       │</span></span>
+<span class="line"><span>2. 流程技能（brainstorming、systematic-debugging） → 先定方法</span></span>
+<span class="line"><span>       │</span></span>
+<span class="line"><span>3. 实现技能（TDD、writing-plans、subagent-driven-development） → 再执行</span></span></code></pre>
+<p><strong>经验法则</strong>：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>你的需求</th><th>触发链</th></tr></thead><tbody><tr><td>”Let’s build X”</td><td><code>brainstorming</code> → <code>writing-plans</code> → <code>TDD</code></td></tr><tr><td>”Fix this bug”</td><td><code>systematic-debugging</code> → <code>TDD</code></td></tr></tbody></table>
+<hr>
+<h2 id="四一句话速查表">四、一句话速查表</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>你想做的事</th><th>说这句话</th><th>触发技能</th></tr></thead><tbody><tr><td>开发新功能</td><td>”帮我做一个XXX”</td><td><code>brainstorming</code></td></tr><tr><td>修 bug</td><td>”这里有个 bug”</td><td><code>systematic-debugging</code></td></tr><tr><td>写代码</td><td>”实现一个XXX函数”</td><td><code>test-driven-development</code></td></tr><tr><td>声称完成</td><td>（自动触发）</td><td><code>verification-before-completion</code></td></tr><tr><td>代码审查</td><td>”帮我 review 代码”</td><td><code>requesting-code-review</code></td></tr><tr><td>收到反馈</td><td>（自动触发）</td><td><code>receiving-code-review</code></td></tr><tr><td>写计划</td><td>”写个实施计划”</td><td><code>writing-plans</code></td></tr><tr><td>执行计划</td><td>”按计划执行”</td><td><code>executing-plans</code></td></tr><tr><td>子代理执行</td><td>”用子代理执行”</td><td><code>subagent-driven-development</code></td></tr><tr><td>并行任务</td><td>”这几个互不相关，同时做”</td><td><code>dispatching-parallel-agents</code></td></tr><tr><td>隔离开发</td><td>”在隔离环境开发”</td><td><code>using-git-worktrees</code></td></tr><tr><td>完成收尾</td><td>”开发完了”</td><td><code>finishing-a-development-branch</code></td></tr><tr><td>写技能</td><td>”创建一个新技能”</td><td><code>writing-skills</code></td></tr></tbody></table>
+<hr>
+<h2 id="五完整技能依赖拓扑图">五、完整技能依赖拓扑图</h2>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>                    using-superpowers (入口)</span></span>
+<span class="line"><span>                           │</span></span>
+<span class="line"><span>              ┌────────────┼────────────┐</span></span>
+<span class="line"><span>              ▼            ▼            ▼</span></span>
+<span class="line"><span>         brainstorming  systematic-  test-driven-</span></span>
+<span class="line"><span>                        debugging    development</span></span>
+<span class="line"><span>              │            │            │</span></span>
+<span class="line"><span>              ▼            │            │</span></span>
+<span class="line"><span>        writing-plans      │            │</span></span>
+<span class="line"><span>              │            │            │</span></span>
+<span class="line"><span>    ┌─────────┼─────────┐  │            │</span></span>
+<span class="line"><span>    ▼         ▼         ▼  │            │</span></span>
+<span class="line"><span>  executing- subagent-  dis-           │</span></span>
+<span class="line"><span>  plans     driven-   patching-        │</span></span>
+<span class="line"><span>            dev       parallel         │</span></span>
+<span class="line"><span>    │         │         │              │</span></span>
+<span class="line"><span>    └─────────┼─────────┘              │</span></span>
+<span class="line"><span>              ▼                        │</span></span>
+<span class="line"><span>    finishing-a-branch                 │</span></span>
+<span class="line"><span>              │                        │</span></span>
+<span class="line"><span>              ▼                        ▼</span></span>
+<span class="line"><span>    requesting-code-review    verification-before-completion</span></span>
+<span class="line"><span>              │                        │</span></span>
+<span class="line"><span>              ▼                        │</span></span>
+<span class="line"><span>    receiving-code-review              │</span></span>
+<span class="line"><span>                                       │</span></span>
+<span class="line"><span>    ┌──────────────────────────────────┘</span></span>
+<span class="line"><span>    │</span></span>
+<span class="line"><span>    ├── using-git-worktrees (基础设施)</span></span>
+<span class="line"><span>    └── writing-skills (基础设施)</span></span></code></pre>
+<hr>
+<h2 id="六技能分类速查">六、技能分类速查</h2>
+<h3 id="流程编排技能7-个">流程编排技能（7 个）</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>技能</th><th>角色</th><th>触发时机</th></tr></thead><tbody><tr><td><code>using-superpowers</code></td><td>入口守卫</td><td>每次对话开始</td></tr><tr><td><code>brainstorming</code></td><td>设计探索</td><td>创意/功能请求</td></tr><tr><td><code>writing-plans</code></td><td>计划编写</td><td>设计批准后</td></tr><tr><td><code>executing-plans</code></td><td>计划执行</td><td>有书面计划时</td></tr><tr><td><code>subagent-driven-development</code></td><td>子代理执行</td><td>含独立任务的计划</td></tr><tr><td><code>dispatching-parallel-agents</code></td><td>并行任务</td><td>多个独立任务</td></tr><tr><td><code>finishing-a-development-branch</code></td><td>收尾</td><td>开发全部完成</td></tr></tbody></table>
+<h3 id="质量纪律技能5-个">质量纪律技能（5 个）</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>技能</th><th>角色</th><th>触发时机</th></tr></thead><tbody><tr><td><code>test-driven-development</code></td><td>TDD 执法</td><td>写任何实现代码前</td></tr><tr><td><code>systematic-debugging</code></td><td>调试方法论</td><td>遇到任何 bug 时</td></tr><tr><td><code>verification-before-completion</code></td><td>验证门禁</td><td>声称完成前</td></tr><tr><td><code>requesting-code-review</code></td><td>审查发起</td><td>任务完成/合并前</td></tr><tr><td><code>receiving-code-review</code></td><td>审查响应</td><td>收到反馈时</td></tr></tbody></table>
+<h3 id="基础设施技能2-个">基础设施技能（2 个）</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>技能</th><th>角色</th><th>触发时机</th></tr></thead><tbody><tr><td><code>using-git-worktrees</code></td><td>环境隔离</td><td>需要干净工作空间</td></tr><tr><td><code>writing-skills</code></td><td>技能编写</td><td>创建/编辑技能</td></tr></tbody></table>  </div> <!-- Previous / Next navigation --> <nav class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-12 pt-8 border-t border-[var(--color-border)]" data-astro-cid-bvzihdzo> <a href="/blog/Superpowers/Superpowers-报告" class="card-hover p-4 no-underline group" data-astro-cid-bvzihdzo> <span class="text-xs text-[var(--color-text-tertiary)] block mb-1" data-astro-cid-bvzihdzo>&larr; 上一篇</span> <span class="text-sm font-medium text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors line-clamp-1" data-astro-cid-bvzihdzo>⚡ Superpowers 深度调研报告</span> </a> <a href="/blog/PPT-Master/PPT-Master-美化指南报告" class="card-hover p-4 no-underline group text-right" data-astro-cid-bvzihdzo> <span class="text-xs text-[var(--color-text-tertiary)] block mb-1" data-astro-cid-bvzihdzo>下一篇 &rarr;</span> <span class="text-sm font-medium text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors line-clamp-1" data-astro-cid-bvzihdzo>ppt-master 制作更美观 PPT 的完整指南</span> </a> </nav> <hr class="!mt-12 !mb-8" data-astro-cid-bvzihdzo> <div data-astro-cid-bvzihdzo> <a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-bvzihdzo>
+&larr; 返回博客列表
+</a> </div> </div> </div> </article> </div>  </main> <footer class="border-t border-[var(--color-border)] mt-24 py-8" data-astro-cid-pux6a34n><div class="max-w-content flex items-center justify-between" data-astro-cid-pux6a34n><span class="text-sm text-[var(--color-text-tertiary)]" data-astro-cid-pux6a34n>
+&copy; 2026 星游寰宇
+</span><div class="flex items-center gap-4" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>博客</a><a href="/projects" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>项目</a><a href="/notes" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>日记</a><a href="/resources" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>资源</a><a href="/about" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>关于</a></div></div></footer> <div id="link-preview" style="display:none;position:fixed;z-index:99;max-width:18rem;pointer-events:none;" data-astro-cid-t7vshrbh></div>  <script type="module">(async()=>{try{const c=await fetch("/posts.json");if(!c.ok)return;const u=await c.json(),p=new Map(u.map(t=>[t.href,t])),e=document.getElementById("link-preview");if(!e)return;let n="",d;document.addEventListener("mouseover",t=>{const i=t.target.closest("a[href^='/blog/']");if(!i){e.style.display="none",n="";return}const s=i.getAttribute("href");if(!s||s===n)return;const o=p.get(s);o&&(n=s,d=setTimeout(()=>{e.innerHTML=`<div class="lp-title">${o.title}</div><div class="lp-summary">${o.summary}</div>`;const r=i.getBoundingClientRect();let a=r.left,l=r.bottom+6;a+288>window.innerWidth&&(a=window.innerWidth-296),l+80>window.innerHeight&&(l=r.top-80),Object.assign(e.style,{left:a+"px",top:l+"px",display:"block"})},300))},{passive:!0}),document.addEventListener("mouseout",t=>{t.target.closest("a[href^='/blog/']")&&(clearTimeout(d),e.style.display="none",n="")},{passive:!0})}catch{}})();</script> </body></html>  <script type="module">const c=document.getElementById("toc-toggle"),s=document.getElementById("toc-list"),i=document.getElementById("toc-chevron");c&&s&&i&&c.addEventListener("click",()=>{const o=s.classList.toggle("hidden");c.setAttribute("aria-expanded",String(o)),i.style.transform=o?"rotate(180deg)":""});const r=document.querySelectorAll(".toc-list a");if(r.length>0){const o=new IntersectionObserver(n=>{for(const t of n)t.isIntersecting&&r.forEach(e=>{e.classList.toggle("active",e.getAttribute("href")===`#${t.target.id}`)})},{rootMargin:"-80px 0px -80% 0px"});r.forEach(n=>{const t=n.getAttribute("href")?.slice(1);if(t){const e=document.getElementById(t);e&&o.observe(e)}})}</script>

@@ -1,0 +1,427 @@
+<!DOCTYPE html><html lang="zh-CN"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="Skill 的触发依赖 **AI 模型对用户意图的匹配**，这个过程天然存在不确定性："><meta name="color-scheme" content="light"><!-- Open Graph --><meta property="og:title" content="Skill 调用清晰化指南 — 如何让 Skill 的触发变得精准可控 — 星游寰宇"><meta property="og:description" content="Skill 的触发依赖 **AI 模型对用户意图的匹配**，这个过程天然存在不确定性："><meta property="og:url" content="https://code2239.github.io/blog/Agent与Skills/Skill调用清晰化-指南报告"><meta property="og:type" content="article"><meta property="og:site_name" content="星游寰宇"><meta property="og:locale" content="zh_CN"><meta property="article:published_time" content="2026-07-05"><meta property="article:tag" content="AI"><meta property="article:tag" content="调研"><meta property="article:tag" content="Skill"><meta property="article:tag" content="工具"><!-- Twitter Card --><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Skill 调用清晰化指南 — 如何让 Skill 的触发变得精准可控 — 星游寰宇"><meta name="twitter:description" content="Skill 的触发依赖 **AI 模型对用户意图的匹配**，这个过程天然存在不确定性："><!-- Canonical --><link rel="canonical" href="https://code2239.github.io/blog/Agent与Skills/Skill调用清晰化-指南报告"><title>Skill 调用清晰化指南 — 如何让 Skill 的触发变得精准可控 — 星游寰宇</title><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="alternate" type="application/rss+xml" title="星游寰宇 RSS" href="/rss.xml"><!-- Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"星游寰宇","url":"https://code2239.github.io","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://code2239.github.io/search?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://code2239.github.io"},{"@type":"ListItem","position":2,"name":"博客","item":"https://code2239.github.io/blog"},{"@type":"ListItem","position":3,"name":"Agent与Skills","item":"https://code2239.github.io/blog/Agent与Skills"},{"@type":"ListItem","position":4,"name":"Skill调用清晰化 指南报告"}]},{"@context":"https://schema.org","@type":"BlogPosting","headline":"Skill 调用清晰化指南 — 如何让 Skill 的触发变得精准可控","description":"Skill 的触发依赖 **AI 模型对用户意图的匹配**，这个过程天然存在不确定性：","datePublished":"2026-07-05","url":"https://code2239.github.io/blog/Agent与Skills/Skill调用清晰化-指南报告","keywords":"AI, 调研, Skill, 工具"}]}</script><link rel="stylesheet" href="/dev/_astro/_slug_.BlQX3qwK.css">
+<style>.back-to-top[data-astro-cid-gzprr2dq]{position:fixed;bottom:2rem;right:2rem;z-index:40;width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:50%;border:1px solid var(--color-border);background:var(--color-bg);color:var(--color-text-secondary);cursor:pointer;box-shadow:var(--shadow-md);transition:opacity .2s ease,transform .2s ease}.back-to-top[data-astro-cid-gzprr2dq]:hover{color:var(--color-accent);border-color:var(--color-accent);transform:translateY(-2px)}.back-to-top[data-astro-cid-gzprr2dq].hidden{opacity:0;pointer-events:none}.copy-btn[data-astro-cid-qqybitij]{position:absolute;top:8px;right:8px;padding:4px 10px;font-size:.6875rem;font-family:var(--font-sans);color:var(--color-text-tertiary);background:var(--color-bg);border:1px solid var(--color-border);border-radius:6px;cursor:pointer;opacity:0;transition:opacity .15s ease,color .15s ease}pre[data-astro-cid-qqybitij]:hover .copy-btn[data-astro-cid-qqybitij]{opacity:1}.copy-btn[data-astro-cid-qqybitij]:hover{color:var(--color-accent);border-color:var(--color-accent)}.copy-btn[data-astro-cid-qqybitij].copied{color:#16a34a;border-color:#16a34a}.blog-layout[data-astro-cid-bvzihdzo]{display:block}.blog-toc[data-astro-cid-bvzihdzo]{display:none}.blog-body[data-astro-cid-bvzihdzo]{min-width:0}@media(min-width:1024px){.blog-layout[data-astro-cid-bvzihdzo]{display:grid;grid-template-columns:14rem 1fr;gap:3rem;align-items:start}.blog-toc[data-astro-cid-bvzihdzo]{display:block}.blog-body[data-astro-cid-bvzihdzo]{padding-right:2rem}}@media(max-width:1023px){.blog-toc[data-astro-cid-bvzihdzo]{display:block;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid var(--color-border)}}
+</style></head> <body class="min-h-screen flex flex-col"> <nav class="sticky top-0 z-40 bg-[var(--color-bg)]/80 backdrop-blur-md border-b border-[var(--color-border)]" data-astro-cid-pux6a34n><div class="max-w-content flex items-center justify-between py-4" data-astro-cid-pux6a34n><a href="/" class="flex items-center gap-2.5 text-base font-semibold no-underline tracking-tight" data-astro-cid-pux6a34n><svg class="w-7 h-7" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" data-astro-cid-pux6a34n><circle cx="16" cy="16" r="15" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-pux6a34n></circle><circle cx="16" cy="16" r="3" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="16" cy="5" r="1.5" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="24" cy="10" r="1" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="8" cy="22" r="1" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="25" cy="21" r="0.8" fill="currentColor" data-astro-cid-pux6a34n></circle></svg>
+星游寰宇
+</a><!-- Desktop nav --><div class="hidden sm:flex items-center gap-5" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>博客</a><a href="/projects" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>项目</a><a href="/notes" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>日记</a><a href="/resources" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>资源</a><a href="/about" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>关于</a><button id="search-trigger" class="flex items-center gap-1.5 text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] bg-[var(--color-bg-secondary)] hover:bg-[var(--color-bg-tertiary)] border border-[var(--color-border)] hover:border-[var(--color-accent)]/30 rounded-lg px-3 py-1.5 cursor-pointer shadow-sm hover:shadow-md transition-all duration-200" aria-label="搜索 (Ctrl+K)" title="搜索 (Ctrl+K)" data-astro-cid-pux6a34n><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-pux6a34n><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" data-astro-cid-pux6a34n></path></svg><span class="hidden lg:inline" data-astro-cid-pux6a34n>搜索</span><kbd class="hidden lg:inline-flex items-center text-[0.625rem] font-mono text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1 py-px rounded" data-astro-cid-pux6a34n>Ctrl+K</kbd></button></div><!-- Mobile hamburger --><button id="menu-btn" class="sm:hidden flex flex-col gap-1 p-2 -mr-2 cursor-pointer" aria-label="打开菜单" data-astro-cid-pux6a34n><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-transform duration-200" data-astro-cid-pux6a34n></span><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-opacity duration-200" data-astro-cid-pux6a34n></span><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-transform duration-200" data-astro-cid-pux6a34n></span></button></div><!-- Mobile menu --><div id="mobile-menu" class="hidden sm:hidden border-t border-[var(--color-border)] bg-[var(--color-bg)]" data-astro-cid-pux6a34n><div class="max-w-content flex flex-col gap-2 py-4" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>博客</a><a href="/projects" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>项目</a><a href="/notes" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>日记</a><a href="/resources" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>资源</a><a href="/about" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>关于</a></div></div></nav>
+    <div id="search-overlay" class="srch-overlay" role="dialog" aria-modal="true" aria-label="全局搜索" data-astro-cid-mn7pezny> <div id="search-backdrop" class="srch-backdrop" data-astro-cid-mn7pezny></div> <div class="srch-panel" id="srch-panel" data-astro-cid-mn7pezny> <!-- Search input --> <div class="srch-input-row" data-astro-cid-mn7pezny> <svg class="srch-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-mn7pezny> <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" data-astro-cid-mn7pezny></path> </svg> <input type="text" id="search-input" class="srch-input" placeholder="搜索文章、项目、日记、资源..." autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="go" data-astro-cid-mn7pezny> <kbd class="srch-kbd" data-astro-cid-mn7pezny>Esc</kbd> </div> <!-- Results area --> <div id="search-results" class="srch-results" data-astro-cid-mn7pezny> <p class="srch-empty" id="search-empty-hint" data-astro-cid-mn7pezny>输入关键词开始搜索</p> </div> <!-- Skeleton loading --> <div id="search-skeleton" class="srch-skeleton" style="display:none;" aria-hidden="true" data-astro-cid-mn7pezny> <div class="srch-skeleton-line" style="width:75%" data-astro-cid-mn7pezny></div> <div class="srch-skeleton-line" style="width:50%" data-astro-cid-mn7pezny></div> <div class="srch-skeleton-line" style="width:60%" data-astro-cid-mn7pezny></div> </div> <!-- Footer hints --> <div class="srch-footer" data-astro-cid-mn7pezny> <div class="srch-footer-hints" data-astro-cid-mn7pezny> <span data-astro-cid-mn7pezny><kbd data-astro-cid-mn7pezny>↑</kbd><kbd data-astro-cid-mn7pezny>↓</kbd> 导航</span> <span data-astro-cid-mn7pezny><kbd data-astro-cid-mn7pezny>↵</kbd> 打开</span> <span data-astro-cid-mn7pezny><kbd data-astro-cid-mn7pezny>Ctrl</kbd>+<kbd data-astro-cid-mn7pezny>K</kbd> 切换</span> </div> <div class="srch-footer-brand" data-astro-cid-mn7pezny>
+powered by Orama
+</div> </div> </div> </div> <script type="module" src="/dev/_astro/Navigation.astro_astro_type_script_index_0_lang.B7cQAlyY.js"></script> <main class="flex-1">  <div class="reading-progress" id="reading-progress" style="width: 0%"></div> <script type="module">const o=document.getElementById("reading-progress");if(!o)throw new Error("Reading progress bar element not found");const r=()=>{const n=window.scrollY,e=document.documentElement.scrollHeight-window.innerHeight,t=e>0?n/e*100:0;o.style.width=`${Math.min(t,100)}%`};window.addEventListener("scroll",r,{passive:!0});</script> <button id="back-to-top" class="back-to-top hidden" aria-label="返回顶部" data-astro-cid-gzprr2dq> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-gzprr2dq> <polyline points="18 15 12 9 6 15" data-astro-cid-gzprr2dq></polyline> </svg> </button>  <script type="module">const o=document.getElementById("back-to-top");o&&(window.addEventListener("scroll",()=>{o.classList.toggle("hidden",window.scrollY<400)},{passive:!0}),o.addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"})));</script> <script type="module">document.querySelectorAll("pre").forEach(e=>{const t=document.createElement("button");t.className="copy-btn",t.textContent="复制",t.addEventListener("click",async()=>{const n=e.querySelector("code")?.textContent||e.textContent||"";try{await navigator.clipboard.writeText(n),t.textContent="已复制",t.classList.add("copied"),setTimeout(()=>{t.textContent="复制",t.classList.remove("copied")},2e3)}catch{t.textContent="失败",setTimeout(()=>{t.textContent="复制"},2e3)}}),e.style.position="relative",e.appendChild(t)});</script> <div class="px-6 xl:px-12 pt-12 pb-16" data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <header class="mb-12 text-center" data-astro-cid-bvzihdzo> <h1 class="text-3xl font-semibold mb-3 tracking-tight" data-astro-cid-bvzihdzo>Skill 调用清晰化指南 — 如何让 Skill 的触发变得精准可控</h1> <div class="flex items-center justify-center gap-2 text-[var(--color-text-tertiary)] text-sm" data-astro-cid-bvzihdzo> <time datetime="2026-07-05" data-astro-cid-bvzihdzo>2026-07-05</time> <span class="text-[var(--color-border)]" data-astro-cid-bvzihdzo>·</span> <span data-astro-cid-bvzihdzo>17 分钟阅读</span>  <span class="text-[var(--color-border)]" data-astro-cid-bvzihdzo>·</span> <span class="text-sm text-[var(--color-text-tertiary)]"> <span> AI<span class="mx-1">·</span> </span><span> 调研<span class="mx-1">·</span> </span><span> Skill<span class="mx-1">·</span> </span><span> 工具 </span> </span>  </div> </header> <div class="blog-layout" data-astro-cid-bvzihdzo> <aside class="blog-toc" data-astro-cid-bvzihdzo> <div class="sticky top-24" data-astro-cid-bvzihdzo> <button id="toc-toggle" class="hidden max-md:flex items-center gap-1 text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-3 cursor-pointer border-none bg-transparent p-0" aria-expanded="false" aria-controls="toc-list" data-astro-cid-bvzihdzo>
+目录
+<svg id="toc-chevron" class="w-3 h-3 transition-transform duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-bvzihdzo><polyline points="6 9 12 15 18 9" data-astro-cid-bvzihdzo></polyline></svg> </button> <span class="text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-3 max-md:hidden" data-astro-cid-bvzihdzo>目录</span> <div id="toc-list" class="max-md:hidden" data-astro-cid-bvzihdzo> <nav class="toc"> <p class="text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-3">目录</p> <ul class="toc-list"> <li class> <a href="#一问题为什么-skill-的触发会模糊">一、问题：为什么 Skill 的触发会模糊？</a> </li><li class="toc-h3"> <a href="#模糊的根源">模糊的根源</a> </li><li class> <a href="#二方案一使用--斜杠命令最可靠">二、方案一：使用 / 斜杠命令（最可靠）</a> </li><li class="toc-h3"> <a href="#用法">用法</a> </li><li class="toc-h3"> <a href="#优点">优点</a> </li><li class="toc-h3"> <a href="#缺点">缺点</a> </li><li class="toc-h3"> <a href="#最佳实践">最佳实践</a> </li><li class> <a href="#三方案二优化-skill-的-description治本之策">三、方案二：优化 Skill 的 description（治本之策）</a> </li><li class="toc-h3"> <a href="#31-反面示例触发模糊">3.1 反面示例（触发模糊）</a> </li><li class="toc-h3"> <a href="#32-正面示例触发精确">3.2 正面示例（触发精确）</a> </li><li class="toc-h3"> <a href="#33-优化-checklist">3.3 优化 Checklist</a> </li><li class="toc-h3"> <a href="#34-多-skill-分工示例">3.4 多 Skill 分工示例</a> </li><li class> <a href="#四方案三创建路由-skill复杂场景最优解">四、方案三：创建”路由 Skill”（复杂场景最优解）</a> </li><li class="toc-h3"> <a href="#41-路由-skill-的定义">4.1 路由 Skill 的定义</a> </li><li class="toc-h3"> <a href="#42-路由工作流程">4.2 路由工作流程</a> </li><li class="toc-h3"> <a href="#43-适用场景">4.3 适用场景</a> </li><li class> <a href="#五方案四利用-hook-辅助间接方案不推荐">五、方案四：利用 Hook 辅助（间接方案，不推荐）</a> </li><li class="toc-h3"> <a href="#51-示例read-文件时提醒可用-skill">5.1 示例：Read 文件时提醒可用 Skill</a> </li><li class="toc-h3"> <a href="#52-为什么只是辅助方案">5.2 为什么只是辅助方案</a> </li><li class> <a href="#六方案对比总表">六、方案对比总表</a> </li><li class> <a href="#七分层推荐策略">七、分层推荐策略</a> </li><li class="toc-h3"> <a href="#如果你独自使用个人开发者">如果你独自使用（个人开发者）</a> </li><li class="toc-h3"> <a href="#如果你管理团队多人协作">如果你管理团队（多人协作）</a> </li><li class="toc-h3"> <a href="#如果你有大量-skill10-个">如果你有大量 Skill（10+ 个）</a> </li><li class> <a href="#八快速实施清单">八、快速实施清单</a> </li><li class="toc-h3"> <a href="#立即可以做5-分钟">立即可以做（5 分钟）</a> </li><li class="toc-h3"> <a href="#深入优化30-分钟">深入优化（30 分钟）</a> </li><li class="toc-h3"> <a href="#持续改进">持续改进</a> </li><li class> <a href="#九总结">九、总结</a> </li><li class> <a href="#参考链接">参考链接</a> </li> </ul> </nav> </div> </div> </aside> <div class="blog-body" data-astro-cid-bvzihdzo> <div class="prose prose-neutral max-w-none" data-astro-cid-bvzihdzo>  <h1 id="skill-调用清晰化指南--如何让-skill-的触发变得精准可控">Skill 调用清晰化指南 — 如何让 Skill 的触发变得精准可控</h1>
+<blockquote>
+<p><strong>报告日期</strong>：2026-07-05<br>
+<strong>关键词</strong>：Skill 触发、命令调度、模糊匹配、精确控制、Claude Code</p>
+</blockquote>
+<hr>
+<h2 id="一问题为什么-skill-的触发会模糊">一、问题：为什么 Skill 的触发会模糊？</h2>
+<p>Skill 的触发依赖 <strong>AI 模型对用户意图的匹配</strong>，这个过程天然存在不确定性：</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>用户说 "帮我看看这段代码"</span></span>
+<span class="line"><span>        │</span></span>
+<span class="line"><span>        ▼</span></span>
+<span class="line"><span>  [AI 模型理解意图]</span></span>
+<span class="line"><span>        │</span></span>
+<span class="line"><span>        ├── 匹配到 code-review Skill     ✓</span></span>
+<span class="line"><span>        ├── 匹配到 security-review Skill ？← 模糊</span></span>
+<span class="line"><span>        ├── 匹配到 react-review Skill     ？← 模糊</span></span>
+<span class="line"><span>        └── 不匹配任何 Skill，普通回答     ？</span></span></code></pre>
+<h3 id="模糊的根源">模糊的根源</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>原因</th><th>说明</th></tr></thead><tbody><tr><td><strong>描述太宽泛</strong></td><td>Skill 的 <code>description</code> 写得模糊（如”分析代码质量”），AI 容易误匹配</td></tr><tr><td><strong>多个 Skill 重叠</strong></td><td>多个 Skill 都声称能做类似的事，AI 无法区分</td></tr><tr><td><strong>自然语言歧义</strong></td><td>”Review”可能指代码审查、设计评审、文档审核</td></tr><tr><td><strong>缺乏负向约束</strong></td><td>没有说明”什么情况下不该触发”</td></tr></tbody></table>
+<hr>
+<h2 id="二方案一使用--斜杠命令最可靠">二、方案一：使用 <code>/</code> 斜杠命令（最可靠）</h2>
+<p><strong>这是唯一 100% 确定性的触发方式</strong>。用户直接输入命令，不依赖 AI 的意图判断。</p>
+<h3 id="用法">用法</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>/security-review         → 精确触发安全审查 Skill</span></span>
+<span class="line"><span>/deep-research "xxx"     → 精确触发深度研究 Skill（带参数）</span></span>
+<span class="line"><span>/ui-styling              → 精确触发 UI 样式 Skill</span></span>
+<span class="line"><span>/code-review --fix       → 精确触发代码审查（带参数）</span></span></code></pre>
+<h3 id="优点">优点</h3>
+<ul>
+<li><strong>零模糊</strong>：人直接指定，AI 没有选择权</li>
+<li><strong>速度快</strong>：跳过意图判断步骤，直接加载 Skill</li>
+<li><strong>支持参数</strong>：可以传递具体参数</li>
+<li><strong>适合高频</strong>：常用 Skill 记住命令后形成肌肉记忆</li>
+</ul>
+<h3 id="缺点">缺点</h3>
+<ul>
+<li><strong>需要记忆</strong>：用户需要知道有哪些 Skill 以及对应的命令名</li>
+<li><strong>不够自然</strong>：不如自然语言”帮我看看这个文件”直观</li>
+<li><strong>缺乏弹性</strong>：严格匹配，拼写错误或记错名字就无效</li>
+</ul>
+<h3 id="最佳实践">最佳实践</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span># 常用 Skill 推荐用 / 命令</span></span>
+<span class="line"><span>/security-review     文件: app/backend/src/auth.ts</span></span>
+<span class="line"><span>/code-review         检查最近 3 个 commit</span></span>
+<span class="line"><span>/deep-research       调研 GitHub 上 Star > 1000 的 AI 工具</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># 不确定名字时</span></span>
+<span class="line"><span>/help                → 列出所有可用命令</span></span></code></pre>
+<hr>
+<h2 id="三方案二优化-skill-的-description治本之策">三、方案二：优化 Skill 的 <code>description</code>（治本之策）</h2>
+<p>Skill 的 <code>description</code> 是 AI 判断是否匹配的核心依据。优化它能从源头减少误触。</p>
+<h3 id="31-反面示例触发模糊">3.1 反面示例（触发模糊）</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="markdown"><code><span class="line"><span style="color:var(--astro-code-foreground);font-weight:bold">## 当前写法（太模糊）</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">---</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">name: code-review</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">description: "审查代码质量"</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">---</span></span></code></pre>
+<p><strong>为什么模糊？</strong>“审查代码质量”可以匹配任何和代码相关的请求。</p>
+<h3 id="32-正面示例触发精确">3.2 正面示例（触发精确）</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="markdown"><code><span class="line"><span style="color:var(--astro-code-foreground);font-weight:bold">## 优化写法（精确界定）</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">---</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">name: code-review</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">description: ></span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">  【触发条件】当用户说以下内容时激活：</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">    - "review 这个 PR/代码/提交"</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">    - "检查这段代码有没有问题"</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">    - "/code-review [</span><span style="color:var(--astro-code-token-keyword)">路径</span><span style="color:var(--astro-code-foreground)">]"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">  【不触发场景】</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">    - 纯问问题（"什么是闭包？"）</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">    - 讨论设计架构（请用 architecture-review Skill）</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">    - 只涉及配置文件或文档</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">  【功能范围】</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">    - 正确性（bug、逻辑错误）</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">    - 安全性（注入、越权、敏感泄露）</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">    - 性能（慢查询、内存泄露）</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">    - 代码规范（命名、结构、冗余）</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">---</span></span></code></pre>
+<h3 id="33-优化-checklist">3.3 优化 Checklist</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>要素</th><th>说明</th></tr></thead><tbody><tr><td><strong>触发词列表</strong></td><td>列出 3-5 个典型触发短语</td></tr><tr><td><strong>不触发场景</strong></td><td>明确什么情况不该匹配</td></tr><tr><td><strong>职责边界</strong></td><td>和相近 Skill 的分工说明</td></tr><tr><td><strong>参数格式</strong></td><td>如果支持参数，写明格式</td></tr><tr><td><strong>示例用法</strong></td><td>1-2 个完整示例</td></tr></tbody></table>
+<h3 id="34-多-skill-分工示例">3.4 多 Skill 分工示例</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="markdown"><code><span class="line"><span style="color:var(--astro-code-foreground);font-weight:bold">## code-review（代码正确性）</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">description: "审查代码的 bug、安全、性能问题。不处理架构设计。"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-foreground);font-weight:bold">## architecture-review（架构评审）</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">description: "评估系统架构、模块划分、技术选型。不看单行代码。"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-foreground);font-weight:bold">## security-review（安全审计）</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">description: "专项安全审查：注入、认证、授权、敏感数据。比 code-review 更深。"</span></span></code></pre>
+<p><strong>每个 Skill 明确”边界”</strong>，AI 就知道遇到模糊请求时该选哪个。</p>
+<hr>
+<h2 id="四方案三创建路由-skill复杂场景最优解">四、方案三：创建”路由 Skill”（复杂场景最优解）</h2>
+<p>当你有大量 Skill 并且自然语言触发总是混淆时，写一个薄调度 Skill 做<strong>意图分发</strong>。</p>
+<h3 id="41-路由-skill-的定义">4.1 路由 Skill 的定义</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="markdown"><code><span class="line"><span style="color:var(--astro-code-foreground)">---</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">name: skill-router</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">description: ></span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">  意图路由 Skill。当用户说"帮我检查代码"、"分析这个"、"review"等</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">  模糊请求时激活。由本 Skill 判断具体调用哪个子 Skill。</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">---</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-foreground);font-weight:bold">## 路由规则</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-foreground);font-weight:bold">### 1. 代码类请求</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">  用户说："检查代码"、"review"、"找 bug"、"安全审查"</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">  → 调用 code-review Skill（一般审查）</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">  → 如果明确提到"安全"→ 调用 security-review</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-foreground);font-weight:bold">### 2. 设计类请求</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">  用户说："设计"、"界面"、"UI"、"UX"、"交互"</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">  → 调用 frontend-design Skill</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-foreground);font-weight:bold">### 3. 研究类请求</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">  用户说："调研"、"研究"、"搜索"、"分析趋势"</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">  → 调用 deep-research Skill</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-foreground);font-weight:bold">### 4. 默认</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">  无法明确分类 → 提示用户以下可用选项：</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">    /code-review、/security-review、/deep-research、/frontend-design</span></span></code></pre>
+<h3 id="42-路由工作流程">4.2 路由工作流程</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>用户: "帮我看看这段代码有没有安全问题"</span></span>
+<span class="line"><span>        │</span></span>
+<span class="line"><span>        ▼</span></span>
+<span class="line"><span>  skill-router 激活</span></span>
+<span class="line"><span>        │</span></span>
+<span class="line"><span>        ├── 检测到关键词 "安全"</span></span>
+<span class="line"><span>        ├── 分类：安全审查</span></span>
+<span class="line"><span>        │</span></span>
+<span class="line"><span>        ▼</span></span>
+<span class="line"><span>  ┌─ 输出路由结果 ─────────────────────┐</span></span>
+<span class="line"><span>  │                                     │</span></span>
+<span class="line"><span>  │  根据你的请求，我建议使用以下 Skill： │</span></span>
+<span class="line"><span>  │                                     │</span></span>
+<span class="line"><span>  │  /security-review  ← 最匹配         │</span></span>
+<span class="line"><span>  │  /code-review      ← 备选           │</span></span>
+<span class="line"><span>  │                                     │</span></span>
+<span class="line"><span>  │  继续前请确认                       │</span></span>
+<span class="line"><span>  └─────────────────────────────────────┘</span></span></code></pre>
+<h3 id="43-适用场景">4.3 适用场景</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>场景</th><th>推荐</th></tr></thead><tbody><tr><td>你有 10+ 个 Skill</td><td>强烈推荐路由 Skill</td></tr><tr><td>Skill 功能高度重叠</td><td>强烈推荐路由 Skill</td></tr><tr><td>团队多人使用，表达习惯不同</td><td>强烈推荐路由 Skill</td></tr><tr><td>只有 3-5 个边界清晰的 Skill</td><td>优化 description 就够了，不需要路由</td></tr><tr><td>你主要用 <code>/</code> 命令</td><td>不需要路由</td></tr></tbody></table>
+<hr>
+<h2 id="五方案四利用-hook-辅助间接方案不推荐">五、方案四：利用 Hook 辅助（间接方案，不推荐）</h2>
+<p>Hook 不能控制 Skill 触发，但可以在特定工具调用后<strong>注入提示</strong>来间接引导。</p>
+<h3 id="51-示例read-文件时提醒可用-skill">5.1 示例：Read 文件时提醒可用 Skill</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="jsonc"><code><span class="line"><span style="color:var(--astro-code-foreground)">{</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">  "hooks"</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-foreground)"> {</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">    "AfterToolCall"</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-foreground)"> {</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">      "Read"</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-foreground)"> {</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">        "handler"</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-foreground)"> [</span></span>
+<span class="line"><span style="color:var(--astro-code-token-string-expression)">          "如果读取的是 .ts/.tsx/.js 代码文件："</span><span style="color:var(--astro-code-token-punctuation)">,</span></span>
+<span class="line"><span style="color:var(--astro-code-token-string-expression)">          "  追加提示：'需要审查代码质量？请使用 /code-review 命令'"</span><span style="color:var(--astro-code-token-punctuation)">,</span></span>
+<span class="line"><span style="color:var(--astro-code-token-string-expression)">          "如果读取的是 .env/配置/密钥文件："</span><span style="color:var(--astro-code-token-punctuation)">,</span></span>
+<span class="line"><span style="color:var(--astro-code-token-string-expression)">          "  追加提示：'需要安全检查？请使用 /security-review 命令'"</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">        ]</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">      }</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">    }</span><span style="color:var(--astro-code-token-punctuation)">,</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">    "BeforeToolCall"</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-foreground)"> {</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">      "Write"</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-foreground)"> {</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">        "handler"</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-foreground)"> [</span></span>
+<span class="line"><span style="color:var(--astro-code-token-string-expression)">          "如果写入的是新功能代码文件："</span><span style="color:var(--astro-code-token-punctuation)">,</span></span>
+<span class="line"><span style="color:var(--astro-code-token-string-expression)">          "  追加提示：'写完后建议运行 /code-review 检查质量'"</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">        ]</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">      }</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">    }</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">  }</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">}</span></span></code></pre>
+<h3 id="52-为什么只是辅助方案">5.2 为什么只是辅助方案</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>局限</th><th>说明</th></tr></thead><tbody><tr><td>只能提醒不能触发</td><td>Hook 无法调用 <code>Skill</code> 工具</td></tr><tr><td>上下文污染</td><td>每次读文件都追加提示，浪费 Token</td></tr><tr><td>场景有限</td><td>只有特定工具调用时才有机会提醒</td></tr><tr><td>治标不治本</td><td>没有解决 AI 意图匹配的模糊问题</td></tr></tbody></table>
+<hr>
+<h2 id="六方案对比总表">六、方案对比总表</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>方案</th><th>精确度</th><th>自然度</th><th>维护成本</th><th>适用规模</th><th>推荐度</th></tr></thead><tbody><tr><td><strong>/ 斜杠命令</strong></td><td>100%</td><td>低</td><td>零</td><td>任意</td><td>⭐⭐⭐⭐⭐</td></tr><tr><td><strong>优化 description</strong></td><td>80%</td><td>高</td><td>低（一次修改）</td><td>3-10 个 Skill</td><td>⭐⭐⭐⭐</td></tr><tr><td><strong>路由 Skill</strong></td><td>95%</td><td>高</td><td>中（需维护映射）</td><td>10+ 个 Skill</td><td>⭐⭐⭐⭐</td></tr><tr><td><strong>Hook 辅助引导</strong></td><td>20%</td><td>中</td><td>高</td><td>特殊场景</td><td>⭐⭐</td></tr></tbody></table>
+<hr>
+<h2 id="七分层推荐策略">七、分层推荐策略</h2>
+<h3 id="如果你独自使用个人开发者">如果你独自使用（个人开发者）</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>核心策略：</span></span>
+<span class="line"><span>  1. 高频 Skill → 记 / 命令，直接敲</span></span>
+<span class="line"><span>  2. 低频 Skill → 优化 description，让 AI 自然匹配</span></span>
+<span class="line"><span>  3. 不要写路由 Skill（没必要）</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>推荐度：/ 命令 (80%) + 优化 description (20%)</span></span></code></pre>
+<h3 id="如果你管理团队多人协作">如果你管理团队（多人协作）</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>核心策略：</span></span>
+<span class="line"><span>  1. 编写路由 Skill，统一团队入口</span></span>
+<span class="line"><span>  2. 每个子 Skill 的 description 精确界定职责边界</span></span>
+<span class="line"><span>  3. 在团队 Wiki / CLAUDE.md 中记录所有 / 命令清单</span></span>
+<span class="line"><span>  4. 设置 Hook 做善意的自动提醒</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>推荐度：路由 Skill (50%) + / 命令 (30%) + 优化 description (20%)</span></span></code></pre>
+<h3 id="如果你有大量-skill10-个">如果你有大量 Skill（10+ 个）</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>核心策略：</span></span>
+<span class="line"><span>  1. 必做：路由 Skill — 解决意图分发问题</span></span>
+<span class="line"><span>  2. 必做：每个子 Skill 精确 description — 减少误匹配</span></span>
+<span class="line"><span>  3. 可选：Hook — 在关键工具操作后提醒</span></span>
+<span class="line"><span>  4. 养成习惯：常用操作用 / 命令</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>推荐度：路由 Skill (40%) + / 命令 (35%) + 优化 description (25%)</span></span></code></pre>
+<hr>
+<h2 id="八快速实施清单">八、快速实施清单</h2>
+<h3 id="立即可以做5-分钟">立即可以做（5 分钟）</h3>
+<ul class="contains-task-list">
+<li class="task-list-item"><input type="checkbox" disabled> 找出你常用的 3 个 Skill，记住它们的 <code>/</code> 命令</li>
+<li class="task-list-item"><input type="checkbox" disabled> 检查已有 Skill 的 <code>description</code>，去掉模糊表述</li>
+<li class="task-list-item"><input type="checkbox" disabled> 在 CLAUDE.md 中添加 Skill 命令清单</li>
+</ul>
+<h3 id="深入优化30-分钟">深入优化（30 分钟）</h3>
+<ul class="contains-task-list">
+<li class="task-list-item"><input type="checkbox" disabled> 为每个 Skill 添加”不触发场景”描述</li>
+<li class="task-list-item"><input type="checkbox" disabled> 为重叠 Skill 明确职责边界</li>
+<li class="task-list-item"><input type="checkbox" disabled> 编写路由 Skill（如果 Skill 超过 10 个）</li>
+</ul>
+<h3 id="持续改进">持续改进</h3>
+<ul class="contains-task-list">
+<li class="task-list-item"><input type="checkbox" disabled> 当发现 AI 误触发 Skill 时，立即更新 description 加排除条件</li>
+<li class="task-list-item"><input type="checkbox" disabled> 定期审计 Skill 使用频率，合并低频、拆分高频</li>
+<li class="task-list-item"><input type="checkbox" disabled> 团队内统一 Skill 命名规范和触发词约定</li>
+</ul>
+<hr>
+<h2 id="九总结">九、总结</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>问题</th><th>答案</th></tr></thead><tbody><tr><td>Skill 触发为什么模糊？</td><td>AI 意图匹配天然有歧义，description 不够精确</td></tr><tr><td><strong>最可靠的方案？</strong></td><td>用 <code>/</code> 斜杠命令，100% 精确</td></tr><tr><td><strong>治本的方案？</strong></td><td>优化 Skill 的 <code>description</code>，加上触发条件和排除条件</td></tr><tr><td><strong>大规模场景的最佳方案？</strong></td><td>创建一个路由 Skill 做意图分发</td></tr><tr><td><strong>Hook 能帮忙吗？</strong></td><td>有限，只能提醒不能触发。不建议作为主要方案</td></tr></tbody></table>
+<blockquote>
+<p><strong>一句话总结</strong>：<strong>用 <code>/</code> 命令保证确定性，用 <code>description</code> 优化自然匹配，用路由 Skill 解决大规模混淆——不要在 Hook 层面解决 Skill 的问题。</strong></p>
+</blockquote>
+<hr>
+<h2 id="参考链接">参考链接</h2>
+<ul>
+<li><a href="https://docs.anthropic.com/en/docs/claude-code/skills">Claude Code Skills 文档</a></li>
+<li><a href="https://docs.anthropic.com/en/docs/claude-code/overview">Claude Code Hooks 文档</a></li>
+<li><a href="https://docs.anthropic.com/en/docs/claude-code/skills#skill-structure">Skill 编写最佳实践</a></li>
+</ul>
+<hr>
+<p><em>基于静态文件大小估算，实际消耗因对话长度而异。</em></p>  </div> <!-- Previous / Next navigation --> <nav class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-12 pt-8 border-t border-[var(--color-border)]" data-astro-cid-bvzihdzo> <a href="/blog/Claude/Claude Code Skills-生态全景报告" class="card-hover p-4 no-underline group" data-astro-cid-bvzihdzo> <span class="text-xs text-[var(--color-text-tertiary)] block mb-1" data-astro-cid-bvzihdzo>&larr; 上一篇</span> <span class="text-sm font-medium text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors line-clamp-1" data-astro-cid-bvzihdzo>🎯 Claude Code Skills 生态全景报告</span> </a> <a href="/blog/Agent与Skills/AI Agent-功能全景报告" class="card-hover p-4 no-underline group text-right" data-astro-cid-bvzihdzo> <span class="text-xs text-[var(--color-text-tertiary)] block mb-1" data-astro-cid-bvzihdzo>下一篇 &rarr;</span> <span class="text-sm font-medium text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors line-clamp-1" data-astro-cid-bvzihdzo>🤖 AI Agent 功能全景报告</span> </a> </nav> <hr class="!mt-12 !mb-8" data-astro-cid-bvzihdzo> <div data-astro-cid-bvzihdzo> <a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-bvzihdzo>
+&larr; 返回博客列表
+</a> </div> </div> </div> </article> </div>  </main> <footer class="border-t border-[var(--color-border)] mt-24 py-8" data-astro-cid-pux6a34n><div class="max-w-content flex items-center justify-between" data-astro-cid-pux6a34n><span class="text-sm text-[var(--color-text-tertiary)]" data-astro-cid-pux6a34n>
+&copy; 2026 星游寰宇
+</span><div class="flex items-center gap-4" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>博客</a><a href="/projects" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>项目</a><a href="/notes" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>日记</a><a href="/resources" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>资源</a><a href="/about" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>关于</a></div></div></footer> <div id="link-preview" style="display:none;position:fixed;z-index:99;max-width:18rem;pointer-events:none;" data-astro-cid-t7vshrbh></div>  <script type="module">(async()=>{try{const c=await fetch("/posts.json");if(!c.ok)return;const u=await c.json(),p=new Map(u.map(t=>[t.href,t])),e=document.getElementById("link-preview");if(!e)return;let n="",d;document.addEventListener("mouseover",t=>{const i=t.target.closest("a[href^='/blog/']");if(!i){e.style.display="none",n="";return}const s=i.getAttribute("href");if(!s||s===n)return;const o=p.get(s);o&&(n=s,d=setTimeout(()=>{e.innerHTML=`<div class="lp-title">${o.title}</div><div class="lp-summary">${o.summary}</div>`;const r=i.getBoundingClientRect();let a=r.left,l=r.bottom+6;a+288>window.innerWidth&&(a=window.innerWidth-296),l+80>window.innerHeight&&(l=r.top-80),Object.assign(e.style,{left:a+"px",top:l+"px",display:"block"})},300))},{passive:!0}),document.addEventListener("mouseout",t=>{t.target.closest("a[href^='/blog/']")&&(clearTimeout(d),e.style.display="none",n="")},{passive:!0})}catch{}})();</script> </body></html>  <script type="module">const c=document.getElementById("toc-toggle"),s=document.getElementById("toc-list"),i=document.getElementById("toc-chevron");c&&s&&i&&c.addEventListener("click",()=>{const o=s.classList.toggle("hidden");c.setAttribute("aria-expanded",String(o)),i.style.transform=o?"rotate(180deg)":""});const r=document.querySelectorAll(".toc-list a");if(r.length>0){const o=new IntersectionObserver(n=>{for(const t of n)t.isIntersecting&&r.forEach(e=>{e.classList.toggle("active",e.getAttribute("href")===`#${t.target.id}`)})},{rootMargin:"-80px 0px -80% 0px"});r.forEach(n=>{const t=n.getAttribute("href")?.slice(1);if(t){const e=document.getElementById(t);e&&o.observe(e)}})}</script>

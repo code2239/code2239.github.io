@@ -1,0 +1,346 @@
+<!DOCTYPE html><html lang="zh-CN"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="ChatDev / MetaGPT / AutoGen Studio / AgentVerse / CrewAI / LangGraph / OpenAgents 七大多代理开源前端应用逐一详解与选型建议。"><meta name="color-scheme" content="light"><!-- Open Graph --><meta property="og:title" content="多代理「开会」模式 — 开源前端应用汇总 — 星游寰宇"><meta property="og:description" content="ChatDev / MetaGPT / AutoGen Studio / AgentVerse / CrewAI / LangGraph / OpenAgents 七大多代理开源前端应用逐一详解与选型建议。"><meta property="og:url" content="https://code2239.github.io/blog/Agent与Skills/Multi-Agent-前端工具"><meta property="og:type" content="article"><meta property="og:site_name" content="星游寰宇"><meta property="og:locale" content="zh_CN"><meta property="article:published_time" content="2026-07-04"><meta property="article:tag" content="Agent"><meta property="article:tag" content="开源"><meta property="article:tag" content="前端"><meta property="article:tag" content="ChatDev"><meta property="article:tag" content="AutoGen"><!-- Twitter Card --><meta name="twitter:card" content="summary"><meta name="twitter:title" content="多代理「开会」模式 — 开源前端应用汇总 — 星游寰宇"><meta name="twitter:description" content="ChatDev / MetaGPT / AutoGen Studio / AgentVerse / CrewAI / LangGraph / OpenAgents 七大多代理开源前端应用逐一详解与选型建议。"><!-- Canonical --><link rel="canonical" href="https://code2239.github.io/blog/Agent与Skills/Multi-Agent-前端工具"><title>多代理「开会」模式 — 开源前端应用汇总 — 星游寰宇</title><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="alternate" type="application/rss+xml" title="星游寰宇 RSS" href="/rss.xml"><!-- Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"星游寰宇","url":"https://code2239.github.io","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://code2239.github.io/search?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://code2239.github.io"},{"@type":"ListItem","position":2,"name":"博客","item":"https://code2239.github.io/blog"},{"@type":"ListItem","position":3,"name":"Agent与Skills","item":"https://code2239.github.io/blog/Agent与Skills"},{"@type":"ListItem","position":4,"name":"Multi Agent 前端工具"}]},{"@context":"https://schema.org","@type":"BlogPosting","headline":"多代理「开会」模式 — 开源前端应用汇总","description":"ChatDev / MetaGPT / AutoGen Studio / AgentVerse / CrewAI / LangGraph / OpenAgents 七大多代理开源前端应用逐一详解与选型建议。","datePublished":"2026-07-04","url":"https://code2239.github.io/blog/Agent与Skills/Multi-Agent-前端工具","keywords":"Agent, 开源, 前端, ChatDev, AutoGen"}]}</script><link rel="stylesheet" href="/dev/_astro/_slug_.BlQX3qwK.css">
+<style>.back-to-top[data-astro-cid-gzprr2dq]{position:fixed;bottom:2rem;right:2rem;z-index:40;width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:50%;border:1px solid var(--color-border);background:var(--color-bg);color:var(--color-text-secondary);cursor:pointer;box-shadow:var(--shadow-md);transition:opacity .2s ease,transform .2s ease}.back-to-top[data-astro-cid-gzprr2dq]:hover{color:var(--color-accent);border-color:var(--color-accent);transform:translateY(-2px)}.back-to-top[data-astro-cid-gzprr2dq].hidden{opacity:0;pointer-events:none}.copy-btn[data-astro-cid-qqybitij]{position:absolute;top:8px;right:8px;padding:4px 10px;font-size:.6875rem;font-family:var(--font-sans);color:var(--color-text-tertiary);background:var(--color-bg);border:1px solid var(--color-border);border-radius:6px;cursor:pointer;opacity:0;transition:opacity .15s ease,color .15s ease}pre[data-astro-cid-qqybitij]:hover .copy-btn[data-astro-cid-qqybitij]{opacity:1}.copy-btn[data-astro-cid-qqybitij]:hover{color:var(--color-accent);border-color:var(--color-accent)}.copy-btn[data-astro-cid-qqybitij].copied{color:#16a34a;border-color:#16a34a}.blog-layout[data-astro-cid-bvzihdzo]{display:block}.blog-toc[data-astro-cid-bvzihdzo]{display:none}.blog-body[data-astro-cid-bvzihdzo]{min-width:0}@media(min-width:1024px){.blog-layout[data-astro-cid-bvzihdzo]{display:grid;grid-template-columns:14rem 1fr;gap:3rem;align-items:start}.blog-toc[data-astro-cid-bvzihdzo]{display:block}.blog-body[data-astro-cid-bvzihdzo]{padding-right:2rem}}@media(max-width:1023px){.blog-toc[data-astro-cid-bvzihdzo]{display:block;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid var(--color-border)}}
+</style></head> <body class="min-h-screen flex flex-col"> <nav class="sticky top-0 z-40 bg-[var(--color-bg)]/80 backdrop-blur-md border-b border-[var(--color-border)]" data-astro-cid-pux6a34n><div class="max-w-content flex items-center justify-between py-4" data-astro-cid-pux6a34n><a href="/" class="flex items-center gap-2.5 text-base font-semibold no-underline tracking-tight" data-astro-cid-pux6a34n><svg class="w-7 h-7" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" data-astro-cid-pux6a34n><circle cx="16" cy="16" r="15" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-pux6a34n></circle><circle cx="16" cy="16" r="3" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="16" cy="5" r="1.5" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="24" cy="10" r="1" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="8" cy="22" r="1" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="25" cy="21" r="0.8" fill="currentColor" data-astro-cid-pux6a34n></circle></svg>
+星游寰宇
+</a><!-- Desktop nav --><div class="hidden sm:flex items-center gap-5" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>博客</a><a href="/projects" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>项目</a><a href="/notes" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>日记</a><a href="/resources" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>资源</a><a href="/about" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>关于</a><button id="search-trigger" class="flex items-center gap-1.5 text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] bg-[var(--color-bg-secondary)] hover:bg-[var(--color-bg-tertiary)] border border-[var(--color-border)] hover:border-[var(--color-accent)]/30 rounded-lg px-3 py-1.5 cursor-pointer shadow-sm hover:shadow-md transition-all duration-200" aria-label="搜索 (Ctrl+K)" title="搜索 (Ctrl+K)" data-astro-cid-pux6a34n><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-pux6a34n><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" data-astro-cid-pux6a34n></path></svg><span class="hidden lg:inline" data-astro-cid-pux6a34n>搜索</span><kbd class="hidden lg:inline-flex items-center text-[0.625rem] font-mono text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1 py-px rounded" data-astro-cid-pux6a34n>Ctrl+K</kbd></button></div><!-- Mobile hamburger --><button id="menu-btn" class="sm:hidden flex flex-col gap-1 p-2 -mr-2 cursor-pointer" aria-label="打开菜单" data-astro-cid-pux6a34n><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-transform duration-200" data-astro-cid-pux6a34n></span><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-opacity duration-200" data-astro-cid-pux6a34n></span><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-transform duration-200" data-astro-cid-pux6a34n></span></button></div><!-- Mobile menu --><div id="mobile-menu" class="hidden sm:hidden border-t border-[var(--color-border)] bg-[var(--color-bg)]" data-astro-cid-pux6a34n><div class="max-w-content flex flex-col gap-2 py-4" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>博客</a><a href="/projects" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>项目</a><a href="/notes" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>日记</a><a href="/resources" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>资源</a><a href="/about" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>关于</a></div></div></nav>
+    <div id="search-overlay" class="srch-overlay" role="dialog" aria-modal="true" aria-label="全局搜索" data-astro-cid-mn7pezny> <div id="search-backdrop" class="srch-backdrop" data-astro-cid-mn7pezny></div> <div class="srch-panel" id="srch-panel" data-astro-cid-mn7pezny> <!-- Search input --> <div class="srch-input-row" data-astro-cid-mn7pezny> <svg class="srch-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-mn7pezny> <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" data-astro-cid-mn7pezny></path> </svg> <input type="text" id="search-input" class="srch-input" placeholder="搜索文章、项目、日记、资源..." autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="go" data-astro-cid-mn7pezny> <kbd class="srch-kbd" data-astro-cid-mn7pezny>Esc</kbd> </div> <!-- Results area --> <div id="search-results" class="srch-results" data-astro-cid-mn7pezny> <p class="srch-empty" id="search-empty-hint" data-astro-cid-mn7pezny>输入关键词开始搜索</p> </div> <!-- Skeleton loading --> <div id="search-skeleton" class="srch-skeleton" style="display:none;" aria-hidden="true" data-astro-cid-mn7pezny> <div class="srch-skeleton-line" style="width:75%" data-astro-cid-mn7pezny></div> <div class="srch-skeleton-line" style="width:50%" data-astro-cid-mn7pezny></div> <div class="srch-skeleton-line" style="width:60%" data-astro-cid-mn7pezny></div> </div> <!-- Footer hints --> <div class="srch-footer" data-astro-cid-mn7pezny> <div class="srch-footer-hints" data-astro-cid-mn7pezny> <span data-astro-cid-mn7pezny><kbd data-astro-cid-mn7pezny>↑</kbd><kbd data-astro-cid-mn7pezny>↓</kbd> 导航</span> <span data-astro-cid-mn7pezny><kbd data-astro-cid-mn7pezny>↵</kbd> 打开</span> <span data-astro-cid-mn7pezny><kbd data-astro-cid-mn7pezny>Ctrl</kbd>+<kbd data-astro-cid-mn7pezny>K</kbd> 切换</span> </div> <div class="srch-footer-brand" data-astro-cid-mn7pezny>
+powered by Orama
+</div> </div> </div> </div> <script type="module" src="/dev/_astro/Navigation.astro_astro_type_script_index_0_lang.B7cQAlyY.js"></script> <main class="flex-1">  <div class="reading-progress" id="reading-progress" style="width: 0%"></div> <script type="module">const o=document.getElementById("reading-progress");if(!o)throw new Error("Reading progress bar element not found");const r=()=>{const n=window.scrollY,e=document.documentElement.scrollHeight-window.innerHeight,t=e>0?n/e*100:0;o.style.width=`${Math.min(t,100)}%`};window.addEventListener("scroll",r,{passive:!0});</script> <button id="back-to-top" class="back-to-top hidden" aria-label="返回顶部" data-astro-cid-gzprr2dq> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-gzprr2dq> <polyline points="18 15 12 9 6 15" data-astro-cid-gzprr2dq></polyline> </svg> </button>  <script type="module">const o=document.getElementById("back-to-top");o&&(window.addEventListener("scroll",()=>{o.classList.toggle("hidden",window.scrollY<400)},{passive:!0}),o.addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"})));</script> <script type="module">document.querySelectorAll("pre").forEach(e=>{const t=document.createElement("button");t.className="copy-btn",t.textContent="复制",t.addEventListener("click",async()=>{const n=e.querySelector("code")?.textContent||e.textContent||"";try{await navigator.clipboard.writeText(n),t.textContent="已复制",t.classList.add("copied"),setTimeout(()=>{t.textContent="复制",t.classList.remove("copied")},2e3)}catch{t.textContent="失败",setTimeout(()=>{t.textContent="复制"},2e3)}}),e.style.position="relative",e.appendChild(t)});</script> <div class="px-6 xl:px-12 pt-12 pb-16" data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <header class="mb-12 text-center" data-astro-cid-bvzihdzo> <h1 class="text-3xl font-semibold mb-3 tracking-tight" data-astro-cid-bvzihdzo>多代理「开会」模式 — 开源前端应用汇总</h1> <div class="flex items-center justify-center gap-2 text-[var(--color-text-tertiary)] text-sm" data-astro-cid-bvzihdzo> <time datetime="2026-07-04" data-astro-cid-bvzihdzo>2026-07-04</time> <span class="text-[var(--color-border)]" data-astro-cid-bvzihdzo>·</span> <span data-astro-cid-bvzihdzo>16 分钟阅读</span>  <span class="text-[var(--color-border)]" data-astro-cid-bvzihdzo>·</span> <span class="text-sm text-[var(--color-text-tertiary)]"> <span> Agent<span class="mx-1">·</span> </span><span> 开源<span class="mx-1">·</span> </span><span> 前端<span class="mx-1">·</span> </span><span> ChatDev<span class="mx-1">·</span> </span><span> AutoGen </span> </span>  </div> </header> <div class="blog-layout" data-astro-cid-bvzihdzo> <aside class="blog-toc" data-astro-cid-bvzihdzo> <div class="sticky top-24" data-astro-cid-bvzihdzo> <button id="toc-toggle" class="hidden max-md:flex items-center gap-1 text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-3 cursor-pointer border-none bg-transparent p-0" aria-expanded="false" aria-controls="toc-list" data-astro-cid-bvzihdzo>
+目录
+<svg id="toc-chevron" class="w-3 h-3 transition-transform duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-bvzihdzo><polyline points="6 9 12 15 18 9" data-astro-cid-bvzihdzo></polyline></svg> </button> <span class="text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-3 max-md:hidden" data-astro-cid-bvzihdzo>目录</span> <div id="toc-list" class="max-md:hidden" data-astro-cid-bvzihdzo> <nav class="toc"> <p class="text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-3">目录</p> <ul class="toc-list"> <li class> <a href="#一概览表">一、概览表</a> </li><li class> <a href="#二逐项详解">二、逐项详解</a> </li><li class="toc-h3"> <a href="#1-chatdev--虚拟软件公司代理逐轮开会">1. ChatDev — 虚拟软件公司，代理逐轮开会</a> </li><li class="toc-h3"> <a href="#2-metagpt--sop-驱动的结构化会议">2. MetaGPT — SOP 驱动的结构化会议</a> </li><li class="toc-h3"> <a href="#3-autogen-studio--微软的低代码多代理工作台">3. AutoGen Studio — 微软的低代码多代理工作台</a> </li><li class="toc-h3"> <a href="#4-agentverse--多代理社会模拟与议事会">4. AgentVerse — 多代理社会模拟与议事会</a> </li><li class="toc-h3"> <a href="#5-crewai--角色驱动的代理团队">5. CrewAI — 角色驱动的代理团队</a> </li><li class="toc-h3"> <a href="#6-langgraph-studio--面向开发者的调试-ide">6. LangGraph Studio — 面向开发者的调试 IDE</a> </li><li class="toc-h3"> <a href="#7-openagents--代理工具平台非会议向">7. OpenAgents — 代理工具平台（非会议向）</a> </li><li class> <a href="#三与你当前-claude-code-环境的对应关系">三、与你当前 Claude Code 环境的对应关系</a> </li><li class> <a href="#四选型建议">四、选型建议</a> </li><li class> <a href="#五快速启动命令">五、快速启动命令</a> </li><li class> <a href="#六相关资源">六、相关资源</a> </li> </ul> </nav> </div> </div> </aside> <div class="blog-body" data-astro-cid-bvzihdzo> <div class="prose prose-neutral max-w-none" data-astro-cid-bvzihdzo>  <blockquote>
+<p>整理日期：2026-07-04
+覆盖范围：ChatDev / MetaGPT / AutoGen Studio / AgentVerse / CrewAI / LangGraph / OpenAgents</p>
+</blockquote>
+<hr>
+<h2 id="一概览表">一、概览表</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>项目</th><th>GitHub</th><th align="center">会议可视化</th><th align="center">结构化产出</th><th align="center">部署难度</th><th align="center">最像”开会”</th></tr></thead><tbody><tr><td><strong>ChatDev</strong></td><td><code>OpenBMB/ChatDev</code></td><td align="center">⭐⭐⭐⭐⭐</td><td align="center">代码</td><td align="center">低</td><td align="center">✅ 最像</td></tr><tr><td><strong>MetaGPT</strong></td><td><code>geekan/MetaGPT</code></td><td align="center">⭐⭐⭐⭐</td><td align="center">PRD/设计图/代码</td><td align="center">中</td><td align="center">✅</td></tr><tr><td><strong>AutoGen Studio</strong></td><td><code>microsoft/autogen</code></td><td align="center">⭐⭐⭐⭐</td><td align="center">灵活配置</td><td align="center">低</td><td align="center">✅</td></tr><tr><td><strong>AgentVerse</strong></td><td><code>OpenBMB/AgentVerse</code></td><td align="center">⭐⭐⭐</td><td align="center">灵活</td><td align="center">低</td><td align="center">✅</td></tr><tr><td><strong>CrewAI</strong></td><td><code>crewAIInc/crewAI</code></td><td align="center">⭐⭐</td><td align="center">灵活</td><td align="center">低</td><td align="center">一般</td></tr><tr><td><strong>LangGraph Studio</strong></td><td><code>langchain-ai/langgraph</code></td><td align="center">⭐⭐⭐</td><td align="center">DAG 状态图</td><td align="center">中</td><td align="center">调试向</td></tr><tr><td><strong>OpenAgents</strong></td><td><code>xlang-ai/OpenAgents</code></td><td align="center">⭐⭐</td><td align="center">工具输出</td><td align="center">低</td><td align="center">❌ 非核心</td></tr></tbody></table>
+<hr>
+<h2 id="二逐项详解">二、逐项详解</h2>
+<h3 id="1-chatdev--虚拟软件公司代理逐轮开会">1. ChatDev — 虚拟软件公司，代理逐轮开会</h3>
+<p><strong>GitHub</strong>: <a href="https://github.com/OpenBMB/ChatDev">OpenBMB/ChatDev</a></p>
+<p><strong>核心概念</strong>: 模拟一家完整的虚拟软件公司，AI 代理扮演 CEO、CTO、程序员、测试员等角色，在聊天面板中逐轮讨论，从需求一路走到交付代码。</p>
+<p><strong>前端形态</strong>:</p>
+<ul>
+<li>多窗口聊天面板，实时展示代理对话</li>
+<li>分阶段可视化：需求分析 → 系统设计 → 编码 → 测试 → 文档</li>
+<li>每个阶段切换发言人，可以看到不同代理”发言”</li>
+</ul>
+<p><strong>会议模式</strong>:</p>
+<ul>
+<li>使用 Chat Chain（对话链）机制</li>
+<li>代理之间按顺序发言，逐轮推进</li>
+<li>每个阶段有明确的主持人和参与者</li>
+</ul>
+<p><strong>技术栈</strong>: Python 后端 + Web 前端（Gradio 或自研）</p>
+<p><strong>适合场景</strong>: 想直观看到代理如何通过”开会”协作完成软件开发任务</p>
+<hr>
+<h3 id="2-metagpt--sop-驱动的结构化会议">2. MetaGPT — SOP 驱动的结构化会议</h3>
+<p><strong>GitHub</strong>: <a href="https://github.com/geekan/MetaGPT">geekan/MetaGPT</a></p>
+<p><strong>核心概念</strong>: 更进一步——代理不仅聊天，还按**标准作业流程（SOP）**产出结构化文档。产品经理出 PRD，架构师出系统设计，工程师编码，所有产出物在共享工作空间可见。</p>
+<p><strong>前端形态</strong>:</p>
+<ul>
+<li>Dashboard 仪表盘 + 文档共享区</li>
+<li>消息池（Message Pool）：所有代理读写共享消息</li>
+<li>结构化输出可视化：PRD 文档、架构图、API 设计、代码</li>
+</ul>
+<p><strong>会议模式</strong>:</p>
+<ul>
+<li>SOP 驱动的逐角色发言（严格顺序）</li>
+<li>产品经理启动 → 架构师回应 → 工程师实现</li>
+<li>每个发言附带结构化产物（不只是聊天文字）</li>
+</ul>
+<p><strong>技术栈</strong>: Python 后端 + Web 前端</p>
+<p><strong>适合场景</strong>: 需要代理产出不只是代码，而是完整文档链（PRD → 设计 → 代码 → 测试报告）</p>
+<hr>
+<h3 id="3-autogen-studio--微软的低代码多代理工作台">3. AutoGen Studio — 微软的低代码多代理工作台</h3>
+<p><strong>GitHub</strong>: <a href="https://github.com/microsoft/autogen">microsoft/autogen</a></p>
+<p><strong>核心概念</strong>: 微软出品，最成熟的 Web 拖拽界面，可设计、测试、监控多代理工作流。内置多种群聊模式（GroupChat / RoundRobin / SelectorGroupChat）。</p>
+<p><strong>前端形态</strong>:</p>
+<ul>
+<li><strong>拖拽式画布</strong>：可视化设计代理、工具和对话流</li>
+<li><strong>实时对话监控</strong>：观察多个代理在聊天室中互动</li>
+<li><strong>JSON 配置导出</strong>：代理团队定义可保存为声明式配置</li>
+<li><strong>内置测试 Playground</strong>：直接在上面对话测试</li>
+</ul>
+<p><strong>会议模式</strong>:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>模式</th><th>描述</th></tr></thead><tbody><tr><td><code>RoundRobinGroupChat</code></td><td>代理轮流发言</td></tr><tr><td><code>SelectorGroupChat</code></td><td>智能选择下一个发言人</td></tr><tr><td><code>Swarm</code></td><td>代理之间可相互移交任务</td></tr><tr><td><code>MagenticOne</code></td><td>多代理单协调者模式</td></tr></tbody></table>
+<p><strong>部署</strong>:</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:var(--astro-code-token-function)">pip</span><span style="color:var(--astro-code-token-string)"> install</span><span style="color:var(--astro-code-token-string)"> autogenstudio</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">autogenstudio</span><span style="color:var(--astro-code-token-string)"> ui</span><span style="color:var(--astro-code-token-string)"> --port</span><span style="color:var(--astro-code-token-constant)"> 8081</span></span></code></pre>
+<p><strong>技术栈</strong>: Python 后端 (FastAPI) + React 前端</p>
+<p><strong>适合场景</strong>: 需要图形化拖拽设计代理团队，不需要写代码</p>
+<hr>
+<h3 id="4-agentverse--多代理社会模拟与议事会">4. AgentVerse — 多代理社会模拟与议事会</h3>
+<p><strong>GitHub</strong>: <a href="https://github.com/OpenBMB/AgentVerse">OpenBMB/AgentVerse</a></p>
+<p><strong>核心概念</strong>: 聚焦于多代理<strong>社会模拟</strong>，支持多种协作拓扑（垂直/水平/混合），其中”议事会”（council）模式让多代理围绕一个话题群组讨论。</p>
+<p><strong>前端形态</strong>:</p>
+<ul>
+<li>Web 聊天界面，展示多代理对话流</li>
+<li>支持自定义代理数量和角色</li>
+<li>对话历史可视化</li>
+</ul>
+<p><strong>会议模式</strong>:</p>
+<ul>
+<li>Council（议事会）：所有代理平等讨论</li>
+<li>Vertical（垂直）：层级式委派</li>
+<li>Horizontal（水平）：并行协作</li>
+</ul>
+<p><strong>技术栈</strong>: Python + Web UI</p>
+<p><strong>适合场景</strong>: 想研究代理社会行为和群体决策过程</p>
+<hr>
+<h3 id="5-crewai--角色驱动的代理团队">5. CrewAI — 角色驱动的代理团队</h3>
+<p><strong>GitHub</strong>: <a href="https://github.com/crewAIInc/crewAI">crewAIInc/crewAI</a></p>
+<p><strong>核心概念</strong>: 强调给每个代理分配<strong>角色（role）、目标（goal）、背景故事（backstory）</strong>。代理像真实团队成员一样协作，有顺序执行和层级委派两种模式。</p>
+<p><strong>前端形态</strong>:</p>
+<ul>
+<li>官方 Web 监控面板（功能不如 AutoGen Studio 丰富）</li>
+<li>社区有多个第三方前端（CrewAI UI、AgentForge 等）</li>
+<li>偏向”任务管理面板”而非”聊天室”</li>
+</ul>
+<p><strong>会议模式</strong>:</p>
+<ul>
+<li>Sequential：链式顺序执行</li>
+<li>Hierarchical：管理者代理分配任务给下属</li>
+</ul>
+<p><strong>代码示例</strong>:</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:var(--astro-code-token-keyword)">from</span><span style="color:var(--astro-code-foreground)"> crewai </span><span style="color:var(--astro-code-token-keyword)">import</span><span style="color:var(--astro-code-foreground)"> Agent</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-foreground)"> Task</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-foreground)"> Crew</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">researcher </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-function)"> Agent</span><span style="color:var(--astro-code-token-punctuation)">(</span></span>
+<span class="line"><span style="color:var(--astro-code-token-punctuation)">    role</span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-string-expression)">"市场研究员"</span><span style="color:var(--astro-code-token-punctuation)">,</span></span>
+<span class="line"><span style="color:var(--astro-code-token-punctuation)">    goal</span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-string-expression)">"分析目标市场的竞争格局"</span><span style="color:var(--astro-code-token-punctuation)">,</span></span>
+<span class="line"><span style="color:var(--astro-code-token-punctuation)">    backstory</span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-string-expression)">"你是一名拥有20年经验的市场研究专家"</span></span>
+<span class="line"><span style="color:var(--astro-code-token-punctuation)">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">analyst </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-function)"> Agent</span><span style="color:var(--astro-code-token-punctuation)">(</span></span>
+<span class="line"><span style="color:var(--astro-code-token-punctuation)">    role</span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-string-expression)">"数据分析师"</span><span style="color:var(--astro-code-token-punctuation)">,</span></span>
+<span class="line"><span style="color:var(--astro-code-token-punctuation)">    goal</span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-string-expression)">"从研究数据中提取关键洞察"</span><span style="color:var(--astro-code-token-punctuation)">,</span></span>
+<span class="line"><span style="color:var(--astro-code-token-punctuation)">    backstory</span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-string-expression)">"你擅长从复杂数据中找出规律"</span></span>
+<span class="line"><span style="color:var(--astro-code-token-punctuation)">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">crew </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-function)"> Crew</span><span style="color:var(--astro-code-token-punctuation)">(agents</span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-punctuation)">[researcher, analyst], tasks</span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-punctuation)">[...])</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">crew</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">kickoff</span><span style="color:var(--astro-code-token-punctuation)">()</span></span></code></pre>
+<p><strong>技术栈</strong>: Python</p>
+<p><strong>适合场景</strong>: 需要代理有不同的”人格”和专业背景的生产级任务</p>
+<hr>
+<h3 id="6-langgraph-studio--面向开发者的调试-ide">6. LangGraph Studio — 面向开发者的调试 IDE</h3>
+<p><strong>GitHub</strong>: <a href="https://github.com/langchain-ai/langgraph">langchain-ai/langgraph</a></p>
+<p><strong>核心概念</strong>: LangChain 出品，用<strong>状态机/有向图</strong>建模代理工作流。Studio 是可视化调试工具，不是”开会 UI”，但你可以看到代理在每个节点的状态变化。</p>
+<p><strong>前端形态</strong>:</p>
+<ul>
+<li>图形编辑器：可视化设计代理流程图</li>
+<li>状态检查器：在每一步观察代理的内部状态</li>
+<li>流式事件追踪：实时看到数据如何在节点间流转</li>
+<li>人机交互断点：在关键节点插入人工审批</li>
+</ul>
+<p><strong>会议模式</strong>: 不直接模拟会议，而是建模为状态图（适合复杂分支逻辑）</p>
+<p><strong>技术栈</strong>: Python + React (Studio)</p>
+<p><strong>适合场景</strong>: 需要精确控制代理协作逻辑的开发者</p>
+<hr>
+<h3 id="7-openagents--代理工具平台非会议向">7. OpenAgents — 代理工具平台（非会议向）</h3>
+<p><strong>GitHub</strong>: <a href="https://github.com/xlang-ai/OpenAgents">xlang-ai/OpenAgents</a></p>
+<p><strong>核心概念</strong>: 偏向<strong>人-代理交互</strong>而非代理间会议。提供类 ChatGPT 插件界面，让代理使用 200+ 工具完成任务。有代理市场可分享/部署代理。</p>
+<p><strong>前端形态</strong>: 聊天式 UI（类似 ChatGPT Plugins）</p>
+<p><strong>会议模式</strong>: ❌ 不在此项目重点范围内</p>
+<hr>
+<h2 id="三与你当前-claude-code-环境的对应关系">三、与你当前 Claude Code 环境的对应关系</h2>
+<p>你的 Claude Code 已有以下相关能力：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Claude Code 能力</th><th>对应开源项目的理念</th></tr></thead><tbody><tr><td><strong><code>ecc:council</code></strong> 技能</td><td>类似 AgentVerse 的 Council 模式</td></tr><tr><td><strong><code>ecc:team-agent-orchestration</code></strong></td><td>类似 CrewAI 的团队编排</td></tr><tr><td><strong><code>Workflow</code> 脚本编排</strong></td><td>类似 AutoGen 的 workflow 定义</td></tr><tr><td><strong><code>SendMessage</code> 代理通信</strong></td><td>底层消息传递（所有框架的基础）</td></tr><tr><td><strong>100+ 专业代理</strong></td><td>类似 MetaGPT 的角色分配</td></tr></tbody></table>
+<hr>
+<h2 id="四选型建议">四、选型建议</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>你的需求</th><th>推荐</th></tr></thead><tbody><tr><td>想看代理”开会聊天”的全过程</td><td><strong>ChatDev</strong></td></tr><tr><td>需要代理产出完整文档链</td><td><strong>MetaGPT</strong></td></tr><tr><td>想拖拽设计代理团队，不写代码</td><td><strong>AutoGen Studio</strong></td></tr><tr><td>想研究代理群体行为</td><td><strong>AgentVerse</strong></td></tr><tr><td>生产环境需要角色化代理</td><td><strong>CrewAI</strong></td></tr><tr><td>需要精确控制协作流程</td><td><strong>LangGraph</strong></td></tr><tr><td>想在 Claude Code 内直接使用</td><td><strong>Workflow + ecc:council</strong></td></tr></tbody></table>
+<hr>
+<h2 id="五快速启动命令">五、快速启动命令</h2>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:var(--astro-code-token-comment)"># ChatDev</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">git</span><span style="color:var(--astro-code-token-string)"> clone</span><span style="color:var(--astro-code-token-string)"> https://github.com/OpenBMB/ChatDev.git</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">cd</span><span style="color:var(--astro-code-token-string)"> ChatDev</span><span style="color:var(--astro-code-token-punctuation)"> &#x26;&#x26;</span><span style="color:var(--astro-code-token-function)"> pip</span><span style="color:var(--astro-code-token-string)"> install</span><span style="color:var(--astro-code-token-string)"> -r</span><span style="color:var(--astro-code-token-string)"> requirements.txt</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">python</span><span style="color:var(--astro-code-token-string)"> run.py</span><span style="color:var(--astro-code-token-string)"> --task</span><span style="color:var(--astro-code-token-string-expression)"> "build a snake game"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># AutoGen Studio</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">pip</span><span style="color:var(--astro-code-token-string)"> install</span><span style="color:var(--astro-code-token-string)"> autogenstudio</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">autogenstudio</span><span style="color:var(--astro-code-token-string)"> ui</span><span style="color:var(--astro-code-token-string)"> --port</span><span style="color:var(--astro-code-token-constant)"> 8081</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># MetaGPT</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">git</span><span style="color:var(--astro-code-token-string)"> clone</span><span style="color:var(--astro-code-token-string)"> https://github.com/geekan/MetaGPT.git</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">cd</span><span style="color:var(--astro-code-token-string)"> MetaGPT</span><span style="color:var(--astro-code-token-punctuation)"> &#x26;&#x26;</span><span style="color:var(--astro-code-token-function)"> pip</span><span style="color:var(--astro-code-token-string)"> install</span><span style="color:var(--astro-code-token-string)"> -e</span><span style="color:var(--astro-code-token-string)"> .</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">python</span><span style="color:var(--astro-code-token-string)"> startup.py</span><span style="color:var(--astro-code-token-string-expression)"> "write a snake game in python"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># CrewAI</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">pip</span><span style="color:var(--astro-code-token-string)"> install</span><span style="color:var(--astro-code-token-string)"> crewai</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 然后写你自己的 crew 脚本</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># AgentVerse</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">git</span><span style="color:var(--astro-code-token-string)"> clone</span><span style="color:var(--astro-code-token-string)"> https://github.com/OpenBMB/AgentVerse.git</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">cd</span><span style="color:var(--astro-code-token-string)"> AgentVerse</span><span style="color:var(--astro-code-token-punctuation)"> &#x26;&#x26;</span><span style="color:var(--astro-code-token-function)"> pip</span><span style="color:var(--astro-code-token-string)"> install</span><span style="color:var(--astro-code-token-string)"> -r</span><span style="color:var(--astro-code-token-string)"> requirements.txt</span></span></code></pre>
+<hr>
+<h2 id="六相关资源">六、相关资源</h2>
+<ul>
+<li><a href="https://microsoft.github.io/autogen/">AutoGen 官方文档</a></li>
+<li><a href="https://arxiv.org/abs/2307.07924">ChatDev 论文</a></li>
+<li><a href="https://arxiv.org/abs/2308.00352">MetaGPT 论文</a></li>
+<li><a href="https://langchain-ai.github.io/langgraph/">LangGraph 文档</a></li>
+<li><a href="https://docs.crewai.com/">CrewAI 文档</a></li>
+</ul>  </div> <!-- Previous / Next navigation --> <nav class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-12 pt-8 border-t border-[var(--color-border)]" data-astro-cid-bvzihdzo> <a href="/blog/Agent与Skills/Skills与Agent-QA总结" class="card-hover p-4 no-underline group" data-astro-cid-bvzihdzo> <span class="text-xs text-[var(--color-text-tertiary)] block mb-1" data-astro-cid-bvzihdzo>&larr; 上一篇</span> <span class="text-sm font-medium text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors line-clamp-1" data-astro-cid-bvzihdzo>Skills 与 Agents 问答总结</span> </a> <a href="/blog/其他/个人网站搭建-全记录" class="card-hover p-4 no-underline group text-right" data-astro-cid-bvzihdzo> <span class="text-xs text-[var(--color-text-tertiary)] block mb-1" data-astro-cid-bvzihdzo>下一篇 &rarr;</span> <span class="text-sm font-medium text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors line-clamp-1" data-astro-cid-bvzihdzo>个人网站搭建全记录 — 从零到上线</span> </a> </nav> <hr class="!mt-12 !mb-8" data-astro-cid-bvzihdzo> <div data-astro-cid-bvzihdzo> <a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-bvzihdzo>
+&larr; 返回博客列表
+</a> </div> </div> </div> </article> </div>  </main> <footer class="border-t border-[var(--color-border)] mt-24 py-8" data-astro-cid-pux6a34n><div class="max-w-content flex items-center justify-between" data-astro-cid-pux6a34n><span class="text-sm text-[var(--color-text-tertiary)]" data-astro-cid-pux6a34n>
+&copy; 2026 星游寰宇
+</span><div class="flex items-center gap-4" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>博客</a><a href="/projects" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>项目</a><a href="/notes" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>日记</a><a href="/resources" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>资源</a><a href="/about" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>关于</a></div></div></footer> <div id="link-preview" style="display:none;position:fixed;z-index:99;max-width:18rem;pointer-events:none;" data-astro-cid-t7vshrbh></div>  <script type="module">(async()=>{try{const c=await fetch("/posts.json");if(!c.ok)return;const u=await c.json(),p=new Map(u.map(t=>[t.href,t])),e=document.getElementById("link-preview");if(!e)return;let n="",d;document.addEventListener("mouseover",t=>{const i=t.target.closest("a[href^='/blog/']");if(!i){e.style.display="none",n="";return}const s=i.getAttribute("href");if(!s||s===n)return;const o=p.get(s);o&&(n=s,d=setTimeout(()=>{e.innerHTML=`<div class="lp-title">${o.title}</div><div class="lp-summary">${o.summary}</div>`;const r=i.getBoundingClientRect();let a=r.left,l=r.bottom+6;a+288>window.innerWidth&&(a=window.innerWidth-296),l+80>window.innerHeight&&(l=r.top-80),Object.assign(e.style,{left:a+"px",top:l+"px",display:"block"})},300))},{passive:!0}),document.addEventListener("mouseout",t=>{t.target.closest("a[href^='/blog/']")&&(clearTimeout(d),e.style.display="none",n="")},{passive:!0})}catch{}})();</script> </body></html>  <script type="module">const c=document.getElementById("toc-toggle"),s=document.getElementById("toc-list"),i=document.getElementById("toc-chevron");c&&s&&i&&c.addEventListener("click",()=>{const o=s.classList.toggle("hidden");c.setAttribute("aria-expanded",String(o)),i.style.transform=o?"rotate(180deg)":""});const r=document.querySelectorAll(".toc-list a");if(r.length>0){const o=new IntersectionObserver(n=>{for(const t of n)t.isIntersecting&&r.forEach(e=>{e.classList.toggle("active",e.getAttribute("href")===`#${t.target.id}`)})},{rootMargin:"-80px 0px -80% 0px"});r.forEach(n=>{const t=n.getAttribute("href")?.slice(1);if(t){const e=document.getElementById(t);e&&o.observe(e)}})}</script>
