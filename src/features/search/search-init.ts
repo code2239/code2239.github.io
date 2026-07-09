@@ -103,7 +103,8 @@ export async function initSearchModal() {
             components: { tokenizer },
           });
 
-          const res = await fetch("/search-index.json");
+          const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
+          const res = await fetch(`${baseUrl}/search-index.json`);
           const docs = (await res.json()) as Doc[];
           await insertMultiple(db, docs);
         } catch {
