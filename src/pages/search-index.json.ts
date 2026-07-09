@@ -1,6 +1,8 @@
 import { getCollection } from "astro:content";
 
 export async function GET() {
+  const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+
   const [blog, projects, notes, resources] = await Promise.all([
     getCollection("blog"),
     getCollection("projects"),
@@ -14,7 +16,7 @@ export async function GET() {
       summary: p.data.summary.toLowerCase(),
       displayTitle: p.data.title,
       displaySummary: p.data.summary,
-      href: `/blog/${p.id.replace(/\.md$/, "")}`,
+      href: `${base}/blog/${p.id.replace(/\.md$/, "")}`,
       type: "blog" as const,
       tags: p.data.tags.join(", ").toLowerCase(),
       displayTags: p.data.tags.join(", "),
@@ -25,7 +27,7 @@ export async function GET() {
       summary: p.data.summary.toLowerCase(),
       displayTitle: p.data.title,
       displaySummary: p.data.summary,
-      href: `/projects/${p.id.replace(/\.md$/, "")}`,
+      href: `${base}/projects/${p.id.replace(/\.md$/, "")}`,
       type: "projects" as const,
       tags: p.data.tags.join(", ").toLowerCase(),
       displayTags: p.data.tags.join(", "),
@@ -36,7 +38,7 @@ export async function GET() {
       summary: n.data.summary.toLowerCase(),
       displayTitle: n.data.title,
       displaySummary: n.data.summary,
-      href: `/notes/${n.id.replace(/\.md$/, "")}`,
+      href: `${base}/notes/${n.id.replace(/\.md$/, "")}`,
       type: "notes" as const,
       tags: n.data.tags.join(", ").toLowerCase(),
       displayTags: n.data.tags.join(", "),
@@ -47,7 +49,7 @@ export async function GET() {
       summary: r.data.summary.toLowerCase(),
       displayTitle: r.data.title,
       displaySummary: r.data.summary,
-      href: `/resources/${r.id.replace(/\.md$/, "")}`,
+      href: `${base}/resources/${r.id.replace(/\.md$/, "")}`,
       type: "resources" as const,
       tags: r.data.tags.join(", ").toLowerCase(),
       displayTags: r.data.tags.join(", "),
