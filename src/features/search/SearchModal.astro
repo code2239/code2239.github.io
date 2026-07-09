@@ -327,6 +327,7 @@
 
 <script>
   import { create, load, search } from "@orama/orama";
+  import { createTokenizer } from "@orama/tokenizers/mandarin";
 
   function initSearchModal() {
     const overlay = document.getElementById("search-overlay")!;
@@ -373,15 +374,20 @@
         fetch("/search-index.json")
           .then((r) => r.json())
           .then(async (raw) => {
+            const tokenizer = await createTokenizer({ language: "mandarin" });
             db = await create({
               schema: {
                 title: "string",
                 summary: "string",
+                displayTitle: "string",
+                displaySummary: "string",
                 href: "string",
                 type: "string",
                 tags: "string",
+                displayTags: "string",
                 date: "string",
               } as const,
+              components: { tokenizer },
             });
             // Restore pre-built index using Orama's save/load pair
             await load(db, raw);
@@ -411,17 +417,17 @@
       }
 
       const rawResults = await search(db, {
-        term: q,
+        term: q.toLowerCase(),
         properties: ["title", "summary", "tags"],
         limit: 20,
       });
 
       const hits = rawResults.hits.map((h) => ({
-        title: h.document.title as string,
-        summary: h.document.summary as string,
+        title: (h.document.displayTitle as string) || (h.document.title as string),
+        summary: (h.document.displaySummary as string) || (h.document.summary as string),
         href: h.document.href as string,
         type: h.document.type as string,
-        tags: (h.document.tags as string).split(", ").filter(Boolean),
+        tags: ((h.document.displayTags as string) || (h.document.tags as string)).split(", ").filter(Boolean),
       }));
 
       if (hits.length === 0) {
