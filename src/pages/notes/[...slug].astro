@@ -21,8 +21,10 @@ const wordCount = bodyText.length;
   title={note.data.title}
   date={note.data.date}
   tags={note.data.tags}
+  summary={note.data.summary}
+  canonicalURL={`/notes/${note.id.replace(/\.md$/, "")}`}
   headings={headings}
-  wordCount={wordCount}
+  charCount={note.body?.replace(/\s+/g, "").length ?? 0}
   prevPost={null}
   nextPost={null}
 >

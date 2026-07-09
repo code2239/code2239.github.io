@@ -31,6 +31,8 @@ const charCount = post.body?.replace(/\s+/g, "").length ?? 0;
   tags={tags}
   headings={headings}
   charCount={charCount}
+  summary={post.data.summary}
+  canonicalURL={`/blog/${post.id.replace(/\.md$/, "")}`}
   prevPost={prevPost ? { title: prevPost.data.title, href: `/blog/${prevPost.id.replace(/\.md$/, "")}` } : null}
   nextPost={nextPost ? { title: nextPost.data.title, href: `/blog/${nextPost.id.replace(/\.md$/, "")}` } : null}
 >

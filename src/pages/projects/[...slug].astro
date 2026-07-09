@@ -42,6 +42,8 @@ if (isSubArticle) {
   title={project.data.title}
   date={project.data.date}
   tags={project.data.tags}
+  summary={project.data.summary}
+  canonicalURL={`/projects/${project.id.replace(/\.md$/, "")}`}
   github={project.data.github}
   demo={project.data.demo}
   image={project.data.image}

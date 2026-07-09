@@ -14,6 +14,13 @@ const TYPE_NAMES: Record<string, string> = {
 
 const TYPE_ORDER = ["blog", "projects", "notes", "resources"];
 
+function highlightMatch(text: string, term: string): string {
+  if (!term || term.length < 2) return text;
+  const escaped = term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const regex = new RegExp(`(${escaped})`, "gi");
+  return text.replace(regex, '<mark class="srch-highlight">$1</mark>');
+}
+
 interface Doc {
   title: string; summary: string; displayTitle: string; displaySummary: string;
   href: string; type: string; tags: string; displayTags: string; date: string;
@@ -42,6 +49,7 @@ export async function initSearchModal() {
     const input = document.getElementById("search-input") as HTMLInputElement;
     const resultsContainer = document.getElementById("search-results")!;
     const emptyHint = document.getElementById("search-empty-hint")!;
+    const skeleton = document.getElementById("search-skeleton")!;
 
     let db: Awaited<ReturnType<typeof create>> | null = null;
     let activeIdx = -1;
@@ -75,8 +83,13 @@ export async function initSearchModal() {
         emptyHint.textContent = db ? "输入关键词开始搜索" : "正在加载搜索索引...";
         emptyHint.className = "srch-empty";
         resultsContainer.appendChild(emptyHint);
+        skeleton.style.display = "none";
         return;
       }
+
+      // Show skeleton while searching
+      resultsContainer.innerHTML = "";
+      skeleton.style.display = "block";
 
       if (!db) {
         // Lazy-load index on first search
@@ -95,6 +108,7 @@ export async function initSearchModal() {
           await insertMultiple(db, docs);
         } catch {
           emptyHint.textContent = "搜索暂不可用，请稍后重试";
+          skeleton.style.display = "none";
           return;
         }
       }
@@ -117,7 +131,8 @@ export async function initSearchModal() {
         resultItems = [];
         activeIdx = -1;
         resultsContainer.innerHTML = "";
-        emptyHint.textContent = `没有找到与「${q}」相关的结果`;
+        skeleton.style.display = "none";
+        emptyHint.innerHTML = `<p>没有找到与「${q}」相关的结果</p><p class="srch-no-results-hint">试试其他关键词，或浏览 <a href="/blog">博客</a> · <a href="/projects">项目</a></p>`;
         emptyHint.className = "srch-no-results";
         resultsContainer.appendChild(emptyHint);
         return;
@@ -129,6 +144,7 @@ export async function initSearchModal() {
         grouped.get(hit.type)!.push(hit);
       }
 
+      skeleton.style.display = "none";
       resultsContainer.innerHTML = "";
       resultItems = [];
 
@@ -151,11 +167,14 @@ export async function initSearchModal() {
             ? `<div class="srch-item-tags">${hit.tags.slice(0, 4).map((t) => `<span class="srch-item-tag">${t}</span>`).join("")}</div>`
             : "";
 
+          const highlightedTitle = highlightMatch(hit.title, q);
+          const highlightedSummary = highlightMatch(hit.summary, q);
+
           el.innerHTML = `
             <span class="srch-item-badge">${TYPE_LABELS[hit.type] || hit.type}</span>
             <div class="srch-item-body">
-              <div class="srch-item-title">${hit.title}</div>
-              <div class="srch-item-summary">${hit.summary}</div>
+              <div class="srch-item-title">${highlightedTitle}</div>
+              <div class="srch-item-summary">${highlightedSummary}</div>
               ${tagsHTML}
             </div>
           `;

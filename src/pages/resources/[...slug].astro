@@ -41,7 +41,14 @@ const backHref = isSubArticle ? `/resources/${parentGroup}` : "/resources";
 const backLabel = isSubArticle ? `返回 ${parentGroup.replace(/-/g, " ")} 概览` : "返回资源列表";
 ---
 
-<Layout title={resource.data.title}>
+<Layout
+    title={resource.data.title}
+    description={resource.data.summary}
+    ogType="article"
+    publishedTime={resource.data.date}
+    articleTags={resource.data.tags}
+    canonicalURL={`/resources/${resource.id.replace(/\.md$/, "")}`}
+  >
   <div class="px-6 xl:px-12 pt-12 pb-16">
     <div class={isSubArticle ? "resource-detail-layout" : ""}>
       {isSubArticle && !hasSubfolder && (

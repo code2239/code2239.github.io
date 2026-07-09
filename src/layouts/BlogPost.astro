@@ -15,19 +15,28 @@ interface Props {
   title: string;
   date: string;
   tags: string[];
+  summary?: string;
+  canonicalURL?: string;
   headings?: { depth: number; slug: string; text: string }[];
   charCount?: number;
   prevPost?: PostLink | null;
   nextPost?: PostLink | null;
 }
 
-const { title, date, tags, headings = [], charCount = 0, prevPost, nextPost } = Astro.props;
+const { title, date, tags, summary, canonicalURL, headings = [], charCount = 0, prevPost, nextPost } = Astro.props;
 // Chinese reading speed ~300 chars/min
 const readingTime = Math.max(1, Math.ceil(charCount / 300));
 const hasToc = headings.length > 0;
 ---
 
-<Layout title={title}>
+<Layout
+    title={title}
+    description={summary}
+    ogType="article"
+    publishedTime={date}
+    articleTags={tags}
+    canonicalURL={canonicalURL}
+  >
   <ReadingProgress />
 
   <BackToTop />

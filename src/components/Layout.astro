@@ -8,14 +8,131 @@ interface Props {
   description?: string;
   ogImage?: string;
   canonicalURL?: string;
+  ogType?: "website" | "article";
+  /** Published date for article:published_time (ISO string or YYYY-MM-DD) */
+  publishedTime?: string;
+  /** Tags for article:tag */
+  articleTags?: string[];
+  /** JSON-LD structured data string (will be injected as-is into <script type="application/ld+json">) */
+  structuredData?: string;
 }
 
-const { title, description, ogImage, canonicalURL } = Astro.props;
+const {
+  title,
+  description,
+  ogImage,
+  canonicalURL,
+  ogType = "website",
+  publishedTime,
+  articleTags,
+  structuredData,
+} = Astro.props;
+
 const fullTitle = `${title} — 星游寰宇`;
 const siteUrl = "https://code2239.github.io";
 const pageUrl = canonicalURL ? `${siteUrl}${canonicalURL}` : Astro.url.href;
 const desc =
   description || "星游寰宇的个人网站——技术文章、项目展示与思考笔记";
+
+// Build BlogPosting JSON-LD for article pages
+function buildArticleJSONLD(): string {
+  return JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: title,
+    description: desc,
+    datePublished: publishedTime,
+    url: pageUrl,
+    ...(articleTags?.length ? { keywords: articleTags.join(", ") } : {}),
+  });
+}
+
+function buildBreadcrumbJSONLD(): string {
+  const path = canonicalURL || Astro.url.pathname;
+  if (path === "/" || !path) return "";
+
+  const segments = path.replace(/\/$/, "").split("/").filter(Boolean);
+  if (segments.length === 0) return "";
+
+  const items = [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "首页",
+      item: siteUrl,
+    },
+  ];
+
+  let accumulatedPath = "";
+  for (let i = 0; i < segments.length; i++) {
+    accumulatedPath += "/" + segments[i];
+    const labelMap: Record<string, string> = {
+      blog: "博客",
+      projects: "项目",
+      notes: "日记",
+      resources: "资源",
+      about: "关于",
+      category: "分类",
+    };
+    items.push({
+      "@type": "ListItem",
+      position: i + 2,
+      name: labelMap[segments[i]] || segments[i].replace(/-/g, " "),
+      item: i < segments.length - 1 ? `${siteUrl}${accumulatedPath}` : undefined,
+    });
+  }
+
+  return JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items,
+  });
+}
+
+// Site-level JSON-LD (Organization + SearchAction)
+const SITE_JSONLD = JSON.stringify({
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      name: "星游寰宇",
+      url: siteUrl,
+      potentialAction: {
+        "@type": "SearchAction",
+        target: {
+          "@type": "EntryPoint",
+          urlTemplate: `${siteUrl}/search?q={search_term_string}`,
+        },
+        "query-input": "required name=search_term_string",
+      },
+    },
+  ],
+});
+
+const articleLD = ogType === "article" ? buildArticleJSONLD() : "";
+const breadcrumbLD = buildBreadcrumbJSONLD();
+// Combine all JSON-LD blocks into a single @graph
+const allLDBlocks = [
+  SITE_JSONLD,
+  breadcrumbLD,
+  articleLD,
+  structuredData,
+].filter(Boolean);
+
+let combinedStructuredData = "";
+if (allLDBlocks.length === 1) {
+  combinedStructuredData = allLDBlocks[0];
+} else {
+  // Merge multiple JSON-LD blocks into @graph
+  const graphs = allLDBlocks.flatMap((block) => {
+    const parsed = JSON.parse(block);
+    return parsed["@graph"] ? parsed["@graph"] : [parsed];
+  });
+  combinedStructuredData = JSON.stringify({
+    "@context": "https://schema.org",
+    "@graph": graphs,
+  });
+}
 ---
 
 <!doctype html>
@@ -30,18 +147,31 @@ const desc =
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={desc} />
     <meta property="og:url" content={pageUrl} />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:site_name" content="星游寰宇" />
     <meta property="og:locale" content="zh_CN" />
     {ogImage && <meta property="og:image" content={`${siteUrl}${ogImage}`} />}
+    {ogImage && (
+      <meta property="og:image:width" content="1200" />
+    )}
+    {ogImage && (
+      <meta property="og:image:height" content="630" />
+    )}
+    {publishedTime && (
+      <meta property="article:published_time" content={publishedTime} />
+    )}
+    {articleTags?.map((tag) => (
+      <meta property="article:tag" content={tag} />
+    ))}
 
     <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary" />
+    <meta
+      name="twitter:card"
+      content={ogImage ? "summary_large_image" : "summary"}
+    />
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={desc} />
-    {ogImage && (
-      <meta name="twitter:image" content={`${siteUrl}${ogImage}`} />
-    )}
+    {ogImage && <meta name="twitter:image" content={`${siteUrl}${ogImage}`} />}
 
     <!-- Canonical -->
     <link rel="canonical" href={pageUrl} />
@@ -54,6 +184,10 @@ const desc =
       title="星游寰宇 RSS"
       href="/rss.xml"
     />
+
+    <!-- Structured Data -->
+    <script type="application/ld+json" set:html={combinedStructuredData}>
+    </script>
   </head>
   <body class="min-h-screen flex flex-col">
     <Navigation variant="header" />

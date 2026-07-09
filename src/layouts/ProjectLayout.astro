@@ -6,6 +6,8 @@ interface Props {
   title: string;
   date: string;
   tags: string[];
+  summary?: string;
+  canonicalURL?: string;
   github?: string;
   demo?: string;
   image?: string;
@@ -13,12 +15,20 @@ interface Props {
   backLabel?: string;
 }
 
-const { title, date, tags, github, demo, image, backHref = "/projects", backLabel = "返回项目列表" } = Astro.props;
+const { title, date, tags, summary, canonicalURL, github, demo, image, backHref = "/projects", backLabel = "返回项目列表" } = Astro.props;
 
 const hasSidebar = !!Astro.slots.sidebar;
 ---
 
-<Layout title={title}>
+<Layout
+    title={title}
+    description={summary}
+    ogType="article"
+    publishedTime={date}
+    articleTags={tags}
+    ogImage={image}
+    canonicalURL={canonicalURL}
+  >
   <div class="px-6 xl:px-12 pt-12 pb-16">
     <div class={hasSidebar ? "project-detail-layout" : ""}>
       {hasSidebar && (
