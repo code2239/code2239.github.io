@@ -33,7 +33,7 @@ const hasSidebar = !!Astro.slots.sidebar;
     <div class={hasSidebar ? "project-detail-layout" : ""}>
       {hasSidebar && (
         <aside class="project-detail-sidebar">
-          <div class="sticky top-20">
+          <div class="sticky top-14 max-h-[calc(100vh-3.5rem)] overflow-y-auto">
             <slot name="sidebar" />
           </div>
         </aside>

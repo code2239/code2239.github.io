@@ -63,7 +63,7 @@ const hasToc = headings.length > 0;
         {
           hasToc && (
             <aside class="blog-toc">
-              <div class="sticky top-24">
+              <div class="sticky top-14 max-h-[calc(100vh-3.5rem)] overflow-y-auto">
                 <button
                   id="toc-toggle"
                   class="hidden max-md:flex items-center gap-1 text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-3 cursor-pointer border-none bg-transparent p-0"
