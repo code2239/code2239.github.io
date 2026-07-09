@@ -326,7 +326,7 @@
 </style>
 
 <script>
-  import { create, insertMultiple, search } from "@orama/orama";
+  import { create, load, search } from "@orama/orama";
 
   function initSearchModal() {
     const overlay = document.getElementById("search-overlay")!;
@@ -383,11 +383,8 @@
                 date: "string",
               } as const,
             });
-            // Restore pre-built index from raw data
-            // Orama's save/load pair: load receives the raw object
-            if (raw?.docs) {
-              await insertMultiple(db, raw.docs as any);
-            }
+            // Restore pre-built index using Orama's save/load pair
+            await load(db, raw);
           })
           .catch(() => {
             emptyHint.textContent = "搜索暂不可用，请稍后重试";
