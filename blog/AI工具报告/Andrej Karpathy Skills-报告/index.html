@@ -1,0 +1,479 @@
+<!DOCTYPE html><html lang="zh-CN"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="- **张佳源（Forrest Chang / Jiayuan Zhang）**，Multica AI 创始人兼 CEO"><meta name="color-scheme" content="light"><!-- Open Graph --><meta property="og:title" content="Andrej Karpathy Skills（multica-ai/andrej-karpathy-skills）深度调研报告 — 星游寰宇"><meta property="og:description" content="- **张佳源（Forrest Chang / Jiayuan Zhang）**，Multica AI 创始人兼 CEO"><meta property="og:url" content="https://code2239.github.io/blog/AI工具报告/Andrej Karpathy Skills-报告"><meta property="og:type" content="article"><meta property="og:site_name" content="星游寰宇"><meta property="og:locale" content="zh_CN"><meta property="article:published_time" content="2026-07-05"><meta property="article:tag" content="AI"><meta property="article:tag" content="调研"><meta property="article:tag" content="Skill"><meta property="article:tag" content="Karpathy"><meta property="article:tag" content="工具"><!-- Twitter Card --><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Andrej Karpathy Skills（multica-ai/andrej-karpathy-skills）深度调研报告 — 星游寰宇"><meta name="twitter:description" content="- **张佳源（Forrest Chang / Jiayuan Zhang）**，Multica AI 创始人兼 CEO"><!-- Canonical --><link rel="canonical" href="https://code2239.github.io/blog/AI工具报告/Andrej Karpathy Skills-报告"><title>Andrej Karpathy Skills（multica-ai/andrej-karpathy-skills）深度调研报告 — 星游寰宇</title><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="alternate" type="application/rss+xml" title="星游寰宇 RSS" href="/rss.xml"><!-- Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"星游寰宇","url":"https://code2239.github.io","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://code2239.github.io/search?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://code2239.github.io"},{"@type":"ListItem","position":2,"name":"博客","item":"https://code2239.github.io/blog"},{"@type":"ListItem","position":3,"name":"AI工具报告","item":"https://code2239.github.io/blog/AI工具报告"},{"@type":"ListItem","position":4,"name":"Andrej Karpathy Skills 报告"}]},{"@context":"https://schema.org","@type":"BlogPosting","headline":"Andrej Karpathy Skills（multica-ai/andrej-karpathy-skills）深度调研报告","description":"- **张佳源（Forrest Chang / Jiayuan Zhang）**，Multica AI 创始人兼 CEO","datePublished":"2026-07-05","url":"https://code2239.github.io/blog/AI工具报告/Andrej Karpathy Skills-报告","keywords":"AI, 调研, Skill, Karpathy, 工具"}]}</script><link rel="stylesheet" href="/_astro/_slug_.D9rnRYSg.css">
+<style>.back-to-top[data-astro-cid-gzprr2dq]{position:fixed;bottom:2rem;right:2rem;z-index:40;width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:50%;border:1px solid var(--color-border);background:var(--color-bg);color:var(--color-text-secondary);cursor:pointer;box-shadow:var(--shadow-md);transition:opacity .2s ease,transform .2s ease}.back-to-top[data-astro-cid-gzprr2dq]:hover{color:var(--color-accent);border-color:var(--color-accent);transform:translateY(-2px)}.back-to-top[data-astro-cid-gzprr2dq].hidden{opacity:0;pointer-events:none}.copy-btn[data-astro-cid-qqybitij]{position:absolute;top:8px;right:8px;padding:4px 10px;font-size:.6875rem;font-family:var(--font-sans);color:var(--color-text-tertiary);background:var(--color-bg);border:1px solid var(--color-border);border-radius:6px;cursor:pointer;opacity:0;transition:opacity .15s ease,color .15s ease}pre[data-astro-cid-qqybitij]:hover .copy-btn[data-astro-cid-qqybitij]{opacity:1}.copy-btn[data-astro-cid-qqybitij]:hover{color:var(--color-accent);border-color:var(--color-accent)}.copy-btn[data-astro-cid-qqybitij].copied{color:#16a34a;border-color:#16a34a}.blog-layout[data-astro-cid-bvzihdzo]{display:block}.blog-toc[data-astro-cid-bvzihdzo]{display:none}.blog-body[data-astro-cid-bvzihdzo]{min-width:0}@media(min-width:1024px){.blog-layout[data-astro-cid-bvzihdzo]{display:grid;grid-template-columns:14rem 1fr;gap:3rem;align-items:start}.blog-toc[data-astro-cid-bvzihdzo]{display:block}.blog-body[data-astro-cid-bvzihdzo]{padding-right:2rem}}@media(max-width:1023px){.blog-toc[data-astro-cid-bvzihdzo]{display:block;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid var(--color-border)}}
+</style></head> <body class="min-h-screen flex flex-col"> <nav class="sticky top-0 z-40 bg-[var(--color-bg)]/80 backdrop-blur-md border-b border-[var(--color-border)]" data-astro-cid-pux6a34n><div class="max-w-content flex items-center justify-between py-4" data-astro-cid-pux6a34n><a href="/" class="flex items-center gap-2.5 text-base font-semibold no-underline tracking-tight" data-astro-cid-pux6a34n><svg class="w-7 h-7" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" data-astro-cid-pux6a34n><circle cx="16" cy="16" r="15" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-pux6a34n></circle><circle cx="16" cy="16" r="3" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="16" cy="5" r="1.5" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="24" cy="10" r="1" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="8" cy="22" r="1" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="25" cy="21" r="0.8" fill="currentColor" data-astro-cid-pux6a34n></circle></svg>
+星游寰宇
+</a><!-- Desktop nav --><div class="hidden sm:flex items-center gap-5" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>博客</a><a href="/projects" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>项目</a><a href="/notes" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>日记</a><a href="/resources" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>资源</a><a href="/about" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>关于</a><button id="search-trigger" class="flex items-center gap-1.5 text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] bg-[var(--color-bg-secondary)] hover:bg-[var(--color-bg-tertiary)] border border-[var(--color-border)] hover:border-[var(--color-accent)]/30 rounded-lg px-3 py-1.5 cursor-pointer shadow-sm hover:shadow-md transition-all duration-200" aria-label="搜索 (Ctrl+K)" title="搜索 (Ctrl+K)" data-astro-cid-pux6a34n><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-pux6a34n><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" data-astro-cid-pux6a34n></path></svg><span class="hidden lg:inline" data-astro-cid-pux6a34n>搜索</span><kbd class="hidden lg:inline-flex items-center text-[0.625rem] font-mono text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1 py-px rounded" data-astro-cid-pux6a34n>Ctrl+K</kbd></button></div><!-- Mobile hamburger --><button id="menu-btn" class="sm:hidden flex flex-col gap-1 p-2 -mr-2 cursor-pointer" aria-label="打开菜单" data-astro-cid-pux6a34n><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-transform duration-200" data-astro-cid-pux6a34n></span><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-opacity duration-200" data-astro-cid-pux6a34n></span><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-transform duration-200" data-astro-cid-pux6a34n></span></button></div><!-- Mobile menu --><div id="mobile-menu" class="hidden sm:hidden border-t border-[var(--color-border)] bg-[var(--color-bg)]" data-astro-cid-pux6a34n><div class="max-w-content flex flex-col gap-2 py-4" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>博客</a><a href="/projects" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>项目</a><a href="/notes" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>日记</a><a href="/resources" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>资源</a><a href="/about" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>关于</a></div></div></nav>
+    <div id="search-overlay" class="srch-overlay" role="dialog" aria-modal="true" aria-label="全局搜索" data-astro-cid-mn7pezny> <div id="search-backdrop" class="srch-backdrop" data-astro-cid-mn7pezny></div> <div class="srch-panel" id="srch-panel" data-astro-cid-mn7pezny> <!-- Search input --> <div class="srch-input-row" data-astro-cid-mn7pezny> <svg class="srch-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-mn7pezny> <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" data-astro-cid-mn7pezny></path> </svg> <input type="text" id="search-input" class="srch-input" placeholder="搜索文章、项目、日记、资源..." autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="go" data-astro-cid-mn7pezny> <kbd class="srch-kbd" data-astro-cid-mn7pezny>Esc</kbd> </div> <!-- Results area --> <div id="search-results" class="srch-results" data-astro-cid-mn7pezny> <p class="srch-empty" id="search-empty-hint" data-astro-cid-mn7pezny>输入关键词开始搜索</p> </div> <!-- Skeleton loading --> <div id="search-skeleton" class="srch-skeleton" style="display:none;" aria-hidden="true" data-astro-cid-mn7pezny> <div class="srch-skeleton-line" style="width:75%" data-astro-cid-mn7pezny></div> <div class="srch-skeleton-line" style="width:50%" data-astro-cid-mn7pezny></div> <div class="srch-skeleton-line" style="width:60%" data-astro-cid-mn7pezny></div> </div> <!-- Footer hints --> <div class="srch-footer" data-astro-cid-mn7pezny> <div class="srch-footer-hints" data-astro-cid-mn7pezny> <span data-astro-cid-mn7pezny><kbd data-astro-cid-mn7pezny>↑</kbd><kbd data-astro-cid-mn7pezny>↓</kbd> 导航</span> <span data-astro-cid-mn7pezny><kbd data-astro-cid-mn7pezny>↵</kbd> 打开</span> <span data-astro-cid-mn7pezny><kbd data-astro-cid-mn7pezny>Ctrl</kbd>+<kbd data-astro-cid-mn7pezny>K</kbd> 切换</span> </div> <div class="srch-footer-brand" data-astro-cid-mn7pezny>
+powered by Orama
+</div> </div> </div> </div> <script type="module" src="/_astro/Navigation.astro_astro_type_script_index_0_lang.15n1EYJp.js"></script> <main class="flex-1">  <div class="reading-progress" id="reading-progress" style="width: 0%"></div> <script type="module">const o=document.getElementById("reading-progress");if(!o)throw new Error("Reading progress bar element not found");const r=()=>{const n=window.scrollY,e=document.documentElement.scrollHeight-window.innerHeight,t=e>0?n/e*100:0;o.style.width=`${Math.min(t,100)}%`};window.addEventListener("scroll",r,{passive:!0});</script> <button id="back-to-top" class="back-to-top hidden" aria-label="返回顶部" data-astro-cid-gzprr2dq> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-gzprr2dq> <polyline points="18 15 12 9 6 15" data-astro-cid-gzprr2dq></polyline> </svg> </button>  <script type="module">const o=document.getElementById("back-to-top");o&&(window.addEventListener("scroll",()=>{o.classList.toggle("hidden",window.scrollY<400)},{passive:!0}),o.addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"})));</script> <script type="module">document.querySelectorAll("pre").forEach(e=>{const t=document.createElement("button");t.className="copy-btn",t.textContent="复制",t.addEventListener("click",async()=>{const n=e.querySelector("code")?.textContent||e.textContent||"";try{await navigator.clipboard.writeText(n),t.textContent="已复制",t.classList.add("copied"),setTimeout(()=>{t.textContent="复制",t.classList.remove("copied")},2e3)}catch{t.textContent="失败",setTimeout(()=>{t.textContent="复制"},2e3)}}),e.style.position="relative",e.appendChild(t)});</script> <div class="px-6 xl:px-12 pt-12 pb-16" data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <header class="mb-12 text-center" data-astro-cid-bvzihdzo> <h1 class="text-3xl font-semibold mb-3 tracking-tight" data-astro-cid-bvzihdzo>Andrej Karpathy Skills（multica-ai/andrej-karpathy-skills）深度调研报告</h1> <div class="flex items-center justify-center gap-2 text-[var(--color-text-tertiary)] text-sm" data-astro-cid-bvzihdzo> <time datetime="2026-07-05" data-astro-cid-bvzihdzo>2026-07-05</time> <span class="text-[var(--color-border)]" data-astro-cid-bvzihdzo>·</span> <span data-astro-cid-bvzihdzo>24 分钟阅读</span>  <span class="text-[var(--color-border)]" data-astro-cid-bvzihdzo>·</span> <span class="text-sm text-[var(--color-text-tertiary)]"> <span> AI<span class="mx-1">·</span> </span><span> 调研<span class="mx-1">·</span> </span><span> Skill<span class="mx-1">·</span> </span><span> Karpathy<span class="mx-1">·</span> </span><span> 工具 </span> </span>  </div> </header> <div class="blog-layout" data-astro-cid-bvzihdzo> <aside class="blog-toc" data-astro-cid-bvzihdzo> <div class="sticky top-14 max-h-[calc(100vh-3.5rem)] overflow-y-auto" data-astro-cid-bvzihdzo> <button id="toc-toggle" class="hidden max-md:flex items-center gap-1 text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-3 cursor-pointer border-none bg-transparent p-0" aria-expanded="false" aria-controls="toc-list" data-astro-cid-bvzihdzo>
+目录
+<svg id="toc-chevron" class="w-3 h-3 transition-transform duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-bvzihdzo><polyline points="6 9 12 15 18 9" data-astro-cid-bvzihdzo></polyline></svg> </button> <span class="text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-3 max-md:hidden" data-astro-cid-bvzihdzo>目录</span> <div id="toc-list" class="max-md:hidden" data-astro-cid-bvzihdzo> <nav class="toc"> <p class="text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-3">目录</p> <ul class="toc-list"> <li class> <a href="#1-开发者与公司背景">1. 开发者与公司背景</a> </li><li class="toc-h3"> <a href="#开发方全称">开发方全称</a> </li><li class="toc-h3"> <a href="#创始人信息">创始人信息</a> </li><li class="toc-h3"> <a href="#团队规模">团队规模</a> </li><li class="toc-h3"> <a href="#公司盈利情况">公司盈利情况</a> </li><li class="toc-h3"> <a href="#项目起源爆火背后的故事">项目起源（爆火背后的故事）</a> </li><li class="toc-h3"> <a href="#官网链接">官网链接</a> </li><li class> <a href="#2-本质定义它不是一个软件产品">2. 本质定义：它不是一个”软件产品”</a> </li><li class="toc-h3"> <a href="#它是什么">它是什么</a> </li><li class="toc-h3"> <a href="#它不是什么">它不是什么</a> </li><li class> <a href="#3-底层技术栈严格来说不算技术栈">3. 底层”技术栈”（严格来说不算技术栈）</a> </li><li class="toc-h3"> <a href="#技术形态">技术形态</a> </li><li class="toc-h3"> <a href="#格式版本">格式版本</a> </li><li class> <a href="#4-开源属性">4. 开源属性</a> </li><li class="toc-h3"> <a href="#开源协议">开源协议</a> </li><li class="toc-h3"> <a href="#是否收费">是否收费</a> </li><li class="toc-h3"> <a href="#商业模式">商业模式</a> </li><li class> <a href="#5-功能全景解析">5. 功能全景解析</a> </li><li class="toc-h3"> <a href="#核心功能">核心功能</a> </li><li class="toc-h3"> <a href="#四大行为准则详细版">四大行为准则（详细版）</a> </li><li class> <a href="#6-功能实现案例">6. 功能实现案例</a> </li><li class="toc-h3"> <a href="#案例在-claude-code-中使用-karpathy-guidelines-开发用户登录功能">案例：在 Claude Code 中使用 Karpathy Guidelines 开发用户登录功能</a> </li><li class> <a href="#7-主要竞品清单">7. 主要竞品清单</a> </li><li class> <a href="#8-与竞品的横向比较">8. 与竞品的横向比较</a> </li><li class="toc-h3"> <a href="#各竞品最适用的细分应用场景">各竞品最适用的细分应用场景</a> </li><li class> <a href="#9-版本迭代信息">9. 版本迭代信息</a> </li><li class="toc-h3"> <a href="#首次公开发布">首次公开发布</a> </li><li class="toc-h3"> <a href="#关键迭代节点">关键迭代节点</a> </li><li class="toc-h3"> <a href="#更新频率">更新频率</a> </li><li class> <a href="#一句话锐评">一句话锐评</a> </li> </ul> </nav> </div> </div> </aside> <div class="blog-body" data-astro-cid-bvzihdzo> <div class="prose prose-neutral max-w-none" data-astro-cid-bvzihdzo>  <h1 id="andrej-karpathy-skillsmultica-aiandrej-karpathy-skills深度调研报告">Andrej Karpathy Skills（multica-ai/andrej-karpathy-skills）深度调研报告</h1>
+<blockquote>
+<p>生成日期：2026-07-05</p>
+<p>调研方法：多源联网搜索，信息交叉验证</p>
+</blockquote>
+<hr>
+<h2 id="1-开发者与公司背景">1. 开发者与公司背景</h2>
+<h3 id="开发方全称">开发方全称</h3>
+<p><strong>Multica AI（原名 Multica）</strong>，组织 <a href="https://github.com/multica-ai">multica-ai</a></p>
+<h3 id="创始人信息">创始人信息</h3>
+<ul>
+<li><strong>张佳源（Forrest Chang / Jiayuan Zhang）</strong>，Multica AI 创始人兼 CEO</li>
+<li>项目创建者，同时也是 Multica 开源平台（Managed Agents 平台）的构建者</li>
+<li>将 Karpathy 的 X 推文用 Claude Code 快速转化为技能文件</li>
+</ul>
+<h3 id="团队规模">团队规模</h3>
+<p>Multica AI 为初创公司，确切团队规模未公开，从其 GitHub 组织和产品线判断为 <strong>小型团队（&#x3C;20人）</strong></p>
+<h3 id="公司盈利情况">公司盈利情况</h3>
+<p>Multica AI 提供一个开源的 <strong>Managed Agents 平台</strong>（<a href="https://github.com/multica-ai/multica">github.com/multica-ai/multica</a>），将 Claude Code、Codex、OpenClaw、Gemini 等编码 Agent 编排为团队协作工具。该项目处于开源生态建设阶段，盈利模式未公开。</p>
+<h3 id="项目起源爆火背后的故事">项目起源（爆火背后的故事）</h3>
+<p>这是一个”无心插柳”的成名故事：</p>
+<ul>
+<li><strong>2026-01-26</strong>：Andrej Karpathy 在 X（原 Twitter）发了一条长推，吐槽 LLM 编程 Agent 的四大通病——“盲猜不确认""过度设计""顺手改无关代码""不验证就交差”</li>
+<li><strong>当日</strong>：张佳源（Forrest Chang）<strong>用 Claude Code 将这条推文直接转换为一个 <code>CLAUDE.md</code> 文件（约 800 行），再用 Claude 自我审查，最终浓缩为约 70 行精炼指令</strong></li>
+<li><strong>2026-01-27</strong>：项目在 GitHub 开源，<strong>一天之内暴涨 3 万 Star</strong>，数周内冲上 GitHub 全球趋势榜首</li>
+<li><strong>截至 2026-07</strong>：Star 数已超 <strong>18 万</strong>，成为 2026 年上半年 GitHub 增长最快的项目之一</li>
+</ul>
+<h3 id="官网链接">官网链接</h3>
+<ul>
+<li>GitHub 仓库：<a href="https://github.com/multica-ai/andrej-karpathy-skills">https://github.com/multica-ai/andrej-karpathy-skills</a></li>
+<li>Multica 平台：<a href="https://github.com/multica-ai/multica">https://github.com/multica-ai/multica</a></li>
+<li>流行 Fork：<a href="https://github.com/swarmclawai/andrej-karpathy-skills">https://github.com/swarmclawai/andrej-karpathy-skills</a></li>
+<li>SkillsMP 市场：<a href="https://skillsmp.com">https://skillsmp.com</a></li>
+</ul>
+<blockquote>
+<p><strong>信息来源</strong>：<a href="https://www.36kr.com/p/3774954488349441">36氪</a>、<a href="https://hub.baai.ac.cn/view/54106">BAAI</a>、<a href="https://developer.aliyun.com/article/1729015">阿里云开发者</a></p>
+</blockquote>
+<hr>
+<h2 id="2-本质定义它不是一个软件产品">2. 本质定义：它不是一个”软件产品”</h2>
+<blockquote>
+<p>⚠️ <strong>理解该项目的前提</strong>：该项目<strong>不是</strong>一个独立的软件产品或框架。它本质上是一个<strong>行为规范文件</strong>——一份约 70 行的 Markdown 文本（CLAUDE.md），以及它的多格式衍生版本（SKILL.md、Cursor Rules 等）。</p>
+</blockquote>
+<h3 id="它是什么">它是什么</h3>
+<ul>
+<li><strong>一份”AI 编程行为守则”</strong>：将资深工程师的编程纪律编译为 AI Agent 可以”阅读”和”遵守”的指令</li>
+<li>每个 AI 工具读取这份文件后，在生成代码时遵循其中规定的行为模式——先思考、写简洁、只改该改的、验证结果</li>
+</ul>
+<h3 id="它不是什么">它不是什么</h3>
+<ul>
+<li>❌ 不是 AI 模型或框架</li>
+<li>❌ 不是代码生成工具</li>
+<li>❌ 不是 IDE 插件或扩展</li>
+<li>❌ 不改变 Claude 本身的模型能力</li>
+</ul>
+<hr>
+<h2 id="3-底层技术栈严格来说不算技术栈">3. 底层”技术栈”（严格来说不算技术栈）</h2>
+<h3 id="技术形态">技术形态</h3>
+<p>该项目本质上是一个<strong>纯文本配置文件</strong>，不涉及大模型、API、数据库或任何后端服务：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>层次</th><th>实现</th></tr></thead><tbody><tr><td><strong>核心内容</strong></td><td>约 70 行 Markdown 文本，包含 4 条行为准则</td></tr><tr><td><strong>文件格式</strong></td><td><code>CLAUDE.md</code> / <code>SKILL.md</code> / <code>.mdc</code>（Cursor Rules）</td></tr><tr><td><strong>执行机制</strong></td><td>被 Claude Code / Cursor 等 AI 客户端自动读取并作为系统指令执行</td></tr><tr><td><strong>依赖</strong></td><td><strong>零依赖</strong>——纯文本文件</td></tr></tbody></table>
+<h3 id="格式版本">格式版本</h3>
+<p>该项目同时提供多种格式适配不同 AI 工具：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>文件</th><th>适用工具</th><th>特性</th></tr></thead><tbody><tr><td><code>CLAUDE.md</code></td><td><strong>Claude Code</strong>、OpenAI Codex CLI</td><td>项目根目录自动读取</td></tr><tr><td><code>skills/karpathy-guidelines/SKILL.md</code></td><td><strong>Claude Code Skill 系统</strong></td><td>带 YAML Frontmatter，可通过插件市场安装</td></tr><tr><td><code>.cursor/rules/karpathy-guidelines.mdc</code></td><td><strong>Cursor IDE</strong></td><td>Cursor Rules 格式，自动生效</td></tr><tr><td>社区适配</td><td>Gemini CLI、Copilot、Aider、Windsurf、OpenCode 等</td><td>16+ 工具均有对应格式</td></tr></tbody></table>
+<blockquote>
+<p><strong>信息来源</strong>：<a href="https://deepwiki.com/multica-ai/andrej-karpathy-skills">DeepWiki</a>、<a href="https://github.com/swarmclawai/andrej-karpathy-skills">swarmclawai fork</a></p>
+</blockquote>
+<hr>
+<h2 id="4-开源属性">4. 开源属性</h2>
+<h3 id="开源协议">开源协议</h3>
+<ul>
+<li><strong>协议类型：MIT License</strong></li>
+<li>商用限制：<strong>无限制</strong>——可自由使用、修改、分发</li>
+<li>GitHub 仓库 Star 数：约 <strong>180,000+ Stars</strong>（截至 2026-07，历史峰值 GitHub 全球 Top 10）</li>
+</ul>
+<h3 id="是否收费">是否收费</h3>
+<p><strong>完全免费，零成本。</strong> 本就是一份纯文本文件，没有付费版本，没有 API 调用费，没有任何形式的商业收费。</p>
+<h3 id="商业模式">商业模式</h3>
+<p><strong>不直接产生商业收入。</strong> 该项目是 Multica AI 公司<strong>提升品牌知名度</strong>的开源项目，间接为 Multica 的 Managed Agents 平台引流。</p>
+<hr>
+<h2 id="5-功能全景解析">5. 功能全景解析</h2>
+<h3 id="核心功能">核心功能</h3>
+<blockquote>
+<p>一份 AI 编程 Agent 的<strong>行为纪律规范</strong>，将资深工程师的编程守则以 AI 可读的方式写入项目配置，从根本上减少 AI 编码中的常见错误模式。</p>
+</blockquote>
+<h3 id="四大行为准则详细版">四大行为准则（详细版）</h3>
+<h4 id="准则-1think-before-coding编码前先思考">准则 1：Think Before Coding（编码前先思考）</h4>
+<p><strong>解决的问题</strong>：AI “自信地犯错”——默默做假设、不确认歧义、选择自己认为对的方式执行。</p>
+<p><strong>具体指令</strong>：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>指令</th><th>实践方式</th></tr></thead><tbody><tr><td>明确列出假设</td><td>如果不确定，<strong>主动问用户</strong></td></tr><tr><td>多义性处理</td><td>如有多种解释，全部列出让用户选——不能闷声选一个</td></tr><tr><td>主动建议</td><td>如果有更简单的方案，要说出来，该反驳就反驳</td></tr><tr><td>停问机制</td><td>不清楚的事必须停下来，说出困惑点，提问</td></tr></tbody></table>
+<h4 id="准则-2simplicity-first简洁优先">准则 2：Simplicity First（简洁优先）</h4>
+<p><strong>解决的问题</strong>：AI “过度设计”——堆抽象层、加未要求的”灵活性”、一次性抽象。</p>
+<p><strong>具体指令</strong>：</p>
+<ul>
+<li><strong>最小代码原则</strong>：只写解决当前问题的最小代码量，不写任何投机性的代码</li>
+<li><strong>不堆抽象</strong>：一次性的使用场景不需要抽象层</li>
+<li><strong>不被要求的功能不写</strong>：没要求的”配置化""灵活性”一概不加</li>
+<li><strong>200 行能缩成 50 行 → 重写</strong>：以”资深工程师会不会说这个太复杂？“为检验标准</li>
+</ul>
+<h4 id="准则-3surgical-changes外科手术式修改">准则 3：Surgical Changes（外科手术式修改）</h4>
+<p><strong>解决的问题</strong>：AI “顺手改一堆”——改一处代码顺便重构隔壁模块、改注释格式、删自己不熟悉的”死代码”。</p>
+<p><strong>具体指令</strong>：</p>
+<ul>
+<li><strong>只动必须动的地方</strong>：不”顺手优化”相邻代码、不重写注释格式</li>
+<li><strong>匹配项目现有风格</strong>：即使你觉得你自己的写法更好</li>
+<li><strong>自己的垃圾自己清</strong>：自己的改动产生的废弃代码必须清理；但”旧死代码”只能提不能删</li>
+<li><strong>每行改动都可溯源</strong>：每行改动都能直接追溯到用户请求</li>
+</ul>
+<h4 id="准则-4goal-driven-execution目标驱动执行">准则 4：Goal-Driven Execution（目标驱动执行）</h4>
+<p><strong>解决的问题</strong>：AI “不知道什么时候算完”——模糊任务边界，做过了头或没做完就开始邀功。</p>
+<p><strong>具体指令</strong>：</p>
+<ul>
+<li><strong>模糊指令→可验证目标</strong>：
+<ul>
+<li>“加验证” → “先写测试覆盖非法输入，再让测试通过”</li>
+<li>“修 bug” → “先写可复现 bug 的测试，再修复”</li>
+<li>“重构 X” → “确保测试在重构前后都能通过”</li>
+</ul>
+</li>
+<li><strong>多步任务结构化计划</strong>：
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>1. [步骤] → verify: [验证方式]</span></span>
+<span class="line"><span>2. [步骤] → verify: [验证方式]</span></span></code></pre>
+</li>
+<li><strong>循环直到通过验证</strong>才算完成</li>
+</ul>
+<hr>
+<h2 id="6-功能实现案例">6. 功能实现案例</h2>
+<h3 id="案例在-claude-code-中使用-karpathy-guidelines-开发用户登录功能">案例：在 Claude Code 中使用 Karpathy Guidelines 开发用户登录功能</h3>
+<p><strong>未使用该规范时（典型 AI 行为）</strong>：</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>用户: "帮我加一个用户登录功能"</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Claude Code 典型回答:</span></span>
+<span class="line"><span>"好的，我已经为你创建了完整的登录系统，包括</span></span>
+<span class="line"><span>- 用户注册、登录、密码重置</span></span>
+<span class="line"><span>- JW Token 认证中间件</span></span>
+<span class="line"><span>- OAuth2.0 社交登录准备</span></span>
+<span class="line"><span>- 完整的 RBAC 权限系统</span></span>
+<span class="line"><span>- 用户管理后台界面"</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>❌ 问题：用户只说了一个"登录"，Claude 擅自加了一大堆"将来可能需要"的功能，</span></span>
+<span class="line"><span>而且没有确认技术选型（JWT vs Session？数据库用啥？）</span></span></code></pre>
+<p><strong>使用 Karpathy Guidelines 后（规范行为）</strong>：</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>步骤 1 - Think Before Coding:</span></span>
+<span class="line"><span>"我需要先确认几个问题：</span></span>
+<span class="line"><span>A) 你希望用 session-based 还是 JWT 认证？</span></span>
+<span class="line"><span>B) 用户信息存储在哪个数据库？</span></span>
+<span class="line"><span>C) 这是 API 登录还是页面表单登录？</span></span>
+<span class="line"><span>请告诉我你的偏好。"</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>(用户选择后)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>步骤 2 - Simplicity First:</span></span>
+<span class="line"><span>"根据你的要求，我将只实现最简单密码登录功能。</span></span>
+<span class="line"><span>不需要添加密码重置、OAuth 或权限系统——这些不是你要求的。"</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>步骤 3 - Goal-Driven Execution:</span></span>
+<span class="line"><span>"我的执行计划：</span></span>
+<span class="line"><span>1) 添加登录路由 + 密码验证逻辑 → verify: curl 测试正常/异常密码返回</span></span>
+<span class="line"><span>2) 添加 Session 中间件 → verify: 登录后访问受保护路由返回 200</span></span>
+<span class="line"><span>3) 更新前端登录表单 → verify: 手动输入测试</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>我可以开始了吗？"</span></span></code></pre>
+<blockquote>
+<p><strong>效果</strong>：代码量减少约 70%，0 未经确认的假设，改动完全可追溯</p>
+</blockquote>
+<blockquote>
+<p><strong>信息来源</strong>：<a href="https://developer.aliyun.com/article/1729015">阿里云开发者社区</a>、<a href="https://zhuanlan.zhihu.com/p/2031694111598694450">知乎深度解析</a></p>
+</blockquote>
+<hr>
+<h2 id="7-主要竞品清单">7. 主要竞品清单</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="center">序号</th><th>竞品</th><th>开发者</th><th>定位</th><th>优势</th><th>劣势</th></tr></thead><tbody><tr><td align="center">1</td><td><strong>Anthropic 官方 Skills 体系</strong></td><td>Anthropic</td><td>通用 Agent Skills 开放标准</td><td>官方标准，跨平台兼容</td><td>覆盖范围广但不够聚焦</td></tr><tr><td align="center">2</td><td><strong>Cursor 默认 Rules</strong></td><td>Cursor/Anysphere</td><td>Cursor IDE 内置项目规则</td><td>IDE 深度集成</td><td>限制 Cursor 生态内</td></tr><tr><td align="center">3</td><td><strong>Aider CONVENTIONS.md</strong></td><td>Aider</td><td>AI 结对编程的约定文件</td><td>轻量，纯文本</td><td>仅 Aider 工具可用</td></tr><tr><td align="center">4</td><td><strong>Copilot Instructions</strong></td><td>GitHub/Microsoft</td><td>GitHub Copilot 的项目指令</td><td>VS Code 深度集成</td><td>仅限 Copilot</td></tr><tr><td align="center">5</td><td><strong>工程规范类开源项目</strong></td><td>社区</td><td>通用编码规范/CLAUDE.md 最佳实践</td><td>经验总结，全面</td><td>通常缺乏量化验证</td></tr><tr><td align="center">6</td><td><strong>直接提示词约束</strong></td><td>—</td><td>每次对话手动输入行为规范</td><td>高度定制</td><td>一次一说，无法持久化</td></tr></tbody></table>
+<hr>
+<h2 id="8-与竞品的横向比较">8. 与竞品的横向比较</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">对比维度</th><th align="left"><strong>Karpathy Skills</strong></th><th align="left"><strong>Anthropic 官方 Skills</strong></th><th align="left"><strong>Cursor Rules</strong></th><th align="left"><strong>聊天中的临时约束</strong></th></tr></thead><tbody><tr><td align="left"><strong>价格</strong></td><td align="left"><strong>完全免费</strong></td><td align="left">免费 + Claude 订阅 $20/月起</td><td align="left">免费</td><td align="left">免费</td></tr><tr><td align="left"><strong>核心能力</strong></td><td align="left">AI 编程的 4 条行为纪律</td><td align="left">通用任务指令封装（文档/设计/测试等）</td><td align="left">IDE 级项目规则</td><td align="left">临时对话约束</td></tr><tr><td align="left"><strong>聚焦领域</strong></td><td align="left"><strong>编程行为规范</strong>（非常窄）</td><td align="left">通用任务执行（范围广）</td><td align="left">项目级配置</td><td align="left">当前任务</td></tr><tr><td align="left"><strong>持久化</strong></td><td align="left">✅ 写入文件永久生效</td><td align="left">✅ 安装后永久生效</td><td align="left">✅ 写入 .cursor/rules</td><td align="left">❌ 对话结束失效</td></tr><tr><td align="left"><strong>跨工具兼容</strong></td><td align="left"><strong>16+ 工具</strong></td><td align="left">Claude 生态为主</td><td align="left">❌ Cursor 独占</td><td align="left">❌ 当前对话独占</td></tr><tr><td align="left"><strong>内容大小</strong></td><td align="left">~70 行，极轻量</td><td align="left">每个技能约 200–5000 行</td><td align="left">按需</td><td align="left">按需</td></tr><tr><td align="left"><strong>主要解决</strong></td><td align="left">AI”自信犯错”的行为倾向</td><td align="left">Agent 如何完成具体任务</td><td align="left">项目特定的格式/编码约定</td><td align="left">一次性任务约束</td></tr></tbody></table>
+<h3 id="各竞品最适用的细分应用场景">各竞品最适用的细分应用场景</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>竞品</th><th>最佳场景</th></tr></thead><tbody><tr><td><strong>Karpathy Skills</strong></td><td><strong>任何使用 AI 编码工具的项目</strong>的”必备配餐”——作为行为底座，可与其他技能叠加使用</td></tr><tr><td><strong>Anthropic 官方 Skills</strong></td><td>需要 AI 完成具体任务时的指令封装（文档生成、MCP 搭建、测试等）</td></tr><tr><td><strong>Cursor Rules</strong></td><td>Cursor IDE 内的项目级编码规范与偏好</td></tr><tr><td><strong>临时约束</strong></td><td>一次性的、无需持久化的快速任务</td></tr></tbody></table>
+<blockquote>
+<p><strong>关键洞察</strong>：Karpathy Skills <strong>不与其他竞品冲突</strong>，反而<strong>互补</strong>。它是 AI 编码的”行为底座”，大多数用户会在已有 Karpathy Skills 的基础上叠加 Anthropic 官方 Skills 或自定义 Skills 使用。</p>
+</blockquote>
+<hr>
+<h2 id="9-版本迭代信息">9. 版本迭代信息</h2>
+<h3 id="首次公开发布">首次公开发布</h3>
+<ul>
+<li><strong>2026-01-26</strong>：Karpathy 发推 → 张佳源当日用 Claude Code 转化</li>
+<li><strong>2026-01-27</strong>：GitHub 发布，开始病毒式传播</li>
+<li><strong>2026-01-29</strong>：三天内达到 GitHub 趋势榜第一，Star 数破万</li>
+</ul>
+<h3 id="关键迭代节点">关键迭代节点</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="center">时间</th><th>事件</th></tr></thead><tbody><tr><td align="center"><strong>2026-01-26</strong></td><td>Karpathy X 推文 → Forrest Chang 转化为 CLAUDE.md</td></tr><tr><td align="center"><strong>2026-01-27</strong></td><td>GitHub 公开发布，当日暴涨 ~30,000 Stars</td></tr><tr><td align="center"><strong>2026-01-29</strong></td><td>GitHub 全球趋势 #1；中英文版 README 上线</td></tr><tr><td align="center"><strong>2026-02~03</strong></td><td>Star 持续增长，突破 6 万；多语言适配（中文、日文、韩文）</td></tr><tr><td align="center"><strong>2026-03</strong></td><td>添加 SKILL.md 格式（Agent Skills 标准兼容）；Cursor Rules 适配</td></tr><tr><td align="center"><strong>2026-04</strong></td><td>Star 超 12 万；swarmclawai 社区 Fork 大幅扩展，适配 16+ 工具</td></tr><tr><td align="center"><strong>2026-05~06</strong></td><td>Star 超 18 万，进入 GitHub All-Time Top 榜单；进入稳定维护期</td></tr></tbody></table>
+<h3 id="更新频率">更新频率</h3>
+<ul>
+<li><strong>早期（2026-01~02）</strong>：爆发期，每日 Multiple 次 PR 合并，密集迭代格式兼容</li>
+<li><strong>中期（2026-03~04）</strong>：高频更新周，主要是工具适配和翻译</li>
+<li><strong>当前（2026-07）</strong>：<strong>稳定维护期</strong>——核心 4 条准则几乎不变，更新以社区贡献的工具适配、翻译和格式衍生为主</li>
+</ul>
+<blockquote>
+<p><strong>特殊亮点</strong>：该项目是 GitHub 史上<strong>从创建到突破 10 万 Star 速度最快的项目之一</strong>（~3 个月），对比 Linux 内核用了 20 年、React 用了 8 年。</p>
+</blockquote>
+<hr>
+<h2 id="一句话锐评">一句话锐评</h2>
+<blockquote>
+<p><strong>这是 2026 年 AI 编程工具链中”投资回报率最高”的一个文件</strong>——70 行 Markdown、零成本、零依赖，但能让 AI 编程 Agent 的行为质量产生肉眼可见的提升。它的爆火揭示了一个深刻事实：在 AI 编程时代，<strong>定义规则的”元能力”可能比底层模型还重要</strong>。如果你在用任何 AI 编码工具且还没装它，这就是一个”为什么不装”的问题——而不是”要不要装”的问题。</p>
+<p>💡 <strong>建议</strong>：与 Anthropic 官方 Skills <strong>叠加使用</strong>——Karpathy 管”行为纪律”（不做什么），官方 Skills 管”专业能力”（做什么），互补效果最佳。</p>
+</blockquote>  </div> <!-- Previous / Next navigation --> <nav class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-12 pt-8 border-t border-[var(--color-border)]" data-astro-cid-bvzihdzo> <a href="/blog/AI工具报告/Scientific Agent Skills-报告" class="card-hover p-4 no-underline group" data-astro-cid-bvzihdzo> <span class="text-xs text-[var(--color-text-tertiary)] block mb-1" data-astro-cid-bvzihdzo>&larr; 上一篇</span> <span class="text-sm font-medium text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors line-clamp-1" data-astro-cid-bvzihdzo>scientific-agent-skills 深度调研报告</span> </a> <a href="/blog/AI工具报告/Dify-报告" class="card-hover p-4 no-underline group text-right" data-astro-cid-bvzihdzo> <span class="text-xs text-[var(--color-text-tertiary)] block mb-1" data-astro-cid-bvzihdzo>下一篇 &rarr;</span> <span class="text-sm font-medium text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors line-clamp-1" data-astro-cid-bvzihdzo>Dify 深度调研报告</span> </a> </nav> <hr class="!mt-12 !mb-8" data-astro-cid-bvzihdzo> <div data-astro-cid-bvzihdzo> <a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-bvzihdzo>
+&larr; 返回博客列表
+</a> </div> </div> </div> </article> </div>  </main> <footer class="border-t border-[var(--color-border)] mt-24 py-8" data-astro-cid-pux6a34n><div class="max-w-content flex items-center justify-between" data-astro-cid-pux6a34n><span class="text-sm text-[var(--color-text-tertiary)]" data-astro-cid-pux6a34n>
+&copy; 2026 星游寰宇
+</span><div class="flex items-center gap-4" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>博客</a><a href="/projects" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>项目</a><a href="/notes" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>日记</a><a href="/resources" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>资源</a><a href="/about" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>关于</a></div></div></footer> <div id="link-preview" style="display:none;position:fixed;z-index:99;max-width:18rem;pointer-events:none;" data-astro-cid-t7vshrbh></div>  <script type="module">(async()=>{try{const c=await fetch("/posts.json");if(!c.ok)return;const u=await c.json(),p=new Map(u.map(t=>[t.href,t])),e=document.getElementById("link-preview");if(!e)return;let n="",d;document.addEventListener("mouseover",t=>{const i=t.target.closest("a[href^='/blog/']");if(!i){e.style.display="none",n="";return}const s=i.getAttribute("href");if(!s||s===n)return;const o=p.get(s);o&&(n=s,d=setTimeout(()=>{e.innerHTML=`<div class="lp-title">${o.title}</div><div class="lp-summary">${o.summary}</div>`;const r=i.getBoundingClientRect();let a=r.left,l=r.bottom+6;a+288>window.innerWidth&&(a=window.innerWidth-296),l+80>window.innerHeight&&(l=r.top-80),Object.assign(e.style,{left:a+"px",top:l+"px",display:"block"})},300))},{passive:!0}),document.addEventListener("mouseout",t=>{t.target.closest("a[href^='/blog/']")&&(clearTimeout(d),e.style.display="none",n="")},{passive:!0})}catch{}})();</script> </body></html>  <script type="module">const c=document.getElementById("toc-toggle"),s=document.getElementById("toc-list"),i=document.getElementById("toc-chevron");c&&s&&i&&c.addEventListener("click",()=>{const o=s.classList.toggle("hidden");c.setAttribute("aria-expanded",String(o)),i.style.transform=o?"rotate(180deg)":""});const r=document.querySelectorAll(".toc-list a");if(r.length>0){const o=new IntersectionObserver(n=>{for(const t of n)t.isIntersecting&&r.forEach(e=>{e.classList.toggle("active",e.getAttribute("href")===`#${t.target.id}`)})},{rootMargin:"-80px 0px -80% 0px"});r.forEach(n=>{const t=n.getAttribute("href")?.slice(1);if(t){const e=document.getElementById(t);e&&o.observe(e)}})}</script>

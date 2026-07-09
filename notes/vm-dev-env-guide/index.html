@@ -1,0 +1,205 @@
+<!DOCTYPE html><html lang="zh-CN"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="在 Ubuntu 虚拟机中开发网页的优势分析：环境一致、快照还原、隔离干净，以及完整的开发环境搭建步骤。"><meta name="color-scheme" content="light"><!-- Open Graph --><meta property="og:title" content="虚拟机 Web 开发环境指南 — 星游寰宇"><meta property="og:description" content="在 Ubuntu 虚拟机中开发网页的优势分析：环境一致、快照还原、隔离干净，以及完整的开发环境搭建步骤。"><meta property="og:url" content="https://code2239.github.io/notes/vm-dev-env-guide"><meta property="og:type" content="article"><meta property="og:site_name" content="星游寰宇"><meta property="og:locale" content="zh_CN"><meta property="article:published_time" content="2026-07-08"><meta property="article:tag" content="开发环境"><meta property="article:tag" content="虚拟机"><meta property="article:tag" content="Linux"><!-- Twitter Card --><meta name="twitter:card" content="summary"><meta name="twitter:title" content="虚拟机 Web 开发环境指南 — 星游寰宇"><meta name="twitter:description" content="在 Ubuntu 虚拟机中开发网页的优势分析：环境一致、快照还原、隔离干净，以及完整的开发环境搭建步骤。"><!-- Canonical --><link rel="canonical" href="https://code2239.github.io/notes/vm-dev-env-guide"><title>虚拟机 Web 开发环境指南 — 星游寰宇</title><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="alternate" type="application/rss+xml" title="星游寰宇 RSS" href="/rss.xml"><!-- Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"星游寰宇","url":"https://code2239.github.io","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://code2239.github.io/search?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://code2239.github.io"},{"@type":"ListItem","position":2,"name":"日记","item":"https://code2239.github.io/notes"},{"@type":"ListItem","position":3,"name":"vm dev env guide"}]},{"@context":"https://schema.org","@type":"BlogPosting","headline":"虚拟机 Web 开发环境指南","description":"在 Ubuntu 虚拟机中开发网页的优势分析：环境一致、快照还原、隔离干净，以及完整的开发环境搭建步骤。","datePublished":"2026-07-08","url":"https://code2239.github.io/notes/vm-dev-env-guide","keywords":"开发环境, 虚拟机, Linux"}]}</script><link rel="stylesheet" href="/_astro/_slug_.D9rnRYSg.css">
+<style>.back-to-top[data-astro-cid-gzprr2dq]{position:fixed;bottom:2rem;right:2rem;z-index:40;width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:50%;border:1px solid var(--color-border);background:var(--color-bg);color:var(--color-text-secondary);cursor:pointer;box-shadow:var(--shadow-md);transition:opacity .2s ease,transform .2s ease}.back-to-top[data-astro-cid-gzprr2dq]:hover{color:var(--color-accent);border-color:var(--color-accent);transform:translateY(-2px)}.back-to-top[data-astro-cid-gzprr2dq].hidden{opacity:0;pointer-events:none}.copy-btn[data-astro-cid-qqybitij]{position:absolute;top:8px;right:8px;padding:4px 10px;font-size:.6875rem;font-family:var(--font-sans);color:var(--color-text-tertiary);background:var(--color-bg);border:1px solid var(--color-border);border-radius:6px;cursor:pointer;opacity:0;transition:opacity .15s ease,color .15s ease}pre[data-astro-cid-qqybitij]:hover .copy-btn[data-astro-cid-qqybitij]{opacity:1}.copy-btn[data-astro-cid-qqybitij]:hover{color:var(--color-accent);border-color:var(--color-accent)}.copy-btn[data-astro-cid-qqybitij].copied{color:#16a34a;border-color:#16a34a}.blog-layout[data-astro-cid-bvzihdzo]{display:block}.blog-toc[data-astro-cid-bvzihdzo]{display:none}.blog-body[data-astro-cid-bvzihdzo]{min-width:0}@media(min-width:1024px){.blog-layout[data-astro-cid-bvzihdzo]{display:grid;grid-template-columns:14rem 1fr;gap:3rem;align-items:start}.blog-toc[data-astro-cid-bvzihdzo]{display:block}.blog-body[data-astro-cid-bvzihdzo]{padding-right:2rem}}@media(max-width:1023px){.blog-toc[data-astro-cid-bvzihdzo]{display:block;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid var(--color-border)}}
+</style></head> <body class="min-h-screen flex flex-col"> <nav class="sticky top-0 z-40 bg-[var(--color-bg)]/80 backdrop-blur-md border-b border-[var(--color-border)]" data-astro-cid-pux6a34n><div class="max-w-content flex items-center justify-between py-4" data-astro-cid-pux6a34n><a href="/" class="flex items-center gap-2.5 text-base font-semibold no-underline tracking-tight" data-astro-cid-pux6a34n><svg class="w-7 h-7" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" data-astro-cid-pux6a34n><circle cx="16" cy="16" r="15" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-pux6a34n></circle><circle cx="16" cy="16" r="3" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="16" cy="5" r="1.5" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="24" cy="10" r="1" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="8" cy="22" r="1" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="25" cy="21" r="0.8" fill="currentColor" data-astro-cid-pux6a34n></circle></svg>
+星游寰宇
+</a><!-- Desktop nav --><div class="hidden sm:flex items-center gap-5" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>博客</a><a href="/projects" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>项目</a><a href="/notes" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>日记</a><a href="/resources" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>资源</a><a href="/about" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>关于</a><button id="search-trigger" class="flex items-center gap-1.5 text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] bg-[var(--color-bg-secondary)] hover:bg-[var(--color-bg-tertiary)] border border-[var(--color-border)] hover:border-[var(--color-accent)]/30 rounded-lg px-3 py-1.5 cursor-pointer shadow-sm hover:shadow-md transition-all duration-200" aria-label="搜索 (Ctrl+K)" title="搜索 (Ctrl+K)" data-astro-cid-pux6a34n><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-pux6a34n><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" data-astro-cid-pux6a34n></path></svg><span class="hidden lg:inline" data-astro-cid-pux6a34n>搜索</span><kbd class="hidden lg:inline-flex items-center text-[0.625rem] font-mono text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1 py-px rounded" data-astro-cid-pux6a34n>Ctrl+K</kbd></button></div><!-- Mobile hamburger --><button id="menu-btn" class="sm:hidden flex flex-col gap-1 p-2 -mr-2 cursor-pointer" aria-label="打开菜单" data-astro-cid-pux6a34n><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-transform duration-200" data-astro-cid-pux6a34n></span><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-opacity duration-200" data-astro-cid-pux6a34n></span><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-transform duration-200" data-astro-cid-pux6a34n></span></button></div><!-- Mobile menu --><div id="mobile-menu" class="hidden sm:hidden border-t border-[var(--color-border)] bg-[var(--color-bg)]" data-astro-cid-pux6a34n><div class="max-w-content flex flex-col gap-2 py-4" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>博客</a><a href="/projects" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>项目</a><a href="/notes" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>日记</a><a href="/resources" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>资源</a><a href="/about" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>关于</a></div></div></nav>
+    <div id="search-overlay" class="srch-overlay" role="dialog" aria-modal="true" aria-label="全局搜索" data-astro-cid-mn7pezny> <div id="search-backdrop" class="srch-backdrop" data-astro-cid-mn7pezny></div> <div class="srch-panel" id="srch-panel" data-astro-cid-mn7pezny> <!-- Search input --> <div class="srch-input-row" data-astro-cid-mn7pezny> <svg class="srch-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-mn7pezny> <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" data-astro-cid-mn7pezny></path> </svg> <input type="text" id="search-input" class="srch-input" placeholder="搜索文章、项目、日记、资源..." autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="go" data-astro-cid-mn7pezny> <kbd class="srch-kbd" data-astro-cid-mn7pezny>Esc</kbd> </div> <!-- Results area --> <div id="search-results" class="srch-results" data-astro-cid-mn7pezny> <p class="srch-empty" id="search-empty-hint" data-astro-cid-mn7pezny>输入关键词开始搜索</p> </div> <!-- Skeleton loading --> <div id="search-skeleton" class="srch-skeleton" style="display:none;" aria-hidden="true" data-astro-cid-mn7pezny> <div class="srch-skeleton-line" style="width:75%" data-astro-cid-mn7pezny></div> <div class="srch-skeleton-line" style="width:50%" data-astro-cid-mn7pezny></div> <div class="srch-skeleton-line" style="width:60%" data-astro-cid-mn7pezny></div> </div> <!-- Footer hints --> <div class="srch-footer" data-astro-cid-mn7pezny> <div class="srch-footer-hints" data-astro-cid-mn7pezny> <span data-astro-cid-mn7pezny><kbd data-astro-cid-mn7pezny>↑</kbd><kbd data-astro-cid-mn7pezny>↓</kbd> 导航</span> <span data-astro-cid-mn7pezny><kbd data-astro-cid-mn7pezny>↵</kbd> 打开</span> <span data-astro-cid-mn7pezny><kbd data-astro-cid-mn7pezny>Ctrl</kbd>+<kbd data-astro-cid-mn7pezny>K</kbd> 切换</span> </div> <div class="srch-footer-brand" data-astro-cid-mn7pezny>
+powered by Orama
+</div> </div> </div> </div> <script type="module" src="/_astro/Navigation.astro_astro_type_script_index_0_lang.15n1EYJp.js"></script> <main class="flex-1">  <div class="reading-progress" id="reading-progress" style="width: 0%"></div> <script type="module">const o=document.getElementById("reading-progress");if(!o)throw new Error("Reading progress bar element not found");const r=()=>{const n=window.scrollY,e=document.documentElement.scrollHeight-window.innerHeight,t=e>0?n/e*100:0;o.style.width=`${Math.min(t,100)}%`};window.addEventListener("scroll",r,{passive:!0});</script> <button id="back-to-top" class="back-to-top hidden" aria-label="返回顶部" data-astro-cid-gzprr2dq> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-gzprr2dq> <polyline points="18 15 12 9 6 15" data-astro-cid-gzprr2dq></polyline> </svg> </button>  <script type="module">const o=document.getElementById("back-to-top");o&&(window.addEventListener("scroll",()=>{o.classList.toggle("hidden",window.scrollY<400)},{passive:!0}),o.addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"})));</script> <script type="module">document.querySelectorAll("pre").forEach(e=>{const t=document.createElement("button");t.className="copy-btn",t.textContent="复制",t.addEventListener("click",async()=>{const n=e.querySelector("code")?.textContent||e.textContent||"";try{await navigator.clipboard.writeText(n),t.textContent="已复制",t.classList.add("copied"),setTimeout(()=>{t.textContent="复制",t.classList.remove("copied")},2e3)}catch{t.textContent="失败",setTimeout(()=>{t.textContent="复制"},2e3)}}),e.style.position="relative",e.appendChild(t)});</script> <div class="px-6 xl:px-12 pt-12 pb-16" data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <header class="mb-12 text-center" data-astro-cid-bvzihdzo> <h1 class="text-3xl font-semibold mb-3 tracking-tight" data-astro-cid-bvzihdzo>虚拟机 Web 开发环境指南</h1> <div class="flex items-center justify-center gap-2 text-[var(--color-text-tertiary)] text-sm" data-astro-cid-bvzihdzo> <time datetime="2026-07-08" data-astro-cid-bvzihdzo>2026-07-08</time> <span class="text-[var(--color-border)]" data-astro-cid-bvzihdzo>·</span> <span data-astro-cid-bvzihdzo>8 分钟阅读</span>  <span class="text-[var(--color-border)]" data-astro-cid-bvzihdzo>·</span> <span class="text-sm text-[var(--color-text-tertiary)]"> <span> 开发环境<span class="mx-1">·</span> </span><span> 虚拟机<span class="mx-1">·</span> </span><span> Linux </span> </span>  </div> </header> <div class="blog-layout" data-astro-cid-bvzihdzo> <aside class="blog-toc" data-astro-cid-bvzihdzo> <div class="sticky top-14 max-h-[calc(100vh-3.5rem)] overflow-y-auto" data-astro-cid-bvzihdzo> <button id="toc-toggle" class="hidden max-md:flex items-center gap-1 text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-3 cursor-pointer border-none bg-transparent p-0" aria-expanded="false" aria-controls="toc-list" data-astro-cid-bvzihdzo>
+目录
+<svg id="toc-chevron" class="w-3 h-3 transition-transform duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-bvzihdzo><polyline points="6 9 12 15 18 9" data-astro-cid-bvzihdzo></polyline></svg> </button> <span class="text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-3 max-md:hidden" data-astro-cid-bvzihdzo>目录</span> <div id="toc-list" class="max-md:hidden" data-astro-cid-bvzihdzo> <nav class="toc"> <p class="text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-3">目录</p> <ul class="toc-list"> <li class> <a href="#一在虚拟机里开发网页的好处">一、在虚拟机里开发网页的好处</a> </li><li class="toc-h3"> <a href="#11-环境和生产服务器一致">1.1 环境和生产服务器一致</a> </li><li class="toc-h3"> <a href="#12-快照随意试错一键还原">1.2 快照：随意试错，一键还原</a> </li><li class="toc-h3"> <a href="#13-环境隔离干净纯粹">1.3 环境隔离，干净纯粹</a> </li><li class="toc-h3"> <a href="#14-贴近真实的-linux-工作流">1.4 贴近真实的 Linux 工作流</a> </li><li class="toc-h3"> <a href="#15-便于迁移和复制">1.5 便于迁移和复制</a> </li><li class> <a href="#二虚拟机环境搭建">二、虚拟机环境搭建</a> </li><li class="toc-h3"> <a href="#21-选择虚拟机平台">2.1 选择虚拟机平台</a> </li><li class="toc-h3"> <a href="#22-创建虚拟机">2.2 创建虚拟机</a> </li><li class="toc-h3"> <a href="#23-安装开发工具">2.3 安装开发工具</a> </li><li class> <a href="#三文件传输方案对比">三、文件传输方案对比</a> </li><li class="toc-h3"> <a href="#31-共享文件夹不推荐用于开发">3.1 共享文件夹（不推荐用于开发）</a> </li><li class="toc-h3"> <a href="#32-推荐方案">3.2 推荐方案</a> </li><li class="toc-h3"> <a href="#33-vs-code-remote-ssh-工作流">3.3 VS Code Remote-SSH 工作流</a> </li><li class> <a href="#四开发工作流总结">四、开发工作流总结</a> </li><li class> <a href="#核心总结">核心总结</a> </li> </ul> </nav> </div> </div> </aside> <div class="blog-body" data-astro-cid-bvzihdzo> <div class="prose prose-neutral max-w-none" data-astro-cid-bvzihdzo>   <blockquote>
+<p>场景：Windows 11 Pro 客户机 → Ubuntu 虚拟机，用于 Web 开发。</p>
+</blockquote>
+<hr>
+<h2 id="一在虚拟机里开发网页的好处">一、在虚拟机里开发网页的好处</h2>
+<p>相对于在 Windows 客户机上直接开发：</p>
+<h3 id="11-环境和生产服务器一致">1.1 环境和生产服务器一致</h3>
+<p>99% 的网站最终部署在 Linux 服务器上：</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Windows 开发 → 部署到 Linux  → "我本地明明是好的啊？"</span></span>
+<span class="line"><span>Ubuntu 开发 → 部署到 Linux  → 一模一样的运行环境</span></span></code></pre>
+<p>文件路径、权限、进程管理、环境变量，开发和上线跑在同一套系统上，<strong>消除”环境差异导致的诡异 bug”</strong>。</p>
+<h3 id="12-快照随意试错一键还原">1.2 快照：随意试错，一键还原</h3>
+<p>这是虚拟机最大的优势：</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>装了个依赖把环境搞崩了？    → 还原快照，30 秒恢复</span></span>
+<span class="line"><span>想尝试重构但不确定会不会翻车？→ 拍个快照，放心改</span></span>
+<span class="line"><span>升级 Node 版本导致项目跑不起来？→ 还原，继续干活</span></span></code></pre>
+<p>Windows 上做实验出了事，可能要折腾半天。虚拟机里 <strong>拍快照 → 随便折腾 → 不行就还原</strong>，零心理负担。</p>
+<h3 id="13-环境隔离干净纯粹">1.3 环境隔离，干净纯粹</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>问题</th><th>Windows 客户机</th><th>Ubuntu 虚拟机</th></tr></thead><tbody><tr><td>装过各种全局工具，版本冲突</td><td>常见</td><td>全新环境，按需安装</td></tr><tr><td>某个旧项目的配置影响新项目</td><td>可能</td><td>完全隔离</td></tr><tr><td>系统更新导致开发环境挂了</td><td>时有发生</td><td>更新前拍快照，挂了秒还原</td></tr><tr><td>试了个工具卸载不干净</td><td>残留文件找半天</td><td>还原快照，干干净净</td></tr></tbody></table>
+<h3 id="14-贴近真实的-linux-工作流">1.4 贴近真实的 Linux 工作流</h3>
+<p>Web 开发大量工具链天生为 Linux 设计：</p>
+<ul>
+<li><code>npm</code> / <code>pnpm</code> 脚本的路径分隔符（<code>/</code> vs <code>\</code>）</li>
+<li>Docker 原生运行（Windows Docker 底层也是跑 Linux 虚拟机）</li>
+<li>各种 CLI 工具首选 Linux 支持</li>
+<li>Nginx、Redis、数据库都是 Linux 一等公民</li>
+</ul>
+<p>在 Linux 上开发，跟着教程敲命令不用改来改去。</p>
+<h3 id="15-便于迁移和复制">1.5 便于迁移和复制</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>换电脑了？      → 导出虚拟机，新电脑导入，零配置恢复</span></span>
+<span class="line"><span>队友要搭环境？  → 分享虚拟机镜像，环境完全一致</span></span>
+<span class="line"><span>想同时测多个环境？→ 复制虚拟机，分别装不同版本的依赖</span></span></code></pre>
+<hr>
+<h2 id="二虚拟机环境搭建">二、虚拟机环境搭建</h2>
+<h3 id="21-选择虚拟机平台">2.1 选择虚拟机平台</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>平台</th><th>特点</th></tr></thead><tbody><tr><td><strong>Hyper-V</strong>（推荐）</td><td>Windows 11 Pro 自带，性能好</td></tr><tr><td>VMware Workstation</td><td>功能强，快照好用</td></tr><tr><td>VirtualBox</td><td>免费开源，跨平台</td></tr></tbody></table>
+<p>Windows 11 Pro 启用 Hyper-V：</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="powershell"><code><span class="line"><span style="color:var(--astro-code-token-comment)"># PowerShell（管理员）</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">Enable-WindowsOptionalFeature</span><span style="color:var(--astro-code-token-keyword)"> -</span><span style="color:var(--astro-code-foreground)">Online </span><span style="color:var(--astro-code-token-keyword)">-</span><span style="color:var(--astro-code-foreground)">FeatureName Microsoft</span><span style="color:var(--astro-code-token-keyword)">-</span><span style="color:var(--astro-code-foreground)">Hyper</span><span style="color:var(--astro-code-token-keyword)">-</span><span style="color:var(--astro-code-foreground)">V</span><span style="color:var(--astro-code-token-keyword)">-</span><span style="color:var(--astro-code-foreground)">All</span></span></code></pre>
+<h3 id="22-创建虚拟机">2.2 创建虚拟机</h3>
+<ul>
+<li>建议配置：<strong>4GB+ 内存、2 核 CPU、40GB+ 硬盘</strong></li>
+<li>操作系统：Ubuntu Server 或 Desktop</li>
+<li>网络：Default Switch（NAT）或 Internal Switch（主机通信）</li>
+</ul>
+<h3 id="23-安装开发工具">2.3 安装开发工具</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:var(--astro-code-token-function)">sudo</span><span style="color:var(--astro-code-token-string)"> apt</span><span style="color:var(--astro-code-token-string)"> update</span><span style="color:var(--astro-code-token-punctuation)"> &#x26;&#x26;</span><span style="color:var(--astro-code-token-function)"> sudo</span><span style="color:var(--astro-code-token-string)"> apt</span><span style="color:var(--astro-code-token-string)"> upgrade</span><span style="color:var(--astro-code-token-string)"> -y</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># Node.js</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">curl</span><span style="color:var(--astro-code-token-string)"> -fsSL</span><span style="color:var(--astro-code-token-string)"> https://deb.nodesource.com/setup_22.x</span><span style="color:var(--astro-code-token-keyword)"> |</span><span style="color:var(--astro-code-token-function)"> sudo</span><span style="color:var(--astro-code-token-string)"> -E</span><span style="color:var(--astro-code-token-string)"> bash</span><span style="color:var(--astro-code-token-string)"> -</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">sudo</span><span style="color:var(--astro-code-token-string)"> apt</span><span style="color:var(--astro-code-token-string)"> install</span><span style="color:var(--astro-code-token-string)"> -y</span><span style="color:var(--astro-code-token-string)"> nodejs</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># Git</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">sudo</span><span style="color:var(--astro-code-token-string)"> apt</span><span style="color:var(--astro-code-token-string)"> install</span><span style="color:var(--astro-code-token-string)"> -y</span><span style="color:var(--astro-code-token-string)"> git</span></span></code></pre>
+<hr>
+<h2 id="三文件传输方案对比">三、文件传输方案对比</h2>
+<h3 id="31-共享文件夹不推荐用于开发">3.1 共享文件夹（不推荐用于开发）</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>问题</th><th>影响</th></tr></thead><tbody><tr><td><code>node_modules</code> 损坏</td><td>Windows 和 Linux 文件系统差异，<code>npm install</code> 报权限错误、符号链接失败</td></tr><tr><td>热更新失效</td><td>Linux <code>inotify</code> 无法监听共享文件夹的文件变动</td></tr><tr><td>权限混乱</td><td><code>chmod</code> 不生效，文件权限是虚拟的</td></tr><tr><td>性能差</td><td>大量小文件（如 <code>node_modules</code>）读写极慢</td></tr></tbody></table>
+<p><strong>结论：共享文件夹可以传文件，但不能用于开发。</strong></p>
+<h3 id="32-推荐方案">3.2 推荐方案</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>方案</th><th>适用场景</th><th>命令</th></tr></thead><tbody><tr><td><strong>Git clone</strong>（最佳）</td><td>代码已在 Git 仓库</td><td><code>git clone &#x3C;仓库地址></code></td></tr><tr><td><strong>scp 一次性传输</strong></td><td>没有 Git 仓库时</td><td><code>scp -r 项目路径 user@IP:/home/user/</code></td></tr><tr><td><strong>VS Code Remote-SSH</strong>（最推荐工作流）</td><td>日常开发</td><td>安装 Remote-SSH 插件 → 连接 <code>user@虚拟机IP</code></td></tr></tbody></table>
+<h3 id="33-vs-code-remote-ssh-工作流">3.3 VS Code Remote-SSH 工作流</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>代码存在虚拟机本地磁盘 → 编辑器在客户机 VS Code → 体验和本地开发完全一样</span></span></code></pre>
+<hr>
+<h2 id="四开发工作流总结">四、开发工作流总结</h2>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>客户机 VS Code（Remote-SSH）──> 虚拟机（代码 + 运行环境）</span></span>
+<span class="line"><span>                                    │</span></span>
+<span class="line"><span>                              git push / git pull</span></span>
+<span class="line"><span>                                    │</span></span>
+<span class="line"><span>                                 GitHub</span></span></code></pre>
+<ol>
+<li>代码用 Git 托管在虚拟机本地磁盘</li>
+<li>客户机通过 VS Code Remote-SSH 连接编辑</li>
+<li><code>git push/pull</code> 实现备份和多机同步</li>
+<li>开发前拍快照，出问题秒还原</li>
+<li>开发环境和生产服务器保持一致</li>
+</ol>
+<hr>
+<h2 id="核心总结">核心总结</h2>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Windows 开发            Ubuntu 虚拟机开发</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>本地方便但和生产不一致    ✅ 和生产环境一模一样</span></span>
+<span class="line"><span>改坏了调试半天          ✅ 快照秒还原</span></span>
+<span class="line"><span>环境越用越乱            ✅ 干净隔离，不行就重建</span></span>
+<span class="line"><span>一些工具兼容性差        ✅ Linux 原生支持</span></span>
+<span class="line"><span>换机器重新配环境        ✅ 导出导入即用</span></span></code></pre>
+<blockquote>
+<p><strong>一句话：虚拟机让你在生产服务器上开发，但保留了随时反悔的能力。</strong></p>
+</blockquote> <div> <a href="/notes" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150">
+&larr; 返回笔记列表
+</a> </div>  </div> <!-- Previous / Next navigation -->  <hr class="!mt-12 !mb-8" data-astro-cid-bvzihdzo> <div data-astro-cid-bvzihdzo> <a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-bvzihdzo>
+&larr; 返回博客列表
+</a> </div> </div> </div> </article> </div>  </main> <footer class="border-t border-[var(--color-border)] mt-24 py-8" data-astro-cid-pux6a34n><div class="max-w-content flex items-center justify-between" data-astro-cid-pux6a34n><span class="text-sm text-[var(--color-text-tertiary)]" data-astro-cid-pux6a34n>
+&copy; 2026 星游寰宇
+</span><div class="flex items-center gap-4" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>博客</a><a href="/projects" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>项目</a><a href="/notes" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>日记</a><a href="/resources" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>资源</a><a href="/about" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>关于</a></div></div></footer> <div id="link-preview" style="display:none;position:fixed;z-index:99;max-width:18rem;pointer-events:none;" data-astro-cid-t7vshrbh></div>  <script type="module">(async()=>{try{const c=await fetch("/posts.json");if(!c.ok)return;const u=await c.json(),p=new Map(u.map(t=>[t.href,t])),e=document.getElementById("link-preview");if(!e)return;let n="",d;document.addEventListener("mouseover",t=>{const i=t.target.closest("a[href^='/blog/']");if(!i){e.style.display="none",n="";return}const s=i.getAttribute("href");if(!s||s===n)return;const o=p.get(s);o&&(n=s,d=setTimeout(()=>{e.innerHTML=`<div class="lp-title">${o.title}</div><div class="lp-summary">${o.summary}</div>`;const r=i.getBoundingClientRect();let a=r.left,l=r.bottom+6;a+288>window.innerWidth&&(a=window.innerWidth-296),l+80>window.innerHeight&&(l=r.top-80),Object.assign(e.style,{left:a+"px",top:l+"px",display:"block"})},300))},{passive:!0}),document.addEventListener("mouseout",t=>{t.target.closest("a[href^='/blog/']")&&(clearTimeout(d),e.style.display="none",n="")},{passive:!0})}catch{}})();</script> </body></html>  <script type="module">const c=document.getElementById("toc-toggle"),s=document.getElementById("toc-list"),i=document.getElementById("toc-chevron");c&&s&&i&&c.addEventListener("click",()=>{const o=s.classList.toggle("hidden");c.setAttribute("aria-expanded",String(o)),i.style.transform=o?"rotate(180deg)":""});const r=document.querySelectorAll(".toc-list a");if(r.length>0){const o=new IntersectionObserver(n=>{for(const t of n)t.isIntersecting&&r.forEach(e=>{e.classList.toggle("active",e.getAttribute("href")===`#${t.target.id}`)})},{rootMargin:"-80px 0px -80% 0px"});r.forEach(n=>{const t=n.getAttribute("href")?.slice(1);if(t){const e=document.getElementById(t);e&&o.observe(e)}})}</script>

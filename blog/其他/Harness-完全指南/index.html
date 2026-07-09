@@ -1,0 +1,943 @@
+<!DOCTYPE html><html lang="zh-CN"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="Harness 工程概念、主流开源项目与小型项目实践方法系统梳理。"><meta name="color-scheme" content="light"><!-- Open Graph --><meta property="og:title" content="Harness 工程完全指南 — 星游寰宇"><meta property="og:description" content="Harness 工程概念、主流开源项目与小型项目实践方法系统梳理。"><meta property="og:url" content="https://code2239.github.io/blog/其他/Harness-完全指南"><meta property="og:type" content="article"><meta property="og:site_name" content="星游寰宇"><meta property="og:locale" content="zh_CN"><meta property="article:published_time" content="2026-07-05"><meta property="article:tag" content="Harness"><meta property="article:tag" content="工程"><meta property="article:tag" content="Claude Code"><!-- Twitter Card --><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Harness 工程完全指南 — 星游寰宇"><meta name="twitter:description" content="Harness 工程概念、主流开源项目与小型项目实践方法系统梳理。"><!-- Canonical --><link rel="canonical" href="https://code2239.github.io/blog/其他/Harness-完全指南"><title>Harness 工程完全指南 — 星游寰宇</title><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="alternate" type="application/rss+xml" title="星游寰宇 RSS" href="/rss.xml"><!-- Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"星游寰宇","url":"https://code2239.github.io","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://code2239.github.io/search?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://code2239.github.io"},{"@type":"ListItem","position":2,"name":"博客","item":"https://code2239.github.io/blog"},{"@type":"ListItem","position":3,"name":"其他","item":"https://code2239.github.io/blog/其他"},{"@type":"ListItem","position":4,"name":"Harness 完全指南"}]},{"@context":"https://schema.org","@type":"BlogPosting","headline":"Harness 工程完全指南","description":"Harness 工程概念、主流开源项目与小型项目实践方法系统梳理。","datePublished":"2026-07-05","url":"https://code2239.github.io/blog/其他/Harness-完全指南","keywords":"Harness, 工程, Claude Code"}]}</script><link rel="stylesheet" href="/_astro/_slug_.D9rnRYSg.css">
+<style>.back-to-top[data-astro-cid-gzprr2dq]{position:fixed;bottom:2rem;right:2rem;z-index:40;width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:50%;border:1px solid var(--color-border);background:var(--color-bg);color:var(--color-text-secondary);cursor:pointer;box-shadow:var(--shadow-md);transition:opacity .2s ease,transform .2s ease}.back-to-top[data-astro-cid-gzprr2dq]:hover{color:var(--color-accent);border-color:var(--color-accent);transform:translateY(-2px)}.back-to-top[data-astro-cid-gzprr2dq].hidden{opacity:0;pointer-events:none}.copy-btn[data-astro-cid-qqybitij]{position:absolute;top:8px;right:8px;padding:4px 10px;font-size:.6875rem;font-family:var(--font-sans);color:var(--color-text-tertiary);background:var(--color-bg);border:1px solid var(--color-border);border-radius:6px;cursor:pointer;opacity:0;transition:opacity .15s ease,color .15s ease}pre[data-astro-cid-qqybitij]:hover .copy-btn[data-astro-cid-qqybitij]{opacity:1}.copy-btn[data-astro-cid-qqybitij]:hover{color:var(--color-accent);border-color:var(--color-accent)}.copy-btn[data-astro-cid-qqybitij].copied{color:#16a34a;border-color:#16a34a}.blog-layout[data-astro-cid-bvzihdzo]{display:block}.blog-toc[data-astro-cid-bvzihdzo]{display:none}.blog-body[data-astro-cid-bvzihdzo]{min-width:0}@media(min-width:1024px){.blog-layout[data-astro-cid-bvzihdzo]{display:grid;grid-template-columns:14rem 1fr;gap:3rem;align-items:start}.blog-toc[data-astro-cid-bvzihdzo]{display:block}.blog-body[data-astro-cid-bvzihdzo]{padding-right:2rem}}@media(max-width:1023px){.blog-toc[data-astro-cid-bvzihdzo]{display:block;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid var(--color-border)}}
+</style></head> <body class="min-h-screen flex flex-col"> <nav class="sticky top-0 z-40 bg-[var(--color-bg)]/80 backdrop-blur-md border-b border-[var(--color-border)]" data-astro-cid-pux6a34n><div class="max-w-content flex items-center justify-between py-4" data-astro-cid-pux6a34n><a href="/" class="flex items-center gap-2.5 text-base font-semibold no-underline tracking-tight" data-astro-cid-pux6a34n><svg class="w-7 h-7" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" data-astro-cid-pux6a34n><circle cx="16" cy="16" r="15" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-pux6a34n></circle><circle cx="16" cy="16" r="3" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="16" cy="5" r="1.5" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="24" cy="10" r="1" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="8" cy="22" r="1" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="25" cy="21" r="0.8" fill="currentColor" data-astro-cid-pux6a34n></circle></svg>
+星游寰宇
+</a><!-- Desktop nav --><div class="hidden sm:flex items-center gap-5" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>博客</a><a href="/projects" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>项目</a><a href="/notes" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>日记</a><a href="/resources" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>资源</a><a href="/about" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>关于</a><button id="search-trigger" class="flex items-center gap-1.5 text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] bg-[var(--color-bg-secondary)] hover:bg-[var(--color-bg-tertiary)] border border-[var(--color-border)] hover:border-[var(--color-accent)]/30 rounded-lg px-3 py-1.5 cursor-pointer shadow-sm hover:shadow-md transition-all duration-200" aria-label="搜索 (Ctrl+K)" title="搜索 (Ctrl+K)" data-astro-cid-pux6a34n><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-pux6a34n><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" data-astro-cid-pux6a34n></path></svg><span class="hidden lg:inline" data-astro-cid-pux6a34n>搜索</span><kbd class="hidden lg:inline-flex items-center text-[0.625rem] font-mono text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1 py-px rounded" data-astro-cid-pux6a34n>Ctrl+K</kbd></button></div><!-- Mobile hamburger --><button id="menu-btn" class="sm:hidden flex flex-col gap-1 p-2 -mr-2 cursor-pointer" aria-label="打开菜单" data-astro-cid-pux6a34n><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-transform duration-200" data-astro-cid-pux6a34n></span><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-opacity duration-200" data-astro-cid-pux6a34n></span><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-transform duration-200" data-astro-cid-pux6a34n></span></button></div><!-- Mobile menu --><div id="mobile-menu" class="hidden sm:hidden border-t border-[var(--color-border)] bg-[var(--color-bg)]" data-astro-cid-pux6a34n><div class="max-w-content flex flex-col gap-2 py-4" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>博客</a><a href="/projects" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>项目</a><a href="/notes" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>日记</a><a href="/resources" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>资源</a><a href="/about" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>关于</a></div></div></nav>
+    <div id="search-overlay" class="srch-overlay" role="dialog" aria-modal="true" aria-label="全局搜索" data-astro-cid-mn7pezny> <div id="search-backdrop" class="srch-backdrop" data-astro-cid-mn7pezny></div> <div class="srch-panel" id="srch-panel" data-astro-cid-mn7pezny> <!-- Search input --> <div class="srch-input-row" data-astro-cid-mn7pezny> <svg class="srch-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-mn7pezny> <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" data-astro-cid-mn7pezny></path> </svg> <input type="text" id="search-input" class="srch-input" placeholder="搜索文章、项目、日记、资源..." autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="go" data-astro-cid-mn7pezny> <kbd class="srch-kbd" data-astro-cid-mn7pezny>Esc</kbd> </div> <!-- Results area --> <div id="search-results" class="srch-results" data-astro-cid-mn7pezny> <p class="srch-empty" id="search-empty-hint" data-astro-cid-mn7pezny>输入关键词开始搜索</p> </div> <!-- Skeleton loading --> <div id="search-skeleton" class="srch-skeleton" style="display:none;" aria-hidden="true" data-astro-cid-mn7pezny> <div class="srch-skeleton-line" style="width:75%" data-astro-cid-mn7pezny></div> <div class="srch-skeleton-line" style="width:50%" data-astro-cid-mn7pezny></div> <div class="srch-skeleton-line" style="width:60%" data-astro-cid-mn7pezny></div> </div> <!-- Footer hints --> <div class="srch-footer" data-astro-cid-mn7pezny> <div class="srch-footer-hints" data-astro-cid-mn7pezny> <span data-astro-cid-mn7pezny><kbd data-astro-cid-mn7pezny>↑</kbd><kbd data-astro-cid-mn7pezny>↓</kbd> 导航</span> <span data-astro-cid-mn7pezny><kbd data-astro-cid-mn7pezny>↵</kbd> 打开</span> <span data-astro-cid-mn7pezny><kbd data-astro-cid-mn7pezny>Ctrl</kbd>+<kbd data-astro-cid-mn7pezny>K</kbd> 切换</span> </div> <div class="srch-footer-brand" data-astro-cid-mn7pezny>
+powered by Orama
+</div> </div> </div> </div> <script type="module" src="/_astro/Navigation.astro_astro_type_script_index_0_lang.15n1EYJp.js"></script> <main class="flex-1">  <div class="reading-progress" id="reading-progress" style="width: 0%"></div> <script type="module">const o=document.getElementById("reading-progress");if(!o)throw new Error("Reading progress bar element not found");const r=()=>{const n=window.scrollY,e=document.documentElement.scrollHeight-window.innerHeight,t=e>0?n/e*100:0;o.style.width=`${Math.min(t,100)}%`};window.addEventListener("scroll",r,{passive:!0});</script> <button id="back-to-top" class="back-to-top hidden" aria-label="返回顶部" data-astro-cid-gzprr2dq> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-gzprr2dq> <polyline points="18 15 12 9 6 15" data-astro-cid-gzprr2dq></polyline> </svg> </button>  <script type="module">const o=document.getElementById("back-to-top");o&&(window.addEventListener("scroll",()=>{o.classList.toggle("hidden",window.scrollY<400)},{passive:!0}),o.addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"})));</script> <script type="module">document.querySelectorAll("pre").forEach(e=>{const t=document.createElement("button");t.className="copy-btn",t.textContent="复制",t.addEventListener("click",async()=>{const n=e.querySelector("code")?.textContent||e.textContent||"";try{await navigator.clipboard.writeText(n),t.textContent="已复制",t.classList.add("copied"),setTimeout(()=>{t.textContent="复制",t.classList.remove("copied")},2e3)}catch{t.textContent="失败",setTimeout(()=>{t.textContent="复制"},2e3)}}),e.style.position="relative",e.appendChild(t)});</script> <div class="px-6 xl:px-12 pt-12 pb-16" data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <header class="mb-12 text-center" data-astro-cid-bvzihdzo> <h1 class="text-3xl font-semibold mb-3 tracking-tight" data-astro-cid-bvzihdzo>Harness 工程完全指南</h1> <div class="flex items-center justify-center gap-2 text-[var(--color-text-tertiary)] text-sm" data-astro-cid-bvzihdzo> <time datetime="2026-07-05" data-astro-cid-bvzihdzo>2026-07-05</time> <span class="text-[var(--color-border)]" data-astro-cid-bvzihdzo>·</span> <span data-astro-cid-bvzihdzo>30 分钟阅读</span>  <span class="text-[var(--color-border)]" data-astro-cid-bvzihdzo>·</span> <span class="text-sm text-[var(--color-text-tertiary)]"> <span> Harness<span class="mx-1">·</span> </span><span> 工程<span class="mx-1">·</span> </span><span> Claude Code </span> </span>  </div> </header> <div class="blog-layout" data-astro-cid-bvzihdzo> <aside class="blog-toc" data-astro-cid-bvzihdzo> <div class="sticky top-14 max-h-[calc(100vh-3.5rem)] overflow-y-auto" data-astro-cid-bvzihdzo> <button id="toc-toggle" class="hidden max-md:flex items-center gap-1 text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-3 cursor-pointer border-none bg-transparent p-0" aria-expanded="false" aria-controls="toc-list" data-astro-cid-bvzihdzo>
+目录
+<svg id="toc-chevron" class="w-3 h-3 transition-transform duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-bvzihdzo><polyline points="6 9 12 15 18 9" data-astro-cid-bvzihdzo></polyline></svg> </button> <span class="text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-3 max-md:hidden" data-astro-cid-bvzihdzo>目录</span> <div id="toc-list" class="max-md:hidden" data-astro-cid-bvzihdzo> <nav class="toc"> <p class="text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-3">目录</p> <ul class="toc-list"> <li class> <a href="#目录">目录</a> </li><li class> <a href="#第一部分什么是-harness-工程">第一部分：什么是 Harness 工程</a> </li><li class="toc-h3"> <a href="#一句话定义">一句话定义</a> </li><li class="toc-h3"> <a href="#核心思想">核心思想</a> </li><li class="toc-h3"> <a href="#五层架构">五层架构</a> </li><li class> <a href="#第二部分harness-要解决的七大核心问题">第二部分：Harness 要解决的七大核心问题</a> </li><li class="toc-h3"> <a href="#1--非确定性输出">1. 🎲 非确定性输出</a> </li><li class="toc-h3"> <a href="#2--上下文窗口瓶颈">2. 🧠 上下文窗口瓶颈</a> </li><li class="toc-h3"> <a href="#3--多步骤任务编排">3. 🔗 多步骤任务编排</a> </li><li class="toc-h3"> <a href="#4-️-安全性与破坏性操作">4. 🛡️ 安全性与破坏性操作</a> </li><li class="toc-h3"> <a href="#5--质量一致性">5. 📊 质量一致性</a> </li><li class="toc-h3"> <a href="#6--反馈循环断裂">6. 🔄 反馈循环断裂</a> </li><li class="toc-h3"> <a href="#7-️-知识流失">7. 🏗️ 知识流失</a> </li><li class> <a href="#第三部分github-主流-harness-项目全景">第三部分：GitHub 主流 Harness 项目全景</a> </li><li class="toc-h3"> <a href="#分类一ai-编程-harness终端ide-内的-ai-编程工具">分类一：AI 编程 Harness（终端/IDE 内的 AI 编程工具）</a> </li><li class="toc-h3"> <a href="#分类二多-agent-编排-harness">分类二：多 Agent 编排 Harness</a> </li><li class="toc-h3"> <a href="#分类三评估-harness">分类三：评估 Harness</a> </li><li class="toc-h3"> <a href="#分类四devops-平台">分类四：DevOps 平台</a> </li><li class="toc-h3"> <a href="#全景对比总表">全景对比总表</a> </li><li class> <a href="#第四部分小型项目如何落地-harness">第四部分：小型项目如何落地 Harness</a> </li><li class="toc-h3"> <a href="#原则重实用轻流程">原则：重实用，轻流程</a> </li><li class="toc-h3"> <a href="#桌面应用开发工作流">桌面应用开发工作流</a> </li><li class="toc-h3"> <a href="#网页维护工作流">网页维护工作流</a> </li><li class="toc-h3"> <a href="#常用命令速查">常用命令速查</a> </li><li class="toc-h3"> <a href="#配置示例claudesettingsjson">配置示例：.claude/settings.json</a> </li><li class> <a href="#第五部分claude-code-harness-能力速查">第五部分：Claude Code Harness 能力速查</a> </li><li class="toc-h3"> <a href="#专业-agent部分精选">专业 Agent（部分精选）</a> </li><li class="toc-h3"> <a href="#核心-skill-流程部分精选">核心 Skill 流程（部分精选）</a> </li><li class> <a href="#第六部分快速上手-checklist">第六部分：快速上手 Checklist</a> </li><li class="toc-h3"> <a href="#第一天建立基础">第一天：建立基础</a> </li><li class="toc-h3"> <a href="#第一周形成习惯">第一周：形成习惯</a> </li><li class="toc-h3"> <a href="#第一个月自动化">第一个月：自动化</a> </li><li class> <a href="#附录关键概念速查表">附录：关键概念速查表</a> </li> </ul> </nav> </div> </div> </aside> <div class="blog-body" data-astro-cid-bvzihdzo> <div class="prose prose-neutral max-w-none" data-astro-cid-bvzihdzo>  <h1 id="harness-工程完全指南">Harness 工程完全指南</h1>
+<blockquote>
+<p>本文档系统梳理 Harness 工程的概念、主流开源项目、以及在小型项目中的实践方法。</p>
+</blockquote>
+<hr>
+<h2 id="目录">目录</h2>
+<ul>
+<li><a href="#%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86%E4%BB%80%E4%B9%88%E6%98%AF-harness-%E5%B7%A5%E7%A8%8B">第一部分：什么是 Harness 工程</a></li>
+<li><a href="#%E7%AC%AC%E4%BA%8C%E9%83%A8%E5%88%86harness-%E8%A6%81%E8%A7%A3%E5%86%B3%E7%9A%84%E4%B8%83%E5%A4%A7%E6%A0%B8%E5%BF%83%E9%97%AE%E9%A2%98">第二部分：Harness 要解决的七大核心问题</a></li>
+<li><a href="#%E7%AC%AC%E4%B8%89%E9%83%A8%E5%88%86github-%E4%B8%BB%E6%B5%81-harness-%E9%A1%B9%E7%9B%AE%E5%85%A8%E6%99%AF">第三部分：GitHub 主流 Harness 项目全景</a></li>
+<li><a href="#%E7%AC%AC%E5%9B%9B%E9%83%A8%E5%88%86%E5%B0%8F%E5%9E%8B%E9%A1%B9%E7%9B%AE%E5%A6%82%E4%BD%95%E8%90%BD%E5%9C%B0-harness">第四部分：小型项目如何落地 Harness</a></li>
+<li><a href="#%E7%AC%AC%E4%BA%94%E9%83%A8%E5%88%86claude-code-harness-%E8%83%BD%E5%8A%9B%E9%80%9F%E6%9F%A5">第五部分：Claude Code Harness 能力速查</a></li>
+<li><a href="#%E7%AC%AC%E5%85%AD%E9%83%A8%E5%88%86%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B-checklist">第六部分：快速上手 Checklist</a></li>
+</ul>
+<hr>
+<h2 id="第一部分什么是-harness-工程">第一部分：什么是 Harness 工程</h2>
+<h3 id="一句话定义">一句话定义</h3>
+<blockquote>
+<p><strong>Harness 工程是一种系统化的 AI 代理（Agent）编排与质量保障方法论。它把人类软件工程中经过验证的实践——Code Review、CI/CD、TDD、安全审计、知识管理——适配到 AI 辅助开发的工作流中，让 AI 从”一个聪明的助手”变成”一个可靠的工程团队”。</strong></p>
+</blockquote>
+<h3 id="核心思想">核心思想</h3>
+<p><strong>不靠单次对话碰运气，而是用工程化的流程来约束和指导 AI 的工作。</strong></p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>❌ 朴素方式：用户 → "帮我做X" → AI尝试一步完成 → 质量不可控</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>✅ Harness 方式：</span></span>
+<span class="line"><span>   用户 → "帮我做X"</span></span>
+<span class="line"><span>        → Brainstorming（明确需求）</span></span>
+<span class="line"><span>        → Plan（制定计划）</span></span>
+<span class="line"><span>        → Agent A（实现模块1）  Agent B（实现模块2）  Agent C（写测试）</span></span>
+<span class="line"><span>        → Code Review（检查质量）</span></span>
+<span class="line"><span>        → Security Scan（安全检查）</span></span>
+<span class="line"><span>        → Verification（运行验证）</span></span>
+<span class="line"><span>        → 交付</span></span></code></pre>
+<h3 id="五层架构">五层架构</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>层次</th><th>作用</th><th>类比</th></tr></thead><tbody><tr><td><strong>Agent 层</strong></td><td>专业化子代理，各擅其长</td><td>团队中的不同角色（前端、后端、测试、安全）</td></tr><tr><td><strong>Skill 层</strong></td><td>预定义的工作流程模板</td><td>公司的 SOP 文档</td></tr><tr><td><strong>Hook 层</strong></td><td>自动化触发规则</td><td>CI/CD Pipeline 的触发器</td></tr><tr><td><strong>Workflow 层</strong></td><td>多 Agent 协作编排</td><td>项目管理的看板和流程</td></tr><tr><td><strong>Memory 层</strong></td><td>跨会话持久化</td><td>团队的 Wiki 和知识库</td></tr></tbody></table>
+<hr>
+<h2 id="第二部分harness-要解决的七大核心问题">第二部分：Harness 要解决的七大核心问题</h2>
+<h3 id="1--非确定性输出">1. 🎲 非确定性输出</h3>
+<p><strong>问题</strong>：AI 每次回答可能不同，同一需求两次生成代码质量差异大。</p>
+<p><strong>Harness 解法</strong>：</p>
+<ul>
+<li>Review Agent 作为质量守门人，不合格就重来</li>
+<li>结构化输出 Schema 强制格式约束</li>
+<li>Skill 固化成功流程，编码为可重用模板</li>
+</ul>
+<h3 id="2--上下文窗口瓶颈">2. 🧠 上下文窗口瓶颈</h3>
+<p><strong>问题</strong>：单个 AI 注意力有限，复杂项目塞不进去。</p>
+<p><strong>Harness 解法</strong>：</p>
+<ul>
+<li>多 Agent 分治：每个 Agent 只读自己相关部分</li>
+<li>Agent 隔离上下文：每个子任务用独立新窗口</li>
+<li>Workflow pipeline 阶段化：每阶段只传入必要信息</li>
+</ul>
+<h3 id="3--多步骤任务编排">3. 🔗 多步骤任务编排</h3>
+<p><strong>问题</strong>：复杂工程任务不是”一问一答”能完成的，需要有序的多步协作。</p>
+<p><strong>Harness 解法</strong>：Brainstorming → Plan → Parallel Execute → Review → Verify → Deliver</p>
+<h3 id="4-️-安全性与破坏性操作">4. 🛡️ 安全性与破坏性操作</h3>
+<p><strong>问题</strong>：AI 可能误删文件、执行危险命令、泄露敏感信息。</p>
+<p><strong>Harness 解法</strong>：</p>
+<ul>
+<li>Sandbox / Worktree 隔离，在副本中操作</li>
+<li>Security Scanner Agent 自动检测密钥和凭证</li>
+<li>Permission 系统 + Hook 拦截危险操作</li>
+</ul>
+<h3 id="5--质量一致性">5. 📊 质量一致性</h3>
+<p><strong>问题</strong>：不同人 + AI 产出的代码质量参差不齐。</p>
+<p><strong>Harness 解法</strong>：</p>
+<ul>
+<li>多维度 Review Agent（语言专项、安全、性能、可访问性）</li>
+<li>TDD Skill 强制测试先行</li>
+<li>Performance Agent 自动 profiling</li>
+</ul>
+<h3 id="6--反馈循环断裂">6. 🔄 反馈循环断裂</h3>
+<p><strong>问题</strong>：传统开发中”写代码 → 发现问题 → 修复”循环太慢。</p>
+<p><strong>Harness 解法</strong>：写代码 → Agent 即时 Review → 即时修复 → Agent 再验证 → 通过 → 才提交</p>
+<h3 id="7-️-知识流失">7. 🏗️ 知识流失</h3>
+<p><strong>问题</strong>：每次对话结束，上下文和决策全部丢失。</p>
+<p><strong>Harness 解法</strong>：</p>
+<ul>
+<li>Memory 系统持久化关键决策和偏好</li>
+<li>Skill 系统编码成功模式为可调用模板</li>
+<li>CLAUDE.md + CODEMAPS 结构化文档</li>
+</ul>
+<hr>
+<h2 id="第三部分github-主流-harness-项目全景">第三部分：GitHub 主流 Harness 项目全景</h2>
+<h3 id="分类一ai-编程-harness终端ide-内的-ai-编程工具">分类一：AI 编程 Harness（终端/IDE 内的 AI 编程工具）</h3>
+<h4 id="1-aider--45000">1. Aider ⭐ 45,000+</h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>维度</th><th>详情</th></tr></thead><tbody><tr><td><strong>仓库</strong></td><td><a href="https://github.com/Aider-AI/aider">Aider-AI/aider</a></td></tr><tr><td><strong>一句话</strong></td><td>终端内的 AI 结对编程工具</td></tr><tr><td><strong>核心功能</strong></td><td>支持 100+ 语言、15+ LLM 提供商（Claude、GPT、DeepSeek、Gemini 等）、Git 深度集成</td></tr><tr><td><strong>独特技术</strong></td><td><strong>Repository Map</strong>（tree-sitter 理解全代码库）；<strong>Edit Format 系统</strong>（自动匹配 diff/whole/udiff 策略）；<strong>Architect/Editor</strong> 分体模式（强模型规划 + 廉价模型执行，大幅降低成本）</td></tr><tr><td><strong>适用场景</strong></td><td>个人开发者、小团队、需要切换多个 LLM 的场景</td></tr><tr><td><strong>许可证</strong></td><td>Apache 2.0</td></tr></tbody></table>
+<h4 id="2-claude-codeanthropic-快速增长">2. Claude Code（Anthropic）⭐ 快速增长</h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>维度</th><th>详情</th></tr></thead><tbody><tr><td><strong>仓库</strong></td><td><a href="https://github.com/anthropics/claude-code">anthropics/claude-code</a></td></tr><tr><td><strong>一句话</strong></td><td>Anthropic 的终端原生 Agentic 编程工具</td></tr><tr><td><strong>核心功能</strong></td><td>自主探索代码库、多文件编辑、运行命令、Git 操作</td></tr><tr><td><strong>独特技术</strong></td><td><strong>Agent + Skill + Hook + Workflow 四层架构</strong>；70+ 专业子代理；Worktree 隔离沙箱；Memory 持久化；多 Agent 并行协作</td></tr><tr><td><strong>适用场景</strong></td><td>复杂多步骤任务、需要自动化审查和质量保障的项目</td></tr><tr><td><strong>许可证</strong></td><td>专有（免费使用）</td></tr></tbody></table>
+<h4 id="3-swe-agent--15000">3. SWE-agent ⭐ 15,000+</h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>维度</th><th>详情</th></tr></thead><tbody><tr><td><strong>仓库</strong></td><td><a href="https://github.com/princeton-nlp/SWE-agent">princeton-nlp/SWE-agent</a></td></tr><tr><td><strong>一句话</strong></td><td>Princeton 出品，将 LLM 转化为软件工程 Agent</td></tr><tr><td><strong>核心功能</strong></td><td>自定义 Linux 环境 + ACI（Agent-Computer Interface）命令</td></tr><tr><td><strong>独特技术</strong></td><td>自定义 ACI 命令集；LM-centric 设计；SWE-bench 上首次实现 12.47% 解决率</td></tr><tr><td><strong>适用场景</strong></td><td>学术研究、AI 编程能力评估、自定义 Agent 开发</td></tr><tr><td><strong>许可证</strong></td><td>MIT</td></tr></tbody></table>
+<h4 id="4-openhands原-opendevin-48000">4. OpenHands（原 OpenDevin）⭐ 48,000+</h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>维度</th><th>详情</th></tr></thead><tbody><tr><td><strong>仓库</strong></td><td><a href="https://github.com/All-Hands-AI/OpenHands">All-Hands-AI/OpenHands</a></td></tr><tr><td><strong>一句话</strong></td><td>Web IDE 风格的全功能 AI 代理框架</td></tr><tr><td><strong>核心功能</strong></td><td>沙盒执行、多 LLM 支持、交互式调试、Web 可视化界面</td></tr><tr><td><strong>独特技术</strong></td><td>沙盒化代码执行；Web 界面可视化监控 Agent 工作；广泛工具集成</td></tr><tr><td><strong>适用场景</strong></td><td>需要安全隔离的代码执行、可视化监控 AI 工作过程</td></tr><tr><td><strong>许可证</strong></td><td>MIT</td></tr></tbody></table>
+<hr>
+<h3 id="分类二多-agent-编排-harness">分类二：多 Agent 编排 Harness</h3>
+<h4 id="5-metagpt--50000">5. MetaGPT ⭐ 50,000+</h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>维度</th><th>详情</th></tr></thead><tbody><tr><td><strong>仓库</strong></td><td><a href="https://github.com/FoundationAgents/MetaGPT">FoundationAgents/MetaGPT</a></td></tr><tr><td><strong>一句话</strong></td><td>模拟完整软件公司的 SOP，输入一句话 → 输出完整软件工程产物</td></tr><tr><td><strong>核心功能</strong></td><td>内置产品经理、架构师、项目经理、工程师等 AI 角色；全流程自动化</td></tr><tr><td><strong>独特技术</strong></td><td><strong><code>Code = SOP(Team)</code></strong> 理念；ICLR 2025 口头报告；MGX.dev 商业平台</td></tr><tr><td><strong>适用场景</strong></td><td>从零生成项目原型、理解 AI 软件开发流程</td></tr><tr><td><strong>许可证</strong></td><td>MIT</td></tr></tbody></table>
+<h4 id="6-autogenmicrosoft-35000">6. AutoGen（Microsoft）⭐ 35,000+</h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>维度</th><th>详情</th></tr></thead><tbody><tr><td><strong>仓库</strong></td><td><a href="https://github.com/microsoft/autogen">microsoft/autogen</a></td></tr><tr><td><strong>一句话</strong></td><td>微软的多 Agent 对话框架</td></tr><tr><td><strong>核心功能</strong></td><td>Agent 之间自主对话、辩论、协作；Human-in-the-Loop</td></tr><tr><td><strong>独特技术</strong></td><td>Multi-Agent Conversation 模式；嵌套对话；代码执行沙箱</td></tr><tr><td><strong>适用场景</strong></td><td>需要多个 AI 角色辩论验证的复杂决策任务</td></tr><tr><td><strong>许可证</strong></td><td>CC-BY-4.0 / MIT</td></tr></tbody></table>
+<h4 id="7-crewai--20000">7. CrewAI ⭐ 20,000+</h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>维度</th><th>详情</th></tr></thead><tbody><tr><td><strong>仓库</strong></td><td><a href="https://github.com/crewAIInc/crewAI">crewAIInc/crewAI</a></td></tr><tr><td><strong>一句话</strong></td><td>角色扮演式多 Agent 编排框架</td></tr><tr><td><strong>核心功能</strong></td><td>为 Agent 定义角色、目标、背景故事和工具；Sequential + Hierarchical 流程</td></tr><tr><td><strong>独特技术</strong></td><td>角色扮演降低编排门槛；Crew Flows 事件驱动；跨 Crew 协作</td></tr><tr><td><strong>适用场景</strong></td><td>非技术人员设计 Agent 工作流、内容生成、研究辅助</td></tr><tr><td><strong>许可证</strong></td><td>Elastic License 2.0</td></tr></tbody></table>
+<h4 id="8-langchain--langgraph--95000">8. LangChain / LangGraph ⭐ 95,000+</h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>维度</th><th>详情</th></tr></thead><tbody><tr><td><strong>仓库</strong></td><td><a href="https://github.com/langchain-ai/langchain">langchain-ai/langchain</a></td></tr><tr><td><strong>一句话</strong></td><td>LLM 应用开发的事实标准框架</td></tr><tr><td><strong>核心功能</strong></td><td>Chain、Tool、Memory、Retriever 组件化设计；LangGraph 有状态图编排</td></tr><tr><td><strong>独特技术</strong></td><td>生态最丰富；LangGraph 支持循环和条件分支的有状态执行；与几乎所有 LLM 和工具集成</td></tr><tr><td><strong>适用场景</strong></td><td>需要高度可定制化的 LLM 应用开发</td></tr><tr><td><strong>许可证</strong></td><td>MIT</td></tr></tbody></table>
+<h4 id="9-dify--50000">9. Dify ⭐ 50,000+</h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>维度</th><th>详情</th></tr></thead><tbody><tr><td><strong>仓库</strong></td><td><a href="https://github.com/langgenius/dify">langgenius/dify</a></td></tr><tr><td><strong>一句话</strong></td><td>可视化 LLM 应用开发平台</td></tr><tr><td><strong>核心功能</strong></td><td>拖拽式工作流编排；内置 RAG 管道；Prompt IDE 带版本控制；可自托管</td></tr><tr><td><strong>独特技术</strong></td><td>Visual workflow builder；文档摄入→分块→嵌入→检索 全流程；API-first 设计</td></tr><tr><td><strong>适用场景</strong></td><td>非开发者构建 AI 应用、企业需要私有化部署</td></tr><tr><td><strong>许可证</strong></td><td>Apache 2.0</td></tr></tbody></table>
+<hr>
+<h3 id="分类三评估-harness">分类三：评估 Harness</h3>
+<h4 id="10-lm-evaluation-harness--7000">10. lm-evaluation-harness ⭐ 7,000+</h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>维度</th><th>详情</th></tr></thead><tbody><tr><td><strong>仓库</strong></td><td><a href="https://github.com/EleutherAI/lm-evaluation-harness">EleutherAI/lm-evaluation-harness</a></td></tr><tr><td><strong>一句话</strong></td><td>LLM 能力统一评估框架</td></tr><tr><td><strong>核心功能</strong></td><td>1000+ 评测任务；统一 CLI/Python API；多模型后端</td></tr><tr><td><strong>独特技术</strong></td><td>驱动 HuggingFace Open LLM Leaderboard；可重现的固定 few-shot；权重和微平均</td></tr><tr><td><strong>适用场景</strong></td><td>模型选型、性能对比、学术研究</td></tr></tbody></table>
+<h4 id="11-swe-bench--3000">11. SWE-bench ⭐ 3,000+</h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>维度</th><th>详情</th></tr></thead><tbody><tr><td><strong>仓库</strong></td><td><a href="https://github.com/princeton-nlp/SWE-bench">princeton-nlp/SWE-bench</a></td></tr><tr><td><strong>一句话</strong></td><td>用真实 GitHub Issue 评估 AI 编程能力</td></tr><tr><td><strong>核心功能</strong></td><td>真实 Bug 修复任务；SWE-bench Verified 子集</td></tr><tr><td><strong>独特技术</strong></td><td>从 GitHub 仓库直接提取任务；多语言支持</td></tr><tr><td><strong>适用场景</strong></td><td>AI 编程工具选型、了解 AI 编程真实水平</td></tr></tbody></table>
+<hr>
+<h3 id="分类四devops-平台">分类四：DevOps 平台</h3>
+<h4 id="12-harnessio--33800">12. Harness.io ⭐ 33,800+</h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>维度</th><th>详情</th></tr></thead><tbody><tr><td><strong>仓库</strong></td><td><a href="https://github.com/harness/harness">harness/harness</a></td></tr><tr><td><strong>一句话</strong></td><td>企业级 AI-Native CI/CD 平台</td></tr><tr><td><strong>核心功能</strong></td><td>Drone CI（开源）；Test Intelligence；Continuous Verification；Cloud Cost Management</td></tr><tr><td><strong>独特技术</strong></td><td>Test Intelligence 构建加速 8x；Policy-as-Code（OPA）；SLSA L3 合规</td></tr><tr><td><strong>适用场景</strong></td><td>大中型企业的多云交付和成本管理</td></tr></tbody></table>
+<hr>
+<h3 id="全景对比总表">全景对比总表</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>类别</th><th>项目</th><th>星标</th><th>核心定位</th></tr></thead><tbody><tr><td>AI 编程</td><td>Aider</td><td>45k+</td><td>终端 AI 结对编程</td></tr><tr><td>AI 编程</td><td>Claude Code</td><td>快速增长</td><td>多步骤编排 + 安全沙箱</td></tr><tr><td>AI 编程</td><td>SWE-agent</td><td>15k+</td><td>AI 操作计算机界面设计</td></tr><tr><td>AI 编程</td><td>OpenHands</td><td>48k+</td><td>可视化沙盒 AI 开发环境</td></tr><tr><td>多 Agent</td><td>MetaGPT</td><td>50k+</td><td>软件工程全流程自动化</td></tr><tr><td>多 Agent</td><td>AutoGen</td><td>35k+</td><td>多 Agent 对话辩论</td></tr><tr><td>多 Agent</td><td>CrewAI</td><td>20k+</td><td>角色扮演式 Agent 编排</td></tr><tr><td>多 Agent</td><td>LangChain</td><td>95k+</td><td>LLM 应用标准化框架</td></tr><tr><td>多 Agent</td><td>Dify</td><td>50k+</td><td>可视化 AI 应用构建</td></tr><tr><td>评估</td><td>lm-eval-harness</td><td>7k+</td><td>LLM 能力统一测量</td></tr><tr><td>评估</td><td>SWE-bench</td><td>3k+</td><td>AI 编程能力真实评测</td></tr><tr><td>DevOps</td><td>Harness.io</td><td>33k+</td><td>企业 CI/CD 与云成本管理</td></tr></tbody></table>
+<hr>
+<h2 id="第四部分小型项目如何落地-harness">第四部分：小型项目如何落地 Harness</h2>
+<blockquote>
+<p>你的项目是小型桌面应用和网页维护，以下是<strong>务实可落地</strong>的做法。</p>
+</blockquote>
+<h3 id="原则重实用轻流程">原则：重实用，轻流程</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>大项目的做法</th><th>小项目的适配</th></tr></thead><tbody><tr><td>完整的 CI/CD Pipeline</td><td>手动触发 + Claude Code 帮你跑</td></tr><tr><td>专职 Code Review</td><td>写完代码用 Review Agent 过一遍</td></tr><tr><td>自动化测试套件</td><td>Agent 帮你写关键路径的测试</td></tr><tr><td>安全扫描 Pipeline</td><td>改完涉及用户数据的代码，跑一次 Security Scan</td></tr><tr><td>知识管理 Wiki</td><td>CLAUDE.md + Memory 文件</td></tr></tbody></table>
+<h3 id="桌面应用开发工作流">桌面应用开发工作流</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>1. 需求阶段</span></span>
+<span class="line"><span>   "帮我实现一个截图功能"</span></span>
+<span class="line"><span>   → 先告诉我你的想法 → 我帮你做 Brainstorming，理清需求</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>2. 计划阶段</span></span>
+<span class="line"><span>   → 产出实现计划（改哪些文件、需要什么库、数据流如何）</span></span>
+<span class="line"><span>   → 你确认后开始写代码</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>3. 实现阶段</span></span>
+<span class="line"><span>   → 按计划逐步实现</span></span>
+<span class="line"><span>   → 每完成一个模块，用对应语言的专业 Agent Review</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>4. 验证阶段</span></span>
+<span class="line"><span>   → 编译运行，修复构建错误</span></span>
+<span class="line"><span>   → 手动测试关键流程</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>5. 提交阶段</span></span>
+<span class="line"><span>   → 清理代码、写 Commit Message</span></span></code></pre>
+<h3 id="网页维护工作流">网页维护工作流</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>1. 发现问题或接受需求</span></span>
+<span class="line"><span>   "首页加载太慢了" 或 "要加一个搜索框"</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>2. 诊断或设计</span></span>
+<span class="line"><span>   → Performance Agent 分析性能问题</span></span>
+<span class="line"><span>   → 或 Brainstorming 明确新功能需求</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>3. 实现</span></span>
+<span class="line"><span>   → 改代码 → React/Vue Review Agent 检查</span></span>
+<span class="line"><span>   → 有安全问题？Security Review Agent 扫描</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>4. 验证</span></span>
+<span class="line"><span>   → E2E Runner 跑关键用户流程</span></span>
+<span class="line"><span>   → 浏览器中实际看一眼</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>5. 上线</span></span>
+<span class="line"><span>   → 构建、部署</span></span></code></pre>
+<h3 id="常用命令速查">常用命令速查</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:var(--astro-code-token-function)">/code-review</span><span style="color:var(--astro-code-token-comment)">          # 审查当前改动</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">/security-review</span><span style="color:var(--astro-code-token-comment)">      # 扫描安全漏洞</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">/simplify</span><span style="color:var(--astro-code-token-comment)">             # 清理冗余代码</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">/verify</span><span style="color:var(--astro-code-token-comment)">               # 端到端验证你的改动是否真的有效</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">/init</span><span style="color:var(--astro-code-token-comment)">                 # 生成 CLAUDE.md，让 Claude 了解你的项目</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">/fewer-permission-prompts</span><span style="color:var(--astro-code-token-comment)">  # 让常用命令不再每次弹窗确认</span></span></code></pre>
+<h3 id="配置示例claudesettingsjson">配置示例：<code>.claude/settings.json</code></h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="json"><code><span class="line"><span style="color:var(--astro-code-foreground)">{</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">  "hooks"</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-foreground)"> {</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">    "post:write"</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-foreground)"> [</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">      {</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">        "matcher"</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-token-string-expression)"> "*.tsx|*.jsx|*.vue"</span><span style="color:var(--astro-code-token-punctuation)">,</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">        "cmd"</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-token-string-expression)"> "/code-review --effort low"</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">      }</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">    ]</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">  }</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">}</span></span></code></pre>
+<blockquote>
+<p>配置后：每次写完前端组件，自动触发轻量级审查。</p>
+</blockquote>
+<hr>
+<h2 id="第五部分claude-code-harness-能力速查">第五部分：Claude Code Harness 能力速查</h2>
+<h3 id="专业-agent部分精选">专业 Agent（部分精选）</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Agent</th><th>用途</th><th>何时使用</th></tr></thead><tbody><tr><td><code>code-reviewer</code></td><td>通用代码审查</td><td>写完代码后</td></tr><tr><td><code>react-reviewer</code></td><td>React 专项审查</td><td>改了 .tsx/.jsx</td></tr><tr><td><code>vue-reviewer</code></td><td>Vue 专项审查</td><td>改了 .vue</td></tr><tr><td><code>python-reviewer</code></td><td>Python 专项审查</td><td>改了 .py</td></tr><tr><td><code>typescript-reviewer</code></td><td>TS 类型审查</td><td>TypeScript 项目</td></tr><tr><td><code>security-reviewer</code></td><td>安全漏洞扫描</td><td>涉及用户输入、认证</td></tr><tr><td><code>performance-optimizer</code></td><td>性能分析</td><td>页面慢、卡顿</td></tr><tr><td><code>build-error-resolver</code></td><td>构建错误修复</td><td>编译/构建失败</td></tr><tr><td><code>react-build-resolver</code></td><td>React 构建修复</td><td>React 构建失败</td></tr><tr><td><code>refactor-cleaner</code></td><td>死代码清理</td><td>代码库变乱</td></tr><tr><td><code>e2e-runner</code></td><td>端到端测试</td><td>验证关键流程</td></tr><tr><td><code>silent-failure-hunter</code></td><td>静默失败检测</td><td>错误被悄悄吞掉</td></tr><tr><td><code>a11y-architect</code></td><td>无障碍审查</td><td>确保 UI 可访问</td></tr><tr><td><code>doc-updater</code></td><td>文档更新</td><td>维护项目文档</td></tr></tbody></table>
+<h3 id="核心-skill-流程部分精选">核心 Skill 流程（部分精选）</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Skill</th><th>用途</th><th>触发时机</th></tr></thead><tbody><tr><td><code>brainstorming</code></td><td>需求分析和方案设计</td><td>开始任何创造性工作前</td></tr><tr><td><code>writing-plans</code></td><td>编写实施计划</td><td>有需求后、动手前</td></tr><tr><td><code>executing-plans</code></td><td>执行实施计划</td><td>计划确认后</td></tr><tr><td><code>subagent-driven-development</code></td><td>多任务并行开发</td><td>多个独立任务</td></tr><tr><td><code>systematic-debugging</code></td><td>系统化调试</td><td>遇到 Bug</td></tr><tr><td><code>test-driven-development</code></td><td>测试驱动开发</td><td>写新功能或修 Bug</td></tr><tr><td><code>verification-before-completion</code></td><td>完成前验证</td><td>任务快结束时</td></tr><tr><td><code>requesting-code-review</code></td><td>请求代码审查</td><td>完成重要功能后</td></tr><tr><td><code>receiving-code-review</code></td><td>处理审查反馈</td><td>收到 Review 意见后</td></tr><tr><td><code>finishing-a-development-branch</code></td><td>完成开发分支</td><td>功能完成准备合并</td></tr></tbody></table>
+<hr>
+<h2 id="第六部分快速上手-checklist">第六部分：快速上手 Checklist</h2>
+<h3 id="第一天建立基础">第一天：建立基础</h3>
+<ul class="contains-task-list">
+<li class="task-list-item"><input type="checkbox" disabled> 在项目根目录告诉 Claude：<strong>“帮我初始化这个项目”</strong> → 生成 CLAUDE.md</li>
+<li class="task-list-item"><input type="checkbox" disabled> 告诉 Claude 你的技术栈偏好 → 写入 Memory</li>
+<li class="task-list-item"><input type="checkbox" disabled> 试一次完整流程：提需求 → Brainstorming → 实现 → Code Review → 验证</li>
+</ul>
+<h3 id="第一周形成习惯">第一周：形成习惯</h3>
+<ul class="contains-task-list">
+<li class="task-list-item"><input type="checkbox" disabled> 每次写代码前先说需求，让 Claude 帮你做 Brainstorming</li>
+<li class="task-list-item"><input type="checkbox" disabled> 每次写完代码后运行 <code>/code-review</code></li>
+<li class="task-list-item"><input type="checkbox" disabled> 遇到 Bug 时使用 <code>systematic-debugging</code> skill</li>
+<li class="task-list-item"><input type="checkbox" disabled> 涉及用户输入/认证的代码，主动运行 <code>/security-review</code></li>
+</ul>
+<h3 id="第一个月自动化">第一个月：自动化</h3>
+<ul class="contains-task-list">
+<li class="task-list-item"><input type="checkbox" disabled> 配置 <code>.claude/settings.json</code> 添加自动 Review Hook</li>
+<li class="task-list-item"><input type="checkbox" disabled> 建立项目的 Memory 文件（架构决策、命名规范、常见坑）</li>
+<li class="task-list-item"><input type="checkbox" disabled> 尝试一次多 Agent 并行任务</li>
+</ul>
+<hr>
+<h2 id="附录关键概念速查表">附录：关键概念速查表</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>概念</th><th>一句话解释</th></tr></thead><tbody><tr><td><strong>Agent</strong></td><td>一个专精某项任务的 AI 子代理</td></tr><tr><td><strong>Skill</strong></td><td>预定义的、经过验证的工作流程</td></tr><tr><td><strong>Hook</strong></td><td>在特定时机自动触发的动作</td></tr><tr><td><strong>Workflow</strong></td><td>多 Agent 的编排脚本（pipeline/parallel）</td></tr><tr><td><strong>Memory</strong></td><td>跨会话持久化的知识条目</td></tr><tr><td><strong>CLAUDE.md</strong></td><td>项目的”欢迎文档”，Claude 每次会话都会加载</td></tr><tr><td><strong>Worktree</strong></td><td>Git 的隔离分支，用于安全地在副本中操作</td></tr><tr><td><strong>Schema</strong></td><td>结构化输出格式，强制 Agent 返回特定格式数据</td></tr></tbody></table>
+<hr>
+<blockquote>
+<p><strong>最后的话</strong>：Harness 工程的本质不是工具多强大，而是<strong>把每一次 AI 交互都当成一次工程交付来对待</strong>。对于小型项目，不需要搭建复杂的 CI/CD Pipeline——只要坚持”先想再做、写完就审、改完就验”三个习惯，就已经在享受 Harness 工程的核心价值了。</p>
+</blockquote>  </div> <!-- Previous / Next navigation --> <nav class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-12 pt-8 border-t border-[var(--color-border)]" data-astro-cid-bvzihdzo> <a href="/blog/其他/Hook-完整解读报告" class="card-hover p-4 no-underline group" data-astro-cid-bvzihdzo> <span class="text-xs text-[var(--color-text-tertiary)] block mb-1" data-astro-cid-bvzihdzo>&larr; 上一篇</span> <span class="text-sm font-medium text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors line-clamp-1" data-astro-cid-bvzihdzo>Hook（钩子）完整解读 — 它是什么，能做什么？</span> </a> <a href="/blog/其他/ECC-测评报告" class="card-hover p-4 no-underline group text-right" data-astro-cid-bvzihdzo> <span class="text-xs text-[var(--color-text-tertiary)] block mb-1" data-astro-cid-bvzihdzo>下一篇 &rarr;</span> <span class="text-sm font-medium text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors line-clamp-1" data-astro-cid-bvzihdzo>ECC（Elliptic Curve Cryptography）调研测评报告</span> </a> </nav> <hr class="!mt-12 !mb-8" data-astro-cid-bvzihdzo> <div data-astro-cid-bvzihdzo> <a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-bvzihdzo>
+&larr; 返回博客列表
+</a> </div> </div> </div> </article> </div>  </main> <footer class="border-t border-[var(--color-border)] mt-24 py-8" data-astro-cid-pux6a34n><div class="max-w-content flex items-center justify-between" data-astro-cid-pux6a34n><span class="text-sm text-[var(--color-text-tertiary)]" data-astro-cid-pux6a34n>
+&copy; 2026 星游寰宇
+</span><div class="flex items-center gap-4" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>博客</a><a href="/projects" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>项目</a><a href="/notes" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>日记</a><a href="/resources" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>资源</a><a href="/about" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>关于</a></div></div></footer> <div id="link-preview" style="display:none;position:fixed;z-index:99;max-width:18rem;pointer-events:none;" data-astro-cid-t7vshrbh></div>  <script type="module">(async()=>{try{const c=await fetch("/posts.json");if(!c.ok)return;const u=await c.json(),p=new Map(u.map(t=>[t.href,t])),e=document.getElementById("link-preview");if(!e)return;let n="",d;document.addEventListener("mouseover",t=>{const i=t.target.closest("a[href^='/blog/']");if(!i){e.style.display="none",n="";return}const s=i.getAttribute("href");if(!s||s===n)return;const o=p.get(s);o&&(n=s,d=setTimeout(()=>{e.innerHTML=`<div class="lp-title">${o.title}</div><div class="lp-summary">${o.summary}</div>`;const r=i.getBoundingClientRect();let a=r.left,l=r.bottom+6;a+288>window.innerWidth&&(a=window.innerWidth-296),l+80>window.innerHeight&&(l=r.top-80),Object.assign(e.style,{left:a+"px",top:l+"px",display:"block"})},300))},{passive:!0}),document.addEventListener("mouseout",t=>{t.target.closest("a[href^='/blog/']")&&(clearTimeout(d),e.style.display="none",n="")},{passive:!0})}catch{}})();</script> </body></html>  <script type="module">const c=document.getElementById("toc-toggle"),s=document.getElementById("toc-list"),i=document.getElementById("toc-chevron");c&&s&&i&&c.addEventListener("click",()=>{const o=s.classList.toggle("hidden");c.setAttribute("aria-expanded",String(o)),i.style.transform=o?"rotate(180deg)":""});const r=document.querySelectorAll(".toc-list a");if(r.length>0){const o=new IntersectionObserver(n=>{for(const t of n)t.isIntersecting&&r.forEach(e=>{e.classList.toggle("active",e.getAttribute("href")===`#${t.target.id}`)})},{rootMargin:"-80px 0px -80% 0px"});r.forEach(n=>{const t=n.getAttribute("href")?.slice(1);if(t){const e=document.getElementById(t);e&&o.observe(e)}})}</script>

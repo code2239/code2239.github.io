@@ -1,0 +1,714 @@
+<!DOCTYPE html><html lang="zh-CN"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="- **开发方全称**：LangChain Inc."><meta name="color-scheme" content="light"><!-- Open Graph --><meta property="og:title" content="LangGraph 调研报告 — 星游寰宇"><meta property="og:description" content="- **开发方全称**：LangChain Inc."><meta property="og:url" content="https://code2239.github.io/blog/AI工具报告/LangGraph-报告"><meta property="og:type" content="article"><meta property="og:site_name" content="星游寰宇"><meta property="og:locale" content="zh_CN"><meta property="article:published_time" content="2026-7-5"><meta property="article:tag" content="AI"><meta property="article:tag" content="调研"><meta property="article:tag" content="LangGraph"><meta property="article:tag" content="自动化"><meta property="article:tag" content="工具"><meta property="article:tag" content="科研"><!-- Twitter Card --><meta name="twitter:card" content="summary"><meta name="twitter:title" content="LangGraph 调研报告 — 星游寰宇"><meta name="twitter:description" content="- **开发方全称**：LangChain Inc."><!-- Canonical --><link rel="canonical" href="https://code2239.github.io/blog/AI工具报告/LangGraph-报告"><title>LangGraph 调研报告 — 星游寰宇</title><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="alternate" type="application/rss+xml" title="星游寰宇 RSS" href="/rss.xml"><!-- Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"星游寰宇","url":"https://code2239.github.io","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://code2239.github.io/search?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://code2239.github.io"},{"@type":"ListItem","position":2,"name":"博客","item":"https://code2239.github.io/blog"},{"@type":"ListItem","position":3,"name":"AI工具报告","item":"https://code2239.github.io/blog/AI工具报告"},{"@type":"ListItem","position":4,"name":"LangGraph 报告"}]},{"@context":"https://schema.org","@type":"BlogPosting","headline":"LangGraph 调研报告","description":"- **开发方全称**：LangChain Inc.","datePublished":"2026-7-5","url":"https://code2239.github.io/blog/AI工具报告/LangGraph-报告","keywords":"AI, 调研, LangGraph, 自动化, 工具, 科研"}]}</script><link rel="stylesheet" href="/_astro/_slug_.D9rnRYSg.css">
+<style>.back-to-top[data-astro-cid-gzprr2dq]{position:fixed;bottom:2rem;right:2rem;z-index:40;width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:50%;border:1px solid var(--color-border);background:var(--color-bg);color:var(--color-text-secondary);cursor:pointer;box-shadow:var(--shadow-md);transition:opacity .2s ease,transform .2s ease}.back-to-top[data-astro-cid-gzprr2dq]:hover{color:var(--color-accent);border-color:var(--color-accent);transform:translateY(-2px)}.back-to-top[data-astro-cid-gzprr2dq].hidden{opacity:0;pointer-events:none}.copy-btn[data-astro-cid-qqybitij]{position:absolute;top:8px;right:8px;padding:4px 10px;font-size:.6875rem;font-family:var(--font-sans);color:var(--color-text-tertiary);background:var(--color-bg);border:1px solid var(--color-border);border-radius:6px;cursor:pointer;opacity:0;transition:opacity .15s ease,color .15s ease}pre[data-astro-cid-qqybitij]:hover .copy-btn[data-astro-cid-qqybitij]{opacity:1}.copy-btn[data-astro-cid-qqybitij]:hover{color:var(--color-accent);border-color:var(--color-accent)}.copy-btn[data-astro-cid-qqybitij].copied{color:#16a34a;border-color:#16a34a}.blog-layout[data-astro-cid-bvzihdzo]{display:block}.blog-toc[data-astro-cid-bvzihdzo]{display:none}.blog-body[data-astro-cid-bvzihdzo]{min-width:0}@media(min-width:1024px){.blog-layout[data-astro-cid-bvzihdzo]{display:grid;grid-template-columns:14rem 1fr;gap:3rem;align-items:start}.blog-toc[data-astro-cid-bvzihdzo]{display:block}.blog-body[data-astro-cid-bvzihdzo]{padding-right:2rem}}@media(max-width:1023px){.blog-toc[data-astro-cid-bvzihdzo]{display:block;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid var(--color-border)}}
+</style></head> <body class="min-h-screen flex flex-col"> <nav class="sticky top-0 z-40 bg-[var(--color-bg)]/80 backdrop-blur-md border-b border-[var(--color-border)]" data-astro-cid-pux6a34n><div class="max-w-content flex items-center justify-between py-4" data-astro-cid-pux6a34n><a href="/" class="flex items-center gap-2.5 text-base font-semibold no-underline tracking-tight" data-astro-cid-pux6a34n><svg class="w-7 h-7" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" data-astro-cid-pux6a34n><circle cx="16" cy="16" r="15" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-pux6a34n></circle><circle cx="16" cy="16" r="3" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="16" cy="5" r="1.5" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="24" cy="10" r="1" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="8" cy="22" r="1" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="25" cy="21" r="0.8" fill="currentColor" data-astro-cid-pux6a34n></circle></svg>
+星游寰宇
+</a><!-- Desktop nav --><div class="hidden sm:flex items-center gap-5" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>博客</a><a href="/projects" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>项目</a><a href="/notes" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>日记</a><a href="/resources" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>资源</a><a href="/about" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>关于</a><button id="search-trigger" class="flex items-center gap-1.5 text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] bg-[var(--color-bg-secondary)] hover:bg-[var(--color-bg-tertiary)] border border-[var(--color-border)] hover:border-[var(--color-accent)]/30 rounded-lg px-3 py-1.5 cursor-pointer shadow-sm hover:shadow-md transition-all duration-200" aria-label="搜索 (Ctrl+K)" title="搜索 (Ctrl+K)" data-astro-cid-pux6a34n><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-pux6a34n><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" data-astro-cid-pux6a34n></path></svg><span class="hidden lg:inline" data-astro-cid-pux6a34n>搜索</span><kbd class="hidden lg:inline-flex items-center text-[0.625rem] font-mono text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1 py-px rounded" data-astro-cid-pux6a34n>Ctrl+K</kbd></button></div><!-- Mobile hamburger --><button id="menu-btn" class="sm:hidden flex flex-col gap-1 p-2 -mr-2 cursor-pointer" aria-label="打开菜单" data-astro-cid-pux6a34n><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-transform duration-200" data-astro-cid-pux6a34n></span><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-opacity duration-200" data-astro-cid-pux6a34n></span><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-transform duration-200" data-astro-cid-pux6a34n></span></button></div><!-- Mobile menu --><div id="mobile-menu" class="hidden sm:hidden border-t border-[var(--color-border)] bg-[var(--color-bg)]" data-astro-cid-pux6a34n><div class="max-w-content flex flex-col gap-2 py-4" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>博客</a><a href="/projects" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>项目</a><a href="/notes" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>日记</a><a href="/resources" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>资源</a><a href="/about" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>关于</a></div></div></nav>
+    <div id="search-overlay" class="srch-overlay" role="dialog" aria-modal="true" aria-label="全局搜索" data-astro-cid-mn7pezny> <div id="search-backdrop" class="srch-backdrop" data-astro-cid-mn7pezny></div> <div class="srch-panel" id="srch-panel" data-astro-cid-mn7pezny> <!-- Search input --> <div class="srch-input-row" data-astro-cid-mn7pezny> <svg class="srch-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-mn7pezny> <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" data-astro-cid-mn7pezny></path> </svg> <input type="text" id="search-input" class="srch-input" placeholder="搜索文章、项目、日记、资源..." autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="go" data-astro-cid-mn7pezny> <kbd class="srch-kbd" data-astro-cid-mn7pezny>Esc</kbd> </div> <!-- Results area --> <div id="search-results" class="srch-results" data-astro-cid-mn7pezny> <p class="srch-empty" id="search-empty-hint" data-astro-cid-mn7pezny>输入关键词开始搜索</p> </div> <!-- Skeleton loading --> <div id="search-skeleton" class="srch-skeleton" style="display:none;" aria-hidden="true" data-astro-cid-mn7pezny> <div class="srch-skeleton-line" style="width:75%" data-astro-cid-mn7pezny></div> <div class="srch-skeleton-line" style="width:50%" data-astro-cid-mn7pezny></div> <div class="srch-skeleton-line" style="width:60%" data-astro-cid-mn7pezny></div> </div> <!-- Footer hints --> <div class="srch-footer" data-astro-cid-mn7pezny> <div class="srch-footer-hints" data-astro-cid-mn7pezny> <span data-astro-cid-mn7pezny><kbd data-astro-cid-mn7pezny>↑</kbd><kbd data-astro-cid-mn7pezny>↓</kbd> 导航</span> <span data-astro-cid-mn7pezny><kbd data-astro-cid-mn7pezny>↵</kbd> 打开</span> <span data-astro-cid-mn7pezny><kbd data-astro-cid-mn7pezny>Ctrl</kbd>+<kbd data-astro-cid-mn7pezny>K</kbd> 切换</span> </div> <div class="srch-footer-brand" data-astro-cid-mn7pezny>
+powered by Orama
+</div> </div> </div> </div> <script type="module" src="/_astro/Navigation.astro_astro_type_script_index_0_lang.15n1EYJp.js"></script> <main class="flex-1">  <div class="reading-progress" id="reading-progress" style="width: 0%"></div> <script type="module">const o=document.getElementById("reading-progress");if(!o)throw new Error("Reading progress bar element not found");const r=()=>{const n=window.scrollY,e=document.documentElement.scrollHeight-window.innerHeight,t=e>0?n/e*100:0;o.style.width=`${Math.min(t,100)}%`};window.addEventListener("scroll",r,{passive:!0});</script> <button id="back-to-top" class="back-to-top hidden" aria-label="返回顶部" data-astro-cid-gzprr2dq> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-gzprr2dq> <polyline points="18 15 12 9 6 15" data-astro-cid-gzprr2dq></polyline> </svg> </button>  <script type="module">const o=document.getElementById("back-to-top");o&&(window.addEventListener("scroll",()=>{o.classList.toggle("hidden",window.scrollY<400)},{passive:!0}),o.addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"})));</script> <script type="module">document.querySelectorAll("pre").forEach(e=>{const t=document.createElement("button");t.className="copy-btn",t.textContent="复制",t.addEventListener("click",async()=>{const n=e.querySelector("code")?.textContent||e.textContent||"";try{await navigator.clipboard.writeText(n),t.textContent="已复制",t.classList.add("copied"),setTimeout(()=>{t.textContent="复制",t.classList.remove("copied")},2e3)}catch{t.textContent="失败",setTimeout(()=>{t.textContent="复制"},2e3)}}),e.style.position="relative",e.appendChild(t)});</script> <div class="px-6 xl:px-12 pt-12 pb-16" data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <header class="mb-12 text-center" data-astro-cid-bvzihdzo> <h1 class="text-3xl font-semibold mb-3 tracking-tight" data-astro-cid-bvzihdzo>LangGraph 调研报告</h1> <div class="flex items-center justify-center gap-2 text-[var(--color-text-tertiary)] text-sm" data-astro-cid-bvzihdzo> <time datetime="2026-7-5" data-astro-cid-bvzihdzo>2026-7-5</time> <span class="text-[var(--color-border)]" data-astro-cid-bvzihdzo>·</span> <span data-astro-cid-bvzihdzo>43 分钟阅读</span>  <span class="text-[var(--color-border)]" data-astro-cid-bvzihdzo>·</span> <span class="text-sm text-[var(--color-text-tertiary)]"> <span> AI<span class="mx-1">·</span> </span><span> 调研<span class="mx-1">·</span> </span><span> LangGraph<span class="mx-1">·</span> </span><span> 自动化<span class="mx-1">·</span> </span><span> 工具<span class="mx-1">·</span> </span><span> 科研 </span> </span>  </div> </header> <div class="blog-layout" data-astro-cid-bvzihdzo> <aside class="blog-toc" data-astro-cid-bvzihdzo> <div class="sticky top-14 max-h-[calc(100vh-3.5rem)] overflow-y-auto" data-astro-cid-bvzihdzo> <button id="toc-toggle" class="hidden max-md:flex items-center gap-1 text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-3 cursor-pointer border-none bg-transparent p-0" aria-expanded="false" aria-controls="toc-list" data-astro-cid-bvzihdzo>
+目录
+<svg id="toc-chevron" class="w-3 h-3 transition-transform duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-bvzihdzo><polyline points="6 9 12 15 18 9" data-astro-cid-bvzihdzo></polyline></svg> </button> <span class="text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-3 max-md:hidden" data-astro-cid-bvzihdzo>目录</span> <div id="toc-list" class="max-md:hidden" data-astro-cid-bvzihdzo> <nav class="toc"> <p class="text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-3">目录</p> <ul class="toc-list"> <li class> <a href="#1-开发者与公司背景">1. 开发者与公司背景</a> </li><li class> <a href="#2-底层技术栈">2. 底层技术栈</a> </li><li class="toc-h3"> <a href="#基础大模型">基础大模型</a> </li><li class="toc-h3"> <a href="#自研大模型">自研大模型</a> </li><li class="toc-h3"> <a href="#是否支持用户自己使用-api-调用大模型">是否支持用户自己使用 API 调用大模型</a> </li><li class="toc-h3"> <a href="#核心技术架构">核心技术架构</a> </li><li class="toc-h3"> <a href="#核心能力">核心能力</a> </li><li class> <a href="#3-开源属性与商业模式">3. 开源属性与商业模式</a> </li><li class="toc-h3"> <a href="#开源属性">开源属性</a> </li><li class="toc-h3"> <a href="#定价模式2026年最新">定价模式（2026年最新）</a> </li><li class="toc-h3"> <a href="#商业模式总结">商业模式总结</a> </li><li class> <a href="#4-功能全景解析">4. 功能全景解析</a> </li><li class="toc-h3"> <a href="#主要功能">主要功能</a> </li><li class="toc-h3"> <a href="#核心功能与核心技术">核心功能与核心技术</a> </li><li class> <a href="#5-功能实现案例">5. 功能实现案例</a> </li><li class="toc-h3"> <a href="#案例构建一个带人工审批的客户支持智能体">案例：构建一个带人工审批的客户支持智能体</a> </li><li class> <a href="#6-主要竞品清单">6. 主要竞品清单</a> </li><li class> <a href="#7-与竞品的横向比较">7. 与竞品的横向比较</a> </li><li class="toc-h3"> <a href="#各竞品最适用的细分应用场景">各竞品最适用的细分应用场景</a> </li><li class> <a href="#8-版本迭代信息">8. 版本迭代信息</a> </li><li class> <a href="#总结langchain-家族产品关系图">总结：LangChain 家族产品关系图</a> </li><li class> <a href="#一句话锐评">一句话锐评</a> </li> </ul> </nav> </div> </div> </aside> <div class="blog-body" data-astro-cid-bvzihdzo> <div class="prose prose-neutral max-w-none" data-astro-cid-bvzihdzo>  <h1 id="langgraph-调研报告">LangGraph 调研报告</h1>
+<blockquote>
+<p><strong>调研日期</strong>：2026年7月5日</p>
+</blockquote>
+<hr>
+<h2 id="1-开发者与公司背景">1. 开发者与公司背景</h2>
+<ul>
+<li><strong>开发方全称</strong>：LangChain Inc.</li>
+<li><strong>所属国家/地区</strong>：美国加州旧金山（San Francisco, CA）</li>
+<li><strong>创始人基本信息</strong>：
+<ul>
+<li><strong>Harrison Chase</strong> — 联合创始人 &#x26; CEO。本科毕业于哈佛大学，主修数学与计算机科学。曾任职于 <strong>Robust Intelligence</strong>（AI 安全初创公司）担任 ML 工程师。2022年10月以业余项目形式创建 LangChain，项目在发布后八周内成为 GitHub 增长最快的仓库。被公认为”AI Agent 框架”类别的开创者。</li>
+<li><strong>Ankush Gola</strong> — 联合创始人，与 Harrison Chase 共同创立 LangChain Inc.，深度参与 LangChain 和 LangGraph 的架构设计。</li>
+</ul>
+</li>
+<li><strong>团队规模</strong>：未公开具体数字，但公司已获得 Benchmark、Sequoia Capital、IVP 等顶级风投投资，预计团队在 100-200 人规模。</li>
+<li><strong>盈利情况</strong>：采用 <strong>开源核心 + 商业平台（LangSmith）</strong> 模式盈利。LangSmith 商业化收入支撑公司运营，企业客户包括 Elastic、GitLab、Rakuten、Morningstar 等。LangChain 框架累计下载量已超过 <strong>10 亿次</strong>，LangSmith 处理了 <strong>150 亿条追踪记录和 100 万亿 tokens</strong>，服务于 300+ 企业客户。</li>
+<li><strong>融资情况</strong>：
+<ul>
+<li><strong>Seed 轮</strong>：Benchmark 领投（金额未披露）</li>
+<li><strong>Series A</strong>：约 <strong>$3500 万</strong>，Sequoia Capital 领投，估值约 <strong>$2 亿</strong>（2023年5月）</li>
+<li><strong>Series B</strong>：IVP 领投（金额未披露）</li>
+</ul>
+</li>
+<li><strong>发展规划</strong>：2026年3月与 <strong>NVIDIA</strong> 宣布企业级 AI Agent 平台合作，加速 LangGraph 执行引擎；推出 <strong>Deep Agents</strong>（长运行工作负载框架）并排名深度研究基准 #1；愿景是成为企业 AI Agent 时代的核心基础设施。</li>
+<li><strong>网站/主页</strong>：
+<ul>
+<li>LangChain 官网：<a href="https://www.langchain.com">https://www.langchain.com</a></li>
+<li>LangGraph GitHub：<a href="https://github.com/langchain-ai/langgraph">https://github.com/langchain-ai/langgraph</a></li>
+<li>LangSmith：<a href="https://smith.langchain.com">https://smith.langchain.com</a></li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><strong>信息源</strong>：<a href="https://www.ivp.com/content/langchain-the-platform-for-the-enterprise-ai-agent-era/">IVP 投资页面</a> | <a href="https://www.taskade.com/blog/langchain-history">Taskade 历史总结</a> | <a href="https://www.langchain.com">LangChain 官网</a> | <a href="https://www.langchain.com/blog/nvidia-enterprise">NVIDIA 合作公告</a></p>
+</blockquote>
+<hr>
+<h2 id="2-底层技术栈">2. 底层技术栈</h2>
+<p>LangGraph 是一个 <strong>AI 原生</strong>的智能体编排框架，其核心技术栈如下：</p>
+<h3 id="基础大模型">基础大模型</h3>
+<p>LangGraph <strong>不绑定任何大模型</strong>，它是一个通用编排层，可以调用任何 LLM 提供商：</p>
+<ul>
+<li><strong>OpenAI</strong>（GPT-4o、GPT-5.x、o-series）</li>
+<li><strong>Anthropic</strong>（Claude 3.5/4.x/5）</li>
+<li><strong>Google</strong>（Gemini 2.5 Pro、Gemini 3.x）</li>
+<li><strong>开源模型</strong>（Llama、Qwen、DeepSeek 等通过 Ollama/vLLM）</li>
+<li><strong>任何兼容 OpenAI 协议的端点</strong></li>
+</ul>
+<blockquote>
+<p>LangGraph 本身不调用大模型——它通过 LangChain 的 Model I/O 抽象层与各类模型交互，或直接通过 provider SDK 调用。</p>
+</blockquote>
+<h3 id="自研大模型">自研大模型</h3>
+<p><strong>否</strong>。LangGraph 不提供自研大模型，其核心竞争力在于<strong>编排框架</strong>而非模型能力。</p>
+<h3 id="是否支持用户自己使用-api-调用大模型">是否支持用户自己使用 API 调用大模型</h3>
+<p><strong>是</strong>。用户需要自带 LLM API Key，LangGraph 通过 LangChain 的模型抽象层调用。</p>
+<h3 id="核心技术架构">核心技术架构</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">层级</th><th align="left">技术</th><th align="left">说明</th></tr></thead><tbody><tr><td align="left"><strong>编排引擎</strong></td><td align="left"><strong>StateGraph</strong></td><td align="left">有状态的图结构引擎，支持节点、边、条件路由、循环</td></tr><tr><td align="left"><strong>图执行</strong></td><td align="left">Pregel 风格</td><td align="left">受 Google Pregel 和 Apache Beam 启发，支持节点级并行</td></tr><tr><td align="left"><strong>状态持久化</strong></td><td align="left">Checkpointer</td><td align="left">SQLite / Postgres 后端，支持时间旅行调试</td></tr><tr><td align="left"><strong>流式处理</strong></td><td align="left">Streaming API v3</td><td align="left">内容块级协议，支持 run.values / messages / lifecycle / subgraphs 四种投影</td></tr><tr><td align="left"><strong>语言支持</strong></td><td align="left">Python + TypeScript/JavaScript</td><td align="left">双语言 SDK，API 语义一致</td></tr></tbody></table>
+<h3 id="核心能力">核心能力</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">能力</th><th align="left">描述</th></tr></thead><tbody><tr><td align="left"><strong>循环/图</strong></td><td align="left">智能体可循环回退（如搜索结果不足时重新检索）</td></tr><tr><td align="left"><strong>条件分支</strong></td><td align="left"><code>add_conditional_edges</code> 基于运行时状态路由执行</td></tr><tr><td align="left"><strong>持久化状态</strong></td><td align="left">TypedDict 状态模式 + Checkpointer（SQLite / Postgres）</td></tr><tr><td align="left"><strong>人机交互</strong></td><td align="left"><code>interrupt()</code> 原语暂停图执行，数小时/天后恢复</td></tr><tr><td align="left"><strong>子图</strong></td><td align="left">将专用智能体作为一等节点组合到父图中</td></tr><tr><td align="left"><strong>并行扇出</strong></td><td align="left"><code>Send()</code> 原语实现并发节点执行</td></tr></tbody></table>
+<blockquote>
+<p><strong>信息源</strong>：<a href="https://langchain-ai.github.io/langgraph/">LangGraph 官方文档</a> | <a href="https://futureagi.com/glossary/langgraph/">FutureAGI 指南</a> | <a href="https://futureagi.com/blog/what-is-langgraph-2026/">What is LangGraph 2026</a> | <a href="https://dev.to/x4nent/langgraph-12-deep-dive-per-node-timeouts-error-handlers-graceful-shutdown-deltachannel--2mp2">LangGraph v1.2 深度解析</a></p>
+</blockquote>
+<hr>
+<h2 id="3-开源属性与商业模式">3. 开源属性与商业模式</h2>
+<h3 id="开源属性">开源属性</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">产品</th><th align="left">开源状态</th><th align="left">协议</th><th align="left">说明</th></tr></thead><tbody><tr><td align="left"><strong>LangGraph Core</strong></td><td align="left">✅ 完全开源</td><td align="left"><strong>MIT</strong></td><td align="left">Python 和 JS SDK 免费使用</td></tr><tr><td align="left"><strong>LangChain Core</strong></td><td align="left">✅ 完全开源</td><td align="left">MIT</td><td align="left">高层面向 LLM 应用的框架</td></tr><tr><td align="left"><strong>LangSmith</strong></td><td align="left">❌ 闭源</td><td align="left">专有</td><td align="left">可观测性/测试/监控/部署平台</td></tr><tr><td align="left"><strong>LangGraph Platform</strong></td><td align="left">⚠️ 核心开源 + 托管服务</td><td align="left">MIT + 付费托管</td><td align="left">自托管免费，云托管收费</td></tr></tbody></table>
+<h3 id="定价模式2026年最新">定价模式（2026年最新）</h3>
+<h4 id="langgraph-核心库--免费mit-协议">LangGraph 核心库 — <strong>免费</strong>（MIT 协议）</h4>
+<ul>
+<li>无使用限制，自托管</li>
+<li>可用于任何场景（个人、商业、企业）</li>
+</ul>
+<h4 id="langgraph-platform托管服务">LangGraph Platform（托管服务）</h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">套餐</th><th align="left">价格</th><th align="left">主要特点</th></tr></thead><tbody><tr><td align="left"><strong>Developer</strong></td><td align="left"><strong>免费</strong></td><td align="left">自托管 Lite 容器，最多 100 万节点/年</td></tr><tr><td align="left"><strong>Plus</strong></td><td align="left"><strong>$39/用户/月</strong> + $0.001/节点 + 待机费</td><td align="left">云端 SaaS，最多10用户，cron调度，缓存</td></tr><tr><td align="left"><strong>Enterprise</strong></td><td align="left"><strong>定制报价</strong></td><td align="left">自托管/混合/云，SSO/RBAC，SOC2，SLA</td></tr></tbody></table>
+<h4 id="langsmith商业可观测性平台">LangSmith（商业可观测性平台）</h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">套餐</th><th align="left">价格</th><th align="left">追踪记录</th><th align="left">保留期</th></tr></thead><tbody><tr><td align="left"><strong>Developer</strong></td><td align="left"><strong>免费</strong></td><td align="left">5,000条/月</td><td align="left">14天</td></tr><tr><td align="left"><strong>Plus</strong></td><td align="left"><strong>$39/用户/月</strong></td><td align="left">10万条/月（超额 $0.50/千条）</td><td align="left">400天</td></tr><tr><td align="left"><strong>Enterprise</strong></td><td align="left"><strong>定制报价</strong>（年付）</td><td align="left">无限</td><td align="left">自定义</td></tr></tbody></table>
+<blockquote>
+<p><strong>典型企业成本</strong>：自托管 Enterprise 通常 <strong>$10万+/年</strong>（社区报告参考）</p>
+</blockquote>
+<h3 id="商业模式总结">商业模式总结</h3>
+<p><strong>开源核心（LangGraph/LangChain）吸引开发者 → 商业平台（LangSmith）变现 → 企业级托管（LangGraph Platform）增值。</strong> 这一模式类似 MongoDB 或 GitLab 的”Open Core”策略。</p>
+<blockquote>
+<p><strong>信息源</strong>：<a href="https://agentsapis.com/langchain/langgraph-pricing/">LangGraph 平台定价</a> | <a href="https://pecollective.com/tools/langchain-pricing/">LangSmith 定价</a> | <a href="https://www.zenml.io/blog/langgraph-pricing">ZenML 定价分析</a> | <a href="https://techjacksolutions.com/ai-tools/langchain/langchain-pricing/">LangChain 定价</a></p>
+</blockquote>
+<hr>
+<h2 id="4-功能全景解析">4. 功能全景解析</h2>
+<h3 id="主要功能">主要功能</h3>
+<blockquote>
+<p>一个<strong>有状态、可循环、支持人机交互的图结构智能体编排框架</strong>，用于构建复杂的、持久化的多智能体协作工作流。目标用户为 AI 应用开发者、智能体工程师和需要生产级编排的企业团队。</p>
+</blockquote>
+<h3 id="核心功能与核心技术">核心功能与核心技术</h3>
+<h4 id="-stategraph有状态图引擎核心创新">① StateGraph：有状态图引擎（核心创新）</h4>
+<p>LangGraph 的核心是 <code>StateGraph</code>——一个有向图结构的状态机。节点（Node）执行逻辑，边（Edge）定义数据流向，条件边（Conditional Edge）根据运行时状态动态路由。</p>
+<ul>
+<li><strong>关键技术</strong>：受 <strong>Google Pregel</strong> 和 <strong>Apache Beam</strong> 启发的大规模图计算模型</li>
+<li><strong>独特价值</strong>：支持<strong>循环</strong>（智能体可自反馈）、<strong>条件分支</strong>、<strong>并行扇出</strong></li>
+<li><strong>参考文献</strong>：<a href="https://langchain-ai.github.io/langgraph/concepts/high_level/">LangGraph 概念文档</a></li>
+</ul>
+<h4 id="-checkpointer持久化与时间旅行调试">② Checkpointer：持久化与时间旅行调试</h4>
+<p>每个图执行步骤的状态可序列化存储到 SQLite 或 Postgres。支持：</p>
+<ul>
+<li>
+<p><strong>故障恢复</strong>：执行中断后可从中断点恢复</p>
+</li>
+<li>
+<p><strong>时间旅行调试（Time-Travel Debugging）</strong>：回退到任意历史检查点，修改状态后重放</p>
+</li>
+<li>
+<p><strong>人机交互（Human-in-the-Loop）</strong>：<code>interrupt_before</code> 在指定节点前暂停，等待人工审批后继续</p>
+</li>
+<li>
+<p><strong>关键技术</strong>：基于 TypedDict 的状态模式 + 序列化检查点机制</p>
+</li>
+<li>
+<p><strong>参考文献</strong>：<a href="https://langchain-ai.github.io/langgraph/concepts/persistence/">LangGraph 持久化文档</a></p>
+</li>
+</ul>
+<h4 id="-子图subgraph组合">③ 子图（Subgraph）组合</h4>
+<p>子图可作为一等节点嵌入父图，实现模块化的智能体组合。支持不同团队的专用智能体作为”微服务”独立开发后组合到超级图中。</p>
+<ul>
+<li><strong>关键技术</strong>：图的递归组合（Recursive Graph Composition）</li>
+</ul>
+<h4 id="-流式处理-v3streaming-api-v3">④ 流式处理 v3（Streaming API v3）</h4>
+<p>2026年5月 v1.2.0 引入的第三代流式 API，支持四种投影模式：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">投影</th><th align="left">说明</th></tr></thead><tbody><tr><td align="left"><code>run.values</code></td><td align="left">完整的运行状态快照</td></tr><tr><td align="left"><code>run.messages</code></td><td align="left">ChatModel 流（文本、推理过程、工具调用、用量）</td></tr><tr><td align="left"><code>run.lifecycle</code></td><td align="left">节点生命周期事件</td></tr><tr><td align="left"><code>run.subgraphs</code></td><td align="left">子图的独立流</td></tr></tbody></table>
+<ul>
+<li><strong>参考文献</strong>：<a href="https://dev.to/x4nent/langgraph-12-deep-dive-per-node-timeouts-error-handlers-graceful-shutdown-deltachannel--2mp2">LangGraph v1.2 流式文档</a></li>
+</ul>
+<h4 id="-节点级容错v122026年5月">⑤ 节点级容错（v1.2，2026年5月）</h4>
+<p>每个节点可独立配置：</p>
+<ul>
+<li><strong>超时策略</strong>：<code>run_timeout</code>（硬限时）+ <code>idle_timeout</code>（空闲超时，流式 LLM 适用）</li>
+<li><strong>重试策略</strong>：<code>RetryPolicy(max_attempts=3)</code></li>
+<li><strong>错误处理器</strong>：Saga 补偿模式——节点失败时执行补偿逻辑（如支付失败后释放库存）</li>
+<li><strong>优雅关闭</strong>：<code>request_drain()</code> 保存可恢复检查点，用于部署安全重启</li>
+</ul>
+<h4 id="-send-并行扇出">⑥ Send() 并行扇出</h4>
+<p><code>Send()</code> 原语允许将图执行自动并行化到多个节点，每个节点接收自定义状态切片。比传统 map-reduce 更灵活。</p>
+<h4 id="-与-langchain-的互补关系">⑦ 与 LangChain 的互补关系</h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">对比项</th><th align="left">LangChain</th><th align="left">LangGraph</th></tr></thead><tbody><tr><td align="left">定位</td><td align="left">高阶 Agent 框架</td><td align="left">低阶编排运行时</td></tr><tr><td align="left">架构</td><td align="left">线性 LCEL 管道</td><td align="left">有状态循环图</td></tr><tr><td align="left">控制粒度</td><td align="left">抽象封装</td><td align="left">完全透明</td></tr><tr><td align="left">适用场景</td><td align="left">RAG、单轮工具调用</td><td align="left">复杂多步、持久化工作流</td></tr></tbody></table>
+<blockquote>
+<p><strong>关键事实</strong>：自 2025年10月 v1.0 GA 起，LangChain 的 <code>create_agent</code> 函数底层运行在 LangGraph 的执行引擎上——两者是非竞争性的互补关系。</p>
+</blockquote>
+<blockquote>
+<p><strong>信息源</strong>：<a href="https://langchain-ai.github.io/langgraph/tutorials/">LangGraph 官方教程</a> | <a href="https://dev.to/x4nent/langgraph-12-deep-dive-per-node-timeouts-error-handlers-graceful-shutdown-deltachannel--2mp2">LangGraph v1.2 深度解析</a> | <a href="https://atlan.com/know/ai-agent/ai-agent-memory/langchain-vs-langgraph/">LangChain vs LangGraph 对比</a> | <a href="https://futureagi.com/glossary/langgraph/">FutureAGI 指南</a></p>
+</blockquote>
+<hr>
+<h2 id="5-功能实现案例">5. 功能实现案例</h2>
+<h3 id="案例构建一个带人工审批的客户支持智能体">案例：构建一个带人工审批的客户支持智能体</h3>
+<p><strong>场景</strong>：电商平台的退款处理工作流——需要 AI 自动判断退款资格，但超过 $500 的退款需要人工经理审批。</p>
+<p><strong>代码实现</strong>（简化版）：</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:var(--astro-code-token-keyword)">from</span><span style="color:var(--astro-code-foreground)"> typing </span><span style="color:var(--astro-code-token-keyword)">import</span><span style="color:var(--astro-code-foreground)"> TypedDict</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-foreground)"> Literal</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">from</span><span style="color:var(--astro-code-foreground)"> langgraph</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-foreground)">graph </span><span style="color:var(--astro-code-token-keyword)">import</span><span style="color:var(--astro-code-foreground)"> StateGraph</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-foreground)"> START</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-foreground)"> END</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">from</span><span style="color:var(--astro-code-foreground)"> langgraph</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-foreground)">checkpoint</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-foreground)">memory </span><span style="color:var(--astro-code-token-keyword)">import</span><span style="color:var(--astro-code-foreground)"> MemorySaver</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 定义状态模式</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">class</span><span style="color:var(--astro-code-token-function)"> RefundState</span><span style="color:var(--astro-code-foreground)">(</span><span style="color:var(--astro-code-token-function)">TypedDict</span><span style="color:var(--astro-code-foreground)">):</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">    order_id</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-token-constant)"> str</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">    amount</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-token-constant)"> float</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">    reason</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-token-constant)"> str</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">    customer_tier</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-token-constant)"> str</span><span style="color:var(--astro-code-token-comment)">  # "normal" | "vip"</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">    eligibility</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-token-constant)"> str</span><span style="color:var(--astro-code-token-keyword)"> |</span><span style="color:var(--astro-code-token-constant)"> None</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">    approved</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-token-constant)"> bool</span><span style="color:var(--astro-code-token-keyword)"> |</span><span style="color:var(--astro-code-token-constant)"> None</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 节点 1：自动核查退款资格</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">def</span><span style="color:var(--astro-code-token-function)"> check_eligibility</span><span style="color:var(--astro-code-foreground)">(</span><span style="color:var(--astro-code-token-parameter)">state</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-foreground)"> RefundState) </span><span style="color:var(--astro-code-token-punctuation)">-></span><span style="color:var(--astro-code-token-constant)"> dict</span><span style="color:var(--astro-code-foreground)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">    if</span><span style="color:var(--astro-code-foreground)"> state</span><span style="color:var(--astro-code-token-punctuation)">[</span><span style="color:var(--astro-code-token-string-expression)">"amount"</span><span style="color:var(--astro-code-token-punctuation)">]</span><span style="color:var(--astro-code-token-keyword)"> &#x3C;=</span><span style="color:var(--astro-code-token-constant)"> 500</span><span style="color:var(--astro-code-token-punctuation)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">        return</span><span style="color:var(--astro-code-token-punctuation)"> {</span><span style="color:var(--astro-code-token-string-expression)">"eligibility"</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-token-string-expression)"> "auto_approved"</span><span style="color:var(--astro-code-token-punctuation)">}</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">    else</span><span style="color:var(--astro-code-token-punctuation)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">        return</span><span style="color:var(--astro-code-token-punctuation)"> {</span><span style="color:var(--astro-code-token-string-expression)">"eligibility"</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-token-string-expression)"> "needs_review"</span><span style="color:var(--astro-code-token-punctuation)">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 节点 2：执行退款（自动化）</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">def</span><span style="color:var(--astro-code-token-function)"> process_refund</span><span style="color:var(--astro-code-foreground)">(</span><span style="color:var(--astro-code-token-parameter)">state</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-foreground)"> RefundState) </span><span style="color:var(--astro-code-token-punctuation)">-></span><span style="color:var(--astro-code-token-constant)"> dict</span><span style="color:var(--astro-code-foreground)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">    print</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-keyword)">f</span><span style="color:var(--astro-code-token-string-expression)">"💸 已处理订单 </span><span style="color:var(--astro-code-token-constant)">{</span><span style="color:var(--astro-code-token-punctuation)">state[</span><span style="color:var(--astro-code-token-string-expression)">'order_id'</span><span style="color:var(--astro-code-token-punctuation)">]</span><span style="color:var(--astro-code-token-constant)">}</span><span style="color:var(--astro-code-token-string-expression)"> 退款 $</span><span style="color:var(--astro-code-token-constant)">{</span><span style="color:var(--astro-code-token-punctuation)">state[</span><span style="color:var(--astro-code-token-string-expression)">'amount'</span><span style="color:var(--astro-code-token-punctuation)">]</span><span style="color:var(--astro-code-token-constant)">}</span><span style="color:var(--astro-code-token-string-expression)">"</span><span style="color:var(--astro-code-token-punctuation)">)</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">    return</span><span style="color:var(--astro-code-token-punctuation)"> {</span><span style="color:var(--astro-code-token-string-expression)">"approved"</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-token-constant)"> True</span><span style="color:var(--astro-code-token-punctuation)">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 节点 3：人工审批（人机交互中断点）</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">def</span><span style="color:var(--astro-code-token-function)"> human_approval</span><span style="color:var(--astro-code-foreground)">(</span><span style="color:var(--astro-code-token-parameter)">state</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-foreground)"> RefundState):</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">    print</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-keyword)">f</span><span style="color:var(--astro-code-token-string-expression)">"⚠️ 需要人工审批：订单 </span><span style="color:var(--astro-code-token-constant)">{</span><span style="color:var(--astro-code-token-punctuation)">state[</span><span style="color:var(--astro-code-token-string-expression)">'order_id'</span><span style="color:var(--astro-code-token-punctuation)">]</span><span style="color:var(--astro-code-token-constant)">}</span><span style="color:var(--astro-code-token-string-expression)"> 退款 $</span><span style="color:var(--astro-code-token-constant)">{</span><span style="color:var(--astro-code-token-punctuation)">state[</span><span style="color:var(--astro-code-token-string-expression)">'amount'</span><span style="color:var(--astro-code-token-punctuation)">]</span><span style="color:var(--astro-code-token-constant)">}</span><span style="color:var(--astro-code-token-string-expression)">"</span><span style="color:var(--astro-code-token-punctuation)">)</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">    # interrupt_before 会在此暂停，等待外部输入</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">    return</span><span style="color:var(--astro-code-token-punctuation)"> {}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 条件边：根据资格决定路由</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">def</span><span style="color:var(--astro-code-token-function)"> route_after_check</span><span style="color:var(--astro-code-foreground)">(</span><span style="color:var(--astro-code-token-parameter)">state</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-foreground)"> RefundState) </span><span style="color:var(--astro-code-token-punctuation)">-></span><span style="color:var(--astro-code-foreground)"> Literal</span><span style="color:var(--astro-code-token-punctuation)">[</span><span style="color:var(--astro-code-token-string-expression)">"human_approval"</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-token-string-expression)"> "process_refund"</span><span style="color:var(--astro-code-token-punctuation)">]</span><span style="color:var(--astro-code-foreground)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">    if</span><span style="color:var(--astro-code-foreground)"> state</span><span style="color:var(--astro-code-token-punctuation)">[</span><span style="color:var(--astro-code-token-string-expression)">"eligibility"</span><span style="color:var(--astro-code-token-punctuation)">]</span><span style="color:var(--astro-code-token-keyword)"> ==</span><span style="color:var(--astro-code-token-string-expression)"> "needs_review"</span><span style="color:var(--astro-code-token-punctuation)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">        return</span><span style="color:var(--astro-code-token-string-expression)"> "human_approval"</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">    return</span><span style="color:var(--astro-code-token-string-expression)"> "process_refund"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 构建图</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">builder </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-function)"> StateGraph</span><span style="color:var(--astro-code-token-punctuation)">(RefundState)</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">builder</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">add_node</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-string-expression)">"check_eligibility"</span><span style="color:var(--astro-code-token-punctuation)">, check_eligibility)</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">builder</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">add_node</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-string-expression)">"process_refund"</span><span style="color:var(--astro-code-token-punctuation)">, process_refund)</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">builder</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">add_node</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-string-expression)">"human_approval"</span><span style="color:var(--astro-code-token-punctuation)">, human_approval)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">builder</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">add_edge</span><span style="color:var(--astro-code-token-punctuation)">(START, </span><span style="color:var(--astro-code-token-string-expression)">"check_eligibility"</span><span style="color:var(--astro-code-token-punctuation)">)</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">builder</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">add_conditional_edges</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-string-expression)">"check_eligibility"</span><span style="color:var(--astro-code-token-punctuation)">, route_after_check)</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">builder</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">add_edge</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-string-expression)">"human_approval"</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-string-expression)">"process_refund"</span><span style="color:var(--astro-code-token-punctuation)">)</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">builder</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">add_edge</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-string-expression)">"process_refund"</span><span style="color:var(--astro-code-token-punctuation)">, END)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 编译（带内存检查点，支持人机交互恢复）</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">graph </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-foreground)"> builder</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">compile</span><span style="color:var(--astro-code-token-punctuation)">(checkpointer</span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-function)">MemorySaver</span><span style="color:var(--astro-code-token-punctuation)">())</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 执行</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">result </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-foreground)"> graph</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">invoke</span><span style="color:var(--astro-code-token-punctuation)">(</span></span>
+<span class="line"><span style="color:var(--astro-code-token-punctuation)">    {</span><span style="color:var(--astro-code-token-string-expression)">"order_id"</span><span style="color:var(--astro-code-token-punctuation)">: </span><span style="color:var(--astro-code-token-string-expression)">"ORD-12345"</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-string-expression)">"amount"</span><span style="color:var(--astro-code-token-punctuation)">: </span><span style="color:var(--astro-code-token-constant)">1200</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-string-expression)">"reason"</span><span style="color:var(--astro-code-token-punctuation)">: </span><span style="color:var(--astro-code-token-string-expression)">"商品破损"</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-string-expression)">"customer_tier"</span><span style="color:var(--astro-code-token-punctuation)">: </span><span style="color:var(--astro-code-token-string-expression)">"vip"</span><span style="color:var(--astro-code-token-punctuation)">},</span></span>
+<span class="line"><span style="color:var(--astro-code-token-punctuation)">    config</span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-punctuation)">{</span><span style="color:var(--astro-code-token-string-expression)">"configurable"</span><span style="color:var(--astro-code-token-punctuation)">: {</span><span style="color:var(--astro-code-token-string-expression)">"thread_id"</span><span style="color:var(--astro-code-token-punctuation)">: </span><span style="color:var(--astro-code-token-string-expression)">"refund-12345"</span><span style="color:var(--astro-code-token-punctuation)">}}</span></span>
+<span class="line"><span style="color:var(--astro-code-token-punctuation)">)</span></span></code></pre>
+<p><strong>执行流程</strong>：</p>
+<ol>
+<li><code>check_eligibility</code> 节点运行 → 金额 $1200 > $500 → <code>eligibility="needs_review"</code></li>
+<li>条件边路由到 <code>human_approval</code> 节点</li>
+<li><strong>人机交互中断</strong>：系统暂停，等待经理确认或拒绝</li>
+<li>经理通过 API / UI 提交审批结果</li>
+<li>从断点恢复 → 继续到 <code>process_refund</code> → 执行退款</li>
+<li>整个执行过程记录到检查点，可随时回放审计</li>
+</ol>
+<p><strong>结果</strong>：一个可审计、可中断、可恢复的智能体工作流，自动处理简单退款，人工处理复杂退款。</p>
+<blockquote>
+<p><strong>参考</strong>：<a href="https://langchain-ai.github.io/langgraph/tutorials/human_in_the_loop/">LangGraph 人机交互教程</a> | <a href="https://langchain-ai.github.io/langgraph/tutorials/introduction/">LangGraph 快速入门</a></p>
+</blockquote>
+<hr>
+<h2 id="6-主要竞品清单">6. 主要竞品清单</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">竞品</th><th align="left">开发商</th><th align="left">定位</th><th align="left">优势</th><th align="left">劣势</th></tr></thead><tbody><tr><td align="left"><strong>CrewAI</strong></td><td align="left">CrewAI Inc.</td><td align="left">角色化多智能体协作框架（Agent + Task + Crew）</td><td align="left">上手极快，YAML 配置，角色化抽象直观</td><td align="left">token 消耗高（2-3x），控制粒度不如 LangGraph</td></tr><tr><td align="left"><strong>AutoGen（AG2）</strong></td><td align="left">Microsoft</td><td align="left">会话式多智能体框架（GroupChat）</td><td align="left">原生 UserProxyAgent，Azure 集成</td><td align="left">⛔ <strong>2025年底已进入维护模式</strong>，不推荐新项目使用</td></tr><tr><td align="left"><strong>Microsoft Agent Framework（MAF）</strong></td><td align="left">Microsoft</td><td align="left">AutoGen 的官方继承者</td><td align="left">图工作流 + 多智能体模式，Azure 原生</td><td align="left">较新，社区不如 LangGraph 活跃</td></tr><tr><td align="left"><strong>OpenAI Agents SDK</strong></td><td align="left">OpenAI</td><td align="left">智能体循环 + 交接（Handoffs）</td><td align="left">OpenAI 生态原生，简单易用</td><td align="left">强绑定 OpenAI，灵活性不足</td></tr><tr><td align="left"><strong>Claude Agent SDK</strong></td><td align="left">Anthropic</td><td align="left">单智能体循环 + 子智能体</td><td align="left">Anthropic 原生，工具使用强大</td><td align="left">不适用于复杂的图编排场景</td></tr><tr><td align="left"><strong>Temporal</strong></td><td align="left">Temporal Technologies</td><td align="left">通用持久化工作流引擎</td><td align="left">企业级可靠性，10年+生产验证</td><td align="left">非 AI 专用，无 LLM 抽象层</td></tr><tr><td align="left"><strong>n8n</strong></td><td align="left">n8n GmbH</td><td align="left">可视化工作流自动化平台</td><td align="left">低代码/无代码，400+ 集成</td><td align="left">非 AI 原生，图执行能力有限</td></tr><tr><td align="left"><strong>Dify</strong></td><td align="left">Dify Inc.</td><td align="left">LLMOps 可视化平台</td><td align="left">可视化编排，内置 RAG，生态丰富</td><td align="left">侧重应用层，底层图控制不如 LangGraph</td></tr></tbody></table>
+<blockquote>
+<p><strong>信息源</strong>：<a href="https://zenodo.org/records/19109057">Zenodo 编排框架对比</a> | <a href="https://futureagi.com/blog/crewai-vs-langgraph-vs-autogen-2026/">FutureAGI 三方对比</a> | <a href="https://www.raftlabs.com/blog/ai-agent-framework-comparison">RaftLabs 框架对比</a> | <a href="https://agentmodeai.com/compare/n8n-vs-langgraph-vs-temporal/">n8n vs LangGraph</a></p>
+</blockquote>
+<hr>
+<h2 id="7-与竞品的横向比较">7. 与竞品的横向比较</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">对比维度</th><th align="left"><strong>LangGraph</strong></th><th align="left"><strong>CrewAI</strong></th><th align="left"><strong>AutoGen（已维护模式）</strong></th><th align="left"><strong>OpenAI Agents SDK</strong></th><th align="left"><strong>Microsoft Agent Framework</strong></th></tr></thead><tbody><tr><td align="left"><strong>价格</strong></td><td align="left">核心免费 + 托管 $39/月起</td><td align="left">开源免费 + 云服务 $29/月起</td><td align="left">开源免费</td><td align="left">开源免费（需 OpenAI API）</td><td align="left">开源免费（需 Azure）</td></tr><tr><td align="left"><strong>性能/Token 效率</strong></td><td align="left">✅ <strong>最佳</strong>（结构化工作流最低成本 ~$12-18/天/千任务）</td><td align="left">❌ 高消耗（~2-3× LangGraph）</td><td align="left">❌ 最高消耗（~20-40% 高于 LangGraph）</td><td align="left">中等（取决于 Agent 循环次数）</td><td align="left">待基准测试</td></tr><tr><td align="left"><strong>易用性与上手门槛</strong></td><td align="left"><strong>较高</strong>：StateGraph 图模型需学习</td><td align="left"><strong>最低</strong>：角色/任务/团队抽象直观</td><td align="left">中等：GroupChat 模式易理解</td><td align="left"><strong>较低</strong>：API 风格简洁</td><td align="left">中等：需了解 Azure 生态</td></tr><tr><td align="left"><strong>生态与集成能力</strong></td><td align="left"><strong>极强</strong>：600+ LangChain 集成，MCP，与 NVIDIA 合作</td><td align="left">强：快速增长的工具生态</td><td align="left">中等（已停滞）：Azure 集成为主</td><td align="left">弱：仅 OpenAI 生态</td><td align="left">中等：Azure &#x26; Microsoft 生态</td></tr><tr><td align="left"><strong>GitHub Stars</strong></td><td align="left">~32,000</td><td align="left">~51,000</td><td align="left">~58,000（含遗留热度）</td><td align="left">~25,000</td><td align="left">~8,000</td></tr><tr><td align="left"><strong>持久化/HITL</strong></td><td align="left">✅ <strong>一等公民</strong></td><td align="left">◐ 部分</td><td align="left">◐ 部分</td><td align="left">❌ 无原生支持</td><td align="left">✅ 原生支持</td></tr><tr><td align="left"><strong>生产就绪度</strong></td><td align="left">✅ <strong>高</strong>（Klarna、LinkedIn、Uber 等在生产中使用）</td><td align="left">✅ 中等-高</td><td align="left">⛔ 不推荐新项目</td><td align="left">中等</td><td align="left">发展中</td></tr></tbody></table>
+<h3 id="各竞品最适用的细分应用场景">各竞品最适用的细分应用场景</h3>
+<ul>
+<li><strong>LangGraph</strong> — 适合需要<strong>持久化状态、高可靠性、人机交互、复杂条件分支</strong>的生产级智能体系统。金融合规、医疗审批、电商客服等需要审计追踪的场景</li>
+<li><strong>CrewAI</strong> — 适合内容生成管道、研究报告撰写、快速原型开发——“一周之内的 MVP”</li>
+<li><strong>AutoGen</strong> — <strong>不推荐新项目使用</strong>（维护模式）。存量 AutoGen 项目建议迁移至 LangGraph 或 Microsoft Agent Framework</li>
+<li><strong>OpenAI Agents SDK</strong> — 适合已深度绑定 OpenAI 生态的单智能体和简单交接场景</li>
+<li><strong>Microsoft Agent Framework</strong> — 适合 Azure 原生企业，替代 AutoGen 的 Microsoft 官方路径</li>
+<li><strong>Temporal</strong> — 适合非 AI 场景的通用持久化工作流，或与 LangGraph 组合使用（LangGraph 做 AI 编排，Temporal 做底层持久化）</li>
+</ul>
+<blockquote>
+<p><strong>信息源</strong>：<a href="https://futureagi.com/blog/crewai-vs-langgraph-vs-autogen-2026/">FutureAGI CrewAI vs LangGraph vs AutoGen</a> | <a href="https://zenodo.org/records/19109057">Zenodo 框架对比论文</a> | <a href="https://ieeexplore.ieee.org/document/11481053">IEEE 混合架构论文</a> | <a href="https://www.langchain.com/resources/ai-agent-frameworks">AI Agent Frameworks 2026</a></p>
+</blockquote>
+<hr>
+<h2 id="8-版本迭代信息">8. 版本迭代信息</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">版本</th><th align="left">发布日期</th><th align="left">主要更新</th></tr></thead><tbody><tr><td align="left"><strong>初始发布</strong></td><td align="left">2024年 Q2</td><td align="left">首个公开版本，支持循环图、基本状态管理</td></tr><tr><td align="left"><strong>0.1.x</strong></td><td align="left">2024下半年</td><td align="left">早期迭代，基础状态管理、图执行</td></tr><tr><td align="left"><strong>0.3.x</strong></td><td align="left">2025年1-4月</td><td align="left">0.3.31-0.3.34，CLI 改进，API 精炼</td></tr><tr><td align="left"><strong>0.4.x</strong></td><td align="left">2025年4-6月</td><td align="left">0.4.0-0.4.10，预构建智能体改进</td></tr><tr><td align="left"><strong>0.5.x</strong></td><td align="left">2025年6-7月</td><td align="left">0.5.0-0.5.4，检查点功能增强</td></tr><tr><td align="left"><strong>v0.6.0</strong></td><td align="left"><strong>2025年7月</strong> ⭐</td><td align="left"><strong>重要里程碑</strong> — 新的 Context API，取代 <code>config['configurable']</code>，类型安全运行时上下文注入</td></tr><tr><td align="left"><strong>v1.0.0</strong></td><td align="left"><strong>2025年10月20日</strong> 🎉</td><td align="left"><strong>正式发布（GA）</strong> — 持久化执行、检查点恢复、人机交互，承诺不引入破坏性变更直至 v2.0</td></tr><tr><td align="left"><strong>1.0.7</strong></td><td align="left">2026年1月</td><td align="left">企业级强化</td></tr><tr><td align="left"><strong>1.0.8-1.0.10rc1</strong></td><td align="left">2026年2-3月</td><td align="left">子图持久化修复，顺序中断处理</td></tr><tr><td align="left"><strong>v1.1.0</strong></td><td align="left"><strong>2026年3月10日</strong></td><td align="left">类型安全流式/调用（<code>version="v2"</code>），Pydantic/dataclass 强制类型转换，<code>GraphOutput</code></td></tr><tr><td align="left"><strong>v1.2.0</strong></td><td align="left"><strong>2026年5月12日</strong> ⭐</td><td align="left"><strong>节点级超时/重试/错误处理，优雅关闭，DeltaChannel，Streaming API v3</strong></td></tr><tr><td align="left"><strong>1.2.1-1.2.6</strong></td><td align="left">2026年5-6月</td><td align="left">嵌套子图检查点修复，v3 流中止处理，稳定性修复</td></tr></tbody></table>
+<ul>
+<li><strong>首次公开发布</strong>：2024年 Q2（GitHub 初始发布）</li>
+<li><strong>当前最新稳定版</strong>：<strong>v1.2.6</strong>（2026年6月）</li>
+<li><strong>更新频率</strong>：<strong>高频迭代</strong> — 自发布以来已累计 270+ 个 PyPI 版本，2025-2026 年月均 2-3 个版本</li>
+<li><strong>未来规划</strong>：v2.0 在路线图中，承诺从 v1.0 开始无破坏性变更</li>
+</ul>
+<blockquote>
+<p><strong>信息源</strong>：<a href="https://github.com/langchain-ai/langgraph/releases">GitHub Releases</a> | <a href="https://security.snyk.io/package/pip/langgraph/versions">Snyk 版本追踪</a> | <a href="https://dev.to/x4nent/langgraph-12-deep-dive-per-node-timeouts-error-handlers-graceful-shutdown-deltachannel--2mp2">LangGraph v1.2 深度解析</a></p>
+</blockquote>
+<hr>
+<h2 id="总结langchain-家族产品关系图">总结：LangChain 家族产品关系图</h2>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>┌─────────────────────────────────────────────────────────────┐</span></span>
+<span class="line"><span>│                    LangChain Inc. 产品家族                    │</span></span>
+<span class="line"><span>├─────────────────────────────────────────────────────────────┤</span></span>
+<span class="line"><span>│                                                             │</span></span>
+<span class="line"><span>│  ┌──────────────┐    ┌──────────────┐    ┌──────────────┐   │</span></span>
+<span class="line"><span>│  │   LangChain   │    │   LangGraph  │    │  LangSmith   │   │</span></span>
+<span class="line"><span>│  │  (开源, MIT)  │    │  (开源, MIT) │    │ (闭源, 付费)  │   │</span></span>
+<span class="line"><span>│  │  高阶 Agent   │◄──►│  低阶编排     │◄──►│  可观测性     │   │</span></span>
+<span class="line"><span>│  │   框架        │    │   运行时      │    │  平台        │   │</span></span>
+<span class="line"><span>│  └──────────────┘    └──────┬───────┘    └──────────────┘   │</span></span>
+<span class="line"><span>│                             │                               │</span></span>
+<span class="line"><span>│                    ┌────────▼────────┐                      │</span></span>
+<span class="line"><span>│                    │ LangGraph       │                      │</span></span>
+<span class="line"><span>│                    │ Platform        │                      │</span></span>
+<span class="line"><span>│                    │ (托管服务, 付费) │                      │</span></span>
+<span class="line"><span>│                    └─────────────────┘                      │</span></span>
+<span class="line"><span>│                                                             │</span></span>
+<span class="line"><span>│  企业客户: Elastic · GitLab · Klarna · LinkedIn · Uber ·    │</span></span>
+<span class="line"><span>│  Rakuten · Morningstar · 300+ 企业客户                       │</span></span>
+<span class="line"><span>│  累计下载: 10亿+ · LangSmith: 150亿+ 追踪 · 100万亿+ tokens  │</span></span>
+<span class="line"><span>└─────────────────────────────────────────────────────────────┘</span></span></code></pre>
+<hr>
+<h2 id="一句话锐评">一句话锐评</h2>
+<p><strong>LangGraph 是 2026 年生产级 AI Agent 编排的事实标准——不是因为它最容易上手，而是因为它是唯一将持久化状态、人机交互、时间旅行调试、节点级容错和条件循环等生产级需求集于一身且经过大规模验证的开源框架。</strong> Klarna、LinkedIn、Uber 等头部企业已在生产环境验证其可靠性。学习曲线虽陡，但对于任何需要构建严肃多智能体系统的团队来说，这笔投入是值得的——而如果你只是想做快速原型，CrewAI 可能是更好的起点。</p>
+<blockquote>
+<p><strong>信息源</strong>：<a href="https://www.langchain.com">LangChain 官网</a> | <a href="https://github.com/langchain-ai/langgraph">LangGraph GitHub</a> | <a href="https://langchain-ai.github.io/langgraph/">LangGraph 文档</a></p>
+</blockquote>  </div> <!-- Previous / Next navigation --> <nav class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-12 pt-8 border-t border-[var(--color-border)]" data-astro-cid-bvzihdzo> <a href="/blog/AI工具报告/MetaGPT-报告" class="card-hover p-4 no-underline group" data-astro-cid-bvzihdzo> <span class="text-xs text-[var(--color-text-tertiary)] block mb-1" data-astro-cid-bvzihdzo>&larr; 上一篇</span> <span class="text-sm font-medium text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors line-clamp-1" data-astro-cid-bvzihdzo>MetaGPT 深度调研报告</span> </a> <a href="/blog/AI工具报告/Browser Use-报告" class="card-hover p-4 no-underline group text-right" data-astro-cid-bvzihdzo> <span class="text-xs text-[var(--color-text-tertiary)] block mb-1" data-astro-cid-bvzihdzo>下一篇 &rarr;</span> <span class="text-sm font-medium text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors line-clamp-1" data-astro-cid-bvzihdzo>深度调研报告：browser-use（AI 浏览器代理框架）</span> </a> </nav> <hr class="!mt-12 !mb-8" data-astro-cid-bvzihdzo> <div data-astro-cid-bvzihdzo> <a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-bvzihdzo>
+&larr; 返回博客列表
+</a> </div> </div> </div> </article> </div>  </main> <footer class="border-t border-[var(--color-border)] mt-24 py-8" data-astro-cid-pux6a34n><div class="max-w-content flex items-center justify-between" data-astro-cid-pux6a34n><span class="text-sm text-[var(--color-text-tertiary)]" data-astro-cid-pux6a34n>
+&copy; 2026 星游寰宇
+</span><div class="flex items-center gap-4" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>博客</a><a href="/projects" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>项目</a><a href="/notes" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>日记</a><a href="/resources" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>资源</a><a href="/about" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>关于</a></div></div></footer> <div id="link-preview" style="display:none;position:fixed;z-index:99;max-width:18rem;pointer-events:none;" data-astro-cid-t7vshrbh></div>  <script type="module">(async()=>{try{const c=await fetch("/posts.json");if(!c.ok)return;const u=await c.json(),p=new Map(u.map(t=>[t.href,t])),e=document.getElementById("link-preview");if(!e)return;let n="",d;document.addEventListener("mouseover",t=>{const i=t.target.closest("a[href^='/blog/']");if(!i){e.style.display="none",n="";return}const s=i.getAttribute("href");if(!s||s===n)return;const o=p.get(s);o&&(n=s,d=setTimeout(()=>{e.innerHTML=`<div class="lp-title">${o.title}</div><div class="lp-summary">${o.summary}</div>`;const r=i.getBoundingClientRect();let a=r.left,l=r.bottom+6;a+288>window.innerWidth&&(a=window.innerWidth-296),l+80>window.innerHeight&&(l=r.top-80),Object.assign(e.style,{left:a+"px",top:l+"px",display:"block"})},300))},{passive:!0}),document.addEventListener("mouseout",t=>{t.target.closest("a[href^='/blog/']")&&(clearTimeout(d),e.style.display="none",n="")},{passive:!0})}catch{}})();</script> </body></html>  <script type="module">const c=document.getElementById("toc-toggle"),s=document.getElementById("toc-list"),i=document.getElementById("toc-chevron");c&&s&&i&&c.addEventListener("click",()=>{const o=s.classList.toggle("hidden");c.setAttribute("aria-expanded",String(o)),i.style.transform=o?"rotate(180deg)":""});const r=document.querySelectorAll(".toc-list a");if(r.length>0){const o=new IntersectionObserver(n=>{for(const t of n)t.isIntersecting&&r.forEach(e=>{e.classList.toggle("active",e.getAttribute("href")===`#${t.target.id}`)})},{rootMargin:"-80px 0px -80% 0px"});r.forEach(n=>{const t=n.getAttribute("href")?.slice(1);if(t){const e=document.getElementById(t);e&&o.observe(e)}})}</script>
