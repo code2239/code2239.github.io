@@ -1,0 +1,49 @@
+---
+interface ArticleItem {
+  slug: string;
+  title: string;
+  date: string;
+}
+
+interface Props {
+  articles: ArticleItem[];
+  currentSlug: string;
+  groupName: string;
+}
+
+const { articles, currentSlug, groupName } = Astro.props;
+---
+
+<nav class="space-y-3">
+  <div class="pb-3 mb-3 border-b border-[var(--color-border)]">
+    <a
+      href={`/resources/${groupName}`}
+      class="text-sm font-semibold text-[var(--color-text)] no-underline hover:text-[var(--color-accent)] transition-colors flex items-center gap-1.5"
+    >
+      <svg class="w-4 h-4 text-[var(--color-text-tertiary)]" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M10 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/>
+      </svg>
+      {groupName.replace(/-/g, " ")}
+    </a>
+  </div>
+
+  <ul class="space-y-0.5 list-none p-0 m-0">
+    {articles.map((article) => {
+      const isActive = article.slug === currentSlug;
+      return (
+        <li>
+          <a
+            href={`/resources/${groupName}/${article.slug}`}
+            class={`block text-xs py-1.5 px-2.5 rounded-md no-underline transition-colors border-l-2 ${
+              isActive
+                ? "bg-[var(--color-accent-soft)] text-[var(--color-accent)] font-medium border-l-[var(--color-accent)]"
+                : "text-[var(--color-text-secondary)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg-secondary)] border-l-transparent"
+            }`}
+          >
+            {article.title}
+          </a>
+        </li>
+      );
+    })}
+  </ul>
+</nav>

@@ -1,0 +1,151 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../components/Layout.astro";
+import ResourceFilter from "../../features/resources/ResourceFilter.astro";
+import { getTagCounts } from "../../lib/tagUtils";
+
+const allResources = await getCollection("resources");
+
+// Split into root-level and subdirectory groups
+const rootResources: typeof allResources = [];
+const groups = new Map<string, typeof allResources>();
+
+for (const r of allResources) {
+  const parts = r.id.split("/");
+  if (parts.length === 1) {
+    rootResources.push(r);
+  } else {
+    const groupName = parts[0];
+    if (!groups.has(groupName)) groups.set(groupName, []);
+    groups.get(groupName)!.push(r);
+  }
+}
+
+const sortedRoot = rootResources.sort(
+  (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+);
+
+const groupEntries = [...groups.entries()];
+const allTags = getTagCounts(allResources);
+---
+
+<Layout title="资源">
+  <div class="px-6 xl:px-12 pt-12 pb-16">
+    <div class="blog-layout">
+      <aside class="blog-sidebar">
+        <div class="sticky top-20 space-y-6">
+          <ResourceFilter tags={allTags} totalResources={allResources.length} />
+        </div>
+      </aside>
+
+      <div class="blog-content">
+        <h1 class="text-3xl font-semibold mb-2">
+          资源
+          {(rootResources.length + groups.size) > 0 && (
+            <span class="text-[var(--color-text-tertiary)] text-xl font-normal"> ({rootResources.length + groups.size} 个)</span>
+          )}
+        </h1>
+        <p class="text-[var(--color-text-secondary)] mb-10">公开资源与文件下载</p>
+
+        {(rootResources.length + groups.size) > 0 ? (
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            {groupEntries.map(([groupName, items]) => {
+              const sorted = items.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+              const dates = sorted.map((i) => i.data.date);
+              const earliest = dates.sort()[0];
+              const latest = dates.sort().reverse()[0];
+              const firstSummary = sorted[0]?.data.summary || "";
+              const displayName = groupName.replace(/-/g, " ");
+              const allGroupTags = [...new Set(items.flatMap((i) => i.data.tags))].slice(0, 5);
+              return (
+                <div class="fade-in h-full resource-item" data-tags={allGroupTags.join(",")}>
+                  <article class="card-hover overflow-hidden h-full flex flex-col">
+                    <a href={`/resources/${groupName}`} class="no-underline flex flex-col h-full group">
+                      <div class="aspect-[16/9] bg-gradient-to-br from-[var(--color-accent-soft)] to-[var(--color-bg-tertiary)] flex items-center justify-center relative">
+                        <svg class="w-14 h-14 text-[var(--color-accent)]/30" viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M10 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/>
+                        </svg>
+                        <span class="absolute bottom-4 right-4 text-xs font-mono text-[var(--color-text-tertiary)] bg-[var(--color-bg)]/80 px-2 py-1 rounded">
+                          {items.length} 个资源
+                        </span>
+                      </div>
+                      <div class="p-5 flex flex-col flex-1">
+                        <h3 class="text-base font-semibold mb-1 text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors capitalize">
+                          {displayName}
+                        </h3>
+                        <p class="text-xs text-[var(--color-text-tertiary)] mb-2">{earliest} ~ {latest}</p>
+                        <p class="text-[var(--color-text-secondary)] text-sm leading-relaxed line-clamp-2">
+                          {firstSummary}
+                        </p>
+                      </div>
+                    </a>
+                  </article>
+                </div>
+              );
+            })}
+
+            {sortedRoot.map((resource) => (
+              <div class="fade-in h-full resource-item" data-tags={resource.data.tags.join(",")}>
+                <article class="card-hover overflow-hidden h-full flex flex-col">
+                  <a href={`/resources/${resource.id.replace(/\.md$/, "")}`} class="no-underline flex flex-col h-full group">
+                    <div class="aspect-[16/9] bg-gradient-to-br from-[var(--color-accent-soft)] to-[var(--color-bg-tertiary)] flex items-center justify-center relative">
+                      <svg class="w-14 h-14 text-[var(--color-accent)]/30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke-linecap="round" stroke-linejoin="round"/>
+                        <polyline points="14 2 14 8 20 8" stroke-linecap="round" stroke-linejoin="round"/>
+                        <line x1="16" y1="13" x2="8" y2="13" stroke-linecap="round" stroke-linejoin="round"/>
+                        <line x1="16" y1="17" x2="8" y2="17" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                      {resource.data.files.length > 0 && (
+                        <span class="absolute bottom-4 right-4 text-xs font-mono text-[var(--color-text-tertiary)] bg-[var(--color-bg)]/80 px-2 py-1 rounded">
+                          {resource.data.files.length} 个文件
+                        </span>
+                      )}
+                    </div>
+                    <div class="p-5 flex flex-col flex-1">
+                      <h3 class="text-base font-semibold mb-1 text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors">
+                        {resource.data.title}
+                      </h3>
+                      <p class="text-xs text-[var(--color-text-tertiary)] mb-2">{resource.data.date}</p>
+                      <p class="text-[var(--color-text-secondary)] text-sm leading-relaxed line-clamp-2 mb-3">
+                        {resource.data.summary}
+                      </p>
+                      <div class="flex flex-wrap gap-1.5 mt-auto">
+                        {resource.data.tags.slice(0, 4).map((tag) => (
+                          <span class="text-xs px-2 py-0.5 rounded-md bg-[var(--color-bg-tertiary)] text-[var(--color-text-tertiary)] font-mono">
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </a>
+                </article>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p class="text-center text-[var(--color-text-tertiary)] py-12">暂无资源。</p>
+        )}
+
+        <p id="resource-filter-empty" class="text-center text-[var(--color-text-tertiary)] py-12" style="display: none;">
+          没有找到匹配标签的资源。
+        </p>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .blog-layout { display: block; }
+  .blog-sidebar { margin-bottom: 2rem; }
+  .blog-content { min-width: 0; }
+
+  @media (min-width: 768px) {
+    .blog-layout {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+    .blog-sidebar { margin-bottom: 0; }
+  }
+</style>

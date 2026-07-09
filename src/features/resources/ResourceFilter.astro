@@ -1,0 +1,182 @@
+---
+interface TagEntry {
+  0: string;
+  1: number;
+}
+
+interface Props {
+  tags: TagEntry[];
+  totalResources: number;
+}
+
+const { tags, totalResources } = Astro.props;
+const INITIAL_VISIBLE = 5;
+const hasMore = tags.length > INITIAL_VISIBLE;
+---
+
+<div>
+  <p class="text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-3">标签筛选</p>
+  <div class="flex flex-col gap-0.5" id="resource-tag-filters">
+    <button class="sidebar-tag active" data-tag="">
+      <span>全部资源</span>
+      <span class="sidebar-tag-count">{totalResources}</span>
+    </button>
+    {tags.map(([tag, count], i) => (
+      <button class={`sidebar-tag${i >= INITIAL_VISIBLE ? " sidebar-tag-collapsed" : ""}`} data-tag={tag}>
+        <span class="truncate">{tag}</span>
+        <span class="sidebar-tag-count">{count}</span>
+      </button>
+    ))}
+  </div>
+
+  {hasMore && (
+    <button id="resource-tag-expand-btn" class="tag-expand-btn">
+      <span id="resource-tag-expand-text">展开全部 ({tags.length} 个标签)</span>
+      <svg id="resource-tag-expand-arrow" class="tag-expand-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="m4 6 4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+  )}
+</div>
+
+<style>
+  .sidebar-tag {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0.375rem 0.625rem;
+    font-size: 0.8125rem;
+    font-family: var(--font-sans);
+    color: var(--color-text-secondary);
+    background: transparent;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    text-align: left;
+    transition: background 150ms ease, color 150ms ease;
+  }
+  .sidebar-tag:hover { background: var(--color-bg-secondary); color: var(--color-text); }
+  .sidebar-tag.active { background: var(--color-accent-soft); color: var(--color-accent); font-weight: 500; }
+
+  .sidebar-tag-count {
+    font-size: 0.6875rem;
+    color: var(--color-text-tertiary);
+    background: var(--color-bg-tertiary);
+    padding: 0.0625rem 0.375rem;
+    border-radius: 4px;
+    min-width: 1.25rem;
+    text-align: center;
+    flex-shrink: 0;
+  }
+  .sidebar-tag.active .sidebar-tag-count { background: var(--color-accent); color: #fff; }
+
+  .sidebar-tag-collapsed { display: none; }
+  .sidebar-tag-collapsed.expanded { display: flex; }
+
+  .tag-expand-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0.375rem 0.625rem;
+    font-size: 0.75rem;
+    font-family: var(--font-sans);
+    color: var(--color-text-tertiary);
+    background: transparent;
+    border: none;
+    border-top: 1px solid var(--color-border);
+    margin-top: 0.25rem;
+    padding-top: 0.5rem;
+    cursor: pointer;
+    transition: color 150ms ease;
+  }
+  .tag-expand-btn:hover { color: var(--color-accent); }
+  .tag-expand-arrow {
+    width: 14px;
+    height: 14px;
+    transition: transform 200ms ease;
+  }
+  .tag-expand-arrow.open { transform: rotate(180deg); }
+</style>
+
+<script>
+  function initResourceTagExpand() {
+    const expandBtn = document.getElementById("resource-tag-expand-btn");
+    if (!expandBtn) return;
+    const textEl = document.getElementById("resource-tag-expand-text");
+    const arrowEl = document.getElementById("resource-tag-expand-arrow");
+    const collapsedTags = document.querySelectorAll<HTMLElement>(".sidebar-tag-collapsed");
+    let expanded = false;
+
+    expandBtn.addEventListener("click", () => {
+      expanded = !expanded;
+      collapsedTags.forEach((el) => el.classList.toggle("expanded", expanded));
+      if (textEl) textEl.textContent = expanded ? "收起" : `展开全部 (${collapsedTags.length + 5} 个标签)`;
+      if (arrowEl) arrowEl.classList.toggle("open", expanded);
+    });
+  }
+
+  function initResourceFilter() {
+    const buttons = document.querySelectorAll("#resource-tag-filters .sidebar-tag");
+    const items = document.querySelectorAll(".resource-item");
+    const emptyEl = document.getElementById("resource-filter-empty");
+
+    if (buttons.length === 0) return;
+
+    let activeTag = "";
+
+    function updateVisibility() {
+      let visibleCount = 0;
+
+      items.forEach((item) => {
+        const tags = item.getAttribute("data-tags") || "";
+        const tagMatch = !activeTag || tags.split(",").includes(activeTag);
+
+        if (tagMatch) {
+          item.style.display = "";
+          visibleCount++;
+        } else {
+          item.style.display = "none";
+        }
+      });
+
+      if (emptyEl) emptyEl.style.display = visibleCount === 0 ? "block" : "none";
+    }
+
+    buttons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        activeTag = btn.getAttribute("data-tag") || "";
+        buttons.forEach((b) =>
+          b.classList.toggle("active", b.getAttribute("data-tag") === activeTag)
+        );
+        const url = new URL(window.location.href);
+        activeTag
+          ? url.searchParams.set("tag", activeTag)
+          : url.searchParams.delete("tag");
+        window.history.replaceState({}, "", url.toString());
+        updateVisibility();
+      });
+    });
+
+    const params = new URLSearchParams(window.location.search);
+    const initialTag = params.get("tag") || "";
+    if (initialTag) {
+      activeTag = initialTag;
+      buttons.forEach((b) =>
+        b.classList.toggle("active", b.getAttribute("data-tag") === activeTag)
+      );
+    }
+    updateVisibility();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", () => {
+      initResourceTagExpand();
+      initResourceFilter();
+    });
+  } else {
+    initResourceTagExpand();
+    initResourceFilter();
+  }
+</script>

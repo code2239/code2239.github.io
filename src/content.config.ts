@@ -34,4 +34,20 @@ const notes = defineCollection({
   }),
 });
 
-export const collections = { blog, projects, notes };
+const resources = defineCollection({
+  schema: z.object({
+    title: z.string(),
+    date: z.string(),
+    summary: z.string(),
+    tags: z.array(z.string()),
+    files: z.array(z.object({
+      filename: z.string(),
+      label: z.string(),
+      size: z.string().optional(),
+      format: z.string().optional(),
+    })),
+    sourceUrl: z.string().url().optional(),
+  }),
+});
+
+export const collections = { blog, projects, notes, resources };

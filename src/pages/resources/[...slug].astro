@@ -1,0 +1,182 @@
+---
+import { getCollection, render } from "astro:content";
+import Layout from "../../components/Layout.astro";
+import ResourceSidebar from "../../features/resources/ResourceSidebar.astro";
+import ResourceTreeSidebar from "../../features/resources/ResourceTreeSidebar.astro";
+
+export async function getStaticPaths() {
+  const resources = await getCollection("resources");
+  return resources.map((r) => ({
+    params: { slug: r.id.replace(/\.md$/, "") },
+    props: { resource: r },
+  }));
+}
+
+const { resource } = Astro.props;
+const { Content } = await render(resource);
+
+// Detect if this is a sub-article (has parent group)
+const slug = resource.id.replace(/\.md$/, "");
+const slugParts = slug.split("/");
+const isSubArticle = slugParts.length > 1;
+const parentGroup = isSubArticle ? slugParts[0] : null;
+
+// Fetch sibling articles for sidebar
+let sidebarArticles: Array<{ slug: string; title: string; date: string }> = [];
+const hasSubfolder = isSubArticle && slugParts.length > 2;
+
+if (isSubArticle) {
+  const allResources = await getCollection("resources");
+  sidebarArticles = allResources
+    .filter((r) => r.id.startsWith(parentGroup + "/"))
+    .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
+    .map((r) => ({
+      slug: r.id.replace(/\.md$/, "").replace(parentGroup + "/", ""),
+      title: r.data.title,
+      date: r.data.date,
+    }));
+}
+
+const backHref = isSubArticle ? `/resources/${parentGroup}` : "/resources";
+const backLabel = isSubArticle ? `返回 ${parentGroup.replace(/-/g, " ")} 概览` : "返回资源列表";
+---
+
+<Layout title={resource.data.title}>
+  <div class="px-6 xl:px-12 pt-12 pb-16">
+    <div class={isSubArticle ? "resource-detail-layout" : ""}>
+      {isSubArticle && !hasSubfolder && (
+        <aside class="resource-detail-sidebar">
+          <div class="sticky top-20">
+            <ResourceSidebar
+              articles={sidebarArticles}
+              currentSlug={slugParts[slugParts.length - 1]}
+              groupName={parentGroup!}
+            />
+          </div>
+        </aside>
+      )}
+
+      {hasSubfolder && (
+        <aside class="resource-detail-sidebar">
+          <div class="sticky top-20">
+            <ResourceTreeSidebar
+              articles={sidebarArticles}
+              currentSlug={slugParts.slice(1).join("/")}
+              groupName={parentGroup!}
+            />
+          </div>
+        </aside>
+      )}
+
+      <article class={isSubArticle ? "resource-detail-content" : "max-w-content"}>
+        <header class="mb-10 text-center">
+          <h1 class="text-3xl font-semibold mb-3 tracking-tight">{resource.data.title}</h1>
+          <div class="flex items-center justify-center gap-2 text-[var(--color-text-tertiary)] text-sm">
+            <time datetime={resource.data.date}>{resource.data.date}</time>
+            {resource.data.tags.length > 0 && (
+              <>
+                <span class="text-[var(--color-border)]">·</span>
+                <div class="flex flex-wrap gap-1.5 justify-center">
+                  {resource.data.tags.map((tag) => (
+                    <a
+                      href={`/resources?tag=${encodeURIComponent(tag)}`}
+                      class="text-xs px-2 py-0.5 rounded-md bg-[var(--color-bg-tertiary)] text-[var(--color-text-tertiary)] font-mono no-underline hover:text-[var(--color-accent)] hover:bg-[var(--color-accent-soft)] transition-colors"
+                    >
+                      {tag}
+                    </a>
+                  ))}
+                </div>
+              </>
+            )}
+          </div>
+        </header>
+
+        <div class="prose prose-neutral max-w-none mb-10">
+          <Content />
+        </div>
+
+        {resource.data.files.length > 0 && (
+          <div class="border border-[var(--color-border)] rounded-xl p-6 mb-10">
+            <h2 class="text-lg font-semibold mb-4 flex items-center gap-2">
+              <svg class="w-5 h-5 text-[var(--color-accent)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" stroke-linecap="round" stroke-linejoin="round"/>
+                <polyline points="7 10 12 15 17 10" stroke-linecap="round" stroke-linejoin="round"/>
+                <line x1="12" y1="15" x2="12" y2="3" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              文件下载
+            </h2>
+            <div class="flex flex-col gap-2">
+              {resource.data.files.map((file) => (
+                <a
+                  href={`/resources/files/${file.filename}`}
+                  download
+                  class="flex items-center gap-3 p-3 rounded-lg border border-[var(--color-border)] no-underline hover:border-[var(--color-accent)] hover:bg-[var(--color-accent-soft)]/50 transition-colors group/file"
+                >
+                  <div class="w-10 h-10 rounded-lg bg-[var(--color-bg-tertiary)] flex items-center justify-center shrink-0 group-hover/file:bg-[var(--color-accent-soft)] transition-colors">
+                    <svg class="w-5 h-5 text-[var(--color-text-secondary)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke-linecap="round" stroke-linejoin="round"/>
+                      <polyline points="14 2 14 8 20 8" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <div class="text-sm font-medium text-[var(--color-text)] group-hover/file:text-[var(--color-accent)] transition-colors">
+                      {file.label}
+                    </div>
+                    <div class="text-xs text-[var(--color-text-tertiary)] flex items-center gap-2">
+                      {file.format && <span class="uppercase">{file.format}</span>}
+                      {file.size && (
+                        <>
+                          {file.format && <span>·</span>}
+                          <span>{file.size}</span>
+                        </>
+                      )}
+                    </div>
+                  </div>
+                  <svg class="w-4 h-4 text-[var(--color-text-tertiary)] group-hover/file:text-[var(--color-accent)] shrink-0 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" stroke-linecap="round" stroke-linejoin="round"/>
+                    <polyline points="7 10 12 15 17 10" stroke-linecap="round" stroke-linejoin="round"/>
+                    <line x1="12" y1="15" x2="12" y2="3" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {resource.data.sourceUrl && (
+          <div class="flex items-center justify-start gap-2 text-sm text-[var(--color-text-secondary)] mb-4">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>原始来源：</span>
+            <a href={resource.data.sourceUrl} target="_blank" rel="noopener noreferrer" class="text-[var(--color-accent)] hover:underline">
+              {resource.data.sourceUrl}
+            </a>
+          </div>
+        )}
+
+        <div class="mt-12 pt-8 border-t border-[var(--color-border)]">
+          <a href={backHref} class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150">
+            &larr; {backLabel}
+          </a>
+        </div>
+      </article>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .resource-detail-layout { display: block; }
+  .resource-detail-sidebar { margin-bottom: 2rem; }
+  .resource-detail-content { min-width: 0; }
+  @media (min-width: 768px) {
+    .resource-detail-layout {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+    .resource-detail-sidebar { margin-bottom: 0; }
+  }
+</style>
