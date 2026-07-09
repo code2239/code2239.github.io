@@ -29,7 +29,8 @@ const {
 } = Astro.props;
 
 const fullTitle = `${title} — 星游寰宇`;
-const siteUrl = "https://code2239.github.io";
+// Use Astro.site for base-path aware URL (handles /dev prefix)
+const siteUrl = Astro.site?.origin || "https://code2239.github.io";
 const pageUrl = canonicalURL ? `${siteUrl}${canonicalURL}` : Astro.url.href;
 const desc =
   description || "星游寰宇的个人网站——技术文章、项目展示与思考笔记";

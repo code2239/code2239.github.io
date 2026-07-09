@@ -7,7 +7,7 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
-  site: 'https://code2239.github.io',
+  site: process.env.SITE_URL || 'https://code2239.github.io',
   markdown: {
     shikiConfig: {
       theme: 'css-variables',

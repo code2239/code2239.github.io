@@ -1,0 +1,34 @@
+name: Deploy Dev to GitHub Pages (/dev/)
+
+on:
+  push:
+    branches: [dev]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - run: npm ci
+
+      # Build with /dev base path so links work from the subdirectory
+      - run: npm run build -- --base /dev
+        env:
+          SITE_URL: https://code2239.github.io/dev
+
+      - name: Deploy to gh-pages /dev/
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          destination_dir: dev
+          keep_files: true
