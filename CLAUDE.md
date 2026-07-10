@@ -35,19 +35,22 @@ src/
 ### 组件层次
 
 ```
-Layout.astro                      ← HTML 根，导入 global.css
-├── Navigation.astro (header)     ← 粘性顶栏，响应式汉堡菜单
-├── <slot />                      ← 页面内容
-└── Navigation.astro (footer)     ← 页脚
+Layout.astro (src/components/)   ← HTML 根，导入 global.css
+├── Navigation.astro (header)    ← 粘性顶栏，响应式汉堡菜单
+├── <slot />                     ← 页面内容
+└── Navigation.astro (footer)    ← 页脚
 
-BlogLayout.astro                  ← 博客列表骨架
-├── PostFilter.astro              ← 侧边栏：搜索 + 分类树 + 标签筛选
-└── <slot />                      ← 文章列表
+BlogLayout.astro                 ← 博客列表骨架
+├── PostFilter.astro             ← 侧边栏：搜索 + 分类树 + 标签筛选
+└── <slot />                     ← 文章列表
 
-BlogPost.astro                    ← 文章详情骨架
-├── ReadingProgress.astro         ← 顶部进度条
-├── TableOfContents.astro         ← 桌面端侧边 TOC
-└── <slot />                      ← Markdown 正文
+BlogPost.astro                   ← 文章详情骨架
+├── ReadingProgress.astro        ← 顶部进度条（src/features/blog/）
+├── TableOfContents.astro        ← 桌面端侧边 TOC
+├── BackToTop.astro              ← 回到顶部按钮（src/features/blog/）
+├── CopyButton.astro             ← 代码块复制按钮（src/features/blog/）
+├── LinkPreview.astro            ← 链接预览卡片（src/features/blog/）
+└── <slot />                     ← Markdown 正文
 ```
 
 ### 路由映射
@@ -63,8 +66,12 @@ BlogPost.astro                    ← 文章详情骨架
 | `/notes/xxx` | `pages/notes/[...slug].astro` | 单篇日记 |
 | `/projects` | `pages/projects/index.astro` | 项目列表 |
 | `/projects/xxx` | `pages/projects/[...slug].astro` | 项目子页面 |
+| `/resources` | `pages/resources/index.astro` | 资源列表 |
+| `/resources/xxx` | `pages/resources/[...slug].astro` | 资源子页面 |
 | `/rss.xml` | `pages/rss.xml.ts` | RSS Feed |
 | `/posts.json` | `pages/posts.json.ts` | 文章 JSON API |
+| `/search-index.json` | `pages/search-index.json.ts` | 搜索索引 |
+| `/404` | `pages/404.astro` | 404 页面 |
 
 ### 数据流（单一真相来源）
 
@@ -82,7 +89,7 @@ src/lib/tagUtils.ts        →  标签统计（泛型，跨集合复用）
 
 ## 内容模型
 
-Schema 定义在 `src/content.config.ts`。三个内容集合各有独立的 Zod schema，不同内容类型有不同的字段约束。
+Schema 定义在 `src/content.config.ts`。四个内容集合各有独立的 Zod schema，不同内容类型有不同的字段约束。
 
 ```yaml
 # blog
@@ -93,10 +100,28 @@ summary: string       - 摘要，用于卡片和 meta description
 categories: string[]  - 可选，必须引用 categories.ts 中已定义的 slug
 
 # notes
-title / date / summary / tags + source(可选) + category(reading|learning|research)
+title / date / summary / tags + source(可选) + category(reading|learning|research，可选)
+
+# projects
+title / date / summary / tags + github(url, 可选) + demo(url, 可选) + image(可选) + featured(boolean, 默认 false)
+
+# resources
+title / date / summary / tags + files[{filename, label, size?, format?}] + sourceUrl(url, 可选)
 ```
 
 新增文章 = 在 `src/content/<集合>/` 下创建 `.md` 文件，不改任何组件。
+
+---
+
+## 功能模块（src/features/）
+
+| 目录 | 内容 | 说明 |
+|------|------|------|
+| `features/blog/` | ReadingProgress, BackToTop, CopyButton, LinkPreview, BlogSearch, CategoryNav, TagFilter, filter-controller.js | 博客文章页交互组件 + 列表页筛选 |
+| `features/search/` | SearchModal.astro, search-init.ts | 全局搜索（Ctrl+K） |
+| `features/notes/` | NotesFilter.astro | 日记列表筛选 |
+| `features/projects/` | ProjectSidebar.astro, ProjectTreeSidebar.astro | 项目页侧边栏 |
+| `features/resources/` | ResourceFilter.astro, ResourceSidebar.astro, ResourceTreeSidebar.astro | 资源页侧边栏与筛选 |
 
 ---
 
@@ -202,6 +227,10 @@ commit message 用英文
 
 ## CI/CD
 
-GitHub Actions 工作流 (`.github/workflows/deploy.yml`)：
-- 触发：`push` 到 `main` 分支
-- 流程：Node 22，`npm ci` → `npm run build` → 部署 `dist/` 到 GitHub Pages
+GitHub Actions 工作流 (`.github/workflows/`)：
+
+| 文件 | 触发 | 说明 |
+|------|------|------|
+| `deploy.yml` | push 到 `main` | Node 22，`npm ci` → `npm run build` → 部署 `dist/` 到 GitHub Pages |
+| `deploy-dev.yml` | 手动触发 | 开发分支部署 |
+| `ci.yml` | PR / push | 持续集成检查 |
