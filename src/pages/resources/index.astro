@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import Layout from "../../components/Layout.astro";
+import Pagination from "../../components/Pagination.astro";
 import ResourceFilter from "../../features/resources/ResourceFilter.astro";
 import { getTagCounts } from "../../lib/tagUtils";
 
@@ -27,6 +28,49 @@ const sortedRoot = rootResources.sort(
 
 const groupEntries = [...groups.entries()];
 const allTags = getTagCounts(allResources);
+
+// Build flat item list for pagination: groups first, then root resources
+const resourceItems: Array<{
+  type: "group" | "resource";
+  title: string;
+  date: string;
+  dateRange?: string;
+  summary: string;
+  tags: string[];
+  href: string;
+  fileCount?: number;
+  itemCount?: number;
+}> = [];
+
+for (const [groupName, items] of groupEntries) {
+  const sorted = items.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+  const dates = sorted.map((i) => i.data.date);
+  const earliest = dates.sort()[0];
+  const latest = dates.sort().reverse()[0];
+  const allGroupTags = [...new Set(items.flatMap((i) => i.data.tags))];
+  resourceItems.push({
+    type: "group",
+    title: groupName.replace(/-/g, " "),
+    date: earliest,
+    dateRange: `${earliest} ~ ${latest}`,
+    summary: sorted[0]?.data.summary || "",
+    tags: allGroupTags,
+    href: `/resources/${groupName}`,
+    itemCount: items.length,
+  });
+}
+
+for (const r of sortedRoot) {
+  resourceItems.push({
+    type: "resource",
+    title: r.data.title,
+    date: r.data.date,
+    summary: r.data.summary,
+    tags: r.data.tags,
+    href: `/resources/${r.id.replace(/\.md$/, "")}`,
+    fileCount: r.data.files.length,
+  });
+}
 ---
 
 <Layout title="资源">
@@ -47,88 +91,15 @@ const allTags = getTagCounts(allResources);
         </h1>
         <p class="text-[var(--color-text-secondary)] mb-10">公开资源与文件下载</p>
 
-        {(rootResources.length + groups.size) > 0 ? (
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-            {groupEntries.map(([groupName, items]) => {
-              const sorted = items.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
-              const dates = sorted.map((i) => i.data.date);
-              const earliest = dates.sort()[0];
-              const latest = dates.sort().reverse()[0];
-              const firstSummary = sorted[0]?.data.summary || "";
-              const displayName = groupName.replace(/-/g, " ");
-              const allGroupTags = [...new Set(items.flatMap((i) => i.data.tags))].slice(0, 5);
-              return (
-                <div class="fade-in h-full resource-item" data-tags={allGroupTags.join(",")}>
-                  <article class="card-hover overflow-hidden h-full flex flex-col">
-                    <a href={`/resources/${groupName}`} class="no-underline flex flex-col h-full group">
-                      <div class="aspect-[16/9] bg-gradient-to-br from-[var(--color-accent-soft)] to-[var(--color-bg-tertiary)] flex items-center justify-center relative">
-                        <svg class="w-14 h-14 text-[var(--color-accent)]/30" viewBox="0 0 24 24" fill="currentColor">
-                          <path d="M10 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/>
-                        </svg>
-                        <span class="absolute bottom-4 right-4 text-xs font-mono text-[var(--color-text-tertiary)] bg-[var(--color-bg)]/80 px-2 py-1 rounded">
-                          {items.length} 个资源
-                        </span>
-                      </div>
-                      <div class="p-5 flex flex-col flex-1">
-                        <h3 class="text-base font-semibold mb-1 text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors capitalize">
-                          {displayName}
-                        </h3>
-                        <p class="text-xs text-[var(--color-text-tertiary)] mb-2">{earliest} ~ {latest}</p>
-                        <p class="text-[var(--color-text-secondary)] text-sm leading-relaxed line-clamp-2">
-                          {firstSummary}
-                        </p>
-                      </div>
-                    </a>
-                  </article>
-                </div>
-              );
-            })}
-
-            {sortedRoot.map((resource) => (
-              <div class="fade-in h-full resource-item" data-tags={resource.data.tags.join(",")}>
-                <article class="card-hover overflow-hidden h-full flex flex-col">
-                  <a href={`/resources/${resource.id.replace(/\.md$/, "")}`} class="no-underline flex flex-col h-full group">
-                    <div class="aspect-[16/9] bg-gradient-to-br from-[var(--color-accent-soft)] to-[var(--color-bg-tertiary)] flex items-center justify-center relative">
-                      <svg class="w-14 h-14 text-[var(--color-accent)]/30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke-linecap="round" stroke-linejoin="round"/>
-                        <polyline points="14 2 14 8 20 8" stroke-linecap="round" stroke-linejoin="round"/>
-                        <line x1="16" y1="13" x2="8" y2="13" stroke-linecap="round" stroke-linejoin="round"/>
-                        <line x1="16" y1="17" x2="8" y2="17" stroke-linecap="round" stroke-linejoin="round"/>
-                      </svg>
-                      {resource.data.files.length > 0 && (
-                        <span class="absolute bottom-4 right-4 text-xs font-mono text-[var(--color-text-tertiary)] bg-[var(--color-bg)]/80 px-2 py-1 rounded">
-                          {resource.data.files.length} 个文件
-                        </span>
-                      )}
-                    </div>
-                    <div class="p-5 flex flex-col flex-1">
-                      <h3 class="text-base font-semibold mb-1 text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors">
-                        {resource.data.title}
-                      </h3>
-                      <p class="text-xs text-[var(--color-text-tertiary)] mb-2">{resource.data.date}</p>
-                      <p class="text-[var(--color-text-secondary)] text-sm leading-relaxed line-clamp-2 mb-3">
-                        {resource.data.summary}
-                      </p>
-                      <div class="flex flex-wrap gap-1.5 mt-auto">
-                        {resource.data.tags.slice(0, 4).map((tag) => (
-                          <span class="text-xs px-2 py-0.5 rounded-md bg-[var(--color-bg-tertiary)] text-[var(--color-text-tertiary)] font-mono">
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </a>
-                </article>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <p class="text-center text-[var(--color-text-tertiary)] py-12">暂无资源。</p>
-        )}
+        <div id="resources-list" class="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <p class="text-center text-[var(--color-text-tertiary)] py-4 col-span-2">加载中…</p>
+        </div>
 
         <p id="resource-filter-empty" class="text-center text-[var(--color-text-tertiary)] py-12" style="display: none;">
           没有找到匹配标签的资源。
         </p>
+
+        <Pagination />
       </div>
     </div>
   </div>
@@ -149,3 +120,76 @@ const allTags = getTagCounts(allResources);
     .blog-sidebar { margin-bottom: 0; }
   }
 </style>
+
+<script>
+  import { createPaginator, renderPagination } from "../../lib/list-paginator.js";
+  import { renderResourceCard, renderResourceGroupCard } from "../../lib/card-renderers.js";
+
+  const dataScript = document.getElementById("resources-posts-data");
+  const allItems = JSON.parse(dataScript?.textContent || "[]");
+
+  const container = document.getElementById("resources-list");
+  const paginationEl = document.getElementById("pagination");
+  const emptyEl = document.getElementById("resource-filter-empty");
+
+  const paginator = createPaginator({
+    items: allItems,
+    pageSize: 10,
+    filterDefs: {
+      tag: (item, value) => item.tags.includes(value),
+    },
+    onStateChange(state) {
+      if (state.pageItems.length === 0) {
+        container.innerHTML = "";
+        emptyEl.style.display = "block";
+      } else {
+        emptyEl.style.display = "none";
+        container.innerHTML = state.pageItems
+          .map((item) => (item.type === "group" ? renderResourceGroupCard(item) : renderResourceCard(item)))
+          .join("");
+      }
+      renderPagination(paginationEl, state.currentPage, state.totalPages, (page) => {
+        paginator.goToPage(page);
+      });
+    },
+  });
+
+  window.__resourcesPaginator = paginator;
+
+  // Wire up filter sidebar
+  document.querySelectorAll("#resource-tag-filters .sidebar-tag").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const tag = btn.getAttribute("data-tag") || "";
+      document.querySelectorAll("#resource-tag-filters .sidebar-tag").forEach((b) =>
+        b.classList.toggle("active", b.getAttribute("data-tag") === tag)
+      );
+      paginator.setFilter("tag", tag || "");
+    });
+  });
+
+  // Wire up tag expand button (kept inline since it's just UI toggle)
+  const expandBtn = document.getElementById("resource-tag-expand-btn");
+  if (expandBtn) {
+    const textEl = document.getElementById("resource-tag-expand-text");
+    const arrowEl = document.getElementById("resource-tag-expand-arrow");
+    const collapsedTags = document.querySelectorAll(".sidebar-tag-collapsed");
+    let expanded = false;
+    expandBtn.addEventListener("click", () => {
+      expanded = !expanded;
+      collapsedTags.forEach((el) => el.classList.toggle("expanded", expanded));
+      if (textEl) textEl.textContent = expanded ? "收起" : `展开全部 (${collapsedTags.length + 5} 个标签)`;
+      if (arrowEl) arrowEl.classList.toggle("open", expanded);
+    });
+  }
+
+  // Restore UI state from URL
+  const params = new URLSearchParams(window.location.search);
+  const initTag = params.get("tag") || "";
+  if (initTag) {
+    document.querySelectorAll("#resource-tag-filters .sidebar-tag").forEach((b) =>
+      b.classList.toggle("active", b.getAttribute("data-tag") === initTag)
+    );
+  }
+</script>
+
+<script type="application/json" id="resources-posts-data" set:html={JSON.stringify(resourceItems)}></script>

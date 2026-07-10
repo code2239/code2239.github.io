@@ -26,7 +26,7 @@ const categories = [
   { value: "research", label: "研究记录", count: categoryCounts.research || 0 },
 ];
 
-// Group notes by date
+// Group notes by date for calendar
 const dateMap = new Map<string, NoteDateInfo[]>();
 noteDatesInfo.forEach((info) => {
   const existing = dateMap.get(info.date) || [];
@@ -34,7 +34,6 @@ noteDatesInfo.forEach((info) => {
   dateMap.set(info.date, existing);
 });
 
-// Build data for calendar: selectedHolidays (visual markers) + popups (hover tooltips)
 const holidayDates: string[] = [...dateMap.keys()];
 
 const popups: Record<string, { modifier: string; html: string }> = {};
@@ -112,10 +111,7 @@ const newestDate =
 <style is:global>
   /* ==============================================
      Vanilla Calendar Pro — Custom Theme
-     Matches project design tokens
      ============================================== */
-
-  /* Root calendar wrapper */
   .vc {
     background: var(--color-bg-secondary) !important;
     border-radius: 10px !important;
@@ -123,24 +119,15 @@ const newestDate =
     min-width: unset !important;
     color: var(--color-text) !important;
   }
-
-  /* Focus ring */
   .vc [tabindex="0"]:focus-visible,
   .vc button:focus-visible,
   .vc:focus-visible {
     outline-color: var(--color-accent) !important;
     outline-offset: -1px;
   }
-
-  /* Header area — month/year label */
-  .vc-header {
-    margin-bottom: 0.5rem !important;
-  }
-  .vc-header__content {
-    gap: 0.25rem;
-  }
-  .vc-month,
-  .vc-year {
+  .vc-header { margin-bottom: 0.5rem !important; }
+  .vc-header__content { gap: 0.25rem; }
+  .vc-month, .vc-year {
     color: var(--color-text) !important;
     font-size: 0.8125rem !important;
     font-weight: 600 !important;
@@ -149,16 +136,8 @@ const newestDate =
     padding: 0.125rem 0.25rem !important;
     line-height: 1.25rem !important;
   }
-  .vc-month:hover,
-  .vc-year:hover {
-    color: var(--color-accent) !important;
-  }
-  .vc-month:disabled,
-  .vc-year:disabled {
-    color: var(--color-text-tertiary) !important;
-  }
-
-  /* Arrow buttons */
+  .vc-month:hover, .vc-year:hover { color: var(--color-accent) !important; }
+  .vc-month:disabled, .vc-year:disabled { color: var(--color-text-tertiary) !important; }
   .vc-arrow {
     background-color: transparent !important;
     height: 1.25rem !important;
@@ -170,11 +149,7 @@ const newestDate =
   .vc-arrow:before {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%231b1b18' d='M12 16c-.3 0-.5-.1-.7-.3l-6-6c-.4-.4-.4-1 0-1.4s1-.4 1.4 0l5.3 5.3 5.3-5.3c.4-.4 1-.4 1.4 0s.4 1 0 1.4l-6 6c-.2.2-.4.3-.7.3'/%3E%3C/svg%3E") !important;
   }
-
-  /* Weekday headers */
-  .vc-week {
-    margin-bottom: 0.25rem !important;
-  }
+  .vc-week { margin-bottom: 0.25rem !important; }
   .vc-week__day {
     color: var(--color-text-tertiary) !important;
     font-size: 10px !important;
@@ -182,8 +157,6 @@ const newestDate =
     min-width: unset !important;
     width: 100%;
   }
-
-  /* Date buttons */
   .vc-date__btn {
     background: transparent !important;
     color: var(--color-text) !important;
@@ -197,29 +170,20 @@ const newestDate =
   .vc-date__btn:hover {
     background: color-mix(in srgb, var(--color-accent) 8%, transparent) !important;
   }
-
-  /* Today */
   .vc-date[data-vc-date-today] .vc-date__btn {
     color: var(--color-accent) !important;
     font-weight: 700 !important;
     background: var(--color-accent-soft) !important;
   }
-
-  /* Other-month dates */
   .vc-date[data-vc-date-month="prev"] .vc-date__btn,
   .vc-date[data-vc-date-month="next"] .vc-date__btn {
-    opacity: 0.25;
-    pointer-events: none;
+    opacity: 0.25; pointer-events: none;
   }
-
-  /* Selected date */
   .vc-date[data-vc-date-selected] .vc-date__btn {
     background: var(--color-accent) !important;
     color: #fff !important;
     font-weight: 600 !important;
   }
-
-  /* Holiday / note dates — accent-colored dot indicator */
   .vc-date[data-vc-date-holiday] .vc-date__btn {
     color: var(--color-text) !important;
     font-weight: 600 !important;
@@ -228,31 +192,19 @@ const newestDate =
   .vc-date[data-vc-date-holiday] .vc-date__btn::after {
     content: "";
     position: absolute;
-    bottom: 2px;
-    left: 50%;
+    bottom: 2px; left: 50%;
     transform: translateX(-50%);
-    width: 3.5px;
-    height: 3.5px;
+    width: 3.5px; height: 3.5px;
     border-radius: 50%;
     background: var(--color-accent);
   }
   .vc-date[data-vc-date-holiday] .vc-date__btn:hover {
     background: color-mix(in srgb, var(--color-accent) 15%, transparent) !important;
   }
-  .vc-date[data-vc-date-holiday][data-vc-date-selected] .vc-date__btn::after {
-    background: #fff;
-  }
+  .vc-date[data-vc-date-holiday][data-vc-date-selected] .vc-date__btn::after { background: #fff; }
   .vc-date[data-vc-date-holiday][data-vc-date-selected] .vc-date__btn {
-    background: var(--color-accent) !important;
-    color: #fff !important;
+    background: var(--color-accent) !important; color: #fff !important;
   }
-  .vc-date[data-vc-date-holiday][data-vc-date-month="prev"] .vc-date__btn,
-  .vc-date[data-vc-date-holiday][data-vc-date-month="next"] .vc-date__btn {
-    opacity: 0.25;
-    pointer-events: none;
-  }
-
-  /* Popups */
   .vc-date__popup {
     background: var(--color-bg) !important;
     color: var(--color-text) !important;
@@ -268,12 +220,6 @@ const newestDate =
     bottom: calc(100% + 4px) !important;
     top: auto !important;
   }
-  .vc-date__popup:hover {
-    opacity: 1;
-    pointer-events: auto;
-  }
-
-  /* Popup note links */
   .cal-popup-link {
     display: block;
     color: var(--color-text-secondary);
@@ -285,23 +231,10 @@ const newestDate =
     font-size: 0.6875rem;
     transition: color 0.15s;
   }
-  .cal-popup-link:hover {
-    color: var(--color-accent);
-  }
-
-  /* Content/grid */
-  .vc-content {
-    flex-grow: 1;
-  }
-  .vc-dates {
-    gap: 1px;
-  }
-  .vc-date {
-    padding-top: 0.0625rem !important;
-    padding-bottom: 0.0625rem !important;
-  }
-
-  /* Hide time controls (not needed) */
+  .cal-popup-link:hover { color: var(--color-accent); }
+  .vc-content { flex-grow: 1; }
+  .vc-dates { gap: 1px; }
+  .vc-date { padding-top: 0.0625rem !important; padding-bottom: 0.0625rem !important; }
   .vc-time { display: none !important; }
 </style>
 
@@ -309,82 +242,14 @@ const newestDate =
   import { Calendar } from "vanilla-calendar-pro";
   import "vanilla-calendar-pro/styles/layout.css";
 
-  function initNotesFilter() {
-    const catBtns = document.querySelectorAll<HTMLButtonElement>(".note-cat-btn");
-    const tagBtns = document.querySelectorAll<HTMLButtonElement>(".note-tag-btn");
-    const items = document.querySelectorAll<HTMLElement>(".note-item");
-    const emptyEl = document.getElementById("notes-filter-empty");
-    const calClear = document.getElementById("cal-clear")!;
-
-    let activeCategory = "";
-    let activeTag = "";
-    let activeDate = "";
-
-    function updateVisibility() {
-      let visibleCount = 0;
-      items.forEach((item) => {
-        const itemCategory = item.getAttribute("data-category") || "";
-        const itemTags = item.getAttribute("data-tags") || "";
-        const itemDate = item.getAttribute("data-date") || "";
-        const catMatch = !activeCategory || itemCategory === activeCategory;
-        const tagMatch = !activeTag || itemTags.split(",").includes(activeTag);
-        const dateMatch = !activeDate || itemDate === activeDate;
-        if (catMatch && tagMatch && dateMatch) {
-          item.style.display = "";
-          visibleCount++;
-        } else {
-          item.style.display = "none";
-        }
-      });
-      if (emptyEl) emptyEl.style.display = visibleCount === 0 ? "block" : "none";
-    }
-
-    // Category buttons
-    catBtns.forEach((btn) => {
-      btn.addEventListener("click", () => {
-        activeCategory = btn.getAttribute("data-category") || "";
-        catBtns.forEach((b) =>
-          b.classList.toggle("active", b.getAttribute("data-category") === activeCategory)
-        );
-        const url = new URL(window.location.href);
-        activeCategory
-          ? url.searchParams.set("category", activeCategory)
-          : url.searchParams.delete("category");
-        window.history.replaceState({}, "", url.toString());
-        updateVisibility();
-      });
-    });
-
-    // Tag buttons
-    tagBtns.forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const tag = btn.getAttribute("data-tag") || "";
-        if (activeTag === tag) {
-          activeTag = "";
-          tagBtns.forEach((b) => b.classList.remove("active"));
-        } else {
-          activeTag = tag;
-          tagBtns.forEach((b) =>
-            b.classList.toggle("active", b.getAttribute("data-tag") === activeTag)
-          );
-        }
-        const url = new URL(window.location.href);
-        activeTag
-          ? url.searchParams.set("tag", activeTag)
-          : url.searchParams.delete("tag");
-        window.history.replaceState({}, "", url.toString());
-        updateVisibility();
-      });
-    });
-
-    // ===== Vanilla Calendar Pro =====
+  function initNotesCalendar() {
     const calContainer = document.getElementById("notes-calendar")!;
     const calData = JSON.parse(calContainer.dataset.cal || "{}");
-    const popups: Record<string, { modifier: string; html: string }> = calData.popups || {};
-    const holidayDates: string[] = calData.holidayDates || [];
+    const popups = calData.popups || {};
+    const holidayDates = calData.holidayDates || [];
+    const calClear = document.getElementById("cal-clear")!;
 
-    // Determine initial month from newest note date
-    let initYear: number, initMonth: number;
+    let initYear, initMonth;
     if (calData.newestDate) {
       const [y, m] = calData.newestDate.split("-");
       initYear = parseInt(y);
@@ -397,25 +262,19 @@ const newestDate =
 
     const calendar = new Calendar("#notes-calendar", {
       type: "default",
-      firstWeekday: 1, // Monday first
+      firstWeekday: 1,
       displayDatesOutside: false,
       selectionDatesMode: "single",
       enableDateToggle: true,
       selectedTheme: "light",
-      selectedMonth: initMonth as 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11,
+      selectedMonth: initMonth,
       selectedYear: initYear,
-      selectedHolidays: holidayDates as string[],
+      selectedHolidays: holidayDates,
       popups: popups,
       locale: {
         months: {
-          long: [
-            "一月", "二月", "三月", "四月", "五月", "六月",
-            "七月", "八月", "九月", "十月", "十一月", "十二月",
-          ],
-          short: [
-            "1月", "2月", "3月", "4月", "5月", "6月",
-            "7月", "8月", "9月", "10月", "11月", "12月",
-          ],
+          long: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
+          short: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"],
         },
         weekdays: {
           long: ["周一", "周二", "周三", "周四", "周五", "周六", "周日"],
@@ -441,63 +300,39 @@ const newestDate =
         `,
       },
       onClickDate: (_self, _event) => {
-        // Use microtask to read selectedDates after the library updates context
         queueMicrotask(() => {
           const dates = calendar.context.selectedDates;
-          activeDate = dates.length > 0 ? dates[0] : "";
+          const activeDate = dates.length > 0 ? dates[0] : "";
           calClear.classList.toggle("hidden", !activeDate);
-          const url = new URL(window.location.href);
-          activeDate
-            ? url.searchParams.set("date", activeDate)
-            : url.searchParams.delete("date");
-          window.history.replaceState({}, "", url.toString());
-          updateVisibility();
+
+          if (window.__notesPaginator) {
+            window.__notesPaginator.setFilter("date", activeDate);
+          }
         });
       },
     });
     calendar.init();
 
-    // Clear button
     calClear.addEventListener("click", () => {
-      // Deselect all dates
       calendar.update({ selectedDates: [] });
-      activeDate = "";
       calClear.classList.add("hidden");
-      const url = new URL(window.location.href);
-      url.searchParams.delete("date");
-      window.history.replaceState({}, "", url.toString());
-      updateVisibility();
+      if (window.__notesPaginator) {
+        window.__notesPaginator.setFilter("date", "");
+      }
     });
 
-    // Handle initial URL params
+    // Handle initial URL date param
     const params = new URLSearchParams(window.location.search);
-    const iCat = params.get("category") || "";
-    const iTag = params.get("tag") || "";
-    const iDate = params.get("date") || "";
-
-    if (iCat) {
-      activeCategory = iCat;
-      catBtns.forEach((b) =>
-        b.classList.toggle("active", b.getAttribute("data-category") === activeCategory)
-      );
-    }
-    if (iTag) {
-      activeTag = iTag;
-      tagBtns.forEach((b) =>
-        b.classList.toggle("active", b.getAttribute("data-tag") === activeTag)
-      );
-    }
-    if (iDate) {
-      activeDate = iDate;
-      calendar.update({ selectedDates: [iDate] });
+    const initDate = params.get("date") || "";
+    if (initDate) {
+      calendar.update({ selectedDates: [initDate] });
       calClear.classList.remove("hidden");
     }
-    updateVisibility();
   }
 
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initNotesFilter);
+    document.addEventListener("DOMContentLoaded", initNotesCalendar);
   } else {
-    initNotesFilter();
+    initNotesCalendar();
   }
 </script>

@@ -1,7 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import Layout from "../../components/Layout.astro";
-import ProjectCard from "../../components/ProjectCard.astro";
+import Pagination from "../../components/Pagination.astro";
 
 const allProjects = await getCollection("projects");
 
@@ -25,6 +25,53 @@ const sortedRoot = rootProjects.sort(
 );
 
 const groupEntries = [...groups.entries()];
+
+// Build flat item list for pagination
+const projectItems: Array<{
+  type: "group" | "project";
+  title: string;
+  date: string;
+  dateRange?: string;
+  summary: string;
+  tags: string[];
+  href: string;
+  image?: string;
+  github?: string;
+  demo?: string;
+  itemCount?: number;
+}> = [];
+
+for (const [groupName, items] of groupEntries) {
+  const sorted = items.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+  const dates = sorted.map((i) => i.data.date);
+  const earliest = dates.sort()[0];
+  const latest = dates.sort().reverse()[0];
+  const allGroupTags = [...new Set(items.flatMap((i) => i.data.tags))].slice(0, 5);
+  projectItems.push({
+    type: "group",
+    title: groupName.replace(/-/g, " "),
+    date: earliest,
+    dateRange: `${earliest} ~ ${latest}`,
+    summary: sorted[0]?.data.summary || "",
+    tags: allGroupTags,
+    href: `/projects/${groupName}`,
+    itemCount: items.length,
+  });
+}
+
+for (const p of sortedRoot) {
+  projectItems.push({
+    type: "project",
+    title: p.data.title,
+    date: p.data.date,
+    summary: p.data.summary,
+    tags: p.data.tags,
+    href: `/projects/${p.id.replace(/\.md$/, "")}`,
+    image: p.data.image,
+    github: p.data.github,
+    demo: p.data.demo,
+  });
+}
 ---
 
 <Layout title="项目">
@@ -38,61 +85,38 @@ const groupEntries = [...groups.entries()];
       </h1>
       <p class="text-[var(--color-text-secondary)] mb-10">项目作品展示</p>
 
-      {(rootProjects.length + groups.size) > 0 ? (
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-          {groupEntries.map(([groupName, items]) => {
-            const sorted = items.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
-            const dates = sorted.map((i) => i.data.date);
-            const earliest = dates.sort()[0];
-            const latest = dates.sort().reverse()[0];
-            const firstSummary = sorted[0]?.data.summary || "";
-            const displayName = groupName.replace(/-/g, " ");
-            const allTags = [...new Set(items.flatMap((i) => i.data.tags))].slice(0, 5);
-            return (
-              <div class="fade-in h-full">
-                <article class="card-hover overflow-hidden h-full flex flex-col">
-                  <a href={`/projects/${groupName}`} class="no-underline flex flex-col h-full group">
-                    <div class="aspect-[16/9] bg-gradient-to-br from-[var(--color-accent-soft)] to-[var(--color-bg-tertiary)] flex items-center justify-center relative">
-                      <svg class="w-14 h-14 text-[var(--color-accent)]/30" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M10 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/>
-                      </svg>
-                      <span class="absolute bottom-4 right-4 text-xs font-mono text-[var(--color-text-tertiary)] bg-[var(--color-bg)]/80 px-2 py-1 rounded">
-                        {items.length} 篇文章
-                      </span>
-                    </div>
-                    <div class="p-5 flex flex-col flex-1">
-                      <h3 class="text-base font-semibold mb-1 text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors capitalize">
-                        {displayName}
-                      </h3>
-                      <p class="text-xs text-[var(--color-text-tertiary)] mb-2">{earliest} ~ {latest}</p>
-                      <p class="text-[var(--color-text-secondary)] text-sm leading-relaxed line-clamp-2">
-                        {firstSummary}
-                      </p>
-                    </div>
-                  </a>
-                </article>
-              </div>
-            );}
-          )}
+      <div id="projects-list" class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <p class="text-center text-[var(--color-text-tertiary)] py-4 col-span-2">加载中…</p>
+      </div>
 
-          {sortedRoot.map((project) => (
-            <div class="fade-in h-full">
-              <ProjectCard
-                title={project.data.title}
-                date={project.data.date}
-                summary={project.data.summary}
-                tags={project.data.tags}
-                image={project.data.image}
-                github={project.data.github}
-                demo={project.data.demo}
-                href={`/projects/${project.id.replace(/\.md$/, "")}`}
-              />
-            </div>
-          ))}
-        </div>
-      ) : (
-        <p class="text-center text-[var(--color-text-tertiary)] py-12">暂无项目。</p>
-      )}
+      <Pagination />
     </div>
   </div>
 </Layout>
+
+<script>
+  import { createPaginator, renderPagination } from "../../lib/list-paginator.js";
+  import { renderProjectCard } from "../../lib/card-renderers.js";
+
+  const dataScript = document.getElementById("projects-posts-data");
+  const allItems = JSON.parse(dataScript?.textContent || "[]");
+
+  const container = document.getElementById("projects-list");
+  const paginationEl = document.getElementById("pagination");
+
+  const paginator = createPaginator({
+    items: allItems,
+    pageSize: 10,
+    filterDefs: {},
+    onStateChange(state) {
+      container.innerHTML = state.pageItems.map(renderProjectCard).join("");
+      renderPagination(paginationEl, state.currentPage, state.totalPages, (page) => {
+        paginator.goToPage(page);
+      });
+    },
+  });
+
+  window.__projectsPaginator = paginator;
+</script>
+
+<script type="application/json" id="projects-posts-data" set:html={JSON.stringify(projectItems)}></script>

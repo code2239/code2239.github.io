@@ -1,6 +1,6 @@
 ---
 // Blog sidebar: composes search, category nav, and tag filter.
-// To remove a feature: delete its import + its folder in src/features/blog/
+// Filter logic is now handled by list-paginator.js in the page.
 import type { FlatNode } from "../lib/categoryTree";
 import BlogSearch from "../features/blog/BlogSearch.astro";
 import CategoryNav from "../features/blog/CategoryNav.astro";
@@ -23,13 +23,3 @@ const { allTags, totalPosts, categoryNodes } = Astro.props;
 <BlogSearch />
 <CategoryNav nodes={categoryNodes} />
 <TagFilter tags={allTags} totalPosts={totalPosts} />
-
-<script>
-  import { initFilter } from '../features/blog/filter-controller.js';
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initFilter);
-  } else {
-    initFilter();
-  }
-</script>

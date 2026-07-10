@@ -2,7 +2,7 @@
 // src/pages/blog/category/[...slug].astro
 import { getCollection } from "astro:content";
 import BlogLayout from "../../../layouts/BlogLayout.astro";
-import ArticleCard from "../../../components/ArticleCard.astro";
+import Pagination from "../../../components/Pagination.astro";
 import { flatCategories, buildCategoryTree, flattenTree } from "../../../lib/categoryTree";
 
 export async function getStaticPaths() {
@@ -51,6 +51,15 @@ const breadcrumbs = slugParts.map((part, i) => {
 });
 
 const subcategories = cat.children ?? [];
+
+// Serialize post data for client-side pagination + filtering
+const postsData = posts.map((p) => ({
+  title: p.data.title,
+  date: p.data.date,
+  summary: p.data.summary,
+  tags: p.data.tags,
+  href: `/blog/${p.id.replace(/\.md$/, "")}`,
+}));
 ---
 
 <BlogLayout title={`${cat.label} — 分类`} allTags={allTags} totalPosts={allPosts.length} categoryNodes={categoryNodes}>
@@ -98,19 +107,92 @@ const subcategories = cat.children ?? [];
     {posts.length === 0 ? (
       <p class="text-[var(--color-text-tertiary)] py-8 text-center">该分类下暂无文章。</p>
     ) : (
-      <div class="flex flex-col gap-4">
-        {posts.map((post) => (
-          <div class="post-item" data-tags={post.data.tags.join(",")}>
-            <ArticleCard
-              title={post.data.title}
-              date={post.data.date}
-              summary={post.data.summary}
-              tags={post.data.tags}
-              href={`/blog/${post.id.replace(/\.md$/, "")}`}
-            />
-          </div>
-        ))}
+      <div id="blog-list" class="flex flex-col gap-4">
+        <p class="text-center text-[var(--color-text-tertiary)] py-4">加载中…</p>
       </div>
     )}
+
+    <p id="filter-empty" class="text-center text-[var(--color-text-tertiary)] py-12" style="display: none;">
+      没有找到匹配标签的文章。
+    </p>
+
+    <Pagination />
   </section>
 </BlogLayout>
+
+<script>
+  import { createPaginator, renderPagination } from "../../../lib/list-paginator.js";
+  import { renderBlogCard } from "../../../lib/card-renderers.js";
+
+  const dataScript = document.getElementById("category-posts-data");
+  const allPosts = JSON.parse(dataScript?.textContent || "[]");
+
+  const container = document.getElementById("blog-list");
+  const paginationEl = document.getElementById("pagination");
+  const emptyEl = document.getElementById("filter-empty");
+  const searchInput = document.getElementById("post-search");
+  const clearBtn = document.getElementById("search-clear");
+
+  const paginator = createPaginator({
+    items: allPosts,
+    pageSize: 10,
+    filterDefs: {
+      tag: (item, value) => item.tags.includes(value),
+    },
+    onStateChange(state) {
+      if (state.pageItems.length === 0) {
+        container.innerHTML = "";
+        emptyEl.style.display = "block";
+      } else {
+        emptyEl.style.display = "none";
+        container.innerHTML = state.pageItems.map(renderBlogCard).join("");
+      }
+      renderPagination(paginationEl, state.currentPage, state.totalPages, (page) => {
+        paginator.goToPage(page);
+      });
+    },
+  });
+
+  window.__blogPaginator = paginator;
+
+  // Wire up filter sidebar
+  document.querySelectorAll(".sidebar-tag").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const tag = btn.getAttribute("data-tag") || "";
+      document.querySelectorAll(".sidebar-tag").forEach((b) =>
+        b.classList.toggle("active", b === btn)
+      );
+      paginator.setFilter("tag", tag || "");
+    });
+  });
+
+  if (searchInput) {
+    searchInput.addEventListener("input", () => {
+      paginator.setFilter("search", searchInput.value.trim());
+      if (clearBtn) clearBtn.style.display = searchInput.value.trim() ? "flex" : "none";
+    });
+  }
+  if (clearBtn) {
+    clearBtn.addEventListener("click", () => {
+      searchInput.value = "";
+      searchInput.focus();
+      clearBtn.style.display = "none";
+      paginator.setFilter("search", "");
+    });
+  }
+
+  const params = new URLSearchParams(window.location.search);
+  const initTag = params.get("tag") || "";
+  const initSearch = params.get("search") || "";
+  if (initSearch && searchInput) {
+    searchInput.value = initSearch;
+    if (clearBtn) clearBtn.style.display = "flex";
+  }
+  if (initTag) {
+    document.querySelectorAll(".sidebar-tag").forEach((b) =>
+      b.classList.toggle("active", b.getAttribute("data-tag") === initTag)
+    );
+  }
+</script>
+
+<script type="application/json" id="category-posts-data" set:html={JSON.stringify(postsData)}></script>

@@ -1,7 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import BlogLayout from "../../layouts/BlogLayout.astro";
-import ArticleCard from "../../components/ArticleCard.astro";
+import Pagination from "../../components/Pagination.astro";
 import { buildCategoryTree, flattenTree } from "../../lib/categoryTree";
 import { getTagCounts } from "../../lib/tagUtils";
 
@@ -17,27 +17,114 @@ const allTags = getTagCounts(posts);
 const categoryNodes = flattenTree(
   buildCategoryTree(posts.map((p) => ({ categories: p.data.categories ?? [] })))
 );
+
+// Serialize post data for client-side pagination + filtering
+const postsData = sortedPosts.map((p) => ({
+  title: p.data.title,
+  date: p.data.date,
+  summary: p.data.summary,
+  tags: p.data.tags,
+  href: `/blog/${p.id.replace(/\.md$/, "")}`,
+}));
 ---
 
 <BlogLayout allTags={allTags} totalPosts={posts.length} categoryNodes={categoryNodes}>
   <h1 class="text-3xl font-semibold mb-2">博客 <span class="text-[var(--color-text-tertiary)] text-xl font-normal">({posts.length} 篇)</span></h1>
   <p class="text-[var(--color-text-secondary)] mb-10">技术文章与思考笔记</p>
 
-  <div class="flex flex-col gap-4">
-    {sortedPosts.map((post) => (
-      <div class="post-item" data-tags={post.data.tags.join(",")}>
-        <ArticleCard
-          title={post.data.title}
-          date={post.data.date}
-          summary={post.data.summary}
-          tags={post.data.tags}
-          href={`/blog/${post.id.replace(/\.md$/, "")}`}
-        />
-      </div>
-    ))}
+  <div id="blog-list" class="flex flex-col gap-4">
+    <!-- Populated by paginator.js -->
+    <p class="text-center text-[var(--color-text-tertiary)] py-4">加载中…</p>
   </div>
 
   <p id="filter-empty" class="text-center text-[var(--color-text-tertiary)] py-12" style="display: none;">
     没有找到匹配标签的文章。
   </p>
+
+  <Pagination />
 </BlogLayout>
+
+<script>
+  import { createPaginator, renderPagination } from "../../lib/list-paginator.js";
+  import { renderBlogCard } from "../../lib/card-renderers.js";
+
+  // Parse embedded data
+  const dataScript = document.getElementById("blog-posts-data");
+  const allPosts = JSON.parse(dataScript?.textContent || "[]");
+
+  const container = document.getElementById("blog-list");
+  const paginationEl = document.getElementById("pagination");
+  const emptyEl = document.getElementById("filter-empty");
+  const searchInput = document.getElementById("post-search");
+  const clearBtn = document.getElementById("search-clear");
+
+  const paginator = createPaginator({
+    items: allPosts,
+    pageSize: 10,
+    filterDefs: {
+      tag: (item, value) => item.tags.includes(value),
+    },
+    onStateChange(state) {
+      // Render cards
+      if (state.pageItems.length === 0) {
+        container.innerHTML = "";
+        emptyEl.style.display = "block";
+      } else {
+        emptyEl.style.display = "none";
+        container.innerHTML = state.pageItems.map(renderBlogCard).join("");
+      }
+
+      // Render pagination
+      renderPagination(paginationEl, state.currentPage, state.totalPages, (page) => {
+        paginator.goToPage(page);
+      });
+    },
+  });
+
+  // Expose for filter sidebar buttons
+  window.__blogPaginator = paginator;
+
+  // ===== Wire up filter sidebar =====
+  // Tag buttons
+  document.querySelectorAll(".sidebar-tag").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const tag = btn.getAttribute("data-tag") || "";
+      document.querySelectorAll(".sidebar-tag").forEach((b) =>
+        b.classList.toggle("active", b === btn)
+      );
+      paginator.setFilter("tag", tag || "");
+    });
+  });
+
+  // Search input
+  if (searchInput) {
+    searchInput.addEventListener("input", () => {
+      paginator.setFilter("search", searchInput.value.trim());
+      if (clearBtn) clearBtn.style.display = searchInput.value.trim() ? "flex" : "none";
+    });
+  }
+  if (clearBtn) {
+    clearBtn.addEventListener("click", () => {
+      searchInput.value = "";
+      searchInput.focus();
+      clearBtn.style.display = "none";
+      paginator.setFilter("search", "");
+    });
+  }
+
+  // Restore UI state from URL on load
+  const params = new URLSearchParams(window.location.search);
+  const initTag = params.get("tag") || "";
+  const initSearch = params.get("search") || "";
+  if (initSearch && searchInput) {
+    searchInput.value = initSearch;
+    if (clearBtn) clearBtn.style.display = "flex";
+  }
+  if (initTag) {
+    document.querySelectorAll(".sidebar-tag").forEach((b) =>
+      b.classList.toggle("active", b.getAttribute("data-tag") === initTag)
+    );
+  }
+</script>
+
+<script type="application/json" id="blog-posts-data" set:html={JSON.stringify(postsData)}></script>

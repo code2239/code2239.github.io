@@ -1,7 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import Layout from "../../components/Layout.astro";
-import ArticleCard from "../../components/ArticleCard.astro";
+import Pagination from "../../components/Pagination.astro";
 import NotesFilter from "../../features/notes/NotesFilter.astro";
 
 const notes = await getCollection("notes");
@@ -30,6 +30,16 @@ const noteDatesInfo = notes.map((n) => ({
   title: n.data.title,
   slug: n.id.replace(/\.md$/, ""),
 }));
+
+// Serialize note data for client-side pagination + filtering
+const notesData = sortedNotes.map((n) => ({
+  title: n.data.title,
+  date: n.data.date,
+  summary: n.data.summary,
+  tags: n.data.tags,
+  category: n.data.category || "",
+  href: `/notes/${n.id.replace(/\.md$/, "")}`,
+}));
 ---
 
 <Layout
@@ -55,32 +65,15 @@ const noteDatesInfo = notes.map((n) => ({
         </h1>
         <p class="text-[var(--color-text-secondary)] mb-10">每日日记与学习记录</p>
 
-        {notes.length > 0 ? (
-          <div class="flex flex-col gap-4">
-            {sortedNotes.map((note) => (
-              <div
-                class="note-item"
-                data-category={note.data.category || ""}
-                data-tags={note.data.tags.join(",")}
-                data-date={note.data.date}
-              >
-                <ArticleCard
-                  title={note.data.title}
-                  date={note.data.date}
-                  summary={note.data.summary}
-                  tags={note.data.tags}
-                  href={`/notes/${note.id.replace(/\.md$/, "")}`}
-                />
-              </div>
-            ))}
-          </div>
-        ) : (
-          <p class="text-center text-[var(--color-text-tertiary)] py-12">暂无笔记。</p>
-        )}
+        <div id="notes-list" class="flex flex-col gap-4">
+          <p class="text-center text-[var(--color-text-tertiary)] py-4">加载中…</p>
+        </div>
 
         <p id="notes-filter-empty" class="text-center text-[var(--color-text-tertiary)] py-12" style="display: none;">
           没有找到匹配的笔记。
         </p>
+
+        <Pagination />
       </div>
     </div>
   </div>
@@ -101,3 +94,86 @@ const noteDatesInfo = notes.map((n) => ({
     .blog-sidebar { margin-bottom: 0; }
   }
 </style>
+
+<script>
+  import { createPaginator, renderPagination } from "../../lib/list-paginator.js";
+  import { renderNotesCard } from "../../lib/card-renderers.js";
+
+  const dataScript = document.getElementById("notes-posts-data");
+  const allNotes = JSON.parse(dataScript?.textContent || "[]");
+
+  const container = document.getElementById("notes-list");
+  const paginationEl = document.getElementById("pagination");
+  const emptyEl = document.getElementById("notes-filter-empty");
+
+  const paginator = createPaginator({
+    items: allNotes,
+    pageSize: 10,
+    filterDefs: {
+      tag: (item, value) => item.tags.includes(value),
+      category: (item, value) => item.category === value,
+      date: (item, value) => item.date === value,
+    },
+    onStateChange(state) {
+      if (state.pageItems.length === 0) {
+        container.innerHTML = "";
+        emptyEl.style.display = "block";
+      } else {
+        emptyEl.style.display = "none";
+        container.innerHTML = state.pageItems.map(renderNotesCard).join("");
+      }
+      renderPagination(paginationEl, state.currentPage, state.totalPages, (page) => {
+        paginator.goToPage(page);
+      });
+    },
+  });
+
+  window.__notesPaginator = paginator;
+
+  // ===== Wire up filter sidebar (category + tag buttons + calendar) =====
+  // Category buttons
+  document.querySelectorAll(".note-cat-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const cat = btn.getAttribute("data-category") || "";
+      document.querySelectorAll(".note-cat-btn").forEach((b) =>
+        b.classList.toggle("active", b.getAttribute("data-category") === cat)
+      );
+      paginator.setFilter("category", cat || "");
+    });
+  });
+
+  // Tag buttons
+  document.querySelectorAll(".note-tag-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const tag = btn.getAttribute("data-tag") || "";
+      // Toggle: clicking active tag deselects it
+      const isActive = btn.classList.contains("active");
+      document.querySelectorAll(".note-tag-btn").forEach((b) => b.classList.remove("active"));
+      if (!isActive) {
+        btn.classList.add("active");
+        paginator.setFilter("tag", tag);
+      } else {
+        paginator.setFilter("tag", "");
+      }
+    });
+  });
+
+  // Calendar is handled below (imported from NotesFilter's inline script)
+
+  // Restore UI state from URL on load
+  const params = new URLSearchParams(window.location.search);
+  const initCat = params.get("category") || "";
+  const initTag = params.get("tag") || "";
+  if (initCat) {
+    document.querySelectorAll(".note-cat-btn").forEach((b) =>
+      b.classList.toggle("active", b.getAttribute("data-category") === initCat)
+    );
+  }
+  if (initTag) {
+    document.querySelectorAll(".note-tag-btn").forEach((b) =>
+      b.classList.toggle("active", b.getAttribute("data-tag") === initTag)
+    );
+  }
+</script>
+
+<script type="application/json" id="notes-posts-data" set:html={JSON.stringify(notesData)}></script>
