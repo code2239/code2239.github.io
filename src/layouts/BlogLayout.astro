@@ -15,22 +15,10 @@ const { title, allTags, totalPosts, categoryNodes } = Astro.props;
 
 <Layout title={title ?? "博客"}>
   <div class="px-6 xl:px-12 pt-12 pb-16">
-    <div class="blog-layout" id="blog-layout">
-      <aside class="blog-sidebar" id="blog-sidebar">
-        <div>
-          <button
-            id="sidebar-collapse-btn"
-            class="sidebar-collapse-btn"
-            aria-label="折叠侧边栏"
-            title="折叠侧边栏"
-          >
-            <svg id="sidebar-collapse-icon" class="w-4 h-4 transition-transform duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <polyline points="15 18 9 12 15 6"/>
-            </svg>
-          </button>
-          <div id="sidebar-content" class="space-y-6">
-            <PostFilter allTags={allTags} totalPosts={totalPosts} categoryNodes={categoryNodes} />
-          </div>
+    <div class="blog-layout">
+      <aside class="blog-sidebar">
+        <div class="sticky top-14 max-h-[calc(100vh-3.5rem)] overflow-y-auto space-y-6">
+          <PostFilter allTags={allTags} totalPosts={totalPosts} categoryNodes={categoryNodes} />
         </div>
       </aside>
       <div class="blog-content">
@@ -41,159 +29,17 @@ const { title, allTags, totalPosts, categoryNodes } = Astro.props;
 </Layout>
 
 <style>
-  .blog-layout {
-    --sidebar-w: 220px;
-    display: grid;
-    grid-template-columns: var(--sidebar-w) 1fr;
-    gap: 0;
-    align-items: start;
-    transition: grid-template-columns 300ms ease;
-  }
-  @media (max-width: 767px) {
-    .blog-layout { display: block; }
-  }
-
-  /* Mobile: normal flow. Desktop: fixed to viewport, JS-controlled left/width */
-  .blog-sidebar {
-    transition: opacity 300ms ease, transform 300ms ease;
-  }
-  @media (min-width: 768px) {
-    .blog-sidebar {
-      position: fixed;
-      top: 57px;
-      z-index: 30;
-      max-height: calc(100vh - 57px);
-      overflow-y: auto;
-    }
-  }
-
-  .blog-sidebar-collapsed {
-    opacity: 0;
-    pointer-events: none;
-  }
-  @media (min-width: 768px) {
-    .blog-sidebar-collapsed {
-      transform: translateX(-12px);
-    }
-  }
-
+  .blog-layout { display: block; }
+  .blog-sidebar { margin-bottom: 2rem; }
   .blog-content { min-width: 0; }
+
   @media (min-width: 768px) {
-    .blog-content {
-      padding-left: 3rem;
-      transition: padding-left 300ms ease;
+    .blog-layout {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 3rem;
+      align-items: start;
     }
-    .blog-layout.no-gap .blog-content {
-      padding-left: 1rem;
-    }
-  }
-
-  /* Collapse button */
-  .sidebar-collapse-btn {
-    position: absolute;
-    top: 0.5rem;
-    right: 0.5rem;
-    z-index: 10;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 1.75rem;
-    height: 1.75rem;
-    border: 1px solid var(--color-border);
-    border-radius: 6px;
-    background: var(--color-bg);
-    color: var(--color-text-tertiary);
-    cursor: pointer;
-    transition: border-color 150ms, color 150ms, opacity 300ms;
-  }
-  .sidebar-collapse-btn:hover {
-    border-color: var(--color-accent);
-    color: var(--color-accent);
-  }
-
-  /* Expand button (shown when collapsed, at the sidebar's left edge) */
-  .sidebar-expand-btn {
-    position: fixed;
-    top: calc(57px + 1rem);
-    z-index: 50;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    width: 1.75rem;
-    height: 1.75rem;
-    border: 1px solid var(--color-border);
-    border-radius: 6px;
-    background: var(--color-bg);
-    color: var(--color-text-tertiary);
-    cursor: pointer;
-    transition: border-color 150ms, color 150ms;
-    box-shadow: var(--shadow-sm);
-  }
-  .sidebar-expand-btn:hover {
-    border-color: var(--color-accent);
-    color: var(--color-accent);
-  }
-  .sidebar-expand-btn.visible {
-    display: flex;
+    .blog-sidebar { margin-bottom: 0; }
   }
 </style>
-
-<script>
-  const layout = document.getElementById("blog-layout")!;
-  const sidebar = document.getElementById("blog-sidebar")!;
-  const collapseBtn = document.getElementById("sidebar-collapse-btn")!;
-  const SIDEBAR_W = 220; // matches --sidebar-w
-
-  // Create expand button
-  const expandBtn = document.createElement("button");
-  expandBtn.className = "sidebar-expand-btn";
-  expandBtn.setAttribute("aria-label", "展开侧边栏");
-  expandBtn.title = "展开侧边栏";
-  expandBtn.innerHTML = `<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>`;
-  document.body.appendChild(expandBtn);
-
-  const STORAGE_KEY = "blog-sidebar-collapsed";
-  const isDesktop = () => window.matchMedia("(min-width: 768px)").matches;
-
-  /** Position the fixed sidebar at the grid container's left edge */
-  function updateSidebarPosition() {
-    if (!isDesktop()) return;
-    const rect = layout.getBoundingClientRect();
-    sidebar.style.left = `${rect.left}px`;
-    sidebar.style.width = `${SIDEBAR_W}px`;
-    expandBtn.style.left = `${rect.left}px`;
-  }
-
-  function collapse() {
-    layout.style.gridTemplateColumns = "0px 1fr";
-    layout.classList.add("no-gap");
-    sidebar.classList.add("blog-sidebar-collapsed");
-    expandBtn.classList.add("visible");
-    localStorage.setItem(STORAGE_KEY, "1");
-    // After grid transition, reposition sidebar (container may have shifted)
-    setTimeout(updateSidebarPosition, 320);
-  }
-
-  function expand() {
-    layout.style.gridTemplateColumns = "";
-    layout.classList.remove("no-gap");
-    sidebar.classList.remove("blog-sidebar-collapsed");
-    expandBtn.classList.remove("visible");
-    localStorage.setItem(STORAGE_KEY, "0");
-    setTimeout(updateSidebarPosition, 320);
-  }
-
-  collapseBtn.addEventListener("click", () => collapse());
-  expandBtn.addEventListener("click", () => expand());
-
-  // Position sidebar on load and resize
-  updateSidebarPosition();
-  window.addEventListener("resize", updateSidebarPosition);
-  // Recalculate after fonts load (may change layout)
-  document.fonts?.ready.then(updateSidebarPosition);
-
-  // Restore state
-  if (localStorage.getItem(STORAGE_KEY) === "1") {
-    collapse();
-  }
-</script>
