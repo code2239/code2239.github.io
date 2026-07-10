@@ -54,13 +54,14 @@ const { title, allTags, totalPosts, categoryNodes } = Astro.props;
   }
 
   .blog-sidebar {
-    overflow: hidden;
+    /* overflow: hidden 会破坏 sticky，已移至 .blog-sidebar-collapsed */
     transition: width 300ms ease, opacity 300ms ease;
   }
 
   .blog-sidebar-collapsed {
     width: 0;
     opacity: 0;
+		overflow: hidden;
   }
   .blog-sidebar-collapsed .sidebar-collapse-btn {
     opacity: 0;
