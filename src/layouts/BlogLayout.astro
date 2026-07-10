@@ -17,7 +17,7 @@ const { title, allTags, totalPosts, categoryNodes } = Astro.props;
   <div class="px-6 xl:px-12 pt-12 pb-16">
     <div class="blog-layout" id="blog-layout">
       <aside class="blog-sidebar" id="blog-sidebar">
-        <div class="sticky top-[57px] max-h-[calc(100vh-57px)] overflow-y-auto relative">
+        <div>
           <button
             id="sidebar-collapse-btn"
             class="sidebar-collapse-btn"
@@ -53,18 +53,28 @@ const { title, allTags, totalPosts, categoryNodes } = Astro.props;
     .blog-layout { display: block; }
   }
 
+  /* Mobile: normal flow. Desktop: fixed to viewport, JS-controlled left/width */
   .blog-sidebar {
-    overflow: hidden;
-    transition: width 300ms ease, opacity 300ms ease;
+    transition: opacity 300ms ease, transform 300ms ease;
+  }
+  @media (min-width: 768px) {
+    .blog-sidebar {
+      position: fixed;
+      top: 57px;
+      z-index: 30;
+      max-height: calc(100vh - 57px);
+      overflow-y: auto;
+    }
   }
 
   .blog-sidebar-collapsed {
-    width: 0;
-    opacity: 0;
-  }
-  .blog-sidebar-collapsed .sidebar-collapse-btn {
     opacity: 0;
     pointer-events: none;
+  }
+  @media (min-width: 768px) {
+    .blog-sidebar-collapsed {
+      transform: translateX(-12px);
+    }
   }
 
   .blog-content { min-width: 0; }
@@ -101,11 +111,10 @@ const { title, allTags, totalPosts, categoryNodes } = Astro.props;
     color: var(--color-accent);
   }
 
-  /* Expand button (shown when collapsed, at the edge) */
+  /* Expand button (shown when collapsed, at the sidebar's left edge) */
   .sidebar-expand-btn {
     position: fixed;
     top: calc(57px + 1rem);
-    left: max(1rem, calc((100vw - 48rem) / 2 + 1rem));
     z-index: 50;
     display: none;
     align-items: center;
@@ -132,11 +141,10 @@ const { title, allTags, totalPosts, categoryNodes } = Astro.props;
 <script>
   const layout = document.getElementById("blog-layout")!;
   const sidebar = document.getElementById("blog-sidebar")!;
-  const content = document.getElementById("sidebar-content")!;
   const collapseBtn = document.getElementById("sidebar-collapse-btn")!;
-  const collapseIcon = document.getElementById("sidebar-collapse-icon") as SVGElement;
+  const SIDEBAR_W = 220; // matches --sidebar-w
 
-  // Create expand button (shown when collapsed)
+  // Create expand button
   const expandBtn = document.createElement("button");
   expandBtn.className = "sidebar-expand-btn";
   expandBtn.setAttribute("aria-label", "展开侧边栏");
@@ -145,6 +153,16 @@ const { title, allTags, totalPosts, categoryNodes } = Astro.props;
   document.body.appendChild(expandBtn);
 
   const STORAGE_KEY = "blog-sidebar-collapsed";
+  const isDesktop = () => window.matchMedia("(min-width: 768px)").matches;
+
+  /** Position the fixed sidebar at the grid container's left edge */
+  function updateSidebarPosition() {
+    if (!isDesktop()) return;
+    const rect = layout.getBoundingClientRect();
+    sidebar.style.left = `${rect.left}px`;
+    sidebar.style.width = `${SIDEBAR_W}px`;
+    expandBtn.style.left = `${rect.left}px`;
+  }
 
   function collapse() {
     layout.style.gridTemplateColumns = "0px 1fr";
@@ -152,6 +170,8 @@ const { title, allTags, totalPosts, categoryNodes } = Astro.props;
     sidebar.classList.add("blog-sidebar-collapsed");
     expandBtn.classList.add("visible");
     localStorage.setItem(STORAGE_KEY, "1");
+    // After grid transition, reposition sidebar (container may have shifted)
+    setTimeout(updateSidebarPosition, 320);
   }
 
   function expand() {
@@ -160,10 +180,17 @@ const { title, allTags, totalPosts, categoryNodes } = Astro.props;
     sidebar.classList.remove("blog-sidebar-collapsed");
     expandBtn.classList.remove("visible");
     localStorage.setItem(STORAGE_KEY, "0");
+    setTimeout(updateSidebarPosition, 320);
   }
 
   collapseBtn.addEventListener("click", () => collapse());
   expandBtn.addEventListener("click", () => expand());
+
+  // Position sidebar on load and resize
+  updateSidebarPosition();
+  window.addEventListener("resize", updateSidebarPosition);
+  // Recalculate after fonts load (may change layout)
+  document.fonts?.ready.then(updateSidebarPosition);
 
   // Restore state
   if (localStorage.getItem(STORAGE_KEY) === "1") {
