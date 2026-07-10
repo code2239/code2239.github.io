@@ -17,7 +17,7 @@ const { title, allTags, totalPosts, categoryNodes } = Astro.props;
   <div class="px-6 xl:px-12 pt-12 pb-16">
     <div class="blog-layout" id="blog-layout">
       <aside class="blog-sidebar" id="blog-sidebar">
-        <div class="sticky top-[57px] max-h-[calc(100vh-57px)] overflow-y-auto relative">
+        <div>
           <button
             id="sidebar-collapse-btn"
             class="sidebar-collapse-btn"
@@ -54,7 +54,11 @@ const { title, allTags, totalPosts, categoryNodes } = Astro.props;
   }
 
   .blog-sidebar {
-    /* overflow: hidden 会破坏 sticky，已移至 .blog-sidebar-collapsed */
+    position: sticky;
+    top: 57px;
+    align-self: start;
+    max-height: calc(100vh - 57px);
+    overflow-y: auto;
     transition: width 300ms ease, opacity 300ms ease;
   }
 
