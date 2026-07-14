@@ -1,0 +1,793 @@
+<!DOCTYPE html><html lang="zh-CN"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="调研范围：MinerU — 上海人工智能实验室（OpenDataLab）开发的开源智能文档解析引擎，PDF 转 Markdown/JSON 的一站式工具。"><meta name="color-scheme" content="light"><!-- Open Graph --><meta property="og:title" content="MinerU调研报告 — 星游寰宇"><meta property="og:description" content="调研范围：MinerU — 上海人工智能实验室（OpenDataLab）开发的开源智能文档解析引擎，PDF 转 Markdown/JSON 的一站式工具。"><meta property="og:url" content="https://code2239.github.io/notes/2026-07-14-MinerU调研报告"><meta property="og:type" content="article"><meta property="og:site_name" content="星游寰宇"><meta property="og:locale" content="zh_CN"><meta property="article:published_time" content="2026-07-14"><meta property="article:tag" content="mineru"><meta property="article:tag" content="pdf"><meta property="article:tag" content="document-parsing"><meta property="article:tag" content="research"><meta property="article:tag" content="report"><meta property="article:tag" content="opendatalab"><!-- Twitter Card --><meta name="twitter:card" content="summary"><meta name="twitter:title" content="MinerU调研报告 — 星游寰宇"><meta name="twitter:description" content="调研范围：MinerU — 上海人工智能实验室（OpenDataLab）开发的开源智能文档解析引擎，PDF 转 Markdown/JSON 的一站式工具。"><!-- Canonical --><link rel="canonical" href="https://code2239.github.io/notes/2026-07-14-MinerU调研报告"><title>MinerU调研报告 — 星游寰宇</title><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="alternate" type="application/rss+xml" title="星游寰宇 RSS" href="/rss.xml"><!-- Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"星游寰宇","url":"https://code2239.github.io","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://code2239.github.io/search?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://code2239.github.io"},{"@type":"ListItem","position":2,"name":"日记","item":"https://code2239.github.io/notes"},{"@type":"ListItem","position":3,"name":"2026 07 14 MinerU调研报告"}]},{"@context":"https://schema.org","@type":"BlogPosting","headline":"MinerU调研报告","description":"调研范围：MinerU — 上海人工智能实验室（OpenDataLab）开发的开源智能文档解析引擎，PDF 转 Markdown/JSON 的一站式工具。","datePublished":"2026-07-14","url":"https://code2239.github.io/notes/2026-07-14-MinerU调研报告","keywords":"mineru, pdf, document-parsing, research, report, opendatalab"}]}</script><link rel="stylesheet" href="/_astro/_slug_.CXDKI3B6.css">
+<style>.back-to-top[data-astro-cid-gzprr2dq]{position:fixed;bottom:2rem;right:2rem;z-index:40;width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:50%;border:1px solid var(--color-border);background:var(--color-bg);color:var(--color-text-secondary);cursor:pointer;box-shadow:var(--shadow-md);transition:opacity .2s ease,transform .2s ease}.back-to-top[data-astro-cid-gzprr2dq]:hover{color:var(--color-accent);border-color:var(--color-accent);transform:translateY(-2px)}.back-to-top[data-astro-cid-gzprr2dq].hidden{opacity:0;pointer-events:none}.copy-btn[data-astro-cid-qqybitij]{position:absolute;top:8px;right:8px;padding:4px 10px;font-size:.6875rem;font-family:var(--font-sans);color:var(--color-text-tertiary);background:var(--color-bg);border:1px solid var(--color-border);border-radius:6px;cursor:pointer;opacity:0;transition:opacity .15s ease,color .15s ease}pre[data-astro-cid-qqybitij]:hover .copy-btn[data-astro-cid-qqybitij]{opacity:1}.copy-btn[data-astro-cid-qqybitij]:hover{color:var(--color-accent);border-color:var(--color-accent)}.copy-btn[data-astro-cid-qqybitij].copied{color:#16a34a;border-color:#16a34a}.blog-layout[data-astro-cid-bvzihdzo]{display:block}.blog-toc[data-astro-cid-bvzihdzo]{display:none}.blog-body[data-astro-cid-bvzihdzo]{min-width:0}@media(min-width:1024px){.blog-layout[data-astro-cid-bvzihdzo]{display:grid;grid-template-columns:14rem 1fr;gap:3rem;align-items:start}.blog-toc[data-astro-cid-bvzihdzo]{display:block}.blog-body[data-astro-cid-bvzihdzo]{padding-right:2rem}}@media(max-width:1023px){.blog-toc[data-astro-cid-bvzihdzo]{display:block;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid var(--color-border)}}
+</style></head> <body class="min-h-screen flex flex-col"> <nav class="sticky top-0 z-40 bg-[var(--color-bg)]/80 backdrop-blur-md border-b border-[var(--color-border)]" data-astro-cid-pux6a34n><div class="max-w-content flex items-center justify-between py-4" data-astro-cid-pux6a34n><a href="/" class="flex items-center gap-2.5 text-base font-semibold no-underline tracking-tight" data-astro-cid-pux6a34n><svg class="w-7 h-7" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" data-astro-cid-pux6a34n><circle cx="16" cy="16" r="15" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-pux6a34n></circle><circle cx="16" cy="16" r="3" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="16" cy="5" r="1.5" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="24" cy="10" r="1" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="8" cy="22" r="1" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="25" cy="21" r="0.8" fill="currentColor" data-astro-cid-pux6a34n></circle></svg>
+星游寰宇
+</a><!-- Desktop nav --><div class="hidden sm:flex items-center gap-5" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>博客</a><a href="/projects" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>项目</a><a href="/notes" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>日记</a><a href="/resources" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>资源</a><a href="/about" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>关于</a><button id="search-trigger" class="flex items-center gap-1.5 text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] bg-[var(--color-bg-secondary)] hover:bg-[var(--color-bg-tertiary)] border border-[var(--color-border)] hover:border-[var(--color-accent)]/30 rounded-lg px-3 py-1.5 cursor-pointer shadow-sm hover:shadow-md transition-all duration-200" aria-label="搜索 (Ctrl+K)" title="搜索 (Ctrl+K)" data-astro-cid-pux6a34n><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-pux6a34n><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" data-astro-cid-pux6a34n></path></svg><span class="hidden lg:inline" data-astro-cid-pux6a34n>搜索</span><kbd class="hidden lg:inline-flex items-center text-[0.625rem] font-mono text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1 py-px rounded" data-astro-cid-pux6a34n>Ctrl+K</kbd></button></div><!-- Mobile hamburger --><button id="menu-btn" class="sm:hidden flex flex-col gap-1 p-2 -mr-2 cursor-pointer" aria-label="打开菜单" data-astro-cid-pux6a34n><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-transform duration-200" data-astro-cid-pux6a34n></span><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-opacity duration-200" data-astro-cid-pux6a34n></span><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-transform duration-200" data-astro-cid-pux6a34n></span></button></div><!-- Mobile menu --><div id="mobile-menu" class="hidden sm:hidden border-t border-[var(--color-border)] bg-[var(--color-bg)]" data-astro-cid-pux6a34n><div class="max-w-content flex flex-col gap-2 py-4" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>博客</a><a href="/projects" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>项目</a><a href="/notes" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>日记</a><a href="/resources" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>资源</a><a href="/about" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>关于</a></div></div></nav>
+    <div id="search-overlay" class="srch-overlay" role="dialog" aria-modal="true" aria-label="全局搜索" data-astro-cid-mn7pezny> <div id="search-backdrop" class="srch-backdrop" data-astro-cid-mn7pezny></div> <div class="srch-panel" id="srch-panel" data-astro-cid-mn7pezny> <!-- Search input --> <div class="srch-input-row" data-astro-cid-mn7pezny> <svg class="srch-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-mn7pezny> <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" data-astro-cid-mn7pezny></path> </svg> <input type="text" id="search-input" class="srch-input" placeholder="搜索文章、项目、日记、资源..." autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="go" data-astro-cid-mn7pezny> <kbd class="srch-kbd" data-astro-cid-mn7pezny>Esc</kbd> </div> <!-- Results area --> <div id="search-results" class="srch-results" data-astro-cid-mn7pezny> <p class="srch-empty" id="search-empty-hint" data-astro-cid-mn7pezny>输入关键词开始搜索</p> </div> <!-- Skeleton loading --> <div id="search-skeleton" class="srch-skeleton" style="display:none;" aria-hidden="true" data-astro-cid-mn7pezny> <div class="srch-skeleton-line" style="width:75%" data-astro-cid-mn7pezny></div> <div class="srch-skeleton-line" style="width:50%" data-astro-cid-mn7pezny></div> <div class="srch-skeleton-line" style="width:60%" data-astro-cid-mn7pezny></div> </div> <!-- Footer hints --> <div class="srch-footer" data-astro-cid-mn7pezny> <div class="srch-footer-hints" data-astro-cid-mn7pezny> <span data-astro-cid-mn7pezny><kbd data-astro-cid-mn7pezny>↑</kbd><kbd data-astro-cid-mn7pezny>↓</kbd> 导航</span> <span data-astro-cid-mn7pezny><kbd data-astro-cid-mn7pezny>↵</kbd> 打开</span> <span data-astro-cid-mn7pezny><kbd data-astro-cid-mn7pezny>Ctrl</kbd>+<kbd data-astro-cid-mn7pezny>K</kbd> 切换</span> </div> <div class="srch-footer-brand" data-astro-cid-mn7pezny>
+powered by Orama
+</div> </div> </div> </div> <script type="module" src="/_astro/Navigation.astro_astro_type_script_index_0_lang.15n1EYJp.js"></script> <main class="flex-1">  <div class="reading-progress" id="reading-progress" style="width: 0%"></div> <script type="module">const o=document.getElementById("reading-progress");if(!o)throw new Error("Reading progress bar element not found");const r=()=>{const n=window.scrollY,e=document.documentElement.scrollHeight-window.innerHeight,t=e>0?n/e*100:0;o.style.width=`${Math.min(t,100)}%`};window.addEventListener("scroll",r,{passive:!0});</script> <button id="back-to-top" class="back-to-top hidden" aria-label="返回顶部" data-astro-cid-gzprr2dq> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-gzprr2dq> <polyline points="18 15 12 9 6 15" data-astro-cid-gzprr2dq></polyline> </svg> </button>  <script type="module">const o=document.getElementById("back-to-top");o&&(window.addEventListener("scroll",()=>{o.classList.toggle("hidden",window.scrollY<400)},{passive:!0}),o.addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"})));</script> <script type="module">document.querySelectorAll("pre").forEach(e=>{const t=document.createElement("button");t.className="copy-btn",t.textContent="复制",t.addEventListener("click",async()=>{const n=e.querySelector("code")?.textContent||e.textContent||"";try{await navigator.clipboard.writeText(n),t.textContent="已复制",t.classList.add("copied"),setTimeout(()=>{t.textContent="复制",t.classList.remove("copied")},2e3)}catch{t.textContent="失败",setTimeout(()=>{t.textContent="复制"},2e3)}}),e.style.position="relative",e.appendChild(t)});</script> <div class="px-6 xl:px-12 pt-12 pb-16" data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <header class="mb-12 text-center" data-astro-cid-bvzihdzo> <h1 class="text-3xl font-semibold mb-3 tracking-tight" data-astro-cid-bvzihdzo>MinerU调研报告</h1> <div class="flex items-center justify-center gap-2 text-[var(--color-text-tertiary)] text-sm" data-astro-cid-bvzihdzo> <time datetime="2026-07-14" data-astro-cid-bvzihdzo>2026-07-14</time> <span class="text-[var(--color-border)]" data-astro-cid-bvzihdzo>·</span> <span data-astro-cid-bvzihdzo>34 分钟阅读</span>  <span class="text-[var(--color-border)]" data-astro-cid-bvzihdzo>·</span> <span class="text-sm text-[var(--color-text-tertiary)]"> <span> mineru<span class="mx-1">·</span> </span><span> pdf<span class="mx-1">·</span> </span><span> document-parsing<span class="mx-1">·</span> </span><span> research<span class="mx-1">·</span> </span><span> report<span class="mx-1">·</span> </span><span> opendatalab </span> </span>  </div> </header> <div class="blog-layout" data-astro-cid-bvzihdzo> <aside class="blog-toc" data-astro-cid-bvzihdzo> <div class="sticky top-14 max-h-[calc(100vh-3.5rem)] overflow-y-auto" data-astro-cid-bvzihdzo> <button id="toc-toggle" class="hidden max-md:flex items-center gap-1 text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-3 cursor-pointer border-none bg-transparent p-0" aria-expanded="false" aria-controls="toc-list" data-astro-cid-bvzihdzo>
+目录
+<svg id="toc-chevron" class="w-3 h-3 transition-transform duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-bvzihdzo><polyline points="6 9 12 15 18 9" data-astro-cid-bvzihdzo></polyline></svg> </button> <span class="text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-3 max-md:hidden" data-astro-cid-bvzihdzo>目录</span> <div id="toc-list" class="max-md:hidden" data-astro-cid-bvzihdzo> <nav class="toc"> <p class="text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-3">目录</p> <ul class="toc-list"> <li class> <a href="#1-开发者与公司背景">1. 开发者与公司背景</a> </li><li class="toc-h3"> <a href="#11-开发方全称">1.1 开发方全称</a> </li><li class="toc-h3"> <a href="#12-创始人背景">1.2 创始人背景</a> </li><li class="toc-h3"> <a href="#13-团队规模">1.3 团队规模</a> </li><li class="toc-h3"> <a href="#14-公司机构背景">1.4 公司/机构背景</a> </li><li class="toc-h3"> <a href="#15-盈利情况">1.5 盈利情况</a> </li><li class> <a href="#2-底层技术栈">2. 底层技术栈</a> </li><li class="toc-h3"> <a href="#21-调用的基础大模型">2.1 调用的基础大模型</a> </li><li class="toc-h3"> <a href="#22-底层深度学习框架">2.2 底层深度学习框架</a> </li><li class="toc-h3"> <a href="#23-技术架构图简化">2.3 技术架构图（简化）</a> </li><li class="toc-h3"> <a href="#24-是否支持用户自己使用-api-调用大模型">2.4 是否支持用户自己使用 API 调用大模型</a> </li><li class> <a href="#3-开源属性与商业模式">3. 开源属性与商业模式</a> </li><li class="toc-h3"> <a href="#31-开源情况">3.1 开源情况</a> </li><li class="toc-h3"> <a href="#32-定价模式">3.2 定价模式</a> </li><li class="toc-h3"> <a href="#33-与-mineru-相关的关键人物">3.3 与 MinerU 相关的关键人物</a> </li><li class> <a href="#4-功能全景解析">4. 功能全景解析</a> </li><li class="toc-h3"> <a href="#41-主要功能一句话概括">4.1 主要功能（一句话概括）</a> </li><li class="toc-h3"> <a href="#42-核心功能与核心技术">4.2 核心功能与核心技术</a> </li><li class> <a href="#5-功能实现案例">5. 功能实现案例</a> </li><li class="toc-h3"> <a href="#案例-1学术论文-pdf-转-markdown">案例 1：学术论文 PDF 转 Markdown</a> </li><li class="toc-h3"> <a href="#案例-2rag-知识库文档预处理">案例 2：RAG 知识库文档预处理</a> </li><li class="toc-h3"> <a href="#案例-3扫描版-pdf-发票识别">案例 3：扫描版 PDF 发票识别</a> </li><li class="toc-h3"> <a href="#参考案例网址">参考案例网址</a> </li><li class> <a href="#6-主要竞品清单">6. 主要竞品清单</a> </li><li class> <a href="#7-与竞品的横向比较表格形式">7. 与竞品的横向比较（表格形式）</a> </li><li class="toc-h3"> <a href="#各竞品最适用的场景">各竞品最适用的场景</a> </li><li class> <a href="#8-版本迭代信息">8. 版本迭代信息</a> </li><li class="toc-h3"> <a href="#首次公开发布">首次公开发布</a> </li><li class="toc-h3"> <a href="#关键版本里程碑">关键版本里程碑</a> </li><li class="toc-h3"> <a href="#更新频率">更新频率</a> </li><li class="toc-h3"> <a href="#增长数据">增长数据</a> </li><li class> <a href="#一句话锐评">一句话锐评</a> </li><li class="toc-h3"> <a href="#对你来说意味着什么">对你来说意味着什么</a> </li> </ul> </nav> </div> </div> </aside> <div class="blog-body" data-astro-cid-bvzihdzo> <div class="prose prose-neutral max-w-none" data-astro-cid-bvzihdzo>   <h1 id="mineru-调研报告">MinerU 调研报告</h1>
+<blockquote>
+<p><strong>调研范围</strong>：MinerU — 上海人工智能实验室（OpenDataLab）开发的开源智能文档解析引擎，PDF 转 Markdown/JSON 的一站式工具。</p>
+</blockquote>
+<hr>
+<h2 id="1-开发者与公司背景">1. 开发者与公司背景</h2>
+<h3 id="11-开发方全称">1.1 开发方全称</h3>
+<ul>
+<li><strong>开发方</strong>：上海人工智能实验室（Shanghai Artificial Intelligence Laboratory）</li>
+<li><strong>项目团队</strong>：<strong>OpenDataLab 团队</strong></li>
+<li><strong>所属国家/地区</strong>：中国·上海</li>
+<li><strong>官网</strong>：<a href="https://www.shlab.org.cn">https://www.shlab.org.cn</a></li>
+</ul>
+<h3 id="12-创始人背景">1.2 创始人背景</h3>
+<p>MinerU 并非个人项目，而是由上海人工智能实验室的 OpenDataLab 团队系统性研发。核心团队成员包括：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>姓名</th><th>角色/贡献</th></tr></thead><tbody><tr><td><strong>王彬 (Bin Wang)</strong></td><td>项目核心负责人</td></tr><tr><td><strong>徐超 (Chao Xu)</strong></td><td>核心开发者</td></tr><tr><td><strong>赵晓萌 (Xiaomeng Zhao)</strong></td><td>核心开发者</td></tr><tr><td><strong>何聪辉 (Conghui He)</strong></td><td>团队负责人</td></tr><tr><td><strong>乔宇 (Yu Qiao)</strong></td><td>上海AI实验室领军科学家</td></tr><tr><td><strong>林达华 (Dahua Lin)</strong></td><td>上海AI实验室领军科学家</td></tr></tbody></table>
+<ul>
+<li><strong>OpenDataLab 官网</strong>：<a href="https://opendatalab.com">https://opendatalab.com</a></li>
+<li><strong>MinerU 项目页</strong>：<a href="https://mineru.net">https://mineru.net</a></li>
+<li><strong>GitHub 仓库</strong>：<a href="https://github.com/opendatalab/MinerU">https://github.com/opendatalab/MinerU</a></li>
+</ul>
+<h3 id="13-团队规模">1.3 团队规模</h3>
+<ul>
+<li>OpenDataLab 团队为上海人工智能实验室内部团队，具体人数未公开</li>
+<li>GitHub 上活跃贡献者约 <strong>50+ 人</strong></li>
+<li>全球社区贡献者超过 <strong>200 人</strong></li>
+</ul>
+<h3 id="14-公司机构背景">1.4 公司/机构背景</h3>
+<p><strong>上海人工智能实验室</strong>（上海AI实验室）是：</p>
+<ul>
+<li>中国国家级人工智能研究机构，成立于 2021 年</li>
+<li>由<strong>上海市政府、上海交通大学、复旦大学、华东师范大学、上海科技大学</strong>等联合发起</li>
+<li>代表项目：
+<ul>
+<li><strong>InternLM</strong>（书生·浦语）— 大语言模型</li>
+<li><strong>InternVL</strong>（书生·万象）— 多模态大模型</li>
+<li><strong>OpenDataLab</strong> — 开放数据平台</li>
+<li><strong>MinerU</strong> — 文档解析工具</li>
+</ul>
+</li>
+</ul>
+<p>MinerU 最初诞生于 InternLM 和 InternVL 的预训练过程——团队在准备训练数据时发现 PDF 解析是最大的瓶颈，于是自己做了 MinerU，没想到成了 GitHub 上火遍全网的项目。</p>
+<h3 id="15-盈利情况">1.5 盈利情况</h3>
+<p>作为国家级研究机构的产品，MinerU 本身<strong>不追求直接盈利</strong>：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>维度</th><th>说明</th></tr></thead><tbody><tr><td><strong>核心工具</strong></td><td><strong>完全免费开源</strong></td></tr><tr><td><strong>收入模式</strong></td><td>通过开放的 API 服务、企业级部署和技术支持探索可持续模式</td></tr><tr><td><strong>战略目标</strong></td><td>推动 AI-Ready 数据的标准化和普及，反哺中国 AI 生态</td></tr><tr><td><strong>资金来源</strong></td><td>上海市政府拨款、国家级科研基金</td></tr></tbody></table>
+<blockquote>
+<p><strong>信息源</strong>：</p>
+<ul>
+<li><a href="https://www.shlab.org.cn">上海人工智能实验室官网</a></li>
+<li><a href="https://github.com/opendatalab/MinerU">MinerU GitHub 仓库</a></li>
+<li><a href="https://mineru.net">MinerU 官网</a></li>
+<li><a href="https://arxiv.org/abs/2505.09666">MinerU 学术论文</a></li>
+<li><a href="https://opendatalab.com">OpenDataLab 平台</a></li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="2-底层技术栈">2. 底层技术栈</h2>
+<blockquote>
+<p>MinerU 是 <strong>AI 赋能的应用软件</strong>，底层依赖多个 AI 模型和深度学习框架。</p>
+</blockquote>
+<h3 id="21-调用的基础大模型">2.1 调用的基础大模型</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>模型</th><th>用途</th><th>说明</th></tr></thead><tbody><tr><td><strong>MinerU2.5-Pro-2604-1.2B</strong></td><td><strong>VLM 主模型</strong>（v3.x 默认）</td><td>自研多模态模型，1.2B 参数，性能超越 Gemini 2.5 Pro 和 GPT-4o</td></tr><tr><td><strong>detectron2</strong></td><td>版面检测（旧版）</td><td>Facebook AI 的检测框架，用于识别标题/段落/图片/表格位置</td></tr><tr><td><strong>PaddleOCR</strong></td><td>文字识别</td><td>百度 OCR 模型，支持 109 种语言</td></tr><tr><td><strong>UniMERNet</strong></td><td>公式识别</td><td>将数学公式转为 LaTeX 格式</td></tr><tr><td><strong>StructTable</strong></td><td>表格识别</td><td>识别并还原表格结构为 HTML 格式</td></tr><tr><td><strong>layoutreader</strong></td><td>阅读顺序排序</td><td>判断文档内容的正确阅读顺序</td></tr><tr><td><strong>doclayout_yolo</strong></td><td>版面元素检测</td><td>YOLO 系列模型，检测文档中的各类元素</td></tr></tbody></table>
+<h3 id="22-底层深度学习框架">2.2 底层深度学习框架</h3>
+<ul>
+<li><strong>PyTorch</strong>：所有模型的核心运行引擎（就是你在安装的那一个）</li>
+<li><strong>ONNX Runtime</strong>：部分模型推理优化</li>
+<li><strong>vLLM / sglang</strong>：大模型推理加速引擎</li>
+</ul>
+<h3 id="23-技术架构图简化">2.3 技术架构图（简化）</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>输入：PDF / DOCX / PPTX / XLSX / 图片</span></span>
+<span class="line"><span>              ↓</span></span>
+<span class="line"><span>      ┌──────────────┐</span></span>
+<span class="line"><span>      │   预处理层     │  ← PyMuPDF / pdfplumber 解析原始文件</span></span>
+<span class="line"><span>      └──────────────┘</span></span>
+<span class="line"><span>              ↓</span></span>
+<span class="line"><span>      ┌──────────────┐</span></span>
+<span class="line"><span>      │   版面分析     │  ← detectron2 / doclayout_yolo 检测区域</span></span>
+<span class="line"><span>      │  (Layout)     │     识别：标题、正文、表格、图片、公式、页眉页脚</span></span>
+<span class="line"><span>      └──────────────┘</span></span>
+<span class="line"><span>              ↓</span></span>
+<span class="line"><span>      ┌──────────────┐</span></span>
+<span class="line"><span>      │   内容识别     │  ← OCR (PaddleOCR) / 公式识别 / 表格识别</span></span>
+<span class="line"><span>      │  (Recognition)│     把每个区域的内容转成文字</span></span>
+<span class="line"><span>      └──────────────┘</span></span>
+<span class="line"><span>              ↓</span></span>
+<span class="line"><span>      ┌──────────────┐</span></span>
+<span class="line"><span>      │   后处理 &#x26;     │  ← 阅读顺序排序、跨页合并、Markdown 组装</span></span>
+<span class="line"><span>      │   Markdown 生成│</span></span>
+<span class="line"><span>      └──────────────┘</span></span>
+<span class="line"><span>              ↓</span></span>
+<span class="line"><span>输出：Markdown / JSON</span></span></code></pre>
+<h3 id="24-是否支持用户自己使用-api-调用大模型">2.4 是否支持用户自己使用 API 调用大模型</h3>
+<p><strong>支持</strong>。MinerU v3.x 提供灵活的模型配置选项：</p>
+<ul>
+<li><strong>内置模型</strong>：默认使用自研的 MinerU2.5-Pro 模型</li>
+<li><strong>替换 VLM 模型</strong>：可以切换为其他 VLM（视觉语言模型）作为解析后端</li>
+<li><strong>纯 pipeline 模式</strong>：可以用传统的版面检测 + OCR 流水线，不依赖大模型</li>
+<li><strong>API 模式</strong>：<code>mineru-open-sdk</code> 支持远程调用 MinerU 云端服务</li>
+</ul>
+<blockquote>
+<p><strong>信息源</strong>：</p>
+<ul>
+<li><a href="https://arxiv.org/abs/2505.09666">MinerU 技术报告</a></li>
+<li><a href="https://neurohive.io/en/state-of-the-art/mineru2-5-open-source-1-2b-model-for-pdf-parsing-outperforms-gemini-2-5-pro-on-benchmarks/">MinerU 2.5 模型发布</a></li>
+<li><a href="https://cloud.tencent.com.cn/developer/article/2663052">MinerU v3.0 更新日志</a></li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="3-开源属性与商业模式">3. 开源属性与商业模式</h2>
+<h3 id="31-开源情况">3.1 开源情况</h3>
+<p>MinerU 的开源协议经历了一次重要演变：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>时期</th><th>许可协议</th><th>原因</th></tr></thead><tbody><tr><td><strong>v0.x - v1.x</strong>（2024.07 - 2025.05）</td><td><strong>AGPL-3.0</strong></td><td>因依赖 PyMuPDF（AGPL 协议）被迫使用</td></tr><tr><td><strong>v2.0+</strong>（2025.06+）</td><td><strong>MinerU 开源协议</strong>（基于 Apache 2.0 修改）</td><td>完全去除 PyMuPDF 依赖，协议更宽松</td></tr><tr><td><strong>v3.1.0+</strong>（2026.04+）</td><td><strong>继续使用 Apache 2.0 基础协议</strong></td><td>进一步降低商用门槛</td></tr></tbody></table>
+<p><strong>当前协议要点：</strong></p>
+<ul>
+<li>✅ 个人使用、研究、教育：完全免费</li>
+<li>✅ 中小企业集成到产品中：无需额外授权</li>
+<li>✅ 可修改、可分发、可做二次开发</li>
+<li>⚠️ 超大规模商业实体（MAU > 1 亿或月收入 > $2000 万）需联系获取商业授权</li>
+<li>⚠️ 第三方在线服务平台需联系获取商业授权</li>
+</ul>
+<h3 id="32-定价模式">3.2 定价模式</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>方案</th><th>价格</th><th>说明</th></tr></thead><tbody><tr><td><strong>MinerU 开源版</strong></td><td><strong>完全免费</strong></td><td>本地部署，自备硬件</td></tr><tr><td><strong>MinerU API 服务</strong></td><td><strong>免费额度 + 按量付费</strong></td><td>云端调用，无需本地 GPU</td></tr><tr><td><strong>企业部署方案</strong></td><td><strong>联系报价</strong></td><td>定制化部署、私有化、技术支持</td></tr><tr><td><strong>桌面客户端</strong></td><td><strong>免费</strong></td><td>Windows / macOS / Linux 即装即用</td></tr></tbody></table>
+<h3 id="33-与-mineru-相关的关键人物">3.3 与 MinerU 相关的关键人物</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>人物</th><th>角色</th></tr></thead><tbody><tr><td><strong>myhloli</strong></td><td>MinerU 核心开发者，提供预编译 wheel 仓库（<code>wheels.myhloli.com</code>）</td></tr><tr><td><strong>opendatalab</strong></td><td>MinerU 官方 GitHub 组织</td></tr></tbody></table>
+<blockquote>
+<p><strong>信息源</strong>：</p>
+<ul>
+<li><a href="https://github.com/opendatalab/MinerU/blob/main/LICENSE">MinerU 开源协议说明</a></li>
+<li><a href="https://www.shlab.org.cn/news/5444204">MinerU 2.0 协议变更公告</a></li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="4-功能全景解析">4. 功能全景解析</h2>
+<h3 id="41-主要功能一句话概括">4.1 主要功能（一句话概括）</h3>
+<blockquote>
+<p>MinerU 是一个智能文档解析引擎，能将 PDF、Word、PPT、Excel、图片等文件转换为结构化的 Markdown 和 JSON，为 LLM、RAG、Agent 提供”AI-Ready”的数据输入。</p>
+</blockquote>
+<h3 id="42-核心功能与核心技术">4.2 核心功能与核心技术</h3>
+<h4 id="421-多格式输入支持v3x">4.2.1 多格式输入支持（v3.x）</h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>格式</th><th>支持情况</th><th>说明</th></tr></thead><tbody><tr><td><strong>PDF</strong></td><td>✅ <strong>原生支持</strong></td><td>扫描件、电子档均支持</td></tr><tr><td><strong>DOCX</strong></td><td>✅ <strong>原生解析</strong>（v3.0+）</td><td>无需转 PDF，速度快 10-100 倍</td></tr><tr><td><strong>PPTX</strong></td><td>✅ <strong>原生解析</strong>（v3.1+）</td><td>直接解析幻灯片</td></tr><tr><td><strong>XLSX</strong></td><td>✅ <strong>原生解析</strong>（v3.1+）</td><td>直接解析电子表格</td></tr><tr><td><strong>图片</strong></td><td>✅</td><td>PNG/JPG/WebP 等常见格式</td></tr></tbody></table>
+<p><strong>关键技术</strong>：传统工具需要将 Office 文件转 PDF → 图片 → OCR 三步走，MinerU v3.x <strong>直接原生读取文件结构</strong>，速度提升 10-100 倍，且几乎不需要 GPU。</p>
+<h4 id="422-版面分析layout-analysis">4.2.2 版面分析（Layout Analysis）</h4>
+<ul>
+<li><strong>功能</strong>：自动检测文档中的各种区域类型</li>
+<li><strong>识别类型</strong>：标题、正文段落、图片、表格、公式、页眉、页脚、脚注、页码</li>
+<li><strong>关键技术</strong>：基于 detectron2 / doclayout_yolo 的深度学习版面检测模型</li>
+<li><strong>精度</strong>：OmniDocBench 评分 <strong>86.2</strong>（pipeline 模式）</li>
+</ul>
+<p><strong>参考</strong>：<a href="https://github.com/opendatalab/MinerU">版面分析技术</a></p>
+<h4 id="423-ocr-文字识别">4.2.3 OCR 文字识别</h4>
+<ul>
+<li><strong>功能</strong>：识别图片中的文字</li>
+<li><strong>语言支持</strong>：<strong>109 种语言</strong></li>
+<li><strong>关键技术</strong>：PaddleOCR（百度 OCR 引擎），PP-OCRv5</li>
+<li><strong>中英混合</strong>：自动识别中英文混合排版</li>
+</ul>
+<h4 id="424-公式识别latex">4.2.4 公式识别（LaTeX）</h4>
+<ul>
+<li><strong>功能</strong>：将数学公式转换为 LaTeX 代码</li>
+<li><strong>关键技术</strong>：自研 UniMERNet 模型</li>
+<li><strong>支持</strong>：行内公式、行间公式、复杂矩阵、微积分符号</li>
+</ul>
+<h4 id="425-表格识别">4.2.5 表格识别</h4>
+<ul>
+<li><strong>功能</strong>：识别表格结构并还原为 HTML/Markdown 格式</li>
+<li><strong>关键技术</strong>：StructTable + RapidTable（10x 加速）</li>
+<li><strong>跨页表格</strong>：v3.x 支持跨页表格合并</li>
+</ul>
+<h4 id="426-vlm-模式v25">4.2.6 VLM 模式（v2.5+）</h4>
+<ul>
+<li><strong>功能</strong>：使用多模态大模型直接理解文档内容</li>
+<li><strong>模型</strong>：MinerU2.5-Pro-2604-1.2B（1.2B 参数）</li>
+<li><strong>性能</strong>：OmniDocBench 评分 <strong>90.67</strong>，超越 Gemini 2.5 Pro 和 GPT-4o</li>
+<li><strong>速度</strong>：2.12 页/秒（A100 GPU）</li>
+</ul>
+<p><strong>参考</strong>：<a href="https://neurohive.io/en/state-of-the-art/mineru2-5-open-source-1-2b-model-for-pdf-parsing-outperforms-gemini-2-5-pro-on-benchmarks/">MinerU2.5 模型评测</a></p>
+<h4 id="427-超长文档支持v30">4.2.7 超长文档支持（v3.0+）</h4>
+<ul>
+<li><strong>功能</strong>：处理数千页的超长文档</li>
+<li><strong>关键技术</strong>：<strong>滑窗机制（Sliding Window）</strong> + 流式写入磁盘</li>
+<li><strong>能力</strong>：8GB 内存可稳定处理 <strong>10,000+ 页</strong>文档</li>
+<li><strong>对比</strong>：之前需要 128GB+ 内存才能处理 ~3,000 页</li>
+</ul>
+<h4 id="428-多-gpu-高并发v30">4.2.8 多 GPU 高并发（v3.0+）</h4>
+<ul>
+<li><strong>功能</strong>：多卡并行处理</li>
+<li><strong>关键技术</strong>：<strong>mineru-router</strong> 编排层——自动任务路由、负载均衡、多线程并发</li>
+<li><strong>参考</strong>：<a href="https://cloud.tencent.com.cn/developer/article/2663052">MinerU v3.0 更新</a></li>
+</ul>
+<blockquote>
+<p><strong>信息源</strong>：</p>
+<ul>
+<li><a href="https://opendatalab.github.io/MinerU/">MinerU 官方文档</a></li>
+<li><a href="https://github.com/opendatalab/MinerU">MinerU GitHub 功能说明</a></li>
+<li><a href="https://www.shlab.org.cn/news/5444204">上海AI实验室发布公告</a></li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="5-功能实现案例">5. 功能实现案例</h2>
+<h3 id="案例-1学术论文-pdf-转-markdown">案例 1：学术论文 PDF 转 Markdown</h3>
+<p><strong>场景</strong>：下载一篇 arxiv 论文，用 MinerU 转为 Markdown，方便阅读和检索。</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="powershell"><code><span class="line"><span style="color:var(--astro-code-token-comment)"># 用你正在安装的 MinerU</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">conda activate MinerU</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 下载一篇论文</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">curl </span><span style="color:var(--astro-code-token-keyword)">-</span><span style="color:var(--astro-code-foreground)">O https:</span><span style="color:var(--astro-code-token-keyword)">//</span><span style="color:var(--astro-code-foreground)">arxiv.org</span><span style="color:var(--astro-code-token-keyword)">/</span><span style="color:var(--astro-code-foreground)">pdf</span><span style="color:var(--astro-code-token-keyword)">/</span><span style="color:var(--astro-code-token-constant)">2303.08774</span><span style="color:var(--astro-code-foreground)">.pdf</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 解析为 Markdown</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">mineru </span><span style="color:var(--astro-code-token-keyword)">-</span><span style="color:var(--astro-code-foreground)">p </span><span style="color:var(--astro-code-token-string-expression)">"2303.08774.pdf"</span><span style="color:var(--astro-code-token-keyword)"> -</span><span style="color:var(--astro-code-foreground)">o .</span><span style="color:var(--astro-code-token-keyword)">/</span><span style="color:var(--astro-code-foreground)">output</span></span></code></pre>
+<p><strong>结果</strong>：</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>output/</span></span>
+<span class="line"><span>├── 2303.08774.md              ← 完整的 Markdown 文件</span></span>
+<span class="line"><span>│   ├ ✅ 标题层级保留（# ## ###）</span></span>
+<span class="line"><span>│   ├ ✅ 数学公式自动转为 LaTeX（$E=mc^2$）</span></span>
+<span class="line"><span>│   ├ ✅ 表格转为 Markdown 表格</span></span>
+<span class="line"><span>│   ├ ✅ 图片被提取到 images/ 目录</span></span>
+<span class="line"><span>│   └ ✅ 引用格式保留</span></span>
+<span class="line"><span>├── images/                    ← 提取的图片文件</span></span>
+<span class="line"><span>└── 2303.08774.json            ← 结构化 JSON（可用于 RAG 系统）</span></span></code></pre>
+<p><strong>技术要点</strong>：整个过程涉及版面分析 → OCR → 公式识别 → 表格识别 → 阅读顺序排序 → Markdown 组装，全部在后台自动完成。</p>
+<h3 id="案例-2rag-知识库文档预处理">案例 2：RAG 知识库文档预处理</h3>
+<p><strong>场景</strong>：公司有 50 份 PDF 合同、100 份 Word 文档，需要导入 RAG 系统做问答。</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="powershell"><code><span class="line"><span style="color:var(--astro-code-token-comment)"># 批量处理整个目录</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">mineru </span><span style="color:var(--astro-code-token-keyword)">-</span><span style="color:var(--astro-code-foreground)">p D:\documents\ </span><span style="color:var(--astro-code-token-keyword)">-</span><span style="color:var(--astro-code-foreground)">o D:\rag_ready\</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 每个文件都转为结构化 JSON，可以直接喂给 LangChain / LlamaIndex</span></span></code></pre>
+<p><strong>结果</strong>：非结构化文档 → AI-Ready 的结构化数据，可以直接导入向量数据库。</p>
+<h3 id="案例-3扫描版-pdf-发票识别">案例 3：扫描版 PDF 发票识别</h3>
+<p><strong>场景</strong>：收到的发票是扫描件（图片型 PDF），需要提取关键信息。</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="powershell"><code><span class="line"><span style="color:var(--astro-code-token-comment)"># MinerU 自动识别这是扫描件，自动启用 OCR</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 109 种语言自动检测，不需要手动指定语言</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">mineru </span><span style="color:var(--astro-code-token-keyword)">-</span><span style="color:var(--astro-code-foreground)">p </span><span style="color:var(--astro-code-token-string-expression)">"invoice.pdf"</span><span style="color:var(--astro-code-token-keyword)"> -</span><span style="color:var(--astro-code-foreground)">o .</span><span style="color:var(--astro-code-token-keyword)">/</span><span style="color:var(--astro-code-foreground)">output</span></span></code></pre>
+<h3 id="参考案例网址">参考案例网址</h3>
+<ul>
+<li><a href="https://mineru.net">MinerU 在线体验 Demo</a></li>
+<li><a href="https://huggingface.co/spaces/derful/MinerU">MinerU Hugging Face 空间</a></li>
+<li><a href="https://www.shlab.org.cn/news/5444050">MinerU 桌面客户端下载</a></li>
+</ul>
+<hr>
+<h2 id="6-主要竞品清单">6. 主要竞品清单</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>#</th><th>竞品</th><th>开发商</th><th>定位</th><th>优势</th><th>劣势</th></tr></thead><tbody><tr><td>1</td><td><strong>Marker</strong></td><td>VikParuchuri（开源）</td><td>PDF 转 Markdown 工具</td><td>速度快、支持多语言、开源</td><td>功能单一，不支持 Office 格式，生态弱</td></tr><tr><td>2</td><td><strong>PyMuPDF (fitz)</strong></td><td>Artifex</td><td>PDF 处理底层库</td><td>解析引擎强大、性能高</td><td>是库不是工具，需要编程使用，AGPL 协议</td></tr><tr><td>3</td><td><strong>pdfplumber</strong></td><td>社区</td><td>PDF 内容提取库</td><td>精准提取文本和表格、Python 友好</td><td>不支持 OCR，不支持扫描件，无版面分析</td></tr><tr><td>4</td><td><strong>Nougat</strong></td><td>Meta</td><td>学术论文 OCR</td><td>专门优化论文公式和图表</td><td>速度慢、只支持论文、无中文支持</td></tr><tr><td>5</td><td><strong>Azure Document Intelligence</strong></td><td>微软</td><td>云端文档分析 API</td><td>精度高、格式多、企业安全</td><td><strong>付费</strong>（按页计费）、数据需上传云端</td></tr><tr><td>6</td><td><strong>Unstructured.io</strong></td><td>Unstructured（美国）</td><td>文档预处理平台</td><td>格式支持广、RAG 集成好</td><td>本地部署版功能有限，API 收费</td></tr><tr><td>7</td><td><strong>Amazon Textract</strong></td><td>AWS</td><td>云端文档分析 API</td><td>AWS 生态集成、精度高</td><td><strong>付费</strong>、需要 AWS 账号、数据云端处理</td></tr><tr><td>8</td><td><strong>LlamaParse</strong></td><td>LlamaIndex</td><td>RAG 文档解析服务</td><td>LlamaIndex 原生集成、支持多格式</td><td><strong>付费</strong>、闭源、依赖云端服务</td></tr><tr><td>9</td><td><strong>MathPix</strong></td><td>MathPix（美国）</td><td>公式识别工具</td><td>公式识别精度极高</td><td><strong>付费</strong>、仅 API、不适合大规模文档</td></tr><tr><td>10</td><td><strong>OCRmyPDF</strong></td><td>社区</td><td>扫描件 OCR</td><td>免费、给 PDF 加文字层</td><td>只做 OCR，不做版面分析和结构化输出</td></tr></tbody></table>
+<hr>
+<h2 id="7-与竞品的横向比较表格形式">7. 与竞品的横向比较（表格形式）</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">对比维度</th><th align="left"><strong>MinerU</strong></th><th align="left"><strong>Marker</strong></th><th align="left"><strong>Azure Document Intelligence</strong></th><th align="left"><strong>Unstructured.io</strong></th></tr></thead><tbody><tr><td align="left"><strong>价格</strong></td><td align="left"><strong>完全免费</strong>（Apache 2.0）</td><td align="left"><strong>完全免费</strong>（GPL）</td><td align="left">按页收费（$0.01-0.05/页）</td><td align="left">免费有限 / API 收费</td></tr><tr><td align="left"><strong>准确率</strong></td><td align="left">⭐⭐⭐⭐⭐ <strong>SOTA</strong>（OmniDocBench 90.67）</td><td align="left">⭐⭐⭐⭐ 好，但不如 VLM 模式</td><td align="left">⭐⭐⭐⭐⭐ 商业级，中文好</td><td align="left">⭐⭐⭐⭐ 好</td></tr><tr><td align="left"><strong>格式支持</strong></td><td align="left">⭐⭐⭐⭐⭐ PDF/DOCX/PPTX/XLSX/图片</td><td align="left">⭐⭐⭐ 仅 PDF</td><td align="left">⭐⭐⭐⭐⭐ PDF/图片/Word</td><td align="left">⭐⭐⭐⭐⭐ PDF/DOCX/HTML/图片</td></tr><tr><td align="left"><strong>易用性与上手门槛</strong></td><td align="left">⭐⭐⭐ pip 一行安装，CLI + API + GUI</td><td align="left">⭐⭐⭐ pip 安装，CLI 使用</td><td align="left">⭐⭐⭐⭐ REST API 调用，但需 Azure 账号</td><td align="left">⭐⭐⭐⭐ SDK 完善，但 API 复杂</td></tr><tr><td align="left"><strong>部署方式</strong></td><td align="left">✅ <strong>本地部署</strong> ✅ 云端 ✅ Docker</td><td align="left">✅ 本地部署</td><td align="left">❌ 仅云端</td><td align="left">✅ 本地部署（有限）/ ✅ 云端</td></tr><tr><td align="left"><strong>国产硬件支持</strong></td><td align="left">⭐⭐⭐⭐⭐ <strong>昇腾/寒武纪/燧原等 10+ 国产芯片</strong></td><td align="left">❌ 不支持</td><td align="left">❌ 不支持</td><td align="left">❌ 不支持</td></tr><tr><td align="left"><strong>RAG 集成</strong></td><td align="left">⭐⭐⭐⭐⭐ LangChain/LlamaIndex/Dify/RAGFlow</td><td align="left">⭐⭐ 需要自己写集成</td><td align="left">⭐⭐⭐⭐ 有 SDK</td><td align="left">⭐⭐⭐⭐⭐ 原生</td></tr></tbody></table>
+<h3 id="各竞品最适用的场景">各竞品最适用的场景</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>竞品</th><th>最佳使用场景</th></tr></thead><tbody><tr><td><strong>MinerU</strong></td><td><strong>国产 AI 生态的首选</strong>——开源免费、支持国产芯片、中文优化、PDF 转 Markdown 的全能工具</td></tr><tr><td><strong>Marker</strong></td><td><strong>简单的 PDF→Markdown 转换</strong>，不需要 Office 格式，追求极简</td></tr><tr><td><strong>Azure Document Intelligence</strong></td><td><strong>企业级云端部署</strong>、已有 Azure 生态、预算充足、需要 SLA 保障</td></tr><tr><td><strong>Unstructured.io</strong></td><td><strong>RAG 数据预处理</strong>，需要多格式支持且愿意付费</td></tr><tr><td><strong>LlamaParse</strong></td><td><strong>LlamaIndex 用户</strong>，想在 RAG 工作流中一键集成文档解析</td></tr><tr><td><strong>Nougat</strong></td><td><strong>学术论文批量 OCR</strong>，英文论文为主</td></tr><tr><td><strong>MathPix</strong></td><td><strong>数学/理工科书籍数字化</strong>，对公式精度要求极高</td></tr></tbody></table>
+<hr>
+<h2 id="8-版本迭代信息">8. 版本迭代信息</h2>
+<h3 id="首次公开发布">首次公开发布</h3>
+<ul>
+<li><strong>MinerU 0.6.2b1</strong>：2024 年 7 月</li>
+<li><strong>GitHub 开源</strong>：2024 年 7 月（基于 AGPL-3.0 协议）</li>
+</ul>
+<h3 id="关键版本里程碑">关键版本里程碑</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>版本</th><th>日期</th><th>关键变化</th></tr></thead><tbody><tr><td><strong>0.6.2b1</strong></td><td>2024-07</td><td>首次开源发布</td></tr><tr><td><strong>0.9.0</strong></td><td>2024-10</td><td>重大重构，84 语言 OCR，doclayout_yolo 版面模型</td></tr><tr><td><strong>1.0.1</strong></td><td>2025-01-22</td><td>新 API 接口，昇腾 NPU 支持，<strong>桌面客户端发布</strong></td></tr><tr><td><strong>2.0</strong></td><td>2025-06-13</td><td><strong>里程碑</strong>：移除 PyMuPDF 依赖，协议改为 Apache 2.0 基础，包名改为 <code>mineru</code>，&#x3C;1B 模型超越 72B 模型</td></tr><tr><td><strong>2.1.0</strong></td><td>2025-07-05</td><td>内置 WebUI，PP-OCRv5（37→109 语言），竖排文字支持</td></tr><tr><td><strong>2.5</strong></td><td>2025-09-19</td><td><strong>1.2B VLM 模型</strong>发布，OmniDocBench SOTA（90.67），超越 Gemini 2.5 Pro 和 GPT-4o</td></tr><tr><td><strong>3.0.0</strong></td><td>2026-03-29</td><td><strong>原生 DOCX 解析</strong>，滑窗内存优化（8GB 处理万页），多 GPU 路由（mineru-router），AGPL 模型全部移除</td></tr><tr><td><strong>3.1.0</strong></td><td>2026-04-18</td><td><strong>原生 PPTX/XLSX 支持</strong>，VLM 模型升级为 MinerU2.5-Pro-2604-1.2B</td></tr><tr><td><strong>3.1.15</strong></td><td>2026-06（最新）</td><td>持续 Bug 修复和稳定性优化</td></tr></tbody></table>
+<h3 id="更新频率">更新频率</h3>
+<ul>
+<li><strong>活跃开发期</strong>（2024-2026）：<strong>周更/双周更</strong></li>
+<li>从 0.6 到 3.1，两年内发布了 <strong>50+ 个版本</strong></li>
+<li>GitHub Issues 响应速度快，社区活跃度高</li>
+</ul>
+<h3 id="增长数据">增长数据</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>指标</th><th>数据</th></tr></thead><tbody><tr><td>GitHub Stars</td><td><strong>70,000+</strong>（2026 年）</td></tr><tr><td>首 5 个月增长</td><td>~25,000 stars</td></tr><tr><td>高频上榜</td><td>GitHub Trending 多次 #1</td></tr></tbody></table>
+<blockquote>
+<p><strong>信息源</strong>：</p>
+<ul>
+<li><a href="https://github.com/opendatalab/MinerU/releases">MinerU GitHub Releases</a></li>
+<li><a href="https://cloud.tencent.com.cn/developer/article/2663052">MinerU 版本历史（CSDN）</a></li>
+<li><a href="https://www.shlab.org.cn/news/5444204">上海AI实验室公告</a></li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="一句话锐评">一句话锐评</h2>
+<blockquote>
+<p><strong>MinerU 不仅仅是一个 PDF 解析工具，它是 AI 时代的”文档翻译官”——把人类世界积累了几十年的 PDF、Word、PPT 等非结构化文档，翻译成 AI 能理解的结构化数据。开源免费、中文友好、支持国产芯片、性能超越 GPT-4o，这些标签组合在一起，让它成为 RAG/Agent 时代的标配基础设施。你选 MinerU 来解析 PDF，是一个很聪明且与时俱进的选择。</strong></p>
+</blockquote>
+<hr>
+<h3 id="对你来说意味着什么">对你来说意味着什么</h3>
+<p>你在 Windows 上安装 MinerU，本质上是在装一套完整的<strong>文档解析生产线</strong>：</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>你的 PDF 文档</span></span>
+<span class="line"><span>    ↓</span></span>
+<span class="line"><span>MinerU（你正在安装的）</span></span>
+<span class="line"><span>    ├── PyTorch（你换了 CUDA 版）</span></span>
+<span class="line"><span>    ├── detectron2（版面检测）</span></span>
+<span class="line"><span>    ├── PaddleOCR（文字识别）</span></span>
+<span class="line"><span>    └── 各 AI 模型（公式、表格识别）</span></span>
+<span class="line"><span>    ↓</span></span>
+<span class="line"><span>结构化的 Markdown / JSON</span></span></code></pre>
+<p>装好之后，你就能：</p>
+<ul>
+<li><code>mineru -p "论文.pdf" -o ./output</code> — 解析单篇论文</li>
+<li><code>mineru -p D:\所有文档\ -o D:\解析结果\</code> — 批量处理整个文件夹</li>
+<li><code>mineru gradio</code> — 启动网页界面，拖拽上传</li>
+</ul>
+<p><strong>🔗 关联笔记</strong>：</p>
+<ul>
+<li>[[MinerU安装计划_Python3.10环境配置]] — 安装操作手册</li>
+<li>[[PyTorch调研报告]] — MinerU 的底层引擎</li>
+<li>[[Python虚拟环境配置指南]] — Conda 环境管理</li>
+</ul>
+<p><strong>🔄 文档版本</strong>：v1.0 | 最后更新：2026-07-14</p> <div> <a href="/notes" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150">
+&larr; 返回笔记列表
+</a> </div>  </div> <!-- Previous / Next navigation -->  <hr class="!mt-12 !mb-8" data-astro-cid-bvzihdzo> <div data-astro-cid-bvzihdzo> <a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-bvzihdzo>
+&larr; 返回博客列表
+</a> </div> </div> </div> </article> </div>  </main> <footer class="border-t border-[var(--color-border)] mt-24 py-8" data-astro-cid-pux6a34n><div class="max-w-content flex items-center justify-between" data-astro-cid-pux6a34n><span class="text-sm text-[var(--color-text-tertiary)]" data-astro-cid-pux6a34n>
+&copy; 2026 星游寰宇
+</span><div class="flex items-center gap-4" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>博客</a><a href="/projects" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>项目</a><a href="/notes" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>日记</a><a href="/resources" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>资源</a><a href="/about" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>关于</a></div></div></footer> <div id="link-preview" style="display:none;position:fixed;z-index:99;max-width:18rem;pointer-events:none;" data-astro-cid-t7vshrbh></div>  <script type="module">(async()=>{try{const c=await fetch("/posts.json");if(!c.ok)return;const u=await c.json(),p=new Map(u.map(t=>[t.href,t])),e=document.getElementById("link-preview");if(!e)return;let n="",d;document.addEventListener("mouseover",t=>{const i=t.target.closest("a[href^='/blog/']");if(!i){e.style.display="none",n="";return}const s=i.getAttribute("href");if(!s||s===n)return;const o=p.get(s);o&&(n=s,d=setTimeout(()=>{e.innerHTML=`<div class="lp-title">${o.title}</div><div class="lp-summary">${o.summary}</div>`;const r=i.getBoundingClientRect();let a=r.left,l=r.bottom+6;a+288>window.innerWidth&&(a=window.innerWidth-296),l+80>window.innerHeight&&(l=r.top-80),Object.assign(e.style,{left:a+"px",top:l+"px",display:"block"})},300))},{passive:!0}),document.addEventListener("mouseout",t=>{t.target.closest("a[href^='/blog/']")&&(clearTimeout(d),e.style.display="none",n="")},{passive:!0})}catch{}})();</script> </body></html>  <script type="module">const c=document.getElementById("toc-toggle"),s=document.getElementById("toc-list"),i=document.getElementById("toc-chevron");c&&s&&i&&c.addEventListener("click",()=>{const o=s.classList.toggle("hidden");c.setAttribute("aria-expanded",String(o)),i.style.transform=o?"rotate(180deg)":""});const r=document.querySelectorAll(".toc-list a");if(r.length>0){const o=new IntersectionObserver(n=>{for(const t of n)t.isIntersecting&&r.forEach(e=>{e.classList.toggle("active",e.getAttribute("href")===`#${t.target.id}`)})},{rootMargin:"-80px 0px -80% 0px"});r.forEach(n=>{const t=n.getAttribute("href")?.slice(1);if(t){const e=document.getElementById(t);e&&o.observe(e)}})}</script>

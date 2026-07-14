@@ -1,0 +1,487 @@
+<!DOCTYPE html><html lang="zh-CN"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="如果说 [[图论入门：从Obsidian到AI]] 是图论的「直觉入门」，"><meta name="color-scheme" content="light"><!-- Open Graph --><meta property="og:title" content="图论的基本问题、方法与研究理论 — 星游寰宇"><meta property="og:description" content="如果说 [[图论入门：从Obsidian到AI]] 是图论的「直觉入门」，"><meta property="og:url" content="https://code2239.github.io/notes/2026-07-12-图论的基本问题、方法与研究理论"><meta property="og:type" content="article"><meta property="og:site_name" content="星游寰宇"><meta property="og:locale" content="zh_CN"><meta property="article:published_time" content="2026-07-12"><meta property="article:tag" content="graph-theory"><meta property="article:tag" content="math"><meta property="article:tag" content="research"><meta property="article:tag" content="methodology"><!-- Twitter Card --><meta name="twitter:card" content="summary"><meta name="twitter:title" content="图论的基本问题、方法与研究理论 — 星游寰宇"><meta name="twitter:description" content="如果说 [[图论入门：从Obsidian到AI]] 是图论的「直觉入门」，"><!-- Canonical --><link rel="canonical" href="https://code2239.github.io/notes/2026-07-12-图论的基本问题、方法与研究理论"><title>图论的基本问题、方法与研究理论 — 星游寰宇</title><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="alternate" type="application/rss+xml" title="星游寰宇 RSS" href="/rss.xml"><!-- Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"星游寰宇","url":"https://code2239.github.io","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://code2239.github.io/search?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://code2239.github.io"},{"@type":"ListItem","position":2,"name":"日记","item":"https://code2239.github.io/notes"},{"@type":"ListItem","position":3,"name":"2026 07 12 图论的基本问题、方法与研究理论"}]},{"@context":"https://schema.org","@type":"BlogPosting","headline":"图论的基本问题、方法与研究理论","description":"如果说 [[图论入门：从Obsidian到AI]] 是图论的「直觉入门」，","datePublished":"2026-07-12","url":"https://code2239.github.io/notes/2026-07-12-图论的基本问题、方法与研究理论","keywords":"graph-theory, math, research, methodology"}]}</script><link rel="stylesheet" href="/_astro/_slug_.CXDKI3B6.css">
+<style>.back-to-top[data-astro-cid-gzprr2dq]{position:fixed;bottom:2rem;right:2rem;z-index:40;width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:50%;border:1px solid var(--color-border);background:var(--color-bg);color:var(--color-text-secondary);cursor:pointer;box-shadow:var(--shadow-md);transition:opacity .2s ease,transform .2s ease}.back-to-top[data-astro-cid-gzprr2dq]:hover{color:var(--color-accent);border-color:var(--color-accent);transform:translateY(-2px)}.back-to-top[data-astro-cid-gzprr2dq].hidden{opacity:0;pointer-events:none}.copy-btn[data-astro-cid-qqybitij]{position:absolute;top:8px;right:8px;padding:4px 10px;font-size:.6875rem;font-family:var(--font-sans);color:var(--color-text-tertiary);background:var(--color-bg);border:1px solid var(--color-border);border-radius:6px;cursor:pointer;opacity:0;transition:opacity .15s ease,color .15s ease}pre[data-astro-cid-qqybitij]:hover .copy-btn[data-astro-cid-qqybitij]{opacity:1}.copy-btn[data-astro-cid-qqybitij]:hover{color:var(--color-accent);border-color:var(--color-accent)}.copy-btn[data-astro-cid-qqybitij].copied{color:#16a34a;border-color:#16a34a}.blog-layout[data-astro-cid-bvzihdzo]{display:block}.blog-toc[data-astro-cid-bvzihdzo]{display:none}.blog-body[data-astro-cid-bvzihdzo]{min-width:0}@media(min-width:1024px){.blog-layout[data-astro-cid-bvzihdzo]{display:grid;grid-template-columns:14rem 1fr;gap:3rem;align-items:start}.blog-toc[data-astro-cid-bvzihdzo]{display:block}.blog-body[data-astro-cid-bvzihdzo]{padding-right:2rem}}@media(max-width:1023px){.blog-toc[data-astro-cid-bvzihdzo]{display:block;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid var(--color-border)}}
+</style></head> <body class="min-h-screen flex flex-col"> <nav class="sticky top-0 z-40 bg-[var(--color-bg)]/80 backdrop-blur-md border-b border-[var(--color-border)]" data-astro-cid-pux6a34n><div class="max-w-content flex items-center justify-between py-4" data-astro-cid-pux6a34n><a href="/" class="flex items-center gap-2.5 text-base font-semibold no-underline tracking-tight" data-astro-cid-pux6a34n><svg class="w-7 h-7" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" data-astro-cid-pux6a34n><circle cx="16" cy="16" r="15" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-pux6a34n></circle><circle cx="16" cy="16" r="3" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="16" cy="5" r="1.5" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="24" cy="10" r="1" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="8" cy="22" r="1" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="25" cy="21" r="0.8" fill="currentColor" data-astro-cid-pux6a34n></circle></svg>
+星游寰宇
+</a><!-- Desktop nav --><div class="hidden sm:flex items-center gap-5" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>博客</a><a href="/projects" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>项目</a><a href="/notes" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>日记</a><a href="/resources" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>资源</a><a href="/about" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>关于</a><button id="search-trigger" class="flex items-center gap-1.5 text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] bg-[var(--color-bg-secondary)] hover:bg-[var(--color-bg-tertiary)] border border-[var(--color-border)] hover:border-[var(--color-accent)]/30 rounded-lg px-3 py-1.5 cursor-pointer shadow-sm hover:shadow-md transition-all duration-200" aria-label="搜索 (Ctrl+K)" title="搜索 (Ctrl+K)" data-astro-cid-pux6a34n><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-pux6a34n><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" data-astro-cid-pux6a34n></path></svg><span class="hidden lg:inline" data-astro-cid-pux6a34n>搜索</span><kbd class="hidden lg:inline-flex items-center text-[0.625rem] font-mono text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1 py-px rounded" data-astro-cid-pux6a34n>Ctrl+K</kbd></button></div><!-- Mobile hamburger --><button id="menu-btn" class="sm:hidden flex flex-col gap-1 p-2 -mr-2 cursor-pointer" aria-label="打开菜单" data-astro-cid-pux6a34n><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-transform duration-200" data-astro-cid-pux6a34n></span><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-opacity duration-200" data-astro-cid-pux6a34n></span><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-transform duration-200" data-astro-cid-pux6a34n></span></button></div><!-- Mobile menu --><div id="mobile-menu" class="hidden sm:hidden border-t border-[var(--color-border)] bg-[var(--color-bg)]" data-astro-cid-pux6a34n><div class="max-w-content flex flex-col gap-2 py-4" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>博客</a><a href="/projects" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>项目</a><a href="/notes" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>日记</a><a href="/resources" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>资源</a><a href="/about" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>关于</a></div></div></nav>
+    <div id="search-overlay" class="srch-overlay" role="dialog" aria-modal="true" aria-label="全局搜索" data-astro-cid-mn7pezny> <div id="search-backdrop" class="srch-backdrop" data-astro-cid-mn7pezny></div> <div class="srch-panel" id="srch-panel" data-astro-cid-mn7pezny> <!-- Search input --> <div class="srch-input-row" data-astro-cid-mn7pezny> <svg class="srch-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-mn7pezny> <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" data-astro-cid-mn7pezny></path> </svg> <input type="text" id="search-input" class="srch-input" placeholder="搜索文章、项目、日记、资源..." autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="go" data-astro-cid-mn7pezny> <kbd class="srch-kbd" data-astro-cid-mn7pezny>Esc</kbd> </div> <!-- Results area --> <div id="search-results" class="srch-results" data-astro-cid-mn7pezny> <p class="srch-empty" id="search-empty-hint" data-astro-cid-mn7pezny>输入关键词开始搜索</p> </div> <!-- Skeleton loading --> <div id="search-skeleton" class="srch-skeleton" style="display:none;" aria-hidden="true" data-astro-cid-mn7pezny> <div class="srch-skeleton-line" style="width:75%" data-astro-cid-mn7pezny></div> <div class="srch-skeleton-line" style="width:50%" data-astro-cid-mn7pezny></div> <div class="srch-skeleton-line" style="width:60%" data-astro-cid-mn7pezny></div> </div> <!-- Footer hints --> <div class="srch-footer" data-astro-cid-mn7pezny> <div class="srch-footer-hints" data-astro-cid-mn7pezny> <span data-astro-cid-mn7pezny><kbd data-astro-cid-mn7pezny>↑</kbd><kbd data-astro-cid-mn7pezny>↓</kbd> 导航</span> <span data-astro-cid-mn7pezny><kbd data-astro-cid-mn7pezny>↵</kbd> 打开</span> <span data-astro-cid-mn7pezny><kbd data-astro-cid-mn7pezny>Ctrl</kbd>+<kbd data-astro-cid-mn7pezny>K</kbd> 切换</span> </div> <div class="srch-footer-brand" data-astro-cid-mn7pezny>
+powered by Orama
+</div> </div> </div> </div> <script type="module" src="/_astro/Navigation.astro_astro_type_script_index_0_lang.15n1EYJp.js"></script> <main class="flex-1">  <div class="reading-progress" id="reading-progress" style="width: 0%"></div> <script type="module">const o=document.getElementById("reading-progress");if(!o)throw new Error("Reading progress bar element not found");const r=()=>{const n=window.scrollY,e=document.documentElement.scrollHeight-window.innerHeight,t=e>0?n/e*100:0;o.style.width=`${Math.min(t,100)}%`};window.addEventListener("scroll",r,{passive:!0});</script> <button id="back-to-top" class="back-to-top hidden" aria-label="返回顶部" data-astro-cid-gzprr2dq> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-gzprr2dq> <polyline points="18 15 12 9 6 15" data-astro-cid-gzprr2dq></polyline> </svg> </button>  <script type="module">const o=document.getElementById("back-to-top");o&&(window.addEventListener("scroll",()=>{o.classList.toggle("hidden",window.scrollY<400)},{passive:!0}),o.addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"})));</script> <script type="module">document.querySelectorAll("pre").forEach(e=>{const t=document.createElement("button");t.className="copy-btn",t.textContent="复制",t.addEventListener("click",async()=>{const n=e.querySelector("code")?.textContent||e.textContent||"";try{await navigator.clipboard.writeText(n),t.textContent="已复制",t.classList.add("copied"),setTimeout(()=>{t.textContent="复制",t.classList.remove("copied")},2e3)}catch{t.textContent="失败",setTimeout(()=>{t.textContent="复制"},2e3)}}),e.style.position="relative",e.appendChild(t)});</script> <div class="px-6 xl:px-12 pt-12 pb-16" data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <header class="mb-12 text-center" data-astro-cid-bvzihdzo> <h1 class="text-3xl font-semibold mb-3 tracking-tight" data-astro-cid-bvzihdzo>图论的基本问题、方法与研究理论</h1> <div class="flex items-center justify-center gap-2 text-[var(--color-text-tertiary)] text-sm" data-astro-cid-bvzihdzo> <time datetime="2026-07-12" data-astro-cid-bvzihdzo>2026-07-12</time> <span class="text-[var(--color-border)]" data-astro-cid-bvzihdzo>·</span> <span data-astro-cid-bvzihdzo>20 分钟阅读</span>  <span class="text-[var(--color-border)]" data-astro-cid-bvzihdzo>·</span> <span class="text-sm text-[var(--color-text-tertiary)]"> <span> graph-theory<span class="mx-1">·</span> </span><span> math<span class="mx-1">·</span> </span><span> research<span class="mx-1">·</span> </span><span> methodology </span> </span>  </div> </header> <div class="blog-layout" data-astro-cid-bvzihdzo> <aside class="blog-toc" data-astro-cid-bvzihdzo> <div class="sticky top-14 max-h-[calc(100vh-3.5rem)] overflow-y-auto" data-astro-cid-bvzihdzo> <button id="toc-toggle" class="hidden max-md:flex items-center gap-1 text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-3 cursor-pointer border-none bg-transparent p-0" aria-expanded="false" aria-controls="toc-list" data-astro-cid-bvzihdzo>
+目录
+<svg id="toc-chevron" class="w-3 h-3 transition-transform duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-bvzihdzo><polyline points="6 9 12 15 18 9" data-astro-cid-bvzihdzo></polyline></svg> </button> <span class="text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-3 max-md:hidden" data-astro-cid-bvzihdzo>目录</span> <div id="toc-list" class="max-md:hidden" data-astro-cid-bvzihdzo> <nav class="toc"> <p class="text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-3">目录</p> <ul class="toc-list"> <li class> <a href="#一图论研究的基本问题">一、图论研究的基本问题</a> </li><li class="toc-h3"> <a href="#问题-1存在性问题">问题 1：存在性问题</a> </li><li class="toc-h3"> <a href="#问题-2最优化问题">问题 2：最优化问题</a> </li><li class="toc-h3"> <a href="#问题-3分类与特征刻画问题">问题 3：分类与特征刻画问题</a> </li><li class="toc-h3"> <a href="#三大问题之间的关系">三大问题之间的关系</a> </li><li class> <a href="#二图论的基本方法">二、图论的基本方法</a> </li><li class="toc-h3"> <a href="#方法-1图表示法">方法 1：图表示法</a> </li><li class="toc-h3"> <a href="#方法-2图遍历">方法 2：图遍历</a> </li><li class="toc-h3"> <a href="#方法-3图论算法">方法 3：图论算法</a> </li><li class="toc-h3"> <a href="#方法-4图的不变量-invariants">方法 4：图的不变量 (Invariants)</a> </li><li class="toc-h3"> <a href="#方法-5归纳与构造">方法 5：归纳与构造</a> </li><li class> <a href="#三图论的主要研究理论分支">三、图论的主要研究理论分支</a> </li><li class="toc-h3"> <a href="#-第一梯队经典核心领域基础理论">🔴 第一梯队：经典核心领域（基础理论）</a> </li><li class="toc-h3"> <a href="#-第二梯队应用驱动的研究领域">🟡 第二梯队：应用驱动的研究领域</a> </li><li class> <a href="#四图论研究的三大基本问题--主要分支矩阵">四、图论研究的「三大基本问题 × 主要分支」矩阵</a> </li><li class> <a href="#五图论研究的一般工作流">五、图论研究的一般工作流</a> </li><li class> <a href="#六总结">六、总结</a> </li><li class="toc-h3"> <a href="#基本问题研究什么">基本问题（研究什么）</a> </li><li class="toc-h3"> <a href="#基本方法用什么研究">基本方法（用什么研究）</a> </li><li class="toc-h3"> <a href="#主要研究理论分支版图">主要研究理论（分支版图）</a> </li><li class> <a href="#-关联笔记">🔗 关联笔记</a> </li> </ul> </nav> </div> </div> </aside> <div class="blog-body" data-astro-cid-bvzihdzo> <div class="prose prose-neutral max-w-none" data-astro-cid-bvzihdzo>   <h1 id="图论的基本问题方法与研究理论">图论的基本问题、方法与研究理论</h1>
+<blockquote>
+<p>如果说 [[图论入门：从Obsidian到AI]] 是图论的「直觉入门」，
+这篇是图论的「系统框架」——基本问题、通用方法、理论版图。</p>
+</blockquote>
+<hr>
+<h2 id="一图论研究的基本问题">一、图论研究的基本问题</h2>
+<p>图论看似庞杂，但所有研究问题可以归结为 <strong>三大类基本问题</strong>。</p>
+<h3 id="问题-1存在性问题">问题 1：存在性问题</h3>
+<blockquote>
+<p><strong>某个结构的图是否存在？</strong></p>
+</blockquote>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>经典问题：</span></span>
+<span class="line"><span>  - 是否存在一个每个顶点的度都是 3 的 6 顶点图？</span></span>
+<span class="line"><span>  - 是否存在一个包含所有可能边的 5 顶点图？</span></span>
+<span class="line"><span>  - 给定一个图，是否存在一条经过所有边恰好一次的路径？</span></span>
+<span class="line"><span>    （欧拉路径问题——图论的起源）</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>在 AI 中的体现：</span></span>
+<span class="line"><span>  - 是否存在一个满足特定约束的神经网络结构？</span></span>
+<span class="line"><span>  - 一个知识图谱中，两个实体之间是否存在某种关系路径？</span></span></code></pre>
+<h3 id="问题-2最优化问题">问题 2：最优化问题</h3>
+<blockquote>
+<p><strong>在满足约束的条件下，找到图上的最佳方案。</strong></p>
+</blockquote>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>经典问题：</span></span>
+<span class="line"><span>  - 最短路径：从 A 到 B 怎么走最近？（Dijkstra 算法）</span></span>
+<span class="line"><span>  - 最小生成树：如何用最短的网线连接所有电脑？</span></span>
+<span class="line"><span>  - 最大流：一个管道网络最多能输送多少流量？</span></span>
+<span class="line"><span>  - 旅行商问题（TSP）：最短路线走完所有城市再回来</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>在 AI 中的体现：</span></span>
+<span class="line"><span>  - 在 Transformer 中，token 之间的注意力权重分布（优化信息传递路径）</span></span>
+<span class="line"><span>  - 推荐系统中，找到用户最可能感兴趣的物品路径</span></span>
+<span class="line"><span>  - 计算图中，优化计算路径以减少内存和计算量</span></span></code></pre>
+<h3 id="问题-3分类与特征刻画问题">问题 3：分类与特征刻画问题</h3>
+<blockquote>
+<p><strong>如何描述和区分不同的图？图具有什么性质？</strong></p>
+</blockquote>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>经典问题：</span></span>
+<span class="line"><span>  - 两个图是不是「相同」的？（图同构问题）</span></span>
+<span class="line"><span>  - 一个图能用多少种颜色给顶点染色，使得相邻顶点不同色？</span></span>
+<span class="line"><span>    （着色问题——四色定理）</span></span>
+<span class="line"><span>  - 一个图是平面的吗？（能否画在平面上边不相交）</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>在 AI 中的体现：</span></span>
+<span class="line"><span>  - 分子图分类（预测某种分子是否有药性）</span></span>
+<span class="line"><span>  - 图神经网络中，如何用一种表示「捕获」图的结构特征</span></span>
+<span class="line"><span>  - 社交网络中的社区发现（自动识别图中的自然簇）</span></span></code></pre>
+<h3 id="三大问题之间的关系">三大问题之间的关系</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="mermaid"><code><span class="line"><span style="color:var(--astro-code-foreground)">graph TD</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">    A[存在性问题&#x3C;br/>有没有?] --> B[最优化问题&#x3C;br/>哪个最好?]</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">    B --> C[分类与刻画问题&#x3C;br/>属于哪一类?]</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">    C --> A</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">    </span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">    A --> D[欧拉七桥问题]</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">    B --> E[最短路径/最小生成树]</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">    C --> F[四色定理/图同构]</span></span></code></pre>
+<blockquote>
+<p><strong>图论中任何一个具体问题，都能归到这三类之一。</strong></p>
+</blockquote>
+<hr>
+<h2 id="二图论的基本方法">二、图论的基本方法</h2>
+<p>图论研究者在解决问题时，有 <strong>几套反复出现的通用工具</strong>。</p>
+<h3 id="方法-1图表示法">方法 1：图表示法</h3>
+<p>把图画转化成数学可以运算的形式。</p>
+<h4 id="方法-1a邻接矩阵">方法 1a：邻接矩阵</h4>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:var(--astro-code-token-comment)"># 一个 4 个顶点的无向图</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">#   V = {A, B, C, D}</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">#   E = {(A,B), (B,C), (C,D), (A,C)}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 邻接矩阵——行和列都是顶点，格子表示是否相连</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">    A  B  C  D</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">A  </span><span style="color:var(--astro-code-token-punctuation)">[</span><span style="color:var(--astro-code-token-constant)">0</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-token-constant)"> 1</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-token-constant)"> 1</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-token-constant)"> 0</span><span style="color:var(--astro-code-token-punctuation)">]</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">B  </span><span style="color:var(--astro-code-token-punctuation)">[</span><span style="color:var(--astro-code-token-constant)">1</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-token-constant)"> 0</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-token-constant)"> 1</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-token-constant)"> 0</span><span style="color:var(--astro-code-token-punctuation)">]</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">C  </span><span style="color:var(--astro-code-token-punctuation)">[</span><span style="color:var(--astro-code-token-constant)">1</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-token-constant)"> 1</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-token-constant)"> 0</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-token-constant)"> 1</span><span style="color:var(--astro-code-token-punctuation)">]</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">D  </span><span style="color:var(--astro-code-token-punctuation)">[</span><span style="color:var(--astro-code-token-constant)">0</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-token-constant)"> 0</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-token-constant)"> 1</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-token-constant)"> 0</span><span style="color:var(--astro-code-token-punctuation)">]</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 在 Transformer 中的自注意力矩阵，就是邻接矩阵的带权版本</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 不过权值不是 0/1，而是连续值（注意力分数）</span></span></code></pre>
+<p><strong>优缺点</strong>：直观、稠密图好用；但稀疏图浪费空间。</p>
+<h4 id="方法-1b邻接表">方法 1b：邻接表</h4>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:var(--astro-code-token-comment)"># 同一个图，用邻接表表示：</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">A</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-foreground)"> [B</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-foreground)"> C]     ← A 连着 B 和 C</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">B</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-foreground)"> [A</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-foreground)"> C]</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">C</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-foreground)"> [A</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-foreground)"> B</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-foreground)"> D]</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">D</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-foreground)"> [C]        ← D 只连着 C</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 在 Obsidian 中的体现——</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 每篇笔记底部的「出链」列表就是邻接表</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 反向链接面板就是入度的邻接表</span></span></code></pre>
+<p><strong>优缺点</strong>：节省空间、稀疏图高效。</p>
+<h4 id="方法-1c度序列">方法 1c：度序列</h4>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>将图中所有顶点的度从大到小排列：</span></span>
+<span class="line"><span>  [3, 2, 2, 1]  ← 上图的度序列</span></span></code></pre>
+<blockquote>
+<p><strong>度序列包含大量图的全局信息</strong>。两个图如果有不同的度序列，它们一定不同构；但同序列不一定同构——这是一个活跃的研究方向。</p>
+</blockquote>
+<h3 id="方法-2图遍历">方法 2：图遍历</h3>
+<blockquote>
+<p><strong>「走一遍」是理解图结构的基本手段。</strong></p>
+</blockquote>
+<h4 id="深度优先搜索-dfs">深度优先搜索 (DFS)</h4>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:var(--astro-code-token-comment)"># 沿着一条路走到黑，走不通再回头</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 就像 Obsidian 中跟着 [[]] 链接一层层点进去</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">def</span><span style="color:var(--astro-code-token-function)"> dfs</span><span style="color:var(--astro-code-foreground)">(</span><span style="color:var(--astro-code-token-parameter)">graph</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-token-parameter)"> start</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-token-parameter)"> visited</span><span style="color:var(--astro-code-foreground)">):</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">    visited</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">add</span><span style="color:var(--astro-code-token-punctuation)">(start)</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">    for</span><span style="color:var(--astro-code-foreground)"> neighbor </span><span style="color:var(--astro-code-token-keyword)">in</span><span style="color:var(--astro-code-foreground)"> graph</span><span style="color:var(--astro-code-token-punctuation)">[</span><span style="color:var(--astro-code-foreground)">start</span><span style="color:var(--astro-code-token-punctuation)">]:</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">        if</span><span style="color:var(--astro-code-foreground)"> neighbor </span><span style="color:var(--astro-code-token-keyword)">not</span><span style="color:var(--astro-code-token-keyword)"> in</span><span style="color:var(--astro-code-foreground)"> visited</span><span style="color:var(--astro-code-token-punctuation)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">            dfs</span><span style="color:var(--astro-code-token-punctuation)">(graph, neighbor, visited)</span></span></code></pre>
+<p><strong>用途</strong>：检测环、拓扑排序、连通分量、迷宫求解。</p>
+<h4 id="广度优先搜索-bfs">广度优先搜索 (BFS)</h4>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:var(--astro-code-token-comment)"># 一层一层往外扩展</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 就像 Obsidian 的局部图谱，把深度设成 1、2、3...</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">def</span><span style="color:var(--astro-code-token-function)"> bfs</span><span style="color:var(--astro-code-foreground)">(</span><span style="color:var(--astro-code-token-parameter)">graph</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-token-parameter)"> start</span><span style="color:var(--astro-code-foreground)">):</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">    queue </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-foreground)"> [start]</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">    visited </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-punctuation)"> {</span><span style="color:var(--astro-code-foreground)">start</span><span style="color:var(--astro-code-token-punctuation)">}</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">    while</span><span style="color:var(--astro-code-foreground)"> queue</span><span style="color:var(--astro-code-token-punctuation)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">        node </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-foreground)"> queue</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">pop</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-constant)">0</span><span style="color:var(--astro-code-token-punctuation)">)</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">        for</span><span style="color:var(--astro-code-foreground)"> neighbor </span><span style="color:var(--astro-code-token-keyword)">in</span><span style="color:var(--astro-code-foreground)"> graph</span><span style="color:var(--astro-code-token-punctuation)">[</span><span style="color:var(--astro-code-foreground)">node</span><span style="color:var(--astro-code-token-punctuation)">]:</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">            if</span><span style="color:var(--astro-code-foreground)"> neighbor </span><span style="color:var(--astro-code-token-keyword)">not</span><span style="color:var(--astro-code-token-keyword)"> in</span><span style="color:var(--astro-code-foreground)"> visited</span><span style="color:var(--astro-code-token-punctuation)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">                visited</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">add</span><span style="color:var(--astro-code-token-punctuation)">(neighbor)</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">                queue</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">append</span><span style="color:var(--astro-code-token-punctuation)">(neighbor)</span></span></code></pre>
+<p><strong>用途</strong>：最短路径（无权图）、社交网络中的「六度分隔」度量。</p>
+<h3 id="方法-3图论算法">方法 3：图论算法</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>算法</th><th>解决的问题</th><th align="center">复杂度</th></tr></thead><tbody><tr><td><strong>Dijkstra</strong></td><td>单源最短路径（带权图）</td><td align="center">$O(V^2)$ 或 $O(E + V\log V)$</td></tr><tr><td><strong>Kruskal / Prim</strong></td><td>最小生成树</td><td align="center">$O(E\log E)$</td></tr><tr><td><strong>Ford-Fulkerson</strong></td><td>最大流</td><td align="center">$O(E \cdot f)$</td></tr><tr><td><strong>Floyd-Warshall</strong></td><td>所有顶点对之间的最短路径</td><td align="center">$O(V^3)$</td></tr><tr><td><strong>Tarjan</strong></td><td>强连通分量、割点、桥</td><td align="center">$O(V+E)$</td></tr><tr><td><strong>Bellman-Ford</strong></td><td>负权边情况下的最短路径</td><td align="center">$O(VE)$</td></tr></tbody></table>
+<h3 id="方法-4图的不变量-invariants">方法 4：图的不变量 (Invariants)</h3>
+<blockquote>
+<p>用一个数值来「概括」图的某个特征。</p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>不变量</th><th>定义</th><th>含义</th></tr></thead><tbody><tr><td><strong>顶点数</strong> $n$</td><td>图中顶点的数量</td><td>规模</td></tr><tr><td><strong>边数</strong> $m$</td><td>图中边的数量</td><td>密度</td></tr><tr><td><strong>色数</strong> $\chi(G)$</td><td>给图着色所需的最少颜色数</td><td>图的「复杂程度」</td></tr><tr><td><strong>团数</strong> $\omega(G)$</td><td>图中最大完全子图的顶点数</td><td>内部互联程度</td></tr><tr><td><strong>独立数</strong> $\alpha(G)$</td><td>图中最大的互不相连的顶点集合</td><td>稀疏程度</td></tr><tr><td><strong>围长</strong> $g(G)$</td><td>图中最短环的长度</td><td>局部结构</td></tr><tr><td><strong>直径</strong> $d(G)$</td><td>最远两个顶点之间的距离</td><td>图的「广度」</td></tr></tbody></table>
+<p><strong>为什么图不变量重要</strong>？因为两个图如果不同的不变量，它们一定不同构——这是快速判断图是否「一样」的重要工具。</p>
+<h3 id="方法-5归纳与构造">方法 5：归纳与构造</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>图论中一种常见的证明/研究方法：</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>归纳步骤：</span></span>
+<span class="line"><span>  假设结论对 n-1 个顶点的图成立</span></span>
+<span class="line"><span>  给图添加第 n 个顶点</span></span>
+<span class="line"><span>  证明添加后的图仍然满足结论</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>构造方法：</span></span>
+<span class="line"><span>  为了证明「存在一个具有性质 P 的图」，</span></span>
+<span class="line"><span>  直接把它造出来</span></span></code></pre>
+<hr>
+<h2 id="三图论的主要研究理论分支">三、图论的主要研究理论分支</h2>
+<h3 id="-第一梯队经典核心领域基础理论">🔴 第一梯队：经典核心领域（基础理论）</h3>
+<h4 id="1-极值图论-extremal-graph-theory">1. 极值图论 (Extremal Graph Theory)</h4>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>核心问题：</span></span>
+<span class="line"><span>  一个图在「不包含某种子图」的条件下，最多能有多少条边？</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>经典结果：</span></span>
+<span class="line"><span>  Turán 定理——如果一个 n 顶点图不含 K_{r+1}（r+1 顶点的完全图），</span></span>
+<span class="line"><span>  则边数不超过 (1 - 1/r) * n²/2</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  Mantel 定理——不含三角形的 n 顶点图，最多有 ⌊n²/4⌋ 条边</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>应用：</span></span>
+<span class="line"><span>  社交网络中，一个群体如果不希望出现「三方闭环」（防止小团体），</span></span>
+<span class="line"><span>  最多能有多少社交关系？</span></span></code></pre>
+<h4 id="2-代数图论-algebraic-graph-theory">2. 代数图论 (Algebraic Graph Theory)</h4>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>用线性代数研究图：</span></span>
+<span class="line"><span>  图的邻接矩阵的特征值 → 揭示图的全局性质</span></span>
+<span class="line"><span>  Laplacian 矩阵 → 图的连通性、谱聚类</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>核心概念：</span></span>
+<span class="line"><span>  谱 (Spectrum)：邻接矩阵的所有特征值</span></span>
+<span class="line"><span>  Laplacian 矩阵：D - A（度矩阵 - 邻接矩阵）</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>应用：</span></span>
+<span class="line"><span>  Google 的 PageRank（基于邻接矩阵的主特征向量）</span></span>
+<span class="line"><span>  图神经网络的消息传递本质上是 Laplacian 上的卷积</span></span>
+<span class="line"><span>  谱聚类（将图分割成簇的标准方法之一）</span></span></code></pre>
+<h4 id="3-随机图论-random-graph-theory">3. 随机图论 (Random Graph Theory)</h4>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>如果图中的边是随机生成的，图会有什么性质？</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Erdős–Rényi 模型 G(n, p)：</span></span>
+<span class="line"><span>  有 n 个顶点，每条边以概率 p 独立出现</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>里程碑发现：</span></span>
+<span class="line"><span>  当 p 超过某个阈值时，图会「突然」出现某个性质（相变）</span></span>
+<span class="line"><span>  例如：当 p > ln(n)/n 时，图几乎必然连通</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>应用：</span></span>
+<span class="line"><span>  复杂网络（互联网、社交网络）的形成机制</span></span>
+<span class="line"><span>  神经网络随机初始化的性质分析</span></span></code></pre>
+<h4 id="4-拓扑图论-topological-graph-theory">4. 拓扑图论 (Topological Graph Theory)</h4>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>研究图的「画法」——图能否画在某个曲面上边不相交？</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>核心概念：</span></span>
+<span class="line"><span>  平面图 (Planar Graph)：可以画在平面上边不相交</span></span>
+<span class="line"><span>  曲面嵌入：图在球面、环面、莫比乌斯带上的画法</span></span>
+<span class="line"><span>  图子式 (Graph Minor)：删点和缩边得到的子结构</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>经典结果：</span></span>
+<span class="line"><span>  四色定理——任何平面图可以用 4 种颜色给顶点染色</span></span>
+<span class="line"><span>  Kuratowski 定理——图是平面图 ⟺ 它不含 K₅ 或 K₃₃ 子结构</span></span>
+<span class="line"><span>  Wagner 猜想（已被 Robertson–Seymour 证明）：图子式构成一个良拟序</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>应用：</span></span>
+<span class="line"><span>  VLSI 电路布线设计</span></span>
+<span class="line"><span>  印刷电路板（PCB）的线路规划</span></span>
+<span class="line"><span>  地图着色</span></span></code></pre>
+<h3 id="-第二梯队应用驱动的研究领域">🟡 第二梯队：应用驱动的研究领域</h3>
+<h4 id="5-网络科学-network-science">5. 网络科学 (Network Science)</h4>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>将图论应用于真实世界的复杂系统：</span></span>
+<span class="line"><span>  - 社交网络分析：影响力传播、社区发现</span></span>
+<span class="line"><span>  - 生物网络：蛋白质相互作用网络、基因调控网络</span></span>
+<span class="line"><span>  - 互联网、万维网的结构分析</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>核心发现：</span></span>
+<span class="line"><span>  小世界网络（Watts–Strogatz 模型）：</span></span>
+<span class="line"><span>    高聚类系数 + 短平均路径</span></span>
+<span class="line"><span>    → 现实网络（社交、神经、电力）的共同特征</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  无标度网络（Barabási–Albert 模型）：</span></span>
+<span class="line"><span>    度分布遵循幂律——少数节点有极高的度（「枢纽」）</span></span>
+<span class="line"><span>    → 互联网、引文网络、人类语言都符合</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>与 AI 的交集：</span></span>
+<span class="line"><span>  GNN 的基础假设就是真实图网络往往具有这些结构特征</span></span></code></pre>
+<h4 id="6-图算法与复杂性-graph-algorithms--complexity">6. 图算法与复杂性 (Graph Algorithms &#x26; Complexity)</h4>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>研究的不是图本身，而是「在图上高效计算」的问题。</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>核心问题：</span></span>
+<span class="line"><span>  P vs NP：图的许多重要问题（如哈密顿路径）是 NP 完全的</span></span>
+<span class="line"><span>  参数化复杂性：对于某些参数小的问题，可有高效算法</span></span>
+<span class="line"><span>  近似算法：对于 NP 难问题，能否得到接近最优的解</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>经典 NP 完全的图问题：</span></span>
+<span class="line"><span>  - 图着色问题</span></span>
+<span class="line"><span>  - 哈密顿路径/回路</span></span>
+<span class="line"><span>  - 最大团 (Max Clique)</span></span>
+<span class="line"><span>  - 顶点覆盖 (Vertex Cover)</span></span>
+<span class="line"><span>  - 独立集 (Independent Set)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>应用：</span></span>
+<span class="line"><span>  几乎所有图论算法的实际应用</span></span>
+<span class="line"><span>  计算化学中的分子结构搜索</span></span></code></pre>
+<h4 id="7-谱图理论-spectral-graph-theory">7. 谱图理论 (Spectral Graph Theory)</h4>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>代数图论 + 应用 = 谱图理论</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>核心思想：</span></span>
+<span class="line"><span>  图的邻接矩阵和 Laplacian 矩阵的特征值和特征向量，</span></span>
+<span class="line"><span>  编码了图的全局结构信息。</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>关键结果：</span></span>
+<span class="line"><span>  Cheeger 不等式：谱隙（特征值 gap）与图的分割质量相关</span></span>
+<span class="line"><span>  谱聚类：用 Laplacian 的次小特征向量将图分成簇</span></span>
+<span class="line"><span>  Expander 图：稀疏但高度连通、谱性质优异的图</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>在 AI 中的直接应用：</span></span>
+<span class="line"><span>  GCN (Graph Convolutional Network)：</span></span>
+<span class="line"><span>    核心操作 = 在图的谱域（特征空间）中做卷积</span></span>
+<span class="line"><span>    本质 = 用 Laplacian 的特征向量作为图信号的傅里叶基</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  图神经网络中的消息传递：</span></span>
+<span class="line"><span>    可以看作谱图理论中「图信号处理」的推广</span></span></code></pre>
+<h4 id="8-图深度学习-graph-deep-learning--新兴交叉领域">8. 图深度学习 (Graph Deep Learning) — 新兴交叉领域</h4>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>图论 + 深度学习，最近 5 年发展最快的方向之一。</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>模型类型：</span></span>
+<span class="line"><span>  GCN (Graph Convolutional Network)</span></span>
+<span class="line"><span>  GAT (Graph Attention Network)</span></span>
+<span class="line"><span>  GraphSAGE</span></span>
+<span class="line"><span>  GIN (Graph Isomorphism Network)</span></span>
+<span class="line"><span>  MPNN (Message Passing Neural Network)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>解决的问题：</span></span>
+<span class="line"><span>  - 图节点分类（社交网络中的用户类型）</span></span>
+<span class="line"><span>  - 图边预测（推荐系统中的链接预测）</span></span>
+<span class="line"><span>  - 图层级分类（分子是否有毒）</span></span>
+<span class="line"><span>  - 图生成（药物分子设计）</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>与经典图论的关系：</span></span>
+<span class="line"><span>  GIN 的理论基础就是图论中的 WL (Weisfeiler-Lehman) 图同构测试</span></span>
+<span class="line"><span>  消息传递框架 = 图论中的局部邻域聚合</span></span></code></pre>
+<hr>
+<h2 id="四图论研究的三大基本问题--主要分支矩阵">四、图论研究的「三大基本问题 × 主要分支」矩阵</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>研究分支</th><th align="center">主要问的存在性问题</th><th align="center">主要问的最优化问题</th><th align="center">主要问的分类与刻画问题</th></tr></thead><tbody><tr><td><strong>极值图论</strong></td><td align="center">不含某子图的最大边数</td><td align="center">——</td><td align="center">图的结构极端值</td></tr><tr><td><strong>代数图论</strong></td><td align="center">特征值决定图的存在性</td><td align="center">——</td><td align="center">用谱分类图</td></tr><tr><td><strong>随机图论</strong></td><td align="center">性质何时「突然出现」</td><td align="center">——</td><td align="center">图的典型性质</td></tr><tr><td><strong>拓扑图论</strong></td><td align="center">图能否嵌入某种曲面</td><td align="center">最优嵌入方式</td><td align="center">曲面嵌入的分类</td></tr><tr><td><strong>网络科学</strong></td><td align="center">真实网络符合哪种模型</td><td align="center">信息传播最大化</td><td align="center">社区结构发现</td></tr><tr><td><strong>图算法</strong></td><td align="center">——</td><td align="center">最短/最大/最优</td><td align="center">图是否同构</td></tr><tr><td><strong>谱图理论</strong></td><td align="center">——</td><td align="center">图分割的最优方式</td><td align="center">用谱特征分类图</td></tr><tr><td><strong>图深度学习</strong></td><td align="center">图神经网络能否逼近</td><td align="center">图上的学习任务</td><td align="center">图的表示学习</td></tr></tbody></table>
+<hr>
+<h2 id="五图论研究的一般工作流">五、图论研究的一般工作流</h2>
+<p>当一个图论研究者面对一个新问题时，通常的思考路径：</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>第 1 步：问题建模</span></span>
+<span class="line"><span>  └─ 这是一个存在性问题、最优化问题还是分类问题？</span></span>
+<span class="line"><span>  </span></span>
+<span class="line"><span>第 2 步：图表示</span></span>
+<span class="line"><span>  └─ 用邻接矩阵、邻接表、度序列还是 Laplacian 矩阵？</span></span>
+<span class="line"><span>  </span></span>
+<span class="line"><span>第 3 步：不变量检查</span></span>
+<span class="line"><span>  └─ 计算已知不变量，寻找规律或反例</span></span>
+<span class="line"><span>  </span></span>
+<span class="line"><span>第 4 步：寻找已知结论</span></span>
+<span class="line"><span>  └─ 这个问题是已知定理的推论吗？</span></span>
+<span class="line"><span>  └─ 它跟经典问题（着色、匹配、流）有关吗？</span></span>
+<span class="line"><span>  </span></span>
+<span class="line"><span>第 5 步：构造或证明</span></span>
+<span class="line"><span>  └─ 构造性证明 / 归纳法 / 概率法 / 代数法</span></span>
+<span class="line"><span>  └─ 或者设计算法求解</span></span>
+<span class="line"><span>  </span></span>
+<span class="line"><span>第 6 步：复杂度分析</span></span>
+<span class="line"><span>  └─ 问题是 P 还是 NP？</span></span>
+<span class="line"><span>  └─ 如果 NP 难，可以近似吗？</span></span></code></pre>
+<hr>
+<h2 id="六总结">六、总结</h2>
+<h3 id="基本问题研究什么">基本问题（研究什么）</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>① 存在性：某个结构存不存在？</span></span>
+<span class="line"><span>② 最优化：在多种方案中哪个最好？</span></span>
+<span class="line"><span>③ 分类：这个图属于哪一类、具有什么性质？</span></span></code></pre>
+<h3 id="基本方法用什么研究">基本方法（用什么研究）</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>① 图的表示：邻接矩阵 / 邻接表 / 度序列</span></span>
+<span class="line"><span>② 图遍历：DFS / BFS</span></span>
+<span class="line"><span>③ 图论算法：Dijkstra / Kruskal / Ford-Fulkerson / Tarjan</span></span>
+<span class="line"><span>④ 图不变量：色数 / 团数 / 直径 / 谱</span></span>
+<span class="line"><span>⑤ 归纳与构造</span></span></code></pre>
+<h3 id="主要研究理论分支版图">主要研究理论（分支版图）</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>经典核心：极值图论 → 代数图论 → 随机图论 → 拓扑图论</span></span>
+<span class="line"><span>应用驱动：网络科学 → 图算法 → 谱图理论</span></span>
+<span class="line"><span>新兴交叉：图深度学习（GNN）</span></span></code></pre>
+<hr>
+<h2 id="-关联笔记">🔗 关联笔记</h2>
+<ul>
+<li>[[图论入门：从Obsidian到AI]] ← 直观入门</li>
+<li>[[Obsidian完美使用工作流]] ← 图论在笔记中的体现</li>
+<li>[[Transformer 架构]] ← 自注意力 = 带权完全图</li>
+<li>[[MOC-图论]]（建议创建）</li>
+</ul>
+<hr>
+<p><em>最后更新：2026-07-12</em></p> <div> <a href="/notes" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150">
+&larr; 返回笔记列表
+</a> </div>  </div> <!-- Previous / Next navigation -->  <hr class="!mt-12 !mb-8" data-astro-cid-bvzihdzo> <div data-astro-cid-bvzihdzo> <a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-bvzihdzo>
+&larr; 返回博客列表
+</a> </div> </div> </div> </article> </div>  </main> <footer class="border-t border-[var(--color-border)] mt-24 py-8" data-astro-cid-pux6a34n><div class="max-w-content flex items-center justify-between" data-astro-cid-pux6a34n><span class="text-sm text-[var(--color-text-tertiary)]" data-astro-cid-pux6a34n>
+&copy; 2026 星游寰宇
+</span><div class="flex items-center gap-4" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>博客</a><a href="/projects" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>项目</a><a href="/notes" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>日记</a><a href="/resources" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>资源</a><a href="/about" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>关于</a></div></div></footer> <div id="link-preview" style="display:none;position:fixed;z-index:99;max-width:18rem;pointer-events:none;" data-astro-cid-t7vshrbh></div>  <script type="module">(async()=>{try{const c=await fetch("/posts.json");if(!c.ok)return;const u=await c.json(),p=new Map(u.map(t=>[t.href,t])),e=document.getElementById("link-preview");if(!e)return;let n="",d;document.addEventListener("mouseover",t=>{const i=t.target.closest("a[href^='/blog/']");if(!i){e.style.display="none",n="";return}const s=i.getAttribute("href");if(!s||s===n)return;const o=p.get(s);o&&(n=s,d=setTimeout(()=>{e.innerHTML=`<div class="lp-title">${o.title}</div><div class="lp-summary">${o.summary}</div>`;const r=i.getBoundingClientRect();let a=r.left,l=r.bottom+6;a+288>window.innerWidth&&(a=window.innerWidth-296),l+80>window.innerHeight&&(l=r.top-80),Object.assign(e.style,{left:a+"px",top:l+"px",display:"block"})},300))},{passive:!0}),document.addEventListener("mouseout",t=>{t.target.closest("a[href^='/blog/']")&&(clearTimeout(d),e.style.display="none",n="")},{passive:!0})}catch{}})();</script> </body></html>  <script type="module">const c=document.getElementById("toc-toggle"),s=document.getElementById("toc-list"),i=document.getElementById("toc-chevron");c&&s&&i&&c.addEventListener("click",()=>{const o=s.classList.toggle("hidden");c.setAttribute("aria-expanded",String(o)),i.style.transform=o?"rotate(180deg)":""});const r=document.querySelectorAll(".toc-list a");if(r.length>0){const o=new IntersectionObserver(n=>{for(const t of n)t.isIntersecting&&r.forEach(e=>{e.classList.toggle("active",e.getAttribute("href")===`#${t.target.id}`)})},{rootMargin:"-80px 0px -80% 0px"});r.forEach(n=>{const t=n.getAttribute("href")?.slice(1);if(t){const e=document.getElementById(t);e&&o.observe(e)}})}</script>

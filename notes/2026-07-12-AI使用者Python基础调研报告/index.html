@@ -1,0 +1,850 @@
+<!DOCTYPE html><html lang="zh-CN"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="报告定位：一份面向「以使用 AI 为目的学习 Python」者的完整技能地图，厘清需要学什么、学到什么程度、按什么顺序学。"><meta name="color-scheme" content="light"><!-- Open Graph --><meta property="og:title" content="AI使用者Python基础调研报告 — 星游寰宇"><meta property="og:description" content="报告定位：一份面向「以使用 AI 为目的学习 Python」者的完整技能地图，厘清需要学什么、学到什么程度、按什么顺序学。"><meta property="og:url" content="https://code2239.github.io/notes/2026-07-12-AI使用者Python基础调研报告"><meta property="og:type" content="article"><meta property="og:site_name" content="星游寰宇"><meta property="og:locale" content="zh_CN"><meta property="article:published_time" content="2026-07-12"><meta property="article:tag" content="python"><meta property="article:tag" content="AI"><meta property="article:tag" content="learning"><meta property="article:tag" content="report"><meta property="article:tag" content="skill-tree"><!-- Twitter Card --><meta name="twitter:card" content="summary"><meta name="twitter:title" content="AI使用者Python基础调研报告 — 星游寰宇"><meta name="twitter:description" content="报告定位：一份面向「以使用 AI 为目的学习 Python」者的完整技能地图，厘清需要学什么、学到什么程度、按什么顺序学。"><!-- Canonical --><link rel="canonical" href="https://code2239.github.io/notes/2026-07-12-AI使用者Python基础调研报告"><title>AI使用者Python基础调研报告 — 星游寰宇</title><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="alternate" type="application/rss+xml" title="星游寰宇 RSS" href="/rss.xml"><!-- Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"星游寰宇","url":"https://code2239.github.io","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://code2239.github.io/search?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://code2239.github.io"},{"@type":"ListItem","position":2,"name":"日记","item":"https://code2239.github.io/notes"},{"@type":"ListItem","position":3,"name":"2026 07 12 AI使用者Python基础调研报告"}]},{"@context":"https://schema.org","@type":"BlogPosting","headline":"AI使用者Python基础调研报告","description":"报告定位：一份面向「以使用 AI 为目的学习 Python」者的完整技能地图，厘清需要学什么、学到什么程度、按什么顺序学。","datePublished":"2026-07-12","url":"https://code2239.github.io/notes/2026-07-12-AI使用者Python基础调研报告","keywords":"python, AI, learning, report, skill-tree"}]}</script><link rel="stylesheet" href="/_astro/_slug_.CXDKI3B6.css">
+<style>.back-to-top[data-astro-cid-gzprr2dq]{position:fixed;bottom:2rem;right:2rem;z-index:40;width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:50%;border:1px solid var(--color-border);background:var(--color-bg);color:var(--color-text-secondary);cursor:pointer;box-shadow:var(--shadow-md);transition:opacity .2s ease,transform .2s ease}.back-to-top[data-astro-cid-gzprr2dq]:hover{color:var(--color-accent);border-color:var(--color-accent);transform:translateY(-2px)}.back-to-top[data-astro-cid-gzprr2dq].hidden{opacity:0;pointer-events:none}.copy-btn[data-astro-cid-qqybitij]{position:absolute;top:8px;right:8px;padding:4px 10px;font-size:.6875rem;font-family:var(--font-sans);color:var(--color-text-tertiary);background:var(--color-bg);border:1px solid var(--color-border);border-radius:6px;cursor:pointer;opacity:0;transition:opacity .15s ease,color .15s ease}pre[data-astro-cid-qqybitij]:hover .copy-btn[data-astro-cid-qqybitij]{opacity:1}.copy-btn[data-astro-cid-qqybitij]:hover{color:var(--color-accent);border-color:var(--color-accent)}.copy-btn[data-astro-cid-qqybitij].copied{color:#16a34a;border-color:#16a34a}.blog-layout[data-astro-cid-bvzihdzo]{display:block}.blog-toc[data-astro-cid-bvzihdzo]{display:none}.blog-body[data-astro-cid-bvzihdzo]{min-width:0}@media(min-width:1024px){.blog-layout[data-astro-cid-bvzihdzo]{display:grid;grid-template-columns:14rem 1fr;gap:3rem;align-items:start}.blog-toc[data-astro-cid-bvzihdzo]{display:block}.blog-body[data-astro-cid-bvzihdzo]{padding-right:2rem}}@media(max-width:1023px){.blog-toc[data-astro-cid-bvzihdzo]{display:block;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid var(--color-border)}}
+</style></head> <body class="min-h-screen flex flex-col"> <nav class="sticky top-0 z-40 bg-[var(--color-bg)]/80 backdrop-blur-md border-b border-[var(--color-border)]" data-astro-cid-pux6a34n><div class="max-w-content flex items-center justify-between py-4" data-astro-cid-pux6a34n><a href="/" class="flex items-center gap-2.5 text-base font-semibold no-underline tracking-tight" data-astro-cid-pux6a34n><svg class="w-7 h-7" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" data-astro-cid-pux6a34n><circle cx="16" cy="16" r="15" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-pux6a34n></circle><circle cx="16" cy="16" r="3" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="16" cy="5" r="1.5" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="24" cy="10" r="1" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="8" cy="22" r="1" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="25" cy="21" r="0.8" fill="currentColor" data-astro-cid-pux6a34n></circle></svg>
+星游寰宇
+</a><!-- Desktop nav --><div class="hidden sm:flex items-center gap-5" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>博客</a><a href="/projects" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>项目</a><a href="/notes" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>日记</a><a href="/resources" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>资源</a><a href="/about" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>关于</a><button id="search-trigger" class="flex items-center gap-1.5 text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] bg-[var(--color-bg-secondary)] hover:bg-[var(--color-bg-tertiary)] border border-[var(--color-border)] hover:border-[var(--color-accent)]/30 rounded-lg px-3 py-1.5 cursor-pointer shadow-sm hover:shadow-md transition-all duration-200" aria-label="搜索 (Ctrl+K)" title="搜索 (Ctrl+K)" data-astro-cid-pux6a34n><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-pux6a34n><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" data-astro-cid-pux6a34n></path></svg><span class="hidden lg:inline" data-astro-cid-pux6a34n>搜索</span><kbd class="hidden lg:inline-flex items-center text-[0.625rem] font-mono text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1 py-px rounded" data-astro-cid-pux6a34n>Ctrl+K</kbd></button></div><!-- Mobile hamburger --><button id="menu-btn" class="sm:hidden flex flex-col gap-1 p-2 -mr-2 cursor-pointer" aria-label="打开菜单" data-astro-cid-pux6a34n><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-transform duration-200" data-astro-cid-pux6a34n></span><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-opacity duration-200" data-astro-cid-pux6a34n></span><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-transform duration-200" data-astro-cid-pux6a34n></span></button></div><!-- Mobile menu --><div id="mobile-menu" class="hidden sm:hidden border-t border-[var(--color-border)] bg-[var(--color-bg)]" data-astro-cid-pux6a34n><div class="max-w-content flex flex-col gap-2 py-4" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>博客</a><a href="/projects" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>项目</a><a href="/notes" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>日记</a><a href="/resources" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>资源</a><a href="/about" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>关于</a></div></div></nav>
+    <div id="search-overlay" class="srch-overlay" role="dialog" aria-modal="true" aria-label="全局搜索" data-astro-cid-mn7pezny> <div id="search-backdrop" class="srch-backdrop" data-astro-cid-mn7pezny></div> <div class="srch-panel" id="srch-panel" data-astro-cid-mn7pezny> <!-- Search input --> <div class="srch-input-row" data-astro-cid-mn7pezny> <svg class="srch-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-mn7pezny> <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" data-astro-cid-mn7pezny></path> </svg> <input type="text" id="search-input" class="srch-input" placeholder="搜索文章、项目、日记、资源..." autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="go" data-astro-cid-mn7pezny> <kbd class="srch-kbd" data-astro-cid-mn7pezny>Esc</kbd> </div> <!-- Results area --> <div id="search-results" class="srch-results" data-astro-cid-mn7pezny> <p class="srch-empty" id="search-empty-hint" data-astro-cid-mn7pezny>输入关键词开始搜索</p> </div> <!-- Skeleton loading --> <div id="search-skeleton" class="srch-skeleton" style="display:none;" aria-hidden="true" data-astro-cid-mn7pezny> <div class="srch-skeleton-line" style="width:75%" data-astro-cid-mn7pezny></div> <div class="srch-skeleton-line" style="width:50%" data-astro-cid-mn7pezny></div> <div class="srch-skeleton-line" style="width:60%" data-astro-cid-mn7pezny></div> </div> <!-- Footer hints --> <div class="srch-footer" data-astro-cid-mn7pezny> <div class="srch-footer-hints" data-astro-cid-mn7pezny> <span data-astro-cid-mn7pezny><kbd data-astro-cid-mn7pezny>↑</kbd><kbd data-astro-cid-mn7pezny>↓</kbd> 导航</span> <span data-astro-cid-mn7pezny><kbd data-astro-cid-mn7pezny>↵</kbd> 打开</span> <span data-astro-cid-mn7pezny><kbd data-astro-cid-mn7pezny>Ctrl</kbd>+<kbd data-astro-cid-mn7pezny>K</kbd> 切换</span> </div> <div class="srch-footer-brand" data-astro-cid-mn7pezny>
+powered by Orama
+</div> </div> </div> </div> <script type="module" src="/_astro/Navigation.astro_astro_type_script_index_0_lang.15n1EYJp.js"></script> <main class="flex-1">  <div class="reading-progress" id="reading-progress" style="width: 0%"></div> <script type="module">const o=document.getElementById("reading-progress");if(!o)throw new Error("Reading progress bar element not found");const r=()=>{const n=window.scrollY,e=document.documentElement.scrollHeight-window.innerHeight,t=e>0?n/e*100:0;o.style.width=`${Math.min(t,100)}%`};window.addEventListener("scroll",r,{passive:!0});</script> <button id="back-to-top" class="back-to-top hidden" aria-label="返回顶部" data-astro-cid-gzprr2dq> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-gzprr2dq> <polyline points="18 15 12 9 6 15" data-astro-cid-gzprr2dq></polyline> </svg> </button>  <script type="module">const o=document.getElementById("back-to-top");o&&(window.addEventListener("scroll",()=>{o.classList.toggle("hidden",window.scrollY<400)},{passive:!0}),o.addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"})));</script> <script type="module">document.querySelectorAll("pre").forEach(e=>{const t=document.createElement("button");t.className="copy-btn",t.textContent="复制",t.addEventListener("click",async()=>{const n=e.querySelector("code")?.textContent||e.textContent||"";try{await navigator.clipboard.writeText(n),t.textContent="已复制",t.classList.add("copied"),setTimeout(()=>{t.textContent="复制",t.classList.remove("copied")},2e3)}catch{t.textContent="失败",setTimeout(()=>{t.textContent="复制"},2e3)}}),e.style.position="relative",e.appendChild(t)});</script> <div class="px-6 xl:px-12 pt-12 pb-16" data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <header class="mb-12 text-center" data-astro-cid-bvzihdzo> <h1 class="text-3xl font-semibold mb-3 tracking-tight" data-astro-cid-bvzihdzo>AI使用者Python基础调研报告</h1> <div class="flex items-center justify-center gap-2 text-[var(--color-text-tertiary)] text-sm" data-astro-cid-bvzihdzo> <time datetime="2026-07-12" data-astro-cid-bvzihdzo>2026-07-12</time> <span class="text-[var(--color-border)]" data-astro-cid-bvzihdzo>·</span> <span data-astro-cid-bvzihdzo>45 分钟阅读</span>  <span class="text-[var(--color-border)]" data-astro-cid-bvzihdzo>·</span> <span class="text-sm text-[var(--color-text-tertiary)]"> <span> python<span class="mx-1">·</span> </span><span> AI<span class="mx-1">·</span> </span><span> learning<span class="mx-1">·</span> </span><span> report<span class="mx-1">·</span> </span><span> skill-tree </span> </span>  </div> </header> <div class="blog-layout" data-astro-cid-bvzihdzo> <aside class="blog-toc" data-astro-cid-bvzihdzo> <div class="sticky top-14 max-h-[calc(100vh-3.5rem)] overflow-y-auto" data-astro-cid-bvzihdzo> <button id="toc-toggle" class="hidden max-md:flex items-center gap-1 text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-3 cursor-pointer border-none bg-transparent p-0" aria-expanded="false" aria-controls="toc-list" data-astro-cid-bvzihdzo>
+目录
+<svg id="toc-chevron" class="w-3 h-3 transition-transform duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-bvzihdzo><polyline points="6 9 12 15 18 9" data-astro-cid-bvzihdzo></polyline></svg> </button> <span class="text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-3 max-md:hidden" data-astro-cid-bvzihdzo>目录</span> <div id="toc-list" class="max-md:hidden" data-astro-cid-bvzihdzo> <nav class="toc"> <p class="text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-3">目录</p> <ul class="toc-list"> <li class> <a href="#1-核心理念为什么以-ai-为目的学-python-与传统学法不同">1. 核心理念：为什么以 AI 为目的学 Python 与传统学法不同</a> </li><li class="toc-h3"> <a href="#11-传统-python-学习路线">1.1 传统 Python 学习路线</a> </li><li class="toc-h3"> <a href="#12-ai-使用者路线本报告推荐">1.2 AI 使用者路线（本报告推荐）</a> </li><li class> <a href="#2-python-基础技能清单">2. Python 基础技能清单</a> </li><li class="toc-h3"> <a href="#21--第一梯队必须掌握日常使用覆盖-80">2.1 🔴 第一梯队——必须掌握（日常使用覆盖 80%）</a> </li><li class="toc-h3"> <a href="#22--第二梯队建议掌握覆盖额外-15">2.2 🟡 第二梯队——建议掌握（覆盖额外 15%）</a> </li><li class="toc-h3"> <a href="#23--第三梯队了解概念需要时查阅">2.3 🟢 第三梯队——了解概念，需要时查阅</a> </li><li class> <a href="#3-数据处理基础ai-的核心前置技能">3. 数据处理基础——AI 的核心前置技能</a> </li><li class="toc-h3"> <a href="#31-numpy--数值计算基础">3.1 NumPy —— 数值计算基础</a> </li><li class="toc-h3"> <a href="#32-pandas--表格数据处理">3.2 Pandas —— 表格数据处理</a> </li><li class="toc-h3"> <a href="#33-matplotlib--seaborn--数据可视化">3.3 Matplotlib / Seaborn —— 数据可视化</a> </li><li class> <a href="#4-aiml-框架开始接触人工智能">4. AI/ML 框架——开始接触人工智能</a> </li><li class="toc-h3"> <a href="#41-机器学习基础scikit-learn">4.1 机器学习基础：scikit-learn</a> </li><li class="toc-h3"> <a href="#42-深度学习框架二选一">4.2 深度学习框架（二选一）</a> </li><li class="toc-h3"> <a href="#43-hugging-face-transformers重中之重">4.3 Hugging Face Transformers（重中之重 🎯）</a> </li><li class> <a href="#5-ai-应用开发技能把-ai-变成真正能用的东西">5. AI 应用开发技能——把 AI 变成真正能用的东西</a> </li><li class="toc-h3"> <a href="#51-llm-api-调用">5.1 LLM API 调用</a> </li><li class="toc-h3"> <a href="#52-prompt-engineering提示词工程">5.2 Prompt Engineering（提示词工程）</a> </li><li class="toc-h3"> <a href="#53-rag检索增强生成">5.3 RAG（检索增强生成）</a> </li><li class="toc-h3"> <a href="#54-快速构建-ai-应用界面">5.4 快速构建 AI 应用界面</a> </li><li class> <a href="#6-工程化基础让代码更可靠">6. 工程化基础——让代码更可靠</a> </li><li class> <a href="#7-学习路径与时间规划">7. 学习路径与时间规划</a> </li><li class="toc-h3"> <a href="#71-推荐学习路线">7.1 推荐学习路线</a> </li><li class="toc-h3"> <a href="#72-每天建议投入">7.2 每天建议投入</a> </li><li class="toc-h3"> <a href="#73-关键里程碑">7.3 关键里程碑</a> </li><li class> <a href="#8-推荐学习资源清单">8. 推荐学习资源清单</a> </li><li class="toc-h3"> <a href="#81-免费优质资源">8.1 免费优质资源</a> </li><li class="toc-h3"> <a href="#82-书籍推荐">8.2 书籍推荐</a> </li><li class="toc-h3"> <a href="#83-日常用-ai-辅助学习">8.3 日常用 AI 辅助学习</a> </li><li class> <a href="#9-常见误区提醒">9. 常见误区提醒</a> </li><li class> <a href="#-一句话锐评">🎯 一句话锐评</a> </li> </ul> </nav> </div> </div> </aside> <div class="blog-body" data-astro-cid-bvzihdzo> <div class="prose prose-neutral max-w-none" data-astro-cid-bvzihdzo>   <h1 id="ai-使用者必备-python-基础与相关知识全景报告">AI 使用者必备 Python 基础与相关知识全景报告</h1>
+<blockquote>
+<p><strong>报告定位</strong>：一份面向「以使用 AI 为目的学习 Python」者的完整技能地图，厘清需要学什么、学到什么程度、按什么顺序学。</p>
+</blockquote>
+<hr>
+<h2 id="1-核心理念为什么以-ai-为目的学-python-与传统学法不同">1. 核心理念：为什么以 AI 为目的学 Python 与传统学法不同</h2>
+<h3 id="11-传统-python-学习路线">1.1 传统 Python 学习路线</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>基础语法 → 数据结构与算法 → 面向对象 → 网络编程 → 并发编程 → Web 框架 → ...</span></span></code></pre>
+<p>这条路线是为成为「专业软件工程师」设计的，周期长、大量内容与 AI 无关。</p>
+<h3 id="12-ai-使用者路线本报告推荐">1.2 AI 使用者路线（本报告推荐）</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>基础够用 → 数据处理 → AI 库调用 → 应用搭建 → 按需深入</span></span></code></pre>
+<p><strong>核心原则</strong>：</p>
+<ul>
+<li>用 Python <strong>20% 的语法完成 80% 的工作</strong></li>
+<li>先用起来，再在需要时深入</li>
+<li>一切以「调用 AI 库、处理数据、搭建应用」为衡量标准</li>
+</ul>
+<p><strong>信息源</strong>：</p>
+<ul>
+<li><a href="https://docs.python.org/3/tutorial/">Python 官方教程 — 入门</a></li>
+<li><a href="https://peps.python.org/pep-0020/">Python 之禅 (Zen of Python)</a> — “Simple is better than complex.”</li>
+</ul>
+<hr>
+<h2 id="2-python-基础技能清单">2. Python 基础技能清单</h2>
+<h3 id="21--第一梯队必须掌握日常使用覆盖-80">2.1 🔴 第一梯队——必须掌握（日常使用覆盖 80%）</h3>
+<h4 id="211-变量与基本数据类型">2.1.1 变量与基本数据类型</h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>类型</th><th>示例</th><th>AI 场景用途</th></tr></thead><tbody><tr><td><code>int</code> (整数)</td><td><code>epochs = 50</code></td><td>训练轮数、批次大小、计数</td></tr><tr><td><code>float</code> (浮点数)</td><td><code>learning_rate = 0.001</code></td><td>模型参数、损失值、温度参数</td></tr><tr><td><code>str</code> (字符串)</td><td><code>prompt = "总结以下内容"</code></td><td>Prompt 文本、数据处理</td></tr><tr><td><code>bool</code> (布尔值)</td><td><code>is_ready = True</code></td><td>条件判断、训练状态标志</td></tr><tr><td><code>None</code> (空值)</td><td><code>result = None</code></td><td>表示缺失值、函数默认返回</td></tr></tbody></table>
+<h4 id="212-核心数据结构">2.1.2 核心数据结构</h4>
+<p><strong><code>list</code>（列表）</strong> — 有序、可修改，AI 编程最高频使用的结构之一</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:var(--astro-code-foreground)">texts </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-foreground)"> [</span><span style="color:var(--astro-code-token-string-expression)">"I love AI"</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-token-string-expression)"> "Python is great"</span><span style="color:var(--astro-code-foreground)">]</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">predictions </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-function)"> model</span><span style="color:var(--astro-code-token-punctuation)">(texts)</span><span style="color:var(--astro-code-token-comment)">  # 批量推理</span></span></code></pre>
+<p><strong><code>dict</code>（字典）</strong> — 键值对、查找快，处理结构化数据的基础</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:var(--astro-code-foreground)">config </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-punctuation)"> {</span></span>
+<span class="line"><span style="color:var(--astro-code-token-string-expression)">    "model"</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-token-string-expression)"> "gpt-4o"</span><span style="color:var(--astro-code-token-punctuation)">,</span></span>
+<span class="line"><span style="color:var(--astro-code-token-string-expression)">    "temperature"</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-token-constant)"> 0.7</span><span style="color:var(--astro-code-token-punctuation)">,</span></span>
+<span class="line"><span style="color:var(--astro-code-token-string-expression)">    "max_tokens"</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-token-constant)"> 1024</span></span>
+<span class="line"><span style="color:var(--astro-code-token-punctuation)">}</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">response </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-foreground)"> openai</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-foreground)">ChatCompletion</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">create</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-keyword)">**</span><span style="color:var(--astro-code-token-punctuation)">config)</span></span></code></pre>
+<p><strong><code>tuple</code>（元组）</strong> — 有序、不可改，固定配置和多返回值</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:var(--astro-code-token-comment)"># 函数返回多个值</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">def</span><span style="color:var(--astro-code-token-function)"> get_stats</span><span style="color:var(--astro-code-foreground)">(</span><span style="color:var(--astro-code-token-parameter)">data</span><span style="color:var(--astro-code-foreground)">):</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">    return</span><span style="color:var(--astro-code-token-function)"> len</span><span style="color:var(--astro-code-token-punctuation)">(data),</span><span style="color:var(--astro-code-token-function)"> sum</span><span style="color:var(--astro-code-token-punctuation)">(data)</span><span style="color:var(--astro-code-token-keyword)"> /</span><span style="color:var(--astro-code-token-function)"> len</span><span style="color:var(--astro-code-token-punctuation)">(data)</span><span style="color:var(--astro-code-token-comment)">  # 返回 tuple</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 解包</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">count</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-foreground)"> mean </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-function)"> get_stats</span><span style="color:var(--astro-code-token-punctuation)">(dataset)</span></span></code></pre>
+<p><strong><code>set</code>（集合）</strong> — 无序、去重、集合运算</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:var(--astro-code-foreground)">unique_labels </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-constant)"> set</span><span style="color:var(--astro-code-token-punctuation)">(all_labels)</span><span style="color:var(--astro-code-token-comment)">  # 去重</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">overlap </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-foreground)"> set_a </span><span style="color:var(--astro-code-token-keyword)">&#x26;</span><span style="color:var(--astro-code-foreground)"> set_b  </span><span style="color:var(--astro-code-token-comment)"># 找两个数据集交集的标签</span></span></code></pre>
+<h4 id="213-控制流">2.1.3 控制流</h4>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:var(--astro-code-token-comment)"># 条件分支</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">if</span><span style="color:var(--astro-code-foreground)"> confidence </span><span style="color:var(--astro-code-token-keyword)">></span><span style="color:var(--astro-code-token-constant)"> 0.95</span><span style="color:var(--astro-code-token-punctuation)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">    label </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-string-expression)"> "high"</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">elif</span><span style="color:var(--astro-code-foreground)"> confidence </span><span style="color:var(--astro-code-token-keyword)">></span><span style="color:var(--astro-code-token-constant)"> 0.7</span><span style="color:var(--astro-code-token-punctuation)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">    label </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-string-expression)"> "medium"</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">else</span><span style="color:var(--astro-code-token-punctuation)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">    label </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-string-expression)"> "low"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 遍历——AI 编程每天用</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">for</span><span style="color:var(--astro-code-foreground)"> text </span><span style="color:var(--astro-code-token-keyword)">in</span><span style="color:var(--astro-code-foreground)"> dataset</span><span style="color:var(--astro-code-token-punctuation)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">    embedding </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-foreground)"> model</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">encode</span><span style="color:var(--astro-code-token-punctuation)">(text)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 遍历字典</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">for</span><span style="color:var(--astro-code-foreground)"> key</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-foreground)"> value </span><span style="color:var(--astro-code-token-keyword)">in</span><span style="color:var(--astro-code-foreground)"> config</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">items</span><span style="color:var(--astro-code-token-punctuation)">():</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">    print</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-keyword)">f</span><span style="color:var(--astro-code-token-string-expression)">"</span><span style="color:var(--astro-code-token-constant)">{</span><span style="color:var(--astro-code-token-punctuation)">key</span><span style="color:var(--astro-code-token-constant)">}</span><span style="color:var(--astro-code-token-string-expression)">: </span><span style="color:var(--astro-code-token-constant)">{</span><span style="color:var(--astro-code-token-punctuation)">value</span><span style="color:var(--astro-code-token-constant)">}</span><span style="color:var(--astro-code-token-string-expression)">"</span><span style="color:var(--astro-code-token-punctuation)">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># while 循环——重试机制</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">while</span><span style="color:var(--astro-code-foreground)"> retries </span><span style="color:var(--astro-code-token-keyword)">&#x3C;</span><span style="color:var(--astro-code-token-constant)"> 3</span><span style="color:var(--astro-code-token-punctuation)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">    try</span><span style="color:var(--astro-code-token-punctuation)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">        result </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-function)"> api_call</span><span style="color:var(--astro-code-token-punctuation)">()</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">        break</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">    except</span><span style="color:var(--astro-code-token-punctuation)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">        retries </span><span style="color:var(--astro-code-token-keyword)">+=</span><span style="color:var(--astro-code-token-constant)"> 1</span></span></code></pre>
+<h4 id="214-函数">2.1.4 函数</h4>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:var(--astro-code-token-keyword)">def</span><span style="color:var(--astro-code-token-function)"> preprocess</span><span style="color:var(--astro-code-foreground)">(</span><span style="color:var(--astro-code-token-parameter)">text</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-token-constant)"> str</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-token-parameter)"> max_len</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-token-constant)"> int</span><span style="color:var(--astro-code-token-keyword)"> =</span><span style="color:var(--astro-code-token-constant)"> 512</span><span style="color:var(--astro-code-foreground)">) </span><span style="color:var(--astro-code-token-punctuation)">-></span><span style="color:var(--astro-code-token-constant)"> str</span><span style="color:var(--astro-code-foreground)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">    """</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">    文本预处理函数</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">    - text: 原始文本</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">    - max_len: 最大长度</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">    - 返回: 清洗后的文本</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">    """</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">    text </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-foreground)"> text</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">strip</span><span style="color:var(--astro-code-token-punctuation)">().</span><span style="color:var(--astro-code-token-function)">lower</span><span style="color:var(--astro-code-token-punctuation)">()</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">    return</span><span style="color:var(--astro-code-foreground)"> text</span><span style="color:var(--astro-code-token-punctuation)">[:</span><span style="color:var(--astro-code-foreground)">max_len</span><span style="color:var(--astro-code-token-punctuation)">]</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 调用</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">cleaned </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-function)"> preprocess</span><span style="color:var(--astro-code-token-punctuation)">(raw_text)</span></span></code></pre>
+<p>需要掌握的概念：</p>
+<ul>
+<li>定义与调用、参数与返回值</li>
+<li>默认参数（常用）</li>
+<li><code>*args</code> 和 <code>**kwargs</code>（看懂即可，常用于库的封装）</li>
+<li><code>docstring</code>（文档字符串）的规范</li>
+</ul>
+<h4 id="215-字符串操作prompt-工程的基础">2.1.5 字符串操作（Prompt 工程的基础）</h4>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:var(--astro-code-token-comment)"># f-string —— 动态生成 Prompt（最常用！）</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">topic </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-string-expression)"> "机器学习"</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">prompt </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-keyword)"> f</span><span style="color:var(--astro-code-token-string-expression)">"请用通俗易懂的方式解释</span><span style="color:var(--astro-code-token-constant)">{</span><span style="color:var(--astro-code-foreground)">topic</span><span style="color:var(--astro-code-token-constant)">}</span><span style="color:var(--astro-code-token-string-expression)">，面向零基础用户。"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 分割与合并</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">sentences </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-foreground)"> paragraph</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">split</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-string-expression)">"。"</span><span style="color:var(--astro-code-token-punctuation)">)</span><span style="color:var(--astro-code-token-comment)">  # 按句号切分</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">csv_row </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-string-expression)"> ","</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">join</span><span style="color:var(--astro-code-token-punctuation)">(values)</span><span style="color:var(--astro-code-token-comment)">         # 合并为CSV</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 替换与清洗</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">clean </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-foreground)"> text</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">replace</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-string-expression)">"\n"</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-string-expression)">" "</span><span style="color:var(--astro-code-token-punctuation)">).</span><span style="color:var(--astro-code-token-function)">strip</span><span style="color:var(--astro-code-token-punctuation)">()</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 查找与判断</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">if</span><span style="color:var(--astro-code-token-string-expression)"> "error"</span><span style="color:var(--astro-code-token-keyword)"> in</span><span style="color:var(--astro-code-foreground)"> log_message</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">lower</span><span style="color:var(--astro-code-token-punctuation)">():</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">    print</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-string-expression)">"检测到错误"</span><span style="color:var(--astro-code-token-punctuation)">)</span></span></code></pre>
+<h4 id="216-文件读写数据输入输出">2.1.6 文件读写（数据输入输出）</h4>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:var(--astro-code-token-comment)"># 读文本文件</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">with</span><span style="color:var(--astro-code-token-function)"> open</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-string-expression)">"data.txt"</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-string-expression)">"r"</span><span style="color:var(--astro-code-token-punctuation)">, encoding</span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-string-expression)">"utf-8"</span><span style="color:var(--astro-code-token-punctuation)">)</span><span style="color:var(--astro-code-token-keyword)"> as</span><span style="color:var(--astro-code-foreground)"> f</span><span style="color:var(--astro-code-token-punctuation)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">    content </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-foreground)"> f</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">read</span><span style="color:var(--astro-code-token-punctuation)">()</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 写文本文件</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">with</span><span style="color:var(--astro-code-token-function)"> open</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-string-expression)">"result.txt"</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-string-expression)">"w"</span><span style="color:var(--astro-code-token-punctuation)">, encoding</span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-string-expression)">"utf-8"</span><span style="color:var(--astro-code-token-punctuation)">)</span><span style="color:var(--astro-code-token-keyword)"> as</span><span style="color:var(--astro-code-foreground)"> f</span><span style="color:var(--astro-code-token-punctuation)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">    f</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">write</span><span style="color:var(--astro-code-token-punctuation)">(output)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># JSON 读写（AI 项目最常见的格式）</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">import</span><span style="color:var(--astro-code-foreground)"> json</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">with</span><span style="color:var(--astro-code-token-function)"> open</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-string-expression)">"config.json"</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-string-expression)">"r"</span><span style="color:var(--astro-code-token-punctuation)">, encoding</span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-string-expression)">"utf-8"</span><span style="color:var(--astro-code-token-punctuation)">)</span><span style="color:var(--astro-code-token-keyword)"> as</span><span style="color:var(--astro-code-foreground)"> f</span><span style="color:var(--astro-code-token-punctuation)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">    config </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-foreground)"> json</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">load</span><span style="color:var(--astro-code-token-punctuation)">(f)</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">with</span><span style="color:var(--astro-code-token-function)"> open</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-string-expression)">"result.json"</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-string-expression)">"w"</span><span style="color:var(--astro-code-token-punctuation)">, encoding</span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-string-expression)">"utf-8"</span><span style="color:var(--astro-code-token-punctuation)">)</span><span style="color:var(--astro-code-token-keyword)"> as</span><span style="color:var(--astro-code-foreground)"> f</span><span style="color:var(--astro-code-token-punctuation)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">    json</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">dump</span><span style="color:var(--astro-code-token-punctuation)">(result, f, ensure_ascii</span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-constant)">False</span><span style="color:var(--astro-code-token-punctuation)">, indent</span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-constant)">2</span><span style="color:var(--astro-code-token-punctuation)">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># CSV 读写（数据集常见格式）</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">import</span><span style="color:var(--astro-code-foreground)"> csv</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">with</span><span style="color:var(--astro-code-token-function)"> open</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-string-expression)">"dataset.csv"</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-string-expression)">"r"</span><span style="color:var(--astro-code-token-punctuation)">, encoding</span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-string-expression)">"utf-8"</span><span style="color:var(--astro-code-token-punctuation)">)</span><span style="color:var(--astro-code-token-keyword)"> as</span><span style="color:var(--astro-code-foreground)"> f</span><span style="color:var(--astro-code-token-punctuation)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">    reader </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-foreground)"> csv</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">DictReader</span><span style="color:var(--astro-code-token-punctuation)">(f)</span><span style="color:var(--astro-code-token-comment)">  # 以字典形式读取</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">    for</span><span style="color:var(--astro-code-foreground)"> row </span><span style="color:var(--astro-code-token-keyword)">in</span><span style="color:var(--astro-code-foreground)"> reader</span><span style="color:var(--astro-code-token-punctuation)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">        print</span><span style="color:var(--astro-code-token-punctuation)">(row[</span><span style="color:var(--astro-code-token-string-expression)">"text"</span><span style="color:var(--astro-code-token-punctuation)">], row[</span><span style="color:var(--astro-code-token-string-expression)">"label"</span><span style="color:var(--astro-code-token-punctuation)">])</span></span></code></pre>
+<h4 id="217-模块导入与包管理">2.1.7 模块导入与包管理</h4>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:var(--astro-code-token-comment)"># 标准库</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">import</span><span style="color:var(--astro-code-foreground)"> os</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">import</span><span style="color:var(--astro-code-foreground)"> json</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">import</span><span style="color:var(--astro-code-foreground)"> sys</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">from</span><span style="color:var(--astro-code-foreground)"> pathlib </span><span style="color:var(--astro-code-token-keyword)">import</span><span style="color:var(--astro-code-foreground)"> Path</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 第三方库</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">import</span><span style="color:var(--astro-code-foreground)"> numpy </span><span style="color:var(--astro-code-token-keyword)">as</span><span style="color:var(--astro-code-foreground)"> np      </span><span style="color:var(--astro-code-token-comment)"># 约定别名</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">import</span><span style="color:var(--astro-code-foreground)"> pandas </span><span style="color:var(--astro-code-token-keyword)">as</span><span style="color:var(--astro-code-foreground)"> pd</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">import</span><span style="color:var(--astro-code-foreground)"> torch</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">from</span><span style="color:var(--astro-code-foreground)"> transformers </span><span style="color:var(--astro-code-token-keyword)">import</span><span style="color:var(--astro-code-foreground)"> pipeline</span></span></code></pre>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:var(--astro-code-token-comment)"># 终端相关命令</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">pip</span><span style="color:var(--astro-code-token-string)"> install</span><span style="color:var(--astro-code-token-string)"> numpy</span><span style="color:var(--astro-code-token-string)"> pandas</span><span style="color:var(--astro-code-token-string)"> torch</span><span style="color:var(--astro-code-token-string)"> transformers</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">pip</span><span style="color:var(--astro-code-token-string)"> list</span><span style="color:var(--astro-code-token-comment)">                    # 查看已安装包</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">pip</span><span style="color:var(--astro-code-token-string)"> freeze</span><span style="color:var(--astro-code-token-keyword)"> ></span><span style="color:var(--astro-code-token-string)"> requirements.txt</span><span style="color:var(--astro-code-token-comment)">  # 导出环境</span></span></code></pre>
+<hr>
+<h3 id="22--第二梯队建议掌握覆盖额外-15">2.2 🟡 第二梯队——建议掌握（覆盖额外 15%）</h3>
+<h4 id="221-列表推导式">2.2.1 列表推导式</h4>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:var(--astro-code-token-comment)"># 基础形式</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">squares </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-foreground)"> [x</span><span style="color:var(--astro-code-token-keyword)">**</span><span style="color:var(--astro-code-token-constant)">2</span><span style="color:var(--astro-code-token-keyword)"> for</span><span style="color:var(--astro-code-foreground)"> x </span><span style="color:var(--astro-code-token-keyword)">in</span><span style="color:var(--astro-code-token-function)"> range</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-constant)">10</span><span style="color:var(--astro-code-token-punctuation)">)</span><span style="color:var(--astro-code-foreground)">]</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 带条件</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">long_texts </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-foreground)"> [t </span><span style="color:var(--astro-code-token-keyword)">for</span><span style="color:var(--astro-code-foreground)"> t </span><span style="color:var(--astro-code-token-keyword)">in</span><span style="color:var(--astro-code-foreground)"> all_texts </span><span style="color:var(--astro-code-token-keyword)">if</span><span style="color:var(--astro-code-token-function)"> len</span><span style="color:var(--astro-code-token-punctuation)">(t)</span><span style="color:var(--astro-code-token-keyword)"> ></span><span style="color:var(--astro-code-token-constant)"> 50</span><span style="color:var(--astro-code-foreground)">]</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 嵌套——处理二维数据</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">matrix </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-foreground)"> [[i </span><span style="color:var(--astro-code-token-keyword)">*</span><span style="color:var(--astro-code-foreground)"> j </span><span style="color:var(--astro-code-token-keyword)">for</span><span style="color:var(--astro-code-foreground)"> j </span><span style="color:var(--astro-code-token-keyword)">in</span><span style="color:var(--astro-code-token-function)"> range</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-constant)">5</span><span style="color:var(--astro-code-token-punctuation)">)</span><span style="color:var(--astro-code-foreground)">] </span><span style="color:var(--astro-code-token-keyword)">for</span><span style="color:var(--astro-code-foreground)"> i </span><span style="color:var(--astro-code-token-keyword)">in</span><span style="color:var(--astro-code-token-function)"> range</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-constant)">5</span><span style="color:var(--astro-code-token-punctuation)">)</span><span style="color:var(--astro-code-foreground)">]</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># AI 场景：批量预处理</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">cleaned </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-foreground)"> [t</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">strip</span><span style="color:var(--astro-code-token-punctuation)">().</span><span style="color:var(--astro-code-token-function)">lower</span><span style="color:var(--astro-code-token-punctuation)">()</span><span style="color:var(--astro-code-token-keyword)"> for</span><span style="color:var(--astro-code-foreground)"> t </span><span style="color:var(--astro-code-token-keyword)">in</span><span style="color:var(--astro-code-foreground)"> raw_texts </span><span style="color:var(--astro-code-token-keyword)">if</span><span style="color:var(--astro-code-foreground)"> t </span><span style="color:var(--astro-code-token-keyword)">and</span><span style="color:var(--astro-code-token-function)"> len</span><span style="color:var(--astro-code-token-punctuation)">(t)</span><span style="color:var(--astro-code-token-keyword)"> ></span><span style="color:var(--astro-code-token-constant)"> 10</span><span style="color:var(--astro-code-foreground)">]</span></span></code></pre>
+<h4 id="222-切片slicing">2.2.2 切片（Slicing）</h4>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:var(--astro-code-foreground)">data </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-foreground)"> [</span><span style="color:var(--astro-code-token-constant)">0</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-token-constant)"> 1</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-token-constant)"> 2</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-token-constant)"> 3</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-token-constant)"> 4</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-token-constant)"> 5</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-token-constant)"> 6</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-token-constant)"> 7</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-token-constant)"> 8</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-token-constant)"> 9</span><span style="color:var(--astro-code-foreground)">]</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 各种切片方式</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">data</span><span style="color:var(--astro-code-token-punctuation)">[:</span><span style="color:var(--astro-code-token-constant)">5</span><span style="color:var(--astro-code-token-punctuation)">]</span><span style="color:var(--astro-code-token-comment)">        # 前5个 → [0,1,2,3,4]</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">data</span><span style="color:var(--astro-code-token-punctuation)">[</span><span style="color:var(--astro-code-token-constant)">5</span><span style="color:var(--astro-code-token-punctuation)">:]</span><span style="color:var(--astro-code-token-comment)">        # 从第6个开始 → [5,6,7,8,9]</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">data</span><span style="color:var(--astro-code-token-punctuation)">[::</span><span style="color:var(--astro-code-token-constant)">2</span><span style="color:var(--astro-code-token-punctuation)">]</span><span style="color:var(--astro-code-token-comment)">       # 每隔一个 → [0,2,4,6,8]</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">data</span><span style="color:var(--astro-code-token-punctuation)">[::</span><span style="color:var(--astro-code-token-keyword)">-</span><span style="color:var(--astro-code-token-constant)">1</span><span style="color:var(--astro-code-token-punctuation)">]</span><span style="color:var(--astro-code-token-comment)">      # 反转 → [9,8,7,6,5,4,3,2,1,0]</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># AI 场景：切分训练/验证集</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">train </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-foreground)"> dataset</span><span style="color:var(--astro-code-token-punctuation)">[:</span><span style="color:var(--astro-code-token-constant)">800</span><span style="color:var(--astro-code-token-punctuation)">]</span><span style="color:var(--astro-code-token-comment)">   # 前800条训练</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">val </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-foreground)"> dataset</span><span style="color:var(--astro-code-token-punctuation)">[</span><span style="color:var(--astro-code-token-constant)">800</span><span style="color:var(--astro-code-token-punctuation)">:]</span><span style="color:var(--astro-code-token-comment)">      # 剩余验证</span></span></code></pre>
+<h4 id="223-异常处理">2.2.3 异常处理</h4>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:var(--astro-code-token-comment)"># AI 场景：API 调用必须处理异常</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">import</span><span style="color:var(--astro-code-foreground)"> time</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">def</span><span style="color:var(--astro-code-token-function)"> call_api_with_retry</span><span style="color:var(--astro-code-foreground)">(</span><span style="color:var(--astro-code-token-parameter)">prompt</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-token-parameter)"> max_retries</span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-constant)">3</span><span style="color:var(--astro-code-foreground)">):</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">    for</span><span style="color:var(--astro-code-foreground)"> attempt </span><span style="color:var(--astro-code-token-keyword)">in</span><span style="color:var(--astro-code-token-function)"> range</span><span style="color:var(--astro-code-token-punctuation)">(max_retries):</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">        try</span><span style="color:var(--astro-code-token-punctuation)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">            response </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-foreground)"> openai</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-foreground)">ChatCompletion</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">create</span><span style="color:var(--astro-code-token-punctuation)">(</span></span>
+<span class="line"><span style="color:var(--astro-code-token-punctuation)">                model</span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-string-expression)">"gpt-4o"</span><span style="color:var(--astro-code-token-punctuation)">,</span></span>
+<span class="line"><span style="color:var(--astro-code-token-punctuation)">                messages</span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-punctuation)">[{</span><span style="color:var(--astro-code-token-string-expression)">"role"</span><span style="color:var(--astro-code-token-punctuation)">: </span><span style="color:var(--astro-code-token-string-expression)">"user"</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-string-expression)">"content"</span><span style="color:var(--astro-code-token-punctuation)">: prompt}]</span></span>
+<span class="line"><span style="color:var(--astro-code-token-punctuation)">            )</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">            return</span><span style="color:var(--astro-code-foreground)"> response</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-foreground)">choices</span><span style="color:var(--astro-code-token-punctuation)">[</span><span style="color:var(--astro-code-token-constant)">0</span><span style="color:var(--astro-code-token-punctuation)">].</span><span style="color:var(--astro-code-foreground)">message</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-foreground)">content</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">        except</span><span style="color:var(--astro-code-foreground)"> RateLimitError</span><span style="color:var(--astro-code-token-punctuation)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">            wait </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-constant)"> 2</span><span style="color:var(--astro-code-token-keyword)"> **</span><span style="color:var(--astro-code-foreground)"> attempt  </span><span style="color:var(--astro-code-token-comment)"># 指数退避</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">            time</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">sleep</span><span style="color:var(--astro-code-token-punctuation)">(wait)</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">        except</span><span style="color:var(--astro-code-foreground)"> APIError </span><span style="color:var(--astro-code-token-keyword)">as</span><span style="color:var(--astro-code-foreground)"> e</span><span style="color:var(--astro-code-token-punctuation)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">            print</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-keyword)">f</span><span style="color:var(--astro-code-token-string-expression)">"API 错误: </span><span style="color:var(--astro-code-token-constant)">{</span><span style="color:var(--astro-code-token-punctuation)">e</span><span style="color:var(--astro-code-token-constant)">}</span><span style="color:var(--astro-code-token-string-expression)">"</span><span style="color:var(--astro-code-token-punctuation)">)</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">            break</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">        except</span><span style="color:var(--astro-code-token-constant)"> Exception</span><span style="color:var(--astro-code-token-keyword)"> as</span><span style="color:var(--astro-code-foreground)"> e</span><span style="color:var(--astro-code-token-punctuation)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">            print</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-keyword)">f</span><span style="color:var(--astro-code-token-string-expression)">"未知错误: </span><span style="color:var(--astro-code-token-constant)">{</span><span style="color:var(--astro-code-token-punctuation)">e</span><span style="color:var(--astro-code-token-constant)">}</span><span style="color:var(--astro-code-token-string-expression)">"</span><span style="color:var(--astro-code-token-punctuation)">)</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">            break</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">    return</span><span style="color:var(--astro-code-token-constant)"> None</span></span></code></pre>
+<h4 id="224-enumerate-与-zip">2.2.4 enumerate 与 zip</h4>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:var(--astro-code-token-comment)"># 同时获取索引和值</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">for</span><span style="color:var(--astro-code-foreground)"> i</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-foreground)"> text </span><span style="color:var(--astro-code-token-keyword)">in</span><span style="color:var(--astro-code-token-function)"> enumerate</span><span style="color:var(--astro-code-token-punctuation)">(texts):</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">    print</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-keyword)">f</span><span style="color:var(--astro-code-token-string-expression)">"第 </span><span style="color:var(--astro-code-token-constant)">{</span><span style="color:var(--astro-code-token-punctuation)">i</span><span style="color:var(--astro-code-token-keyword)">+</span><span style="color:var(--astro-code-token-constant)">1}</span><span style="color:var(--astro-code-token-string-expression)"> 条: </span><span style="color:var(--astro-code-token-constant)">{</span><span style="color:var(--astro-code-token-punctuation)">text[:</span><span style="color:var(--astro-code-token-constant)">20</span><span style="color:var(--astro-code-token-punctuation)">]</span><span style="color:var(--astro-code-token-constant)">}</span><span style="color:var(--astro-code-token-string-expression)">..."</span><span style="color:var(--astro-code-token-punctuation)">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 同时遍历多个列表</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">for</span><span style="color:var(--astro-code-foreground)"> text</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-foreground)"> label </span><span style="color:var(--astro-code-token-keyword)">in</span><span style="color:var(--astro-code-token-function)"> zip</span><span style="color:var(--astro-code-token-punctuation)">(texts, labels):</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">    print</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-keyword)">f</span><span style="color:var(--astro-code-token-string-expression)">"文本: </span><span style="color:var(--astro-code-token-constant)">{</span><span style="color:var(--astro-code-token-punctuation)">text</span><span style="color:var(--astro-code-token-constant)">}</span><span style="color:var(--astro-code-token-string-expression)"> → 标签: </span><span style="color:var(--astro-code-token-constant)">{</span><span style="color:var(--astro-code-token-punctuation)">label</span><span style="color:var(--astro-code-token-constant)">}</span><span style="color:var(--astro-code-token-string-expression)">"</span><span style="color:var(--astro-code-token-punctuation)">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 合并成字典</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">pairs </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-constant)"> dict</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-function)">zip</span><span style="color:var(--astro-code-token-punctuation)">(keys, values))</span></span></code></pre>
+<h4 id="225-lambda-与高阶函数">2.2.5 lambda 与高阶函数</h4>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:var(--astro-code-token-comment)"># 排序——按字典里某个字段排序</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">sorted_results </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-function)"> sorted</span><span style="color:var(--astro-code-token-punctuation)">(</span></span>
+<span class="line"><span style="color:var(--astro-code-token-punctuation)">    results, </span></span>
+<span class="line"><span style="color:var(--astro-code-token-punctuation)">    key</span><span style="color:var(--astro-code-token-keyword)">=lambda</span><span style="color:var(--astro-code-token-parameter)"> x</span><span style="color:var(--astro-code-token-punctuation)">: x[</span><span style="color:var(--astro-code-token-string-expression)">"confidence"</span><span style="color:var(--astro-code-token-punctuation)">], </span></span>
+<span class="line"><span style="color:var(--astro-code-token-punctuation)">    reverse</span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-constant)">True</span></span>
+<span class="line"><span style="color:var(--astro-code-token-punctuation)">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># filter —— 过滤</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">high_conf </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-constant)"> list</span><span style="color:var(--astro-code-token-punctuation)">(</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">    filter</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-keyword)">lambda</span><span style="color:var(--astro-code-token-parameter)"> x</span><span style="color:var(--astro-code-token-punctuation)">: x[</span><span style="color:var(--astro-code-token-string-expression)">"confidence"</span><span style="color:var(--astro-code-token-punctuation)">] </span><span style="color:var(--astro-code-token-keyword)">></span><span style="color:var(--astro-code-token-constant)"> 0.9</span><span style="color:var(--astro-code-token-punctuation)">, results)</span></span>
+<span class="line"><span style="color:var(--astro-code-token-punctuation)">)</span></span></code></pre>
+<hr>
+<h3 id="23--第三梯队了解概念需要时查阅">2.3 🟢 第三梯队——了解概念，需要时查阅</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>概念</th><th>一句话解释</th><th>何时会用到</th></tr></thead><tbody><tr><td><strong>类与面向对象</strong></td><td><code>class</code> 将数据和操作打包在一起</td><td>自定义 PyTorch 模型、自定义 Dataset 类</td></tr><tr><td><strong>装饰器 <code>@</code></strong></td><td>在不修改函数代码的前提下增强功能</td><td>Flask/FastAPI 路由、<code>@torch.no_grad()</code></td></tr><tr><td><strong>生成器 <code>yield</code></strong></td><td>惰性求值，一次只产生一个元素，节省内存</td><td>处理超大数据集</td></tr><tr><td><strong>正则表达式 <code>re</code></strong></td><td>用模式匹配文本</td><td>复杂文本提取与清洗</td></tr><tr><td><strong>类型注解</strong></td><td><code>def add(a: int, b: int) -> int:</code></td><td>提高代码可读性，配合 IDE 提示</td></tr><tr><td><strong>多线程/异步</strong></td><td>同时执行多个任务</td><td>并发调用 API、批量下载</td></tr><tr><td><strong>上下文管理器</strong></td><td><code>with</code> 语句背后的原理</td><td>自定义资源管理</td></tr></tbody></table>
+<hr>
+<h2 id="3-数据处理基础ai-的核心前置技能">3. 数据处理基础——AI 的核心前置技能</h2>
+<p>AI 的本质是「数据 + 算法」，数据处理能力直接决定你是否能用 AI 做出东西。</p>
+<h3 id="31-numpy--数值计算基础">3.1 NumPy —— 数值计算基础</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:var(--astro-code-token-keyword)">import</span><span style="color:var(--astro-code-foreground)"> numpy </span><span style="color:var(--astro-code-token-keyword)">as</span><span style="color:var(--astro-code-foreground)"> np</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 创建数组</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">arr </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-foreground)"> np</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">array</span><span style="color:var(--astro-code-token-punctuation)">([[</span><span style="color:var(--astro-code-token-constant)">1</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">2</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">3</span><span style="color:var(--astro-code-token-punctuation)">], [</span><span style="color:var(--astro-code-token-constant)">4</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">5</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">6</span><span style="color:var(--astro-code-token-punctuation)">]])</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">zeros </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-foreground)"> np</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">zeros</span><span style="color:var(--astro-code-token-punctuation)">((</span><span style="color:var(--astro-code-token-constant)">3</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">4</span><span style="color:var(--astro-code-token-punctuation)">))</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">ones </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-foreground)"> np</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">ones</span><span style="color:var(--astro-code-token-punctuation)">((</span><span style="color:var(--astro-code-token-constant)">2</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">3</span><span style="color:var(--astro-code-token-punctuation)">))</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">random </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-foreground)"> np</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-foreground)">random</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">randn</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-constant)">1000</span><span style="color:var(--astro-code-token-punctuation)">)</span><span style="color:var(--astro-code-token-comment)">  # 正态分布随机数</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 数组运算（向量化，比 for 循环快几十倍）</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">arr </span><span style="color:var(--astro-code-token-keyword)">*</span><span style="color:var(--astro-code-token-constant)"> 2</span><span style="color:var(--astro-code-token-keyword)"> +</span><span style="color:var(--astro-code-token-constant)"> 1</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">np</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">mean</span><span style="color:var(--astro-code-token-punctuation)">(arr)</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">np</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">std</span><span style="color:var(--astro-code-token-punctuation)">(arr)</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">arr</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">dot</span><span style="color:var(--astro-code-token-punctuation)">(arr.T)</span><span style="color:var(--astro-code-token-comment)">  # 矩阵乘法</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 索引与切片</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">arr</span><span style="color:var(--astro-code-token-punctuation)">[:,</span><span style="color:var(--astro-code-token-constant)"> 1</span><span style="color:var(--astro-code-token-punctuation)">]</span><span style="color:var(--astro-code-token-comment)">  # 所有行，第1列</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">arr</span><span style="color:var(--astro-code-token-punctuation)">[</span><span style="color:var(--astro-code-foreground)">arr </span><span style="color:var(--astro-code-token-keyword)">></span><span style="color:var(--astro-code-token-constant)"> 3</span><span style="color:var(--astro-code-token-punctuation)">]</span><span style="color:var(--astro-code-token-comment)">  # 条件索引</span></span></code></pre>
+<p><strong>为什么学 NumPy</strong>：</p>
+<ul>
+<li>PyTorch/TensorFlow 的 Tensor 操作与 NumPy 几乎一致</li>
+<li>特征工程、数据预处理、相似度计算都需要向量化操作</li>
+<li>理解「向量化运算」思维是进入 AI 的关键一步</li>
+</ul>
+<h3 id="32-pandas--表格数据处理">3.2 Pandas —— 表格数据处理</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:var(--astro-code-token-keyword)">import</span><span style="color:var(--astro-code-foreground)"> pandas </span><span style="color:var(--astro-code-token-keyword)">as</span><span style="color:var(--astro-code-foreground)"> pd</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 读取数据</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">df </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-foreground)"> pd</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">read_csv</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-string-expression)">"dataset.csv"</span><span style="color:var(--astro-code-token-punctuation)">)</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">df </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-foreground)"> pd</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">read_json</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-string-expression)">"data.json"</span><span style="color:var(--astro-code-token-punctuation)">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 核心操作</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">df</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">head</span><span style="color:var(--astro-code-token-punctuation)">()</span><span style="color:var(--astro-code-token-comment)">            # 预览前5行</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">df</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">info</span><span style="color:var(--astro-code-token-punctuation)">()</span><span style="color:var(--astro-code-token-comment)">            # 列信息、类型、非空值数量</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">df</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">describe</span><span style="color:var(--astro-code-token-punctuation)">()</span><span style="color:var(--astro-code-token-comment)">        # 统计摘要</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">df</span><span style="color:var(--astro-code-token-punctuation)">[</span><span style="color:var(--astro-code-token-string-expression)">"text"</span><span style="color:var(--astro-code-token-punctuation)">].</span><span style="color:var(--astro-code-token-function)">value_counts</span><span style="color:var(--astro-code-token-punctuation)">()</span><span style="color:var(--astro-code-token-comment)">  # 分类统计</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 数据清洗</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">df</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">dropna</span><span style="color:var(--astro-code-token-punctuation)">()</span><span style="color:var(--astro-code-token-comment)">                  # 删除空值行</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">df</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">fillna</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-string-expression)">""</span><span style="color:var(--astro-code-token-punctuation)">)</span><span style="color:var(--astro-code-token-comment)">                # 填充空值</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">df</span><span style="color:var(--astro-code-token-punctuation)">[</span><span style="color:var(--astro-code-token-string-expression)">"text"</span><span style="color:var(--astro-code-token-punctuation)">]</span><span style="color:var(--astro-code-token-keyword)"> =</span><span style="color:var(--astro-code-foreground)"> df</span><span style="color:var(--astro-code-token-punctuation)">[</span><span style="color:var(--astro-code-token-string-expression)">"text"</span><span style="color:var(--astro-code-token-punctuation)">].</span><span style="color:var(--astro-code-foreground)">str</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">strip</span><span style="color:var(--astro-code-token-punctuation)">()</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">df </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-foreground)"> df</span><span style="color:var(--astro-code-token-punctuation)">[</span><span style="color:var(--astro-code-foreground)">df</span><span style="color:var(--astro-code-token-punctuation)">[</span><span style="color:var(--astro-code-token-string-expression)">"length"</span><span style="color:var(--astro-code-token-punctuation)">]</span><span style="color:var(--astro-code-token-keyword)"> ></span><span style="color:var(--astro-code-token-constant)"> 10</span><span style="color:var(--astro-code-token-punctuation)">]</span><span style="color:var(--astro-code-token-comment)">  # 条件过滤</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 分组与聚合</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">df</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">groupby</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-string-expression)">"label"</span><span style="color:var(--astro-code-token-punctuation)">)</span><span style="color:var(--astro-code-foreground)">[</span><span style="color:var(--astro-code-token-string-expression)">"score"</span><span style="color:var(--astro-code-foreground)">]</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">mean</span><span style="color:var(--astro-code-token-punctuation)">()</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 保存</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">df</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">to_csv</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-string-expression)">"cleaned.csv"</span><span style="color:var(--astro-code-token-punctuation)">, index</span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-constant)">False</span><span style="color:var(--astro-code-token-punctuation)">)</span></span></code></pre>
+<p><strong>为什么学 Pandas</strong>：</p>
+<ul>
+<li>数据探索（EDA）的标配工具</li>
+<li>清洗数据集、分析分布、切分训练集</li>
+<li>几乎所有 Kaggle 数据集都能用 Pandas 直接读取</li>
+</ul>
+<h3 id="33-matplotlib--seaborn--数据可视化">3.3 Matplotlib / Seaborn —— 数据可视化</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:var(--astro-code-token-keyword)">import</span><span style="color:var(--astro-code-foreground)"> matplotlib</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-foreground)">pyplot </span><span style="color:var(--astro-code-token-keyword)">as</span><span style="color:var(--astro-code-foreground)"> plt</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">import</span><span style="color:var(--astro-code-foreground)"> seaborn </span><span style="color:var(--astro-code-token-keyword)">as</span><span style="color:var(--astro-code-foreground)"> sns</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 折线图——训练损失变化</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">plt</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">plot</span><span style="color:var(--astro-code-token-punctuation)">(train_losses, label</span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-string-expression)">"Train"</span><span style="color:var(--astro-code-token-punctuation)">)</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">plt</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">plot</span><span style="color:var(--astro-code-token-punctuation)">(val_losses, label</span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-string-expression)">"Validation"</span><span style="color:var(--astro-code-token-punctuation)">)</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">plt</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">legend</span><span style="color:var(--astro-code-token-punctuation)">()</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">plt</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">show</span><span style="color:var(--astro-code-token-punctuation)">()</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 直方图——数据分布</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">sns</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">histplot</span><span style="color:var(--astro-code-token-punctuation)">(df[</span><span style="color:var(--astro-code-token-string-expression)">"text_length"</span><span style="color:var(--astro-code-token-punctuation)">])</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">plt</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">title</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-string-expression)">"文本长度分布"</span><span style="color:var(--astro-code-token-punctuation)">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 混淆矩阵——分类结果</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">sns</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">heatmap</span><span style="color:var(--astro-code-token-punctuation)">(confusion_matrix, annot</span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-constant)">True</span><span style="color:var(--astro-code-token-punctuation)">, fmt</span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-string-expression)">"d"</span><span style="color:var(--astro-code-token-punctuation)">)</span></span></code></pre>
+<p><strong>为什么学可视化</strong>：</p>
+<ul>
+<li>理解数据分布是特征工程的基础</li>
+<li>监控模型训练过程（损失曲线）</li>
+<li>展示结果、写报告、做演示</li>
+</ul>
+<p><strong>信息源</strong>：</p>
+<ul>
+<li><a href="https://numpy.org/doc/stable/user/absolute_beginners.html">NumPy 官方教程</a></li>
+<li><a href="https://pandas.pydata.org/docs/getting_started/index.html">Pandas 官方入门</a></li>
+<li><a href="https://matplotlib.org/stable/tutorials/index.html">Matplotlib 教程</a></li>
+<li><a href="https://seaborn.pydata.org/tutorial.html">Seaborn 教程</a></li>
+</ul>
+<hr>
+<h2 id="4-aiml-框架开始接触人工智能">4. AI/ML 框架——开始接触人工智能</h2>
+<h3 id="41-机器学习基础scikit-learn">4.1 机器学习基础：scikit-learn</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:var(--astro-code-token-keyword)">from</span><span style="color:var(--astro-code-foreground)"> sklearn</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-foreground)">model_selection </span><span style="color:var(--astro-code-token-keyword)">import</span><span style="color:var(--astro-code-foreground)"> train_test_split</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">from</span><span style="color:var(--astro-code-foreground)"> sklearn</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-foreground)">feature_extraction</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-foreground)">text </span><span style="color:var(--astro-code-token-keyword)">import</span><span style="color:var(--astro-code-foreground)"> TfidfVectorizer</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">from</span><span style="color:var(--astro-code-foreground)"> sklearn</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-foreground)">ensemble </span><span style="color:var(--astro-code-token-keyword)">import</span><span style="color:var(--astro-code-foreground)"> RandomForestClassifier</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">from</span><span style="color:var(--astro-code-foreground)"> sklearn</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-foreground)">metrics </span><span style="color:var(--astro-code-token-keyword)">import</span><span style="color:var(--astro-code-foreground)"> classification_report</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 切分数据</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">X_train</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-foreground)"> X_test</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-foreground)"> y_train</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-foreground)"> y_test </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-function)"> train_test_split</span><span style="color:var(--astro-code-token-punctuation)">(</span></span>
+<span class="line"><span style="color:var(--astro-code-token-punctuation)">    texts, labels, test_size</span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-constant)">0.2</span><span style="color:var(--astro-code-token-punctuation)">, random_state</span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-constant)">42</span></span>
+<span class="line"><span style="color:var(--astro-code-token-punctuation)">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 特征提取</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">vectorizer </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-function)"> TfidfVectorizer</span><span style="color:var(--astro-code-token-punctuation)">(max_features</span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-constant)">5000</span><span style="color:var(--astro-code-token-punctuation)">)</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">X_train_vec </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-foreground)"> vectorizer</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">fit_transform</span><span style="color:var(--astro-code-token-punctuation)">(X_train)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 训练</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">model </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-function)"> RandomForestClassifier</span><span style="color:var(--astro-code-token-punctuation)">()</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">model</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">fit</span><span style="color:var(--astro-code-token-punctuation)">(X_train_vec, y_train)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 评估</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">y_pred </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-foreground)"> model</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">predict</span><span style="color:var(--astro-code-token-punctuation)">(X_test_vec)</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">print</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-function)">classification_report</span><span style="color:var(--astro-code-token-punctuation)">(y_test, y_pred))</span></span></code></pre>
+<p><strong>需要掌握的概念</strong>：</p>
+<ul>
+<li>训练集/验证集/测试集切分</li>
+<li>特征提取与特征工程</li>
+<li>过拟合与欠拟合</li>
+<li>常见评估指标（准确率、精确率、召回率、F1、AUC）</li>
+</ul>
+<p><strong>学习提醒</strong>：不需要手推公式，会用 <code>scikit-learn</code> 的 API 即可。</p>
+<h3 id="42-深度学习框架二选一">4.2 深度学习框架（二选一）</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>框架</th><th>特点</th><th>适用场景</th></tr></thead><tbody><tr><td><strong>PyTorch</strong></td><td>学术界主流、灵活、生态好</td><td>NLP/LLM/研究向 — <strong>推荐首选</strong></td></tr><tr><td><strong>TensorFlow/Keras</strong></td><td>工业界存量大、Keras 友好</td><td>传统 CV/已有 TF 项目</td></tr></tbody></table>
+<p><strong>PyTorch 基础入门</strong></p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:var(--astro-code-token-keyword)">import</span><span style="color:var(--astro-code-foreground)"> torch</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">import</span><span style="color:var(--astro-code-foreground)"> torch</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-foreground)">nn </span><span style="color:var(--astro-code-token-keyword)">as</span><span style="color:var(--astro-code-foreground)"> nn</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">import</span><span style="color:var(--astro-code-foreground)"> torch</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-foreground)">optim </span><span style="color:var(--astro-code-token-keyword)">as</span><span style="color:var(--astro-code-foreground)"> optim</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># Tensor（张量）——深度学习的基本数据结构</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">x </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-foreground)"> torch</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">tensor</span><span style="color:var(--astro-code-token-punctuation)">([</span><span style="color:var(--astro-code-token-constant)">1</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">2</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">3</span><span style="color:var(--astro-code-token-punctuation)">])</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">x </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-foreground)"> torch</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">randn</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-constant)">3</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">224</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">224</span><span style="color:var(--astro-code-token-punctuation)">)</span><span style="color:var(--astro-code-token-comment)">  # 图片张量 (C, H, W)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 检查是否有 GPU</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">device </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-foreground)"> torch</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">device</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-string-expression)">"cuda"</span><span style="color:var(--astro-code-token-keyword)"> if</span><span style="color:var(--astro-code-token-punctuation)"> torch.cuda.</span><span style="color:var(--astro-code-token-function)">is_available</span><span style="color:var(--astro-code-token-punctuation)">() </span><span style="color:var(--astro-code-token-keyword)">else</span><span style="color:var(--astro-code-token-string-expression)"> "cpu"</span><span style="color:var(--astro-code-token-punctuation)">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 加载预训练模型（更常用）</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">from</span><span style="color:var(--astro-code-foreground)"> transformers </span><span style="color:var(--astro-code-token-keyword)">import</span><span style="color:var(--astro-code-foreground)"> AutoModel</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">model </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-foreground)"> AutoModel</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">from_pretrained</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-string-expression)">"bert-base-uncased"</span><span style="color:var(--astro-code-token-punctuation)">)</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">model</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">to</span><span style="color:var(--astro-code-token-punctuation)">(device)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 推理</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">with</span><span style="color:var(--astro-code-foreground)"> torch</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">no_grad</span><span style="color:var(--astro-code-token-punctuation)">():</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">    outputs </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-function)"> model</span><span style="color:var(--astro-code-token-punctuation)">(input_ids)</span></span></code></pre>
+<p><strong>学习深度</strong>：初学时<strong>会加载预训练模型做推理即可</strong>，不需要从零训练。</p>
+<h3 id="43-hugging-face-transformers重中之重">4.3 Hugging Face Transformers（重中之重 🎯）</h3>
+<p>这是「以 AI 为目的学 Python」最值得投入时间学习的库。</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:var(--astro-code-token-keyword)">from</span><span style="color:var(--astro-code-foreground)"> transformers </span><span style="color:var(--astro-code-token-keyword)">import</span><span style="color:var(--astro-code-foreground)"> pipeline</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 一行代码使用最先进的 NLP 模型</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">classifier </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-function)"> pipeline</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-string-expression)">"sentiment-analysis"</span><span style="color:var(--astro-code-token-punctuation)">)</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">result </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-function)"> classifier</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-string-expression)">"I love learning Python!"</span><span style="color:var(--astro-code-token-punctuation)">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 其他 pipeline</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">summarizer </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-function)"> pipeline</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-string-expression)">"summarization"</span><span style="color:var(--astro-code-token-punctuation)">)</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">translator </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-function)"> pipeline</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-string-expression)">"translation_en_to_zh"</span><span style="color:var(--astro-code-token-punctuation)">)</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">generator </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-function)"> pipeline</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-string-expression)">"text-generation"</span><span style="color:var(--astro-code-token-punctuation)">, model</span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-string-expression)">"gpt2"</span><span style="color:var(--astro-code-token-punctuation)">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 底层 API（更灵活的控制）</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">from</span><span style="color:var(--astro-code-foreground)"> transformers </span><span style="color:var(--astro-code-token-keyword)">import</span><span style="color:var(--astro-code-foreground)"> AutoTokenizer</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-foreground)"> AutoModelForCausalLM</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">tokenizer </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-foreground)"> AutoTokenizer</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">from_pretrained</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-string-expression)">"mistralai/Mistral-7B-v0.1"</span><span style="color:var(--astro-code-token-punctuation)">)</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">model </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-foreground)"> AutoModelForCausalLM</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">from_pretrained</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-string-expression)">"mistralai/Mistral-7B-v0.1"</span><span style="color:var(--astro-code-token-punctuation)">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">inputs </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-function)"> tokenizer</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-string-expression)">"人工智能的未来是"</span><span style="color:var(--astro-code-token-punctuation)">, return_tensors</span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-string-expression)">"pt"</span><span style="color:var(--astro-code-token-punctuation)">)</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">outputs </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-foreground)"> model</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">generate</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-keyword)">**</span><span style="color:var(--astro-code-token-punctuation)">inputs, max_length</span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-constant)">100</span><span style="color:var(--astro-code-token-punctuation)">)</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">result </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-foreground)"> tokenizer</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">decode</span><span style="color:var(--astro-code-token-punctuation)">(outputs[</span><span style="color:var(--astro-code-token-constant)">0</span><span style="color:var(--astro-code-token-punctuation)">])</span></span></code></pre>
+<p><strong>核心三要素</strong>：</p>
+<ul>
+<li><strong>Tokenizer</strong>：将文本转换为模型能理解的数字 ID</li>
+<li><strong>Model</strong>：预训练模型</li>
+<li><strong>Pipeline</strong>：封装好的高级 API</li>
+</ul>
+<p><strong>信息源</strong>：</p>
+<ul>
+<li><a href="https://scikit-learn.org/stable/">scikit-learn 官方文档</a></li>
+<li><a href="https://pytorch.org/tutorials/">PyTorch 入门教程</a></li>
+<li><a href="https://huggingface.co/learn/nlp-course">Hugging Face 课程</a></li>
+<li><a href="https://huggingface.co/docs/transformers/index">Transformers 文档</a></li>
+</ul>
+<hr>
+<h2 id="5-ai-应用开发技能把-ai-变成真正能用的东西">5. AI 应用开发技能——把 AI 变成真正能用的东西</h2>
+<h3 id="51-llm-api-调用">5.1 LLM API 调用</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:var(--astro-code-token-comment)"># OpenAI API</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">import</span><span style="color:var(--astro-code-foreground)"> openai</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">client </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-foreground)"> openai</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">OpenAI</span><span style="color:var(--astro-code-token-punctuation)">(api_key</span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-string-expression)">"sk-xxx"</span><span style="color:var(--astro-code-token-punctuation)">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">response </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-foreground)"> client</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-foreground)">chat</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-foreground)">completions</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">create</span><span style="color:var(--astro-code-token-punctuation)">(</span></span>
+<span class="line"><span style="color:var(--astro-code-token-punctuation)">    model</span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-string-expression)">"gpt-4o"</span><span style="color:var(--astro-code-token-punctuation)">,</span></span>
+<span class="line"><span style="color:var(--astro-code-token-punctuation)">    messages</span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-punctuation)">[</span></span>
+<span class="line"><span style="color:var(--astro-code-token-punctuation)">        {</span><span style="color:var(--astro-code-token-string-expression)">"role"</span><span style="color:var(--astro-code-token-punctuation)">: </span><span style="color:var(--astro-code-token-string-expression)">"system"</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-string-expression)">"content"</span><span style="color:var(--astro-code-token-punctuation)">: </span><span style="color:var(--astro-code-token-string-expression)">"你是一个Python导师"</span><span style="color:var(--astro-code-token-punctuation)">},</span></span>
+<span class="line"><span style="color:var(--astro-code-token-punctuation)">        {</span><span style="color:var(--astro-code-token-string-expression)">"role"</span><span style="color:var(--astro-code-token-punctuation)">: </span><span style="color:var(--astro-code-token-string-expression)">"user"</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-string-expression)">"content"</span><span style="color:var(--astro-code-token-punctuation)">: </span><span style="color:var(--astro-code-token-string-expression)">"请用简单的话解释什么是装饰器"</span><span style="color:var(--astro-code-token-punctuation)">}</span></span>
+<span class="line"><span style="color:var(--astro-code-token-punctuation)">    ],</span></span>
+<span class="line"><span style="color:var(--astro-code-token-punctuation)">    temperature</span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-constant)">0.7</span><span style="color:var(--astro-code-token-punctuation)">,</span></span>
+<span class="line"><span style="color:var(--astro-code-token-punctuation)">    max_tokens</span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-constant)">500</span></span>
+<span class="line"><span style="color:var(--astro-code-token-punctuation)">)</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">print</span><span style="color:var(--astro-code-token-punctuation)">(response.choices[</span><span style="color:var(--astro-code-token-constant)">0</span><span style="color:var(--astro-code-token-punctuation)">].message.content)</span></span></code></pre>
+<p><strong>需要掌握的概念</strong>：</p>
+<ul>
+<li>API Key 管理与环境变量（<code>.env</code> 文件）</li>
+<li>理解 <code>messages</code> 格式（system/user/assistant）</li>
+<li>参数调优（temperature、max_tokens、top_p）</li>
+<li>Streaming（流式输出）</li>
+<li>Token 用量与成本计算</li>
+</ul>
+<h3 id="52-prompt-engineering提示词工程">5.2 Prompt Engineering（提示词工程）</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:var(--astro-code-token-comment)"># 结构化 Prompt 模板</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">system_prompt </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-string-expression)"> """你是一个专业的</span><span style="color:var(--astro-code-token-constant)">{role}</span><span style="color:var(--astro-code-token-string-expression)">。请基于以下信息回答问题。</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-string-expression)">## 背景</span></span>
+<span class="line"><span style="color:var(--astro-code-token-constant)">{context}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-string-expression)">## 要求</span></span>
+<span class="line"><span style="color:var(--astro-code-token-string-expression)">1. 回答需要简洁准确</span></span>
+<span class="line"><span style="color:var(--astro-code-token-string-expression)">2. 如果不知道，请说"我不确定"</span></span>
+<span class="line"><span style="color:var(--astro-code-token-string-expression)">3. 使用中文回答</span></span>
+<span class="line"><span style="color:var(--astro-code-token-string-expression)">"""</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">user_prompt </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-keyword)"> f</span><span style="color:var(--astro-code-token-string-expression)">"""问题：</span><span style="color:var(--astro-code-token-constant)">{</span><span style="color:var(--astro-code-foreground)">question</span><span style="color:var(--astro-code-token-constant)">}</span><span style="color:var(--astro-code-token-string-expression)">"""</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># Few-shot（少样本）</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">messages </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-foreground)"> [</span></span>
+<span class="line"><span style="color:var(--astro-code-token-punctuation)">    {</span><span style="color:var(--astro-code-token-string-expression)">"role"</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-token-string-expression)"> "system"</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-token-string-expression)"> "content"</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-token-string-expression)"> "将句子翻译成英文"</span><span style="color:var(--astro-code-token-punctuation)">},</span></span>
+<span class="line"><span style="color:var(--astro-code-token-punctuation)">    {</span><span style="color:var(--astro-code-token-string-expression)">"role"</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-token-string-expression)"> "user"</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-token-string-expression)"> "content"</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-token-string-expression)"> "今天天气真好"</span><span style="color:var(--astro-code-token-punctuation)">},</span></span>
+<span class="line"><span style="color:var(--astro-code-token-punctuation)">    {</span><span style="color:var(--astro-code-token-string-expression)">"role"</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-token-string-expression)"> "assistant"</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-token-string-expression)"> "content"</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-token-string-expression)"> "The weather is nice today"</span><span style="color:var(--astro-code-token-punctuation)">},</span></span>
+<span class="line"><span style="color:var(--astro-code-token-punctuation)">    {</span><span style="color:var(--astro-code-token-string-expression)">"role"</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-token-string-expression)"> "user"</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-token-string-expression)"> "content"</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-token-string-expression)"> "我们一起去公园吧"</span><span style="color:var(--astro-code-token-punctuation)">},</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">]</span></span></code></pre>
+<p><strong>需要掌握的概念</strong>：</p>
+<ul>
+<li>系统提示词与用户提示词的拆分</li>
+<li>Few-shot 学习（给示例）</li>
+<li>Chain-of-Thought（思维链）</li>
+<li>结构化输出（JSON 格式约束）</li>
+</ul>
+<h3 id="53-rag检索增强生成">5.3 RAG（检索增强生成）</h3>
+<p>RAG 使 AI 能够<strong>基于你自己的文档</strong>回答问题，是目前最实用的 AI 应用模式之一。</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:var(--astro-code-token-comment)"># 简化的 RAG 流程</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">from</span><span style="color:var(--astro-code-foreground)"> langchain_community</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-foreground)">document_loaders </span><span style="color:var(--astro-code-token-keyword)">import</span><span style="color:var(--astro-code-foreground)"> TextLoader</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">from</span><span style="color:var(--astro-code-foreground)"> langchain</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-foreground)">text_splitter </span><span style="color:var(--astro-code-token-keyword)">import</span><span style="color:var(--astro-code-foreground)"> CharacterTextSplitter</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">from</span><span style="color:var(--astro-code-foreground)"> langchain_community</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-foreground)">vectorstores </span><span style="color:var(--astro-code-token-keyword)">import</span><span style="color:var(--astro-code-foreground)"> Chroma</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">from</span><span style="color:var(--astro-code-foreground)"> langchain_community</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-foreground)">embeddings </span><span style="color:var(--astro-code-token-keyword)">import</span><span style="color:var(--astro-code-foreground)"> OpenAIEmbeddings</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 1. 加载文档</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">loader </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-function)"> TextLoader</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-string-expression)">"my_notes.md"</span><span style="color:var(--astro-code-token-punctuation)">)</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">documents </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-foreground)"> loader</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">load</span><span style="color:var(--astro-code-token-punctuation)">()</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 2. 分块</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">splitter </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-function)"> CharacterTextSplitter</span><span style="color:var(--astro-code-token-punctuation)">(chunk_size</span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-constant)">500</span><span style="color:var(--astro-code-token-punctuation)">, chunk_overlap</span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-constant)">50</span><span style="color:var(--astro-code-token-punctuation)">)</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">chunks </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-foreground)"> splitter</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">split_documents</span><span style="color:var(--astro-code-token-punctuation)">(documents)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 3. 向量化 &#x26; 存储</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">vectorstore </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-foreground)"> Chroma</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">from_documents</span><span style="color:var(--astro-code-token-punctuation)">(</span></span>
+<span class="line"><span style="color:var(--astro-code-token-punctuation)">    chunks, </span><span style="color:var(--astro-code-token-function)">OpenAIEmbeddings</span><span style="color:var(--astro-code-token-punctuation)">()</span></span>
+<span class="line"><span style="color:var(--astro-code-token-punctuation)">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 4. 检索 &#x26; 生成</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">query </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-string-expression)"> "我关于Python的笔记里有哪些重点？"</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">results </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-foreground)"> vectorstore</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">similarity_search</span><span style="color:var(--astro-code-token-punctuation)">(query, k</span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-constant)">3</span><span style="color:var(--astro-code-token-punctuation)">)</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">context </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-string-expression)"> "\n"</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">join</span><span style="color:var(--astro-code-token-punctuation)">([r.page_content </span><span style="color:var(--astro-code-token-keyword)">for</span><span style="color:var(--astro-code-token-punctuation)"> r </span><span style="color:var(--astro-code-token-keyword)">in</span><span style="color:var(--astro-code-token-punctuation)"> results])</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 5. 生成回答</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">prompt </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-keyword)"> f</span><span style="color:var(--astro-code-token-string-expression)">"基于以下信息回答问题：</span><span style="color:var(--astro-code-foreground)">\n\n</span><span style="color:var(--astro-code-token-constant)">{</span><span style="color:var(--astro-code-foreground)">context</span><span style="color:var(--astro-code-token-constant)">}</span><span style="color:var(--astro-code-foreground)">\n\n</span><span style="color:var(--astro-code-token-string-expression)">问题：</span><span style="color:var(--astro-code-token-constant)">{</span><span style="color:var(--astro-code-foreground)">query</span><span style="color:var(--astro-code-token-constant)">}</span><span style="color:var(--astro-code-token-string-expression)">"</span></span></code></pre>
+<p><strong>核心组件</strong>：</p>
+<ul>
+<li>文档加载器（支持 PDF、网页、Markdown 等）</li>
+<li>文本分割器（固定大小、递归分割）</li>
+<li>嵌入模型（将文本转为向量）</li>
+<li>向量数据库（Chroma、FAISS、Pinecone）</li>
+<li>检索器（相似度搜索）</li>
+</ul>
+<h3 id="54-快速构建-ai-应用界面">5.4 快速构建 AI 应用界面</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:var(--astro-code-token-comment)"># Streamlit —— 最简单的方式把 AI 变成网页</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">import</span><span style="color:var(--astro-code-foreground)"> streamlit </span><span style="color:var(--astro-code-token-keyword)">as</span><span style="color:var(--astro-code-foreground)"> st</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">st</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">title</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-string-expression)">"AI 问答助手"</span><span style="color:var(--astro-code-token-punctuation)">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">prompt </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-foreground)"> st</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">text_input</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-string-expression)">"请输入你的问题"</span><span style="color:var(--astro-code-token-punctuation)">)</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">if</span><span style="color:var(--astro-code-foreground)"> st</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">button</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-string-expression)">"生成回答"</span><span style="color:var(--astro-code-token-punctuation)">):</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">    with</span><span style="color:var(--astro-code-foreground)"> st</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">spinner</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-string-expression)">"AI 正在思考..."</span><span style="color:var(--astro-code-token-punctuation)">):</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">        response </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-foreground)"> client</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-foreground)">chat</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-foreground)">completions</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">create</span><span style="color:var(--astro-code-token-punctuation)">(...)</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">        st</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">write</span><span style="color:var(--astro-code-token-punctuation)">(response.choices[</span><span style="color:var(--astro-code-token-constant)">0</span><span style="color:var(--astro-code-token-punctuation)">].message.content)</span></span></code></pre>
+<p><strong>选择建议</strong>：</p>
+<ul>
+<li><strong>Streamlit</strong>：数据科学/AI 展示，上手最快</li>
+<li><strong>Gradio</strong>：机器学习模型演示，Hugging Face 生态</li>
+<li><strong>FastAPI</strong>：将 AI 包装为 API 接口</li>
+</ul>
+<p><strong>信息源</strong>：</p>
+<ul>
+<li><a href="https://platform.openai.com/docs/">OpenAI API 文档</a></li>
+<li><a href="https://python.langchain.com/docs/get_started/introduction">LangChain 教程</a></li>
+<li><a href="https://docs.streamlit.io/">Streamlit 文档</a></li>
+<li><a href="https://www.gradio.app/docs">Gradio 文档</a></li>
+</ul>
+<hr>
+<h2 id="6-工程化基础让代码更可靠">6. 工程化基础——让代码更可靠</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>技能</th><th>为什么重要</th><th align="center">学习门槛</th></tr></thead><tbody><tr><td><strong>Git 版本控制</strong></td><td>管理代码版本、看开源项目源码、团队协作</td><td align="center">⭐⭐</td></tr><tr><td><strong>虚拟环境 (venv/conda)</strong></td><td>不同项目依赖隔离，避免冲突</td><td align="center">⭐</td></tr><tr><td><strong>调试技巧 (print/pdb)</strong></td><td>快速定位问题</td><td align="center">⭐</td></tr><tr><td><strong>日志 (logging)</strong></td><td>记录模型运行情况，比 print 更规范</td><td align="center">⭐⭐</td></tr><tr><td><strong>GPU 基础认知</strong></td><td>了解显存、CUDA、推理速度优化</td><td align="center">⭐⭐</td></tr><tr><td><strong>Try/Except 实战</strong></td><td>让程序即使出错也能优雅处理</td><td align="center">⭐</td></tr></tbody></table>
+<p><strong>信息源</strong>：</p>
+<ul>
+<li><a href="https://git-scm.com/book/zh/v2">Git 入门指南</a></li>
+<li><a href="https://docs.python.org/3/howto/logging.html">Python Logging 教程</a></li>
+</ul>
+<hr>
+<h2 id="7-学习路径与时间规划">7. 学习路径与时间规划</h2>
+<h3 id="71-推荐学习路线">7.1 推荐学习路线</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Month 1  ── Python 基础（第一梯队）</span></span>
+<span class="line"><span>Month 2  ── NumPy + Pandas（数据处理核心）</span></span>
+<span class="line"><span>Month 3  ── Matplotlib + scikit-learn（可视化 + ML概念）</span></span>
+<span class="line"><span>Month 4  ── PyTorch + HuggingFace Transformers（开始用AI）</span></span>
+<span class="line"><span>Month 5  ── API 调用 + Prompt Engineering（LLM应用）</span></span>
+<span class="line"><span>Month 6  ── LangChain/RAG + Streamlit（搭建完整应用）</span></span></code></pre>
+<h3 id="72-每天建议投入">7.2 每天建议投入</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="center">时间</th><th>安排</th></tr></thead><tbody><tr><td align="center">30 分钟</td><td>阅读/看教程，理解概念</td></tr><tr><td align="center">1 小时</td><td>动手写代码（最重要！）</td></tr><tr><td align="center">随时</td><td>用 AI（Claude/GPT）解决遇到的具体问题</td></tr></tbody></table>
+<h3 id="73-关键里程碑">7.3 关键里程碑</h3>
+<ul>
+<li>✅ <strong>Day 1</strong>：Python 环境装好，跑通第一个 <code>.py</code> 文件</li>
+<li>✅ <strong>Week 2</strong>：能用 Pandas 读取 CSV 并做基本统计</li>
+<li>✅ <strong>Month 1</strong>：能用 Matplotlib 画图，理解基础统计概念</li>
+<li>✅ <strong>Month 2</strong>：能用 Transformer pipeline 完成文本分类/摘要</li>
+<li>✅ <strong>Month 3</strong>：能调用 LLM API，写一个自己的 AI 工具</li>
+<li>✅ <strong>Month 6</strong>：能搭建一个完整的 RAG 问答系统</li>
+</ul>
+<hr>
+<h2 id="8-推荐学习资源清单">8. 推荐学习资源清单</h2>
+<h3 id="81-免费优质资源">8.1 免费优质资源</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>资源</th><th>类型</th><th>推荐理由</th></tr></thead><tbody><tr><td><a href="https://docs.python.org/3/tutorial/">Python 官方教程</a></td><td>文档</td><td>官方出品，精炼准确</td></tr><tr><td><a href="https://www.kaggle.com/learn/">Kaggle Learn</a></td><td>交互教程</td><td>免费、有实战数据集、浏览器运行</td></tr><tr><td><a href="https://huggingface.co/learn/nlp-course">Hugging Face NLP Course</a></td><td>课程</td><td>学 Transformers 的最佳入口</td></tr><tr><td><a href="https://course.fast.ai/">Fast.ai Practical Deep Learning</a></td><td>视频+Notebook</td><td>自顶向下教学，先会用再理解</td></tr><tr><td><a href="https://google.github.io/styleguide/pyguide.html">Google Python Style Guide</a></td><td>规范</td><td>写出规范 Python 代码的参考</td></tr><tr><td><a href="https://learn.microsoft.com/en-us/training/paths/python-language/">Microsoft Python for Beginners</a></td><td>免费课程</td><td>适合零基础入门</td></tr></tbody></table>
+<h3 id="82-书籍推荐">8.2 书籍推荐</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>书名</th><th>适合阶段</th><th>推荐理由</th></tr></thead><tbody><tr><td>《Python编程：从入门到实践》</td><td>入门</td><td>实战项目驱动，覆盖面广</td></tr><tr><td>《利用Python进行数据分析》</td><td>进阶</td><td>Pandas + NumPy 圣经</td></tr><tr><td>《Hands-On Machine Learning》</td><td>AI入门</td><td>动手实践派的 ML 入门书</td></tr><tr><td>《Natural Language Processing with Transformers》</td><td>NLP专项</td><td>HuggingFace 团队出品</td></tr></tbody></table>
+<h3 id="83-日常用-ai-辅助学习">8.3 日常用 AI 辅助学习</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>遇到问题时的最佳提问方式：</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>❌ 错误：Python 报错了，怎么办？</span></span>
+<span class="line"><span>✅ 正确：我在用 Pandas 读取 CSV 时遇到 UnicodeDecodeError，</span></span>
+<span class="line"><span>   文件编码可能是 GBK。代码如下 [贴代码]，请问怎么指定编码？</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>❌ 错误：怎么学 PyTorch？</span></span>
+<span class="line"><span>✅ 正确：我想用 PyTorch 加载一个 BERT 模型做文本分类，</span></span>
+<span class="line"><span>   目前已经安装了 transformers，下一步应该怎么做？</span></span></code></pre>
+<p><strong>越具体的问题，AI 能给你的帮助越大。</strong></p>
+<hr>
+<h2 id="9-常见误区提醒">9. 常见误区提醒</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>误区</th><th>正确做法</th></tr></thead><tbody><tr><td>试图学完所有语法再动手</td><td><strong>学够 20% 立即开始做项目，以用带学</strong></td></tr><tr><td>手推数学公式、手写算法</td><td><strong>会用库的 API 即可，数学在需要时再补</strong></td></tr><tr><td>追求「理解原理」才动手</td><td><strong>先跑通再理解，从结果倒推学习</strong></td></tr><tr><td>一次性学太多框架</td><td><strong>先深入一个（推荐 PyTorch），触类旁通</strong></td></tr><tr><td>只看不写代码</td><td><strong>编程是一门手艺，必须每天动手</strong></td></tr><tr><td>遇到错误就卡住</td><td><strong>把错误信息直接发给 AI，学会 Debug 本身也是技能</strong></td></tr></tbody></table>
+<hr>
+<h2 id="-一句话锐评">🎯 一句话锐评</h2>
+<blockquote>
+<p>对 AI 使用者来说，Python 不需要学深，只需要学对——<strong>20% 的语法覆盖 80% 的工作</strong>。核心在于掌握「数据处理（Pandas/NumPy）→ 模型调用（Transformers/API）→ 应用搭建（RAG/LangChain）」这条主链路，并在每一步用 AI 来辅助学习 AI 本身。<strong>不要学完再开始，而是要开始再学</strong>，用具体项目倒推知识碎片，这才是最快的路径。</p>
+</blockquote>
+<hr>
+<p><strong>📂 关联笔记</strong>：</p>
+<ul>
+<li>[[Python学习路线]]</li>
+<li>[[AI工具链概览]]</li>
+<li>[[Prompt Engineering入门]]</li>
+</ul>
+<p><strong>🔄 文档版本</strong>：v1.0 | 最后更新：2026-07-12</p> <div> <a href="/notes" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150">
+&larr; 返回笔记列表
+</a> </div>  </div> <!-- Previous / Next navigation -->  <hr class="!mt-12 !mb-8" data-astro-cid-bvzihdzo> <div data-astro-cid-bvzihdzo> <a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-bvzihdzo>
+&larr; 返回博客列表
+</a> </div> </div> </div> </article> </div>  </main> <footer class="border-t border-[var(--color-border)] mt-24 py-8" data-astro-cid-pux6a34n><div class="max-w-content flex items-center justify-between" data-astro-cid-pux6a34n><span class="text-sm text-[var(--color-text-tertiary)]" data-astro-cid-pux6a34n>
+&copy; 2026 星游寰宇
+</span><div class="flex items-center gap-4" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>博客</a><a href="/projects" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>项目</a><a href="/notes" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>日记</a><a href="/resources" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>资源</a><a href="/about" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>关于</a></div></div></footer> <div id="link-preview" style="display:none;position:fixed;z-index:99;max-width:18rem;pointer-events:none;" data-astro-cid-t7vshrbh></div>  <script type="module">(async()=>{try{const c=await fetch("/posts.json");if(!c.ok)return;const u=await c.json(),p=new Map(u.map(t=>[t.href,t])),e=document.getElementById("link-preview");if(!e)return;let n="",d;document.addEventListener("mouseover",t=>{const i=t.target.closest("a[href^='/blog/']");if(!i){e.style.display="none",n="";return}const s=i.getAttribute("href");if(!s||s===n)return;const o=p.get(s);o&&(n=s,d=setTimeout(()=>{e.innerHTML=`<div class="lp-title">${o.title}</div><div class="lp-summary">${o.summary}</div>`;const r=i.getBoundingClientRect();let a=r.left,l=r.bottom+6;a+288>window.innerWidth&&(a=window.innerWidth-296),l+80>window.innerHeight&&(l=r.top-80),Object.assign(e.style,{left:a+"px",top:l+"px",display:"block"})},300))},{passive:!0}),document.addEventListener("mouseout",t=>{t.target.closest("a[href^='/blog/']")&&(clearTimeout(d),e.style.display="none",n="")},{passive:!0})}catch{}})();</script> </body></html>  <script type="module">const c=document.getElementById("toc-toggle"),s=document.getElementById("toc-list"),i=document.getElementById("toc-chevron");c&&s&&i&&c.addEventListener("click",()=>{const o=s.classList.toggle("hidden");c.setAttribute("aria-expanded",String(o)),i.style.transform=o?"rotate(180deg)":""});const r=document.querySelectorAll(".toc-list a");if(r.length>0){const o=new IntersectionObserver(n=>{for(const t of n)t.isIntersecting&&r.forEach(e=>{e.classList.toggle("active",e.getAttribute("href")===`#${t.target.id}`)})},{rootMargin:"-80px 0px -80% 0px"});r.forEach(n=>{const t=n.getAttribute("href")?.slice(1);if(t){const e=document.getElementById(t);e&&o.observe(e)}})}</script>

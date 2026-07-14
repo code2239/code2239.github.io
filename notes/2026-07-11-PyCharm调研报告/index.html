@@ -1,0 +1,561 @@
+<!DOCTYPE html><html lang="zh-CN"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="生成日期：2026-07-11"><meta name="color-scheme" content="light"><!-- Open Graph --><meta property="og:title" content="PyCharm调研报告 — 星游寰宇"><meta property="og:description" content="生成日期：2026-07-11"><meta property="og:url" content="https://code2239.github.io/notes/2026-07-11-PyCharm调研报告"><meta property="og:type" content="article"><meta property="og:site_name" content="星游寰宇"><meta property="og:locale" content="zh_CN"><meta property="article:published_time" content="2026-07-11"><meta property="article:tag" content="research"><meta property="article:tag" content="pycharm"><meta property="article:tag" content="IDE"><meta property="article:tag" content="python"><meta property="article:tag" content="jetbrains"><!-- Twitter Card --><meta name="twitter:card" content="summary"><meta name="twitter:title" content="PyCharm调研报告 — 星游寰宇"><meta name="twitter:description" content="生成日期：2026-07-11"><!-- Canonical --><link rel="canonical" href="https://code2239.github.io/notes/2026-07-11-PyCharm调研报告"><title>PyCharm调研报告 — 星游寰宇</title><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="alternate" type="application/rss+xml" title="星游寰宇 RSS" href="/rss.xml"><!-- Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"星游寰宇","url":"https://code2239.github.io","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://code2239.github.io/search?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://code2239.github.io"},{"@type":"ListItem","position":2,"name":"日记","item":"https://code2239.github.io/notes"},{"@type":"ListItem","position":3,"name":"2026 07 11 PyCharm调研报告"}]},{"@context":"https://schema.org","@type":"BlogPosting","headline":"PyCharm调研报告","description":"生成日期：2026-07-11","datePublished":"2026-07-11","url":"https://code2239.github.io/notes/2026-07-11-PyCharm调研报告","keywords":"research, pycharm, IDE, python, jetbrains"}]}</script><link rel="stylesheet" href="/_astro/_slug_.CXDKI3B6.css">
+<style>.back-to-top[data-astro-cid-gzprr2dq]{position:fixed;bottom:2rem;right:2rem;z-index:40;width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:50%;border:1px solid var(--color-border);background:var(--color-bg);color:var(--color-text-secondary);cursor:pointer;box-shadow:var(--shadow-md);transition:opacity .2s ease,transform .2s ease}.back-to-top[data-astro-cid-gzprr2dq]:hover{color:var(--color-accent);border-color:var(--color-accent);transform:translateY(-2px)}.back-to-top[data-astro-cid-gzprr2dq].hidden{opacity:0;pointer-events:none}.copy-btn[data-astro-cid-qqybitij]{position:absolute;top:8px;right:8px;padding:4px 10px;font-size:.6875rem;font-family:var(--font-sans);color:var(--color-text-tertiary);background:var(--color-bg);border:1px solid var(--color-border);border-radius:6px;cursor:pointer;opacity:0;transition:opacity .15s ease,color .15s ease}pre[data-astro-cid-qqybitij]:hover .copy-btn[data-astro-cid-qqybitij]{opacity:1}.copy-btn[data-astro-cid-qqybitij]:hover{color:var(--color-accent);border-color:var(--color-accent)}.copy-btn[data-astro-cid-qqybitij].copied{color:#16a34a;border-color:#16a34a}.blog-layout[data-astro-cid-bvzihdzo]{display:block}.blog-toc[data-astro-cid-bvzihdzo]{display:none}.blog-body[data-astro-cid-bvzihdzo]{min-width:0}@media(min-width:1024px){.blog-layout[data-astro-cid-bvzihdzo]{display:grid;grid-template-columns:14rem 1fr;gap:3rem;align-items:start}.blog-toc[data-astro-cid-bvzihdzo]{display:block}.blog-body[data-astro-cid-bvzihdzo]{padding-right:2rem}}@media(max-width:1023px){.blog-toc[data-astro-cid-bvzihdzo]{display:block;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid var(--color-border)}}
+</style></head> <body class="min-h-screen flex flex-col"> <nav class="sticky top-0 z-40 bg-[var(--color-bg)]/80 backdrop-blur-md border-b border-[var(--color-border)]" data-astro-cid-pux6a34n><div class="max-w-content flex items-center justify-between py-4" data-astro-cid-pux6a34n><a href="/" class="flex items-center gap-2.5 text-base font-semibold no-underline tracking-tight" data-astro-cid-pux6a34n><svg class="w-7 h-7" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" data-astro-cid-pux6a34n><circle cx="16" cy="16" r="15" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-pux6a34n></circle><circle cx="16" cy="16" r="3" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="16" cy="5" r="1.5" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="24" cy="10" r="1" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="8" cy="22" r="1" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="25" cy="21" r="0.8" fill="currentColor" data-astro-cid-pux6a34n></circle></svg>
+星游寰宇
+</a><!-- Desktop nav --><div class="hidden sm:flex items-center gap-5" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>博客</a><a href="/projects" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>项目</a><a href="/notes" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>日记</a><a href="/resources" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>资源</a><a href="/about" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>关于</a><button id="search-trigger" class="flex items-center gap-1.5 text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] bg-[var(--color-bg-secondary)] hover:bg-[var(--color-bg-tertiary)] border border-[var(--color-border)] hover:border-[var(--color-accent)]/30 rounded-lg px-3 py-1.5 cursor-pointer shadow-sm hover:shadow-md transition-all duration-200" aria-label="搜索 (Ctrl+K)" title="搜索 (Ctrl+K)" data-astro-cid-pux6a34n><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-pux6a34n><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" data-astro-cid-pux6a34n></path></svg><span class="hidden lg:inline" data-astro-cid-pux6a34n>搜索</span><kbd class="hidden lg:inline-flex items-center text-[0.625rem] font-mono text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1 py-px rounded" data-astro-cid-pux6a34n>Ctrl+K</kbd></button></div><!-- Mobile hamburger --><button id="menu-btn" class="sm:hidden flex flex-col gap-1 p-2 -mr-2 cursor-pointer" aria-label="打开菜单" data-astro-cid-pux6a34n><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-transform duration-200" data-astro-cid-pux6a34n></span><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-opacity duration-200" data-astro-cid-pux6a34n></span><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-transform duration-200" data-astro-cid-pux6a34n></span></button></div><!-- Mobile menu --><div id="mobile-menu" class="hidden sm:hidden border-t border-[var(--color-border)] bg-[var(--color-bg)]" data-astro-cid-pux6a34n><div class="max-w-content flex flex-col gap-2 py-4" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>博客</a><a href="/projects" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>项目</a><a href="/notes" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>日记</a><a href="/resources" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>资源</a><a href="/about" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>关于</a></div></div></nav>
+    <div id="search-overlay" class="srch-overlay" role="dialog" aria-modal="true" aria-label="全局搜索" data-astro-cid-mn7pezny> <div id="search-backdrop" class="srch-backdrop" data-astro-cid-mn7pezny></div> <div class="srch-panel" id="srch-panel" data-astro-cid-mn7pezny> <!-- Search input --> <div class="srch-input-row" data-astro-cid-mn7pezny> <svg class="srch-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-mn7pezny> <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" data-astro-cid-mn7pezny></path> </svg> <input type="text" id="search-input" class="srch-input" placeholder="搜索文章、项目、日记、资源..." autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="go" data-astro-cid-mn7pezny> <kbd class="srch-kbd" data-astro-cid-mn7pezny>Esc</kbd> </div> <!-- Results area --> <div id="search-results" class="srch-results" data-astro-cid-mn7pezny> <p class="srch-empty" id="search-empty-hint" data-astro-cid-mn7pezny>输入关键词开始搜索</p> </div> <!-- Skeleton loading --> <div id="search-skeleton" class="srch-skeleton" style="display:none;" aria-hidden="true" data-astro-cid-mn7pezny> <div class="srch-skeleton-line" style="width:75%" data-astro-cid-mn7pezny></div> <div class="srch-skeleton-line" style="width:50%" data-astro-cid-mn7pezny></div> <div class="srch-skeleton-line" style="width:60%" data-astro-cid-mn7pezny></div> </div> <!-- Footer hints --> <div class="srch-footer" data-astro-cid-mn7pezny> <div class="srch-footer-hints" data-astro-cid-mn7pezny> <span data-astro-cid-mn7pezny><kbd data-astro-cid-mn7pezny>↑</kbd><kbd data-astro-cid-mn7pezny>↓</kbd> 导航</span> <span data-astro-cid-mn7pezny><kbd data-astro-cid-mn7pezny>↵</kbd> 打开</span> <span data-astro-cid-mn7pezny><kbd data-astro-cid-mn7pezny>Ctrl</kbd>+<kbd data-astro-cid-mn7pezny>K</kbd> 切换</span> </div> <div class="srch-footer-brand" data-astro-cid-mn7pezny>
+powered by Orama
+</div> </div> </div> </div> <script type="module" src="/_astro/Navigation.astro_astro_type_script_index_0_lang.15n1EYJp.js"></script> <main class="flex-1">  <div class="reading-progress" id="reading-progress" style="width: 0%"></div> <script type="module">const o=document.getElementById("reading-progress");if(!o)throw new Error("Reading progress bar element not found");const r=()=>{const n=window.scrollY,e=document.documentElement.scrollHeight-window.innerHeight,t=e>0?n/e*100:0;o.style.width=`${Math.min(t,100)}%`};window.addEventListener("scroll",r,{passive:!0});</script> <button id="back-to-top" class="back-to-top hidden" aria-label="返回顶部" data-astro-cid-gzprr2dq> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-gzprr2dq> <polyline points="18 15 12 9 6 15" data-astro-cid-gzprr2dq></polyline> </svg> </button>  <script type="module">const o=document.getElementById("back-to-top");o&&(window.addEventListener("scroll",()=>{o.classList.toggle("hidden",window.scrollY<400)},{passive:!0}),o.addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"})));</script> <script type="module">document.querySelectorAll("pre").forEach(e=>{const t=document.createElement("button");t.className="copy-btn",t.textContent="复制",t.addEventListener("click",async()=>{const n=e.querySelector("code")?.textContent||e.textContent||"";try{await navigator.clipboard.writeText(n),t.textContent="已复制",t.classList.add("copied"),setTimeout(()=>{t.textContent="复制",t.classList.remove("copied")},2e3)}catch{t.textContent="失败",setTimeout(()=>{t.textContent="复制"},2e3)}}),e.style.position="relative",e.appendChild(t)});</script> <div class="px-6 xl:px-12 pt-12 pb-16" data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <header class="mb-12 text-center" data-astro-cid-bvzihdzo> <h1 class="text-3xl font-semibold mb-3 tracking-tight" data-astro-cid-bvzihdzo>PyCharm调研报告</h1> <div class="flex items-center justify-center gap-2 text-[var(--color-text-tertiary)] text-sm" data-astro-cid-bvzihdzo> <time datetime="2026-07-11" data-astro-cid-bvzihdzo>2026-07-11</time> <span class="text-[var(--color-border)]" data-astro-cid-bvzihdzo>·</span> <span data-astro-cid-bvzihdzo>33 分钟阅读</span>  <span class="text-[var(--color-border)]" data-astro-cid-bvzihdzo>·</span> <span class="text-sm text-[var(--color-text-tertiary)]"> <span> research<span class="mx-1">·</span> </span><span> pycharm<span class="mx-1">·</span> </span><span> IDE<span class="mx-1">·</span> </span><span> python<span class="mx-1">·</span> </span><span> jetbrains </span> </span>  </div> </header> <div class="blog-layout" data-astro-cid-bvzihdzo> <aside class="blog-toc" data-astro-cid-bvzihdzo> <div class="sticky top-14 max-h-[calc(100vh-3.5rem)] overflow-y-auto" data-astro-cid-bvzihdzo> <button id="toc-toggle" class="hidden max-md:flex items-center gap-1 text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-3 cursor-pointer border-none bg-transparent p-0" aria-expanded="false" aria-controls="toc-list" data-astro-cid-bvzihdzo>
+目录
+<svg id="toc-chevron" class="w-3 h-3 transition-transform duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-bvzihdzo><polyline points="6 9 12 15 18 9" data-astro-cid-bvzihdzo></polyline></svg> </button> <span class="text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-3 max-md:hidden" data-astro-cid-bvzihdzo>目录</span> <div id="toc-list" class="max-md:hidden" data-astro-cid-bvzihdzo> <nav class="toc"> <p class="text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-3">目录</p> <ul class="toc-list"> <li class> <a href="#1-开发者与公司背景">1. 开发者与公司背景</a> </li><li class="toc-h3"> <a href="#开发方全称">开发方全称</a> </li><li class="toc-h3"> <a href="#创始人基本信息">创始人基本信息</a> </li><li class="toc-h3"> <a href="#当前-ceo">当前 CEO</a> </li><li class="toc-h3"> <a href="#团队规模">团队规模</a> </li><li class="toc-h3"> <a href="#盈利情况">盈利情况</a> </li><li class="toc-h3"> <a href="#发展战略与企业信条">发展战略与企业信条</a> </li><li class="toc-h3"> <a href="#链接">链接</a> </li><li class> <a href="#2-底层技术栈">2. 底层技术栈</a> </li><li class="toc-h3"> <a href="#核心技术架构intellij-platform">核心技术架构：IntelliJ Platform</a> </li><li class="toc-h3"> <a href="#ai-能力非原生但已集成">AI 能力（非原生，但已集成）</a> </li><li class="toc-h3"> <a href="#支持语言">支持语言</a> </li><li class> <a href="#3-开源属性与商业模式">3. 开源属性与商业模式</a> </li><li class="toc-h3"> <a href="#开源情况">开源情况</a> </li><li class="toc-h3"> <a href="#定价模式">定价模式</a> </li><li class> <a href="#4-功能全景解析">4. 功能全景解析</a> </li><li class="toc-h3"> <a href="#主要功能一句话概括">主要功能（一句话概括）</a> </li><li class="toc-h3"> <a href="#核心功能与核心技术">核心功能与核心技术</a> </li><li class> <a href="#5-功能实现案例">5. 功能实现案例</a> </li><li class="toc-h3"> <a href="#案例使用-pycharm-重构-django-web-项目">案例：使用 PyCharm 重构 Django Web 项目</a> </li><li class> <a href="#6-主要竞品清单">6. 主要竞品清单</a> </li><li class> <a href="#7-与竞品的横向比较">7. 与竞品的横向比较</a> </li><li class="toc-h3"> <a href="#各竞品最适用场景">各竞品最适用场景</a> </li><li class> <a href="#8-版本迭代信息">8. 版本迭代信息</a> </li><li class="toc-h3"> <a href="#首次公开发布">首次公开发布</a> </li><li class="toc-h3"> <a href="#主要里程碑">主要里程碑</a> </li><li class="toc-h3"> <a href="#当前最新稳定版">当前最新稳定版</a> </li><li class="toc-h3"> <a href="#预计后续版本">预计后续版本</a> </li><li class="toc-h3"> <a href="#更新频率">更新频率</a> </li><li class> <a href="#一句话锐评">一句话锐评</a> </li> </ul> </nav> </div> </div> </aside> <div class="blog-body" data-astro-cid-bvzihdzo> <div class="prose prose-neutral max-w-none" data-astro-cid-bvzihdzo>   <div class="mb-6 px-4 py-2.5 rounded-lg bg-[var(--color-accent-soft)] border border-[var(--color-border)] text-sm text-[var(--color-text-secondary)]"> <span class="text-[var(--color-text-tertiary)]">来源：</span> web </div><h1 id="pycharm-调研报告">PyCharm 调研报告</h1>
+<blockquote>
+<p>生成日期：2026-07-11</p>
+</blockquote>
+<hr>
+<h2 id="1-开发者与公司背景">1. 开发者与公司背景</h2>
+<h3 id="开发方全称">开发方全称</h3>
+<p><strong>JetBrains s.r.o.</strong>（原 IntelliJ Software s.r.o.），总部位于捷克共和国布拉格，另在荷兰阿姆斯特丹设有法律注册地址。</p>
+<h3 id="创始人基本信息">创始人基本信息</h3>
+<ul>
+<li><strong>Sergey Dmitriev</strong>（谢尔盖·德米特里耶夫）—— 联合创始人，首任 CEO（任职至 2012 年）</li>
+<li><strong>Valentin Kipyatkov</strong>（瓦伦丁·基皮亚特科夫）—— 联合创始人</li>
+<li><strong>Eugene Belyaev</strong>（尤金·别利亚耶夫）—— 联合创始人</li>
+</ul>
+<p>三位创始人均为俄罗斯软件工程师，于 2000 年在布拉格创立公司。</p>
+<h3 id="当前-ceo">当前 CEO</h3>
+<p><strong>Kirill Skrygan</strong>（基里尔·斯克雷甘）—— 2024 年 2 月上任，在 JetBrains 工作 14+ 年，曾创立 Rider IDE 和 Code With Me 协作工具。前任 CEO 为 Max Shafirov 与 Oleg Stepanov（联合 CEO 模式）。</p>
+<h3 id="团队规模">团队规模</h3>
+<ul>
+<li><strong>2,245 名员工</strong>（截至 2024 年），分布于全球 13 个办公室</li>
+<li>此前：~2,200（2021 年）、~1,500（2019 年），持续稳定增长</li>
+</ul>
+<h3 id="盈利情况">盈利情况</h3>
+<ul>
+<li>私营公司，<strong>从未接受外部融资</strong>，持续盈利</li>
+<li>2024 年收入约 <strong>$252M USD</strong>（第三方估算，同比增长 5.6%）</li>
+<li>2021 年收入约 104.3 亿捷克克朗（按当时汇率约 $4.5 亿）</li>
+<li>产品被 <strong>88 家财富 100 强</strong> 企业使用</li>
+<li>截至 2024 年拥有 <strong>1,140 万开发者用户</strong></li>
+</ul>
+<h3 id="发展战略与企业信条">发展战略与企业信条</h3>
+<p>JetBrains 以”开发者优先、质量优先于速度”著称。2025 年推出了自家 AI 编码代理 <strong>Junie</strong>。公司坚持可持续增长模式，主要收入来自 IDE 订阅。近期重点方向：</p>
+<ul>
+<li><strong>AI 辅助编码</strong>：AI Assistant + Junie 智能体</li>
+<li><strong>统一化产品体验</strong>：将 Community 与 Professional 合并为统一 IDE</li>
+<li><strong>远程开发</strong>：强化 SSH/WSL/Docker 远程解释器支持</li>
+<li><strong>开源生态</strong>：持续维护 Kotlin 语言及 IntelliJ Platform</li>
+</ul>
+<h3 id="链接">链接</h3>
+<ul>
+<li><a href="https://www.jetbrains.com">公司官网</a></li>
+<li><a href="https://en.wikipedia.org/wiki/JetBrains">维基百科</a></li>
+<li><a href="https://www.jetbrains.com/lp/annualreport-2024/">2024 年报</a></li>
+<li><a href="https://www.jetbrains.com/pycharm/">PyCharm 官网</a></li>
+</ul>
+<blockquote>
+<p><strong>信息源</strong>：<a href="https://en.wikipedia.org/wiki/JetBrains">JetBrains Wikipedia</a> · <a href="https://getlatka.com/companies/jetbrains.com">Latka 数据</a> · <a href="https://www.jetbrains.com/lp/annualreport-2024/">JetBrains 2024 年报</a></p>
+</blockquote>
+<hr>
+<h2 id="2-底层技术栈">2. 底层技术栈</h2>
+<blockquote>
+<p><strong>PyCharm 为功能完备的 Python IDE，非 AI 原生软件，但已深度集成 AI 能力。</strong></p>
+</blockquote>
+<h3 id="核心技术架构intellij-platform">核心技术架构：IntelliJ Platform</h3>
+<p>PyCharm 构建于 <strong>IntelliJ Platform</strong> 之上，该平台是 JetBrains 自研的 IDE 框架，也驱动 IntelliJ IDEA、WebStorm 等全系产品。其核心技术组件包括：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>组件</th><th>功能说明</th></tr></thead><tbody><tr><td><strong>PSI（Program Structure Interface）</strong></td><td>具体语法树（CST），保留完整源代码结构（含空白、标点等），支持增量更新与类型推断</td></tr><tr><td><strong>索引引擎（Indexing System）</strong></td><td>扫描分析项目代码，构建类、方法、对象等元素的虚拟映射，驱动补全/导航/查找/重构</td></tr><tr><td><strong>重构引擎（Refactoring Engine）</strong></td><td>结构感知的代码变换引擎，支持安全的重命名、提取方法、移动、更改签名等操作</td></tr><tr><td><strong>代码检查引擎（Inspections）</strong></td><td>后台实时运行 PEP 8 合规检查及数百种自定义检查，提供 Alt+Enter 快速修复</td></tr><tr><td><strong>共享索引（Shared Indexes）</strong></td><td>预生成索引并共享给团队，大幅减少大型项目的索引时间</td></tr></tbody></table>
+<p><strong>PSI 树的独特性</strong>：与抽象语法树（AST）不同，PSI 保留了注释、格式等全部词法信息，可直接用于重构和代码生成。PyCharm 还构建了”简化语法树”（Reduced Syntax Trees），省略函数体等非关键信息，只保留结构骨架以加速访问。</p>
+<h3 id="ai-能力非原生但已集成">AI 能力（非原生，但已集成）</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>AI 特性</th><th>技术说明</th></tr></thead><tbody><tr><td><strong>本地 AI 补全</strong></td><td>基于本地 LLM 的全行代码补全，无需联网，代码不上传（PyCharm 2024.1+）</td></tr><tr><td><strong>AI Assistant</strong></td><td>可选订阅服务，提供多行代码生成、聊天式问答、提交信息撰写</td></tr><tr><td><strong>Next Edit Suggestions (NES)</strong></td><td>智能预测下一步编辑操作，不消耗 AI 额度</td></tr><tr><td><strong>Junie Agent</strong></td><td>JetBrains 自研 AI 编码代理（2025 年 1 月发布），深度集成 IDE 索引能力</td></tr><tr><td><strong>ACP Registry</strong></td><td>内置 AI 编码代理目录，支持接入 OpenAI Codex、Gemini CLI 等第三方代理</td></tr></tbody></table>
+<h3 id="支持语言">支持语言</h3>
+<ul>
+<li><strong>主要</strong>：Python（3.9–3.15）</li>
+<li><strong>Web</strong>：JavaScript、TypeScript、React、Angular、HTML、CSS（Pro 版深度支持）</li>
+<li><strong>数据库</strong>：SQL（Pro 版内置数据库工具）</li>
+<li><strong>模板</strong>：Django Template Language、Jinja2</li>
+</ul>
+<blockquote>
+<p><strong>信息源</strong>：<a href="https://www.jetbrains.com/opensource/idea/">IntelliJ Platform 文档</a> · <a href="https://www.jetbrains.com/pycharm/features/">JetBrains 官方功能页</a> · <a href="https://plugins.jetbrains.com/docs/intellij/psi.html">PSI 架构文档</a> · <a href="https://www.jetbrains.com/help/pycharm/shared-indexes.html">共享索引文档</a></p>
+</blockquote>
+<hr>
+<h2 id="3-开源属性与商业模式">3. 开源属性与商业模式</h2>
+<h3 id="开源情况">开源情况</h3>
+<ul>
+<li><strong>核心部分开源</strong>：基于 <strong>Apache License 2.0</strong> 协议开源</li>
+<li>开源范围：PyCharm Community Edition 的核心代码（现即统一产品的免费核心）</li>
+<li>开源代码维护于 JetBrains GitHub 组织</li>
+<li><strong>注意</strong>：统一后的二进制发行版受 JetBrains 用户协议约束，不可再分发；仅自行从源码构建的版本遵循 Apache 2.0</li>
+<li>官方开源条款：<a href="https://www.jetbrains.com/legal/docs/toolbox/user_community/">https://www.jetbrains.com/legal/docs/toolbox/user_community/</a></li>
+</ul>
+<h3 id="定价模式">定价模式</h3>
+<p><strong>2025 年统一化后</strong>：Community 与 Professional 不再分版本，统一产品提供免费核心 + Pro 订阅模式。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>方案</th><th>价格（USD）</th><th>说明</th></tr></thead><tbody><tr><td><strong>免费核心</strong></td><td><strong>$0</strong></td><td>统一产品安装后，核心功能（含 Jupyter 支持）永久免费</td></tr><tr><td><strong>Pro 个人 - 首年</strong></td><td><strong>$109/年</strong></td><td>或按月付费</td></tr><tr><td><strong>Pro 个人 - 第二年</strong></td><td><strong>$87/年</strong></td><td>连续性折扣</td></tr><tr><td><strong>Pro 个人 - 第三年起</strong></td><td><strong>$65/年</strong></td><td>最高节省 40%</td></tr><tr><td><strong>Pro 组织版</strong></td><td><strong>$249/年/用户</strong></td><td>含企业管理功能</td></tr><tr><td><strong>All Products Pack（个人）</strong></td><td><strong>$299/年（首年）</strong></td><td>所有 JetBrains IDE 全家桶</td></tr><tr><td><strong>All Products Pack（组织）</strong></td><td><strong>$779/年/用户</strong></td><td>企业全家桶</td></tr></tbody></table>
+<p><strong>关键特点</strong>：</p>
+<ul>
+<li>每次安装附赠 <strong>30 天 Pro 免费试用</strong></li>
+<li>连续订阅 12 个月后获得 <strong>永久回退许可</strong>（Perpetual Fallback License）</li>
+<li>教育机构免费（教师和学生可申请免费授权）</li>
+</ul>
+<blockquote>
+<p><strong>信息源</strong>：<a href="https://www.jetbrains.com/store/">JetBrains 商店页面</a> · <a href="https://www.jetbrains.com/legal/docs/toolbox/user_community/">JetBrains Community Edition Terms</a> · <a href="https://www.trustradius.com/products/pycharm/">TrustRadius 定价数据</a> · <a href="https://www.capterra.com/p/186625/PyCharm/">Capterra 定价数据</a></p>
+</blockquote>
+<hr>
+<h2 id="4-功能全景解析">4. 功能全景解析</h2>
+<h3 id="主要功能一句话概括">主要功能（一句话概括）</h3>
+<blockquote>
+<p>PyCharm 是面向专业 Python 开发者的全功能 IDE，提供深度代码理解、智能重构、可视化调试及丰富框架支持的一站式开发环境。</p>
+</blockquote>
+<h3 id="核心功能与核心技术">核心功能与核心技术</h3>
+<h4 id="41--智能代码补全intelligent-code-completion">4.1 🧠 智能代码补全（Intelligent Code Completion）</h4>
+<ul>
+<li><strong>基础补全</strong>：上下文感知的关键字、类、变量、参数建议（<code>Ctrl+Space</code>）</li>
+<li><strong>类型提示 + 自动导入</strong>：基于项目结构推荐最匹配的类型和导入</li>
+<li><strong>AI 全行补全</strong>：本地 LLM 驱动，灰色显示预测的下行代码，无需联网、数据不离开本地</li>
+<li><strong>关键技术</strong>：PSI 树索引 + 类型推断引擎 + KInference（JVM 端 ONNX 模型推理框架）</li>
+<li><a href="https://www.jetbrains.com/pycharm/features/coding_assistance.html">参考：JetBrains 官方功能页</a></li>
+</ul>
+<h4 id="42--安全重构safe-refactoring">4.2 🔧 安全重构（Safe Refactoring）</h4>
+<ul>
+<li>支持 rename、extract method/variable/constant/parameter、inline、change signature、push up/pull down、extract superclass、convert module↔package 等数十种重构操作</li>
+<li>所有重构均<strong>全局安全</strong>（project-wide），自动更新所有引用</li>
+<li><strong>关键技术</strong>：PSI 结构感知变换 + 跨文件引用追踪（引用搜索基于索引系统）</li>
+<li><a href="https://www.jetbrains.com/help/pycharm/project-analysis.html">参考：PyCharm 项目分析文档</a></li>
+</ul>
+<h4 id="43--可视化调试器visual-debugger">4.3 🐞 可视化调试器（Visual Debugger）</h4>
+<ul>
+<li>支持条件断点、变量监视、内联变量显示</li>
+<li><strong>远程调试</strong>：SSH、WSL、Docker 容器</li>
+<li>2026.1 全新调试引擎：基于 <code>debugpy</code> + DAP（Debug Adapter Protocol），支持 PEP 669（Python 3.12+）、完整 <code>asyncio</code> 调试</li>
+<li>多线程/多进程调试</li>
+<li><a href="https://www.jetbrains.com/pycharm/features/coding_assistance.html">参考：PyCharm 编码辅助功能</a></li>
+</ul>
+<h4 id="44--深度-web-框架支持pro">4.4 🌐 深度 Web 框架支持（Pro）</h4>
+<ul>
+<li><strong>Django</strong>：项目模板、ORM 导航、DTL 补全、视图↔URL 路由导航、管理命令集成</li>
+<li><strong>Flask/FastAPI</strong>：路由补全、端点导航、模板调试</li>
+<li>SQLAlchemy：模型导航、查询补全</li>
+<li><strong>数据库工具（Pro）</strong>：内置 SQL 编辑器、数据浏览器、导航、查询控制台</li>
+<li><a href="https://www.jetbrains.com/pycharm/">参考：PyCharm 主页</a></li>
+</ul>
+<h4 id="45--科学计算与-jupyterpro">4.5 📊 科学计算与 Jupyter（Pro）</h4>
+<ul>
+<li>内建 Jupyter Notebook 支持（2025.3 起支持远程 Jupyter）</li>
+<li>科学模式（Scientific Mode）：变量浏览器、绘图预览、数据框检查</li>
+<li>主动数据探索：自动检测 pandas DataFrame 质量问题</li>
+<li><a href="https://blog.jetbrains.com/pycharm/2025/12/pycharm-2025-3-unified-ide-jupyter-notebooks-in-remote-development-uv-as-default-and-more/">参考：PyCharm 2025.3 发布公告</a></li>
+</ul>
+<h4 id="46--ai-辅助编程">4.6 🤖 AI 辅助编程</h4>
+<ul>
+<li><strong>AI Assistant</strong>：全文代码生成、代码解释、重构建议、提交信息撰写</li>
+<li><strong>Next Edit Suggestions（NES）</strong>：预测下一步编辑，不消耗 AI 额度</li>
+<li><strong>Junie Agent</strong>：深度集成 IDE 索引的 AI 编码代理（MCP 协议）</li>
+<li><strong>BYOK（Bring Your Own Key）</strong>：支持接入 OpenAI / Anthropic / Google 等模型</li>
+<li><a href="https://www.jetbrains.com/help/pycharm/ai-assistant-in-jetbrains-ides.html">参考：PyCharm AI Assistant 文档</a></li>
+</ul>
+<h4 id="47--测试与质量工具">4.7 🧪 测试与质量工具</h4>
+<ul>
+<li>原生集成 pytest / unittest / doctest</li>
+<li>覆盖率可视化</li>
+<li>内置代码分析器（Profiler）</li>
+<li>代码重复检测器</li>
+<li>PEP 8 合规检查</li>
+<li><a href="https://www.jetbrains.com/pycharm/features/coding_assistance.html">参考：PyCharm 编码辅助功能</a></li>
+</ul>
+<hr>
+<h2 id="5-功能实现案例">5. 功能实现案例</h2>
+<h3 id="案例使用-pycharm-重构-django-web-项目">案例：使用 PyCharm 重构 Django Web 项目</h3>
+<p><strong>场景</strong>：开发者接手一个遗留 Django 电商项目，其中有一个 300 行的视图函数 <code>checkout_view</code>，混合了订单验证、支付处理和邮件通知逻辑，需要拆分为可维护的子函数。</p>
+<p><strong>操作步骤</strong>：</p>
+<ol>
+<li><strong>选中代码提取方法</strong>：在 <code>checkout_view</code> 中选中支付处理逻辑（约 40 行），按 <code>Ctrl+Alt+M</code>（macOS：<code>Cmd+Option+M</code>），输入新方法名 <code>process_payment</code></li>
+<li><strong>PyCharm 自动完成</strong>：
+<ul>
+<li>自动识别函数中用到的局部变量，生成参数列表</li>
+<li>自动推断返回值</li>
+<li>自动在类中添加新方法</li>
+<li>自动替换原位置的代码为新方法调用</li>
+</ul>
+</li>
+<li><strong>重命名重构</strong>：将 <code>checkout_view</code> 改名为 <code>handle_checkout</code>（Shift+F6），项目中所有对该函数的引用（urls.py、测试文件等）自动更新</li>
+<li><strong>移动重构</strong>：将新增的 <code>process_payment</code> 方法提取到独立的 <code>PaymentService</code> 类（F6），系统自动处理导入</li>
+<li><strong>代码检查</strong>：保存后，PyCharm 后台检查器实时检测到缺少错误处理，在方法调用处显示警告并提供 Alt+Enter 快速修复选项</li>
+</ol>
+<p><strong>结果</strong>：原本一个 300 行的视图函数在几秒钟内被重构为多个层次清晰、可单独测试的方法和类，所有跨文件引用自动更新，无一处遗漏。</p>
+<hr>
+<h2 id="6-主要竞品清单">6. 主要竞品清单</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>#</th><th>竞品</th><th>开发商</th><th>定位</th><th>优势</th><th>劣势</th></tr></thead><tbody><tr><td>1</td><td><strong>Visual Studio Code</strong></td><td>Microsoft</td><td>轻量级跨语言代码编辑器</td><td>免费、插件生态庞大（30,000+）、启动快（~3s）、跨语言支持强</td><td>需大量配置才能达到 PyCharm 的 Python 深度；重构能力弱</td></tr><tr><td>2</td><td><strong>Cursor</strong></td><td>Anysphere（美国）</td><td>AI 原生代码编辑器（VS Code 分支）</td><td>AI 深度集成、多文件编辑、增长最快（2026 年份额+11.7%）</td><td>定价较高、依赖云 API、Python 专项能力不及 PyCharm</td></tr><tr><td>3</td><td><strong>Spyder</strong></td><td>Anaconda Inc.</td><td>科学计算 Python IDE</td><td>免费、原生 NumPy/Pandas 支持、MATLAB 式变量浏览器、数学友好</td><td>不适合 Web 开发、无 Git 集成、界面陈旧、插件少</td></tr><tr><td>4</td><td><strong>Wing IDE</strong></td><td>Wingware（美国）</td><td>专业 Python 调试 IDE</td><td>最强调试器、轻量（1-2s 启动）、远程/嵌入式调试</td><td>市场知名度低、定价高（$179/年）、社区资源少</td></tr><tr><td>5</td><td><strong>Thonny</strong></td><td>芬兰赫尔辛基大学</td><td>教育级 Python IDE</td><td>完全免费、零配置、可视化执行流程、适合教学</td><td>功能非常有限、不适合 >100 行项目、无 Git/重构</td></tr><tr><td>6</td><td><strong>JupyterLab</strong></td><td>开源社区 / Project Jupyter</td><td>交互式计算环境</td><td>免费、数据科学事实标准、富文本/可视化输出</td><td>代码组织弱、无重构/调试、适合探索非构建</td></tr><tr><td>7</td><td><strong>IDLE</strong></td><td>Python 官方团队</td><td>Python 内置轻量 IDE</td><td>免费、随 Python 安装自带、0 学习成本</td><td>功能极其简陋、不适合专业开发</td></tr><tr><td>8</td><td><strong>Sublime Text</strong></td><td>Sublime HQ（美国）</td><td>轻量高性能代码编辑器</td><td>极速启动、界面精美、跨平台</td><td>需插件（LSP）才能达 IDE 水平、需付费（$99）</td></tr></tbody></table>
+<hr>
+<h2 id="7-与竞品的横向比较">7. 与竞品的横向比较</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">对比维度</th><th align="left"><strong>PyCharm Pro</strong></th><th align="left">VS Code</th><th align="left">Cursor</th><th align="left">Spyder</th><th align="left">Wing IDE</th></tr></thead><tbody><tr><td align="left"><strong>价格</strong></td><td align="left">免费核心 / Pro $109/年起</td><td align="left"><strong>完全免费</strong></td><td align="left">$20/月起</td><td align="left"><strong>完全免费</strong></td><td align="left">$179/年</td></tr><tr><td align="left"><strong>性能/准确率</strong></td><td align="left">⭐⭐⭐⭐⭐ Python 语义深度无出其右；重构准确率业界第一</td><td align="left">⭐⭐⭐⭐ 借助 Pylance/Pyright 表现优异，但跨文件重构不如 PyCharm</td><td align="left">⭐⭐⭐⭐ AI 补全强，但 Python 特定分析深度不及 PyCharm</td><td align="left">⭐⭐⭐ 基础级语法检测，无重构能力</td><td align="left">⭐⭐⭐⭐ 调试能力顶尖，代码分析中等偏上</td></tr><tr><td align="left"><strong>易用性与上手门槛</strong></td><td align="left">中高（功能密集，学习曲线陡峭）但开箱即用</td><td align="left"><strong>极低</strong>（轻量可扩展，上手即用）</td><td align="left">中（AI 辅助降低门槛，但仍需配置）</td><td align="left"><strong>低</strong>（MATLAB 用户无缝迁移）</td><td align="left">中（界面直观但功能聚焦单一）</td></tr><tr><td align="left"><strong>生态与集成能力</strong></td><td align="left">⭐⭐⭐⭐⭐ VCS、Docker、数据库、云服务、Kubernetes 全面集成</td><td align="left">⭐⭐⭐⭐⭐ 30,000+ 插件，生态最大</td><td align="left">⭐⭐⭐⭐ VS Code 生态兼容 + AI 增强</td><td align="left">⭐⭐ 科学计算生态强，但通用插件极少</td><td align="left">⭐⭐⭐ 调试生态优秀，通用扩展有限</td></tr></tbody></table>
+<h3 id="各竞品最适用场景">各竞品最适用场景</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>竞品</th><th>最佳使用场景</th></tr></thead><tbody><tr><td><strong>PyCharm</strong></td><td>专业 Python 开发者、大型项目、Django/Flask/FastAPI Web 开发、需要深度重构和调试</td></tr><tr><td><strong>VS Code</strong></td><td>多语言开发、轻量级工作流、预算敏感、需要灵活扩展生态的团队</td></tr><tr><td><strong>Cursor</strong></td><td>AI-first 工作流、追求极致编码效率、多文件 AI 辅助编辑的开发者</td></tr><tr><td><strong>Spyder</strong></td><td>数据科学家、学术研究者、从 MATLAB 迁移的用户</td></tr><tr><td><strong>Wing IDE</strong></td><td>需要深度调试的生产环境（金融、医疗等关键系统）、嵌入式/远程开发</td></tr><tr><td><strong>Thonny</strong></td><td>K-12 编程教育、Python 零基础入门教学</td></tr><tr><td><strong>JupyterLab</strong></td><td>数据分析、机器学习实验、探索性编程</td></tr><tr><td><strong>IDLE</strong></td><td>Python 绝对初学者、最简需求</td></tr></tbody></table>
+<blockquote>
+<p><strong>信息源</strong>：<a href="https://pypl.github.io/IDE.html">PYPL IDE Index（2026 年 4 月）</a> · <a href="https://www.educative.io/blog/what-is-the-best-python-ide">Educative.io 对比评测</a> · <a href="https://dev.to/farhadrahimiklie/which-code-editor-is-best-for-developers-in-2026-2dn7">Dev.to 编辑器对比</a> · <a href="https://www.softwareadvice.com/devops/pycharm-profile/">Software Advice 评测</a> · <a href="https://www.trustradius.com/products/pycharm/">TrustRadius 用户评价</a></p>
+</blockquote>
+<hr>
+<h2 id="8-版本迭代信息">8. 版本迭代信息</h2>
+<h3 id="首次公开发布">首次公开发布</h3>
+<ul>
+<li><strong>Beta 版</strong>：2010 年 7 月</li>
+<li><strong>v1.0 正式版</strong>：2010 年 10 月</li>
+<li><strong>开源（Community Edition）</strong>：2013 年 10 月 22 日，采用 Apache License 2.0</li>
+</ul>
+<h3 id="主要里程碑">主要里程碑</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>版本</th><th>日期</th><th>关键变化</th></tr></thead><tbody><tr><td>v1.0</td><td>2010-10</td><td>首个正式版</td></tr><tr><td>v2.0</td><td>2011-12</td><td>首次重大更新</td></tr><tr><td>v3.0</td><td>2013-09</td><td>大规模功能增强</td></tr><tr><td>v4.0</td><td>2014-11</td><td>全新 UI 设计</td></tr><tr><td><strong>2016.1</strong></td><td>2016-03</td><td>切换为<strong>年份命名</strong></td></tr><tr><td>2017-2024</td><td>逐年 3 版</td><td>持续稳定迭代</td></tr><tr><td><strong>2025.1</strong></td><td>2025-04-16</td><td><strong>统一产品发布</strong>：Community+Pro 合并</td></tr><tr><td>2025.2</td><td>2025-08-04</td><td>最后一个独立 Community 版</td></tr><tr><td>2025.3</td><td>2025-12-08</td><td>所有用户迁移到统一产品；uv 为默认包管理器；Claude Agent 集成</td></tr><tr><td><strong>2026.1</strong></td><td>2026-03-30</td><td><strong>全新调试引擎</strong>；原生 uv 远程支持；NES 智能编辑建议；ACP Registry</td></tr></tbody></table>
+<h3 id="当前最新稳定版">当前最新稳定版</h3>
+<ul>
+<li><strong>PyCharm 2026.1</strong>（2026 年 3 月 30 日发布）</li>
+<li>2026.1.1 补丁版已发布：新增 uv/Poetry/Hatch Workspaces 支持（Beta）</li>
+</ul>
+<h3 id="预计后续版本">预计后续版本</h3>
+<ul>
+<li><strong>2026.2</strong>：预计 2026 年 7-8 月</li>
+<li><strong>2026.3</strong>：预计 2026 年 11-12 月</li>
+</ul>
+<h3 id="更新频率">更新频率</h3>
+<ul>
+<li><strong>每年 3 次大版本更新</strong>（春季 .1、夏季 .2、深秋 .3）</li>
+<li><strong>月均 1-2 次补丁更新</strong>（Bug-fix），间隔约 2.5-3 周</li>
+<li><strong>EAP（Early Access Program）</strong>：每个大版本前 2-3 周开放测试</li>
+</ul>
+<blockquote>
+<p><strong>信息源</strong>：<a href="https://en.wikipedia.org/wiki/PyCharm">PyCharm Wikipedia</a> · <a href="https://www.jetbrains.com/pycharm/download/other.html">JetBrains 版本发布记录</a> · <a href="https://github.com/ChrisCarini/jetbrains-ide-release-dates">GitHub 发布日期追踪</a> · <a href="https://blog.jetbrains.com/pycharm/">JetBrains 官方博客</a></p>
+</blockquote>
+<hr>
+<h2 id="一句话锐评">一句话锐评</h2>
+<blockquote>
+<p><strong>PyCharm 是 Python 专业领域无可争议的”航空母舰”——重构精度和框架深度在业界独一档，适合将 Python 作为主力语言的团队，但如果你追求轻量或 AI-first 工作流，VS Code 和 Cursor 是更灵活的选择。</strong></p>
+</blockquote>
+<hr>
+<p><em>本报告基于 2026 年 7 月 11 日的公开信息编制。部分数据（如最新定价）请以 JetBrains 官网为准。</em></p> <div> <a href="/notes" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150">
+&larr; 返回笔记列表
+</a> </div>  </div> <!-- Previous / Next navigation -->  <hr class="!mt-12 !mb-8" data-astro-cid-bvzihdzo> <div data-astro-cid-bvzihdzo> <a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-bvzihdzo>
+&larr; 返回博客列表
+</a> </div> </div> </div> </article> </div>  </main> <footer class="border-t border-[var(--color-border)] mt-24 py-8" data-astro-cid-pux6a34n><div class="max-w-content flex items-center justify-between" data-astro-cid-pux6a34n><span class="text-sm text-[var(--color-text-tertiary)]" data-astro-cid-pux6a34n>
+&copy; 2026 星游寰宇
+</span><div class="flex items-center gap-4" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>博客</a><a href="/projects" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>项目</a><a href="/notes" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>日记</a><a href="/resources" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>资源</a><a href="/about" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>关于</a></div></div></footer> <div id="link-preview" style="display:none;position:fixed;z-index:99;max-width:18rem;pointer-events:none;" data-astro-cid-t7vshrbh></div>  <script type="module">(async()=>{try{const c=await fetch("/posts.json");if(!c.ok)return;const u=await c.json(),p=new Map(u.map(t=>[t.href,t])),e=document.getElementById("link-preview");if(!e)return;let n="",d;document.addEventListener("mouseover",t=>{const i=t.target.closest("a[href^='/blog/']");if(!i){e.style.display="none",n="";return}const s=i.getAttribute("href");if(!s||s===n)return;const o=p.get(s);o&&(n=s,d=setTimeout(()=>{e.innerHTML=`<div class="lp-title">${o.title}</div><div class="lp-summary">${o.summary}</div>`;const r=i.getBoundingClientRect();let a=r.left,l=r.bottom+6;a+288>window.innerWidth&&(a=window.innerWidth-296),l+80>window.innerHeight&&(l=r.top-80),Object.assign(e.style,{left:a+"px",top:l+"px",display:"block"})},300))},{passive:!0}),document.addEventListener("mouseout",t=>{t.target.closest("a[href^='/blog/']")&&(clearTimeout(d),e.style.display="none",n="")},{passive:!0})}catch{}})();</script> </body></html>  <script type="module">const c=document.getElementById("toc-toggle"),s=document.getElementById("toc-list"),i=document.getElementById("toc-chevron");c&&s&&i&&c.addEventListener("click",()=>{const o=s.classList.toggle("hidden");c.setAttribute("aria-expanded",String(o)),i.style.transform=o?"rotate(180deg)":""});const r=document.querySelectorAll(".toc-list a");if(r.length>0){const o=new IntersectionObserver(n=>{for(const t of n)t.isIntersecting&&r.forEach(e=>{e.classList.toggle("active",e.getAttribute("href")===`#${t.target.id}`)})},{rootMargin:"-80px 0px -80% 0px"});r.forEach(n=>{const t=n.getAttribute("href")?.slice(1);if(t){const e=document.getElementById(t);e&&o.observe(e)}})}</script>

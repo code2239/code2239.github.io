@@ -1,0 +1,552 @@
+<!DOCTYPE html><html lang="zh-CN"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="MCP 是 Anthropic 推出的开放协议标准，让 AI Agent 能够以统一的方式连接外部数据源和工具。"><meta name="color-scheme" content="light"><!-- Open Graph --><meta property="og:title" content="MCP 学习路径 — 星游寰宇"><meta property="og:description" content="MCP 是 Anthropic 推出的开放协议标准，让 AI Agent 能够以统一的方式连接外部数据源和工具。"><meta property="og:url" content="https://code2239.github.io/notes/2026-07-13-MCP 学习路径"><meta property="og:type" content="article"><meta property="og:site_name" content="星游寰宇"><meta property="og:locale" content="zh_CN"><meta property="article:published_time" content="2026-07-13"><meta property="article:tag" content="MCP"><meta property="article:tag" content="AI"><meta property="article:tag" content="学习路径"><meta property="article:tag" content="系统架构"><meta property="article:tag" content="实践"><!-- Twitter Card --><meta name="twitter:card" content="summary"><meta name="twitter:title" content="MCP 学习路径 — 星游寰宇"><meta name="twitter:description" content="MCP 是 Anthropic 推出的开放协议标准，让 AI Agent 能够以统一的方式连接外部数据源和工具。"><!-- Canonical --><link rel="canonical" href="https://code2239.github.io/notes/2026-07-13-MCP 学习路径"><title>MCP 学习路径 — 星游寰宇</title><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="alternate" type="application/rss+xml" title="星游寰宇 RSS" href="/rss.xml"><!-- Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"星游寰宇","url":"https://code2239.github.io","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://code2239.github.io/search?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://code2239.github.io"},{"@type":"ListItem","position":2,"name":"日记","item":"https://code2239.github.io/notes"},{"@type":"ListItem","position":3,"name":"2026 07 13 MCP 学习路径"}]},{"@context":"https://schema.org","@type":"BlogPosting","headline":"MCP 学习路径","description":"MCP 是 Anthropic 推出的开放协议标准，让 AI Agent 能够以统一的方式连接外部数据源和工具。","datePublished":"2026-07-13","url":"https://code2239.github.io/notes/2026-07-13-MCP 学习路径","keywords":"MCP, AI, 学习路径, 系统架构, 实践"}]}</script><link rel="stylesheet" href="/_astro/_slug_.CXDKI3B6.css">
+<style>.back-to-top[data-astro-cid-gzprr2dq]{position:fixed;bottom:2rem;right:2rem;z-index:40;width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:50%;border:1px solid var(--color-border);background:var(--color-bg);color:var(--color-text-secondary);cursor:pointer;box-shadow:var(--shadow-md);transition:opacity .2s ease,transform .2s ease}.back-to-top[data-astro-cid-gzprr2dq]:hover{color:var(--color-accent);border-color:var(--color-accent);transform:translateY(-2px)}.back-to-top[data-astro-cid-gzprr2dq].hidden{opacity:0;pointer-events:none}.copy-btn[data-astro-cid-qqybitij]{position:absolute;top:8px;right:8px;padding:4px 10px;font-size:.6875rem;font-family:var(--font-sans);color:var(--color-text-tertiary);background:var(--color-bg);border:1px solid var(--color-border);border-radius:6px;cursor:pointer;opacity:0;transition:opacity .15s ease,color .15s ease}pre[data-astro-cid-qqybitij]:hover .copy-btn[data-astro-cid-qqybitij]{opacity:1}.copy-btn[data-astro-cid-qqybitij]:hover{color:var(--color-accent);border-color:var(--color-accent)}.copy-btn[data-astro-cid-qqybitij].copied{color:#16a34a;border-color:#16a34a}.blog-layout[data-astro-cid-bvzihdzo]{display:block}.blog-toc[data-astro-cid-bvzihdzo]{display:none}.blog-body[data-astro-cid-bvzihdzo]{min-width:0}@media(min-width:1024px){.blog-layout[data-astro-cid-bvzihdzo]{display:grid;grid-template-columns:14rem 1fr;gap:3rem;align-items:start}.blog-toc[data-astro-cid-bvzihdzo]{display:block}.blog-body[data-astro-cid-bvzihdzo]{padding-right:2rem}}@media(max-width:1023px){.blog-toc[data-astro-cid-bvzihdzo]{display:block;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid var(--color-border)}}
+</style></head> <body class="min-h-screen flex flex-col"> <nav class="sticky top-0 z-40 bg-[var(--color-bg)]/80 backdrop-blur-md border-b border-[var(--color-border)]" data-astro-cid-pux6a34n><div class="max-w-content flex items-center justify-between py-4" data-astro-cid-pux6a34n><a href="/" class="flex items-center gap-2.5 text-base font-semibold no-underline tracking-tight" data-astro-cid-pux6a34n><svg class="w-7 h-7" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" data-astro-cid-pux6a34n><circle cx="16" cy="16" r="15" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-pux6a34n></circle><circle cx="16" cy="16" r="3" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="16" cy="5" r="1.5" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="24" cy="10" r="1" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="8" cy="22" r="1" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="25" cy="21" r="0.8" fill="currentColor" data-astro-cid-pux6a34n></circle></svg>
+星游寰宇
+</a><!-- Desktop nav --><div class="hidden sm:flex items-center gap-5" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>博客</a><a href="/projects" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>项目</a><a href="/notes" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>日记</a><a href="/resources" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>资源</a><a href="/about" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>关于</a><button id="search-trigger" class="flex items-center gap-1.5 text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] bg-[var(--color-bg-secondary)] hover:bg-[var(--color-bg-tertiary)] border border-[var(--color-border)] hover:border-[var(--color-accent)]/30 rounded-lg px-3 py-1.5 cursor-pointer shadow-sm hover:shadow-md transition-all duration-200" aria-label="搜索 (Ctrl+K)" title="搜索 (Ctrl+K)" data-astro-cid-pux6a34n><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-pux6a34n><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" data-astro-cid-pux6a34n></path></svg><span class="hidden lg:inline" data-astro-cid-pux6a34n>搜索</span><kbd class="hidden lg:inline-flex items-center text-[0.625rem] font-mono text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1 py-px rounded" data-astro-cid-pux6a34n>Ctrl+K</kbd></button></div><!-- Mobile hamburger --><button id="menu-btn" class="sm:hidden flex flex-col gap-1 p-2 -mr-2 cursor-pointer" aria-label="打开菜单" data-astro-cid-pux6a34n><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-transform duration-200" data-astro-cid-pux6a34n></span><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-opacity duration-200" data-astro-cid-pux6a34n></span><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-transform duration-200" data-astro-cid-pux6a34n></span></button></div><!-- Mobile menu --><div id="mobile-menu" class="hidden sm:hidden border-t border-[var(--color-border)] bg-[var(--color-bg)]" data-astro-cid-pux6a34n><div class="max-w-content flex flex-col gap-2 py-4" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>博客</a><a href="/projects" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>项目</a><a href="/notes" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>日记</a><a href="/resources" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>资源</a><a href="/about" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>关于</a></div></div></nav>
+    <div id="search-overlay" class="srch-overlay" role="dialog" aria-modal="true" aria-label="全局搜索" data-astro-cid-mn7pezny> <div id="search-backdrop" class="srch-backdrop" data-astro-cid-mn7pezny></div> <div class="srch-panel" id="srch-panel" data-astro-cid-mn7pezny> <!-- Search input --> <div class="srch-input-row" data-astro-cid-mn7pezny> <svg class="srch-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-mn7pezny> <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" data-astro-cid-mn7pezny></path> </svg> <input type="text" id="search-input" class="srch-input" placeholder="搜索文章、项目、日记、资源..." autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="go" data-astro-cid-mn7pezny> <kbd class="srch-kbd" data-astro-cid-mn7pezny>Esc</kbd> </div> <!-- Results area --> <div id="search-results" class="srch-results" data-astro-cid-mn7pezny> <p class="srch-empty" id="search-empty-hint" data-astro-cid-mn7pezny>输入关键词开始搜索</p> </div> <!-- Skeleton loading --> <div id="search-skeleton" class="srch-skeleton" style="display:none;" aria-hidden="true" data-astro-cid-mn7pezny> <div class="srch-skeleton-line" style="width:75%" data-astro-cid-mn7pezny></div> <div class="srch-skeleton-line" style="width:50%" data-astro-cid-mn7pezny></div> <div class="srch-skeleton-line" style="width:60%" data-astro-cid-mn7pezny></div> </div> <!-- Footer hints --> <div class="srch-footer" data-astro-cid-mn7pezny> <div class="srch-footer-hints" data-astro-cid-mn7pezny> <span data-astro-cid-mn7pezny><kbd data-astro-cid-mn7pezny>↑</kbd><kbd data-astro-cid-mn7pezny>↓</kbd> 导航</span> <span data-astro-cid-mn7pezny><kbd data-astro-cid-mn7pezny>↵</kbd> 打开</span> <span data-astro-cid-mn7pezny><kbd data-astro-cid-mn7pezny>Ctrl</kbd>+<kbd data-astro-cid-mn7pezny>K</kbd> 切换</span> </div> <div class="srch-footer-brand" data-astro-cid-mn7pezny>
+powered by Orama
+</div> </div> </div> </div> <script type="module" src="/_astro/Navigation.astro_astro_type_script_index_0_lang.15n1EYJp.js"></script> <main class="flex-1">  <div class="reading-progress" id="reading-progress" style="width: 0%"></div> <script type="module">const o=document.getElementById("reading-progress");if(!o)throw new Error("Reading progress bar element not found");const r=()=>{const n=window.scrollY,e=document.documentElement.scrollHeight-window.innerHeight,t=e>0?n/e*100:0;o.style.width=`${Math.min(t,100)}%`};window.addEventListener("scroll",r,{passive:!0});</script> <button id="back-to-top" class="back-to-top hidden" aria-label="返回顶部" data-astro-cid-gzprr2dq> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-gzprr2dq> <polyline points="18 15 12 9 6 15" data-astro-cid-gzprr2dq></polyline> </svg> </button>  <script type="module">const o=document.getElementById("back-to-top");o&&(window.addEventListener("scroll",()=>{o.classList.toggle("hidden",window.scrollY<400)},{passive:!0}),o.addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"})));</script> <script type="module">document.querySelectorAll("pre").forEach(e=>{const t=document.createElement("button");t.className="copy-btn",t.textContent="复制",t.addEventListener("click",async()=>{const n=e.querySelector("code")?.textContent||e.textContent||"";try{await navigator.clipboard.writeText(n),t.textContent="已复制",t.classList.add("copied"),setTimeout(()=>{t.textContent="复制",t.classList.remove("copied")},2e3)}catch{t.textContent="失败",setTimeout(()=>{t.textContent="复制"},2e3)}}),e.style.position="relative",e.appendChild(t)});</script> <div class="px-6 xl:px-12 pt-12 pb-16" data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <header class="mb-12 text-center" data-astro-cid-bvzihdzo> <h1 class="text-3xl font-semibold mb-3 tracking-tight" data-astro-cid-bvzihdzo>MCP 学习路径</h1> <div class="flex items-center justify-center gap-2 text-[var(--color-text-tertiary)] text-sm" data-astro-cid-bvzihdzo> <time datetime="2026-07-13" data-astro-cid-bvzihdzo>2026-07-13</time> <span class="text-[var(--color-border)]" data-astro-cid-bvzihdzo>·</span> <span data-astro-cid-bvzihdzo>26 分钟阅读</span>  <span class="text-[var(--color-border)]" data-astro-cid-bvzihdzo>·</span> <span class="text-sm text-[var(--color-text-tertiary)]"> <span> MCP<span class="mx-1">·</span> </span><span> AI<span class="mx-1">·</span> </span><span> 学习路径<span class="mx-1">·</span> </span><span> 系统架构<span class="mx-1">·</span> </span><span> 实践 </span> </span>  </div> </header> <div class="blog-layout" data-astro-cid-bvzihdzo> <aside class="blog-toc" data-astro-cid-bvzihdzo> <div class="sticky top-14 max-h-[calc(100vh-3.5rem)] overflow-y-auto" data-astro-cid-bvzihdzo> <button id="toc-toggle" class="hidden max-md:flex items-center gap-1 text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-3 cursor-pointer border-none bg-transparent p-0" aria-expanded="false" aria-controls="toc-list" data-astro-cid-bvzihdzo>
+目录
+<svg id="toc-chevron" class="w-3 h-3 transition-transform duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-bvzihdzo><polyline points="6 9 12 15 18 9" data-astro-cid-bvzihdzo></polyline></svg> </button> <span class="text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-3 max-md:hidden" data-astro-cid-bvzihdzo>目录</span> <div id="toc-list" class="max-md:hidden" data-astro-cid-bvzihdzo> <nav class="toc"> <p class="text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-3">目录</p> <ul class="toc-list"> <li class> <a href="#-核心理念">📌 核心理念</a> </li><li class> <a href="#第一阶段理解概念预计-2-3-天">第一阶段：理解概念（预计 2-3 天）</a> </li><li class="toc-h3"> <a href="#目标">目标</a> </li><li class="toc-h3"> <a href="#学习内容">学习内容</a> </li><li class="toc-h3"> <a href="#-阶段成果">✅ 阶段成果</a> </li><li class> <a href="#第二阶段使用-mcp预计-2-3-天">第二阶段：使用 MCP（预计 2-3 天）</a> </li><li class="toc-h3"> <a href="#目标-1">目标</a> </li><li class="toc-h3"> <a href="#学习内容-1">学习内容</a> </li><li class="toc-h3"> <a href="#-阶段成果-1">✅ 阶段成果</a> </li><li class> <a href="#第三阶段开发第一个-mcp-server预计-5-7-天">第三阶段：开发第一个 MCP Server（预计 5-7 天）</a> </li><li class="toc-h3"> <a href="#目标-2">目标</a> </li><li class="toc-h3"> <a href="#学习内容-2">学习内容</a> </li><li class="toc-h3"> <a href="#-阶段成果-2">✅ 阶段成果</a> </li><li class> <a href="#第四阶段进阶开发预计-7-10-天">第四阶段：进阶开发（预计 7-10 天）</a> </li><li class="toc-h3"> <a href="#目标-3">目标</a> </li><li class="toc-h3"> <a href="#学习内容-3">学习内容</a> </li><li class="toc-h3"> <a href="#-阶段成果-3">✅ 阶段成果</a> </li><li class> <a href="#第五阶段实战项目预计-10-14-天">第五阶段：实战项目（预计 10-14 天）</a> </li><li class="toc-h3"> <a href="#目标-4">目标</a> </li><li class="toc-h3"> <a href="#推荐项目选一个">推荐项目（选一个）</a> </li><li class="toc-h3"> <a href="#-阶段成果-4">✅ 阶段成果</a> </li><li class> <a href="#第六阶段深入生态持续学习">第六阶段：深入生态（持续学习）</a> </li><li class="toc-h3"> <a href="#目标-5">目标</a> </li><li class="toc-h3"> <a href="#学习内容-4">学习内容</a> </li><li class> <a href="#学习路线总览">学习路线总览</a> </li><li class> <a href="#常见问题">常见问题</a> </li><li class="toc-h3"> <a href="#q-需要先学什么语言">Q: 需要先学什么语言？</a> </li><li class="toc-h3"> <a href="#q-mcp-和普通-api-有什么区别">Q: MCP 和普通 API 有什么区别？</a> </li><li class="toc-h3"> <a href="#q-需要先理解-json-rpc-吗">Q: 需要先理解 JSON-RPC 吗？</a> </li><li class="toc-h3"> <a href="#q-如何调试-mcp-server">Q: 如何调试 MCP Server？</a> </li><li class> <a href="#下一步行动">下一步行动</a> </li> </ul> </nav> </div> </div> </aside> <div class="blog-body" data-astro-cid-bvzihdzo> <div class="prose prose-neutral max-w-none" data-astro-cid-bvzihdzo>   <h1 id="mcpmodel-context-protocol学习路径">MCP（Model Context Protocol）学习路径</h1>
+<h2 id="-核心理念">📌 核心理念</h2>
+<p>MCP 是 Anthropic 推出的<strong>开放协议标准</strong>，让 AI Agent 能够以统一的方式连接外部数据源和工具。</p>
+<blockquote>
+<p><strong>类比理解</strong>：MCP 就像 USB-C 接口——不管是什么设备（工具/服务），插上同一个接口就能用。</p>
+</blockquote>
+<hr>
+<h2 id="第一阶段理解概念预计-2-3-天">第一阶段：理解概念（预计 2-3 天）</h2>
+<h3 id="目标">目标</h3>
+<p>搞清楚 MCP 是什么、为什么需要它、核心架构是什么。</p>
+<h3 id="学习内容">学习内容</h3>
+<h4 id="11-阅读官方文档必须">1.1 阅读官方文档（必须）</h4>
+<ul>
+<li>
+<p><strong>MCP 入门指南</strong>：<a href="https://modelcontextprotocol.io/introduction">https://modelcontextprotocol.io/introduction</a></p>
+<ul>
+<li>MCP 解决了什么问题</li>
+<li>与传统 API 调用的区别</li>
+<li>协议的核心设计理念</li>
+</ul>
+</li>
+<li>
+<p><strong>协议规范</strong>：<a href="https://modelcontextprotocol.io/specification">https://modelcontextprotocol.io/specification</a></p>
+<ul>
+<li>JSON-RPC 2.0 通信协议</li>
+<li>消息格式和传输方式</li>
+<li>请求/通知/响应模型</li>
+</ul>
+</li>
+</ul>
+<h4 id="12-理解核心概念">1.2 理解核心概念</h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>概念</th><th>说明</th><th>类比</th></tr></thead><tbody><tr><td><strong>MCP Host</strong></td><td>使用工具的一方（如 Claude Code、Cursor）</td><td>电脑</td></tr><tr><td><strong>MCP Server</strong></td><td>提供工具的一方（如文件系统、数据库）</td><td>USB 设备</td></tr><tr><td><strong>MCP Client</strong></td><td>Host 内部的协议客户端</td><td>USB 驱动</td></tr><tr><td><strong>Transport</strong></td><td>通信方式（stdio / SSE / Streamable HTTP）</td><td>USB-C 线缆</td></tr></tbody></table>
+<h4 id="13-理解架构">1.3 理解架构</h4>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>┌──────────────────────────────────────┐</span></span>
+<span class="line"><span>│         MCP Host                      │</span></span>
+<span class="line"><span>│  (Claude Code / Cursor / 你的应用)     │</span></span>
+<span class="line"><span>│                                       │</span></span>
+<span class="line"><span>│  ┌──────────────────────────────────┐ │</span></span>
+<span class="line"><span>│  │        MCP Client                 │ │</span></span>
+<span class="line"><span>│  │  (协议客户端，管理连接)             │ │</span></span>
+<span class="line"><span>│  └────────┬─────────────────────────┘ │</span></span>
+<span class="line"><span>│           │ Transport (stdio/SSE)      │</span></span>
+<span class="line"><span>└───────────┼───────────────────────────┘</span></span>
+<span class="line"><span>            │</span></span>
+<span class="line"><span>┌───────────┼───────────────────────────┐</span></span>
+<span class="line"><span>│  ┌────────▼─────────────────────────┐ │</span></span>
+<span class="line"><span>│  │       MCP Server                  │ │</span></span>
+<span class="line"><span>│  │  (提供 tools / resources / prompts) │ │</span></span>
+<span class="line"><span>│  └──────────────────────────────────┘ │</span></span>
+<span class="line"><span>│         第三方服务                       │</span></span>
+<span class="line"><span>│  (文件系统 / 数据库 / API / ...)        │</span></span>
+<span class="line"><span>└──────────────────────────────────────┘</span></span></code></pre>
+<h3 id="-阶段成果">✅ 阶段成果</h3>
+<ul class="contains-task-list">
+<li class="task-list-item"><input type="checkbox" disabled> 能用自己的话解释 “MCP 是什么”</li>
+<li class="task-list-item"><input type="checkbox" disabled> 能画出 MCP 架构图</li>
+<li class="task-list-item"><input type="checkbox" disabled> 理解 Host / Client / Server / Transport 四个角色的关系</li>
+</ul>
+<hr>
+<h2 id="第二阶段使用-mcp预计-2-3-天">第二阶段：使用 MCP（预计 2-3 天）</h2>
+<h3 id="目标-1">目标</h3>
+<p>学会在 Claude Code 中配置和使用 MCP Server。</p>
+<h3 id="学习内容-1">学习内容</h3>
+<h4 id="21-配置-mcp-server">2.1 配置 MCP Server</h4>
+<p>Claude Code 中 MCP Server 的配置在 <code>.claude/settings.json</code> 或 <code>.mcp.json</code>：</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="json"><code><span class="line"><span style="color:var(--astro-code-foreground)">{</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">  "mcpServers"</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-foreground)"> {</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">    "my-server"</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-foreground)"> {</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">      "command"</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-token-string-expression)"> "npx"</span><span style="color:var(--astro-code-token-punctuation)">,</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">      "args"</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-foreground)"> [</span><span style="color:var(--astro-code-token-string-expression)">"-y"</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-token-string-expression)"> "@modelcontextprotocol/server-filesystem"</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-token-string-expression)"> "/path/to/dir"</span><span style="color:var(--astro-code-foreground)">]</span><span style="color:var(--astro-code-token-punctuation)">,</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">      "env"</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-foreground)"> {}</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">    }</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">  }</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">}</span></span></code></pre>
+<p><strong>关键配置项：</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>字段</th><th>说明</th></tr></thead><tbody><tr><td><code>command</code></td><td>启动 Server 的命令</td></tr><tr><td><code>args</code></td><td>启动参数</td></tr><tr><td><code>env</code></td><td>环境变量</td></tr><tr><td><code>transport</code></td><td>传输方式（默认 stdio）</td></tr></tbody></table>
+<h4 id="22-探索内置-mcp-工具">2.2 探索内置 MCP 工具</h4>
+<p>在 Claude Code 中，观察哪些能力来自 MCP：</p>
+<ul>
+<li>浏览器操作（Chrome DevTools MCP）</li>
+<li>文件搜索（Grep / Glob）</li>
+<li>代码阅读（Read / Write / Edit）</li>
+</ul>
+<h4 id="23-安装社区-mcp-server">2.3 安装社区 MCP Server</h4>
+<p>尝试安装几个流行的 MCP Server：</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:var(--astro-code-token-comment)"># 1. 文件系统 Server</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">npx</span><span style="color:var(--astro-code-token-string)"> -y</span><span style="color:var(--astro-code-token-string)"> @modelcontextprotocol/server-filesystem</span><span style="color:var(--astro-code-token-string)"> .</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 2. GitHub Server（需要 token）</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">npx</span><span style="color:var(--astro-code-token-string)"> -y</span><span style="color:var(--astro-code-token-string)"> @modelcontextprotocol/server-github</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 3. PostgreSQL Server</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">npx</span><span style="color:var(--astro-code-token-string)"> -y</span><span style="color:var(--astro-code-token-string)"> @modelcontextprotocol/server-postgres</span></span></code></pre>
+<h3 id="-阶段成果-1">✅ 阶段成果</h3>
+<ul class="contains-task-list">
+<li class="task-list-item"><input type="checkbox" disabled> 能在 Claude Code 中成功配置一个 MCP Server</li>
+<li class="task-list-item"><input type="checkbox" disabled> 能用 <code>npx</code> 启动至少 3 个不同的 MCP Server</li>
+<li class="task-list-item"><input type="checkbox" disabled> 理解 MCP 配置文件的结构和各字段含义</li>
+</ul>
+<hr>
+<h2 id="第三阶段开发第一个-mcp-server预计-5-7-天">第三阶段：开发第一个 MCP Server（预计 5-7 天）</h2>
+<h3 id="目标-2">目标</h3>
+<p>从零开发一个 MCP Server，理解协议细节。</p>
+<h3 id="学习内容-2">学习内容</h3>
+<h4 id="31-选择开发语言">3.1 选择开发语言</h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>语言</th><th>SDK</th><th>难度</th></tr></thead><tbody><tr><td><strong>TypeScript/Node.js</strong></td><td><code>@modelcontextprotocol/sdk</code></td><td>⭐ 推荐（生态最成熟）</td></tr><tr><td><strong>Python</strong></td><td><code>mcp</code> SDK</td><td>⭐ 推荐（最简洁）</td></tr><tr><td><strong>Java</strong></td><td><code>modelcontextprotocol/spec</code></td><td>较复杂</td></tr></tbody></table>
+<h4 id="32-python-快速上手推荐入门">3.2 Python 快速上手（推荐入门）</h4>
+<p><strong>步骤 1：安装 SDK</strong></p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:var(--astro-code-token-function)">pip</span><span style="color:var(--astro-code-token-string)"> install</span><span style="color:var(--astro-code-token-string)"> mcp</span></span></code></pre>
+<p><strong>步骤 2：创建第一个 Server</strong></p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:var(--astro-code-token-comment)"># my_server.py</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">from</span><span style="color:var(--astro-code-foreground)"> mcp</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-foreground)">server </span><span style="color:var(--astro-code-token-keyword)">import</span><span style="color:var(--astro-code-foreground)"> Server</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">from</span><span style="color:var(--astro-code-foreground)"> mcp</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-foreground)">types </span><span style="color:var(--astro-code-token-keyword)">import</span><span style="color:var(--astro-code-foreground)"> Tool</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-foreground)"> TextContent</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">app </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-function)"> Server</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-string-expression)">"my-server"</span><span style="color:var(--astro-code-token-punctuation)">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">@app</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">tool</span><span style="color:var(--astro-code-token-punctuation)">()</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">def</span><span style="color:var(--astro-code-token-function)"> greet</span><span style="color:var(--astro-code-foreground)">(</span><span style="color:var(--astro-code-token-parameter)">name</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-token-constant)"> str</span><span style="color:var(--astro-code-foreground)">) </span><span style="color:var(--astro-code-token-punctuation)">-></span><span style="color:var(--astro-code-token-constant)"> str</span><span style="color:var(--astro-code-foreground)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">    """向用户打招呼"""</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">    return</span><span style="color:var(--astro-code-token-keyword)"> f</span><span style="color:var(--astro-code-token-string-expression)">"Hello, </span><span style="color:var(--astro-code-token-constant)">{</span><span style="color:var(--astro-code-foreground)">name</span><span style="color:var(--astro-code-token-constant)">}</span><span style="color:var(--astro-code-token-string-expression)">!"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">@app</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">tool</span><span style="color:var(--astro-code-token-punctuation)">()</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">def</span><span style="color:var(--astro-code-token-function)"> add</span><span style="color:var(--astro-code-foreground)">(</span><span style="color:var(--astro-code-token-parameter)">a</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-token-constant)"> int</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-token-parameter)"> b</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-token-constant)"> int</span><span style="color:var(--astro-code-foreground)">) </span><span style="color:var(--astro-code-token-punctuation)">-></span><span style="color:var(--astro-code-token-constant)"> int</span><span style="color:var(--astro-code-foreground)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">    """计算两个数的和"""</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">    return</span><span style="color:var(--astro-code-foreground)"> a </span><span style="color:var(--astro-code-token-keyword)">+</span><span style="color:var(--astro-code-foreground)"> b</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">@app</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">tool</span><span style="color:var(--astro-code-token-punctuation)">()</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">def</span><span style="color:var(--astro-code-token-function)"> search_notes</span><span style="color:var(--astro-code-foreground)">(</span><span style="color:var(--astro-code-token-parameter)">query</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-token-constant)"> str</span><span style="color:var(--astro-code-foreground)">) </span><span style="color:var(--astro-code-token-punctuation)">-></span><span style="color:var(--astro-code-foreground)"> list</span><span style="color:var(--astro-code-token-punctuation)">[</span><span style="color:var(--astro-code-token-constant)">str</span><span style="color:var(--astro-code-token-punctuation)">]</span><span style="color:var(--astro-code-foreground)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">    """搜索笔记（示例）"""</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">    # 这里可以接入你的实际数据源</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">    return</span><span style="color:var(--astro-code-foreground)"> [</span><span style="color:var(--astro-code-token-keyword)">f</span><span style="color:var(--astro-code-token-string-expression)">"找到关于 '</span><span style="color:var(--astro-code-token-constant)">{</span><span style="color:var(--astro-code-foreground)">query</span><span style="color:var(--astro-code-token-constant)">}</span><span style="color:var(--astro-code-token-string-expression)">' 的笔记..."</span><span style="color:var(--astro-code-foreground)">]</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">if</span><span style="color:var(--astro-code-token-constant)"> __name__</span><span style="color:var(--astro-code-token-keyword)"> ==</span><span style="color:var(--astro-code-token-string-expression)"> "__main__"</span><span style="color:var(--astro-code-token-punctuation)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">    from</span><span style="color:var(--astro-code-foreground)"> mcp</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-foreground)">server</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-foreground)">stdio </span><span style="color:var(--astro-code-token-keyword)">import</span><span style="color:var(--astro-code-foreground)"> stdio_server</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">    import</span><span style="color:var(--astro-code-foreground)"> asyncio</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">    async</span><span style="color:var(--astro-code-token-keyword)"> def</span><span style="color:var(--astro-code-token-function)"> main</span><span style="color:var(--astro-code-foreground)">():</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">        async</span><span style="color:var(--astro-code-token-keyword)"> with</span><span style="color:var(--astro-code-token-function)"> stdio_server</span><span style="color:var(--astro-code-token-punctuation)">()</span><span style="color:var(--astro-code-token-keyword)"> as</span><span style="color:var(--astro-code-foreground)"> (read</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-foreground)"> write)</span><span style="color:var(--astro-code-token-punctuation)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">            await</span><span style="color:var(--astro-code-foreground)"> app</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">run</span><span style="color:var(--astro-code-token-punctuation)">(read, write, app.</span><span style="color:var(--astro-code-token-function)">create_initialization_options</span><span style="color:var(--astro-code-token-punctuation)">())</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">    asyncio</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">run</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-function)">main</span><span style="color:var(--astro-code-token-punctuation)">())</span></span></code></pre>
+<p><strong>步骤 3：配置到 Claude Code</strong></p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="json"><code><span class="line"><span style="color:var(--astro-code-foreground)">{</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">  "mcpServers"</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-foreground)"> {</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">    "my-tools"</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-foreground)"> {</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">      "command"</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-token-string-expression)"> "python"</span><span style="color:var(--astro-code-token-punctuation)">,</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">      "args"</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-foreground)"> [</span><span style="color:var(--astro-code-token-string-expression)">"my_server.py"</span><span style="color:var(--astro-code-foreground)">]</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">    }</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">  }</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">}</span></span></code></pre>
+<p><strong>步骤 4：测试</strong></p>
+<p>在 Claude Code 中对话，让 Agent 调用你刚写的工具。</p>
+<h4 id="33-typescriptnodejs-版本">3.3 TypeScript/Node.js 版本</h4>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:var(--astro-code-token-function)">npm</span><span style="color:var(--astro-code-token-string)"> install</span><span style="color:var(--astro-code-token-string)"> @modelcontextprotocol/sdk</span></span></code></pre>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="typescript"><code><span class="line"><span style="color:var(--astro-code-token-comment)">// my-server.ts</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">import</span><span style="color:var(--astro-code-foreground)"> { McpServer } </span><span style="color:var(--astro-code-token-keyword)">from</span><span style="color:var(--astro-code-token-string-expression)"> "@modelcontextprotocol/sdk/server/mcp.js"</span><span style="color:var(--astro-code-foreground)">;</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">import</span><span style="color:var(--astro-code-foreground)"> { StdioTransport } </span><span style="color:var(--astro-code-token-keyword)">from</span><span style="color:var(--astro-code-token-string-expression)"> "@modelcontextprotocol/sdk/server/stdio.js"</span><span style="color:var(--astro-code-foreground)">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">const</span><span style="color:var(--astro-code-token-constant)"> server</span><span style="color:var(--astro-code-token-keyword)"> =</span><span style="color:var(--astro-code-token-keyword)"> new</span><span style="color:var(--astro-code-token-function)"> McpServer</span><span style="color:var(--astro-code-foreground)">({</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">  name</span><span style="color:var(--astro-code-token-keyword)">:</span><span style="color:var(--astro-code-token-string-expression)"> "my-server"</span><span style="color:var(--astro-code-token-punctuation)">,</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">  version</span><span style="color:var(--astro-code-token-keyword)">:</span><span style="color:var(--astro-code-token-string-expression)"> "1.0.0"</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">});</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">// 注册 Tool</span></span>
+<span class="line"><span style="color:var(--astro-code-token-constant)">server</span><span style="color:var(--astro-code-token-function)">.tool</span><span style="color:var(--astro-code-foreground)">(</span><span style="color:var(--astro-code-token-string-expression)">"greet"</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-token-string-expression)"> "向用户打招呼"</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-foreground)"> {</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">  name</span><span style="color:var(--astro-code-token-keyword)">:</span><span style="color:var(--astro-code-foreground)"> { type</span><span style="color:var(--astro-code-token-keyword)">:</span><span style="color:var(--astro-code-token-string-expression)"> "string"</span><span style="color:var(--astro-code-foreground)"> }</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">}</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-token-keyword)"> async</span><span style="color:var(--astro-code-foreground)"> ({ name }) </span><span style="color:var(--astro-code-token-keyword)">=></span><span style="color:var(--astro-code-foreground)"> ({</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">  content</span><span style="color:var(--astro-code-token-keyword)">:</span><span style="color:var(--astro-code-foreground)"> [{ type</span><span style="color:var(--astro-code-token-keyword)">:</span><span style="color:var(--astro-code-token-string-expression)"> "text"</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-foreground)"> text</span><span style="color:var(--astro-code-token-keyword)">:</span><span style="color:var(--astro-code-token-string-expression)"> `Hello, </span><span style="color:var(--astro-code-token-keyword)">${</span><span style="color:var(--astro-code-foreground)">name</span><span style="color:var(--astro-code-token-keyword)">}</span><span style="color:var(--astro-code-token-string-expression)">!`</span><span style="color:var(--astro-code-foreground)"> }]</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">}));</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">// 注册 Resource</span></span>
+<span class="line"><span style="color:var(--astro-code-token-constant)">server</span><span style="color:var(--astro-code-token-function)">.resource</span><span style="color:var(--astro-code-foreground)">(</span><span style="color:var(--astro-code-token-string-expression)">"config"</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-token-string-expression)"> "config://app"</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-token-keyword)"> async</span><span style="color:var(--astro-code-foreground)"> () </span><span style="color:var(--astro-code-token-keyword)">=></span><span style="color:var(--astro-code-foreground)"> ({</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">  uri</span><span style="color:var(--astro-code-token-keyword)">:</span><span style="color:var(--astro-code-token-string-expression)"> "config://app"</span><span style="color:var(--astro-code-token-punctuation)">,</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">  text</span><span style="color:var(--astro-code-token-keyword)">:</span><span style="color:var(--astro-code-token-constant)"> JSON</span><span style="color:var(--astro-code-token-function)">.stringify</span><span style="color:var(--astro-code-foreground)">({ theme</span><span style="color:var(--astro-code-token-keyword)">:</span><span style="color:var(--astro-code-token-string-expression)"> "dark"</span><span style="color:var(--astro-code-foreground)"> })</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">}));</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">// 启动</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">const</span><span style="color:var(--astro-code-token-constant)"> transport</span><span style="color:var(--astro-code-token-keyword)"> =</span><span style="color:var(--astro-code-token-keyword)"> new</span><span style="color:var(--astro-code-token-function)"> StdioTransport</span><span style="color:var(--astro-code-foreground)">();</span></span>
+<span class="line"><span style="color:var(--astro-code-token-constant)">server</span><span style="color:var(--astro-code-token-function)">.connect</span><span style="color:var(--astro-code-foreground)">(transport);</span></span></code></pre>
+<h4 id="34-理解-mcp-三大核心对象">3.4 理解 MCP 三大核心对象</h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>对象</th><th>说明</th><th>类比</th></tr></thead><tbody><tr><td><strong>Tools</strong></td><td>Agent 可调用的函数</td><td>API 端点</td></tr><tr><td><strong>Resources</strong></td><td>Agent 可读取的数据</td><td>数据库表</td></tr><tr><td><strong>Prompts</strong></td><td>预定义的提示模板</td><td>快捷指令</td></tr></tbody></table>
+<h4 id="35-深入-tool-开发">3.5 深入 Tool 开发</h4>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:var(--astro-code-token-function)">@app</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">tool</span><span style="color:var(--astro-code-token-punctuation)">()</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">def</span><span style="color:var(--astro-code-token-function)"> weather</span><span style="color:var(--astro-code-foreground)">(</span><span style="color:var(--astro-code-token-parameter)">city</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-token-constant)"> str</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-token-parameter)"> unit</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-token-constant)"> str</span><span style="color:var(--astro-code-token-keyword)"> =</span><span style="color:var(--astro-code-token-string-expression)"> "celsius"</span><span style="color:var(--astro-code-foreground)">) </span><span style="color:var(--astro-code-token-punctuation)">-></span><span style="color:var(--astro-code-token-constant)"> dict</span><span style="color:var(--astro-code-foreground)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">    """</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">    查询天气信息</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">    Args:</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">        city: 城市名称</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">        unit: 温度单位 (celsius/fahrenheit)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">    Returns:</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">        天气信息字典</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">    """</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">    # 模拟 API 调用</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">    return</span><span style="color:var(--astro-code-token-punctuation)"> {</span></span>
+<span class="line"><span style="color:var(--astro-code-token-string-expression)">        "city"</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-foreground)"> city</span><span style="color:var(--astro-code-token-punctuation)">,</span></span>
+<span class="line"><span style="color:var(--astro-code-token-string-expression)">        "temperature"</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-token-constant)"> 25</span><span style="color:var(--astro-code-token-punctuation)">,</span></span>
+<span class="line"><span style="color:var(--astro-code-token-string-expression)">        "unit"</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-foreground)"> unit</span><span style="color:var(--astro-code-token-punctuation)">,</span></span>
+<span class="line"><span style="color:var(--astro-code-token-string-expression)">        "condition"</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-token-string-expression)"> "sunny"</span></span>
+<span class="line"><span style="color:var(--astro-code-token-punctuation)">    }</span></span></code></pre>
+<h3 id="-阶段成果-2">✅ 阶段成果</h3>
+<ul class="contains-task-list">
+<li class="task-list-item"><input type="checkbox" disabled> 成功创建并运行自己的 MCP Server</li>
+<li class="task-list-item"><input type="checkbox" disabled> 实现了至少 3 个不同的 Tools</li>
+<li class="task-list-item"><input type="checkbox" disabled> 能将 Server 配置到 Claude Code 并成功调用</li>
+<li class="task-list-item"><input type="checkbox" disabled> 理解 Tool / Resource / Prompt 三者的区别</li>
+</ul>
+<hr>
+<h2 id="第四阶段进阶开发预计-7-10-天">第四阶段：进阶开发（预计 7-10 天）</h2>
+<h3 id="目标-3">目标</h3>
+<p>掌握 MCP Server 的高级功能，能开发生产级 Server。</p>
+<h3 id="学习内容-3">学习内容</h3>
+<h4 id="41-resources资源">4.1 Resources（资源）</h4>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:var(--astro-code-token-keyword)">from</span><span style="color:var(--astro-code-foreground)"> mcp</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-foreground)">types </span><span style="color:var(--astro-code-token-keyword)">import</span><span style="color:var(--astro-code-foreground)"> Resource</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">@app</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">resource</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-string-expression)">"notes://</span><span style="color:var(--astro-code-token-constant)">{path}</span><span style="color:var(--astro-code-token-string-expression)">"</span><span style="color:var(--astro-code-token-punctuation)">)</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">def</span><span style="color:var(--astro-code-token-function)"> read_note</span><span style="color:var(--astro-code-foreground)">(</span><span style="color:var(--astro-code-token-parameter)">path</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-token-constant)"> str</span><span style="color:var(--astro-code-foreground)">) </span><span style="color:var(--astro-code-token-punctuation)">-></span><span style="color:var(--astro-code-token-constant)"> str</span><span style="color:var(--astro-code-foreground)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">    """读取指定路径的笔记"""</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">    with</span><span style="color:var(--astro-code-token-function)"> open</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-keyword)">f</span><span style="color:var(--astro-code-token-string-expression)">"vault/</span><span style="color:var(--astro-code-token-constant)">{</span><span style="color:var(--astro-code-token-punctuation)">path</span><span style="color:var(--astro-code-token-constant)">}</span><span style="color:var(--astro-code-token-string-expression)">.md"</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-string-expression)">"r"</span><span style="color:var(--astro-code-token-punctuation)">)</span><span style="color:var(--astro-code-token-keyword)"> as</span><span style="color:var(--astro-code-foreground)"> f</span><span style="color:var(--astro-code-token-punctuation)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">        return</span><span style="color:var(--astro-code-foreground)"> f</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">read</span><span style="color:var(--astro-code-token-punctuation)">()</span></span></code></pre>
+<h4 id="42-prompts提示模板">4.2 Prompts（提示模板）</h4>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:var(--astro-code-token-function)">@app</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">prompt</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-string-expression)">"summarize"</span><span style="color:var(--astro-code-token-punctuation)">)</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">def</span><span style="color:var(--astro-code-token-function)"> summarize_prompt</span><span style="color:var(--astro-code-foreground)">(</span><span style="color:var(--astro-code-token-parameter)">topic</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-token-constant)"> str</span><span style="color:var(--astro-code-foreground)">) </span><span style="color:var(--astro-code-token-punctuation)">-></span><span style="color:var(--astro-code-token-constant)"> str</span><span style="color:var(--astro-code-foreground)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">    """生成摘要的提示模板"""</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">    return</span><span style="color:var(--astro-code-token-keyword)"> f</span><span style="color:var(--astro-code-token-string-expression)">"请为以下主题写一篇300字的摘要：</span><span style="color:var(--astro-code-token-constant)">{</span><span style="color:var(--astro-code-foreground)">topic</span><span style="color:var(--astro-code-token-constant)">}</span><span style="color:var(--astro-code-token-string-expression)">"</span></span></code></pre>
+<h4 id="43-错误处理">4.3 错误处理</h4>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:var(--astro-code-token-keyword)">from</span><span style="color:var(--astro-code-foreground)"> mcp</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-foreground)">server</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-foreground)">exceptions </span><span style="color:var(--astro-code-token-keyword)">import</span><span style="color:var(--astro-code-foreground)"> McpError</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">@app</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">tool</span><span style="color:var(--astro-code-token-punctuation)">()</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">def</span><span style="color:var(--astro-code-token-function)"> delete_file</span><span style="color:var(--astro-code-foreground)">(</span><span style="color:var(--astro-code-token-parameter)">path</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-token-constant)"> str</span><span style="color:var(--astro-code-foreground)">) </span><span style="color:var(--astro-code-token-punctuation)">-></span><span style="color:var(--astro-code-token-constant)"> str</span><span style="color:var(--astro-code-foreground)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">    """删除文件"""</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">    if</span><span style="color:var(--astro-code-token-keyword)"> not</span><span style="color:var(--astro-code-foreground)"> os</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-foreground)">path</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">exists</span><span style="color:var(--astro-code-token-punctuation)">(path):</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">        raise</span><span style="color:var(--astro-code-token-function)"> McpError</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-keyword)">f</span><span style="color:var(--astro-code-token-string-expression)">"文件不存在: </span><span style="color:var(--astro-code-token-constant)">{</span><span style="color:var(--astro-code-token-punctuation)">path</span><span style="color:var(--astro-code-token-constant)">}</span><span style="color:var(--astro-code-token-string-expression)">"</span><span style="color:var(--astro-code-token-punctuation)">)</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">    os</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">remove</span><span style="color:var(--astro-code-token-punctuation)">(path)</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">    return</span><span style="color:var(--astro-code-token-keyword)"> f</span><span style="color:var(--astro-code-token-string-expression)">"已删除: </span><span style="color:var(--astro-code-token-constant)">{</span><span style="color:var(--astro-code-foreground)">path</span><span style="color:var(--astro-code-token-constant)">}</span><span style="color:var(--astro-code-token-string-expression)">"</span></span></code></pre>
+<h4 id="44-sse-transporthttp-传输">4.4 SSE Transport（HTTP 传输）</h4>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:var(--astro-code-token-comment)"># 从 stdio 切换到 SSE，支持远程连接</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">from</span><span style="color:var(--astro-code-foreground)"> mcp</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-foreground)">server</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-foreground)">sse </span><span style="color:var(--astro-code-token-keyword)">import</span><span style="color:var(--astro-code-foreground)"> SseServerTransport</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 适合部署为独立服务的情况</span></span></code></pre>
+<h4 id="45-安全最佳实践">4.5 安全最佳实践</h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>原则</th><th>说明</th></tr></thead><tbody><tr><td><strong>最小权限</strong></td><td>Server 只暴露必要的工具和资源</td></tr><tr><td><strong>输入验证</strong></td><td>对所有参数做类型和范围校验</td></tr><tr><td><strong>环境隔离</strong></td><td>不要暴露敏感环境变量</td></tr><tr><td><strong>认证授权</strong></td><td>对外部服务调用做 token 管理</td></tr><tr><td><strong>日志审计</strong></td><td>记录所有工具调用</td></tr></tbody></table>
+<h3 id="-阶段成果-3">✅ 阶段成果</h3>
+<ul class="contains-task-list">
+<li class="task-list-item"><input type="checkbox" disabled> 实现了 Resources 和 Prompts</li>
+<li class="task-list-item"><input type="checkbox" disabled> 添加了完善的错误处理</li>
+<li class="task-list-item"><input type="checkbox" disabled> 理解 SSE 和 stdio 两种传输方式的区别</li>
+<li class="task-list-item"><input type="checkbox" disabled> 能按照安全最佳实践编写 Server</li>
+</ul>
+<hr>
+<h2 id="第五阶段实战项目预计-10-14-天">第五阶段：实战项目（预计 10-14 天）</h2>
+<h3 id="目标-4">目标</h3>
+<p>完成一个完整的实战项目，将 MCP 应用到实际场景。</p>
+<h3 id="推荐项目选一个">推荐项目（选一个）</h3>
+<h4 id="项目-aobsidian-vault-mcp-server--推荐">项目 A：Obsidian Vault MCP Server ⭐ 推荐</h4>
+<p>把你的 Obsidian 知识库变成一个 MCP Server：</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:var(--astro-code-token-comment)"># obsidian-mcp-server.py</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">@app</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">tool</span><span style="color:var(--astro-code-token-punctuation)">()</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">def</span><span style="color:var(--astro-code-token-function)"> search_notes</span><span style="color:var(--astro-code-foreground)">(</span><span style="color:var(--astro-code-token-parameter)">query</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-token-constant)"> str</span><span style="color:var(--astro-code-foreground)">) </span><span style="color:var(--astro-code-token-punctuation)">-></span><span style="color:var(--astro-code-foreground)"> list</span><span style="color:var(--astro-code-token-punctuation)">[</span><span style="color:var(--astro-code-token-constant)">str</span><span style="color:var(--astro-code-token-punctuation)">]</span><span style="color:var(--astro-code-foreground)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">    """搜索笔记标题和标签"""</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">@app</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">tool</span><span style="color:var(--astro-code-token-punctuation)">()</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">def</span><span style="color:var(--astro-code-token-function)"> read_note</span><span style="color:var(--astro-code-foreground)">(</span><span style="color:var(--astro-code-token-parameter)">path</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-token-constant)"> str</span><span style="color:var(--astro-code-foreground)">) </span><span style="color:var(--astro-code-token-punctuation)">-></span><span style="color:var(--astro-code-token-constant)"> str</span><span style="color:var(--astro-code-foreground)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">    """读取笔记内容"""</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">@app</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">tool</span><span style="color:var(--astro-code-token-punctuation)">()</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">def</span><span style="color:var(--astro-code-token-function)"> create_note</span><span style="color:var(--astro-code-foreground)">(</span><span style="color:var(--astro-code-token-parameter)">title</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-token-constant)"> str</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-token-parameter)"> content</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-token-constant)"> str</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-token-parameter)"> tags</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-foreground)"> list</span><span style="color:var(--astro-code-token-punctuation)">[</span><span style="color:var(--astro-code-token-constant)">str</span><span style="color:var(--astro-code-token-punctuation)">]</span><span style="color:var(--astro-code-foreground)">) </span><span style="color:var(--astro-code-token-punctuation)">-></span><span style="color:var(--astro-code-token-constant)"> str</span><span style="color:var(--astro-code-foreground)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">    """创建新笔记"""</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">@app</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">tool</span><span style="color:var(--astro-code-token-punctuation)">()</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">def</span><span style="color:var(--astro-code-token-function)"> find_links</span><span style="color:var(--astro-code-foreground)">(</span><span style="color:var(--astro-code-token-parameter)">path</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-token-constant)"> str</span><span style="color:var(--astro-code-foreground)">) </span><span style="color:var(--astro-code-token-punctuation)">-></span><span style="color:var(--astro-code-foreground)"> list</span><span style="color:var(--astro-code-token-punctuation)">[</span><span style="color:var(--astro-code-token-constant)">str</span><span style="color:var(--astro-code-token-punctuation)">]</span><span style="color:var(--astro-code-foreground)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">    """查找笔记中的所有 Wiki 链接"""</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">@app</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">resource</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-string-expression)">"note://</span><span style="color:var(--astro-code-token-constant)">{path}</span><span style="color:var(--astro-code-token-string-expression)">"</span><span style="color:var(--astro-code-token-punctuation)">)</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">def</span><span style="color:var(--astro-code-token-function)"> get_note_resource</span><span style="color:var(--astro-code-foreground)">(</span><span style="color:var(--astro-code-token-parameter)">path</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-token-constant)"> str</span><span style="color:var(--astro-code-foreground)">) </span><span style="color:var(--astro-code-token-punctuation)">-></span><span style="color:var(--astro-code-token-constant)"> str</span><span style="color:var(--astro-code-foreground)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">    """作为资源暴露笔记"""</span></span></code></pre>
+<h4 id="项目-b数据库查询-mcp-server">项目 B：数据库查询 MCP Server</h4>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:var(--astro-code-token-function)">@app</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">tool</span><span style="color:var(--astro-code-token-punctuation)">()</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">def</span><span style="color:var(--astro-code-token-function)"> query</span><span style="color:var(--astro-code-foreground)">(</span><span style="color:var(--astro-code-token-parameter)">sql</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-token-constant)"> str</span><span style="color:var(--astro-code-foreground)">) </span><span style="color:var(--astro-code-token-punctuation)">-></span><span style="color:var(--astro-code-foreground)"> list</span><span style="color:var(--astro-code-token-punctuation)">[</span><span style="color:var(--astro-code-token-constant)">dict</span><span style="color:var(--astro-code-token-punctuation)">]</span><span style="color:var(--astro-code-foreground)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">    """执行 SQL 查询（只读）"""</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">@app</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">tool</span><span style="color:var(--astro-code-token-punctuation)">()</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">def</span><span style="color:var(--astro-code-token-function)"> describe_table</span><span style="color:var(--astro-code-foreground)">(</span><span style="color:var(--astro-code-token-parameter)">table</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-token-constant)"> str</span><span style="color:var(--astro-code-foreground)">) </span><span style="color:var(--astro-code-token-punctuation)">-></span><span style="color:var(--astro-code-token-constant)"> dict</span><span style="color:var(--astro-code-foreground)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">    """查看表结构"""</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">@app</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">resource</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-string-expression)">"table://</span><span style="color:var(--astro-code-token-constant)">{table}</span><span style="color:var(--astro-code-token-string-expression)">"</span><span style="color:var(--astro-code-token-punctuation)">)</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">def</span><span style="color:var(--astro-code-token-function)"> get_table_schema</span><span style="color:var(--astro-code-foreground)">(</span><span style="color:var(--astro-code-token-parameter)">table</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-token-constant)"> str</span><span style="color:var(--astro-code-foreground)">) </span><span style="color:var(--astro-code-token-punctuation)">-></span><span style="color:var(--astro-code-token-constant)"> str</span><span style="color:var(--astro-code-foreground)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">    """暴露表结构"""</span></span></code></pre>
+<h4 id="项目-cgithub-管理-mcp-server">项目 C：GitHub 管理 MCP Server</h4>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:var(--astro-code-token-function)">@app</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">tool</span><span style="color:var(--astro-code-token-punctuation)">()</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">def</span><span style="color:var(--astro-code-token-function)"> list_repos</span><span style="color:var(--astro-code-foreground)">(</span><span style="color:var(--astro-code-token-parameter)">org</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-token-constant)"> str</span><span style="color:var(--astro-code-foreground)">) </span><span style="color:var(--astro-code-token-punctuation)">-></span><span style="color:var(--astro-code-foreground)"> list</span><span style="color:var(--astro-code-token-punctuation)">[</span><span style="color:var(--astro-code-token-constant)">str</span><span style="color:var(--astro-code-token-punctuation)">]</span><span style="color:var(--astro-code-foreground)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">    """列出组织下的仓库"""</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">@app</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">tool</span><span style="color:var(--astro-code-token-punctuation)">()</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">def</span><span style="color:var(--astro-code-token-function)"> create_issue</span><span style="color:var(--astro-code-foreground)">(</span><span style="color:var(--astro-code-token-parameter)">repo</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-token-constant)"> str</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-token-parameter)"> title</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-token-constant)"> str</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-token-parameter)"> body</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-token-constant)"> str</span><span style="color:var(--astro-code-foreground)">) </span><span style="color:var(--astro-code-token-punctuation)">-></span><span style="color:var(--astro-code-token-constant)"> dict</span><span style="color:var(--astro-code-foreground)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">    """创建 Issue"""</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">@app</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">tool</span><span style="color:var(--astro-code-token-punctuation)">()</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">def</span><span style="color:var(--astro-code-token-function)"> review_pr</span><span style="color:var(--astro-code-foreground)">(</span><span style="color:var(--astro-code-token-parameter)">repo</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-token-constant)"> str</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-token-parameter)"> pr_number</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-token-constant)"> int</span><span style="color:var(--astro-code-foreground)">) </span><span style="color:var(--astro-code-token-punctuation)">-></span><span style="color:var(--astro-code-token-constant)"> str</span><span style="color:var(--astro-code-foreground)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">    """审查 PR 代码"""</span></span></code></pre>
+<h4 id="项目-d自定义-api-封装-mcp-server">项目 D：自定义 API 封装 MCP Server</h4>
+<p>将任何 REST API 封装成 MCP Tools：</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:var(--astro-code-token-function)">@app</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">tool</span><span style="color:var(--astro-code-token-punctuation)">()</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">def</span><span style="color:var(--astro-code-token-function)"> get_user</span><span style="color:var(--astro-code-foreground)">(</span><span style="color:var(--astro-code-token-parameter)">user_id</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-token-constant)"> str</span><span style="color:var(--astro-code-foreground)">) </span><span style="color:var(--astro-code-token-punctuation)">-></span><span style="color:var(--astro-code-token-constant)"> dict</span><span style="color:var(--astro-code-foreground)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">    """查询用户信息"""</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">@app</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">tool</span><span style="color:var(--astro-code-token-punctuation)">()</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">def</span><span style="color:var(--astro-code-token-function)"> update_user</span><span style="color:var(--astro-code-foreground)">(</span><span style="color:var(--astro-code-token-parameter)">user_id</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-token-constant)"> str</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-token-keyword)"> **</span><span style="color:var(--astro-code-token-parameter)">kwargs</span><span style="color:var(--astro-code-foreground)">) </span><span style="color:var(--astro-code-token-punctuation)">-></span><span style="color:var(--astro-code-token-constant)"> dict</span><span style="color:var(--astro-code-foreground)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">    """更新用户信息"""</span></span></code></pre>
+<h3 id="-阶段成果-4">✅ 阶段成果</h3>
+<ul class="contains-task-list">
+<li class="task-list-item"><input type="checkbox" disabled> 完成一个完整的 MCP Server 项目</li>
+<li class="task-list-item"><input type="checkbox" disabled> 包含至少 5 个 Tools、2 个 Resources</li>
+<li class="task-list-item"><input type="checkbox" disabled> 有完整的错误处理和安全措施</li>
+<li class="task-list-item"><input type="checkbox" disabled> 能实际投入使用并解决问题</li>
+</ul>
+<hr>
+<h2 id="第六阶段深入生态持续学习">第六阶段：深入生态（持续学习）</h2>
+<h3 id="目标-5">目标</h3>
+<p>了解 MCP 生态，参与社区，持续跟进发展。</p>
+<h3 id="学习内容-4">学习内容</h3>
+<h4 id="61-官方资源">6.1 官方资源</h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>资源</th><th>地址</th></tr></thead><tbody><tr><td>官方文档</td><td><a href="https://modelcontextprotocol.io">https://modelcontextprotocol.io</a></td></tr><tr><td>GitHub 仓库</td><td><a href="https://github.com/modelcontextprotocol">https://github.com/modelcontextprotocol</a></td></tr><tr><td>SDK TypeScript</td><td><a href="https://github.com/modelcontextprotocol/typescript-sdk">https://github.com/modelcontextprotocol/typescript-sdk</a></td></tr><tr><td>SDK Python</td><td><a href="https://github.com/modelcontextprotocol/python-sdk">https://github.com/modelcontextprotocol/python-sdk</a></td></tr></tbody></table>
+<h4 id="62-社区-server-目录">6.2 社区 Server 目录</h4>
+<p><a href="https://github.com/modelcontextprotocol/servers">https://github.com/modelcontextprotocol/servers</a></p>
+<p>浏览社区已有 Server，学习别人的实现：</p>
+<ul>
+<li>文件系统 Server</li>
+<li>GitHub Server</li>
+<li>PostgreSQL Server</li>
+<li>Puppeteer Server</li>
+<li>Slack Server</li>
+<li>GitLab Server</li>
+</ul>
+<h4 id="63-进阶主题">6.3 进阶主题</h4>
+<ul>
+<li><strong>自定义 Transport</strong>：实现 WebSocket / gRPC 传输</li>
+<li><strong>动态 Tools</strong>：运行时注册和注销工具</li>
+<li><strong>分页和资源流</strong>：处理大数据集</li>
+<li><strong>多模态</strong>：在 Tools 中传递图像和文件</li>
+<li><strong>MCP 网关</strong>：聚合多个 Server</li>
+</ul>
+<hr>
+<h2 id="学习路线总览">学习路线总览</h2>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>阶段 1: 理解概念    ━━━━━━━━━  2-3 天</span></span>
+<span class="line"><span>         ↓</span></span>
+<span class="line"><span>阶段 2: 使用 MCP    ━━━━━━━━━  2-3 天</span></span>
+<span class="line"><span>         ↓</span></span>
+<span class="line"><span>阶段 3: 第一个 Server ━━━━━━━ 5-7 天    ← 最关键阶段</span></span>
+<span class="line"><span>         ↓</span></span>
+<span class="line"><span>阶段 4: 进阶开发    ━━━━━━━━━  7-10 天</span></span>
+<span class="line"><span>         ↓</span></span>
+<span class="line"><span>阶段 5: 实战项目    ━━━━━━━━━ 10-14 天  ← 推荐做 Obsidian MCP Server</span></span>
+<span class="line"><span>         ↓</span></span>
+<span class="line"><span>阶段 6: 深入生态    ━━━━━━━━  持续学习</span></span></code></pre>
+<p><strong>总预计时间：约 6-8 周（每周投入 10-15 小时）</strong></p>
+<hr>
+<h2 id="常见问题">常见问题</h2>
+<h3 id="q-需要先学什么语言">Q: 需要先学什么语言？</h3>
+<p>A: Python（最快上手）或 TypeScript（生态最成熟），二选一即可。</p>
+<h3 id="q-mcp-和普通-api-有什么区别">Q: MCP 和普通 API 有什么区别？</h3>
+<p>A: MCP 是<strong>面向 AI Agent 设计的协议</strong>，标准化工具描述、资源访问和提示模板，让 Agent 能自动发现和调用工具。</p>
+<h3 id="q-需要先理解-json-rpc-吗">Q: 需要先理解 JSON-RPC 吗？</h3>
+<p>A: 了解即可，SDK 封装了大部分细节，不需要深入 JSON-RPC 底层。</p>
+<h3 id="q-如何调试-mcp-server">Q: 如何调试 MCP Server？</h3>
+<p>A: 使用官方 MCP Inspector 工具：</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:var(--astro-code-token-function)">npx</span><span style="color:var(--astro-code-token-string)"> @modelcontextprotocol/inspector</span><span style="color:var(--astro-code-token-string)"> python</span><span style="color:var(--astro-code-token-string)"> my_server.py</span></span></code></pre>
+<hr>
+<h2 id="下一步行动">下一步行动</h2>
+<ol>
+<li><strong>今天</strong>：阅读 MCP 官方入门文档</li>
+<li><strong>明天</strong>：安装 Python SDK，写第一个 “Hello World” MCP Server</li>
+<li><strong>本周</strong>：完成阶段 1 + 阶段 2 的学习</li>
+</ol>
+<blockquote>
+<p>💡 建议从 <strong>Python</strong> 开始，因为代码最简洁、上手最快。等理解了核心概念后，可以再学 TypeScript 版本。</p>
+</blockquote> <div> <a href="/notes" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150">
+&larr; 返回笔记列表
+</a> </div>  </div> <!-- Previous / Next navigation -->  <hr class="!mt-12 !mb-8" data-astro-cid-bvzihdzo> <div data-astro-cid-bvzihdzo> <a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-bvzihdzo>
+&larr; 返回博客列表
+</a> </div> </div> </div> </article> </div>  </main> <footer class="border-t border-[var(--color-border)] mt-24 py-8" data-astro-cid-pux6a34n><div class="max-w-content flex items-center justify-between" data-astro-cid-pux6a34n><span class="text-sm text-[var(--color-text-tertiary)]" data-astro-cid-pux6a34n>
+&copy; 2026 星游寰宇
+</span><div class="flex items-center gap-4" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>博客</a><a href="/projects" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>项目</a><a href="/notes" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>日记</a><a href="/resources" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>资源</a><a href="/about" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>关于</a></div></div></footer> <div id="link-preview" style="display:none;position:fixed;z-index:99;max-width:18rem;pointer-events:none;" data-astro-cid-t7vshrbh></div>  <script type="module">(async()=>{try{const c=await fetch("/posts.json");if(!c.ok)return;const u=await c.json(),p=new Map(u.map(t=>[t.href,t])),e=document.getElementById("link-preview");if(!e)return;let n="",d;document.addEventListener("mouseover",t=>{const i=t.target.closest("a[href^='/blog/']");if(!i){e.style.display="none",n="";return}const s=i.getAttribute("href");if(!s||s===n)return;const o=p.get(s);o&&(n=s,d=setTimeout(()=>{e.innerHTML=`<div class="lp-title">${o.title}</div><div class="lp-summary">${o.summary}</div>`;const r=i.getBoundingClientRect();let a=r.left,l=r.bottom+6;a+288>window.innerWidth&&(a=window.innerWidth-296),l+80>window.innerHeight&&(l=r.top-80),Object.assign(e.style,{left:a+"px",top:l+"px",display:"block"})},300))},{passive:!0}),document.addEventListener("mouseout",t=>{t.target.closest("a[href^='/blog/']")&&(clearTimeout(d),e.style.display="none",n="")},{passive:!0})}catch{}})();</script> </body></html>  <script type="module">const c=document.getElementById("toc-toggle"),s=document.getElementById("toc-list"),i=document.getElementById("toc-chevron");c&&s&&i&&c.addEventListener("click",()=>{const o=s.classList.toggle("hidden");c.setAttribute("aria-expanded",String(o)),i.style.transform=o?"rotate(180deg)":""});const r=document.querySelectorAll(".toc-list a");if(r.length>0){const o=new IntersectionObserver(n=>{for(const t of n)t.isIntersecting&&r.forEach(e=>{e.classList.toggle("active",e.getAttribute("href")===`#${t.target.id}`)})},{rootMargin:"-80px 0px -80% 0px"});r.forEach(n=>{const t=n.getAttribute("href")?.slice(1);if(t){const e=document.getElementById(t);e&&o.observe(e)}})}</script>

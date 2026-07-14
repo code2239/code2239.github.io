@@ -1,0 +1,877 @@
+<!DOCTYPE html><html lang="zh-CN"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="调研范围：OpenScience 及其关联项目 Open Science Desktop 的完整调研"><meta name="color-scheme" content="light"><!-- Open Graph --><meta property="og:title" content="OpenScience调研报告 — 星游寰宇"><meta property="og:description" content="调研范围：OpenScience 及其关联项目 Open Science Desktop 的完整调研"><meta property="og:url" content="https://code2239.github.io/notes/2026-07-13-OpenScience调研报告"><meta property="og:type" content="article"><meta property="og:site_name" content="星游寰宇"><meta property="og:locale" content="zh_CN"><meta property="article:published_time" content="2026-07-13"><meta property="article:tag" content="AI4S"><meta property="article:tag" content="open-source"><meta property="article:tag" content="research-platform"><meta property="article:tag" content="AI-workbench"><!-- Twitter Card --><meta name="twitter:card" content="summary"><meta name="twitter:title" content="OpenScience调研报告 — 星游寰宇"><meta name="twitter:description" content="调研范围：OpenScience 及其关联项目 Open Science Desktop 的完整调研"><!-- Canonical --><link rel="canonical" href="https://code2239.github.io/notes/2026-07-13-OpenScience调研报告"><title>OpenScience调研报告 — 星游寰宇</title><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="alternate" type="application/rss+xml" title="星游寰宇 RSS" href="/rss.xml"><!-- Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"星游寰宇","url":"https://code2239.github.io","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://code2239.github.io/search?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://code2239.github.io"},{"@type":"ListItem","position":2,"name":"日记","item":"https://code2239.github.io/notes"},{"@type":"ListItem","position":3,"name":"2026 07 13 OpenScience调研报告"}]},{"@context":"https://schema.org","@type":"BlogPosting","headline":"OpenScience调研报告","description":"调研范围：OpenScience 及其关联项目 Open Science Desktop 的完整调研","datePublished":"2026-07-13","url":"https://code2239.github.io/notes/2026-07-13-OpenScience调研报告","keywords":"AI4S, open-source, research-platform, AI-workbench"}]}</script><link rel="stylesheet" href="/_astro/_slug_.CXDKI3B6.css">
+<style>.back-to-top[data-astro-cid-gzprr2dq]{position:fixed;bottom:2rem;right:2rem;z-index:40;width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:50%;border:1px solid var(--color-border);background:var(--color-bg);color:var(--color-text-secondary);cursor:pointer;box-shadow:var(--shadow-md);transition:opacity .2s ease,transform .2s ease}.back-to-top[data-astro-cid-gzprr2dq]:hover{color:var(--color-accent);border-color:var(--color-accent);transform:translateY(-2px)}.back-to-top[data-astro-cid-gzprr2dq].hidden{opacity:0;pointer-events:none}.copy-btn[data-astro-cid-qqybitij]{position:absolute;top:8px;right:8px;padding:4px 10px;font-size:.6875rem;font-family:var(--font-sans);color:var(--color-text-tertiary);background:var(--color-bg);border:1px solid var(--color-border);border-radius:6px;cursor:pointer;opacity:0;transition:opacity .15s ease,color .15s ease}pre[data-astro-cid-qqybitij]:hover .copy-btn[data-astro-cid-qqybitij]{opacity:1}.copy-btn[data-astro-cid-qqybitij]:hover{color:var(--color-accent);border-color:var(--color-accent)}.copy-btn[data-astro-cid-qqybitij].copied{color:#16a34a;border-color:#16a34a}.blog-layout[data-astro-cid-bvzihdzo]{display:block}.blog-toc[data-astro-cid-bvzihdzo]{display:none}.blog-body[data-astro-cid-bvzihdzo]{min-width:0}@media(min-width:1024px){.blog-layout[data-astro-cid-bvzihdzo]{display:grid;grid-template-columns:14rem 1fr;gap:3rem;align-items:start}.blog-toc[data-astro-cid-bvzihdzo]{display:block}.blog-body[data-astro-cid-bvzihdzo]{padding-right:2rem}}@media(max-width:1023px){.blog-toc[data-astro-cid-bvzihdzo]{display:block;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid var(--color-border)}}
+</style></head> <body class="min-h-screen flex flex-col"> <nav class="sticky top-0 z-40 bg-[var(--color-bg)]/80 backdrop-blur-md border-b border-[var(--color-border)]" data-astro-cid-pux6a34n><div class="max-w-content flex items-center justify-between py-4" data-astro-cid-pux6a34n><a href="/" class="flex items-center gap-2.5 text-base font-semibold no-underline tracking-tight" data-astro-cid-pux6a34n><svg class="w-7 h-7" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" data-astro-cid-pux6a34n><circle cx="16" cy="16" r="15" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-pux6a34n></circle><circle cx="16" cy="16" r="3" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="16" cy="5" r="1.5" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="24" cy="10" r="1" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="8" cy="22" r="1" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="25" cy="21" r="0.8" fill="currentColor" data-astro-cid-pux6a34n></circle></svg>
+星游寰宇
+</a><!-- Desktop nav --><div class="hidden sm:flex items-center gap-5" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>博客</a><a href="/projects" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>项目</a><a href="/notes" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>日记</a><a href="/resources" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>资源</a><a href="/about" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>关于</a><button id="search-trigger" class="flex items-center gap-1.5 text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] bg-[var(--color-bg-secondary)] hover:bg-[var(--color-bg-tertiary)] border border-[var(--color-border)] hover:border-[var(--color-accent)]/30 rounded-lg px-3 py-1.5 cursor-pointer shadow-sm hover:shadow-md transition-all duration-200" aria-label="搜索 (Ctrl+K)" title="搜索 (Ctrl+K)" data-astro-cid-pux6a34n><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-pux6a34n><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" data-astro-cid-pux6a34n></path></svg><span class="hidden lg:inline" data-astro-cid-pux6a34n>搜索</span><kbd class="hidden lg:inline-flex items-center text-[0.625rem] font-mono text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1 py-px rounded" data-astro-cid-pux6a34n>Ctrl+K</kbd></button></div><!-- Mobile hamburger --><button id="menu-btn" class="sm:hidden flex flex-col gap-1 p-2 -mr-2 cursor-pointer" aria-label="打开菜单" data-astro-cid-pux6a34n><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-transform duration-200" data-astro-cid-pux6a34n></span><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-opacity duration-200" data-astro-cid-pux6a34n></span><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-transform duration-200" data-astro-cid-pux6a34n></span></button></div><!-- Mobile menu --><div id="mobile-menu" class="hidden sm:hidden border-t border-[var(--color-border)] bg-[var(--color-bg)]" data-astro-cid-pux6a34n><div class="max-w-content flex flex-col gap-2 py-4" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>博客</a><a href="/projects" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>项目</a><a href="/notes" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>日记</a><a href="/resources" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>资源</a><a href="/about" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>关于</a></div></div></nav>
+    <div id="search-overlay" class="srch-overlay" role="dialog" aria-modal="true" aria-label="全局搜索" data-astro-cid-mn7pezny> <div id="search-backdrop" class="srch-backdrop" data-astro-cid-mn7pezny></div> <div class="srch-panel" id="srch-panel" data-astro-cid-mn7pezny> <!-- Search input --> <div class="srch-input-row" data-astro-cid-mn7pezny> <svg class="srch-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-mn7pezny> <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" data-astro-cid-mn7pezny></path> </svg> <input type="text" id="search-input" class="srch-input" placeholder="搜索文章、项目、日记、资源..." autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="go" data-astro-cid-mn7pezny> <kbd class="srch-kbd" data-astro-cid-mn7pezny>Esc</kbd> </div> <!-- Results area --> <div id="search-results" class="srch-results" data-astro-cid-mn7pezny> <p class="srch-empty" id="search-empty-hint" data-astro-cid-mn7pezny>输入关键词开始搜索</p> </div> <!-- Skeleton loading --> <div id="search-skeleton" class="srch-skeleton" style="display:none;" aria-hidden="true" data-astro-cid-mn7pezny> <div class="srch-skeleton-line" style="width:75%" data-astro-cid-mn7pezny></div> <div class="srch-skeleton-line" style="width:50%" data-astro-cid-mn7pezny></div> <div class="srch-skeleton-line" style="width:60%" data-astro-cid-mn7pezny></div> </div> <!-- Footer hints --> <div class="srch-footer" data-astro-cid-mn7pezny> <div class="srch-footer-hints" data-astro-cid-mn7pezny> <span data-astro-cid-mn7pezny><kbd data-astro-cid-mn7pezny>↑</kbd><kbd data-astro-cid-mn7pezny>↓</kbd> 导航</span> <span data-astro-cid-mn7pezny><kbd data-astro-cid-mn7pezny>↵</kbd> 打开</span> <span data-astro-cid-mn7pezny><kbd data-astro-cid-mn7pezny>Ctrl</kbd>+<kbd data-astro-cid-mn7pezny>K</kbd> 切换</span> </div> <div class="srch-footer-brand" data-astro-cid-mn7pezny>
+powered by Orama
+</div> </div> </div> </div> <script type="module" src="/_astro/Navigation.astro_astro_type_script_index_0_lang.15n1EYJp.js"></script> <main class="flex-1">  <div class="reading-progress" id="reading-progress" style="width: 0%"></div> <script type="module">const o=document.getElementById("reading-progress");if(!o)throw new Error("Reading progress bar element not found");const r=()=>{const n=window.scrollY,e=document.documentElement.scrollHeight-window.innerHeight,t=e>0?n/e*100:0;o.style.width=`${Math.min(t,100)}%`};window.addEventListener("scroll",r,{passive:!0});</script> <button id="back-to-top" class="back-to-top hidden" aria-label="返回顶部" data-astro-cid-gzprr2dq> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-gzprr2dq> <polyline points="18 15 12 9 6 15" data-astro-cid-gzprr2dq></polyline> </svg> </button>  <script type="module">const o=document.getElementById("back-to-top");o&&(window.addEventListener("scroll",()=>{o.classList.toggle("hidden",window.scrollY<400)},{passive:!0}),o.addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"})));</script> <script type="module">document.querySelectorAll("pre").forEach(e=>{const t=document.createElement("button");t.className="copy-btn",t.textContent="复制",t.addEventListener("click",async()=>{const n=e.querySelector("code")?.textContent||e.textContent||"";try{await navigator.clipboard.writeText(n),t.textContent="已复制",t.classList.add("copied"),setTimeout(()=>{t.textContent="复制",t.classList.remove("copied")},2e3)}catch{t.textContent="失败",setTimeout(()=>{t.textContent="复制"},2e3)}}),e.style.position="relative",e.appendChild(t)});</script> <div class="px-6 xl:px-12 pt-12 pb-16" data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <header class="mb-12 text-center" data-astro-cid-bvzihdzo> <h1 class="text-3xl font-semibold mb-3 tracking-tight" data-astro-cid-bvzihdzo>OpenScience调研报告</h1> <div class="flex items-center justify-center gap-2 text-[var(--color-text-tertiary)] text-sm" data-astro-cid-bvzihdzo> <time datetime="2026-07-13" data-astro-cid-bvzihdzo>2026-07-13</time> <span class="text-[var(--color-border)]" data-astro-cid-bvzihdzo>·</span> <span data-astro-cid-bvzihdzo>41 分钟阅读</span>  <span class="text-[var(--color-border)]" data-astro-cid-bvzihdzo>·</span> <span class="text-sm text-[var(--color-text-tertiary)]"> <span> AI4S<span class="mx-1">·</span> </span><span> open-source<span class="mx-1">·</span> </span><span> research-platform<span class="mx-1">·</span> </span><span> AI-workbench </span> </span>  </div> </header> <div class="blog-layout" data-astro-cid-bvzihdzo> <aside class="blog-toc" data-astro-cid-bvzihdzo> <div class="sticky top-14 max-h-[calc(100vh-3.5rem)] overflow-y-auto" data-astro-cid-bvzihdzo> <button id="toc-toggle" class="hidden max-md:flex items-center gap-1 text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-3 cursor-pointer border-none bg-transparent p-0" aria-expanded="false" aria-controls="toc-list" data-astro-cid-bvzihdzo>
+目录
+<svg id="toc-chevron" class="w-3 h-3 transition-transform duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-bvzihdzo><polyline points="6 9 12 15 18 9" data-astro-cid-bvzihdzo></polyline></svg> </button> <span class="text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-3 max-md:hidden" data-astro-cid-bvzihdzo>目录</span> <div id="toc-list" class="max-md:hidden" data-astro-cid-bvzihdzo> <nav class="toc"> <p class="text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-3">目录</p> <ul class="toc-list"> <li class> <a href="#1-开发者与公司背景">1. 开发者与公司背景</a> </li><li class="toc-h3"> <a href="#开发方全称">开发方全称</a> </li><li class="toc-h3"> <a href="#创始人基本信息">创始人基本信息</a> </li><li class="toc-h3"> <a href="#团队规模">团队规模</a> </li><li class="toc-h3"> <a href="#融资与盈利情况">融资与盈利情况</a> </li><li class="toc-h3"> <a href="#发展规划">发展规划</a> </li><li class="toc-h3"> <a href="#官网链接">官网/链接</a> </li><li class> <a href="#2-底层技术栈">2. 底层技术栈</a> </li><li class="toc-h3"> <a href="#核心技术定位">核心技术定位</a> </li><li class="toc-h3"> <a href="#技术架构">技术架构</a> </li><li class="toc-h3"> <a href="#核心技术组件">核心技术组件</a> </li><li class="toc-h3"> <a href="#支持的大模型">支持的大模型</a> </li><li class="toc-h3"> <a href="#参考文献">参考文献</a> </li><li class> <a href="#3-开源属性与商业模式">3. 开源属性与商业模式</a> </li><li class="toc-h3"> <a href="#开源属性">开源属性</a> </li><li class="toc-h3"> <a href="#商业模式">商业模式</a> </li><li class="toc-h3"> <a href="#与竞品的价格对比">与竞品的价格对比</a> </li><li class> <a href="#4-功能全景解析">4. 功能全景解析</a> </li><li class="toc-h3"> <a href="#核心价值">核心价值</a> </li><li class="toc-h3"> <a href="#核心功能与关键技术">核心功能与关键技术</a> </li><li class="toc-h3"> <a href="#关键技术参考文献">关键技术参考文献</a> </li><li class> <a href="#5-功能实现案例">5. 功能实现案例</a> </li><li class="toc-h3"> <a href="#案例-1自动化材料科学文献综述">案例 1：自动化材料科学文献综述</a> </li><li class="toc-h3"> <a href="#案例-2新材料性质预测实验">案例 2：新材料性质预测实验</a> </li><li class="toc-h3"> <a href="#案例-3跨模型协作研究">案例 3：跨模型协作研究</a> </li><li class="toc-h3"> <a href="#案例网址">案例网址</a> </li><li class> <a href="#6-主要竞品清单">6. 主要竞品清单</a> </li><li class> <a href="#7-与竞品的横向比较表格形式">7. 与竞品的横向比较（表格形式）</a> </li><li class="toc-h3"> <a href="#核心竞品对比">核心竞品对比</a> </li><li class="toc-h3"> <a href="#各竞品最适用的细分场景">各竞品最适用的细分场景</a> </li><li class> <a href="#8-版本迭代信息">8. 版本迭代信息</a> </li><li class="toc-h3"> <a href="#opensciencesynthetic-sciences">OpenScience（Synthetic Sciences）</a> </li><li class="toc-h3"> <a href="#open-science-desktopai4s-research-社区版">Open Science Desktop（ai4s-research 社区版）</a> </li><li class="toc-h3"> <a href="#已知-roadmap">已知 Roadmap</a> </li><li class> <a href="#一句话锐评">一句话锐评</a> </li><li class> <a href="#附录核心信息源链接汇总">附录：核心信息源链接汇总</a> </li><li class="toc-h3"> <a href="#官方仓库与网站">官方仓库与网站</a> </li><li class="toc-h3"> <a href="#媒体报道">媒体报道</a> </li><li class="toc-h3"> <a href="#竞品参考">竞品参考</a> </li> </ul> </nav> </div> </div> </aside> <div class="blog-body" data-astro-cid-bvzihdzo> <div class="prose prose-neutral max-w-none" data-astro-cid-bvzihdzo>   <h1 id="openscienceopen-science-desktop调研报告">OpenScience（Open Science Desktop）调研报告</h1>
+<blockquote>
+<p><strong>调研范围</strong>：OpenScience 及其关联项目 Open Science Desktop 的完整调研
+<strong>调研日期</strong>：2026 年 7 月 13 日
+<strong>方法</strong>：基于 WebSearch 的深度研究工作流</p>
+</blockquote>
+<hr>
+<h2 id="1-开发者与公司背景">1. 开发者与公司背景</h2>
+<h3 id="开发方全称">开发方全称</h3>
+<p>OpenScience 由 <strong>Synthetic Sciences Inc.</strong> 开发并维护。该公司有两个关联项目：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">项目</th><th align="left">GitHub 组织</th><th align="left">定位</th><th align="left">开源协议</th></tr></thead><tbody><tr><td align="left"><strong>OpenScience</strong></td><td align="left"><a href="https://github.com/synthetic-sciences/openscience">synthetic-sciences/openscience</a></td><td align="left">AI 科研工作台（商业 + 开源）</td><td align="left">Apache 2.0</td></tr><tr><td align="left"><strong>Open Science Desktop</strong></td><td align="left"><a href="https://github.com/ai4s-research/open-science">ai4s-research/open-science</a></td><td align="left">纯社区驱动的桌面科研工作台</td><td align="left">MIT</td></tr></tbody></table>
+<p>两个项目高度同源，均定位为”Claude Science 的开源平替”，本文以 <strong>OpenScience</strong> 为主进行调研。</p>
+<ul>
+<li><strong>所属国家/地区</strong>：美国加利福尼亚州旧金山（San Francisco, CA）</li>
+<li><strong>公司注册时间</strong>：2025 年</li>
+</ul>
+<h3 id="创始人基本信息">创始人基本信息</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">创始人</th><th align="center">年龄</th><th align="left">背景</th><th align="left">亮点</th></tr></thead><tbody><tr><td align="left"><strong>Aayam Bansal</strong></td><td align="center">18 岁</td><td align="left">曾发明并专利化 AI 骨科袜子并成功出售；搭建 COVID-19 基础设施服务 5 万+日活用户</td><td align="left">印度德里公学 Ruby Park 校友</td></tr><tr><td align="left"><strong>Ishaan Gangwani</strong></td><td align="center">—</td><td align="left">印度 IOAI 国家队选拔 Top 排名，USACO 铂金级；竞技编程背景</td><td align="left">在 NUS、CMU、MIT CSAIL 参与 ML 研究</td></tr></tbody></table>
+<p>两人在 NUS、CMU 和 MIT CSAIL 做 ML 研究期间相识，共同在 <strong>NeurIPS、ICML、AAAI</strong> 等顶会 workshop 发表过论文。</p>
+<h3 id="团队规模">团队规模</h3>
+<ul>
+<li>核心团队：<strong>2 位创始人</strong></li>
+<li>YC 创业阶段，暂未大规模招聘</li>
+<li>GitHub 上有开源社区贡献者</li>
+</ul>
+<h3 id="融资与盈利情况">融资与盈利情况</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">轮次</th><th align="center">金额</th><th align="left">来源</th></tr></thead><tbody><tr><td align="left">Pre-YC 融资</td><td align="center"><strong>$140 万</strong></td><td align="left">天使投资</td></tr><tr><td align="left">YC W26 标准投资</td><td align="center"><strong>$50 万</strong></td><td align="left">Y Combinator</td></tr><tr><td align="left"><strong>总计</strong></td><td align="center"><strong>$190 万</strong></td><td align="left"></td></tr></tbody></table>
+<p>目前处于早期创业阶段，产品免费（BYOK 模式），通过 <strong>Atlas</strong> 托管平台探索商业化。</p>
+<h3 id="发展规划">发展规划</h3>
+<ul>
+<li><strong>短期</strong>：完善 250+ 科研技能包，稳定 v0.1 核心功能</li>
+<li><strong>中期</strong>：增加 HPC/Slurm 计算支持、R 语言内核、Windows 安装程序</li>
+<li><strong>长期</strong>：构建开放的科研 AI 生态——“没有一个公司应该垄断人类用于探索和发现的工具”</li>
+</ul>
+<h3 id="官网链接">官网/链接</h3>
+<ul>
+<li>GitHub 仓库：<a href="https://github.com/synthetic-sciences/openscience">github.com/synthetic-sciences/openscience</a></li>
+<li>社区版（MIT）：<a href="https://github.com/ai4s-research/open-science">github.com/ai4s-research/open-science</a></li>
+<li>YC 页面：<a href="https://www.ycombinator.com/companies/synthetic-sciences">ycombinator.com/companies/synthetic-sciences</a></li>
+<li>官方网站：<a href="https://www.openscience.sh/">openscience.sh</a></li>
+</ul>
+<blockquote>
+<p><strong>信息源</strong>：</p>
+<ul>
+<li><a href="https://www.ycombinator.com/launches/PY9-synthetic-sciences-ai-co-scientists-for-end-to-end-scientific-research">YC Launch: Synthetic Sciences</a></li>
+<li><a href="https://americanbazaaronline.com/2026/03/31/yc-w26-demo-day-highlights-rising-influence-of-ia-entrepreneurs-477926/">美国湾区时报 - YC W26 Demo Day</a></li>
+<li><a href="https://www.startuphub.ai/ai-news/claudes-corner/2026/claudes-corner-synthetic-sciences-yc-w2026">StartupHub.ai - Claude’s Corner: Synthetic Sciences</a></li>
+<li><a href="https://tracxn.com/d/companies/synthetic-sciences/___f7WC7QV9OrzfL-bXazCwLZzWz8Ibpuk7gmUD0XfeZk">Tracxn - Synthetic Sciences 公司档案</a></li>
+<li><a href="https://www.extruct.ai/hub/syntheticsciences-ai/">Extruct.ai - Synthetic Sciences 融资分析</a></li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="2-底层技术栈">2. 底层技术栈</h2>
+<h3 id="核心技术定位">核心技术定位</h3>
+<p>OpenScience 是 <strong>AI4S（AI for Science）科研工作台</strong>，而非 AI 原生软件。其核心是一个<strong>模型无关的 AI 代理编排引擎</strong>，不涉及也不依赖单一基础大模型。</p>
+<h3 id="技术架构">技术架构</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>┌─────────────────────────────────────────────────────┐</span></span>
+<span class="line"><span>│                   Tauri 2 Desktop Shell               │</span></span>
+<span class="line"><span>│         (React + TypeScript + Vite frontend)          │</span></span>
+<span class="line"><span>├─────────────────────────────────────────────────────┤</span></span>
+<span class="line"><span>│                  OpenCode Agent Runtime                │</span></span>
+<span class="line"><span>│    (单二进制 sidecar，管理模型调用、技能执行、MCP)       │</span></span>
+<span class="line"><span>├────────────┬────────────┬──────────────┬─────────────┤</span></span>
+<span class="line"><span>│ Agent Skill│ Agent Skill│ Agent Skill  │ External    │</span></span>
+<span class="line"><span>│  Core      │  Core      │  Core        │ MCP Server  │</span></span>
+<span class="line"><span>│ (Plan→Exec)│ (Research) │ (Write)      │ (自定义)    │</span></span>
+<span class="line"><span>├────────────┴────────────┴──────────────┴─────────────┤</span></span>
+<span class="line"><span>│              Model Provider Layer                     │</span></span>
+<span class="line"><span>│  OpenRouter │ OpenAI │ Anthropic │ Ollama │ 150+ APIs │</span></span>
+<span class="line"><span>└─────────────────────────────────────────────────────┘</span></span></code></pre>
+<h3 id="核心技术组件">核心技术组件</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">组件</th><th align="left">技术</th><th align="left">说明</th></tr></thead><tbody><tr><td align="left"><strong>桌面壳层</strong></td><td align="left"><strong>Tauri 2</strong> + React + TypeScript + Vite</td><td align="left">跨平台（macOS/Windows/Linux），比 Electron 更轻量</td></tr><tr><td align="left"><strong>AI Agent 运行时</strong></td><td align="left"><strong>OpenCode</strong>（单二进制 sidecar）</td><td align="left">管理所有模型调用、技能执行、MCP 通信；UI 从不直接对接模型</td></tr><tr><td align="left"><strong>技能包系统</strong></td><td align="left">TypeScript agent skills</td><td align="left">7 个内置核心技能 + 250+ 扩展技能包</td></tr><tr><td align="left"><strong>模型连接层</strong></td><td align="left">OpenRouter / 自定义 API</td><td align="left"><strong>模型无关</strong>：支持 ~150 家模型提供商</td></tr><tr><td align="left"><strong>MCP（模型上下文协议）</strong></td><td align="left">MCP 标准协议</td><td align="left">可接入自定义数据源、数据库、计算资源</td></tr><tr><td align="left"><strong>可追溯性系统</strong></td><td align="left"><code>provenance.jsonl</code></td><td align="left">每次写入追加版本，全链路可追溯</td></tr><tr><td align="left"><strong>SDK 层</strong></td><td align="left"><code>OpenCodeClient</code></td><td align="left">隔离 UI 与运行时，技能/MCP/模型提供商可插拔</td></tr></tbody></table>
+<h3 id="支持的大模型">支持的大模型</h3>
+<p>OpenScience 支持<strong>自由切换</strong>以下所有模型（甚至同一会话中混合使用）：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">类别</th><th align="left">支持范围</th></tr></thead><tbody><tr><td align="left">☁️ <strong>云端商业模型</strong></td><td align="left">Claude (Opus/Sonnet/Haiku)、GPT-4o/4.1、DeepSeek-V3/R1、GLM-4、Gemini 2.5、Gemma、Mistral、Llama 3</td></tr><tr><td align="left">🏠 <strong>本地模型</strong></td><td align="left"><strong>Ollama</strong>（任意开源模型，完全离线运行）</td></tr><tr><td align="left">🔗 <strong>聚合平台</strong></td><td align="left">OpenRouter（150+ 提供商）、OpenAI 兼容接口、Anthropic 接口</td></tr><tr><td align="left">🆓 <strong>内置免费模型</strong></td><td align="left">零配置即用（有限额度）</td></tr></tbody></table>
+<blockquote>
+<p><strong>与传统 AI4S 工具的关键差异</strong>：OpenScience <strong>不绑定</strong>任何一个模型。你可以用 Claude 做文献规划，用 DeepSeek 写代码，用本地 Ollama 处理隐私数据——在同一工作流内自由切换。</p>
+</blockquote>
+<h3 id="参考文献">参考文献</h3>
+<ul>
+<li><a href="https://v2.tauri.app/">Tauri 2 框架</a></li>
+<li><a href="https://modelcontextprotocol.io/">MCP 协议（Model Context Protocol）</a></li>
+<li><a href="https://openrouter.ai/">OpenRouter 模型聚合</a></li>
+<li><a href="https://ollama.ai/">Ollama 本地模型</a></li>
+</ul>
+<blockquote>
+<p><strong>信息源</strong>：</p>
+<ul>
+<li><a href="https://github.com/synthetic-sciences/openscience">GitHub: synthetic-sciences/openscience</a></li>
+<li><a href="https://www.geekpark.net/news/367207">极客公园 - Open Science Desktop 登顶 AI4S 评测榜首</a></li>
+<li><a href="https://www.pcpop.com/article/6940144.shtml">泡泡网报道</a></li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="3-开源属性与商业模式">3. 开源属性与商业模式</h2>
+<h3 id="开源属性">开源属性</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">属性</th><th align="left">说明</th></tr></thead><tbody><tr><td align="left"><strong>开源状态</strong></td><td align="left">✅ <strong>完全开源</strong>（核心开源）</td></tr><tr><td align="left"><strong>开源协议</strong></td><td align="left"><strong>Apache 2.0</strong>（synthetic-sciences/openscience）/ <strong>MIT</strong>（ai4s-research/open-science）</td></tr><tr><td align="left"><strong>代码可审计</strong></td><td align="left">✅ 全部源代码公开，可审计、可 Fork、可扩展</td></tr><tr><td align="left"><strong>社区贡献</strong></td><td align="left">✅ 开放 PR 和 Issue</td></tr></tbody></table>
+<h3 id="商业模式">商业模式</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">模式</th><th align="center">价格</th><th align="left">说明</th></tr></thead><tbody><tr><td align="left"><strong>自托管（BYOK）</strong></td><td align="center"><strong>完全免费</strong> 🆓</td><td align="left">自带 API Key（OpenAI/Anthropic/DeepSeek 等），或使用 Ollama 本地模型完全免费</td></tr><tr><td align="left"><strong>Atlas 托管平台</strong></td><td align="center">付费（按量计费）</td><td align="left">托管钱包 + 多模型访问 + 持久化研究图谱 + 云端算力</td></tr><tr><td align="left"><strong>商业使用</strong></td><td align="center"><strong>免费</strong></td><td align="left">Apache 2.0 协议无商业限制</td></tr></tbody></table>
+<h3 id="与竞品的价格对比">与竞品的价格对比</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">平台</th><th align="left">免费方案</th><th align="left">付费方案</th></tr></thead><tbody><tr><td align="left"><strong>OpenScience</strong></td><td align="left">✅ 完整功能免费（BYOK / 本地模型）</td><td align="left">Atlas 按量计费</td></tr><tr><td align="left"><strong>Claude Science</strong></td><td align="left">❌ 无免费方案</td><td align="left">Pro $20/月 → Max $100-200/月 → 企业定制</td></tr><tr><td align="left"><strong>Codex CLI</strong></td><td align="left">有基础免费额度</td><td align="left">按 token 计费</td></tr></tbody></table>
+<blockquote>
+<p><strong>信息源</strong>：</p>
+<ul>
+<li><a href="https://github.com/synthetic-sciences/openscience/blob/main/LICENSE">GitHub LICENSE - Apache 2.0</a></li>
+<li><a href="https://www.kucoin.com/news/flash/openscience-launches-as-open-source-alternative-to-claude-science">KuCoin News - OpenScience Launch</a></li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="4-功能全景解析">4. 功能全景解析</h2>
+<h3 id="核心价值">核心价值</h3>
+<blockquote>
+<p><strong>一个开源的、模型无关的 AI 科研工作台，让研究人员用自然语言指令自动化完成文献调研→实验设计→代码执行→论文写作的全流程科研流水线。</strong></p>
+</blockquote>
+<p>目标用户：学术研究人员、计算科学家、材料科学家、生物信息学家、AI4S 从业者</p>
+<h3 id="核心功能与关键技术">核心功能与关键技术</h3>
+<h4 id="-端到端科研自动化流水线">🎯 端到端科研自动化流水线</h4>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>用户输入科研目标</span></span>
+<span class="line"><span>    ↓</span></span>
+<span class="line"><span>[1] Plan（AI 制定研究计划）→ 用户审批</span></span>
+<span class="line"><span>    ↓</span></span>
+<span class="line"><span>[2] Execute（AI 自主执行：检索文献→写代码→跑实验→分析数据）</span></span>
+<span class="line"><span>    ↓</span></span>
+<span class="line"><span>[3] Artifacts（生成图表、表格、中间结果）</span></span>
+<span class="line"><span>    ↓</span></span>
+<span class="line"><span>[4] Review（自动审核：查证引用、验证计算、检查逻辑）</span></span>
+<span class="line"><span>    ↓</span></span>
+<span class="line"><span>输出：可复现的完整科研记录</span></span></code></pre>
+<p><strong>关键技术</strong>：<strong>多 Agent 协作架构</strong>——主 Agent 负责任务分解 + 多个 Specialist Agent 负责子任务 + Reviewer Agent 负责事实核查。全部通过 OpenCode 运行时编排。</p>
+<h4 id="-7-个内置-agent-skill-模块">📚 7 个内置 Agent Skill 模块</h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">技能模块</th><th align="left">功能</th><th align="left">输出</th></tr></thead><tbody><tr><td align="left"><strong>research-explorer</strong></td><td align="left">主题探索、研究前沿扫描</td><td align="left">研究趋势报告</td></tr><tr><td align="left"><strong>literature-survey</strong></td><td align="left">自动化文献综述生成</td><td align="left"><strong>6-20 页</strong>综述，<strong>60+</strong> 真实学术引用</td></tr><tr><td align="left"><strong>experiment-suite</strong></td><td align="left">实验设计 + 代码生成</td><td align="left">可运行代码 + 出版级图表</td></tr><tr><td align="left"><strong>paper-writer</strong></td><td align="left">论文自动撰写</td><td align="left"><strong>8-14 页</strong>研究论文草稿</td></tr><tr><td align="left"><strong>mindmap-render</strong></td><td align="left">思维导图可视化</td><td align="left">研究路线图</td></tr><tr><td align="left"><strong>integrity-auditor</strong></td><td align="left">完整性审计</td><td align="left">源验证报告</td></tr><tr><td align="left"><strong>ai4s-agent</strong></td><td align="left">AI4S 核心代理</td><td align="left">跨模块协调</td></tr></tbody></table>
+<h4 id="-250-科研技能包">🔬 250+ 科研技能包</h4>
+<p>覆盖领域包括但不限于：</p>
+<ul>
+<li><strong>机器学习</strong>：DeepSpeed、PEFT、TRL、模型评估</li>
+<li><strong>生物学</strong>：分子生物学、临床生物信息学、化学信息学</li>
+<li><strong>物理学</strong>：计算物理、量子化学</li>
+<li><strong>化学</strong>：计算化学、分子模拟</li>
+<li><strong>通用</strong>：文献检索、LaTeX 排版、图表绘制、云计算</li>
+</ul>
+<h4 id="-科学数据连接器">🔗 科学数据连接器</h4>
+<p>直接对接 <strong>30+ 科学数据库</strong>：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">类别</th><th align="left">数据库</th></tr></thead><tbody><tr><td align="left">学术文献</td><td align="left"><strong>arXiv</strong>、<strong>PubMed</strong>、<strong>Crossref</strong>、<strong>Semantic Scholar</strong>、bioRxiv/medRxiv</td></tr><tr><td align="left">化学</td><td align="left"><strong>PubChem</strong>、<strong>ChEMBL</strong></td></tr><tr><td align="left">生物</td><td align="left"><strong>UniProt</strong>、<strong>PDB</strong>、<strong>Ensembl</strong></td></tr><tr><td align="left">临床</td><td align="left"><strong>ClinicalTrials.gov</strong></td></tr><tr><td align="left">其他</td><td align="left">通过 <strong>MCP 协议</strong>可接入任意自定义数据库</td></tr></tbody></table>
+<h4 id="-全链路可追溯性provenance">📝 全链路可追溯性（Provenance）</h4>
+<p>每次操作（代码执行、图生成、数据查询）都追加记录到 <code>provenance.jsonl</code>：</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>原文 → 引用的论文（已解析至 Crossref/arXiv/PubMed）</span></span>
+<span class="line"><span>图表 → 生成它的代码 + 输入数据 + 运行环境 + 模型版本</span></span>
+<span class="line"><span>数据 → 来源数据库 + 查询时间</span></span></code></pre>
+<p>支持 <strong>一键回滚</strong> 到任意历史版本。</p>
+<h4 id="-隐私与安全">🔐 隐私与安全</h4>
+<ul>
+<li><strong>本地优先</strong>：所有数据、代码、会话默认存储在本地</li>
+<li><strong>审批关卡</strong>：每次命令执行、依赖安装、文件删除、网络访问都需要用户显式同意</li>
+<li><strong>Ollama 支持</strong>：完全离线运行，零数据离开本机</li>
+</ul>
+<h3 id="关键技术参考文献">关键技术参考文献</h3>
+<ul>
+<li><a href="https://github.com/synthetic-sciences/openscience/tree/main/runtime">OpenCode Agent Runtime</a></li>
+<li><a href="https://modelcontextprotocol.io/">MCP 协议规范</a></li>
+<li><a href="https://v2.tauri.app/">Tauri 2 框架文档</a></li>
+<li><a href="https://www.geekpark.net/news/367207">ResearchClawBench 基准</a></li>
+</ul>
+<blockquote>
+<p><strong>信息源</strong>：</p>
+<ul>
+<li><a href="https://github.com/synthetic-sciences/openscience">GitHub: synthetic-sciences/openscience - README</a></li>
+<li><a href="https://www.geekpark.net/news/367207">极客公园深度报道</a></li>
+<li><a href="https://hub.baai.ac.cn/view/56174">北京智源社区 - Claude Science 开源平替</a></li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="5-功能实现案例">5. 功能实现案例</h2>
+<h3 id="案例-1自动化材料科学文献综述">案例 1：自动化材料科学文献综述</h3>
+<p><strong>场景</strong>：一位材料科学研究者想了解”等变图神经网络在晶体结构预测中的最新进展”。</p>
+<p><strong>操作</strong>：</p>
+<ol>
+<li>在 OpenScience 中输入：“Write a comprehensive literature review on equivariant GNNs for crystal structure prediction”</li>
+<li>OpenScience 的 <code>literature-survey</code> 技能自动：搜索 <strong>arXiv/Semantic Scholar</strong> → 提取 <strong>60+ 篇相关论文</strong> → 按主题组织章节 → 生成 <strong>15 页综述</strong></li>
+<li>Reviewer Agent 自动核查：每篇引用是否真实存在、数据是否可追溯</li>
+<li>用户可选择导出为 Markdown / LaTeX / PDF</li>
+</ol>
+<p><strong>输出</strong>：带真实引用链接的完整文献综述，所有引用均通过 Crossref/arXiv/PubMed 验证。</p>
+<h3 id="案例-2新材料性质预测实验">案例 2：新材料性质预测实验</h3>
+<p><strong>场景</strong>：研究者想预测一批新型钙钛矿材料的带隙，并生成发表级图表。</p>
+<p><strong>操作</strong>：</p>
+<ol>
+<li>输入 CSV 格式的晶体结构数据</li>
+<li>OpenScience 的 <code>experiment-suite</code> 自动：选择合适模型 → 编写 Python 脚本 → 运行预测 → 生成带误差棒的带隙分布图</li>
+<li>所有代码、数据、结果一并记录到 <code>provenance.jsonl</code></li>
+<li>结果可直接导入 <code>paper-writer</code> 生成论文草稿</li>
+</ol>
+<p><strong>输出</strong>：可复现的完整实验包（代码 + 数据 + 图表 + 参数配置）</p>
+<h3 id="案例-3跨模型协作研究">案例 3：跨模型协作研究</h3>
+<p><strong>场景</strong>：研究者想结合不同模型的优势完成一项研究。</p>
+<p><strong>操作</strong>：</p>
+<ol>
+<li>用 <strong>Claude</strong> 规划研究框架（强推理能力）</li>
+<li>用 <strong>GPT-4o</strong> 编写数据分析代码（强编码能力）</li>
+<li>用 <strong>本地 Ollama 模型</strong> 处理涉及未公开数据的部分</li>
+</ol>
+<p><strong>全在同一个 OpenScience 会话中完成</strong>，无需切换工具。</p>
+<h3 id="案例网址">案例网址</h3>
+<ul>
+<li><a href="https://github.com/synthetic-sciences/openscience">Project OpenScience GitHub 官方示例</a></li>
+<li><a href="https://www.geekpark.net/news/367207">极客公园 - 登顶 AI4S 评测报道</a></li>
+<li><a href="https://hub.baai.ac.cn/view/56174">北京智源社区 - Claude Science 开源平替介绍</a></li>
+</ul>
+<blockquote>
+<p><strong>信息源</strong>：上述案例根据 OpenScience 官方文档和媒体报道的综合描述整理。</p>
+</blockquote>
+<hr>
+<h2 id="6-主要竞品清单">6. 主要竞品清单</h2>
+<p>OpenScience 所处的赛道是 <strong>“AI 驱动的科研自动化工作台”</strong>，主要竞品如下：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="center">#</th><th align="left">竞品</th><th align="left">开发商</th><th align="left">定位</th><th align="left">优势</th><th align="left">劣势</th></tr></thead><tbody><tr><td align="center">1</td><td align="left"><strong>Claude Science</strong></td><td align="left">Anthropic</td><td align="left">闭源 AI 科研工作台</td><td align="left">Claude 深度集成、3D 分子渲染、企业级支持</td><td align="left">仅支持 Claude、仅 macOS/Linux、付费</td></tr><tr><td align="center">2</td><td align="left"><strong>Codex CLI</strong></td><td align="left">OpenAI</td><td align="left">AI 编码 + 科研助手</td><td align="left">GPT-4.1 代码能力</td><td align="left">非科研专用、缺乏文献综述能力</td></tr><tr><td align="center">3</td><td align="left"><strong>OpenAI4S</strong></td><td align="left">北大 Yuan 团队</td><td align="left">开源 AI4S 平台</td><td align="left">超低成本（¥9.9/月）、Code-as-Action 架构</td><td align="left">技能包少于 OpenScience（24 个）</td></tr><tr><td align="center">4</td><td align="left"><strong>K-Dense BYOK</strong></td><td align="left">nikemaul</td><td align="left">BYOK 科研平台</td><td align="left">30 个模型 × 10 家服务商</td><td align="left">社区较小、不够成熟</td></tr><tr><td align="center">5</td><td align="left"><strong>Claude Science for Win</strong></td><td align="left">JWM0203</td><td align="left">Windows 原生 Claude Science</td><td align="left">60+ 数据库连接器</td><td align="left">仅绑定 Claude</td></tr><tr><td align="center">6</td><td align="left"><strong>ResearchCopilot</strong></td><td align="left">—</td><td align="left">科研 AI 助手</td><td align="left">专注文献管理</td><td align="left">功能范围较窄</td></tr><tr><td align="center">7</td><td align="left"><strong>Elicit</strong></td><td align="left">Elicit</td><td align="left">文献检索 + 分析</td><td align="left">成熟的文献工作流</td><td align="left">非端到端科研平台</td></tr><tr><td align="center">8</td><td align="left"><strong>NotebookLM</strong></td><td align="left">Google</td><td align="left">AI 笔记 + 研究辅助</td><td align="left">Gemini 集成</td><td align="left">非开源、功能有限</td></tr></tbody></table>
+<blockquote>
+<p><strong>信息源</strong>：</p>
+<ul>
+<li><a href="https://github.com/PKU-YuanGroup/OpenAI4S">GitHub: PKU-YuanGroup/OpenAI4S</a></li>
+<li><a href="https://github.com/nikemaul/k-dense-byok">GitHub: nikemaul/k-dense-byok</a></li>
+<li><a href="https://github.com/JWM0203/Claude-Science-for-win">GitHub: JWM0203/Claude-Science-for-win</a></li>
+<li><a href="https://elicit.com/">Elicit 官网</a></li>
+<li><a href="https://notebooklm.google.com/">Google NotebookLM</a></li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="7-与竞品的横向比较表格形式">7. 与竞品的横向比较（表格形式）</h2>
+<h3 id="核心竞品对比">核心竞品对比</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">对比维度</th><th align="left"><strong>OpenScience</strong> 🥇</th><th align="left">Claude Science</th><th align="left">Codex CLI</th><th align="left">OpenAI4S</th></tr></thead><tbody><tr><td align="left"><strong>价格</strong></td><td align="left"><strong>免费</strong>（BYOK / 本地 Ollama 零成本）</td><td align="left">Pro $20/月 → 企业定制</td><td align="left">有免费额度</td><td align="left"><strong>¥9.9/月</strong>起</td></tr><tr><td align="left"><strong>开源协议</strong></td><td align="left"><strong>Apache 2.0 / MIT</strong> ✅</td><td align="left">❌ 闭源</td><td align="left">❌ 闭源</td><td align="left">✅ 开源</td></tr><tr><td align="left"><strong>模型自由度</strong></td><td align="left">⭐⭐⭐⭐⭐ 任选 Claude/GPT/DeepSeek/GLM/本地</td><td align="left">⭐⭐ 仅 Claude</td><td align="left">⭐⭐⭐ GPT 系列</td><td align="left">⭐⭐⭐⭐ Claude/GPT/Gemini/豆包</td></tr><tr><td align="left"><strong>本地运行</strong></td><td align="left">✅ <strong>完全本地优先</strong>（Ollama 离线可用）</td><td align="left">❌ 需云端</td><td align="left">❌ 需云端</td><td align="left">✅ 支持</td></tr><tr><td align="left"><strong>平台支持</strong></td><td align="left">macOS / Windows / Linux</td><td align="left">macOS / Linux 仅</td><td align="left">macOS / Linux 仅</td><td align="left">Web 端</td></tr><tr><td align="left"><strong>ResearchClawBench</strong></td><td align="left"><strong>22.8 🥇 #1</strong></td><td align="left">21.5 🥈</td><td align="left">18.4 🥉</td><td align="left">暂无公开</td></tr><tr><td align="left"><strong>科研技能包</strong></td><td align="left"><strong>250+ 个</strong></td><td align="left">~60 个</td><td align="left">~20 个（编码为主）</td><td align="left">24 个</td></tr><tr><td align="left"><strong>文献综述能力</strong></td><td align="left">✅ <strong>6-20 页综述，60+ 引用</strong></td><td align="left">✅ 有</td><td align="left">❌ 无</td><td align="left">❌ 无</td></tr><tr><td align="left"><strong>论文写作</strong></td><td align="left">✅ 8-14 页论文草稿</td><td align="left">✅ 有</td><td align="left">❌ 无</td><td align="left">❌ 无</td></tr><tr><td align="left"><strong>可追溯性</strong></td><td align="left">✅ <code>provenance.jsonl</code> 全链路追踪</td><td align="left">✅ 图表有追踪</td><td align="left">❌ 有限</td><td align="left">❌ 有限</td></tr><tr><td align="left"><strong>科学数据库连接</strong></td><td align="left">30+</td><td align="left">60+</td><td align="left">无</td><td align="left">有限</td></tr><tr><td align="left"><strong>安装复杂度</strong></td><td align="left">⭐⭐⭐⭐ 一行命令</td><td align="left">⭐⭐⭐ 下载安装</td><td align="left">⭐⭐⭐ 需配置</td><td align="left">⭐⭐⭐⭐ Web 即用</td></tr><tr><td align="left"><strong>企业支持</strong></td><td align="left">开发中（Atlas）</td><td align="left">✅ 成熟</td><td align="left">❌</td><td align="left">❌</td></tr></tbody></table>
+<h3 id="各竞品最适用的细分场景">各竞品最适用的细分场景</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">竞品</th><th align="left">最适合场景</th></tr></thead><tbody><tr><td align="left"><strong>OpenScience</strong> 🥇</td><td align="left">需要模型自由、重视数据隐私、预算有限的学术研究团队</td></tr><tr><td align="left"><strong>Claude Science</strong></td><td align="left">已深度嵌入 Anthropic 生态、需要 3D 分子渲染和企业级支持的商业研究</td></tr><tr><td align="left"><strong>Codex CLI</strong></td><td align="left">纯代码驱动的计算实验，不需要文献综述能力的场景</td></tr><tr><td align="left"><strong>OpenAI4S</strong></td><td align="left">预算极度有限（¥9.9/月）、需要快速上手 AI4S 但不需要全流程科研</td></tr><tr><td align="left"><strong>K-Dense BYOK</strong></td><td align="left">需要最大模型选择面（30 种模型）、不介意社区较小</td></tr><tr><td align="left"><strong>NotebookLM</strong></td><td align="left">个人文献笔记管理，不做端到端科研</td></tr></tbody></table>
+<blockquote>
+<p><strong>信息源</strong>：对比数据综合自 ResearchClawBench 公开排行榜、各产品 GitHub 页面、媒体报道。</p>
+</blockquote>
+<hr>
+<h2 id="8-版本迭代信息">8. 版本迭代信息</h2>
+<h3 id="opensciencesynthetic-sciences">OpenScience（Synthetic Sciences）</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">版本</th><th align="left">发布日期</th><th align="left">关键内容</th></tr></thead><tbody><tr><td align="left"><strong>v0.1</strong>（初始发布）</td><td align="left"><strong>2026 年 7 月 3 日</strong></td><td align="left">首个公开版本，Apache 2.0 开源，7 个内置 Agent Skill</td></tr><tr><td align="left">目前最新</td><td align="left">2026 年 7 月 13 日</td><td align="left">发布 10 天，GitHub 已获 <strong>2,195 ⭐</strong>、311 Forks</td></tr><tr><td align="left">更新频率</td><td align="left"><strong>日更/周更</strong></td><td align="left">早期快速迭代阶段</td></tr></tbody></table>
+<h3 id="open-science-desktopai4s-research-社区版">Open Science Desktop（ai4s-research 社区版）</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">版本</th><th align="left">发布日期</th><th align="left">关键内容</th></tr></thead><tbody><tr><td align="left">初始发布</td><td align="left">2026 年 7 月初</td><td align="left">MIT 协议，Tauri 2 桌面版</td></tr><tr><td align="left">目前最新</td><td align="left">2026 年 7 月</td><td align="left">ResearchClawBench #1（22.8 分）</td></tr></tbody></table>
+<h3 id="已知-roadmap">已知 Roadmap</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">计划内容</th><th align="left">时间线</th></tr></thead><tbody><tr><td align="left">3D 分子/蛋白质结构渲染器</td><td align="left">短期（2026 Q3）</td></tr><tr><td align="left">R 语言内核支持</td><td align="left">短期（2026 Q3）</td></tr><tr><td align="left">Windows 安装程序</td><td align="left">短期（2026 Q3）</td></tr><tr><td align="left">更大规模的多文件项目管理</td><td align="left">中期</td></tr><tr><td align="left">HPC / Slurm 计算支持</td><td align="left">中期</td></tr><tr><td align="left">Atlas 托管平台正式版</td><td align="left">中期</td></tr></tbody></table>
+<blockquote>
+<p><strong>信息源</strong>：</p>
+<ul>
+<li><a href="https://github.com/synthetic-sciences/openscience">GitHub 仓库</a></li>
+<li><a href="https://github.com/ai4s-research/open-science">GitHub: ai4s-research/open-science - 技术设计文档</a></li>
+<li><a href="https://www.geekpark.net/news/367207">极客公园 2026 年 7 月 9 日报道</a></li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="一句话锐评">一句话锐评</h2>
+<blockquote>
+<p><strong>OpenScience 是 2026 年 AI4S 领域最值得关注的开源黑马：一次开发，任意模型，全流程科研自动化。以 Apache 2.0 + ResearchClawBench #1 + 250+ 技能包的组合拳，在模型自由度和开放性上碾压 Claude Science。虽然 v0.1 还很早期，但对于重视数据主权和模型选择自由度的学术团队，这是一个不容忽视的选择。适合需要多模型协作、重视可复现性和隐私保护的 AI4S 研究者。</strong> 🚀</p>
+</blockquote>
+<hr>
+<h2 id="附录核心信息源链接汇总">附录：核心信息源链接汇总</h2>
+<h3 id="官方仓库与网站">官方仓库与网站</h3>
+<ul>
+<li><a href="https://github.com/synthetic-sciences/openscience">OpenScience GitHub（synthetic-sciences）</a></li>
+<li><a href="https://github.com/ai4s-research/open-science">Open Science Desktop GitHub（ai4s-research）</a></li>
+<li><a href="https://www.openscience.sh/">OpenScience 官方网站</a></li>
+<li><a href="https://www.ycombinator.com/companies/synthetic-sciences">YC Synthetic Sciences 页面</a></li>
+<li><a href="https://www.ycombinator.com/launches/PY9-synthetic-sciences-ai-co-scientists-for-end-to-end-scientific-research">YC Launch 公告</a></li>
+</ul>
+<h3 id="媒体报道">媒体报道</h3>
+<ul>
+<li><a href="https://www.geekpark.net/news/367207">极客公园 - 登顶 AI4S 评测榜首</a></li>
+<li><a href="https://www.pcpop.com/article/6940144.shtml">泡泡网报道</a></li>
+<li><a href="https://www.cinic.org.cn/zgzz/qy/1644067.html">中国产业经济信息网报道</a></li>
+<li><a href="https://hub.baai.ac.cn/view/56174">北京智源社区 - Claude Science 开源平替</a></li>
+<li><a href="https://www.kucoin.com/news/flash/openscience-launches-as-open-source-alternative-to-claude-science">KuCoin News - OpenScience Launch</a></li>
+<li><a href="https://www.startuphub.ai/ai-news/claudes-corner/2026/claudes-corner-synthetic-sciences-yc-w2026">StartupHub.ai - Synthetic Sciences 报道</a></li>
+<li><a href="https://americanbazaaronline.com/2026/03/31/yc-w26-demo-day-highlights-rising-influence-of-ia-entrepreneurs-477926/">美国湾区时报 - YC W26 Demo Day</a></li>
+</ul>
+<h3 id="竞品参考">竞品参考</h3>
+<ul>
+<li><a href="https://claude.ai/science">Claude Science（Anthropic）</a></li>
+<li><a href="https://github.com/PKU-YuanGroup/OpenAI4S">OpenAI4S - GitHub</a></li>
+<li><a href="https://github.com/nikemaul/k-dense-byok">K-Dense BYOK - GitHub</a></li>
+<li><a href="https://github.com/JWM0203/Claude-Science-for-win">Claude Science for Win - GitHub</a></li>
+</ul> <div> <a href="/notes" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150">
+&larr; 返回笔记列表
+</a> </div>  </div> <!-- Previous / Next navigation -->  <hr class="!mt-12 !mb-8" data-astro-cid-bvzihdzo> <div data-astro-cid-bvzihdzo> <a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-bvzihdzo>
+&larr; 返回博客列表
+</a> </div> </div> </div> </article> </div>  </main> <footer class="border-t border-[var(--color-border)] mt-24 py-8" data-astro-cid-pux6a34n><div class="max-w-content flex items-center justify-between" data-astro-cid-pux6a34n><span class="text-sm text-[var(--color-text-tertiary)]" data-astro-cid-pux6a34n>
+&copy; 2026 星游寰宇
+</span><div class="flex items-center gap-4" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>博客</a><a href="/projects" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>项目</a><a href="/notes" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>日记</a><a href="/resources" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>资源</a><a href="/about" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>关于</a></div></div></footer> <div id="link-preview" style="display:none;position:fixed;z-index:99;max-width:18rem;pointer-events:none;" data-astro-cid-t7vshrbh></div>  <script type="module">(async()=>{try{const c=await fetch("/posts.json");if(!c.ok)return;const u=await c.json(),p=new Map(u.map(t=>[t.href,t])),e=document.getElementById("link-preview");if(!e)return;let n="",d;document.addEventListener("mouseover",t=>{const i=t.target.closest("a[href^='/blog/']");if(!i){e.style.display="none",n="";return}const s=i.getAttribute("href");if(!s||s===n)return;const o=p.get(s);o&&(n=s,d=setTimeout(()=>{e.innerHTML=`<div class="lp-title">${o.title}</div><div class="lp-summary">${o.summary}</div>`;const r=i.getBoundingClientRect();let a=r.left,l=r.bottom+6;a+288>window.innerWidth&&(a=window.innerWidth-296),l+80>window.innerHeight&&(l=r.top-80),Object.assign(e.style,{left:a+"px",top:l+"px",display:"block"})},300))},{passive:!0}),document.addEventListener("mouseout",t=>{t.target.closest("a[href^='/blog/']")&&(clearTimeout(d),e.style.display="none",n="")},{passive:!0})}catch{}})();</script> </body></html>  <script type="module">const c=document.getElementById("toc-toggle"),s=document.getElementById("toc-list"),i=document.getElementById("toc-chevron");c&&s&&i&&c.addEventListener("click",()=>{const o=s.classList.toggle("hidden");c.setAttribute("aria-expanded",String(o)),i.style.transform=o?"rotate(180deg)":""});const r=document.querySelectorAll(".toc-list a");if(r.length>0){const o=new IntersectionObserver(n=>{for(const t of n)t.isIntersecting&&r.forEach(e=>{e.classList.toggle("active",e.getAttribute("href")===`#${t.target.id}`)})},{rootMargin:"-80px 0px -80% 0px"});r.forEach(n=>{const t=n.getAttribute("href")?.slice(1);if(t){const e=document.getElementById(t);e&&o.observe(e)}})}</script>

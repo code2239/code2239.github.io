@@ -1,0 +1,767 @@
+<!DOCTYPE html><html lang="zh-CN"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="Anthropic 2026 年旗舰产品——AI 驱动的科研工作台，号称&#34;科研界的 Claude Code&#34;"><meta name="color-scheme" content="light"><!-- Open Graph --><meta property="og:title" content="Claude Science 深度调研报告 — 星游寰宇"><meta property="og:description" content="Anthropic 2026 年旗舰产品——AI 驱动的科研工作台，号称&#34;科研界的 Claude Code&#34;"><meta property="og:url" content="https://code2239.github.io/notes/2026-07-11-Claude Science 深度调研报告"><meta property="og:type" content="article"><meta property="og:site_name" content="星游寰宇"><meta property="og:locale" content="zh_CN"><meta property="article:published_time" content="2026-07-11"><meta property="article:tag" content="research"><meta property="article:tag" content="anthropic"><meta property="article:tag" content="claude-science"><meta property="article:tag" content="ai"><meta property="article:tag" content="scientific-research"><!-- Twitter Card --><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Claude Science 深度调研报告 — 星游寰宇"><meta name="twitter:description" content="Anthropic 2026 年旗舰产品——AI 驱动的科研工作台，号称&#34;科研界的 Claude Code&#34;"><!-- Canonical --><link rel="canonical" href="https://code2239.github.io/notes/2026-07-11-Claude Science 深度调研报告"><title>Claude Science 深度调研报告 — 星游寰宇</title><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="alternate" type="application/rss+xml" title="星游寰宇 RSS" href="/rss.xml"><!-- Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"星游寰宇","url":"https://code2239.github.io","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://code2239.github.io/search?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://code2239.github.io"},{"@type":"ListItem","position":2,"name":"日记","item":"https://code2239.github.io/notes"},{"@type":"ListItem","position":3,"name":"2026 07 11 Claude Science 深度调研报告"}]},{"@context":"https://schema.org","@type":"BlogPosting","headline":"Claude Science 深度调研报告","description":"Anthropic 2026 年旗舰产品——AI 驱动的科研工作台，号称\"科研界的 Claude Code\"","datePublished":"2026-07-11","url":"https://code2239.github.io/notes/2026-07-11-Claude Science 深度调研报告","keywords":"research, anthropic, claude-science, ai, scientific-research"}]}</script><link rel="stylesheet" href="/_astro/_slug_.CXDKI3B6.css">
+<style>.back-to-top[data-astro-cid-gzprr2dq]{position:fixed;bottom:2rem;right:2rem;z-index:40;width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:50%;border:1px solid var(--color-border);background:var(--color-bg);color:var(--color-text-secondary);cursor:pointer;box-shadow:var(--shadow-md);transition:opacity .2s ease,transform .2s ease}.back-to-top[data-astro-cid-gzprr2dq]:hover{color:var(--color-accent);border-color:var(--color-accent);transform:translateY(-2px)}.back-to-top[data-astro-cid-gzprr2dq].hidden{opacity:0;pointer-events:none}.copy-btn[data-astro-cid-qqybitij]{position:absolute;top:8px;right:8px;padding:4px 10px;font-size:.6875rem;font-family:var(--font-sans);color:var(--color-text-tertiary);background:var(--color-bg);border:1px solid var(--color-border);border-radius:6px;cursor:pointer;opacity:0;transition:opacity .15s ease,color .15s ease}pre[data-astro-cid-qqybitij]:hover .copy-btn[data-astro-cid-qqybitij]{opacity:1}.copy-btn[data-astro-cid-qqybitij]:hover{color:var(--color-accent);border-color:var(--color-accent)}.copy-btn[data-astro-cid-qqybitij].copied{color:#16a34a;border-color:#16a34a}.blog-layout[data-astro-cid-bvzihdzo]{display:block}.blog-toc[data-astro-cid-bvzihdzo]{display:none}.blog-body[data-astro-cid-bvzihdzo]{min-width:0}@media(min-width:1024px){.blog-layout[data-astro-cid-bvzihdzo]{display:grid;grid-template-columns:14rem 1fr;gap:3rem;align-items:start}.blog-toc[data-astro-cid-bvzihdzo]{display:block}.blog-body[data-astro-cid-bvzihdzo]{padding-right:2rem}}@media(max-width:1023px){.blog-toc[data-astro-cid-bvzihdzo]{display:block;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid var(--color-border)}}
+</style></head> <body class="min-h-screen flex flex-col"> <nav class="sticky top-0 z-40 bg-[var(--color-bg)]/80 backdrop-blur-md border-b border-[var(--color-border)]" data-astro-cid-pux6a34n><div class="max-w-content flex items-center justify-between py-4" data-astro-cid-pux6a34n><a href="/" class="flex items-center gap-2.5 text-base font-semibold no-underline tracking-tight" data-astro-cid-pux6a34n><svg class="w-7 h-7" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" data-astro-cid-pux6a34n><circle cx="16" cy="16" r="15" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-pux6a34n></circle><circle cx="16" cy="16" r="3" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="16" cy="5" r="1.5" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="24" cy="10" r="1" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="8" cy="22" r="1" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="25" cy="21" r="0.8" fill="currentColor" data-astro-cid-pux6a34n></circle></svg>
+星游寰宇
+</a><!-- Desktop nav --><div class="hidden sm:flex items-center gap-5" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>博客</a><a href="/projects" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>项目</a><a href="/notes" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>日记</a><a href="/resources" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>资源</a><a href="/about" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>关于</a><button id="search-trigger" class="flex items-center gap-1.5 text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] bg-[var(--color-bg-secondary)] hover:bg-[var(--color-bg-tertiary)] border border-[var(--color-border)] hover:border-[var(--color-accent)]/30 rounded-lg px-3 py-1.5 cursor-pointer shadow-sm hover:shadow-md transition-all duration-200" aria-label="搜索 (Ctrl+K)" title="搜索 (Ctrl+K)" data-astro-cid-pux6a34n><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-pux6a34n><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" data-astro-cid-pux6a34n></path></svg><span class="hidden lg:inline" data-astro-cid-pux6a34n>搜索</span><kbd class="hidden lg:inline-flex items-center text-[0.625rem] font-mono text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1 py-px rounded" data-astro-cid-pux6a34n>Ctrl+K</kbd></button></div><!-- Mobile hamburger --><button id="menu-btn" class="sm:hidden flex flex-col gap-1 p-2 -mr-2 cursor-pointer" aria-label="打开菜单" data-astro-cid-pux6a34n><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-transform duration-200" data-astro-cid-pux6a34n></span><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-opacity duration-200" data-astro-cid-pux6a34n></span><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-transform duration-200" data-astro-cid-pux6a34n></span></button></div><!-- Mobile menu --><div id="mobile-menu" class="hidden sm:hidden border-t border-[var(--color-border)] bg-[var(--color-bg)]" data-astro-cid-pux6a34n><div class="max-w-content flex flex-col gap-2 py-4" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>博客</a><a href="/projects" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>项目</a><a href="/notes" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>日记</a><a href="/resources" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>资源</a><a href="/about" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>关于</a></div></div></nav>
+    <div id="search-overlay" class="srch-overlay" role="dialog" aria-modal="true" aria-label="全局搜索" data-astro-cid-mn7pezny> <div id="search-backdrop" class="srch-backdrop" data-astro-cid-mn7pezny></div> <div class="srch-panel" id="srch-panel" data-astro-cid-mn7pezny> <!-- Search input --> <div class="srch-input-row" data-astro-cid-mn7pezny> <svg class="srch-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-mn7pezny> <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" data-astro-cid-mn7pezny></path> </svg> <input type="text" id="search-input" class="srch-input" placeholder="搜索文章、项目、日记、资源..." autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="go" data-astro-cid-mn7pezny> <kbd class="srch-kbd" data-astro-cid-mn7pezny>Esc</kbd> </div> <!-- Results area --> <div id="search-results" class="srch-results" data-astro-cid-mn7pezny> <p class="srch-empty" id="search-empty-hint" data-astro-cid-mn7pezny>输入关键词开始搜索</p> </div> <!-- Skeleton loading --> <div id="search-skeleton" class="srch-skeleton" style="display:none;" aria-hidden="true" data-astro-cid-mn7pezny> <div class="srch-skeleton-line" style="width:75%" data-astro-cid-mn7pezny></div> <div class="srch-skeleton-line" style="width:50%" data-astro-cid-mn7pezny></div> <div class="srch-skeleton-line" style="width:60%" data-astro-cid-mn7pezny></div> </div> <!-- Footer hints --> <div class="srch-footer" data-astro-cid-mn7pezny> <div class="srch-footer-hints" data-astro-cid-mn7pezny> <span data-astro-cid-mn7pezny><kbd data-astro-cid-mn7pezny>↑</kbd><kbd data-astro-cid-mn7pezny>↓</kbd> 导航</span> <span data-astro-cid-mn7pezny><kbd data-astro-cid-mn7pezny>↵</kbd> 打开</span> <span data-astro-cid-mn7pezny><kbd data-astro-cid-mn7pezny>Ctrl</kbd>+<kbd data-astro-cid-mn7pezny>K</kbd> 切换</span> </div> <div class="srch-footer-brand" data-astro-cid-mn7pezny>
+powered by Orama
+</div> </div> </div> </div> <script type="module" src="/_astro/Navigation.astro_astro_type_script_index_0_lang.15n1EYJp.js"></script> <main class="flex-1">  <div class="reading-progress" id="reading-progress" style="width: 0%"></div> <script type="module">const o=document.getElementById("reading-progress");if(!o)throw new Error("Reading progress bar element not found");const r=()=>{const n=window.scrollY,e=document.documentElement.scrollHeight-window.innerHeight,t=e>0?n/e*100:0;o.style.width=`${Math.min(t,100)}%`};window.addEventListener("scroll",r,{passive:!0});</script> <button id="back-to-top" class="back-to-top hidden" aria-label="返回顶部" data-astro-cid-gzprr2dq> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-gzprr2dq> <polyline points="18 15 12 9 6 15" data-astro-cid-gzprr2dq></polyline> </svg> </button>  <script type="module">const o=document.getElementById("back-to-top");o&&(window.addEventListener("scroll",()=>{o.classList.toggle("hidden",window.scrollY<400)},{passive:!0}),o.addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"})));</script> <script type="module">document.querySelectorAll("pre").forEach(e=>{const t=document.createElement("button");t.className="copy-btn",t.textContent="复制",t.addEventListener("click",async()=>{const n=e.querySelector("code")?.textContent||e.textContent||"";try{await navigator.clipboard.writeText(n),t.textContent="已复制",t.classList.add("copied"),setTimeout(()=>{t.textContent="复制",t.classList.remove("copied")},2e3)}catch{t.textContent="失败",setTimeout(()=>{t.textContent="复制"},2e3)}}),e.style.position="relative",e.appendChild(t)});</script> <div class="px-6 xl:px-12 pt-12 pb-16" data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <header class="mb-12 text-center" data-astro-cid-bvzihdzo> <h1 class="text-3xl font-semibold mb-3 tracking-tight" data-astro-cid-bvzihdzo>Claude Science 深度调研报告</h1> <div class="flex items-center justify-center gap-2 text-[var(--color-text-tertiary)] text-sm" data-astro-cid-bvzihdzo> <time datetime="2026-07-11" data-astro-cid-bvzihdzo>2026-07-11</time> <span class="text-[var(--color-border)]" data-astro-cid-bvzihdzo>·</span> <span data-astro-cid-bvzihdzo>41 分钟阅读</span>  <span class="text-[var(--color-border)]" data-astro-cid-bvzihdzo>·</span> <span class="text-sm text-[var(--color-text-tertiary)]"> <span> research<span class="mx-1">·</span> </span><span> anthropic<span class="mx-1">·</span> </span><span> claude-science<span class="mx-1">·</span> </span><span> ai<span class="mx-1">·</span> </span><span> scientific-research </span> </span>  </div> </header> <div class="blog-layout" data-astro-cid-bvzihdzo> <aside class="blog-toc" data-astro-cid-bvzihdzo> <div class="sticky top-14 max-h-[calc(100vh-3.5rem)] overflow-y-auto" data-astro-cid-bvzihdzo> <button id="toc-toggle" class="hidden max-md:flex items-center gap-1 text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-3 cursor-pointer border-none bg-transparent p-0" aria-expanded="false" aria-controls="toc-list" data-astro-cid-bvzihdzo>
+目录
+<svg id="toc-chevron" class="w-3 h-3 transition-transform duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-bvzihdzo><polyline points="6 9 12 15 18 9" data-astro-cid-bvzihdzo></polyline></svg> </button> <span class="text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-3 max-md:hidden" data-astro-cid-bvzihdzo>目录</span> <div id="toc-list" class="max-md:hidden" data-astro-cid-bvzihdzo> <nav class="toc"> <p class="text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-3">目录</p> <ul class="toc-list"> <li class> <a href="#1-开发者与公司背景">1. 开发者与公司背景</a> </li><li class="toc-h3"> <a href="#开发方">开发方</a> </li><li class="toc-h3"> <a href="#关键人物">关键人物</a> </li><li class="toc-h3"> <a href="#公司近况">公司近况</a> </li><li class="toc-h3"> <a href="#重要时间线">重要时间线</a> </li><li class> <a href="#2-底层技术栈">2. 底层技术栈</a> </li><li class="toc-h3"> <a href="#21-技术架构">2.1 技术架构</a> </li><li class="toc-h3"> <a href="#22-核心模型支持">2.2 核心模型支持</a> </li><li class="toc-h3"> <a href="#23-关键技术特性">2.3 关键技术特性</a> </li><li class> <a href="#3-开源属性与商业模式">3. 开源属性与商业模式</a> </li><li class="toc-h3"> <a href="#31-开源状态">3.1 开源状态</a> </li><li class="toc-h3"> <a href="#32-定价模式">3.2 定价模式</a> </li><li class="toc-h3"> <a href="#33-商业定位">3.3 商业定位</a> </li><li class> <a href="#4-功能全景解析">4. 功能全景解析</a> </li><li class="toc-h3"> <a href="#41-核心定位">4.1 核心定位</a> </li><li class="toc-h3"> <a href="#42-核心功能">4.2 核心功能</a> </li><li class> <a href="#5-功能实现案例">5. 功能实现案例</a> </li><li class="toc-h3"> <a href="#案例一文献综述从-2-年压缩到几周">案例一：文献综述从 2 年压缩到几周</a> </li><li class="toc-h3"> <a href="#案例二脑肿瘤基因组分析ucsf">案例二：脑肿瘤基因组分析（UCSF）</a> </li><li class="toc-h3"> <a href="#案例三药物靶点筛选manifold-bio">案例三：药物靶点筛选（Manifold Bio）</a> </li><li class="toc-h3"> <a href="#关键引用">关键引用</a> </li><li class> <a href="#6-主要竞品清单">6. 主要竞品清单</a> </li><li class> <a href="#7-与竞品的横向比较">7. 与竞品的横向比较</a> </li><li class="toc-h3"> <a href="#各竞品最适用的场景">各竞品最适用的场景</a> </li><li class> <a href="#8-版本迭代信息">8. 版本迭代信息</a> </li><li class="toc-h3"> <a href="#发展历程">发展历程</a> </li><li class="toc-h3"> <a href="#当前状态">当前状态</a> </li><li class="toc-h3"> <a href="#未来路线图推测">未来路线图（推测）</a> </li><li class> <a href="#一句话锐评">一句话锐评</a> </li> </ul> </nav> </div> </div> </aside> <div class="blog-body" data-astro-cid-bvzihdzo> <div class="prose prose-neutral max-w-none" data-astro-cid-bvzihdzo>   <h1 id="claude-science-深度调研报告">Claude Science 深度调研报告</h1>
+<blockquote>
+<p>Anthropic 2026 年旗舰产品——AI 驱动的科研工作台，号称”科研界的 Claude Code”</p>
+</blockquote>
+<hr>
+<h2 id="1-开发者与公司背景">1. 开发者与公司背景</h2>
+<h3 id="开发方">开发方</h3>
+<p><strong>Anthropic</strong>（美国），总部位于加利福尼亚州旧金山，由前 OpenAI 高管 Dario Amodei 和 Daniela Amodei 于 2021 年创立，专注于构建安全、有益的前沿 AI 系统。</p>
+<h3 id="关键人物">关键人物</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">姓名</th><th align="left">角色</th><th align="left">背景</th></tr></thead><tbody><tr><td align="left"><strong>Eric Kauderer-Abrams</strong></td><td align="left">生命科学负责人</td><td align="left">斯坦福 AI + 神经科学研究背景，前 Detect（分子诊断公司）CEO/CTO，曾带领团队推出 FDA 授权的居家 COVID 检测</td></tr><tr><td align="left"><strong>John Jumper</strong></td><td align="left">加入 Anthropic（2026.6）</td><td align="left">2024 年诺贝尔化学奖得主（AlphaFold 蛋白质结构预测），前 Google DeepMind VP、AlphaFold 团队负责人。加入 Anthropic 后加强其生命科学力量</td></tr><tr><td align="left"><strong>团队</strong></td><td align="left">跨学科团队</td><td align="left">除 AI 工程师外，包含生物学家、化学家、药物研发专家；Anthropic 正在建设自有湿实验室（wet lab）</td></tr></tbody></table>
+<h3 id="公司近况">公司近况</h3>
+<ul>
+<li><strong>估值</strong>：约 <strong>$9650 亿</strong>（2026 年中），已超越 OpenAI</li>
+<li><strong>营收</strong>：API + 订阅 + 企业合同快速增长，Claude Science 是其产品生态的关键一环</li>
+<li><strong>战略方向</strong>：从”通用 AI 模型”扩展到”垂直行业工作台”——Claude Code（软件工程）、Claude Cowork（通用办公）、Claude Science（科学研究）三大产品线并立</li>
+<li><strong>上市预期</strong>：正在筹备 2026 年下半年 IPO</li>
+<li><strong>生命科学投入</strong>：2026 年 4 月以约 <strong>$4 亿</strong>收购 AI 生物科技公司 Coefficient Bio；正在招聘生物学家、建设湿实验室</li>
+</ul>
+<h3 id="重要时间线">重要时间线</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="center">时间</th><th align="left">事件</th></tr></thead><tbody><tr><td align="center">2025 年 10 月</td><td align="left">Anthropic 成立医疗与生命科学部门，Kauderer-Abrams 为负责人</td></tr><tr><td align="center">2025 年 10 月</td><td align="left">推出 “Claude for Healthcare”——Claude Science 的前身</td></tr><tr><td align="center">2026 年 4 月</td><td align="left">收购 Coefficient Bio（$4 亿），增强生物技术能力</td></tr><tr><td align="center">2026 年 6 月 20 日</td><td align="left">诺贝尔奖得主 John Jumper 离开 Google DeepMind 加入 Anthropic</td></tr><tr><td align="center"><strong>2026 年 6 月 30 日</strong></td><td align="left"><strong>Claude Science 正式发布</strong></td></tr><tr><td align="center">2026 年 7 月 15 日</td><td align="left">AI for Science 资助计划申请截止（50 个名额，每项目最高 $30,000 额度）</td></tr></tbody></table>
+<blockquote>
+<p><strong>信息源</strong>：</p>
+<ul>
+<li><a href="https://www.technologyreview.com/2026/06/30/1139987/claude-science-is-anthropics-newest-flagship-product/">MIT Technology Review - Claude Science is Anthropic’s newest flagship product</a></li>
+<li><a href="https://techcrunch.com/2026/06/30/anthropics-claude-science-bets-on-workflow-not-a-new-model-to-win-over-scientists/">TechCrunch - Claude Science bets on workflow, not a new model</a></li>
+<li><a href="https://finance.eastmoney.com/a/202607013788815354.html">东方财富 - Anthropic 推出 Claude Science</a></li>
+<li><a href="https://www.synbiobeta.com/read/anthropic-is-hiring-biologists-building-wet-labs-and-betting-big-on-drug-discovery">SynBioBeta - Anthropic 招聘生物学家、建设湿实验室</a></li>
+<li><a href="https://www.indiatoday.in/technology/news/story/nobel-prize-winner-alphafold-lead-john-jumper-leaves-google-deepmind-for-anthropic-after-9-years-2930361-2026-06-20">印度时报 - John Jumper 加入 Anthropic</a></li>
+<li><a href="https://www.zaobao.com/finance/world/story20260621-9240776">Zaobao - 诺贝尔奖得主从谷歌跳槽至Anthropic</a></li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="2-底层技术栈">2. 底层技术栈</h2>
+<p>Claude Science <strong>不是一个新模型</strong>，而是一个<strong>集成式科研工作台（AI Workbench）</strong>。它运行在现有 Claude 模型之上（包括 Claude Opus 4.8、Claude Sonnet 5 等），核心创新在于<strong>工作流集成</strong>而非模型能力。</p>
+<h3 id="21-技术架构">2.1 技术架构</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>┌─────────────────────────────────────────────────────────────┐</span></span>
+<span class="line"><span>│                     Claude Science App                       │</span></span>
+<span class="line"><span>│                    macOS / Linux 原生桌面应用                  │</span></span>
+<span class="line"><span>├─────────────────────────────────────────────────────────────┤</span></span>
+<span class="line"><span>│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐      │</span></span>
+<span class="line"><span>│  │  协调 Agent   │  │  专业子 Agent  │  │  审核 Agent   │      │</span></span>
+<span class="line"><span>│  │  (主控制器)    │→│  (可自定义)    │  │  (检查引用/    │      │</span></span>
+<span class="line"><span>│  │              │  │              │  │   计算准确性)   │      │</span></span>
+<span class="line"><span>│  └──────┬───────┘  └──────┬───────┘  └──────┬───────┘      │</span></span>
+<span class="line"><span>│         │                 │                 │              │</span></span>
+<span class="line"><span>├─────────┴─────────────────┴─────────────────┴──────────────┤</span></span>
+<span class="line"><span>│                    集成工具层                                │</span></span>
+<span class="line"><span>│  ┌────────┐ ┌────────┐ ┌────────┐ ┌────────┐ ┌────────┐   │</span></span>
+<span class="line"><span>│  │ 文献检索 │ │ 数据库  │ │ Jupyter│ │  Python │ │ 分子   │   │</span></span>
+<span class="line"><span>│  │  PubMed │ │ UniProt │ │ R 环境  │ │ 脚本   │ │ 可视化 │   │</span></span>
+<span class="line"><span>│  │  arXiv  │ │ PDB等   │ │        │ │        │ │ 3D渲染 │   │</span></span>
+<span class="line"><span>│  └────────┘ └────────┘ └────────┘ └────────┘ └────────┘   │</span></span>
+<span class="line"><span>├─────────────────────────────────────────────────────────────┤</span></span>
+<span class="line"><span>│                  NVIDIA BioNeMo 集成                         │</span></span>
+<span class="line"><span>│  ┌──────────┐  ┌──────────┐  ┌──────────┐                  │</span></span>
+<span class="line"><span>│  │  Evo 2   │  │ Boltz-2  │  │OpenFold3 │                  │</span></span>
+<span class="line"><span>│  │ (基因组)  │  │ (分子动力) │  │(蛋白质结构)│                 │</span></span>
+<span class="line"><span>│  └──────────┘  └──────────┘  └──────────┘                  │</span></span>
+<span class="line"><span>├─────────────────────────────────────────────────────────────┤</span></span>
+<span class="line"><span>│                    基础设施层                                │</span></span>
+<span class="line"><span>│  本地 (macOS/Linux)  /  SSH 远程  /  HPC 集群  /  Modal     │</span></span>
+<span class="line"><span>└─────────────────────────────────────────────────────────────┘</span></span></code></pre>
+<h3 id="22-核心模型支持">2.2 核心模型支持</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">模型</th><th align="left">角色</th><th align="center">发布时间</th></tr></thead><tbody><tr><td align="left">Claude Opus 4.8</td><td align="left">旗舰模型，复杂科研推理</td><td align="center">2026 年初</td></tr><tr><td align="left">Claude Sonnet 5</td><td align="left">性能接近 Opus，半价可用，Agent 能力突出</td><td align="center">2026 年 6 月（与 Claude Science 同日发布）</td></tr><tr><td align="left">Claude Haiku</td><td align="left">轻量级快速任务</td><td align="center">持续可用</td></tr></tbody></table>
+<h3 id="23-关键技术特性">2.3 关键技术特性</h3>
+<h4 id="-多-agent-架构">🧠 多 Agent 架构</h4>
+<ul>
+<li><strong>协调 Agent</strong>：主控制器，理解任务目标，分解为子任务</li>
+<li><strong>专业子 Agent</strong>：用户可自定义”专家”Agent，一键或在后台按需生成。例如文献综述 Agent、基因组分析 Agent、分子对接 Agent</li>
+<li><strong>审核 Agent</strong>：自动检查引用准确性、数学计算、数据一致性（相当于 AI “同行评议”）</li>
+</ul>
+<h4 id="-60-预配置科学数据库">🔬 60+ 预配置科学数据库</h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">类别</th><th align="left">数据库</th></tr></thead><tbody><tr><td align="left">蛋白质</td><td align="left">UniProt, PDB (Protein Data Bank), OpenFold3</td></tr><tr><td align="left">基因组</td><td align="left">Ensembl, ClinVar, GEO (Gene Expression Omnibus)</td></tr><tr><td align="left">化学</td><td align="left">ChEMBL, PubChem, DrugBank</td></tr><tr><td align="left">文献</td><td align="left">PubMed, arXiv, bioRxiv, medRxiv</td></tr><tr><td align="left">临床</td><td align="left">ClinicalTrials.gov, COSMIC (癌症突变)</td></tr></tbody></table>
+<h4 id="-内置可重复性系统">👣 内置可重复性系统</h4>
+<ul>
+<li>每个生成的图表/结果都附带：<strong>精确代码 → 运行环境 → 自然语言描述 → 完整对话历史</strong></li>
+<li>任何人都可以从结果追溯到原始生成过程的每一步</li>
+<li>解决 AI 辅助科研最大的痛点：“这个结果是怎么来的？“</li>
+</ul>
+<h4 id="️-本地--灵活部署">🏗️ 本地 / 灵活部署</h4>
+<ul>
+<li>支持在实验室本地基础设施运行，<strong>敏感数据不离开实验室</strong></li>
+<li>通过 SSH 连接远程服务器或 HPC 集群</li>
+<li>支持 Modal 计算平台</li>
+<li>支持 macOS 和 Linux</li>
+</ul>
+<h4 id="-nvidia-bionemo-集成">🔗 NVIDIA BioNeMo 集成</h4>
+<ul>
+<li><strong>Evo 2</strong>：基因组基础模型</li>
+<li><strong>Boltz-2</strong>：分子动力学模拟</li>
+<li><strong>OpenFold3</strong>：蛋白质结构预测（AlphaFold 的开源替代）</li>
+</ul>
+<blockquote>
+<p><strong>信息源</strong>：</p>
+<ul>
+<li><a href="https://aibusiness.com/generative-ai/with-claude-science-anthropic-targets-application">AI Business - With Claude Science, Anthropic Targets Another Application</a></li>
+<li><a href="https://thenextweb.com/news/anthropic-claude-science-ai-workbench-scientists">The Next Web - Anthropic launches Claude Science</a></li>
+<li><a href="https://ai.zhiding.cn/2026/0701/3192143.shtml">智顶网 - Claude Science 发布</a></li>
+<li><a href="https://hub-assets-cache.baai.ac.cn/view/56020">BAAI - Claude Science 几周干完两年活</a></li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="3-开源属性与商业模式">3. 开源属性与商业模式</h2>
+<h3 id="31-开源状态">3.1 开源状态</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">组件</th><th align="center">开源？</th><th align="left">说明</th></tr></thead><tbody><tr><td align="left"><strong>Claude Science 核心应用</strong></td><td align="center">❌ 闭源</td><td align="left">Anthropic 商业产品，需要订阅访问</td></tr><tr><td align="left"><strong>Claude 模型（Opus/Sonnet/Haiku）</strong></td><td align="center">❌ 闭源</td><td align="left">商业大模型，API 按量计费或订阅</td></tr><tr><td align="left"><strong>NVIDIA BioNeMo 集成</strong></td><td align="center">⚠️ 部分开源</td><td align="left">BioNeMo 框架本身有开源组件，但高级模型闭源</td></tr><tr><td align="left"><strong>支持的第三方数据库</strong></td><td align="center">✅ 大多公开</td><td align="left">UniProt/PDB/PubChem 等均为公开科研数据库</td></tr></tbody></table>
+<h3 id="32-定价模式">3.2 定价模式</h3>
+<p>Claude Science <strong>不单独售卖</strong>，而是包含在所有付费 Claude 订阅计划中：</p>
+<h4 id="个人团队订阅">个人/团队订阅</h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">计划</th><th align="left">价格</th><th align="left">包含功能</th></tr></thead><tbody><tr><td align="left"><strong>Pro</strong></td><td align="left"><strong>$17-20/月</strong></td><td align="left">入门级，含 Claude Science、Claude Code、Cowork、Design 等全产品线</td></tr><tr><td align="left"><strong>Max 5x</strong></td><td align="left"><strong>$100/月</strong></td><td align="left">5 倍于 Pro 的使用量，500K 上下文窗口，优先访问</td></tr><tr><td align="left"><strong>Max 20x</strong></td><td align="left"><strong>$200/月</strong></td><td align="left">20 倍使用量，最高优先级</td></tr><tr><td align="left"><strong>Team Standard</strong></td><td align="left"><strong>$25/席位/月</strong></td><td align="left">团队协作（5-150 人），限 Sonnet/Haiku 模型</td></tr><tr><td align="left"><strong>Team Premium</strong></td><td align="left"><strong>$125/席位/月</strong></td><td align="left">全模型（含 Opus），完整 Claude Code、500K 上下文</td></tr><tr><td align="left"><strong>Enterprise</strong></td><td align="left">定制报价</td><td align="left">自定义使用限制、HIPAA 合规、SSO/SCIM、审计日志、数据驻留</td></tr></tbody></table>
+<blockquote>
+<p><strong>特别说明</strong>：学术和非营利研究实验室可享受<strong>折扣团队计划</strong>。</p>
+</blockquote>
+<h4 id="ai-for-science-资助计划">AI for Science 资助计划</h4>
+<p>Anthropic 提供 <strong>50 个名额，每项目最高 $30,000 的 Claude 信用额度</strong>，面向从事科研的学术和非营利机构。申请截止：<strong>2026 年 7 月 15 日</strong>。</p>
+<h3 id="33-商业定位">3.3 商业定位</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">对比维度</th><th align="left">Claude Science 策略</th></tr></thead><tbody><tr><td align="left"><strong>触达方式</strong></td><td align="left">广泛触达——所有付费用户均可使用，而非像 OpenAI 那样”企业专属门控”</td></tr><tr><td align="left"><strong>盈利模式</strong></td><td align="left">订阅费为主 + 超量使用费（Max 层级的限制本质是使用量分层）</td></tr><tr><td align="left"><strong>竞争策略</strong></td><td align="left"><strong>工作流集成 > 模型能力</strong>——不是做一个更强的生物模型，而是让科学家在一个平台完成所有工作</td></tr><tr><td align="left"><strong>自研药物</strong></td><td align="left">Anthropic 也在用 Claude Science 做内部药物发现——这是一个<strong>吃自己的狗粮</strong>的信誉策略，同时也是潜在的巨额商业回报</td></tr></tbody></table>
+<blockquote>
+<p><strong>信息源</strong>：</p>
+<ul>
+<li><a href="https://claude.com/pricing">Claude 官方定价页</a></li>
+<li><a href="https://www.cloudzero.com/blog/claude-pricing/">CloudZero - Claude Pricing In 2026</a></li>
+<li><a href="https://techfundingnews.com/anthropic-launches-claude-science-and-google-and-openai-are-already-racing-to-match-it/">TFN - Anthropic launches Claude Science</a></li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="4-功能全景解析">4. 功能全景解析</h2>
+<h3 id="41-核心定位">4.1 核心定位</h3>
+<blockquote>
+<p><strong>把科学家从零散的工具链中解放出来——文献、数据库、代码、计算资源、写作、图表，全部在一个 AI 工作台中完成。</strong></p>
+</blockquote>
+<p>Claude Science 的定位类比：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">产品</th><th align="left">解决领域</th><th align="left">核心价值</th></tr></thead><tbody><tr><td align="left"><strong>Claude Code</strong></td><td align="left">软件开发</td><td align="left">在终端中完成编码、调试、部署</td></tr><tr><td align="left"><strong>Claude Cowork</strong></td><td align="left">通用办公</td><td align="left">内容生成、分析、团队协作</td></tr><tr><td align="left"><strong>Claude Science</strong></td><td align="left">科学研究</td><td align="left">文献分析、实验设计、数据分析、论文撰写</td></tr></tbody></table>
+<h3 id="42-核心功能">4.2 核心功能</h3>
+<h4 id="-功能一全流程科研支持">🔬 功能一：全流程科研支持</h4>
+<p>传统科研工具链（支离破碎）：</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>PubMed搜索 → 下载PDF → Zotero管理 → Excel记录 → Python分析 →</span></span>
+<span class="line"><span>Jupyter可视化 → PPT做图 → Word写论文 → 手动检查引用</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>         ↑ 每个步骤在不同工具间手动切换，信息反复丢失</span></span></code></pre>
+<p>Claude Science 一站式流程：</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>┌─────────────────────────────────────────────────────────────┐</span></span>
+<span class="line"><span>│  在一个窗口中完成：                                            │</span></span>
+<span class="line"><span>│  ① 自然语言提问 "最近有哪些关于X的突破？"                       │</span></span>
+<span class="line"><span>│  ② AI 自动检索 PubMed / arXiv / bioRxiv                       │</span></span>
+<span class="line"><span>│  ③ 分析、总结、对比多篇论文                                     │</span></span>
+<span class="line"><span>│  ④ 生成假设 + 设计实验方案                                     │</span></span>
+<span class="line"><span>│  ⑤ 连接 Jupyter/Python 环境分析数据                            │</span></span>
+<span class="line"><span>│  ⑥ 自动生成图表（3D 蛋白结构/基因组轨迹图等）                     │</span></span>
+<span class="line"><span>│  ⑦ 撰写论文段落，引用自动标注                                   │</span></span>
+<span class="line"><span>│  ⑧ 审核 Agent 检查引用准确性 + 计算正确性                       │</span></span>
+<span class="line"><span>└─────────────────────────────────────────────────────────────┘</span></span></code></pre>
+<h4 id="-功能二60-数据库即取即用">🧪 功能二：60+ 数据库即取即用</h4>
+<p>无需手动下载、无需配置 API Key——Claude Science 内置直接查询：</p>
+<ul>
+<li><strong>查询方式</strong>：直接用自然语言问”找到与 TP53 基因相关的已知突变”</li>
+<li><strong>背后</strong>：AI 自动选择 ClinVar/COSMIC 等数据库，返回结构化结果</li>
+<li><strong>可视化</strong>：突变位置自动标注在 3D 蛋白结构上</li>
+</ul>
+<h4 id="-功能三原生科学可视化">📊 功能三：原生科学可视化</h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">渲染类型</th><th align="left">示例</th></tr></thead><tbody><tr><td align="left">🧬 <strong>3D 蛋白质结构</strong></td><td align="left">用 NVIDIA OpenFold3 预测 + 原生 3D 渲染</td></tr><tr><td align="left">🧪 <strong>化学分子式</strong></td><td align="left">SMILES 自动转结构式</td></tr><tr><td align="left">🧬 <strong>基因组浏览器轨迹</strong></td><td align="left">基因表达数据的可视化</td></tr><tr><td align="left">📈 <strong>科学图表</strong></td><td align="left">统计图、热图、火山图等</td></tr></tbody></table>
+<h4 id="-功能四审核-agentai-同行评议">🔍 功能四：审核 Agent（AI 同行评议）</h4>
+<ul>
+<li>自动检查<strong>引用准确性</strong>（每条引文是否真的存在、是否准确被引用）</li>
+<li>自动验证<strong>数学计算</strong>（重新计算结果确认一致）</li>
+<li>检查<strong>数据与结论的一致性</strong></li>
+<li><strong>局限</strong>：目前仍是用同一个底层模型检查自己，而非独立模型</li>
+</ul>
+<h4 id="-功能五可重复性封装">🔄 功能五：可重复性封装</h4>
+<p>每个输出结果附带完整的”数字孪生”包：</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>输出结果</span></span>
+<span class="line"><span>  ├── 生成代码（Python/R）</span></span>
+<span class="line"><span>  ├── 运行环境（conda/pip 清单）</span></span>
+<span class="line"><span>  ├── 自然语言描述（每一步做了什么）</span></span>
+<span class="line"><span>  └── 完整对话历史（可回放到任意节点）</span></span></code></pre>
+<blockquote>
+<p><strong>信息源</strong>：</p>
+<ul>
+<li><a href="https://www.technologyreview.com/2026/06/30/1139987/claude-science-is-anthropics-newest-flagship-product/">MIT Technology Review - Claude Science</a></li>
+<li><a href="https://techcrunch.com/2026/06/30/anthropics-claude-science-bets-on-workflow-not-a-new-model-to-win-over-scientists/">TechCrunch - Claude Science</a></li>
+<li><a href="https://www.siliconrepublic.com/machines/anthropic-launches-claude-science-app-for-researchers-and-scientists-ai">硅谷共和 - Anthropic launches Claude Science</a></li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="5-功能实现案例">5. 功能实现案例</h2>
+<h3 id="案例一文献综述从-2-年压缩到几周">案例一：文献综述从 2 年压缩到几周</h3>
+<p><strong>背景</strong>：Allen 研究所神经科学家 <strong>Jérôme Lecoq</strong> 需要撰写长篇科学综述。</p>
+<p><strong>传统方式</strong>：</p>
+<ul>
+<li>阅读数千篇论文 → 手动整理 → 撰写 → 同行评审修改</li>
+<li>通常耗时 <strong>~2 年</strong></li>
+</ul>
+<p><strong>Claude Science 方式</strong>：</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Lecoq 创建了约 20 个自定义子 Agent：</span></span>
+<span class="line"><span>- 文献检索 Agent：自动搜索并筛选相关论文</span></span>
+<span class="line"><span>- 摘要 Agent：提取关键发现</span></span>
+<span class="line"><span>- 对比 Agent：找不同研究间的矛盾和共识</span></span>
+<span class="line"><span>- 写作 Agent：根据大纲撰写初稿</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>效果：几周内完成初稿，Lecoq 主要负责战略指导和判断</span></span></code></pre>
+<p><strong>意义</strong>：展示了多 Agent 协作在知识密集型工作中的潜力——人做”导演”，AI 做”执行”。</p>
+<hr>
+<h3 id="案例二脑肿瘤基因组分析ucsf">案例二：脑肿瘤基因组分析（UCSF）</h3>
+<p><strong>背景</strong>：UCSF 脑肿瘤中心需要对胶质瘤进行种系分析（germline analysis）。</p>
+<p><strong>传统方式</strong>：</p>
+<ul>
+<li>手动分析全基因组测序数据 → 交叉对比已知突变数据库 → 撰写报告</li>
+<li>通常耗时数周 ~ 数月</li>
+</ul>
+<p><strong>Claude Science 方式</strong>：</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>① 研究者描述任务："分析这个患者的全基因组数据，寻找与胶质瘤相关的种系突变"</span></span>
+<span class="line"><span>② Claude Science 自动连接测序数据 + ClinVar/COSMIC 数据库</span></span>
+<span class="line"><span>③ 运行分析流程 + 统计验证</span></span>
+<span class="line"><span>④ 生成完整分析报告 + 可视化图表</span></span>
+<span class="line"><span>⑤ 结果被独立验证（独立团队重新分析了原始数据，结果一致 ✅）</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>效果：耗时约为传统方法的 1/10</span></span></code></pre>
+<hr>
+<h3 id="案例三药物靶点筛选manifold-bio">案例三：药物靶点筛选（Manifold Bio）</h3>
+<p><strong>背景</strong>：生物技术公司 Manifold Bio 需要在多个组织中评估候选药物靶点。</p>
+<p><strong>Claude Science 方式</strong>：</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>① 输入目标：评估某个跨膜蛋白作为药物靶点的可行性</span></span>
+<span class="line"><span>② Claude Science 自动查询 UniProt/PDB 获取结构信息</span></span>
+<span class="line"><span>③ 查询 GTEx/Encode 获取组织表达数据</span></span>
+<span class="line"><span>④ 查询 DrugBank 了解已知相互作用</span></span>
+<span class="line"><span>⑤ 评估表面表达、体内运输、安全性</span></span>
+<span class="line"><span>⑥ 输出端到端靶点评估报告</span></span></code></pre>
+<p><strong>意义</strong>：展示了 Claude Science 在<strong>早期药物发现</strong>场景中的端到端能力——从基因到靶点评估全流程。</p>
+<hr>
+<h3 id="关键引用">关键引用</h3>
+<blockquote>
+<p>Eric Kauderer-Abrams（Anthropic 生命科学负责人）：
+<em>“这代表了 Claude Science 对我们使命的重要性——它与 Claude Code 和 Claude Cowork 并列，是我们发布的下一个真正重要的产品。我们的使命是开发服务人类长期福祉的 AI，我们认为生命科学是最大的机会。”</em></p>
+</blockquote>
+<blockquote>
+<p>Harvard 物理学家 Matthew Schwartz：
+<em>“Claude Opus 4.5 在执行科学项目方面的能力大约相当于一个二年级研究生。”</em></p>
+</blockquote>
+<blockquote>
+<p><strong>信息源</strong>：</p>
+<ul>
+<li><a href="https://www.technologyreview.com/2026/06/30/1139987/claude-science-is-anthropics-newest-flagship-product/">MIT Technology Review - Claude Science</a></li>
+<li><a href="https://hub-assets-cache.baai.ac.cn/view/56020">BAAI - Claude Science 几周干完两年活</a></li>
+<li><a href="https://techfundingnews.com/anthropic-launches-claude-science-and-google-and-openai-are-already-racing-to-match-it/">TFN - Anthropic launches Claude Science</a></li>
+<li><a href="https://aibusiness.com/generative-ai/with-claude-science-anthropic-targets-application">AI Business - Claude Science</a></li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="6-主要竞品清单">6. 主要竞品清单</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="center">排名</th><th align="left">竞品</th><th align="left">开发商</th><th align="left">定位</th><th align="left">优势</th><th align="left">劣势</th></tr></thead><tbody><tr><td align="center">1</td><td align="left"><strong>GPT-Rosalind</strong></td><td align="left">OpenAI</td><td align="left">面向生命科学的”前沿推理模型”，专为生物/药物研发优化</td><td align="left">LifeSciBench 评分最高（0.576）；专为生命科学微调</td><td align="left">企业门控访问（普通用户用不到）；仅做模型不做工作台</td></tr><tr><td align="center">2</td><td align="left"><strong>Gemini for Science</strong></td><td align="left">Google DeepMind</td><td align="left">科学版 Gemini + AlphaFold/AlphaGenome 等自有模型生态</td><td align="left">拥有 AlphaFold（蛋白质预测金标准）；Google 搜索 + 数据库整合</td><td align="left">生态碎片化，功能分散在不同产品中</td></tr><tr><td align="center">3</td><td align="left"><strong>AlphaFold / AlphaGenome</strong></td><td align="left">Google DeepMind</td><td align="left">专用科学模型（蛋白质结构预测、基因组分析）</td><td align="left">特定任务达到世界顶尖水平（催生 2024 诺贝尔奖）</td><td align="left">仅解决单一问题，不是完整工作台</td></tr><tr><td align="center">4</td><td align="left"><strong>Claude for Healthcare</strong>（前身）</td><td align="left">Anthropic</td><td align="left">Claude Science 的前一版本</td><td align="left">已服务医疗领域</td><td align="left">已被 Claude Science 取代</td></tr><tr><td align="center">5</td><td align="left"><strong>BioNeMo</strong></td><td align="left">NVIDIA</td><td align="left">生物学 AI 模型平台</td><td align="left">强大的底层算力 + 多模型支持；被 Claude Science 集成</td><td align="left">不是面向最终用户的产品，而是开发者平台</td></tr><tr><td align="center">6</td><td align="left"><strong>PyTorch + Jupyter 手动工作流</strong></td><td align="left">开源</td><td align="left">科学家自己搭建的科研 pipeline</td><td align="left">完全灵活可控</td><td align="left">极高使用门槛，工具碎片化严重</td></tr><tr><td align="center">7</td><td align="left"><strong>ResearchGate / 学术社交网络</strong></td><td align="left">ResearchGate</td><td align="left">论文共享 + 学术社交</td><td align="left">社区互动</td><td align="left">非 AI 辅助，分析能力弱</td></tr></tbody></table>
+<hr>
+<h2 id="7-与竞品的横向比较">7. 与竞品的横向比较</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">对比维度</th><th align="left"><strong>Claude Science</strong>（Anthropic）</th><th align="left"><strong>GPT-Rosalind</strong>（OpenAI）</th><th align="left"><strong>Gemini for Science</strong>（Google）</th></tr></thead><tbody><tr><td align="left"><strong>价格</strong></td><td align="left"><strong>起点低</strong>：Pro $17-20/月即可使用；学术折扣可用</td><td align="left"><strong>门槛高</strong>：企业门控”可信访问计划”，不向个人开放</td><td align="left"><strong>中等</strong>：Gemini 订阅可用，但科学功能分散</td></tr><tr><td align="left"><strong>模型性能</strong>（LifeSciBench）</td><td align="left">⚠️ Claude 未在 LifeSciBench 测试</td><td align="left">🟢 <strong>最高分 0.576</strong> / 36.1% 通过率</td><td align="left">🟡 Gemini 3.1 Pro <strong>0.515</strong> / 23.6%</td></tr><tr><td align="left"><strong>产品形态</strong></td><td align="left">🟢 <strong>完整工作台</strong>：数据库 + 代码 + 可视化 + 写作，一站式</td><td align="left">🟡 <strong>模型 + 插件</strong>：核心是模型，需自行搭建周边工具链</td><td align="left">🟡 <strong>生态集合</strong>：Gemini + AlphaFold + Colab 等需组合</td></tr><tr><td align="left"><strong>可访问性</strong></td><td align="left">🟢 <strong>所有付费用户</strong>（Pro 以上即可）</td><td align="left">🔴 <strong>企业门控</strong>（需申请白名单）</td><td align="left">🟡 部分公开，部分受限</td></tr><tr><td align="left"><strong>可重复性</strong></td><td align="left">🟢 <strong>内置</strong>：每个结果附完整代码+环境+对话历史</td><td align="left">🟡 依赖用户自行记录</td><td align="left">⚠️ 未强调此特性</td></tr><tr><td align="left"><strong>部署灵活性</strong></td><td align="left">🟢 <strong>本地/SSH/HPC/Modal</strong>，敏感数据不出实验室</td><td align="left">🔴 云端 API 调用</td><td align="left">🟡 Google Cloud 为主</td></tr><tr><td align="left"><strong>科学可视化</strong></td><td align="left">🟢 <strong>原生 3D 渲染</strong>：蛋白结构、化学式、基因组轨迹</td><td align="left">🟡 文本为主，图表需外部工具</td><td align="left">🟡 部分可视化能力</td></tr><tr><td align="left"><strong>特长领域</strong></td><td align="left">🟢 <strong>全流程工作台</strong> + <strong>多 Agent 协作</strong></td><td align="left">🟢 <strong>推理能力</strong> + 生命科学知识深度</td><td align="left">🟢 <strong>结构预测</strong>（AlphaFold） + <strong>搜索引擎</strong></td></tr><tr><td align="left"><strong>2026 年成熟度</strong></td><td align="left">🟡 公测阶段，早期用户反馈积极</td><td align="left">🟡 已发布但访问受限</td><td align="left">🟡 多个产品组合，无统一入口</td></tr></tbody></table>
+<h3 id="各竞品最适用的场景">各竞品最适用的场景</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">产品</th><th align="left">最佳适用场景</th></tr></thead><tbody><tr><td align="left"><strong>Claude Science</strong></td><td align="left">需要<strong>全流程科研 AI 助手</strong>的研究团队——文献综述、数据分析、论文撰写、实验设计一站式完成</td></tr><tr><td align="left"><strong>GPT-Rosalind</strong></td><td align="left">大型药企/生物技术公司的<strong>深度推理任务</strong>——复杂的多步科学推理、假设生成</td></tr><tr><td align="left"><strong>Gemini for Science</strong></td><td align="left">需要<strong>结构预测（AlphaFold）+ 搜索能力</strong>的科研场景；已深度使用 Google 生态的团队</td></tr><tr><td align="left"><strong>手动工作流</strong>（Python/Jupyter）</td><td align="left">对<strong>控制力要求极高</strong>、或使用非标准数据格式的专业计算生物学团队</td></tr></tbody></table>
+<hr>
+<h2 id="8-版本迭代信息">8. 版本迭代信息</h2>
+<h3 id="发展历程">发展历程</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="center">时间</th><th align="left">版本/事件</th><th align="left">说明</th></tr></thead><tbody><tr><td align="center">2025 年 10 月</td><td align="left"><strong>Claude for Healthcare</strong> 发布</td><td align="left">Claude Science 的前身，聚焦医疗场景</td></tr><tr><td align="center">2025 年 12 月-2026 年 4 月</td><td align="left">内部迭代 + 收购 Coefficient Bio</td><td align="left">扩展团队能力和数据基础</td></tr><tr><td align="center">2026 年 4 月</td><td align="left">GPT-Rosalind 发布（竞品信号）</td><td align="left">OpenAI 推出生命科学专用模型，加速 Anthropic 产品发布节奏</td></tr><tr><td align="center">2026 年 6 月 20 日</td><td align="left">John Jumper 加入 Anthropic</td><td align="left">诺贝尔奖得主加盟，强化生命科学可信度</td></tr><tr><td align="center"><strong>2026 年 6 月 30 日</strong></td><td align="left"><strong>Claude Science 公开 Beta</strong></td><td align="left">macOS + Linux 桌面应用，Pro 以上用户可访问</td></tr><tr><td align="center">2026 年 7 月 1 日</td><td align="left">Claude Sonnet 5 同日发布</td><td align="left">性能接近 Opus 4.8，半价可用，Agent 能力突出</td></tr></tbody></table>
+<h3 id="当前状态">当前状态</h3>
+<ul>
+<li><strong>最新版本</strong>：v1.0 Beta（2026 年 6 月 30 日）</li>
+<li><strong>形式</strong>：原生桌面应用（macOS + Linux），支持本地/SSH/HPC</li>
+<li><strong>更新频率</strong>：公测期间预计<strong>周更/双周更</strong>，Anthropic 的产品通常迭代较快</li>
+</ul>
+<h3 id="未来路线图推测">未来路线图（推测）</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">时间段</th><th align="left">预期更新</th></tr></thead><tbody><tr><td align="left">2026 年下半年</td><td align="left">更多数据库接入；Windows 版本；API 开放；自研药物项目首批结果</td></tr><tr><td align="left">2027 年</td><td align="left">企业级功能深化；更强大的审核 Agent；第三方插件系统</td></tr></tbody></table>
+<hr>
+<h2 id="一句话锐评">一句话锐评</h2>
+<p><strong>Claude Science 是 2026 年 AI + 科学领域最重要的产品发布之一</strong>。它没有选择”造一个更强的生物学模型”（如 GPT-Rosalind），而是选择”造一个科学家真正能用的工作台”——这个策略更务实、更可能产生实际影响力。<strong>最大亮点</strong>：内置可重复性系统（解决 AI 科研的最大信任问题）+ 60+ 数据库即插即用 + 多 Agent 协作架构。<strong>最大变数</strong>：同一模型既做生成又做审核的”自查”机制是否足够可靠？Claude 在 LifeSciBench 上能否匹敌 GPT-Rosalind？对于从事计算生物学、药物发现、基因组学的研究团队，Claude Science 值得立即试用——尤其是 $17/月的入门价和学术折扣计划，门槛极低。</p>
+<hr>
+<blockquote>
+<p><strong>报告生成日期</strong>：2026 年 7 月 11 日
+<strong>关联阅读</strong>：</p>
+<ul>
+<li>[[Obsidian Skills AI 智能体与 Obsidian 的桥梁]]（AI Agent 在知识管理中的应用，与 Claude Science 的多 Agent 架构同频）</li>
+<li>[[Layer Zero Experience 深度调研报告]]（Claude Science 是 AI Agent 在垂直行业的深度落地案例）</li>
+<li>[[Agentic Commerce 智能体商务调研报告]]（Anthropic 在商业和科研两端的布局）</li>
+</ul>
+</blockquote> <div> <a href="/notes" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150">
+&larr; 返回笔记列表
+</a> </div>  </div> <!-- Previous / Next navigation -->  <hr class="!mt-12 !mb-8" data-astro-cid-bvzihdzo> <div data-astro-cid-bvzihdzo> <a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-bvzihdzo>
+&larr; 返回博客列表
+</a> </div> </div> </div> </article> </div>  </main> <footer class="border-t border-[var(--color-border)] mt-24 py-8" data-astro-cid-pux6a34n><div class="max-w-content flex items-center justify-between" data-astro-cid-pux6a34n><span class="text-sm text-[var(--color-text-tertiary)]" data-astro-cid-pux6a34n>
+&copy; 2026 星游寰宇
+</span><div class="flex items-center gap-4" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>博客</a><a href="/projects" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>项目</a><a href="/notes" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>日记</a><a href="/resources" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>资源</a><a href="/about" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>关于</a></div></div></footer> <div id="link-preview" style="display:none;position:fixed;z-index:99;max-width:18rem;pointer-events:none;" data-astro-cid-t7vshrbh></div>  <script type="module">(async()=>{try{const c=await fetch("/posts.json");if(!c.ok)return;const u=await c.json(),p=new Map(u.map(t=>[t.href,t])),e=document.getElementById("link-preview");if(!e)return;let n="",d;document.addEventListener("mouseover",t=>{const i=t.target.closest("a[href^='/blog/']");if(!i){e.style.display="none",n="";return}const s=i.getAttribute("href");if(!s||s===n)return;const o=p.get(s);o&&(n=s,d=setTimeout(()=>{e.innerHTML=`<div class="lp-title">${o.title}</div><div class="lp-summary">${o.summary}</div>`;const r=i.getBoundingClientRect();let a=r.left,l=r.bottom+6;a+288>window.innerWidth&&(a=window.innerWidth-296),l+80>window.innerHeight&&(l=r.top-80),Object.assign(e.style,{left:a+"px",top:l+"px",display:"block"})},300))},{passive:!0}),document.addEventListener("mouseout",t=>{t.target.closest("a[href^='/blog/']")&&(clearTimeout(d),e.style.display="none",n="")},{passive:!0})}catch{}})();</script> </body></html>  <script type="module">const c=document.getElementById("toc-toggle"),s=document.getElementById("toc-list"),i=document.getElementById("toc-chevron");c&&s&&i&&c.addEventListener("click",()=>{const o=s.classList.toggle("hidden");c.setAttribute("aria-expanded",String(o)),i.style.transform=o?"rotate(180deg)":""});const r=document.querySelectorAll(".toc-list a");if(r.length>0){const o=new IntersectionObserver(n=>{for(const t of n)t.isIntersecting&&r.forEach(e=>{e.classList.toggle("active",e.getAttribute("href")===`#${t.target.id}`)})},{rootMargin:"-80px 0px -80% 0px"});r.forEach(n=>{const t=n.getAttribute("href")?.slice(1);if(t){const e=document.getElementById(t);e&&o.observe(e)}})}</script>

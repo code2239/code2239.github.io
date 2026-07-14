@@ -1,0 +1,364 @@
+<!DOCTYPE html><html lang="zh-CN"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="图论是研究「连接」的数学——不关心节点是什么，只关心谁跟谁连在一起。"><meta name="color-scheme" content="light"><!-- Open Graph --><meta property="og:title" content="图论入门：从Obsidian到AI — 星游寰宇"><meta property="og:description" content="图论是研究「连接」的数学——不关心节点是什么，只关心谁跟谁连在一起。"><meta property="og:url" content="https://code2239.github.io/notes/2026-07-12-图论入门：从Obsidian到AI"><meta property="og:type" content="article"><meta property="og:site_name" content="星游寰宇"><meta property="og:locale" content="zh_CN"><meta property="article:published_time" content="2026-07-12"><meta property="article:tag" content="graph-theory"><meta property="article:tag" content="math"><meta property="article:tag" content="obsidian"><meta property="article:tag" content="ai"><meta property="article:tag" content="transformer"><meta property="article:tag" content="knowledge-management"><!-- Twitter Card --><meta name="twitter:card" content="summary"><meta name="twitter:title" content="图论入门：从Obsidian到AI — 星游寰宇"><meta name="twitter:description" content="图论是研究「连接」的数学——不关心节点是什么，只关心谁跟谁连在一起。"><!-- Canonical --><link rel="canonical" href="https://code2239.github.io/notes/2026-07-12-图论入门：从Obsidian到AI"><title>图论入门：从Obsidian到AI — 星游寰宇</title><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="alternate" type="application/rss+xml" title="星游寰宇 RSS" href="/rss.xml"><!-- Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"星游寰宇","url":"https://code2239.github.io","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://code2239.github.io/search?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://code2239.github.io"},{"@type":"ListItem","position":2,"name":"日记","item":"https://code2239.github.io/notes"},{"@type":"ListItem","position":3,"name":"2026 07 12 图论入门：从Obsidian到AI"}]},{"@context":"https://schema.org","@type":"BlogPosting","headline":"图论入门：从Obsidian到AI","description":"图论是研究「连接」的数学——不关心节点是什么，只关心谁跟谁连在一起。","datePublished":"2026-07-12","url":"https://code2239.github.io/notes/2026-07-12-图论入门：从Obsidian到AI","keywords":"graph-theory, math, obsidian, ai, transformer, knowledge-management"}]}</script><link rel="stylesheet" href="/_astro/_slug_.CXDKI3B6.css">
+<style>.back-to-top[data-astro-cid-gzprr2dq]{position:fixed;bottom:2rem;right:2rem;z-index:40;width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:50%;border:1px solid var(--color-border);background:var(--color-bg);color:var(--color-text-secondary);cursor:pointer;box-shadow:var(--shadow-md);transition:opacity .2s ease,transform .2s ease}.back-to-top[data-astro-cid-gzprr2dq]:hover{color:var(--color-accent);border-color:var(--color-accent);transform:translateY(-2px)}.back-to-top[data-astro-cid-gzprr2dq].hidden{opacity:0;pointer-events:none}.copy-btn[data-astro-cid-qqybitij]{position:absolute;top:8px;right:8px;padding:4px 10px;font-size:.6875rem;font-family:var(--font-sans);color:var(--color-text-tertiary);background:var(--color-bg);border:1px solid var(--color-border);border-radius:6px;cursor:pointer;opacity:0;transition:opacity .15s ease,color .15s ease}pre[data-astro-cid-qqybitij]:hover .copy-btn[data-astro-cid-qqybitij]{opacity:1}.copy-btn[data-astro-cid-qqybitij]:hover{color:var(--color-accent);border-color:var(--color-accent)}.copy-btn[data-astro-cid-qqybitij].copied{color:#16a34a;border-color:#16a34a}.blog-layout[data-astro-cid-bvzihdzo]{display:block}.blog-toc[data-astro-cid-bvzihdzo]{display:none}.blog-body[data-astro-cid-bvzihdzo]{min-width:0}@media(min-width:1024px){.blog-layout[data-astro-cid-bvzihdzo]{display:grid;grid-template-columns:14rem 1fr;gap:3rem;align-items:start}.blog-toc[data-astro-cid-bvzihdzo]{display:block}.blog-body[data-astro-cid-bvzihdzo]{padding-right:2rem}}@media(max-width:1023px){.blog-toc[data-astro-cid-bvzihdzo]{display:block;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid var(--color-border)}}
+</style></head> <body class="min-h-screen flex flex-col"> <nav class="sticky top-0 z-40 bg-[var(--color-bg)]/80 backdrop-blur-md border-b border-[var(--color-border)]" data-astro-cid-pux6a34n><div class="max-w-content flex items-center justify-between py-4" data-astro-cid-pux6a34n><a href="/" class="flex items-center gap-2.5 text-base font-semibold no-underline tracking-tight" data-astro-cid-pux6a34n><svg class="w-7 h-7" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" data-astro-cid-pux6a34n><circle cx="16" cy="16" r="15" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-pux6a34n></circle><circle cx="16" cy="16" r="3" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="16" cy="5" r="1.5" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="24" cy="10" r="1" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="8" cy="22" r="1" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="25" cy="21" r="0.8" fill="currentColor" data-astro-cid-pux6a34n></circle></svg>
+星游寰宇
+</a><!-- Desktop nav --><div class="hidden sm:flex items-center gap-5" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>博客</a><a href="/projects" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>项目</a><a href="/notes" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>日记</a><a href="/resources" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>资源</a><a href="/about" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>关于</a><button id="search-trigger" class="flex items-center gap-1.5 text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] bg-[var(--color-bg-secondary)] hover:bg-[var(--color-bg-tertiary)] border border-[var(--color-border)] hover:border-[var(--color-accent)]/30 rounded-lg px-3 py-1.5 cursor-pointer shadow-sm hover:shadow-md transition-all duration-200" aria-label="搜索 (Ctrl+K)" title="搜索 (Ctrl+K)" data-astro-cid-pux6a34n><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-pux6a34n><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" data-astro-cid-pux6a34n></path></svg><span class="hidden lg:inline" data-astro-cid-pux6a34n>搜索</span><kbd class="hidden lg:inline-flex items-center text-[0.625rem] font-mono text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1 py-px rounded" data-astro-cid-pux6a34n>Ctrl+K</kbd></button></div><!-- Mobile hamburger --><button id="menu-btn" class="sm:hidden flex flex-col gap-1 p-2 -mr-2 cursor-pointer" aria-label="打开菜单" data-astro-cid-pux6a34n><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-transform duration-200" data-astro-cid-pux6a34n></span><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-opacity duration-200" data-astro-cid-pux6a34n></span><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-transform duration-200" data-astro-cid-pux6a34n></span></button></div><!-- Mobile menu --><div id="mobile-menu" class="hidden sm:hidden border-t border-[var(--color-border)] bg-[var(--color-bg)]" data-astro-cid-pux6a34n><div class="max-w-content flex flex-col gap-2 py-4" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>博客</a><a href="/projects" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>项目</a><a href="/notes" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>日记</a><a href="/resources" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>资源</a><a href="/about" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>关于</a></div></div></nav>
+    <div id="search-overlay" class="srch-overlay" role="dialog" aria-modal="true" aria-label="全局搜索" data-astro-cid-mn7pezny> <div id="search-backdrop" class="srch-backdrop" data-astro-cid-mn7pezny></div> <div class="srch-panel" id="srch-panel" data-astro-cid-mn7pezny> <!-- Search input --> <div class="srch-input-row" data-astro-cid-mn7pezny> <svg class="srch-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-mn7pezny> <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" data-astro-cid-mn7pezny></path> </svg> <input type="text" id="search-input" class="srch-input" placeholder="搜索文章、项目、日记、资源..." autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="go" data-astro-cid-mn7pezny> <kbd class="srch-kbd" data-astro-cid-mn7pezny>Esc</kbd> </div> <!-- Results area --> <div id="search-results" class="srch-results" data-astro-cid-mn7pezny> <p class="srch-empty" id="search-empty-hint" data-astro-cid-mn7pezny>输入关键词开始搜索</p> </div> <!-- Skeleton loading --> <div id="search-skeleton" class="srch-skeleton" style="display:none;" aria-hidden="true" data-astro-cid-mn7pezny> <div class="srch-skeleton-line" style="width:75%" data-astro-cid-mn7pezny></div> <div class="srch-skeleton-line" style="width:50%" data-astro-cid-mn7pezny></div> <div class="srch-skeleton-line" style="width:60%" data-astro-cid-mn7pezny></div> </div> <!-- Footer hints --> <div class="srch-footer" data-astro-cid-mn7pezny> <div class="srch-footer-hints" data-astro-cid-mn7pezny> <span data-astro-cid-mn7pezny><kbd data-astro-cid-mn7pezny>↑</kbd><kbd data-astro-cid-mn7pezny>↓</kbd> 导航</span> <span data-astro-cid-mn7pezny><kbd data-astro-cid-mn7pezny>↵</kbd> 打开</span> <span data-astro-cid-mn7pezny><kbd data-astro-cid-mn7pezny>Ctrl</kbd>+<kbd data-astro-cid-mn7pezny>K</kbd> 切换</span> </div> <div class="srch-footer-brand" data-astro-cid-mn7pezny>
+powered by Orama
+</div> </div> </div> </div> <script type="module" src="/_astro/Navigation.astro_astro_type_script_index_0_lang.15n1EYJp.js"></script> <main class="flex-1">  <div class="reading-progress" id="reading-progress" style="width: 0%"></div> <script type="module">const o=document.getElementById("reading-progress");if(!o)throw new Error("Reading progress bar element not found");const r=()=>{const n=window.scrollY,e=document.documentElement.scrollHeight-window.innerHeight,t=e>0?n/e*100:0;o.style.width=`${Math.min(t,100)}%`};window.addEventListener("scroll",r,{passive:!0});</script> <button id="back-to-top" class="back-to-top hidden" aria-label="返回顶部" data-astro-cid-gzprr2dq> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-gzprr2dq> <polyline points="18 15 12 9 6 15" data-astro-cid-gzprr2dq></polyline> </svg> </button>  <script type="module">const o=document.getElementById("back-to-top");o&&(window.addEventListener("scroll",()=>{o.classList.toggle("hidden",window.scrollY<400)},{passive:!0}),o.addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"})));</script> <script type="module">document.querySelectorAll("pre").forEach(e=>{const t=document.createElement("button");t.className="copy-btn",t.textContent="复制",t.addEventListener("click",async()=>{const n=e.querySelector("code")?.textContent||e.textContent||"";try{await navigator.clipboard.writeText(n),t.textContent="已复制",t.classList.add("copied"),setTimeout(()=>{t.textContent="复制",t.classList.remove("copied")},2e3)}catch{t.textContent="失败",setTimeout(()=>{t.textContent="复制"},2e3)}}),e.style.position="relative",e.appendChild(t)});</script> <div class="px-6 xl:px-12 pt-12 pb-16" data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <header class="mb-12 text-center" data-astro-cid-bvzihdzo> <h1 class="text-3xl font-semibold mb-3 tracking-tight" data-astro-cid-bvzihdzo>图论入门：从Obsidian到AI</h1> <div class="flex items-center justify-center gap-2 text-[var(--color-text-tertiary)] text-sm" data-astro-cid-bvzihdzo> <time datetime="2026-07-12" data-astro-cid-bvzihdzo>2026-07-12</time> <span class="text-[var(--color-border)]" data-astro-cid-bvzihdzo>·</span> <span data-astro-cid-bvzihdzo>15 分钟阅读</span>  <span class="text-[var(--color-border)]" data-astro-cid-bvzihdzo>·</span> <span class="text-sm text-[var(--color-text-tertiary)]"> <span> graph-theory<span class="mx-1">·</span> </span><span> math<span class="mx-1">·</span> </span><span> obsidian<span class="mx-1">·</span> </span><span> ai<span class="mx-1">·</span> </span><span> transformer<span class="mx-1">·</span> </span><span> knowledge-management </span> </span>  </div> </header> <div class="blog-layout" data-astro-cid-bvzihdzo> <aside class="blog-toc" data-astro-cid-bvzihdzo> <div class="sticky top-14 max-h-[calc(100vh-3.5rem)] overflow-y-auto" data-astro-cid-bvzihdzo> <button id="toc-toggle" class="hidden max-md:flex items-center gap-1 text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-3 cursor-pointer border-none bg-transparent p-0" aria-expanded="false" aria-controls="toc-list" data-astro-cid-bvzihdzo>
+目录
+<svg id="toc-chevron" class="w-3 h-3 transition-transform duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-bvzihdzo><polyline points="6 9 12 15 18 9" data-astro-cid-bvzihdzo></polyline></svg> </button> <span class="text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-3 max-md:hidden" data-astro-cid-bvzihdzo>目录</span> <div id="toc-list" class="max-md:hidden" data-astro-cid-bvzihdzo> <nav class="toc"> <p class="text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-3">目录</p> <ul class="toc-list"> <li class> <a href="#1-一个直觉起点你的-obsidian-图谱">1. 一个直觉起点：你的 Obsidian 图谱</a> </li><li class="toc-h3"> <a href="#你在-obsidian-里每天看到的">你在 Obsidian 里每天看到的：</a> </li><li class="toc-h3"> <a href="#对应的图论术语">对应的图论术语：</a> </li><li class> <a href="#2-图的数学定义">2. 图的数学定义</a> </li><li class="toc-h3"> <a href="#21-无向图">2.1 无向图</a> </li><li class="toc-h3"> <a href="#22-有向图">2.2 有向图</a> </li><li class="toc-h3"> <a href="#23-带权图">2.3 带权图</a> </li><li class="toc-h3"> <a href="#24-obsidian-中的这三种图">2.4 Obsidian 中的这三种图</a> </li><li class> <a href="#3-图论核心概念配-obsidian-类比">3. 图论核心概念（配 Obsidian 类比）</a> </li><li class="toc-h3"> <a href="#31-度-degree">3.1 度 (Degree)</a> </li><li class="toc-h3"> <a href="#32-路径-path">3.2 路径 (Path)</a> </li><li class="toc-h3"> <a href="#33-连通分量-connected-component">3.3 连通分量 (Connected Component)</a> </li><li class="toc-h3"> <a href="#34-桥梁-bridge">3.4 桥梁 (Bridge)</a> </li><li class="toc-h3"> <a href="#35-聚类系数-clustering-coefficient">3.5 聚类系数 (Clustering Coefficient)</a> </li><li class> <a href="#4-图论在-ai-中的核心应用">4. 图论在 AI 中的核心应用</a> </li><li class="toc-h3"> <a href="#41-transformer-的自注意力机制">4.1 Transformer 的自注意力机制</a> </li><li class="toc-h3"> <a href="#42-图神经网络-gnn">4.2 图神经网络 (GNN)</a> </li><li class="toc-h3"> <a href="#43-知识图谱-knowledge-graph">4.3 知识图谱 (Knowledge Graph)</a> </li><li class="toc-h3"> <a href="#44-搜索引擎的-pagerank-算法">4.4 搜索引擎的 PageRank 算法</a> </li><li class> <a href="#5-图论中几个著名的图">5. 图论中几个著名的「图」</a> </li><li class="toc-h3"> <a href="#51-欧拉路径与七桥问题">5.1 欧拉路径与七桥问题</a> </li><li class="toc-h3"> <a href="#52-复杂网络中的小世界现象">5.2 复杂网络中的「小世界」现象</a> </li><li class> <a href="#6-从-obsidian-中观察图论概念">6. 从 Obsidian 中观察图论概念</a> </li><li class="toc-h3"> <a href="#实操用你的-vault-当图论实验室">实操：用你的 Vault 当图论实验室</a> </li><li class> <a href="#7-图论的知识图谱moc">7. 图论的知识图谱（MOC）</a> </li><li class> <a href="#8-图论四句偈">8. 图论四句偈</a> </li><li class> <a href="#-关联笔记">🔗 关联笔记</a> </li> </ul> </nav> </div> </div> </aside> <div class="blog-body" data-astro-cid-bvzihdzo> <div class="prose prose-neutral max-w-none" data-astro-cid-bvzihdzo>   <h1 id="图论入门从-obsidian-到-ai">图论入门：从 Obsidian 到 AI</h1>
+<blockquote>
+<p>图论是研究「连接」的数学——不关心节点是什么，只关心谁跟谁连在一起。</p>
+</blockquote>
+<hr>
+<h2 id="1-一个直觉起点你的-obsidian-图谱">1. 一个直觉起点：你的 Obsidian 图谱</h2>
+<h3 id="你在-obsidian-里每天看到的">你在 Obsidian 里每天看到的：</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>一篇笔记        =  一个圆点</span></span>
+<span class="line"><span>[[]] 链接       =  一条线</span></span>
+<span class="line"><span>图谱全局视图    =  一张图</span></span></code></pre>
+<h3 id="对应的图论术语">对应的图论术语：</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="center">Obsidian 中的概念</th><th align="center">图论术语</th><th align="center">符号</th><th>定义</th></tr></thead><tbody><tr><td align="center">一篇笔记</td><td align="center"><strong>顶点 / 节点</strong> (Vertex)</td><td align="center">$V$</td><td>一个实体</td></tr><tr><td align="center">一个 <code>[[]]</code> 链接</td><td align="center"><strong>边</strong> (Edge)</td><td align="center">$E$</td><td>两个实体之间的关系</td></tr><tr><td align="center">你的整个图谱</td><td align="center"><strong>图</strong> (Graph)</td><td align="center">$G = (V, E)$</td><td>顶点和边的集合</td></tr><tr><td align="center">A → B 的箭头</td><td align="center"><strong>有向边</strong> (Directed Edge)</td><td align="center">$A \to B$</td><td>关系有方向</td></tr><tr><td align="center">没有箭头的线</td><td align="center"><strong>无向边</strong> (Undirected Edge)</td><td align="center">$A - B$</td><td>关系是双向的</td></tr><tr><td align="center">孤立节点</td><td align="center"><strong>孤立顶点</strong> (Isolated Vertex)</td><td align="center">—</td><td>没有连接任何边的节点</td></tr><tr><td align="center">笔记与笔记之间的路径</td><td align="center"><strong>路径</strong> (Path)</td><td align="center">$v_1 \to v_2 \to … \to v_k$</td><td>沿着边走，不重复</td></tr><tr><td align="center">一组互相连通的笔记</td><td align="center"><strong>连通分量</strong> (Connected Component)</td><td align="center">—</td><td>内部连通，对外隔离</td></tr></tbody></table>
+<blockquote>
+<p><strong>图论就是把你在 Obsidian 图谱里「看到」的东西，变成可以用数学精确描述和计算的东西。</strong></p>
+</blockquote>
+<hr>
+<h2 id="2-图的数学定义">2. 图的数学定义</h2>
+<h3 id="21-无向图">2.1 无向图</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>一个无向图 G = (V, E) 包含：</span></span>
+<span class="line"><span>  V = {v₁, v₂, v₃, ...}    ← 顶点的集合</span></span>
+<span class="line"><span>  E = {(v₁,v₂), (v₂,v₃), ...}  ← 边的集合，边没有方向</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>例子：</span></span>
+<span class="line"><span>  V = {Python笔记, AI笔记, 数据处理笔记}</span></span>
+<span class="line"><span>  E = {(Python, AI), (AI, 数据处理)}</span></span>
+<span class="line"><span>  → Python 和 AI 互相链接，AI 和数据处理互相链接</span></span>
+<span class="line"><span>  → Python 和数据处理没有直接链接</span></span></code></pre>
+<h3 id="22-有向图">2.2 有向图</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>每条边有方向：</span></span>
+<span class="line"><span>  E = {(Python → AI), (AI → 数据处理)}</span></span>
+<span class="line"><span>  → Python 链接到了 AI（但 AI 不一定链接回 Python）</span></span></code></pre>
+<p>在 Obsidian 中，<code>[[]]</code> 链接在底层是<strong>有向的</strong>（A 链接到 B ≠ B 链接到 A），但图谱展示时默认显示为双向边。</p>
+<h3 id="23-带权图">2.3 带权图</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="yaml"><code><span class="line"><span style="color:var(--astro-code-token-string-expression)">每条边有一个数值（权重）：</span></span>
+<span class="line"><span style="color:var(--astro-code-token-string-expression)">  Python ---[3]--- AI        ← 权重 3</span></span>
+<span class="line"><span style="color:var(--astro-code-token-string-expression)">  AI    ---[1]--- 数据处理     ← 权重 1</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-string-expression)">权重可以表示：</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">  - </span><span style="color:var(--astro-code-token-string-expression)">链接的强度（两篇笔记被同时引用的次数）</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">  - </span><span style="color:var(--astro-code-token-string-expression)">距离（两个城市之间的公里数）</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">  - </span><span style="color:var(--astro-code-token-string-expression)">成本（两个节点之间的传输代价）</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">  - </span><span style="color:var(--astro-code-token-string-expression)">相似度（两个向量之间的余弦相似度）</span></span></code></pre>
+<h3 id="24-obsidian-中的这三种图">2.4 Obsidian 中的这三种图</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>无向图：  你在图谱中看到的默认视图</span></span>
+<span class="line"><span>有向图：  [笔记A] 指向 [笔记B]，但B不一定指向A</span></span>
+<span class="line"><span>带权图：  用 Graph Analysis 插件可以显示边的权重</span></span>
+<span class="line"><span>          （基于共同引用、标签相似度等）</span></span></code></pre>
+<hr>
+<h2 id="3-图论核心概念配-obsidian-类比">3. 图论核心概念（配 Obsidian 类比）</h2>
+<h3 id="31-度-degree">3.1 度 (Degree)</h3>
+<p>一个顶点连接的边数。</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>在 Obsidian 中：</span></span>
+<span class="line"><span>  度 = 一篇笔记有多少个 [[]] 链接</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  度高的笔记 = 被广泛引用的核心概念</span></span>
+<span class="line"><span>  度低的笔记 = 冷门知识点</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  Obsidian 图谱中节点的大小默认就反映度——</span></span>
+<span class="line"><span>  越大 = 度越高 = 越核心</span></span></code></pre>
+<p><strong>度的类型：</strong></p>
+<ul>
+<li><strong>度 (Degree)</strong>：无向图中的一个顶点连接的边数</li>
+<li><strong>入度 (In-degree)</strong>：有向图中指向该顶点的边数（被谁引用）</li>
+<li><strong>出度 (Out-degree)</strong>：有向图中从该顶点出发的边数（引用了谁）</li>
+</ul>
+<h3 id="32-路径-path">3.2 路径 (Path)</h3>
+<p>从一个顶点到另一个顶点经过的边的序列。</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>在 Obsidian 中：</span></span>
+<span class="line"><span>  找「Python基础」到「Transformer」的最短路径</span></span>
+<span class="line"><span>  = 图谱中两个节点之间最少需要跳转几次</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  路径：Python基础 → 深度学习 → Transformer</span></span>
+<span class="line"><span>  长度：2</span></span></code></pre>
+<p><strong>最短路径问题</strong>：</p>
+<ul>
+<li>地图导航（高德/Google Maps 的核心算法）</li>
+<li>社交网络中的「六度分隔」</li>
+<li>知识网络中两个概念之间的最短知识路径</li>
+</ul>
+<h3 id="33-连通分量-connected-component">3.3 连通分量 (Connected Component)</h3>
+<p>一个子图，内部的顶点互相连通，但与子图外的顶点没有连接。</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>在 Obsidian 中：</span></span>
+<span class="line"><span>  你可能有几个知识簇：</span></span>
+<span class="line"><span>    ├── 机器学习簇（ML笔记之间互连）</span></span>
+<span class="line"><span>    ├── 生活笔记簇（日记、食谱全部互相连）</span></span>
+<span class="line"><span>    └── 编程笔记簇（代码笔记之间互连）</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  如果这些簇之间没有任何 [[]] 链接相连——</span></span>
+<span class="line"><span>  你的图谱中有 3 个连通分量。</span></span></code></pre>
+<h3 id="34-桥梁-bridge">3.4 桥梁 (Bridge)</h3>
+<p>一条边，如果去掉它，图的连通分量数会增加。</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>在 Obsidian 中：</span></span>
+<span class="line"><span>  你只有一篇笔记连接了「机器学习」和「编程」两个领域</span></span>
+<span class="line"><span>  删掉这篇笔记 → 两个领域完全断开</span></span>
+<span class="line"><span>  这篇笔记的链接就是「桥梁」</span></span></code></pre>
+<p><strong>桥梁代表了你知识体系中关键的跨领域连接。</strong></p>
+<h3 id="35-聚类系数-clustering-coefficient">3.5 聚类系数 (Clustering Coefficient)</h3>
+<p>你的邻居之间互相连接的程度。</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>在 Obsidian 中：</span></span>
+<span class="line"><span>  如果「Python笔记」链接了「NumPy笔记」和「Pandas笔记」</span></span>
+<span class="line"><span>  而「NumPy」和「Pandas」互相也有链接</span></span>
+<span class="line"><span>  → 聚类系数高 → 你对这个领域的理解很密实</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  如果「Python笔记」链接了「NumPy笔记」和「早餐食谱」</span></span>
+<span class="line"><span>  而「NumPy」和「早餐食谱」互不相连</span></span>
+<span class="line"><span>  → 聚类系数低 → 这些主题只是被凑巧关联</span></span></code></pre>
+<hr>
+<h2 id="4-图论在-ai-中的核心应用">4. 图论在 AI 中的核心应用</h2>
+<h3 id="41-transformer-的自注意力机制">4.1 Transformer 的自注意力机制</h3>
+<p>这是你学 AI 时最重要的图论应用。</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>在一句话中：</span></span>
+<span class="line"><span>  "The cat sat on the mat"</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Transformer 把每个词看作一个节点，</span></span>
+<span class="line"><span>每对词之间的关系看作一条带权边：</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>           cat</span></span>
+<span class="line"><span>          /   \</span></span>
+<span class="line"><span>         The   sat</span></span>
+<span class="line"><span>          |   / |</span></span>
+<span class="line"><span>         on    mat</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>每个词的表示 = 所有词对该词的「加权和」</span></span>
+<span class="line"><span>权重 = 词与词之间的「注意力分数」</span></span></code></pre>
+<p><strong>这不是比喻——Transformer 的自注意力计算的就是一个</strong>完全图 <strong>（每对顶点之间都有边），边的权重由注意力分数决定。</strong></p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="yaml"><code><span class="line"><span style="color:var(--astro-code-token-keyword)">Token</span><span style="color:var(--astro-code-token-keyword)">:</span><span style="color:var(--astro-code-foreground)"> [</span><span style="color:var(--astro-code-token-string)">The</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-token-string)"> cat</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-token-string)"> sat</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-token-constant)"> on</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-token-string)"> the</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-token-string)"> mat</span><span style="color:var(--astro-code-foreground)">]</span></span>
+<span class="line"><span style="color:var(--astro-code-token-string-expression)">         ↓</span></span>
+<span class="line"><span style="color:var(--astro-code-token-string-expression)">自注意力矩阵（6×6）：</span></span>
+<span class="line"><span style="color:var(--astro-code-token-string-expression)">    The  cat  sat  on  the  mat</span></span>
+<span class="line"><span style="color:var(--astro-code-token-string-expression)">The  0.2  0.3  0.1  0.1  0.2  0.1    ← The 跟所有词的关系</span></span>
+<span class="line"><span style="color:var(--astro-code-token-string-expression)">cat  0.1  0.4  0.3  0.1  0.0  0.1</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">...                               </span><span style="color:var(--astro-code-token-string-expression)">← 这就是一个带权完全图的邻接矩阵</span></span></code></pre>
+<h3 id="42-图神经网络-gnn">4.2 图神经网络 (GNN)</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>传统神经网络（处理向量/图像）</span></span>
+<span class="line"><span>  → 假设输入是「规整的」网格结构</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>图神经网络（处理图结构数据）</span></span>
+<span class="line"><span>  → 输入可以是任意拓扑结构</span></span>
+<span class="line"><span>  → 每个节点通过学习邻居的信息来更新自己的表示</span></span>
+<span class="line"><span>  → 非常适合社交网络、分子结构、知识图谱</span></span></code></pre>
+<p><strong>典型应用</strong>：</p>
+<ul>
+<li>药物发现（分子 = 原子为节点，化学键为边）</li>
+<li>推荐系统（用户和物品为节点，交互为边）</li>
+<li>知识图谱推理</li>
+</ul>
+<h3 id="43-知识图谱-knowledge-graph">4.3 知识图谱 (Knowledge Graph)</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>你的 Obsidian Vault 本质上就是一个个人知识图谱。</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>知识图谱 = 图论 + 语义</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  实体：         节点</span></span>
+<span class="line"><span>  关系：         带标签的边</span></span>
+<span class="line"><span>  三元组：       (实体, 关系, 实体)</span></span>
+<span class="line"><span>  例子：         (Transformer, 使用, 自注意力机制)</span></span></code></pre>
+<p><strong>从 Obsidian 到知识图谱的桥接：</strong></p>
+<ul>
+<li><code>[[]]</code> 链接 → 无标签的边（默认关系是「相关」）</li>
+<li>通过标签或元数据 → 可以给边赋予语义</li>
+<li>一个进阶玩法：用 Dataview 插件把你的笔记导出为结构化知识图谱</li>
+</ul>
+<h3 id="44-搜索引擎的-pagerank-算法">4.4 搜索引擎的 PageRank 算法</h3>
+<p>Google 起家的算法，本质是图论问题。</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>把整个互联网看作一张有向图：</span></span>
+<span class="line"><span>  网页 = 节点</span></span>
+<span class="line"><span>  超链接 = 有向边</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>PageRank 的核心直觉：</span></span>
+<span class="line"><span>  - 被越多重要网页引用的网页越重要</span></span>
+<span class="line"><span>  - 一个网页给出去的「票数」被均分</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>这跟你判断 Obsidian 中「核心笔记」的逻辑完全一样：</span></span>
+<span class="line"><span>  - 被越多核心笔记引用的笔记越重要</span></span>
+<span class="line"><span>  - 一篇笔记如果链接了很多内容，单条链接的价值就稀释了</span></span></code></pre>
+<hr>
+<h2 id="5-图论中几个著名的图">5. 图论中几个著名的「图」</h2>
+<h3 id="51-欧拉路径与七桥问题">5.1 欧拉路径与七桥问题</h3>
+<blockquote>
+<p><strong>图论的起源</strong>（1736 年，欧拉）</p>
+</blockquote>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>问题：哥尼斯堡有七座桥，能否不重复地走完所有桥？</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>欧拉的解法：</span></span>
+<span class="line"><span>  把四块陆地抽象为 4 个节点</span></span>
+<span class="line"><span>  把七座桥抽象为 7 条边</span></span>
+<span class="line"><span>  证明：当且仅当奇度数顶点的个数为 0 或 2 时才有可能</span></span>
+<span class="line"><span>  哥尼斯堡有 4 个奇度顶点 → 不可能</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>这是历史上第一次有人用「图」来解决问题</span></span>
+<span class="line"><span>→ 图论诞生了</span></span></code></pre>
+<h3 id="52-复杂网络中的小世界现象">5.2 复杂网络中的「小世界」现象</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>六度分隔实验：</span></span>
+<span class="line"><span>  世界上任意两个人之间，</span></span>
+<span class="line"><span>  平均只要通过 6 个中间人就能建立联系</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>图论解释：</span></span>
+<span class="line"><span>  现实世界的网络（社交、引文、互联网）</span></span>
+<span class="line"><span>  都同时具有「高聚类系数」和「短平均路径」</span></span></code></pre>
+<p>你的 Obsidian 知识网络随着笔记增加，也会出现这个现象——主题内部高度互联（高聚类），不同主题之间只用几步就能到达（短路径）。</p>
+<hr>
+<h2 id="6-从-obsidian-中观察图论概念">6. 从 Obsidian 中观察图论概念</h2>
+<h3 id="实操用你的-vault-当图论实验室">实操：用你的 Vault 当图论实验室</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>图论概念</th><th>在 Obsidian 中怎么看</th></tr></thead><tbody><tr><td><strong>度</strong></td><td>图谱中节点的大小 = 度</td></tr><tr><td><strong>连通分量</strong></td><td>图谱中成簇的节点群</td></tr><tr><td><strong>桥梁</strong></td><td>两个簇之间唯一的连接线</td></tr><tr><td><strong>最短路径</strong></td><td>图谱中两个节点之间的最少跳数</td></tr><tr><td><strong>孤立顶点</strong></td><td>没有任何连接的单个节点</td></tr><tr><td><strong>稠密图 vs 稀疏图</strong></td><td>一个簇内链接密集（稠密）vs 整个图谱链接很少（稀疏）</td></tr><tr><td><strong>邻接矩阵</strong></td><td>在图形视图开启「显示邻接矩阵」</td></tr><tr><td><strong>中心性</strong></td><td>节点越大、位置越居中 → 中心性越高</td></tr></tbody></table>
+<hr>
+<h2 id="7-图论的知识图谱moc">7. 图论的知识图谱（MOC）</h2>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="markdown"><code><span class="line"><span style="color:var(--astro-code-foreground);font-weight:bold"># 🗺️ MOC-图论</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-foreground);font-weight:bold">## 基础概念</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">- [[</span><span style="color:var(--astro-code-token-keyword)">顶点与边</span><span style="color:var(--astro-code-foreground)">]]</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">- [[</span><span style="color:var(--astro-code-token-keyword)">度、入度、出度</span><span style="color:var(--astro-code-foreground)">]]</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">- [[</span><span style="color:var(--astro-code-token-keyword)">路径与最短路径</span><span style="color:var(--astro-code-foreground)">]]</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">- [[</span><span style="color:var(--astro-code-token-keyword)">连通分量</span><span style="color:var(--astro-code-foreground)">]]</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">- [[</span><span style="color:var(--astro-code-token-keyword)">有向图与无向图</span><span style="color:var(--astro-code-foreground)">]]</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">- [[</span><span style="color:var(--astro-code-token-keyword)">带权图</span><span style="color:var(--astro-code-foreground)">]]</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-foreground);font-weight:bold">## 核心算法</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">- [[广度优先搜索 BFS]]</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">- [[深度优先搜索 DFS]]</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">- [[Dijkstra 最短路径]]</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">- [[</span><span style="color:var(--astro-code-token-keyword)">PageRank</span><span style="color:var(--astro-code-foreground)">]]</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-foreground);font-weight:bold">## AI 中的应用</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">- [[Transformer 与注意力机制]]</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">- [[图神经网络 GNN]]</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">- [[</span><span style="color:var(--astro-code-token-keyword)">知识图谱</span><span style="color:var(--astro-code-foreground)">]]</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">- [[</span><span style="color:var(--astro-code-token-keyword)">推荐系统</span><span style="color:var(--astro-code-foreground)">]]</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-foreground);font-weight:bold">## 在 Obsidian 中的体现</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">- [[</span><span style="color:var(--astro-code-token-keyword)">Obsidian知识管理的底层逻辑</span><span style="color:var(--astro-code-foreground)">]]</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">- [[</span><span style="color:var(--astro-code-token-keyword)">Obsidian完美使用工作流</span><span style="color:var(--astro-code-foreground)">]]</span></span></code></pre>
+<hr>
+<h2 id="8-图论四句偈">8. 图论四句偈</h2>
+<blockquote>
+<p>不关心内容，只关心连接
+不关心单个，只关心结构
+不关心名称，只关心关系
+<strong>你每天看的图谱，就是图论本身</strong></p>
+</blockquote>
+<hr>
+<h2 id="-关联笔记">🔗 关联笔记</h2>
+<ul>
+<li>[[Obsidian知识管理的底层逻辑]]</li>
+<li>[[Obsidian完美使用工作流]]</li>
+<li>[[Transformer 架构]]（如已存在）</li>
+<li>[[从零理解自注意力机制]]（如已存在）</li>
+<li>[[MOC-内容地图完全指南]]</li>
+</ul>
+<hr>
+<p><em>最后更新：2026-07-12</em></p> <div> <a href="/notes" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150">
+&larr; 返回笔记列表
+</a> </div>  </div> <!-- Previous / Next navigation -->  <hr class="!mt-12 !mb-8" data-astro-cid-bvzihdzo> <div data-astro-cid-bvzihdzo> <a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-bvzihdzo>
+&larr; 返回博客列表
+</a> </div> </div> </div> </article> </div>  </main> <footer class="border-t border-[var(--color-border)] mt-24 py-8" data-astro-cid-pux6a34n><div class="max-w-content flex items-center justify-between" data-astro-cid-pux6a34n><span class="text-sm text-[var(--color-text-tertiary)]" data-astro-cid-pux6a34n>
+&copy; 2026 星游寰宇
+</span><div class="flex items-center gap-4" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>博客</a><a href="/projects" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>项目</a><a href="/notes" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>日记</a><a href="/resources" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>资源</a><a href="/about" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>关于</a></div></div></footer> <div id="link-preview" style="display:none;position:fixed;z-index:99;max-width:18rem;pointer-events:none;" data-astro-cid-t7vshrbh></div>  <script type="module">(async()=>{try{const c=await fetch("/posts.json");if(!c.ok)return;const u=await c.json(),p=new Map(u.map(t=>[t.href,t])),e=document.getElementById("link-preview");if(!e)return;let n="",d;document.addEventListener("mouseover",t=>{const i=t.target.closest("a[href^='/blog/']");if(!i){e.style.display="none",n="";return}const s=i.getAttribute("href");if(!s||s===n)return;const o=p.get(s);o&&(n=s,d=setTimeout(()=>{e.innerHTML=`<div class="lp-title">${o.title}</div><div class="lp-summary">${o.summary}</div>`;const r=i.getBoundingClientRect();let a=r.left,l=r.bottom+6;a+288>window.innerWidth&&(a=window.innerWidth-296),l+80>window.innerHeight&&(l=r.top-80),Object.assign(e.style,{left:a+"px",top:l+"px",display:"block"})},300))},{passive:!0}),document.addEventListener("mouseout",t=>{t.target.closest("a[href^='/blog/']")&&(clearTimeout(d),e.style.display="none",n="")},{passive:!0})}catch{}})();</script> </body></html>  <script type="module">const c=document.getElementById("toc-toggle"),s=document.getElementById("toc-list"),i=document.getElementById("toc-chevron");c&&s&&i&&c.addEventListener("click",()=>{const o=s.classList.toggle("hidden");c.setAttribute("aria-expanded",String(o)),i.style.transform=o?"rotate(180deg)":""});const r=document.querySelectorAll(".toc-list a");if(r.length>0){const o=new IntersectionObserver(n=>{for(const t of n)t.isIntersecting&&r.forEach(e=>{e.classList.toggle("active",e.getAttribute("href")===`#${t.target.id}`)})},{rootMargin:"-80px 0px -80% 0px"});r.forEach(n=>{const t=n.getAttribute("href")?.slice(1);if(t){const e=document.getElementById(t);e&&o.observe(e)}})}</script>

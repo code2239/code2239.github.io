@@ -1,0 +1,350 @@
+<!DOCTYPE html><html lang="zh-CN"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="这不是 Obsidian 的操作教程，而是它背后那套思维方式——理解了这套逻辑，你才知道 Obsidian 到底应该怎么用，以及为什么它和其他笔记软件不一样。"><meta name="color-scheme" content="light"><!-- Open Graph --><meta property="og:title" content="Obsidian知识管理的底层逻辑 — 星游寰宇"><meta property="og:description" content="这不是 Obsidian 的操作教程，而是它背后那套思维方式——理解了这套逻辑，你才知道 Obsidian 到底应该怎么用，以及为什么它和其他笔记软件不一样。"><meta property="og:url" content="https://code2239.github.io/notes/2026-07-12-Obsidian知识管理的底层逻辑"><meta property="og:type" content="article"><meta property="og:site_name" content="星游寰宇"><meta property="og:locale" content="zh_CN"><meta property="article:published_time" content="2026-07-12"><meta property="article:tag" content="obsidian"><meta property="article:tag" content="knowledge-management"><meta property="article:tag" content="methodology"><meta property="article:tag" content="pkm"><!-- Twitter Card --><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Obsidian知识管理的底层逻辑 — 星游寰宇"><meta name="twitter:description" content="这不是 Obsidian 的操作教程，而是它背后那套思维方式——理解了这套逻辑，你才知道 Obsidian 到底应该怎么用，以及为什么它和其他笔记软件不一样。"><!-- Canonical --><link rel="canonical" href="https://code2239.github.io/notes/2026-07-12-Obsidian知识管理的底层逻辑"><title>Obsidian知识管理的底层逻辑 — 星游寰宇</title><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="alternate" type="application/rss+xml" title="星游寰宇 RSS" href="/rss.xml"><!-- Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"星游寰宇","url":"https://code2239.github.io","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://code2239.github.io/search?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://code2239.github.io"},{"@type":"ListItem","position":2,"name":"日记","item":"https://code2239.github.io/notes"},{"@type":"ListItem","position":3,"name":"2026 07 12 Obsidian知识管理的底层逻辑"}]},{"@context":"https://schema.org","@type":"BlogPosting","headline":"Obsidian知识管理的底层逻辑","description":"这不是 Obsidian 的操作教程，而是它背后那套思维方式——理解了这套逻辑，你才知道 Obsidian 到底应该怎么用，以及为什么它和其他笔记软件不一样。","datePublished":"2026-07-12","url":"https://code2239.github.io/notes/2026-07-12-Obsidian知识管理的底层逻辑","keywords":"obsidian, knowledge-management, methodology, pkm"}]}</script><link rel="stylesheet" href="/_astro/_slug_.CXDKI3B6.css">
+<style>.back-to-top[data-astro-cid-gzprr2dq]{position:fixed;bottom:2rem;right:2rem;z-index:40;width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:50%;border:1px solid var(--color-border);background:var(--color-bg);color:var(--color-text-secondary);cursor:pointer;box-shadow:var(--shadow-md);transition:opacity .2s ease,transform .2s ease}.back-to-top[data-astro-cid-gzprr2dq]:hover{color:var(--color-accent);border-color:var(--color-accent);transform:translateY(-2px)}.back-to-top[data-astro-cid-gzprr2dq].hidden{opacity:0;pointer-events:none}.copy-btn[data-astro-cid-qqybitij]{position:absolute;top:8px;right:8px;padding:4px 10px;font-size:.6875rem;font-family:var(--font-sans);color:var(--color-text-tertiary);background:var(--color-bg);border:1px solid var(--color-border);border-radius:6px;cursor:pointer;opacity:0;transition:opacity .15s ease,color .15s ease}pre[data-astro-cid-qqybitij]:hover .copy-btn[data-astro-cid-qqybitij]{opacity:1}.copy-btn[data-astro-cid-qqybitij]:hover{color:var(--color-accent);border-color:var(--color-accent)}.copy-btn[data-astro-cid-qqybitij].copied{color:#16a34a;border-color:#16a34a}.blog-layout[data-astro-cid-bvzihdzo]{display:block}.blog-toc[data-astro-cid-bvzihdzo]{display:none}.blog-body[data-astro-cid-bvzihdzo]{min-width:0}@media(min-width:1024px){.blog-layout[data-astro-cid-bvzihdzo]{display:grid;grid-template-columns:14rem 1fr;gap:3rem;align-items:start}.blog-toc[data-astro-cid-bvzihdzo]{display:block}.blog-body[data-astro-cid-bvzihdzo]{padding-right:2rem}}@media(max-width:1023px){.blog-toc[data-astro-cid-bvzihdzo]{display:block;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid var(--color-border)}}
+</style></head> <body class="min-h-screen flex flex-col"> <nav class="sticky top-0 z-40 bg-[var(--color-bg)]/80 backdrop-blur-md border-b border-[var(--color-border)]" data-astro-cid-pux6a34n><div class="max-w-content flex items-center justify-between py-4" data-astro-cid-pux6a34n><a href="/" class="flex items-center gap-2.5 text-base font-semibold no-underline tracking-tight" data-astro-cid-pux6a34n><svg class="w-7 h-7" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" data-astro-cid-pux6a34n><circle cx="16" cy="16" r="15" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-pux6a34n></circle><circle cx="16" cy="16" r="3" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="16" cy="5" r="1.5" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="24" cy="10" r="1" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="8" cy="22" r="1" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="25" cy="21" r="0.8" fill="currentColor" data-astro-cid-pux6a34n></circle></svg>
+星游寰宇
+</a><!-- Desktop nav --><div class="hidden sm:flex items-center gap-5" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>博客</a><a href="/projects" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>项目</a><a href="/notes" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>日记</a><a href="/resources" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>资源</a><a href="/about" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>关于</a><button id="search-trigger" class="flex items-center gap-1.5 text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] bg-[var(--color-bg-secondary)] hover:bg-[var(--color-bg-tertiary)] border border-[var(--color-border)] hover:border-[var(--color-accent)]/30 rounded-lg px-3 py-1.5 cursor-pointer shadow-sm hover:shadow-md transition-all duration-200" aria-label="搜索 (Ctrl+K)" title="搜索 (Ctrl+K)" data-astro-cid-pux6a34n><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-pux6a34n><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" data-astro-cid-pux6a34n></path></svg><span class="hidden lg:inline" data-astro-cid-pux6a34n>搜索</span><kbd class="hidden lg:inline-flex items-center text-[0.625rem] font-mono text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1 py-px rounded" data-astro-cid-pux6a34n>Ctrl+K</kbd></button></div><!-- Mobile hamburger --><button id="menu-btn" class="sm:hidden flex flex-col gap-1 p-2 -mr-2 cursor-pointer" aria-label="打开菜单" data-astro-cid-pux6a34n><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-transform duration-200" data-astro-cid-pux6a34n></span><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-opacity duration-200" data-astro-cid-pux6a34n></span><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-transform duration-200" data-astro-cid-pux6a34n></span></button></div><!-- Mobile menu --><div id="mobile-menu" class="hidden sm:hidden border-t border-[var(--color-border)] bg-[var(--color-bg)]" data-astro-cid-pux6a34n><div class="max-w-content flex flex-col gap-2 py-4" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>博客</a><a href="/projects" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>项目</a><a href="/notes" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>日记</a><a href="/resources" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>资源</a><a href="/about" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>关于</a></div></div></nav>
+    <div id="search-overlay" class="srch-overlay" role="dialog" aria-modal="true" aria-label="全局搜索" data-astro-cid-mn7pezny> <div id="search-backdrop" class="srch-backdrop" data-astro-cid-mn7pezny></div> <div class="srch-panel" id="srch-panel" data-astro-cid-mn7pezny> <!-- Search input --> <div class="srch-input-row" data-astro-cid-mn7pezny> <svg class="srch-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-mn7pezny> <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" data-astro-cid-mn7pezny></path> </svg> <input type="text" id="search-input" class="srch-input" placeholder="搜索文章、项目、日记、资源..." autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="go" data-astro-cid-mn7pezny> <kbd class="srch-kbd" data-astro-cid-mn7pezny>Esc</kbd> </div> <!-- Results area --> <div id="search-results" class="srch-results" data-astro-cid-mn7pezny> <p class="srch-empty" id="search-empty-hint" data-astro-cid-mn7pezny>输入关键词开始搜索</p> </div> <!-- Skeleton loading --> <div id="search-skeleton" class="srch-skeleton" style="display:none;" aria-hidden="true" data-astro-cid-mn7pezny> <div class="srch-skeleton-line" style="width:75%" data-astro-cid-mn7pezny></div> <div class="srch-skeleton-line" style="width:50%" data-astro-cid-mn7pezny></div> <div class="srch-skeleton-line" style="width:60%" data-astro-cid-mn7pezny></div> </div> <!-- Footer hints --> <div class="srch-footer" data-astro-cid-mn7pezny> <div class="srch-footer-hints" data-astro-cid-mn7pezny> <span data-astro-cid-mn7pezny><kbd data-astro-cid-mn7pezny>↑</kbd><kbd data-astro-cid-mn7pezny>↓</kbd> 导航</span> <span data-astro-cid-mn7pezny><kbd data-astro-cid-mn7pezny>↵</kbd> 打开</span> <span data-astro-cid-mn7pezny><kbd data-astro-cid-mn7pezny>Ctrl</kbd>+<kbd data-astro-cid-mn7pezny>K</kbd> 切换</span> </div> <div class="srch-footer-brand" data-astro-cid-mn7pezny>
+powered by Orama
+</div> </div> </div> </div> <script type="module" src="/_astro/Navigation.astro_astro_type_script_index_0_lang.15n1EYJp.js"></script> <main class="flex-1">  <div class="reading-progress" id="reading-progress" style="width: 0%"></div> <script type="module">const o=document.getElementById("reading-progress");if(!o)throw new Error("Reading progress bar element not found");const r=()=>{const n=window.scrollY,e=document.documentElement.scrollHeight-window.innerHeight,t=e>0?n/e*100:0;o.style.width=`${Math.min(t,100)}%`};window.addEventListener("scroll",r,{passive:!0});</script> <button id="back-to-top" class="back-to-top hidden" aria-label="返回顶部" data-astro-cid-gzprr2dq> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-gzprr2dq> <polyline points="18 15 12 9 6 15" data-astro-cid-gzprr2dq></polyline> </svg> </button>  <script type="module">const o=document.getElementById("back-to-top");o&&(window.addEventListener("scroll",()=>{o.classList.toggle("hidden",window.scrollY<400)},{passive:!0}),o.addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"})));</script> <script type="module">document.querySelectorAll("pre").forEach(e=>{const t=document.createElement("button");t.className="copy-btn",t.textContent="复制",t.addEventListener("click",async()=>{const n=e.querySelector("code")?.textContent||e.textContent||"";try{await navigator.clipboard.writeText(n),t.textContent="已复制",t.classList.add("copied"),setTimeout(()=>{t.textContent="复制",t.classList.remove("copied")},2e3)}catch{t.textContent="失败",setTimeout(()=>{t.textContent="复制"},2e3)}}),e.style.position="relative",e.appendChild(t)});</script> <div class="px-6 xl:px-12 pt-12 pb-16" data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <header class="mb-12 text-center" data-astro-cid-bvzihdzo> <h1 class="text-3xl font-semibold mb-3 tracking-tight" data-astro-cid-bvzihdzo>Obsidian知识管理的底层逻辑</h1> <div class="flex items-center justify-center gap-2 text-[var(--color-text-tertiary)] text-sm" data-astro-cid-bvzihdzo> <time datetime="2026-07-12" data-astro-cid-bvzihdzo>2026-07-12</time> <span class="text-[var(--color-border)]" data-astro-cid-bvzihdzo>·</span> <span data-astro-cid-bvzihdzo>14 分钟阅读</span>  <span class="text-[var(--color-border)]" data-astro-cid-bvzihdzo>·</span> <span class="text-sm text-[var(--color-text-tertiary)]"> <span> obsidian<span class="mx-1">·</span> </span><span> knowledge-management<span class="mx-1">·</span> </span><span> methodology<span class="mx-1">·</span> </span><span> pkm </span> </span>  </div> </header> <div class="blog-layout" data-astro-cid-bvzihdzo> <aside class="blog-toc" data-astro-cid-bvzihdzo> <div class="sticky top-14 max-h-[calc(100vh-3.5rem)] overflow-y-auto" data-astro-cid-bvzihdzo> <button id="toc-toggle" class="hidden max-md:flex items-center gap-1 text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-3 cursor-pointer border-none bg-transparent p-0" aria-expanded="false" aria-controls="toc-list" data-astro-cid-bvzihdzo>
+目录
+<svg id="toc-chevron" class="w-3 h-3 transition-transform duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-bvzihdzo><polyline points="6 9 12 15 18 9" data-astro-cid-bvzihdzo></polyline></svg> </button> <span class="text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-3 max-md:hidden" data-astro-cid-bvzihdzo>目录</span> <div id="toc-list" class="max-md:hidden" data-astro-cid-bvzihdzo> <nav class="toc"> <p class="text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-3">目录</p> <ul class="toc-list"> <li class> <a href="#0-一句话总纲">0. 一句话总纲</a> </li><li class> <a href="#1-最大的范式转换从文件夹到链接">1. 最大的范式转换：从「文件夹」到「链接」</a> </li><li class="toc-h3"> <a href="#传统软件的认知模型文件柜">传统软件的认知模型（文件柜）</a> </li><li class="toc-h3"> <a href="#obsidian-的认知模型网络">Obsidian 的认知模型（网络）</a> </li><li class> <a href="#2-第二个底层原则笔记原子化">2. 第二个底层原则：笔记原子化</a> </li><li class="toc-h3"> <a href="#原则">原则</a> </li><li class="toc-h3"> <a href="#为什么">为什么？</a> </li><li class> <a href="#3-第三个底层原则自下而上的结构生长">3. 第三个底层原则：自下而上的结构生长</a> </li><li class="toc-h3"> <a href="#自顶向下传统方式vs-自下而上obsidian-方式">自顶向下（传统方式）vs 自下而上（Obsidian 方式）</a> </li><li class="toc-h3"> <a href="#为什么自下而上更好">为什么自下而上更好？</a> </li><li class> <a href="#4-第四个底层原则双向链接改变信息的发现方式">4. 第四个底层原则：双向链接改变信息的发现方式</a> </li><li class="toc-h3"> <a href="#单向链接传统笔记软件">单向链接（传统笔记软件）</a> </li><li class="toc-h3"> <a href="#双向链接obsidian">双向链接（Obsidian）</a> </li><li class="toc-h3"> <a href="#为什么双向链接是革命性的">为什么双向链接是革命性的？</a> </li><li class> <a href="#5-第五个底层原则写笔记就是思考">5. 第五个底层原则：写笔记就是思考</a> </li><li class="toc-h3"> <a href="#大多数人的误区">大多数人的误区</a> </li><li class="toc-h3"> <a href="#obsidian-倡导的方式">Obsidian 倡导的方式</a> </li><li class> <a href="#6-第六个底层原则渐进式学习">6. 第六个底层原则：渐进式学习</a> </li><li class> <a href="#7-第七个底层原则你的数据你做主">7. 第七个底层原则：你的数据你做主</a> </li><li class="toc-h3"> <a href="#本地优先--纯文本">本地优先 + 纯文本</a> </li><li class="toc-h3"> <a href="#这意味着什么">这意味着什么？</a> </li><li class> <a href="#8-所有原则的关系图谱">8. 所有原则的关系图谱</a> </li><li class> <a href="#9-这些原则实际意味着什么操作建议">9. 这些原则实际意味着什么——操作建议</a> </li><li class> <a href="#10-和其他软件的本质差异">10. 和其他软件的本质差异</a> </li><li class> <a href="#-总结底层逻辑--一套认知假设">🎯 总结：底层逻辑 = 一套认知假设</a> </li><li class> <a href="#-关联笔记">🔗 关联笔记</a> </li> </ul> </nav> </div> </div> </aside> <div class="blog-body" data-astro-cid-bvzihdzo> <div class="prose prose-neutral max-w-none" data-astro-cid-bvzihdzo>   <h1 id="obsidian-知识管理的底层逻辑">Obsidian 知识管理的底层逻辑</h1>
+<blockquote>
+<p>这不是 Obsidian 的操作教程，而是它背后<strong>那套思维方式</strong>——理解了这套逻辑，你才知道 Obsidian 到底应该怎么用，以及为什么它和其他笔记软件不一样。</p>
+</blockquote>
+<hr>
+<h2 id="0-一句话总纲">0. 一句话总纲</h2>
+<blockquote>
+<p><strong>Obsidian 的底层逻辑只有一句话：知识不是被存起来的，而是被连接出来的。</strong></p>
+</blockquote>
+<p>大部分笔记软件的核心假设是「知识 = 文件」，所以帮你把文件<strong>分好类、存整齐</strong>。
+Obsidian 的核心假设是「知识 = 网络」，所以它帮你做的是<strong>建立连接、看到关系</strong>。</p>
+<hr>
+<h2 id="1-最大的范式转换从文件夹到链接">1. 最大的范式转换：从「文件夹」到「链接」</h2>
+<h3 id="传统软件的认知模型文件柜">传统软件的认知模型（文件柜）</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>📁 年度报告/</span></span>
+<span class="line"><span>  ├── 📁 财务/</span></span>
+<span class="line"><span>  │   ├── Q1报告.docx</span></span>
+<span class="line"><span>  │   └── Q2报告.docx</span></span>
+<span class="line"><span>  └── 📁 市场/</span></span>
+<span class="line"><span>      └── 竞品分析.docx</span></span></code></pre>
+<p><strong>核心假设</strong>：一个文件只有一个位置。
+<strong>问题</strong>：一篇笔记可能涉及多个主题——你把它放哪？</p>
+<h3 id="obsidian-的认知模型网络">Obsidian 的认知模型（网络）</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>[[竞品分析]] ←——→ [[Q2营收趋势]]</span></span>
+<span class="line"><span>    ↑                    ↑</span></span>
+<span class="line"><span>    |                    |</span></span>
+<span class="line"><span>[[市场策略]] ←——→ [[产品路线图]]</span></span></code></pre>
+<p><strong>核心假设</strong>：一篇笔记可以出现在无数个上下文中。
+<strong>解决方案</strong>：不纠结「放哪」，而是问「跟谁连」。</p>
+<blockquote>
+<p>这就是 Obsidian 和 Notion/飞书/印象笔记<strong>最根本的区别</strong>——不是一个功能差异，而是对「知识是什么」这个问题的不同回答。</p>
+</blockquote>
+<hr>
+<h2 id="2-第二个底层原则笔记原子化">2. 第二个底层原则：笔记原子化</h2>
+<h3 id="原则">原则</h3>
+<blockquote>
+<p><strong>一篇笔记只讲一个概念。</strong></p>
+</blockquote>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>❌ 坏习惯：</span></span>
+<span class="line"><span>一篇笔记叫《Python笔记》，里面从变量写到神经网络</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>✅ 好习惯：</span></span>
+<span class="line"><span>变量与数据类型.md          ← 一个概念</span></span>
+<span class="line"><span>控制流-for循环.md          ← 一个概念  </span></span>
+<span class="line"><span>函数定义与参数.md          ← 一个概念</span></span>
+<span class="line"><span>NumPy数组基础操作.md       ← 一个概念</span></span></code></pre>
+<h3 id="为什么">为什么？</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>维度</th><th>大而全的笔记</th><th>原子化笔记</th></tr></thead><tbody><tr><td>链接复用</td><td>❌ 不能精确链接到某一段</td><td>✅ 可以精确指向这个概念</td></tr><tr><td>组合灵活度</td><td>❌ 只能以整篇为单位</td><td>✅ 可以像积木一样拼装</td></tr><tr><td>复习效率</td><td>❌ 每次都看一大堆</td><td>✅ 聚焦一个点，消化快</td></tr><tr><td>发现关联</td><td>❌ 知识是封闭的</td><td>✅ 更容易发现概念间的连接</td></tr></tbody></table>
+<p><strong>原子化 + 链接 = 知识积木系统。</strong></p>
+<p>原子化的笔记就像乐高积木块，每块很小，但你可以用它们拼出任何形状。而大而全的笔记就像一块已经拼好的乐高模型——看起来完整，但没法重新组合。</p>
+<hr>
+<h2 id="3-第三个底层原则自下而上的结构生长">3. 第三个底层原则：自下而上的结构生长</h2>
+<h3 id="自顶向下传统方式vs-自下而上obsidian-方式">自顶向下（传统方式）vs 自下而上（Obsidian 方式）</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>自顶向下（传统笔记软件强迫你这么做）：</span></span>
+<span class="line"><span>  先建好文件夹体系 → 再把笔记放进去 → 放不进去就硬塞</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  比如你刚学 Python，就要先决定：</span></span>
+<span class="line"><span>  我是建「编程语言」文件夹</span></span>
+<span class="line"><span>  还是「AI学习」文件夹？</span></span>
+<span class="line"><span>  万一以后转了 JavaScript，这个结构还对吗？</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>自下而上（Obsidian 的方式）：</span></span>
+<span class="line"><span>  先随便写 → 笔记多了自然聚成簇 → 簇大了再加结构</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  先写 5 篇 Python 笔记</span></span>
+<span class="line"><span>  写 3 篇 PyTorch 笔记  </span></span>
+<span class="line"><span>  突然发现：它们都是「AI学习」的一部分 → 建一个 MOC 收起来</span></span></code></pre>
+<h3 id="为什么自下而上更好">为什么自下而上更好？</h3>
+<p><strong>因为你还没学完的时候，不可能知道最终的结构应该是什么样的。</strong></p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>你开始学「机器学习」时：</span></span>
+<span class="line"><span>  - 不知道「监督学习」和「无监督学习」是两大分支（刚学完才知道）</span></span>
+<span class="line"><span>  - 不知道「迁移学习」会变成一个重要专题（踩坑后才懂）</span></span>
+<span class="line"><span>  - 不知道你会用 PyTorch 而不是 TensorFlow（用了才知道）</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>自顶向下强制你预先猜一个结构 → 必然猜错 → 后面要重构</span></span>
+<span class="line"><span>自下而上让结构从笔记中自然长出来 → 结构与知识同步成熟</span></span></code></pre>
+<hr>
+<h2 id="4-第四个底层原则双向链接改变信息的发现方式">4. 第四个底层原则：双向链接改变信息的发现方式</h2>
+<h3 id="单向链接传统笔记软件">单向链接（传统笔记软件）</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>你翻到笔记 A → 底部有链接指向笔记 B → 只看得到 A→B 这一条线</span></span></code></pre>
+<h3 id="双向链接obsidian">双向链接（Obsidian）</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>你在看笔记 A</span></span>
+<span class="line"><span>  → 底部「反向链接」面板显示：笔记 C、笔记 D、笔记 E 都引用了 A</span></span>
+<span class="line"><span>  → 你突然发现：原来 A 这个概念跟之前完全没想到的 D 也有关系</span></span>
+<span class="line"><span>  → 灵感来了</span></span></code></pre>
+<h3 id="为什么双向链接是革命性的">为什么双向链接是革命性的？</h3>
+<p><strong>因为人类大脑就是这样工作的。</strong></p>
+<p>你想到一个概念时，不是顺着一个树状结构往下找，而是：</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>「注意力机制」→ 你脑中跳出...</span></span>
+<span class="line"><span>    ├── Transformer 架构</span></span>
+<span class="line"><span>    ├── 机器翻译应用场景</span></span>
+<span class="line"><span>    ├── 我最近在看的论文</span></span>
+<span class="line"><span>    └── 欸？它跟 RAG 也有关系...</span></span></code></pre>
+<p>这就是<strong>联想式思考</strong>。Obsidian 的双向链接就是在模拟这个过程。
+而文件夹结构模拟的是<strong>图书馆编目员</strong>的思维——这两个思维方式完全不同。</p>
+<hr>
+<h2 id="5-第五个底层原则写笔记就是思考">5. 第五个底层原则：写笔记就是思考</h2>
+<h3 id="大多数人的误区">大多数人的误区</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>阅读 → 划线/高亮 → 保存 → 再也不看了</span></span></code></pre>
+<p>这是一种<strong>被动收集</strong>——你觉得在「积累知识」，其实只是在搬运文字。</p>
+<h3 id="obsidian-倡导的方式">Obsidian 倡导的方式</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>阅读 → 理解 → 用自己的话重写 → 建立链接 → 纳入知识网络</span></span></code></pre>
+<p><strong>判断标准：你是不是用自己的话重新写了一篇？</strong></p>
+<p>如果是直接复制粘贴，那不是笔记，是<strong>剪报</strong>。
+如果是看了以后，关掉原文，用你自己的语言解释了一遍，并且跟已有笔记建立了链接——那才是真正的笔记。</p>
+<blockquote>
+<p><strong>写作即思考。</strong> 你不需要「先想清楚再写」——你是通过写来想清楚的。</p>
+</blockquote>
+<hr>
+<h2 id="6-第六个底层原则渐进式学习">6. 第六个底层原则：渐进式学习</h2>
+<p>知识不是一次到位的，而是逐步加深的。</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>第1层：捕获（Capture）</span></span>
+<span class="line"><span>  快速记下想法，不追求完美</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>第2层：整理（Organize）  </span></span>
+<span class="line"><span>  建立链接，放到 MOC 中</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>第3层：提炼（Distill）</span></span>
+<span class="line"><span>  标识重点，写下自己的理解</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>第4层：表达（Express）</span></span>
+<span class="line"><span>  输出成文章、项目、报告</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>第5层：连接（Connect）</span></span>
+<span class="line"><span>  在更高层次上打通不同领域</span></span></code></pre>
+<p><strong>Obsidian 的灵活性在于：同一篇笔记可以在不同阶段做不同的事。</strong></p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>一篇新笔记：</span></span>
+<span class="line"><span>  - 今天：随便写几个要点 → 捕获状态</span></span>
+<span class="line"><span>  - 一周后：加了个 MOC 链接 → 整理状态  </span></span>
+<span class="line"><span>  - 一个月后：写了段自己的理解 → 提炼状态</span></span>
+<span class="line"><span>  - 半年后：用来写了一篇文章 → 表达状态</span></span></code></pre>
+<p>没有强制流程，没有固定模板——怎么用取决于你当前的需要。</p>
+<hr>
+<h2 id="7-第七个底层原则你的数据你做主">7. 第七个底层原则：你的数据你做主</h2>
+<h3 id="本地优先--纯文本">本地优先 + 纯文本</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="markdown"><code><span class="line"><span style="color:var(--astro-code-foreground);font-weight:bold"># 这篇笔记就是一个普通文本文件</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">- 没有专有格式</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">- 没有数据库依赖</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">- 没有云服务绑定</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">- 任何文本编辑器都能打开</span></span></code></pre>
+<h3 id="这意味着什么">这意味着什么？</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>场景</th><th>其他笔记软件</th><th>Obsidian</th></tr></thead><tbody><tr><td>软件停止开发</td><td>笔记锁死在里面</td><td><strong>文件还在，用别的工具继续编辑</strong></td></tr><tr><td>想批量操作</td><td>只能通过官方 API</td><td><code>grep</code>、<code>sed</code>、Python 脚本随便处理</td></tr><tr><td>换工具</td><td>导出格式经常乱</td><td><strong>本来就是标准 Markdown，直接迁移</strong></td></tr><tr><td>版本管理</td><td>没有或有限</td><td><code>git init</code> 就搞定了</td></tr><tr><td>离线使用</td><td>功能受限</td><td><strong>完全一样，纯本地文件</strong></td></tr></tbody></table>
+<p><strong>这不是技术选择，而是一种对数据所有权的态度。</strong></p>
+<hr>
+<h2 id="8-所有原则的关系图谱">8. 所有原则的关系图谱</h2>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="mermaid"><code><span class="line"><span style="color:var(--astro-code-foreground)">graph TD</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">    A[知识 = 网络, 不是文件] --> B[用链接代替文件夹]</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">    A --> C[自下而上生长结构]</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">    B --> D[原子化笔记]</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">    B --> E[双向链接发现关联]</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">    C --> F[MOC 作为导航]</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">    D --> G[笔记像乐高积木, 可以任意组合]</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">    E --> H[联想到意外连接]</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">    F --> I[鸟瞰知识体系]</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">    G --> J[渐进式学习]</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">    H --> J</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">    I --> J</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">    J --> K[写笔记 = 思考]</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">    K --> L[知识内化]</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">    M[纯文本本地存储] --> N[数据所有权]</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">    N --> O[自由迁移/处理/备份]</span></span></code></pre>
+<hr>
+<h2 id="9-这些原则实际意味着什么操作建议">9. 这些原则实际意味着什么——操作建议</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>原则</th><th>操作上怎么做</th></tr></thead><tbody><tr><td><strong>链接 > 文件夹</strong></td><td>写 <code>[[]]</code> 比建文件夹更重要。犹豫放哪？先写链接。</td></tr><tr><td><strong>原子化笔记</strong></td><td>一篇笔记只讲一个概念。超过一屏就考虑拆分。</td></tr><tr><td><strong>自下而上</strong></td><td>不用提前设计结构。写到 10 篇相关笔记时，再建 MOC。</td></tr><tr><td><strong>双向链接</strong></td><td>每篇笔记底部留一块「相关笔记」区。</td></tr><tr><td><strong>写就是思考</strong></td><td>不要复制粘贴。关掉原文用自己的话写。</td></tr><tr><td><strong>渐进式</strong></td><td>允许笔记是「未完成」的。先记下来，以后慢慢完善。</td></tr><tr><td><strong>数据主权</strong></td><td>定期 git 备份。不依赖任何云服务作为唯一存储。</td></tr></tbody></table>
+<hr>
+<h2 id="10-和其他软件的本质差异">10. 和其他软件的本质差异</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>维度</th><th>Obsidian</th><th>Notion / 飞书</th><th>印象笔记 / 有道</th></tr></thead><tbody><tr><td><strong>对知识的理解</strong></td><td>知识 = 网络</td><td>知识 = 数据库</td><td>知识 = 文件</td></tr><tr><td><strong>核心操作</strong></td><td><code>[[]]</code> 建立链接</td><td>拖拽建表、关联数据库</td><td>建笔记本、打标签</td></tr><tr><td><strong>结构来源</strong></td><td>自下而上生长</td><td>自顶向下设计</td><td>自顶向下设计</td></tr><tr><td><strong>知识发现</strong></td><td>图谱 + 反向链接</td><td>数据库筛选</td><td>搜索</td></tr><tr><td><strong>数据归属</strong></td><td>本地纯文本</td><td>云端数据库</td><td>云端专有格式</td></tr><tr><td><strong>思考深度</strong></td><td>需要主动写和组织</td><td>偏收集和整理</td><td>偏收集</td></tr></tbody></table>
+<p><strong>选哪个不取决于功能多少，而取决于你认同哪种「知识观」。</strong></p>
+<hr>
+<h2 id="-总结底层逻辑--一套认知假设">🎯 总结：底层逻辑 = 一套认知假设</h2>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>你认为知识是：</span></span>
+<span class="line"><span>  文件 → 用 笔记软件      ← 印象笔记、有道云</span></span>
+<span class="line"><span>  数据库 → 用 Notion      ← Notion、飞书、AirTable</span></span>
+<span class="line"><span>  网络 → 用 Obsidian      ← Obsidian、Roam Research、Logseq</span></span></code></pre>
+<p>Obsidian 的底层逻辑不是一套功能列表，而是一套关于「知识是什么、知识怎么生长」的假设。当你认同这些假设时，Obsidian 用起来得心应手；当你不认同时，它就显得奇怪甚至难用。</p>
+<p>所以理解这 7 条底层逻辑，比学会任何一个具体操作都重要——因为它们回答的是 <strong>「为什么这样做」</strong>，而不是 <strong>「怎么做」</strong>。</p>
+<hr>
+<h2 id="-关联笔记">🔗 关联笔记</h2>
+<ul>
+<li>[[MOC-内容地图完全指南]] — MOC 是这套逻辑的具体实践</li>
+<li>[[Obsidian限定文件夹知识图谱指南]] — 图谱是可视化结果</li>
+<li>[[AI使用者Python基础调研报告]] — 用这套逻辑组织学习</li>
+</ul>
+<hr>
+<p><em>最后更新：2026-07-12</em></p> <div> <a href="/notes" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150">
+&larr; 返回笔记列表
+</a> </div>  </div> <!-- Previous / Next navigation -->  <hr class="!mt-12 !mb-8" data-astro-cid-bvzihdzo> <div data-astro-cid-bvzihdzo> <a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-bvzihdzo>
+&larr; 返回博客列表
+</a> </div> </div> </div> </article> </div>  </main> <footer class="border-t border-[var(--color-border)] mt-24 py-8" data-astro-cid-pux6a34n><div class="max-w-content flex items-center justify-between" data-astro-cid-pux6a34n><span class="text-sm text-[var(--color-text-tertiary)]" data-astro-cid-pux6a34n>
+&copy; 2026 星游寰宇
+</span><div class="flex items-center gap-4" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>博客</a><a href="/projects" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>项目</a><a href="/notes" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>日记</a><a href="/resources" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>资源</a><a href="/about" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>关于</a></div></div></footer> <div id="link-preview" style="display:none;position:fixed;z-index:99;max-width:18rem;pointer-events:none;" data-astro-cid-t7vshrbh></div>  <script type="module">(async()=>{try{const c=await fetch("/posts.json");if(!c.ok)return;const u=await c.json(),p=new Map(u.map(t=>[t.href,t])),e=document.getElementById("link-preview");if(!e)return;let n="",d;document.addEventListener("mouseover",t=>{const i=t.target.closest("a[href^='/blog/']");if(!i){e.style.display="none",n="";return}const s=i.getAttribute("href");if(!s||s===n)return;const o=p.get(s);o&&(n=s,d=setTimeout(()=>{e.innerHTML=`<div class="lp-title">${o.title}</div><div class="lp-summary">${o.summary}</div>`;const r=i.getBoundingClientRect();let a=r.left,l=r.bottom+6;a+288>window.innerWidth&&(a=window.innerWidth-296),l+80>window.innerHeight&&(l=r.top-80),Object.assign(e.style,{left:a+"px",top:l+"px",display:"block"})},300))},{passive:!0}),document.addEventListener("mouseout",t=>{t.target.closest("a[href^='/blog/']")&&(clearTimeout(d),e.style.display="none",n="")},{passive:!0})}catch{}})();</script> </body></html>  <script type="module">const c=document.getElementById("toc-toggle"),s=document.getElementById("toc-list"),i=document.getElementById("toc-chevron");c&&s&&i&&c.addEventListener("click",()=>{const o=s.classList.toggle("hidden");c.setAttribute("aria-expanded",String(o)),i.style.transform=o?"rotate(180deg)":""});const r=document.querySelectorAll(".toc-list a");if(r.length>0){const o=new IntersectionObserver(n=>{for(const t of n)t.isIntersecting&&r.forEach(e=>{e.classList.toggle("active",e.getAttribute("href")===`#${t.target.id}`)})},{rootMargin:"-80px 0px -80% 0px"});r.forEach(n=>{const t=n.getAttribute("href")?.slice(1);if(t){const e=document.getElementById(t);e&&o.observe(e)}})}</script>

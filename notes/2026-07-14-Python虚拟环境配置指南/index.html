@@ -1,0 +1,323 @@
+<!DOCTYPE html><html lang="zh-CN"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="一句话理解虚拟环境：每个项目拥有自己独立的 Python 解释器和包仓库，互不干扰。项目 A 用 Django 4.2，项目 B 用 Django 5.0——井水不犯河水。"><meta name="color-scheme" content="light"><!-- Open Graph --><meta property="og:title" content="Python虚拟环境配置指南 — 星游寰宇"><meta property="og:description" content="一句话理解虚拟环境：每个项目拥有自己独立的 Python 解释器和包仓库，互不干扰。项目 A 用 Django 4.2，项目 B 用 Django 5.0——井水不犯河水。"><meta property="og:url" content="https://code2239.github.io/notes/2026-07-14-Python虚拟环境配置指南"><meta property="og:type" content="article"><meta property="og:site_name" content="星游寰宇"><meta property="og:locale" content="zh_CN"><meta property="article:published_time" content="2026-07-14"><meta property="article:tag" content="python"><meta property="article:tag" content="virtualenv"><meta property="article:tag" content="venv"><meta property="article:tag" content="conda"><meta property="article:tag" content="uv"><meta property="article:tag" content="environment"><meta property="article:tag" content="engineering"><!-- Twitter Card --><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Python虚拟环境配置指南 — 星游寰宇"><meta name="twitter:description" content="一句话理解虚拟环境：每个项目拥有自己独立的 Python 解释器和包仓库，互不干扰。项目 A 用 Django 4.2，项目 B 用 Django 5.0——井水不犯河水。"><!-- Canonical --><link rel="canonical" href="https://code2239.github.io/notes/2026-07-14-Python虚拟环境配置指南"><title>Python虚拟环境配置指南 — 星游寰宇</title><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="alternate" type="application/rss+xml" title="星游寰宇 RSS" href="/rss.xml"><!-- Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"星游寰宇","url":"https://code2239.github.io","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://code2239.github.io/search?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://code2239.github.io"},{"@type":"ListItem","position":2,"name":"日记","item":"https://code2239.github.io/notes"},{"@type":"ListItem","position":3,"name":"2026 07 14 Python虚拟环境配置指南"}]},{"@context":"https://schema.org","@type":"BlogPosting","headline":"Python虚拟环境配置指南","description":"一句话理解虚拟环境：每个项目拥有自己独立的 Python 解释器和包仓库，互不干扰。项目 A 用 Django 4.2，项目 B 用 Django 5.0——井水不犯河水。","datePublished":"2026-07-14","url":"https://code2239.github.io/notes/2026-07-14-Python虚拟环境配置指南","keywords":"python, virtualenv, venv, conda, uv, environment, engineering"}]}</script><link rel="stylesheet" href="/_astro/_slug_.CXDKI3B6.css">
+<style>.back-to-top[data-astro-cid-gzprr2dq]{position:fixed;bottom:2rem;right:2rem;z-index:40;width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:50%;border:1px solid var(--color-border);background:var(--color-bg);color:var(--color-text-secondary);cursor:pointer;box-shadow:var(--shadow-md);transition:opacity .2s ease,transform .2s ease}.back-to-top[data-astro-cid-gzprr2dq]:hover{color:var(--color-accent);border-color:var(--color-accent);transform:translateY(-2px)}.back-to-top[data-astro-cid-gzprr2dq].hidden{opacity:0;pointer-events:none}.copy-btn[data-astro-cid-qqybitij]{position:absolute;top:8px;right:8px;padding:4px 10px;font-size:.6875rem;font-family:var(--font-sans);color:var(--color-text-tertiary);background:var(--color-bg);border:1px solid var(--color-border);border-radius:6px;cursor:pointer;opacity:0;transition:opacity .15s ease,color .15s ease}pre[data-astro-cid-qqybitij]:hover .copy-btn[data-astro-cid-qqybitij]{opacity:1}.copy-btn[data-astro-cid-qqybitij]:hover{color:var(--color-accent);border-color:var(--color-accent)}.copy-btn[data-astro-cid-qqybitij].copied{color:#16a34a;border-color:#16a34a}.blog-layout[data-astro-cid-bvzihdzo]{display:block}.blog-toc[data-astro-cid-bvzihdzo]{display:none}.blog-body[data-astro-cid-bvzihdzo]{min-width:0}@media(min-width:1024px){.blog-layout[data-astro-cid-bvzihdzo]{display:grid;grid-template-columns:14rem 1fr;gap:3rem;align-items:start}.blog-toc[data-astro-cid-bvzihdzo]{display:block}.blog-body[data-astro-cid-bvzihdzo]{padding-right:2rem}}@media(max-width:1023px){.blog-toc[data-astro-cid-bvzihdzo]{display:block;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid var(--color-border)}}
+</style></head> <body class="min-h-screen flex flex-col"> <nav class="sticky top-0 z-40 bg-[var(--color-bg)]/80 backdrop-blur-md border-b border-[var(--color-border)]" data-astro-cid-pux6a34n><div class="max-w-content flex items-center justify-between py-4" data-astro-cid-pux6a34n><a href="/" class="flex items-center gap-2.5 text-base font-semibold no-underline tracking-tight" data-astro-cid-pux6a34n><svg class="w-7 h-7" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" data-astro-cid-pux6a34n><circle cx="16" cy="16" r="15" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-pux6a34n></circle><circle cx="16" cy="16" r="3" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="16" cy="5" r="1.5" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="24" cy="10" r="1" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="8" cy="22" r="1" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="25" cy="21" r="0.8" fill="currentColor" data-astro-cid-pux6a34n></circle></svg>
+星游寰宇
+</a><!-- Desktop nav --><div class="hidden sm:flex items-center gap-5" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>博客</a><a href="/projects" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>项目</a><a href="/notes" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>日记</a><a href="/resources" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>资源</a><a href="/about" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>关于</a><button id="search-trigger" class="flex items-center gap-1.5 text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] bg-[var(--color-bg-secondary)] hover:bg-[var(--color-bg-tertiary)] border border-[var(--color-border)] hover:border-[var(--color-accent)]/30 rounded-lg px-3 py-1.5 cursor-pointer shadow-sm hover:shadow-md transition-all duration-200" aria-label="搜索 (Ctrl+K)" title="搜索 (Ctrl+K)" data-astro-cid-pux6a34n><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-pux6a34n><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" data-astro-cid-pux6a34n></path></svg><span class="hidden lg:inline" data-astro-cid-pux6a34n>搜索</span><kbd class="hidden lg:inline-flex items-center text-[0.625rem] font-mono text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1 py-px rounded" data-astro-cid-pux6a34n>Ctrl+K</kbd></button></div><!-- Mobile hamburger --><button id="menu-btn" class="sm:hidden flex flex-col gap-1 p-2 -mr-2 cursor-pointer" aria-label="打开菜单" data-astro-cid-pux6a34n><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-transform duration-200" data-astro-cid-pux6a34n></span><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-opacity duration-200" data-astro-cid-pux6a34n></span><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-transform duration-200" data-astro-cid-pux6a34n></span></button></div><!-- Mobile menu --><div id="mobile-menu" class="hidden sm:hidden border-t border-[var(--color-border)] bg-[var(--color-bg)]" data-astro-cid-pux6a34n><div class="max-w-content flex flex-col gap-2 py-4" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>博客</a><a href="/projects" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>项目</a><a href="/notes" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>日记</a><a href="/resources" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>资源</a><a href="/about" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>关于</a></div></div></nav>
+    <div id="search-overlay" class="srch-overlay" role="dialog" aria-modal="true" aria-label="全局搜索" data-astro-cid-mn7pezny> <div id="search-backdrop" class="srch-backdrop" data-astro-cid-mn7pezny></div> <div class="srch-panel" id="srch-panel" data-astro-cid-mn7pezny> <!-- Search input --> <div class="srch-input-row" data-astro-cid-mn7pezny> <svg class="srch-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-mn7pezny> <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" data-astro-cid-mn7pezny></path> </svg> <input type="text" id="search-input" class="srch-input" placeholder="搜索文章、项目、日记、资源..." autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="go" data-astro-cid-mn7pezny> <kbd class="srch-kbd" data-astro-cid-mn7pezny>Esc</kbd> </div> <!-- Results area --> <div id="search-results" class="srch-results" data-astro-cid-mn7pezny> <p class="srch-empty" id="search-empty-hint" data-astro-cid-mn7pezny>输入关键词开始搜索</p> </div> <!-- Skeleton loading --> <div id="search-skeleton" class="srch-skeleton" style="display:none;" aria-hidden="true" data-astro-cid-mn7pezny> <div class="srch-skeleton-line" style="width:75%" data-astro-cid-mn7pezny></div> <div class="srch-skeleton-line" style="width:50%" data-astro-cid-mn7pezny></div> <div class="srch-skeleton-line" style="width:60%" data-astro-cid-mn7pezny></div> </div> <!-- Footer hints --> <div class="srch-footer" data-astro-cid-mn7pezny> <div class="srch-footer-hints" data-astro-cid-mn7pezny> <span data-astro-cid-mn7pezny><kbd data-astro-cid-mn7pezny>↑</kbd><kbd data-astro-cid-mn7pezny>↓</kbd> 导航</span> <span data-astro-cid-mn7pezny><kbd data-astro-cid-mn7pezny>↵</kbd> 打开</span> <span data-astro-cid-mn7pezny><kbd data-astro-cid-mn7pezny>Ctrl</kbd>+<kbd data-astro-cid-mn7pezny>K</kbd> 切换</span> </div> <div class="srch-footer-brand" data-astro-cid-mn7pezny>
+powered by Orama
+</div> </div> </div> </div> <script type="module" src="/_astro/Navigation.astro_astro_type_script_index_0_lang.15n1EYJp.js"></script> <main class="flex-1">  <div class="reading-progress" id="reading-progress" style="width: 0%"></div> <script type="module">const o=document.getElementById("reading-progress");if(!o)throw new Error("Reading progress bar element not found");const r=()=>{const n=window.scrollY,e=document.documentElement.scrollHeight-window.innerHeight,t=e>0?n/e*100:0;o.style.width=`${Math.min(t,100)}%`};window.addEventListener("scroll",r,{passive:!0});</script> <button id="back-to-top" class="back-to-top hidden" aria-label="返回顶部" data-astro-cid-gzprr2dq> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-gzprr2dq> <polyline points="18 15 12 9 6 15" data-astro-cid-gzprr2dq></polyline> </svg> </button>  <script type="module">const o=document.getElementById("back-to-top");o&&(window.addEventListener("scroll",()=>{o.classList.toggle("hidden",window.scrollY<400)},{passive:!0}),o.addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"})));</script> <script type="module">document.querySelectorAll("pre").forEach(e=>{const t=document.createElement("button");t.className="copy-btn",t.textContent="复制",t.addEventListener("click",async()=>{const n=e.querySelector("code")?.textContent||e.textContent||"";try{await navigator.clipboard.writeText(n),t.textContent="已复制",t.classList.add("copied"),setTimeout(()=>{t.textContent="复制",t.classList.remove("copied")},2e3)}catch{t.textContent="失败",setTimeout(()=>{t.textContent="复制"},2e3)}}),e.style.position="relative",e.appendChild(t)});</script> <div class="px-6 xl:px-12 pt-12 pb-16" data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <header class="mb-12 text-center" data-astro-cid-bvzihdzo> <h1 class="text-3xl font-semibold mb-3 tracking-tight" data-astro-cid-bvzihdzo>Python虚拟环境配置指南</h1> <div class="flex items-center justify-center gap-2 text-[var(--color-text-tertiary)] text-sm" data-astro-cid-bvzihdzo> <time datetime="2026-07-14" data-astro-cid-bvzihdzo>2026-07-14</time> <span class="text-[var(--color-border)]" data-astro-cid-bvzihdzo>·</span> <span data-astro-cid-bvzihdzo>16 分钟阅读</span>  <span class="text-[var(--color-border)]" data-astro-cid-bvzihdzo>·</span> <span class="text-sm text-[var(--color-text-tertiary)]"> <span> python<span class="mx-1">·</span> </span><span> virtualenv<span class="mx-1">·</span> </span><span> venv<span class="mx-1">·</span> </span><span> conda<span class="mx-1">·</span> </span><span> uv<span class="mx-1">·</span> </span><span> environment<span class="mx-1">·</span> </span><span> engineering </span> </span>  </div> </header> <div class="blog-layout" data-astro-cid-bvzihdzo> <aside class="blog-toc" data-astro-cid-bvzihdzo> <div class="sticky top-14 max-h-[calc(100vh-3.5rem)] overflow-y-auto" data-astro-cid-bvzihdzo> <button id="toc-toggle" class="hidden max-md:flex items-center gap-1 text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-3 cursor-pointer border-none bg-transparent p-0" aria-expanded="false" aria-controls="toc-list" data-astro-cid-bvzihdzo>
+目录
+<svg id="toc-chevron" class="w-3 h-3 transition-transform duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-bvzihdzo><polyline points="6 9 12 15 18 9" data-astro-cid-bvzihdzo></polyline></svg> </button> <span class="text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-3 max-md:hidden" data-astro-cid-bvzihdzo>目录</span> <div id="toc-list" class="max-md:hidden" data-astro-cid-bvzihdzo> <nav class="toc"> <p class="text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-3">目录</p> <ul class="toc-list"> <li class> <a href="#1-为什么需要虚拟环境">1. 为什么需要虚拟环境？</a> </li><li class> <a href="#2-方案一venvpython-内置零安装">2. 方案一：venv（Python 内置，零安装）</a> </li><li class="toc-h3"> <a href="#21-创建虚拟环境">2.1 创建虚拟环境</a> </li><li class="toc-h3"> <a href="#22-激活虚拟环境">2.2 激活虚拟环境</a> </li><li class="toc-h3"> <a href="#23-安装依赖">2.3 安装依赖</a> </li><li class="toc-h3"> <a href="#24-退出虚拟环境">2.4 退出虚拟环境</a> </li><li class="toc-h3"> <a href="#25-删除虚拟环境">2.5 删除虚拟环境</a> </li><li class="toc-h3"> <a href="#26-标准工作流日常">2.6 标准工作流（日常）</a> </li><li class="toc-h3"> <a href="#27-不要提交-venv-到-git">2.7 不要提交 .venv 到 Git</a> </li><li class> <a href="#3-方案二conda数据科学--ai-标配">3. 方案二：Conda（数据科学 / AI 标配）</a> </li><li class="toc-h3"> <a href="#31-安装-miniconda推荐">3.1 安装 Miniconda（推荐）</a> </li><li class="toc-h3"> <a href="#32-常用命令">3.2 常用命令</a> </li><li class="toc-h3"> <a href="#33-与-venv-的关键区别">3.3 与 venv 的关键区别</a> </li><li class> <a href="#4-方案三uv新贵极速">4. 方案三：uv（新贵，极速）</a> </li><li class> <a href="#5-实战你的-ai-项目如何配置">5. 实战：你的 AI 项目如何配置</a> </li><li class="toc-h3"> <a href="#推荐conda--pip-混用">推荐：Conda + pip 混用</a> </li><li class="toc-h3"> <a href="#轻量venv每个项目独立">轻量：venv（每个项目独立）</a> </li><li class> <a href="#6-常见问题">6. 常见问题</a> </li><li class="toc-h3"> <a href="#q1-pip-命令走的是系统级还是环境内">Q1: pip 命令走的是系统级还是环境内？</a> </li><li class="toc-h3"> <a href="#q2-为什么我的虚拟环境激活后还是调用了系统-python">Q2: 为什么我的虚拟环境激活后还是调用了系统 Python？</a> </li><li class="toc-h3"> <a href="#q3-删除环境后项目还能运行吗">Q3: 删除环境后，项目还能运行吗？</a> </li><li class="toc-h3"> <a href="#q4-多人协作时怎么管理环境">Q4: 多人协作时怎么管理环境？</a> </li><li class="toc-h3"> <a href="#q5-pycharmvs-code-里怎么配置">Q5: PyCharm/VS Code 里怎么配置？</a> </li><li class> <a href="#7-三方案速查表">7. 三方案速查表</a> </li><li class> <a href="#-信息源">🔗 信息源</a> </li> </ul> </nav> </div> </div> </aside> <div class="blog-body" data-astro-cid-bvzihdzo> <div class="prose prose-neutral max-w-none" data-astro-cid-bvzihdzo>   <h1 id="python-虚拟环境配置完全指南">Python 虚拟环境配置完全指南</h1>
+<blockquote>
+<p><strong>一句话理解虚拟环境</strong>：每个项目拥有自己独立的 Python 解释器和包仓库，互不干扰。项目 A 用 Django 4.2，项目 B 用 Django 5.0——井水不犯河水。</p>
+</blockquote>
+<hr>
+<h2 id="1-为什么需要虚拟环境">1. 为什么需要虚拟环境？</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>问题</th><th>无虚拟环境</th><th>有虚拟环境</th></tr></thead><tbody><tr><td>依赖冲突</td><td>项目A需要 <code>torch==1.13</code>，项目B需要 <code>torch==2.0</code> → 只能装一个</td><td>各项目独立，各装各的</td></tr><tr><td>系统污染</td><td><code>pip install</code> 装到系统级，卸载不干净</td><td>环境删了就干净</td></tr><tr><td>权限问题</td><td>系统级安装需要 <code>sudo</code></td><td>用户目录下操作，无需权限</td></tr><tr><td>复现困难</td><td>不知道项目装了哪些包</td><td>有 <code>requirements.txt</code> / <code>pyproject.toml</code>，一键复现</td></tr></tbody></table>
+<hr>
+<h2 id="2-方案一venvpython-内置零安装">2. 方案一：venv（Python 内置，零安装）</h2>
+<p>Python 3.3+ 自带 <code>venv</code>，<strong>零依赖、零安装</strong>，适合绝大多数项目。</p>
+<h3 id="21-创建虚拟环境">2.1 创建虚拟环境</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:var(--astro-code-token-comment)"># 在项目目录下创建虚拟环境（约定命名 .venv 或 venv）</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">cd</span><span style="color:var(--astro-code-token-string)"> your_project</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">python3</span><span style="color:var(--astro-code-token-string)"> -m</span><span style="color:var(--astro-code-token-string)"> venv</span><span style="color:var(--astro-code-token-string)"> .venv</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 执行后项目目录下会多出一个 .venv 文件夹</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># .venv/</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">#   ├── bin/         # 激活脚本、python 解释器</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">#   ├── lib/         # 包安装目录</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">#   └── pyvenv.cfg   # 配置文件</span></span></code></pre>
+<h3 id="22-激活虚拟环境">2.2 激活虚拟环境</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:var(--astro-code-token-comment)"># macOS / Linux</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">source</span><span style="color:var(--astro-code-token-string)"> .venv/bin/activate</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># Windows (Command Prompt)</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">.venv\Scripts\activate.bat</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># Windows (PowerShell)</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">.venv\Scripts\Activate.ps1</span></span></code></pre>
+<p><strong>激活后</strong>，终端会出现环境名提示：</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:var(--astro-code-foreground)">(</span><span style="color:var(--astro-code-token-function)">.venv</span><span style="color:var(--astro-code-foreground)">) </span><span style="color:var(--astro-code-token-function)">your_project</span><span style="color:var(--astro-code-foreground)"> $ </span><span style="color:var(--astro-code-token-string)">_</span></span></code></pre>
+<p>此时 <code>python</code> 和 <code>pip</code> 都指向虚拟环境内的版本：</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:var(--astro-code-foreground)">(</span><span style="color:var(--astro-code-token-function)">.venv</span><span style="color:var(--astro-code-foreground)">) </span><span style="color:var(--astro-code-token-function)">$</span><span style="color:var(--astro-code-token-string)"> which</span><span style="color:var(--astro-code-token-string)"> python</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># → /path/to/your_project/.venv/bin/python</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">(</span><span style="color:var(--astro-code-token-function)">.venv</span><span style="color:var(--astro-code-foreground)">) </span><span style="color:var(--astro-code-token-function)">$</span><span style="color:var(--astro-code-token-string)"> which</span><span style="color:var(--astro-code-token-string)"> pip</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># → /path/to/your_project/.venv/bin/pip</span></span></code></pre>
+<h3 id="23-安装依赖">2.3 安装依赖</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:var(--astro-code-token-comment)"># 安装包</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">(</span><span style="color:var(--astro-code-token-function)">.venv</span><span style="color:var(--astro-code-foreground)">) </span><span style="color:var(--astro-code-token-function)">$</span><span style="color:var(--astro-code-token-string)"> pip</span><span style="color:var(--astro-code-token-string)"> install</span><span style="color:var(--astro-code-token-string)"> torch</span><span style="color:var(--astro-code-token-string)"> transformers</span><span style="color:var(--astro-code-token-string)"> datasets</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 从文件安装（最常用）</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">(</span><span style="color:var(--astro-code-token-function)">.venv</span><span style="color:var(--astro-code-foreground)">) </span><span style="color:var(--astro-code-token-function)">$</span><span style="color:var(--astro-code-token-string)"> pip</span><span style="color:var(--astro-code-token-string)"> install</span><span style="color:var(--astro-code-token-string)"> -r</span><span style="color:var(--astro-code-token-string)"> requirements.txt</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 导出当前环境（生成 requirements.txt）</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">(</span><span style="color:var(--astro-code-token-function)">.venv</span><span style="color:var(--astro-code-foreground)">) </span><span style="color:var(--astro-code-token-function)">$</span><span style="color:var(--astro-code-token-string)"> pip</span><span style="color:var(--astro-code-token-string)"> freeze</span><span style="color:var(--astro-code-token-keyword)"> ></span><span style="color:var(--astro-code-token-string)"> requirements.txt</span></span></code></pre>
+<h3 id="24-退出虚拟环境">2.4 退出虚拟环境</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:var(--astro-code-foreground)">(</span><span style="color:var(--astro-code-token-function)">.venv</span><span style="color:var(--astro-code-foreground)">) </span><span style="color:var(--astro-code-token-function)">$</span><span style="color:var(--astro-code-token-string)"> deactivate</span></span></code></pre>
+<h3 id="25-删除虚拟环境">2.5 删除虚拟环境</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:var(--astro-code-token-comment)"># 直接删文件夹即可</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">rm</span><span style="color:var(--astro-code-token-string)"> -rf</span><span style="color:var(--astro-code-token-string)"> .venv</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 然后用同样的方式重新创建</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">python3</span><span style="color:var(--astro-code-token-string)"> -m</span><span style="color:var(--astro-code-token-string)"> venv</span><span style="color:var(--astro-code-token-string)"> .venv</span></span></code></pre>
+<h3 id="26-标准工作流日常">2.6 标准工作流（日常）</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:var(--astro-code-token-comment)"># 1. 克隆/创建项目</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">git</span><span style="color:var(--astro-code-token-string)"> clone</span><span style="color:var(--astro-code-token-string)"> xxx</span><span style="color:var(--astro-code-token-punctuation)"> &#x26;&#x26;</span><span style="color:var(--astro-code-token-function)"> cd</span><span style="color:var(--astro-code-token-string)"> xxx</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 2. 创建虚拟环境</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">python3</span><span style="color:var(--astro-code-token-string)"> -m</span><span style="color:var(--astro-code-token-string)"> venv</span><span style="color:var(--astro-code-token-string)"> .venv</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 3. 激活</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">source</span><span style="color:var(--astro-code-token-string)"> .venv/bin/activate</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 4. 安装依赖</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">pip</span><span style="color:var(--astro-code-token-string)"> install</span><span style="color:var(--astro-code-token-string)"> -r</span><span style="color:var(--astro-code-token-string)"> requirements.txt</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 5. 开始开发...</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 6. 更新依赖清单（安装新包后）</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">pip</span><span style="color:var(--astro-code-token-string)"> freeze</span><span style="color:var(--astro-code-token-keyword)"> ></span><span style="color:var(--astro-code-token-string)"> requirements.txt</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 7. 退出</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">deactivate</span></span></code></pre>
+<h3 id="27-不要提交-venv-到-git">2.7 不要提交 .venv 到 Git</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span># .gitignore 中添加</span></span>
+<span class="line"><span>.venv/</span></span>
+<span class="line"><span>venv/</span></span></code></pre>
+<p><strong>原因</strong>：虚拟环境文件夹体积大（几十 MB 到几百 MB），且依赖操作系统架构，别人拉下来不通用。只提交 <code>requirements.txt</code> 即可。</p>
+<hr>
+<h2 id="3-方案二conda数据科学--ai-标配">3. 方案二：Conda（数据科学 / AI 标配）</h2>
+<p>Conda 不仅能管理 Python 环境，还能管理<strong>非 Python 依赖</strong>（如 CUDA、cuDNN、FFmpeg），是 AI/数据科学领域的事实标准。</p>
+<h3 id="31-安装-miniconda推荐">3.1 安装 Miniconda（推荐）</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:var(--astro-code-token-comment)"># macOS (Apple Silicon 选 arm64, Intel 选 x86_64)</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 下载：https://docs.conda.io/en/latest/miniconda.html</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 安装后验证</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">conda</span><span style="color:var(--astro-code-token-string)"> --version</span></span></code></pre>
+<h3 id="32-常用命令">3.2 常用命令</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:var(--astro-code-token-comment)"># 创建环境，指定 Python 版本</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">conda</span><span style="color:var(--astro-code-token-string)"> create</span><span style="color:var(--astro-code-token-string)"> -n</span><span style="color:var(--astro-code-token-string)"> myenv</span><span style="color:var(--astro-code-token-string)"> python=</span><span style="color:var(--astro-code-token-constant)">3.11</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 创建环境并同时安装包</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">conda</span><span style="color:var(--astro-code-token-string)"> create</span><span style="color:var(--astro-code-token-string)"> -n</span><span style="color:var(--astro-code-token-string)"> torch_env</span><span style="color:var(--astro-code-token-string)"> python=</span><span style="color:var(--astro-code-token-constant)">3.11</span><span style="color:var(--astro-code-token-string)"> pytorch</span><span style="color:var(--astro-code-token-string)"> torchvision</span><span style="color:var(--astro-code-token-string)"> -c</span><span style="color:var(--astro-code-token-string)"> pytorch</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 激活/退出</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">conda</span><span style="color:var(--astro-code-token-string)"> activate</span><span style="color:var(--astro-code-token-string)"> myenv</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">conda</span><span style="color:var(--astro-code-token-string)"> deactivate</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 列出所有环境</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">conda</span><span style="color:var(--astro-code-token-string)"> env</span><span style="color:var(--astro-code-token-string)"> list</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 删除环境</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">conda</span><span style="color:var(--astro-code-token-string)"> remove</span><span style="color:var(--astro-code-token-string)"> -n</span><span style="color:var(--astro-code-token-string)"> myenv</span><span style="color:var(--astro-code-token-string)"> --all</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 导出/导入环境</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">conda</span><span style="color:var(--astro-code-token-string)"> env</span><span style="color:var(--astro-code-token-string)"> export</span><span style="color:var(--astro-code-token-keyword)"> ></span><span style="color:var(--astro-code-token-string)"> environment.yml</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">conda</span><span style="color:var(--astro-code-token-string)"> env</span><span style="color:var(--astro-code-token-string)"> create</span><span style="color:var(--astro-code-token-string)"> -f</span><span style="color:var(--astro-code-token-string)"> environment.yml</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 安装包（conda VS pip 混用）</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">conda</span><span style="color:var(--astro-code-token-string)"> install</span><span style="color:var(--astro-code-token-string)"> numpy</span><span style="color:var(--astro-code-token-string)"> pandas</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">pip</span><span style="color:var(--astro-code-token-string)"> install</span><span style="color:var(--astro-code-token-string)"> torch</span><span style="color:var(--astro-code-token-string)"> transformers</span><span style="color:var(--astro-code-token-comment)">  # conda 没有的用 pip 补</span></span></code></pre>
+<h3 id="33-与-venv-的关键区别">3.3 与 venv 的关键区别</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>特性</th><th>venv</th><th>Conda</th></tr></thead><tbody><tr><td>Python 版本</td><td>继承系统的 Python 版本</td><td><strong>可指定任意版本</strong>（3.8/3.9/3.10/3.11…）</td></tr><tr><td>非 Python 包</td><td>❌ 不能</td><td>✅ CUDA、cuDNN、gcc、FFmpeg</td></tr><tr><td>包数量</td><td>pip 仓库（PyPI）</td><td>conda 仓库 + PyPI</td></tr><tr><td>体积</td><td>小</td><td>较大</td></tr><tr><td>AI 项目适用性</td><td>基本够用</td><td>更推荐（CUDA、GPU 版本管理方便）</td></tr></tbody></table>
+<hr>
+<h2 id="4-方案三uv新贵极速">4. 方案三：uv（新贵，极速）</h2>
+<p><code>uv</code> 是 Rust 编写的 Python 包管理器，<strong>速度比 pip 快 10-100 倍</strong>，可完全替代 pip + venv。PyCharm 2025.3+ 已将其设为默认包管理器。</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:var(--astro-code-token-comment)"># 安装 uv</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">curl</span><span style="color:var(--astro-code-token-string)"> -LsSf</span><span style="color:var(--astro-code-token-string)"> https://astral.sh/uv/install.sh</span><span style="color:var(--astro-code-token-keyword)"> |</span><span style="color:var(--astro-code-token-function)"> sh</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 创建虚拟环境</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">uv</span><span style="color:var(--astro-code-token-string)"> venv</span><span style="color:var(--astro-code-token-string)"> .venv</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 激活（和 venv 一样）</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">source</span><span style="color:var(--astro-code-token-string)"> .venv/bin/activate</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 安装依赖（极快！）</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">uv</span><span style="color:var(--astro-code-token-string)"> pip</span><span style="color:var(--astro-code-token-string)"> install</span><span style="color:var(--astro-code-token-string)"> -r</span><span style="color:var(--astro-code-token-string)"> requirements.txt</span></span></code></pre>
+<hr>
+<h2 id="5-实战你的-ai-项目如何配置">5. 实战：你的 AI 项目如何配置</h2>
+<p>基于你在学的 [[AI开发三周系统学习计划]]，推荐工作流：</p>
+<h3 id="推荐conda--pip-混用">推荐：Conda + pip 混用</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:var(--astro-code-token-comment)"># 1. 为三周学习计划创建一个统一环境</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">conda</span><span style="color:var(--astro-code-token-string)"> create</span><span style="color:var(--astro-code-token-string)"> -n</span><span style="color:var(--astro-code-token-string)"> ai_bootcamp</span><span style="color:var(--astro-code-token-string)"> python=</span><span style="color:var(--astro-code-token-constant)">3.11</span><span style="color:var(--astro-code-token-string)"> -y</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 2. 激活</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">conda</span><span style="color:var(--astro-code-token-string)"> activate</span><span style="color:var(--astro-code-token-string)"> ai_bootcamp</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 3. 安装核心依赖</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">pip</span><span style="color:var(--astro-code-token-string)"> install</span><span style="color:var(--astro-code-token-string)"> httpx</span><span style="color:var(--astro-code-token-string)"> pydantic</span><span style="color:var(--astro-code-token-string)"> openai</span><span style="color:var(--astro-code-token-string)"> anthropic</span><span style="color:var(--astro-code-token-comment)">    # LLM 调用</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">pip</span><span style="color:var(--astro-code-token-string)"> install</span><span style="color:var(--astro-code-token-string)"> langchain</span><span style="color:var(--astro-code-token-string)"> chromadb</span><span style="color:var(--astro-code-token-comment)">                  # RAG</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">pip</span><span style="color:var(--astro-code-token-string)"> install</span><span style="color:var(--astro-code-token-string)"> jupyter</span><span style="color:var(--astro-code-token-string)"> matplotlib</span><span style="color:var(--astro-code-token-comment)">                  # 可视化/笔记</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 4. 验证</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">python</span><span style="color:var(--astro-code-token-string)"> -c</span><span style="color:var(--astro-code-token-string-expression)"> "import httpx; import pydantic; print('✅ 环境就绪')"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 5. 用完退出</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">conda</span><span style="color:var(--astro-code-token-string)"> deactivate</span></span></code></pre>
+<h3 id="轻量venv每个项目独立">轻量：venv（每个项目独立）</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:var(--astro-code-token-comment)"># 每个 Block 创建独立环境</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">mkdir</span><span style="color:var(--astro-code-token-string)"> block_a</span><span style="color:var(--astro-code-token-punctuation)"> &#x26;&#x26;</span><span style="color:var(--astro-code-token-function)"> cd</span><span style="color:var(--astro-code-token-string)"> block_a</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">python3</span><span style="color:var(--astro-code-token-string)"> -m</span><span style="color:var(--astro-code-token-string)"> venv</span><span style="color:var(--astro-code-token-string)"> .venv</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">source</span><span style="color:var(--astro-code-token-string)"> .venv/bin/activate</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">pip</span><span style="color:var(--astro-code-token-string)"> install</span><span style="color:var(--astro-code-token-string)"> pydantic</span><span style="color:var(--astro-code-token-string)"> mypy</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 切到 Block B 时</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">cd</span><span style="color:var(--astro-code-token-string)"> ../block_b</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">python3</span><span style="color:var(--astro-code-token-string)"> -m</span><span style="color:var(--astro-code-token-string)"> venv</span><span style="color:var(--astro-code-token-string)"> .venv</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">source</span><span style="color:var(--astro-code-token-string)"> .venv/bin/activate</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">pip</span><span style="color:var(--astro-code-token-string)"> install</span><span style="color:var(--astro-code-token-string)"> httpx</span><span style="color:var(--astro-code-token-string)"> openai</span><span style="color:var(--astro-code-token-string)"> anthropic</span></span></code></pre>
+<hr>
+<h2 id="6-常见问题">6. 常见问题</h2>
+<h3 id="q1-pip-命令走的是系统级还是环境内">Q1: <code>pip</code> 命令走的是系统级还是环境内？</h3>
+<p>运行 <code>which pip</code> 确认路径：</p>
+<ul>
+<li>如果在环境内 → <code>.venv/bin/pip</code> ✅</li>
+<li>如果显示 <code>/usr/local/bin/pip</code> → 没有激活环境 ❌</li>
+</ul>
+<h3 id="q2-为什么我的虚拟环境激活后还是调用了系统-python">Q2: 为什么我的虚拟环境激活后还是调用了系统 Python？</h3>
+<p>检查 <code>PATH</code> 变量：</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:var(--astro-code-token-function)">echo</span><span style="color:var(--astro-code-foreground)"> $PATH</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 应该看到 .venv/bin 在最前面：/project/.venv/bin:/usr/bin:/bin:...</span></span></code></pre>
+<h3 id="q3-删除环境后项目还能运行吗">Q3: 删除环境后，项目还能运行吗？</h3>
+<p><strong>不能</strong>。删除环境 = 删除了所有依赖包。需要重新创建并安装。</p>
+<h3 id="q4-多人协作时怎么管理环境">Q4: 多人协作时怎么管理环境？</h3>
+<ul>
+<li>提交 <code>requirements.txt</code> 或 <code>environment.yml</code> 到 Git</li>
+<li>团队成员各自 <code>pip install -r requirements.txt</code> 或 <code>conda env create -f environment.yml</code></li>
+<li>避免提交 <code>.venv/</code> 目录</li>
+</ul>
+<h3 id="q5-pycharmvs-code-里怎么配置">Q5: PyCharm/VS Code 里怎么配置？</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="yaml"><code><span class="line"><span style="color:var(--astro-code-token-keyword)">PyCharm</span><span style="color:var(--astro-code-token-keyword)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-token-string-expression)">  设置 → Project → Python Interpreter → Add Interpreter</span></span>
+<span class="line"><span style="color:var(--astro-code-token-string-expression)">  → 选择 "Existing environment" → 定位到 .venv/bin/python</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">VS Code</span><span style="color:var(--astro-code-token-keyword)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">  Cmd+Shift+P → "Python</span><span style="color:var(--astro-code-token-keyword)">:</span><span style="color:var(--astro-code-token-string-expression)"> Select Interpreter"</span></span>
+<span class="line"><span style="color:var(--astro-code-token-string-expression)">  → 选择 .venv/bin/python</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">  → 终端自动激活（需要在 settings.json 设置 "python.terminal.activateEnvironment"</span><span style="color:var(--astro-code-token-keyword)">:</span><span style="color:var(--astro-code-token-string-expression)"> true）</span></span></code></pre>
+<hr>
+<h2 id="7-三方案速查表">7. 三方案速查表</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>场景</th><th>推荐方案</th><th>理由</th></tr></thead><tbody><tr><td>日常 Python 项目</td><td><strong>venv</strong></td><td>零安装、轻量、够用</td></tr><tr><td>AI/深度学习项目</td><td><strong>Conda</strong></td><td>CUDA 管理、Python 版本随意切换</td></tr><tr><td>需要极速安装</td><td><strong>uv</strong></td><td>Rust 实现，比 pip 快 10-100x</td></tr><tr><td>团队协作项目</td><td><strong>venv + requirements.txt</strong></td><td>最通用、最兼容</td></tr><tr><td>Jupyter Notebook</td><td><strong>Conda</strong></td><td>ipykernel 注册方便</td></tr></tbody></table>
+<hr>
+<h2 id="-信息源">🔗 信息源</h2>
+<ul>
+<li><a href="https://docs.python.org/3/library/venv.html">Python venv 官方文档</a></li>
+<li><a href="https://docs.conda.io/projects/conda/en/latest/user-guide/index.html">Conda 用户指南</a></li>
+<li><a href="https://docs.astral.sh/uv/">uv 官方文档</a></li>
+<li><a href="https://pip.pypa.io/en/stable/">pip 官方文档</a></li>
+</ul>
+<hr>
+<p><strong>📂 关联笔记</strong>：</p>
+<ul>
+<li>[[AI使用者Python基础调研报告]] — 第6节工程化基础</li>
+<li>[[AI开发三周系统学习计划]] — 学习环境基础</li>
+<li>[[PyCharm调研报告]] — IDE 中配置环境</li>
+</ul>
+<p><strong>🔄 文档版本</strong>：v1.0 | 最后更新：2026-07-14</p> <div> <a href="/notes" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150">
+&larr; 返回笔记列表
+</a> </div>  </div> <!-- Previous / Next navigation -->  <hr class="!mt-12 !mb-8" data-astro-cid-bvzihdzo> <div data-astro-cid-bvzihdzo> <a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-bvzihdzo>
+&larr; 返回博客列表
+</a> </div> </div> </div> </article> </div>  </main> <footer class="border-t border-[var(--color-border)] mt-24 py-8" data-astro-cid-pux6a34n><div class="max-w-content flex items-center justify-between" data-astro-cid-pux6a34n><span class="text-sm text-[var(--color-text-tertiary)]" data-astro-cid-pux6a34n>
+&copy; 2026 星游寰宇
+</span><div class="flex items-center gap-4" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>博客</a><a href="/projects" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>项目</a><a href="/notes" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>日记</a><a href="/resources" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>资源</a><a href="/about" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>关于</a></div></div></footer> <div id="link-preview" style="display:none;position:fixed;z-index:99;max-width:18rem;pointer-events:none;" data-astro-cid-t7vshrbh></div>  <script type="module">(async()=>{try{const c=await fetch("/posts.json");if(!c.ok)return;const u=await c.json(),p=new Map(u.map(t=>[t.href,t])),e=document.getElementById("link-preview");if(!e)return;let n="",d;document.addEventListener("mouseover",t=>{const i=t.target.closest("a[href^='/blog/']");if(!i){e.style.display="none",n="";return}const s=i.getAttribute("href");if(!s||s===n)return;const o=p.get(s);o&&(n=s,d=setTimeout(()=>{e.innerHTML=`<div class="lp-title">${o.title}</div><div class="lp-summary">${o.summary}</div>`;const r=i.getBoundingClientRect();let a=r.left,l=r.bottom+6;a+288>window.innerWidth&&(a=window.innerWidth-296),l+80>window.innerHeight&&(l=r.top-80),Object.assign(e.style,{left:a+"px",top:l+"px",display:"block"})},300))},{passive:!0}),document.addEventListener("mouseout",t=>{t.target.closest("a[href^='/blog/']")&&(clearTimeout(d),e.style.display="none",n="")},{passive:!0})}catch{}})();</script> </body></html>  <script type="module">const c=document.getElementById("toc-toggle"),s=document.getElementById("toc-list"),i=document.getElementById("toc-chevron");c&&s&&i&&c.addEventListener("click",()=>{const o=s.classList.toggle("hidden");c.setAttribute("aria-expanded",String(o)),i.style.transform=o?"rotate(180deg)":""});const r=document.querySelectorAll(".toc-list a");if(r.length>0){const o=new IntersectionObserver(n=>{for(const t of n)t.isIntersecting&&r.forEach(e=>{e.classList.toggle("active",e.getAttribute("href")===`#${t.target.id}`)})},{rootMargin:"-80px 0px -80% 0px"});r.forEach(n=>{const t=n.getAttribute("href")?.slice(1);if(t){const e=document.getElementById(t);e&&o.observe(e)}})}</script>

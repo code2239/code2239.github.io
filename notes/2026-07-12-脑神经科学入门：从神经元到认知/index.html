@@ -1,0 +1,434 @@
+<!DOCTYPE html><html lang="zh-CN"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="脑神经科学（Neuroscience）是研究神经系统的科学——从微观的单个神经元如何放电，到宏观的大脑如何产生意识、记忆和决策。"><meta name="color-scheme" content="light"><!-- Open Graph --><meta property="og:title" content="脑神经科学入门：从神经元到认知 — 星游寰宇"><meta property="og:description" content="脑神经科学（Neuroscience）是研究神经系统的科学——从微观的单个神经元如何放电，到宏观的大脑如何产生意识、记忆和决策。"><meta property="og:url" content="https://code2239.github.io/notes/2026-07-12-脑神经科学入门：从神经元到认知"><meta property="og:type" content="article"><meta property="og:site_name" content="星游寰宇"><meta property="og:locale" content="zh_CN"><meta property="article:published_time" content="2026-07-12"><meta property="article:tag" content="neuroscience"><meta property="article:tag" content="brain"><meta property="article:tag" content="cognitive-science"><meta property="article:tag" content="biology"><meta property="article:tag" content="ai"><!-- Twitter Card --><meta name="twitter:card" content="summary"><meta name="twitter:title" content="脑神经科学入门：从神经元到认知 — 星游寰宇"><meta name="twitter:description" content="脑神经科学（Neuroscience）是研究神经系统的科学——从微观的单个神经元如何放电，到宏观的大脑如何产生意识、记忆和决策。"><!-- Canonical --><link rel="canonical" href="https://code2239.github.io/notes/2026-07-12-脑神经科学入门：从神经元到认知"><title>脑神经科学入门：从神经元到认知 — 星游寰宇</title><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="alternate" type="application/rss+xml" title="星游寰宇 RSS" href="/rss.xml"><!-- Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"星游寰宇","url":"https://code2239.github.io","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://code2239.github.io/search?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://code2239.github.io"},{"@type":"ListItem","position":2,"name":"日记","item":"https://code2239.github.io/notes"},{"@type":"ListItem","position":3,"name":"2026 07 12 脑神经科学入门：从神经元到认知"}]},{"@context":"https://schema.org","@type":"BlogPosting","headline":"脑神经科学入门：从神经元到认知","description":"脑神经科学（Neuroscience）是研究神经系统的科学——从微观的单个神经元如何放电，到宏观的大脑如何产生意识、记忆和决策。","datePublished":"2026-07-12","url":"https://code2239.github.io/notes/2026-07-12-脑神经科学入门：从神经元到认知","keywords":"neuroscience, brain, cognitive-science, biology, ai"}]}</script><link rel="stylesheet" href="/_astro/_slug_.CXDKI3B6.css">
+<style>.back-to-top[data-astro-cid-gzprr2dq]{position:fixed;bottom:2rem;right:2rem;z-index:40;width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:50%;border:1px solid var(--color-border);background:var(--color-bg);color:var(--color-text-secondary);cursor:pointer;box-shadow:var(--shadow-md);transition:opacity .2s ease,transform .2s ease}.back-to-top[data-astro-cid-gzprr2dq]:hover{color:var(--color-accent);border-color:var(--color-accent);transform:translateY(-2px)}.back-to-top[data-astro-cid-gzprr2dq].hidden{opacity:0;pointer-events:none}.copy-btn[data-astro-cid-qqybitij]{position:absolute;top:8px;right:8px;padding:4px 10px;font-size:.6875rem;font-family:var(--font-sans);color:var(--color-text-tertiary);background:var(--color-bg);border:1px solid var(--color-border);border-radius:6px;cursor:pointer;opacity:0;transition:opacity .15s ease,color .15s ease}pre[data-astro-cid-qqybitij]:hover .copy-btn[data-astro-cid-qqybitij]{opacity:1}.copy-btn[data-astro-cid-qqybitij]:hover{color:var(--color-accent);border-color:var(--color-accent)}.copy-btn[data-astro-cid-qqybitij].copied{color:#16a34a;border-color:#16a34a}.blog-layout[data-astro-cid-bvzihdzo]{display:block}.blog-toc[data-astro-cid-bvzihdzo]{display:none}.blog-body[data-astro-cid-bvzihdzo]{min-width:0}@media(min-width:1024px){.blog-layout[data-astro-cid-bvzihdzo]{display:grid;grid-template-columns:14rem 1fr;gap:3rem;align-items:start}.blog-toc[data-astro-cid-bvzihdzo]{display:block}.blog-body[data-astro-cid-bvzihdzo]{padding-right:2rem}}@media(max-width:1023px){.blog-toc[data-astro-cid-bvzihdzo]{display:block;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid var(--color-border)}}
+</style></head> <body class="min-h-screen flex flex-col"> <nav class="sticky top-0 z-40 bg-[var(--color-bg)]/80 backdrop-blur-md border-b border-[var(--color-border)]" data-astro-cid-pux6a34n><div class="max-w-content flex items-center justify-between py-4" data-astro-cid-pux6a34n><a href="/" class="flex items-center gap-2.5 text-base font-semibold no-underline tracking-tight" data-astro-cid-pux6a34n><svg class="w-7 h-7" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" data-astro-cid-pux6a34n><circle cx="16" cy="16" r="15" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-pux6a34n></circle><circle cx="16" cy="16" r="3" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="16" cy="5" r="1.5" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="24" cy="10" r="1" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="8" cy="22" r="1" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="25" cy="21" r="0.8" fill="currentColor" data-astro-cid-pux6a34n></circle></svg>
+星游寰宇
+</a><!-- Desktop nav --><div class="hidden sm:flex items-center gap-5" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>博客</a><a href="/projects" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>项目</a><a href="/notes" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>日记</a><a href="/resources" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>资源</a><a href="/about" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>关于</a><button id="search-trigger" class="flex items-center gap-1.5 text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] bg-[var(--color-bg-secondary)] hover:bg-[var(--color-bg-tertiary)] border border-[var(--color-border)] hover:border-[var(--color-accent)]/30 rounded-lg px-3 py-1.5 cursor-pointer shadow-sm hover:shadow-md transition-all duration-200" aria-label="搜索 (Ctrl+K)" title="搜索 (Ctrl+K)" data-astro-cid-pux6a34n><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-pux6a34n><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" data-astro-cid-pux6a34n></path></svg><span class="hidden lg:inline" data-astro-cid-pux6a34n>搜索</span><kbd class="hidden lg:inline-flex items-center text-[0.625rem] font-mono text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1 py-px rounded" data-astro-cid-pux6a34n>Ctrl+K</kbd></button></div><!-- Mobile hamburger --><button id="menu-btn" class="sm:hidden flex flex-col gap-1 p-2 -mr-2 cursor-pointer" aria-label="打开菜单" data-astro-cid-pux6a34n><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-transform duration-200" data-astro-cid-pux6a34n></span><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-opacity duration-200" data-astro-cid-pux6a34n></span><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-transform duration-200" data-astro-cid-pux6a34n></span></button></div><!-- Mobile menu --><div id="mobile-menu" class="hidden sm:hidden border-t border-[var(--color-border)] bg-[var(--color-bg)]" data-astro-cid-pux6a34n><div class="max-w-content flex flex-col gap-2 py-4" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>博客</a><a href="/projects" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>项目</a><a href="/notes" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>日记</a><a href="/resources" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>资源</a><a href="/about" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>关于</a></div></div></nav>
+    <div id="search-overlay" class="srch-overlay" role="dialog" aria-modal="true" aria-label="全局搜索" data-astro-cid-mn7pezny> <div id="search-backdrop" class="srch-backdrop" data-astro-cid-mn7pezny></div> <div class="srch-panel" id="srch-panel" data-astro-cid-mn7pezny> <!-- Search input --> <div class="srch-input-row" data-astro-cid-mn7pezny> <svg class="srch-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-mn7pezny> <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" data-astro-cid-mn7pezny></path> </svg> <input type="text" id="search-input" class="srch-input" placeholder="搜索文章、项目、日记、资源..." autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="go" data-astro-cid-mn7pezny> <kbd class="srch-kbd" data-astro-cid-mn7pezny>Esc</kbd> </div> <!-- Results area --> <div id="search-results" class="srch-results" data-astro-cid-mn7pezny> <p class="srch-empty" id="search-empty-hint" data-astro-cid-mn7pezny>输入关键词开始搜索</p> </div> <!-- Skeleton loading --> <div id="search-skeleton" class="srch-skeleton" style="display:none;" aria-hidden="true" data-astro-cid-mn7pezny> <div class="srch-skeleton-line" style="width:75%" data-astro-cid-mn7pezny></div> <div class="srch-skeleton-line" style="width:50%" data-astro-cid-mn7pezny></div> <div class="srch-skeleton-line" style="width:60%" data-astro-cid-mn7pezny></div> </div> <!-- Footer hints --> <div class="srch-footer" data-astro-cid-mn7pezny> <div class="srch-footer-hints" data-astro-cid-mn7pezny> <span data-astro-cid-mn7pezny><kbd data-astro-cid-mn7pezny>↑</kbd><kbd data-astro-cid-mn7pezny>↓</kbd> 导航</span> <span data-astro-cid-mn7pezny><kbd data-astro-cid-mn7pezny>↵</kbd> 打开</span> <span data-astro-cid-mn7pezny><kbd data-astro-cid-mn7pezny>Ctrl</kbd>+<kbd data-astro-cid-mn7pezny>K</kbd> 切换</span> </div> <div class="srch-footer-brand" data-astro-cid-mn7pezny>
+powered by Orama
+</div> </div> </div> </div> <script type="module" src="/_astro/Navigation.astro_astro_type_script_index_0_lang.15n1EYJp.js"></script> <main class="flex-1">  <div class="reading-progress" id="reading-progress" style="width: 0%"></div> <script type="module">const o=document.getElementById("reading-progress");if(!o)throw new Error("Reading progress bar element not found");const r=()=>{const n=window.scrollY,e=document.documentElement.scrollHeight-window.innerHeight,t=e>0?n/e*100:0;o.style.width=`${Math.min(t,100)}%`};window.addEventListener("scroll",r,{passive:!0});</script> <button id="back-to-top" class="back-to-top hidden" aria-label="返回顶部" data-astro-cid-gzprr2dq> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-gzprr2dq> <polyline points="18 15 12 9 6 15" data-astro-cid-gzprr2dq></polyline> </svg> </button>  <script type="module">const o=document.getElementById("back-to-top");o&&(window.addEventListener("scroll",()=>{o.classList.toggle("hidden",window.scrollY<400)},{passive:!0}),o.addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"})));</script> <script type="module">document.querySelectorAll("pre").forEach(e=>{const t=document.createElement("button");t.className="copy-btn",t.textContent="复制",t.addEventListener("click",async()=>{const n=e.querySelector("code")?.textContent||e.textContent||"";try{await navigator.clipboard.writeText(n),t.textContent="已复制",t.classList.add("copied"),setTimeout(()=>{t.textContent="复制",t.classList.remove("copied")},2e3)}catch{t.textContent="失败",setTimeout(()=>{t.textContent="复制"},2e3)}}),e.style.position="relative",e.appendChild(t)});</script> <div class="px-6 xl:px-12 pt-12 pb-16" data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <header class="mb-12 text-center" data-astro-cid-bvzihdzo> <h1 class="text-3xl font-semibold mb-3 tracking-tight" data-astro-cid-bvzihdzo>脑神经科学入门：从神经元到认知</h1> <div class="flex items-center justify-center gap-2 text-[var(--color-text-tertiary)] text-sm" data-astro-cid-bvzihdzo> <time datetime="2026-07-12" data-astro-cid-bvzihdzo>2026-07-12</time> <span class="text-[var(--color-border)]" data-astro-cid-bvzihdzo>·</span> <span data-astro-cid-bvzihdzo>16 分钟阅读</span>  <span class="text-[var(--color-border)]" data-astro-cid-bvzihdzo>·</span> <span class="text-sm text-[var(--color-text-tertiary)]"> <span> neuroscience<span class="mx-1">·</span> </span><span> brain<span class="mx-1">·</span> </span><span> cognitive-science<span class="mx-1">·</span> </span><span> biology<span class="mx-1">·</span> </span><span> ai </span> </span>  </div> </header> <div class="blog-layout" data-astro-cid-bvzihdzo> <aside class="blog-toc" data-astro-cid-bvzihdzo> <div class="sticky top-14 max-h-[calc(100vh-3.5rem)] overflow-y-auto" data-astro-cid-bvzihdzo> <button id="toc-toggle" class="hidden max-md:flex items-center gap-1 text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-3 cursor-pointer border-none bg-transparent p-0" aria-expanded="false" aria-controls="toc-list" data-astro-cid-bvzihdzo>
+目录
+<svg id="toc-chevron" class="w-3 h-3 transition-transform duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-bvzihdzo><polyline points="6 9 12 15 18 9" data-astro-cid-bvzihdzo></polyline></svg> </button> <span class="text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-3 max-md:hidden" data-astro-cid-bvzihdzo>目录</span> <div id="toc-list" class="max-md:hidden" data-astro-cid-bvzihdzo> <nav class="toc"> <p class="text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-3">目录</p> <ul class="toc-list"> <li class> <a href="#1-一句话定义">1. 一句话定义</a> </li><li class> <a href="#2-脑神经科学的六大子领域">2. 脑神经科学的六大子领域</a> </li><li class="toc-h3"> <a href="#分子与细胞神经科学">分子与细胞神经科学</a> </li><li class="toc-h3"> <a href="#系统神经科学">系统神经科学</a> </li><li class="toc-h3"> <a href="#认知神经科学">认知神经科学</a> </li><li class="toc-h3"> <a href="#发育神经科学">发育神经科学</a> </li><li class="toc-h3"> <a href="#临床神经科学">临床神经科学</a> </li><li class="toc-h3"> <a href="#计算神经科学">计算神经科学</a> </li><li class> <a href="#3-脑神经科学的核心概念">3. 脑神经科学的核心概念</a> </li><li class="toc-h3"> <a href="#31-神经元大脑的基本单位">3.1 神经元——大脑的基本单位</a> </li><li class="toc-h3"> <a href="#32-突触可塑性学习和记忆的生物学基础">3.2 突触可塑性——学习和记忆的生物学基础</a> </li><li class="toc-h3"> <a href="#33-大脑的组织层级">3.3 大脑的组织层级</a> </li><li class="toc-h3"> <a href="#34-神经递质大脑的化学信使">3.4 神经递质——大脑的化学信使</a> </li><li class> <a href="#4-脑神经科学-vs-人工智能关键区别">4. 脑神经科学 vs 人工智能：关键区别</a> </li><li class="toc-h3"> <a href="#它们共享的名字神经网络">它们共享的名字——「神经网络」</a> </li><li class="toc-h3"> <a href="#六个关键区别">六个关键区别</a> </li><li class="toc-h3"> <a href="#相互启发的关系">相互启发的关系</a> </li><li class> <a href="#5-脑神经科学如何解释你之前的笔记">5. 脑神经科学如何解释你之前的笔记</a> </li><li class="toc-h3"> <a href="#51-教育保护大脑的神经科学基础">5.1 教育保护大脑的神经科学基础</a> </li><li class="toc-h3"> <a href="#52-obsidian-知识管理与大脑的隐喻">5.2 Obsidian 知识管理与大脑的隐喻</a> </li><li class> <a href="#6-脑神经科学的研究方法">6. 脑神经科学的研究方法</a> </li><li class="toc-h3"> <a href="#技术工具">技术工具</a> </li><li class="toc-h3"> <a href="#研究方法逻辑">研究方法逻辑</a> </li><li class> <a href="#7-脑神经科学与-ai-的交汇你感兴趣的交叉点">7. 脑神经科学与 AI 的交汇——你感兴趣的交叉点</a> </li><li class="toc-h3"> <a href="#71-注意力机制的神经科学起源">7.1 注意力机制的神经科学起源</a> </li><li class="toc-h3"> <a href="#72-你可以关注的交叉领域">7.2 你可以关注的交叉领域</a> </li><li class> <a href="#8-一句话锐评">8. 一句话锐评</a> </li><li class> <a href="#-关联笔记">🔗 关联笔记</a> </li><li class> <a href="#-推荐入门资源">📚 推荐入门资源</a> </li> </ul> </nav> </div> </div> </aside> <div class="blog-body" data-astro-cid-bvzihdzo> <div class="prose prose-neutral max-w-none" data-astro-cid-bvzihdzo>   <h1 id="脑神经科学入门从神经元到认知">脑神经科学入门：从神经元到认知</h1>
+<blockquote>
+<p>脑神经科学（Neuroscience）是研究<strong>神经系统</strong>的科学——从微观的单个神经元如何放电，到宏观的大脑如何产生意识、记忆和决策。</p>
+</blockquote>
+<hr>
+<h2 id="1-一句话定义">1. 一句话定义</h2>
+<blockquote>
+<p><strong>脑神经科学 = 关于「大脑如何工作」的全部科学。</strong></p>
+</blockquote>
+<p>它不是一个单一的学科，而是<strong>从分子到行为</strong>多个层次研究的集合：</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>分子水平      ──→  神经元如何传递信号</span></span>
+<span class="line"><span>细胞水平      ──→  不同类型的神经细胞</span></span>
+<span class="line"><span>神经网络水平  ──→  一组神经元如何协同工作</span></span>
+<span class="line"><span>脑区水平      ──→  不同脑区域负责什么功能</span></span>
+<span class="line"><span>行为水平      ──→  大脑如何产生行为</span></span>
+<span class="line"><span>认知水平      ──→  记忆、语言、意识如何产生</span></span></code></pre>
+<hr>
+<h2 id="2-脑神经科学的六大子领域">2. 脑神经科学的六大子领域</h2>
+<h3 id="分子与细胞神经科学">分子与细胞神经科学</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>研究什么：</span></span>
+<span class="line"><span>  - 神经递质（多巴胺、血清素、乙酰胆碱）如何工作</span></span>
+<span class="line"><span>  - 离子通道如何控制神经元的兴奋性</span></span>
+<span class="line"><span>  - 突触可塑性——学习和记忆的分子基础</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>与你的相关性：</span></span>
+<span class="line"><span>  - 阿尔兹海默症的 β-淀粉样蛋白和 tau 蛋白病理</span></span>
+<span class="line"><span>  - 抗抑郁药/抗精神病药的分子靶点</span></span></code></pre>
+<h3 id="系统神经科学">系统神经科学</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>研究什么：</span></span>
+<span class="line"><span>  - 视觉系统：从视网膜到视觉皮层的信息处理</span></span>
+<span class="line"><span>  - 运动系统：大脑如何控制肌肉运动</span></span>
+<span class="line"><span>  - 奖励系统：多巴胺通路与动机</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>与你的相关性：</span></span>
+<span class="line"><span>  - 理解「大脑如何编码信息」→ 启发了深度学习中的卷积神经网络</span></span></code></pre>
+<h3 id="认知神经科学">认知神经科学</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>研究什么：</span></span>
+<span class="line"><span>  - 记忆：短期记忆 vs 长期记忆，海马体的作用</span></span>
+<span class="line"><span>  - 语言：布罗卡区（语言生成）vs 韦尼克区（语言理解）</span></span>
+<span class="line"><span>  - 决策：前额叶皮层如何评估和选择</span></span>
+<span class="line"><span>  - 意识：最前沿也最困难的问题</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>与你的相关性：</span></span>
+<span class="line"><span>  - 之前讨论的「认知储备」理论就来自这里</span></span>
+<span class="line"><span>  - 理解注意力机制——注意力是认知神经科学的核心概念之一</span></span></code></pre>
+<h3 id="发育神经科学">发育神经科学</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>研究什么：</span></span>
+<span class="line"><span>  - 大脑从胚胎到成年的发育过程</span></span>
+<span class="line"><span>  - 关键期：为什么儿童学语言比成人快？</span></span>
+<span class="line"><span>  - 神经可塑性：大脑如何自我重塑</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>经典发现：</span></span>
+<span class="line"><span>  - "use it or lose it"——不用的神经连接会被修剪</span></span>
+<span class="line"><span>  - 这和你 Obsidian 中「不用的笔记会变成孤岛」是同一道理</span></span></code></pre>
+<h3 id="临床神经科学">临床神经科学</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>研究什么：</span></span>
+<span class="line"><span>  - 神经退行性疾病：阿尔兹海默症、帕金森病、亨廷顿病</span></span>
+<span class="line"><span>  - 精神疾病：抑郁症、精神分裂、焦虑症</span></span>
+<span class="line"><span>  - 脑损伤、中风、脊髓损伤</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>与你的相关性：</span></span>
+<span class="line"><span>  - 上一份笔记 [[阿尔兹海默症发病率与受教育程度的关系]] 就属于这个领域</span></span></code></pre>
+<h3 id="计算神经科学">计算神经科学</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>研究什么：</span></span>
+<span class="line"><span>  - 用数学模型描述神经元的电活动</span></span>
+<span class="line"><span>  - 用计算机模拟神经网络</span></span>
+<span class="line"><span>  - 大脑的计算理论——大脑在「算」什么？</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>与你的相关性：</span></span>
+<span class="line"><span>  - **这是神经科学和 AI 的交汇点**</span></span>
+<span class="line"><span>  - 深度学习中的「神经网络」一词就来自这里</span></span>
+<span class="line"><span>  - 但注意：人工神经网络 ≠ 真实神经网络（下面详说）</span></span></code></pre>
+<hr>
+<h2 id="3-脑神经科学的核心概念">3. 脑神经科学的核心概念</h2>
+<h3 id="31-神经元大脑的基本单位">3.1 神经元——大脑的基本单位</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="mermaid"><code><span class="line"><span style="color:var(--astro-code-foreground)">graph LR</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">    A[树突&#x3C;br/>接收信号] --> B[细胞体&#x3C;br/>整合信号]</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">    B --> C[轴突&#x3C;br/>传导信号]</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">    C --> D[突触&#x3C;br/>传递信号到下一个神经元]</span></span></code></pre>
+<p><strong>关键数字</strong>：</p>
+<ul>
+<li>人脑约有 <strong>860 亿</strong>个神经元</li>
+<li>每个神经元平均有 <strong>~7,000</strong> 个突触连接</li>
+<li>突触总数：约 <strong>600 万亿</strong>（比银河系的恒星数还多 3 个数量级）</li>
+</ul>
+<h3 id="32-突触可塑性学习和记忆的生物学基础">3.2 突触可塑性——学习和记忆的生物学基础</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="yaml"><code><span class="line"><span style="color:var(--astro-code-token-string-expression)">Hebbian 规则（1949）：</span></span>
+<span class="line"><span style="color:var(--astro-code-token-string-expression)">  "Cells that fire together, wire together."</span></span>
+<span class="line"><span style="color:var(--astro-code-token-string-expression)">  一起放电的神经元，会连接得更强。</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-string-expression)">长时程增强 (LTP)：</span></span>
+<span class="line"><span style="color:var(--astro-code-token-string-expression)">  高频刺激 → 突触连接增强 → 记忆形成</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-string-expression)">长时程抑制 (LTD)：</span></span>
+<span class="line"><span style="color:var(--astro-code-token-string-expression)">  低频刺激 → 突触连接减弱 → 遗忘</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-string-expression)">这与你的 Obsidian 知识网络类比：</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">  [[]] </span><span style="color:var(--astro-code-token-string-expression)">链接用得越多 → 连接越强（LTP）</span></span>
+<span class="line"><span style="color:var(--astro-code-token-string-expression)">  从不回顾的笔记 → 连接减弱（LTD）</span></span></code></pre>
+<h3 id="33-大脑的组织层级">3.3 大脑的组织层级</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>大脑皮层（灰质）</span></span>
+<span class="line"><span>  ├── 额叶：决策、规划、人格</span></span>
+<span class="line"><span>  ├── 顶叶：空间感知、触觉</span></span>
+<span class="line"><span>  ├── 颞叶：听觉、语言理解、记忆（海马体在这里）</span></span>
+<span class="line"><span>  └── 枕叶：视觉处理</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>皮层下结构</span></span>
+<span class="line"><span>  ├── 海马体：记忆形成（阿尔兹海默症最先受损的区域）</span></span>
+<span class="line"><span>  ├── 杏仁核：情绪（特别是恐惧）</span></span>
+<span class="line"><span>  ├── 基底核：运动控制（帕金森病在这里）</span></span>
+<span class="line"><span>  └── 丘脑：感觉信息的中继站</span></span></code></pre>
+<h3 id="34-神经递质大脑的化学信使">3.4 神经递质——大脑的化学信使</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>神经递质</th><th>主要功能</th><th>相关疾病/药物</th></tr></thead><tbody><tr><td><strong>多巴胺</strong></td><td>奖励、动机、运动控制</td><td>帕金森（↓）、精神分裂（↑）、成瘾</td></tr><tr><td><strong>血清素</strong></td><td>情绪、食欲、睡眠</td><td>抑郁症（SSRI 类药物靶点）</td></tr><tr><td><strong>乙酰胆碱</strong></td><td>注意力、记忆、肌肉收缩</td><td>阿尔兹海默症（↓↓）</td></tr><tr><td><strong>谷氨酸</strong></td><td>主要兴奋性递质、学习（LTP）</td><td>中风时过度释放导致神经毒性</td></tr><tr><td><strong>GABA</strong></td><td>主要抑制性递质</td><td>焦虑症（苯二氮䓬类药物靶点）</td></tr></tbody></table>
+<hr>
+<h2 id="4-脑神经科学-vs-人工智能关键区别">4. 脑神经科学 vs 人工智能：关键区别</h2>
+<p>这是对你「学 AI」最相关的一个部分。</p>
+<h3 id="它们共享的名字神经网络">它们共享的名字——「神经网络」</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="yaml"><code><span class="line"><span style="color:var(--astro-code-token-string-expression)">人工神经网络（你正在学的）：</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">  - </span><span style="color:var(--astro-code-token-string-expression)">节点是简单的数学函数</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">  - </span><span style="color:var(--astro-code-token-string-expression)">权重是数值</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">  - </span><span style="color:var(--astro-code-token-string-expression)">训练 = 调整权重</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">  - </span><span style="color:var(--astro-code-token-string-expression)">反向传播算法</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-string-expression)">真实神经网络（脑神经科学研究的）：</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">  - </span><span style="color:var(--astro-code-token-string-expression)">节点是复杂的生物细胞</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">  - </span><span style="color:var(--astro-code-token-string-expression)">连接是化学突触（比权重复杂得多）</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">  - </span><span style="color:var(--astro-code-token-string-expression)">学习 = 突触可塑性（LTP/LTD）</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">  - </span><span style="color:var(--astro-code-token-string-expression)">没有等价的反向传播</span></span></code></pre>
+<h3 id="六个关键区别">六个关键区别</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>维度</th><th>人工神经网络</th><th>真实大脑</th></tr></thead><tbody><tr><td><strong>速度</strong></td><td>纳秒级（电子）</td><td>毫秒级（离子+化学）→ 慢 100 万倍</td></tr><tr><td><strong>并行度</strong></td><td>顺序处理（即使 GPU 也是受限并行）</td><td><strong>极度并行</strong>（860 亿个单元同时工作）</td></tr><tr><td><strong>能耗</strong></td><td>GPT-4 训练估计 ~50 GWh</td><td>人脑 <strong>~20W</strong>（一个节能灯泡）</td></tr><tr><td><strong>学习方式</strong></td><td>反向传播 + 海量标注数据</td><td>单样本/小样本学习，无监督为主</td></tr><tr><td><strong>可解释性</strong></td><td>黑箱（虽然研究很多）</td><td>也是黑箱（但研究工具不同）</td></tr><tr><td><strong>容错性</strong></td><td>权重损坏 → 性能急剧下降</td><td>每天损失数千神经元 → 正常运作</td></tr></tbody></table>
+<h3 id="相互启发的关系">相互启发的关系</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="yaml"><code><span class="line"><span style="color:var(--astro-code-token-string-expression)">神经科学 → AI：</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">  - </span><span style="color:var(--astro-code-token-string-expression)">感知机 (1958) ← 受神经元启发</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">  - </span><span style="color:var(--astro-code-token-string-expression)">CNN (1980s) ← 受猫视觉皮层实验启发</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">  - </span><span style="color:var(--astro-code-token-string-expression)">注意力机制 (2017) ← 受认知注意力启发</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">  - </span><span style="color:var(--astro-code-token-string-expression)">强化学习 ← 受多巴胺奖励系统启发</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-string-expression)">AI → 神经科学：</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">  - </span><span style="color:var(--astro-code-token-string-expression)">用深度学习模型来模拟大脑信息处理</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">  - </span><span style="color:var(--astro-code-token-string-expression)">用 AI 分析脑成像数据</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">  - </span><span style="color:var(--astro-code-token-string-expression)">用 AI 预测蛋白质结构（包括神经相关蛋白）</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-string-expression)">最前沿：两者正在融合为「神经AI」(NeuroAI)</span></span></code></pre>
+<hr>
+<h2 id="5-脑神经科学如何解释你之前的笔记">5. 脑神经科学如何解释你之前的笔记</h2>
+<h3 id="51-教育保护大脑的神经科学基础">5.1 教育保护大脑的神经科学基础</h3>
+<p>上一份笔记 [[阿尔兹海默症发病率与受教育程度的关系]] 中的「认知储备」，其神经基础是：</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="yaml"><code><span class="line"><span style="color:var(--astro-code-token-string-expression)">① 突触密度增加：</span></span>
+<span class="line"><span style="color:var(--astro-code-token-string-expression)">  学习 = 形成新的突触连接</span></span>
+<span class="line"><span style="color:var(--astro-code-token-string-expression)">  受教育时间越长 → 突触密度越高 → 神经回路有更多冗余</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-string-expression)">② 神经通路替代：</span></span>
+<span class="line"><span style="color:var(--astro-code-token-string-expression)">  当一条通路受损（如淀粉样斑块阻塞），</span></span>
+<span class="line"><span style="color:var(--astro-code-token-string-expression)">  高教育者更容易启用替代通路来补偿</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-string-expression)">③ "认知储备"不是理论假设——</span></span>
+<span class="line"><span style="color:var(--astro-code-token-string-expression)">  尸检研究证实：相同程度的病理改变，</span></span>
+<span class="line"><span style="color:var(--astro-code-token-string-expression)">  高教育者临床症状更轻</span></span></code></pre>
+<h3 id="52-obsidian-知识管理与大脑的隐喻">5.2 Obsidian 知识管理与大脑的隐喻</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>大脑中的概念</th><th>Obsidian 中的对应</th></tr></thead><tbody><tr><td>神经元</td><td>一篇原子笔记</td></tr><tr><td>突触</td><td><code>[[]]</code> 链接</td></tr><tr><td>Hebbian 学习（一起放电的神经元连在一起）</td><td>被你频繁「同时打开」的笔记关联更强</td></tr><tr><td>突触修剪（不用的连接消失）</td><td>从不维护的链接变成断链或孤岛</td></tr><tr><td>海马体（记忆索引）</td><td>MOC（内容地图）</td></tr><tr><td>长时程增强（LTP）</td><td>反复回顾和更新的笔记</td></tr><tr><td>记忆巩固</td><td>从收件箱 → 原子笔记 → MOC 的渐进式整理</td></tr><tr><td>神经元死亡</td><td>弃用的笔记（正常，每天都有新笔记）</td></tr></tbody></table>
+<blockquote>
+<p>这不是牵强附会——<strong>你用一个外部知识网络（Obsidian）来扩展内部知识网络（大脑）</strong>，两种网络遵循相似的原理。</p>
+</blockquote>
+<hr>
+<h2 id="6-脑神经科学的研究方法">6. 脑神经科学的研究方法</h2>
+<h3 id="技术工具">技术工具</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>技术</th><th>看什么</th><th align="center">分辨率</th><th>局限性</th></tr></thead><tbody><tr><td><strong>fMRI（功能磁共振）</strong></td><td>脑区活动（血流变化）</td><td align="center">空间高 / 时间低</td><td>不能看单个神经元</td></tr><tr><td><strong>EEG（脑电图）</strong></td><td>脑电波节律</td><td align="center">时间高 / 空间低</td><td>难以定位精确来源</td></tr><tr><td><strong>PET（正电子扫描）</strong></td><td>代谢活动、分子分布</td><td align="center">中等</td><td>有辐射</td></tr><tr><td><strong>双光子显微镜</strong></td><td>单个神经元、突触</td><td align="center">极高</td><td>需要动物，不能用于人</td></tr><tr><td><strong>光遗传学</strong></td><td>用光精确控制特定神经元</td><td align="center">精确到细胞类型</td><td>需要基因改造，仅动物</td></tr></tbody></table>
+<h3 id="研究方法逻辑">研究方法逻辑</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>描述性研究：这个脑区在做什么任务时激活？</span></span>
+<span class="line"><span>  例：fMRI 显示海马体在回忆时激活</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>损伤研究：这个脑区坏了会怎样？</span></span>
+<span class="line"><span>  例：H.M. 病人切除海马体后无法形成新记忆</span></span>
+<span class="line"><span>      → 证明了海马体在记忆形成中的关键作用</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>干预研究：改变这个脑区会怎样？</span></span>
+<span class="line"><span>  例：光遗传学激活小鼠特定神经元 → 产生虚假记忆</span></span>
+<span class="line"><span>  例：经颅磁刺激（TMS）抑制某脑区 → 认知变化</span></span></code></pre>
+<p><strong>神经科学史上最重要的病人——H.M.</strong></p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>1953 年，27 岁的 H.M. 为治疗癫痫切除了双侧海马体。</span></span>
+<span class="line"><span>结果：</span></span>
+<span class="line"><span>  - 癫痫好转</span></span>
+<span class="line"><span>  - 智力正常，能正常对话</span></span>
+<span class="line"><span>  - 但无法形成任何新的长期记忆</span></span>
+<span class="line"><span>  - 每天见到医生都像第一次见面</span></span>
+<span class="line"><span>  - 能学会新技能（如画五角星）但不记得学过</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>这个病例：</span></span>
+<span class="line"><span>  - 证明了海马体对记忆形成的必要性</span></span>
+<span class="line"><span>  - 区分了「陈述性记忆」（忘记）和「程序性记忆」（保留）</span></span>
+<span class="line"><span>  - 奠定了现代记忆研究的基石</span></span></code></pre>
+<hr>
+<h2 id="7-脑神经科学与-ai-的交汇你感兴趣的交叉点">7. 脑神经科学与 AI 的交汇——你感兴趣的交叉点</h2>
+<h3 id="71-注意力机制的神经科学起源">7.1 注意力机制的神经科学起源</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="yaml"><code><span class="line"><span style="color:var(--astro-code-token-string-expression)">你在学 Transformer 中的「注意力机制」，</span></span>
+<span class="line"><span style="color:var(--astro-code-token-string-expression)">它的名字和灵感来源就是认知神经科学中的「注意力」：</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-string-expression)">大脑中的注意力：</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">  - </span><span style="color:var(--astro-code-token-string-expression)">你不会同时处理所有视觉输入</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">  - </span><span style="color:var(--astro-code-token-string-expression)">你「选择性地关注」某些信息而忽略其他</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">  - </span><span style="color:var(--astro-code-token-string-expression)">顶叶和前额叶皮层协同实现注意力的导向</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-string-expression)">Transformer 的注意力：</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">  - </span><span style="color:var(--astro-code-token-string-expression)">模型不会同等关注所有 token</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">  - </span><span style="color:var(--astro-code-token-string-expression)">通过注意力分数「选择性地关注」相关 token</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">  - </span><span style="color:var(--astro-code-token-string-expression)">这跟大脑的机制惊人地相似</span></span></code></pre>
+<h3 id="72-你可以关注的交叉领域">7.2 你可以关注的交叉领域</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>领域</th><th>说明</th><th>适合你的切入点</th></tr></thead><tbody><tr><td><strong>神经形态计算</strong></td><td>仿造大脑架构的芯片（如 Intel Loihi）</td><td>硬件层面，可以先了解概念</td></tr><tr><td><strong>类脑 AI</strong></td><td>受大脑启发的新型 AI 架构</td><td>了解现有深度学习的局限</td></tr><tr><td><strong>认知架构</strong></td><td>模拟人类认知过程的 AI 系统</td><td>跟你的知识管理兴趣很契合</td></tr><tr><td><strong>脑机接口 (BCI)</strong></td><td>大脑直接与计算机通信</td><td>技术前沿，目前临床应用为主</td></tr></tbody></table>
+<hr>
+<h2 id="8-一句话锐评">8. 一句话锐评</h2>
+<blockquote>
+<p><strong>脑神经科学是「唯一一门研究对象和研究工具是同一件事」的学科</strong>——大脑用大脑来研究大脑。它对 AI 学习者的价值不在于提供可以直接复制到代码中的算法，而在于让你理解「智能」这个目标是什么样子的：一个 20W、860 亿神经元、极度并行的系统。知道了真正的大脑是什么样，你就知道当前 AI 的路走到了哪里，以及哪些路还没走。</p>
+</blockquote>
+<hr>
+<h2 id="-关联笔记">🔗 关联笔记</h2>
+<ul>
+<li>[[阿尔兹海默症发病率与受教育程度的关系]] ← 临床神经科学案例</li>
+<li>[[图论入门：从Obsidian到AI]] ← 神经网络可视为图，大脑可视为图</li>
+<li>[[Obsidian知识管理的底层逻辑]] ← 外部知识网络与大脑网络的类比</li>
+<li>[[Transformer 架构]]（如存在）← 注意力机制的神经科学起源</li>
+</ul>
+<hr>
+<h2 id="-推荐入门资源">📚 推荐入门资源</h2>
+<ul>
+<li><strong>书籍</strong>：《 Neuroscience: Exploring the Brain》（Mark Bear）— 经典教材</li>
+<li><strong>书籍</strong>：《认知神经科学》（Michael Gazzaniga）— 认知方向</li>
+<li><strong>课程</strong>：HarvardX 的 CS50x 脑科学入门（免费）</li>
+<li><strong>课程</strong>：MIT 9.01 神经科学导论（OpenCourseWare）</li>
+<li><strong>文章</strong>：<a href="https://nba.uth.tmc.edu/neuroscience/">Neuroscience for AI</a> (免费在线教材)</li>
+</ul>
+<hr>
+<p><em>最后更新：2026-07-12</em></p> <div> <a href="/notes" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150">
+&larr; 返回笔记列表
+</a> </div>  </div> <!-- Previous / Next navigation -->  <hr class="!mt-12 !mb-8" data-astro-cid-bvzihdzo> <div data-astro-cid-bvzihdzo> <a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-bvzihdzo>
+&larr; 返回博客列表
+</a> </div> </div> </div> </article> </div>  </main> <footer class="border-t border-[var(--color-border)] mt-24 py-8" data-astro-cid-pux6a34n><div class="max-w-content flex items-center justify-between" data-astro-cid-pux6a34n><span class="text-sm text-[var(--color-text-tertiary)]" data-astro-cid-pux6a34n>
+&copy; 2026 星游寰宇
+</span><div class="flex items-center gap-4" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>博客</a><a href="/projects" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>项目</a><a href="/notes" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>日记</a><a href="/resources" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>资源</a><a href="/about" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>关于</a></div></div></footer> <div id="link-preview" style="display:none;position:fixed;z-index:99;max-width:18rem;pointer-events:none;" data-astro-cid-t7vshrbh></div>  <script type="module">(async()=>{try{const c=await fetch("/posts.json");if(!c.ok)return;const u=await c.json(),p=new Map(u.map(t=>[t.href,t])),e=document.getElementById("link-preview");if(!e)return;let n="",d;document.addEventListener("mouseover",t=>{const i=t.target.closest("a[href^='/blog/']");if(!i){e.style.display="none",n="";return}const s=i.getAttribute("href");if(!s||s===n)return;const o=p.get(s);o&&(n=s,d=setTimeout(()=>{e.innerHTML=`<div class="lp-title">${o.title}</div><div class="lp-summary">${o.summary}</div>`;const r=i.getBoundingClientRect();let a=r.left,l=r.bottom+6;a+288>window.innerWidth&&(a=window.innerWidth-296),l+80>window.innerHeight&&(l=r.top-80),Object.assign(e.style,{left:a+"px",top:l+"px",display:"block"})},300))},{passive:!0}),document.addEventListener("mouseout",t=>{t.target.closest("a[href^='/blog/']")&&(clearTimeout(d),e.style.display="none",n="")},{passive:!0})}catch{}})();</script> </body></html>  <script type="module">const c=document.getElementById("toc-toggle"),s=document.getElementById("toc-list"),i=document.getElementById("toc-chevron");c&&s&&i&&c.addEventListener("click",()=>{const o=s.classList.toggle("hidden");c.setAttribute("aria-expanded",String(o)),i.style.transform=o?"rotate(180deg)":""});const r=document.querySelectorAll(".toc-list a");if(r.length>0){const o=new IntersectionObserver(n=>{for(const t of n)t.isIntersecting&&r.forEach(e=>{e.classList.toggle("active",e.getAttribute("href")===`#${t.target.id}`)})},{rootMargin:"-80px 0px -80% 0px"});r.forEach(n=>{const t=n.getAttribute("href")?.slice(1);if(t){const e=document.getElementById(t);e&&o.observe(e)}})}</script>

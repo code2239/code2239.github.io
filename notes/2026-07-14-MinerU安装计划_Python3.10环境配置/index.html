@@ -1,0 +1,588 @@
+<!DOCTYPE html><html lang="zh-CN"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="目标：在 Windows 电脑上安装 Miniconda → 创建 Python 3.10 环境 → 安装 MinerU（v3.x `mineru` 包）并启用 GPU 加速"><meta name="color-scheme" content="light"><!-- Open Graph --><meta property="og:title" content="MinerU安装计划_Python3.10环境配置 — 星游寰宇"><meta property="og:description" content="目标：在 Windows 电脑上安装 Miniconda → 创建 Python 3.10 环境 → 安装 MinerU（v3.x `mineru` 包）并启用 GPU 加速"><meta property="og:url" content="https://code2239.github.io/notes/2026-07-14-MinerU安装计划_Python3.10环境配置"><meta property="og:type" content="article"><meta property="og:site_name" content="星游寰宇"><meta property="og:locale" content="zh_CN"><meta property="article:published_time" content="2026-07-14"><meta property="article:tag" content="mineru"><meta property="article:tag" content="pdf"><meta property="article:tag" content="conda"><meta property="article:tag" content="windows"><meta property="article:tag" content="installation"><meta property="article:tag" content="plan"><!-- Twitter Card --><meta name="twitter:card" content="summary"><meta name="twitter:title" content="MinerU安装计划_Python3.10环境配置 — 星游寰宇"><meta name="twitter:description" content="目标：在 Windows 电脑上安装 Miniconda → 创建 Python 3.10 环境 → 安装 MinerU（v3.x `mineru` 包）并启用 GPU 加速"><!-- Canonical --><link rel="canonical" href="https://code2239.github.io/notes/2026-07-14-MinerU安装计划_Python3.10环境配置"><title>MinerU安装计划_Python3.10环境配置 — 星游寰宇</title><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="alternate" type="application/rss+xml" title="星游寰宇 RSS" href="/rss.xml"><!-- Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"星游寰宇","url":"https://code2239.github.io","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://code2239.github.io/search?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://code2239.github.io"},{"@type":"ListItem","position":2,"name":"日记","item":"https://code2239.github.io/notes"},{"@type":"ListItem","position":3,"name":"2026 07 14 MinerU安装计划_Python3.10环境配置"}]},{"@context":"https://schema.org","@type":"BlogPosting","headline":"MinerU安装计划_Python3.10环境配置","description":"目标：在 Windows 电脑上安装 Miniconda → 创建 Python 3.10 环境 → 安装 MinerU（v3.x `mineru` 包）并启用 GPU 加速","datePublished":"2026-07-14","url":"https://code2239.github.io/notes/2026-07-14-MinerU安装计划_Python3.10环境配置","keywords":"mineru, pdf, conda, windows, installation, plan"}]}</script><link rel="stylesheet" href="/_astro/_slug_.CXDKI3B6.css">
+<style>.back-to-top[data-astro-cid-gzprr2dq]{position:fixed;bottom:2rem;right:2rem;z-index:40;width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:50%;border:1px solid var(--color-border);background:var(--color-bg);color:var(--color-text-secondary);cursor:pointer;box-shadow:var(--shadow-md);transition:opacity .2s ease,transform .2s ease}.back-to-top[data-astro-cid-gzprr2dq]:hover{color:var(--color-accent);border-color:var(--color-accent);transform:translateY(-2px)}.back-to-top[data-astro-cid-gzprr2dq].hidden{opacity:0;pointer-events:none}.copy-btn[data-astro-cid-qqybitij]{position:absolute;top:8px;right:8px;padding:4px 10px;font-size:.6875rem;font-family:var(--font-sans);color:var(--color-text-tertiary);background:var(--color-bg);border:1px solid var(--color-border);border-radius:6px;cursor:pointer;opacity:0;transition:opacity .15s ease,color .15s ease}pre[data-astro-cid-qqybitij]:hover .copy-btn[data-astro-cid-qqybitij]{opacity:1}.copy-btn[data-astro-cid-qqybitij]:hover{color:var(--color-accent);border-color:var(--color-accent)}.copy-btn[data-astro-cid-qqybitij].copied{color:#16a34a;border-color:#16a34a}.blog-layout[data-astro-cid-bvzihdzo]{display:block}.blog-toc[data-astro-cid-bvzihdzo]{display:none}.blog-body[data-astro-cid-bvzihdzo]{min-width:0}@media(min-width:1024px){.blog-layout[data-astro-cid-bvzihdzo]{display:grid;grid-template-columns:14rem 1fr;gap:3rem;align-items:start}.blog-toc[data-astro-cid-bvzihdzo]{display:block}.blog-body[data-astro-cid-bvzihdzo]{padding-right:2rem}}@media(max-width:1023px){.blog-toc[data-astro-cid-bvzihdzo]{display:block;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid var(--color-border)}}
+</style></head> <body class="min-h-screen flex flex-col"> <nav class="sticky top-0 z-40 bg-[var(--color-bg)]/80 backdrop-blur-md border-b border-[var(--color-border)]" data-astro-cid-pux6a34n><div class="max-w-content flex items-center justify-between py-4" data-astro-cid-pux6a34n><a href="/" class="flex items-center gap-2.5 text-base font-semibold no-underline tracking-tight" data-astro-cid-pux6a34n><svg class="w-7 h-7" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" data-astro-cid-pux6a34n><circle cx="16" cy="16" r="15" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-pux6a34n></circle><circle cx="16" cy="16" r="3" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="16" cy="5" r="1.5" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="24" cy="10" r="1" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="8" cy="22" r="1" fill="currentColor" data-astro-cid-pux6a34n></circle><circle cx="25" cy="21" r="0.8" fill="currentColor" data-astro-cid-pux6a34n></circle></svg>
+星游寰宇
+</a><!-- Desktop nav --><div class="hidden sm:flex items-center gap-5" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>博客</a><a href="/projects" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>项目</a><a href="/notes" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>日记</a><a href="/resources" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>资源</a><a href="/about" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>关于</a><button id="search-trigger" class="flex items-center gap-1.5 text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] bg-[var(--color-bg-secondary)] hover:bg-[var(--color-bg-tertiary)] border border-[var(--color-border)] hover:border-[var(--color-accent)]/30 rounded-lg px-3 py-1.5 cursor-pointer shadow-sm hover:shadow-md transition-all duration-200" aria-label="搜索 (Ctrl+K)" title="搜索 (Ctrl+K)" data-astro-cid-pux6a34n><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-pux6a34n><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" data-astro-cid-pux6a34n></path></svg><span class="hidden lg:inline" data-astro-cid-pux6a34n>搜索</span><kbd class="hidden lg:inline-flex items-center text-[0.625rem] font-mono text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1 py-px rounded" data-astro-cid-pux6a34n>Ctrl+K</kbd></button></div><!-- Mobile hamburger --><button id="menu-btn" class="sm:hidden flex flex-col gap-1 p-2 -mr-2 cursor-pointer" aria-label="打开菜单" data-astro-cid-pux6a34n><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-transform duration-200" data-astro-cid-pux6a34n></span><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-opacity duration-200" data-astro-cid-pux6a34n></span><span class="menu-bar block w-5 h-0.5 bg-[var(--color-text)] rounded transition-transform duration-200" data-astro-cid-pux6a34n></span></button></div><!-- Mobile menu --><div id="mobile-menu" class="hidden sm:hidden border-t border-[var(--color-border)] bg-[var(--color-bg)]" data-astro-cid-pux6a34n><div class="max-w-content flex flex-col gap-2 py-4" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>博客</a><a href="/projects" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>项目</a><a href="/notes" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>日记</a><a href="/resources" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>资源</a><a href="/about" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150 py-1" data-astro-cid-pux6a34n>关于</a></div></div></nav>
+    <div id="search-overlay" class="srch-overlay" role="dialog" aria-modal="true" aria-label="全局搜索" data-astro-cid-mn7pezny> <div id="search-backdrop" class="srch-backdrop" data-astro-cid-mn7pezny></div> <div class="srch-panel" id="srch-panel" data-astro-cid-mn7pezny> <!-- Search input --> <div class="srch-input-row" data-astro-cid-mn7pezny> <svg class="srch-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-mn7pezny> <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" data-astro-cid-mn7pezny></path> </svg> <input type="text" id="search-input" class="srch-input" placeholder="搜索文章、项目、日记、资源..." autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="go" data-astro-cid-mn7pezny> <kbd class="srch-kbd" data-astro-cid-mn7pezny>Esc</kbd> </div> <!-- Results area --> <div id="search-results" class="srch-results" data-astro-cid-mn7pezny> <p class="srch-empty" id="search-empty-hint" data-astro-cid-mn7pezny>输入关键词开始搜索</p> </div> <!-- Skeleton loading --> <div id="search-skeleton" class="srch-skeleton" style="display:none;" aria-hidden="true" data-astro-cid-mn7pezny> <div class="srch-skeleton-line" style="width:75%" data-astro-cid-mn7pezny></div> <div class="srch-skeleton-line" style="width:50%" data-astro-cid-mn7pezny></div> <div class="srch-skeleton-line" style="width:60%" data-astro-cid-mn7pezny></div> </div> <!-- Footer hints --> <div class="srch-footer" data-astro-cid-mn7pezny> <div class="srch-footer-hints" data-astro-cid-mn7pezny> <span data-astro-cid-mn7pezny><kbd data-astro-cid-mn7pezny>↑</kbd><kbd data-astro-cid-mn7pezny>↓</kbd> 导航</span> <span data-astro-cid-mn7pezny><kbd data-astro-cid-mn7pezny>↵</kbd> 打开</span> <span data-astro-cid-mn7pezny><kbd data-astro-cid-mn7pezny>Ctrl</kbd>+<kbd data-astro-cid-mn7pezny>K</kbd> 切换</span> </div> <div class="srch-footer-brand" data-astro-cid-mn7pezny>
+powered by Orama
+</div> </div> </div> </div> <script type="module" src="/_astro/Navigation.astro_astro_type_script_index_0_lang.15n1EYJp.js"></script> <main class="flex-1">  <div class="reading-progress" id="reading-progress" style="width: 0%"></div> <script type="module">const o=document.getElementById("reading-progress");if(!o)throw new Error("Reading progress bar element not found");const r=()=>{const n=window.scrollY,e=document.documentElement.scrollHeight-window.innerHeight,t=e>0?n/e*100:0;o.style.width=`${Math.min(t,100)}%`};window.addEventListener("scroll",r,{passive:!0});</script> <button id="back-to-top" class="back-to-top hidden" aria-label="返回顶部" data-astro-cid-gzprr2dq> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-gzprr2dq> <polyline points="18 15 12 9 6 15" data-astro-cid-gzprr2dq></polyline> </svg> </button>  <script type="module">const o=document.getElementById("back-to-top");o&&(window.addEventListener("scroll",()=>{o.classList.toggle("hidden",window.scrollY<400)},{passive:!0}),o.addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"})));</script> <script type="module">document.querySelectorAll("pre").forEach(e=>{const t=document.createElement("button");t.className="copy-btn",t.textContent="复制",t.addEventListener("click",async()=>{const n=e.querySelector("code")?.textContent||e.textContent||"";try{await navigator.clipboard.writeText(n),t.textContent="已复制",t.classList.add("copied"),setTimeout(()=>{t.textContent="复制",t.classList.remove("copied")},2e3)}catch{t.textContent="失败",setTimeout(()=>{t.textContent="复制"},2e3)}}),e.style.position="relative",e.appendChild(t)});</script> <div class="px-6 xl:px-12 pt-12 pb-16" data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <header class="mb-12 text-center" data-astro-cid-bvzihdzo> <h1 class="text-3xl font-semibold mb-3 tracking-tight" data-astro-cid-bvzihdzo>MinerU安装计划_Python3.10环境配置</h1> <div class="flex items-center justify-center gap-2 text-[var(--color-text-tertiary)] text-sm" data-astro-cid-bvzihdzo> <time datetime="2026-07-14" data-astro-cid-bvzihdzo>2026-07-14</time> <span class="text-[var(--color-border)]" data-astro-cid-bvzihdzo>·</span> <span data-astro-cid-bvzihdzo>40 分钟阅读</span>  <span class="text-[var(--color-border)]" data-astro-cid-bvzihdzo>·</span> <span class="text-sm text-[var(--color-text-tertiary)]"> <span> mineru<span class="mx-1">·</span> </span><span> pdf<span class="mx-1">·</span> </span><span> conda<span class="mx-1">·</span> </span><span> windows<span class="mx-1">·</span> </span><span> installation<span class="mx-1">·</span> </span><span> plan </span> </span>  </div> </header> <div class="blog-layout" data-astro-cid-bvzihdzo> <aside class="blog-toc" data-astro-cid-bvzihdzo> <div class="sticky top-14 max-h-[calc(100vh-3.5rem)] overflow-y-auto" data-astro-cid-bvzihdzo> <button id="toc-toggle" class="hidden max-md:flex items-center gap-1 text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-3 cursor-pointer border-none bg-transparent p-0" aria-expanded="false" aria-controls="toc-list" data-astro-cid-bvzihdzo>
+目录
+<svg id="toc-chevron" class="w-3 h-3 transition-transform duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-bvzihdzo><polyline points="6 9 12 15 18 9" data-astro-cid-bvzihdzo></polyline></svg> </button> <span class="text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-3 max-md:hidden" data-astro-cid-bvzihdzo>目录</span> <div id="toc-list" class="max-md:hidden" data-astro-cid-bvzihdzo> <nav class="toc"> <p class="text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-3">目录</p> <ul class="toc-list"> <li class> <a href="#环境前提检查">环境前提检查</a> </li><li class="toc-h3"> <a href="#11-确认-windows-版本与架构">1.1 确认 Windows 版本与架构</a> </li><li class="toc-h3"> <a href="#12-确认是否有-nvidia-显卡">1.2 确认是否有 NVIDIA 显卡</a> </li><li class="toc-h3"> <a href="#13-确认磁盘空间">1.3 确认磁盘空间</a> </li><li class="toc-h3"> <a href="#14-确认终端工具">1.4 确认终端工具</a> </li><li class> <a href="#第一阶段安装-miniconda">第一阶段：安装 Miniconda</a> </li><li class="toc-h3"> <a href="#step-11-下载-miniconda-安装程序">Step 1.1 下载 Miniconda 安装程序</a> </li><li class="toc-h3"> <a href="#step-12-运行安装程序">Step 1.2 运行安装程序</a> </li><li class="toc-h3"> <a href="#step-13-验证安装">Step 1.3 验证安装</a> </li><li class="toc-h3"> <a href="#step-14-配置-conda-国内镜像可选下载更快">Step 1.4 配置 conda 国内镜像（可选，下载更快）</a> </li><li class="toc-h3"> <a href="#step-15-更新-conda-到最新版本">Step 1.5 更新 conda 到最新版本</a> </li><li class> <a href="#第二阶段创建-python-310-环境">第二阶段：创建 Python 3.10 环境</a> </li><li class="toc-h3"> <a href="#step-21-创建环境">Step 2.1 创建环境</a> </li><li class="toc-h3"> <a href="#step-22-激活环境">Step 2.2 激活环境</a> </li><li class="toc-h3"> <a href="#step-23-验证环境">Step 2.3 验证环境</a> </li><li class> <a href="#第三阶段安装-mineruv3x-新版">第三阶段：安装 MinerU（v3.x 新版）</a> </li><li class="toc-h3"> <a href="#step-31-确认有-vc-编译工具">Step 3.1 确认有 VC++ 编译工具</a> </li><li class="toc-h3"> <a href="#step-32-升级-pip">Step 3.2 升级 pip</a> </li><li class="toc-h3"> <a href="#step-33-安装-mineru-完整版">Step 3.3 安装 MinerU 完整版</a> </li><li class="toc-h3"> <a href="#step-34-验证安装">Step 3.4 验证安装</a> </li><li class> <a href="#第四阶段配置-gpu-加速如有-nvidia-显卡">第四阶段：配置 GPU 加速（如有 NVIDIA 显卡）</a> </li><li class="toc-h3"> <a href="#step-41-确认已安装-cuda">Step 4.1 确认已安装 CUDA</a> </li><li class="toc-h3"> <a href="#step-42-安装-cuda-版-pytorch">Step 4.2 安装 CUDA 版 PyTorch</a> </li><li class="toc-h3"> <a href="#step-43-验证-gpu-可用">Step 4.3 验证 GPU 可用</a> </li><li class="toc-h3"> <a href="#step-44-配置-mineru-使用-gpu">Step 4.4 配置 MinerU 使用 GPU</a> </li><li class> <a href="#磁盘空间规划重要">磁盘空间规划（重要）</a> </li><li class> <a href="#第五阶段下载模型权重">第五阶段：下载模型权重</a> </li><li class="toc-h3"> <a href="#step-50可选把模型下载到-d-盘c-盘紧张必看">Step 5.0（可选）把模型下载到 D 盘（C 盘紧张必看）</a> </li><li class="toc-h3"> <a href="#如果已经下载了模型在-c-盘想挪到-d-盘">如果已经下载了模型在 C 盘，想挪到 D 盘</a> </li><li class="toc-h3"> <a href="#step-51-设置国内模型下载源推荐中国大陆用户">Step 5.1 设置国内模型下载源（推荐中国大陆用户）</a> </li><li class="toc-h3"> <a href="#step-52-执行模型下载">Step 5.2 执行模型下载</a> </li><li class> <a href="#第六阶段测试-mineru">第六阶段：测试 MinerU</a> </li><li class="toc-h3"> <a href="#step-61-准备一个测试-pdf">Step 6.1 准备一个测试 PDF</a> </li><li class="toc-h3"> <a href="#step-62-解析-pdf">Step 6.2 解析 PDF</a> </li><li class="toc-h3"> <a href="#step-63-启动-web-界面可选">Step 6.3 启动 Web 界面（可选）</a> </li><li class> <a href="#完整安装流程复制即用版">完整安装流程（复制即用版）</a> </li><li class> <a href="#如果你之前已装了-magic-pdf旧版">如果你之前已装了 magic-pdf（旧版）</a> </li><li class="toc-h3"> <a href="#选择-a继续用旧版不需要改">选择 A：继续用旧版（不需要改）</a> </li><li class="toc-h3"> <a href="#选择-b升级到新版-mineru-命令推荐">选择 B：升级到新版 mineru 命令（推荐）</a> </li><li class> <a href="#无-gpu-电脑的替代方案">无 GPU 电脑的替代方案</a> </li><li class="toc-h3"> <a href="#cpu-模式最简单">CPU 模式（最简单）</a> </li><li class> <a href="#gpu-性能参考">GPU 性能参考</a> </li><li class> <a href="#常见问题">常见问题</a> </li><li class="toc-h3"> <a href="#q1-conda-命令找不到">Q1: conda 命令找不到</a> </li><li class="toc-h3"> <a href="#q2-mineru---version-报错">Q2: mineru --version 报错</a> </li><li class="toc-h3"> <a href="#q3-torchcudais_available-返回-false">Q3: torch.cuda.is_available() 返回 False</a> </li><li class="toc-h3"> <a href="#q4-模型下载特别慢">Q4: 模型下载特别慢</a> </li><li class="toc-h3"> <a href="#q5-c-盘空间不够怎么办">Q5: C 盘空间不够怎么办？</a> </li><li class="toc-h3"> <a href="#q6-想卸载整个环境">Q6: 想卸载整个环境</a> </li><li class> <a href="#-参考链接">🔗 参考链接</a> </li> </ul> </nav> </div> </div> </aside> <div class="blog-body" data-astro-cid-bvzihdzo> <div class="prose prose-neutral max-w-none" data-astro-cid-bvzihdzo>   <h1 id="mineru-安装计划windows--python-310">MinerU 安装计划：Windows + Python 3.10</h1>
+<blockquote>
+<p><strong>目标</strong>：在 Windows 电脑上安装 Miniconda → 创建 Python 3.10 环境 → 安装 MinerU（v3.x <code>mineru</code> 包）并启用 GPU 加速</p>
+</blockquote>
+<hr>
+<h2 id="环境前提检查">环境前提检查</h2>
+<p>在开始之前，请先在 Windows 电脑上确认以下信息：</p>
+<h3 id="11-确认-windows-版本与架构">1.1 确认 Windows 版本与架构</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="powershell"><code><span class="line"><span style="color:var(--astro-code-token-comment)"># 按 Win + R，输入 winver，按回车 → 查看 Windows 版本</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 要求在 Windows 10 或 Windows 11，64 位系统（x86_64）</span></span></code></pre>
+<h3 id="12-确认是否有-nvidia-显卡">1.2 确认是否有 NVIDIA 显卡</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="powershell"><code><span class="line"><span style="color:var(--astro-code-token-comment)"># 方法一：打开任务管理器 → 性能选项卡 → 看是否有 "GPU"（NVIDIA）</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 方法二：打开设备管理器 → 显示适配器 → 看是否有 NVIDIA 显卡</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 方法三：在终端运行（需要已安装 NVIDIA 驱动）</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">nvidia</span><span style="color:var(--astro-code-token-keyword)">-</span><span style="color:var(--astro-code-foreground)">smi</span></span></code></pre>
+<p><strong>如果 <code>nvidia-smi</code> 可用</strong>，会显示：</p>
+<ul>
+<li>GPU 型号（如 “NVIDIA GeForce RTX 3060”）</li>
+<li>显存大小</li>
+<li>CUDA 版本（如 “CUDA Version: 12.4”）</li>
+<li><strong>恭喜！你的电脑支持 GPU 加速 🎉</strong></li>
+</ul>
+<p><strong>如果没有 NVIDIA 显卡</strong>：</p>
+<ul>
+<li>MinerU 仍然可以工作，但只能用 CPU 模式，速度慢 3-5 倍</li>
+<li>MinerU v3.x 也支持 DirectML（AMD / Intel 显卡可用）</li>
+</ul>
+<h3 id="13-确认磁盘空间">1.3 确认磁盘空间</h3>
+<p>MinerU 安装后约占用 <strong>5-8 GB</strong>（含模型权重文件约 2-3 GB），确保目标盘有足够空间。</p>
+<h3 id="14-确认终端工具">1.4 确认终端工具</h3>
+<p>本教程使用 <strong>Windows PowerShell</strong> 作为终端。打开方式：</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>按 Win + S → 输入 "PowerShell" → 打开 "Windows PowerShell"</span></span></code></pre>
+<blockquote>
+<p>⚠️ <strong>不要用 cmd（命令提示符）</strong>，本教程多数命令基于 PowerShell 语法。</p>
+</blockquote>
+<hr>
+<h2 id="第一阶段安装-miniconda">第一阶段：安装 Miniconda</h2>
+<blockquote>
+<p><strong>为什么选 Miniconda？</strong></p>
+<ul>
+<li>你只需要一个 Python 3.10 环境来跑 MinerU</li>
+<li>Miniconda 只有 ~60 MB，比 Anaconda（~3 GB）轻量得多</li>
+<li>按需装包，不浪费硬盘</li>
+</ul>
+</blockquote>
+<h3 id="step-11-下载-miniconda-安装程序">Step 1.1 下载 Miniconda 安装程序</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="powershell"><code><span class="line"><span style="color:var(--astro-code-token-comment)"># 用浏览器下载（推荐，更稳定）</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 打开网址：https://docs.anaconda.com/miniconda/</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 点击 "Miniconda3 Windows 64-bit" 下载 .exe 文件</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 或者用命令行下载（如果 Windows 有 curl）</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">curl </span><span style="color:var(--astro-code-token-keyword)">-</span><span style="color:var(--astro-code-foreground)">O https:</span><span style="color:var(--astro-code-token-keyword)">//</span><span style="color:var(--astro-code-token-function)">repo.anaconda.com</span><span style="color:var(--astro-code-token-keyword)">/</span><span style="color:var(--astro-code-foreground)">miniconda</span><span style="color:var(--astro-code-token-keyword)">/</span><span style="color:var(--astro-code-token-function)">Miniconda3-latest-Windows-x86_64.exe</span></span></code></pre>
+<p><strong>说明：</strong></p>
+<ul>
+<li><code>Windows-x86_64</code>：64 位 Windows 版本</li>
+<li>下载到 <code>Downloads</code> 文件夹，约 60-70 MB</li>
+</ul>
+<h3 id="step-12-运行安装程序">Step 1.2 运行安装程序</h3>
+<p>找到下载的 <code>Miniconda3-latest-Windows-x86_64.exe</code>，<strong>双击运行</strong>。</p>
+<p>安装过程中的选项：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>提示</th><th>应选</th><th>说明</th></tr></thead><tbody><tr><td><code>License Agreement</code></td><td>✅ <strong>I Agree</strong></td><td>接受许可协议</td></tr><tr><td><code>Install for: Just me / All Users</code></td><td>✅ <strong>Just Me</strong>（推荐）</td><td>仅当前用户安装，无需管理员权限</td></tr><tr><td><code>Installation Location</code></td><td>默认（<code>C:\Users\你的用户名\Miniconda3</code>）</td><td>保持默认</td></tr><tr><td><code>Add Miniconda3 to my PATH environment variable</code></td><td>✅ <strong>勾选</strong></td><td>⚠️ <strong>重要</strong>：这样 conda 命令才能在终端直接使用</td></tr><tr><td><code>Register Miniconda3 as my default Python</code></td><td>可选（建议勾选）</td><td>会让系统的 <code>python</code> 指向 conda 的 Python</td></tr></tbody></table>
+<h3 id="step-13-验证安装">Step 1.3 验证安装</h3>
+<p>安装完成后，<strong>重新打开 PowerShell</strong>（或搜索打开 “Anaconda Prompt (Miniconda)”）：</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="powershell"><code><span class="line"><span style="color:var(--astro-code-token-comment)"># 验证 conda 命令可用</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">conda </span><span style="color:var(--astro-code-token-keyword)">--</span><span style="color:var(--astro-code-foreground)">version</span></span></code></pre>
+<p><strong>逐行解释：</strong></p>
+<ul>
+<li>应该显示类似 <code>conda 24.x.x</code> 的版本号</li>
+<li>如果提示 <code>conda : 无法将"conda"项识别为 cmdlet...</code>：
+<ul>
+<li><strong>原因</strong>：没有添加到 PATH</li>
+<li><strong>解决</strong>：开始菜单 → 搜索 “Anaconda Prompt (Miniconda)” → 用这个终端</li>
+</ul>
+</li>
+</ul>
+<h3 id="step-14-配置-conda-国内镜像可选下载更快">Step 1.4 配置 conda 国内镜像（可选，下载更快）</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="powershell"><code><span class="line"><span style="color:var(--astro-code-token-comment)"># 如果你在中国大陆，可以换成国内镜像源，下载包更快</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">conda config </span><span style="color:var(--astro-code-token-keyword)">--</span><span style="color:var(--astro-code-foreground)">add channels https:</span><span style="color:var(--astro-code-token-keyword)">//</span><span style="color:var(--astro-code-foreground)">mirrors.tuna.tsinghua.edu.cn</span><span style="color:var(--astro-code-token-keyword)">/</span><span style="color:var(--astro-code-foreground)">anaconda</span><span style="color:var(--astro-code-token-keyword)">/</span><span style="color:var(--astro-code-foreground)">pkgs</span><span style="color:var(--astro-code-token-keyword)">/</span><span style="color:var(--astro-code-foreground)">main</span><span style="color:var(--astro-code-token-keyword)">/</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">conda config </span><span style="color:var(--astro-code-token-keyword)">--</span><span style="color:var(--astro-code-foreground)">add channels https:</span><span style="color:var(--astro-code-token-keyword)">//</span><span style="color:var(--astro-code-foreground)">mirrors.tuna.tsinghua.edu.cn</span><span style="color:var(--astro-code-token-keyword)">/</span><span style="color:var(--astro-code-foreground)">anaconda</span><span style="color:var(--astro-code-token-keyword)">/</span><span style="color:var(--astro-code-foreground)">pkgs</span><span style="color:var(--astro-code-token-keyword)">/</span><span style="color:var(--astro-code-foreground)">free</span><span style="color:var(--astro-code-token-keyword)">/</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">conda config </span><span style="color:var(--astro-code-token-keyword)">--</span><span style="color:var(--astro-code-foreground)">set show_channel_urls yes</span></span></code></pre>
+<p><strong>逐行解释：</strong></p>
+<ul>
+<li><code>conda config --add channels ...</code>：添加清华大学的 conda 镜像源</li>
+<li><code>--set show_channel_urls yes</code>：安装时显示来源渠道</li>
+</ul>
+<h3 id="step-15-更新-conda-到最新版本">Step 1.5 更新 conda 到最新版本</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="powershell"><code><span class="line"><span style="color:var(--astro-code-token-comment)"># 确保 conda 本身是最新版本</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">conda update conda </span><span style="color:var(--astro-code-token-keyword)">-</span><span style="color:var(--astro-code-foreground)">y</span></span></code></pre>
+<hr>
+<h2 id="第二阶段创建-python-310-环境">第二阶段：创建 Python 3.10 环境</h2>
+<h3 id="step-21-创建环境">Step 2.1 创建环境</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="powershell"><code><span class="line"><span style="color:var(--astro-code-token-comment)"># 创建一个名为 MinerU 的环境，指定 Python 版本为 3.10</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">conda create </span><span style="color:var(--astro-code-token-keyword)">-</span><span style="color:var(--astro-code-foreground)">n MinerU python</span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-constant)">3.10</span><span style="color:var(--astro-code-token-keyword)"> -</span><span style="color:var(--astro-code-foreground)">y</span></span></code></pre>
+<p><strong>逐行解释：</strong></p>
+<ul>
+<li><code>conda create</code>：创建新环境</li>
+<li><code>-n MinerU</code>：环境名称叫 <code>MinerU</code>（可以自定义）</li>
+<li><code>python=3.10</code>：使用 Python 3.10.x</li>
+<li><code>-y</code>：自动确认，跳过提示</li>
+</ul>
+<blockquote>
+<p><strong>为什么要用 Python 3.10？</strong> 因为 MinerU 的预编译 wheel（detectron2 等）只提供了 Python 3.10 的 Windows 版本。</p>
+</blockquote>
+<h3 id="step-22-激活环境">Step 2.2 激活环境</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="powershell"><code><span class="line"><span style="color:var(--astro-code-token-comment)"># 激活 MinerU 环境</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">conda activate MinerU</span></span></code></pre>
+<p><strong>逐行解释：</strong></p>
+<ul>
+<li>激活后，终端提示符前面会出现 <code>(MinerU)</code></li>
+<li>此后所有 <code>python</code> 和 <code>pip</code> 都指向环境内的 Python 3.10</li>
+</ul>
+<h3 id="step-23-验证环境">Step 2.3 验证环境</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="powershell"><code><span class="line"><span style="color:var(--astro-code-token-comment)"># 确认当前 Python 版本</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">python </span><span style="color:var(--astro-code-token-keyword)">--</span><span style="color:var(--astro-code-foreground)">version</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 确认 pip 指向环境内的 pip</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">Get-Command</span><span style="color:var(--astro-code-foreground)"> pip</span></span></code></pre>
+<p><strong>预期输出：</strong></p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Python 3.10.x</span></span>
+<span class="line"><span>C:\Users\你的用户名\Miniconda3\envs\MinerU\Scripts\pip.exe</span></span></code></pre>
+<blockquote>
+<p>如果 <code>Get-Command pip</code> 显示的是系统目录，说明没有激活环境，回到 Step 2.2。</p>
+</blockquote>
+<hr>
+<h2 id="第三阶段安装-mineruv3x-新版">第三阶段：安装 MinerU（v3.x 新版）</h2>
+<blockquote>
+<p>⚠️ <strong>重要说明</strong>：MinerU 有两个版本：</p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>版本</th><th>包名</th><th>安装命令</th><th>终端命令</th></tr></thead><tbody><tr><td><strong>v2.x（旧版）</strong></td><td><code>magic-pdf</code></td><td><code>pip install magic-pdf[full]</code></td><td><code>magic-pdf</code></td></tr><tr><td><strong>v3.x（新版 ✅）</strong></td><td><strong><code>mineru</code></strong></td><td><strong><code>pip install "mineru[all]"</code></strong></td><td><strong><code>mineru</code></strong></td></tr></tbody></table>
+<blockquote>
+<p>你要用的是 <strong>v3.x 新版</strong>，命令是 <code>mineru</code>，不是 <code>magic-pdf</code>。</p>
+</blockquote>
+<h3 id="step-31-确认有-vc-编译工具">Step 3.1 确认有 VC++ 编译工具</h3>
+<p>MinerU 的部分依赖需要 C++ 编译，Windows 需要安装 <strong>Microsoft C++ Build Tools</strong>：</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="powershell"><code><span class="line"><span style="color:var(--astro-code-token-comment)"># 检查是否已安装（在 PowerShell 中运行）</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">Get-Command</span><span style="color:var(--astro-code-token-function)"> cl.exe</span><span style="color:var(--astro-code-token-keyword)"> -</span><span style="color:var(--astro-code-foreground)">ErrorAction SilentlyContinue</span></span></code></pre>
+<p>如果没有任何输出，需要下载安装：</p>
+<ol>
+<li>打开 <a href="https://visualstudio.microsoft.com/visual-cpp-build-tools/">https://visualstudio.microsoft.com/visual-cpp-build-tools/</a></li>
+<li>下载 <code>vs_BuildTools.exe</code></li>
+<li>运行安装 → 勾选 <strong>“Desktop development with C++”</strong></li>
+<li>只把<strong>安装位置</strong>改为 D 盘即可，不用改其他</li>
+<li>安装完成后<strong>重启电脑</strong></li>
+</ol>
+<h3 id="step-32-升级-pip">Step 3.2 升级 pip</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="powershell"><code><span class="line"><span style="color:var(--astro-code-token-comment)"># 把 MinerU 环境内的 pip 升级到最新版</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 这能避免后续安装时出现的"pip 版本过旧"警告</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">python </span><span style="color:var(--astro-code-token-keyword)">-</span><span style="color:var(--astro-code-foreground)">m pip install </span><span style="color:var(--astro-code-token-keyword)">--</span><span style="color:var(--astro-code-foreground)">upgrade pip</span></span></code></pre>
+<h3 id="step-33-安装-mineru-完整版">Step 3.3 安装 MinerU 完整版</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="powershell"><code><span class="line"><span style="color:var(--astro-code-token-comment)"># 安装 MinerU v3.x 完整版（含 OCR、版面检测、公式识别等所有功能）</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># --trusted-host 是告诉 pip "这个网站我信得过"，忽略 HTTP 警告</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">pip install </span><span style="color:var(--astro-code-token-keyword)">-</span><span style="color:var(--astro-code-foreground)">U </span><span style="color:var(--astro-code-token-string-expression)">"mineru[all]"</span><span style="color:var(--astro-code-token-keyword)"> --</span><span style="color:var(--astro-code-foreground)">extra</span><span style="color:var(--astro-code-token-keyword)">-</span><span style="color:var(--astro-code-foreground)">index</span><span style="color:var(--astro-code-token-keyword)">-</span><span style="color:var(--astro-code-foreground)">url https:</span><span style="color:var(--astro-code-token-keyword)">//</span><span style="color:var(--astro-code-token-function)">wheels.myhloli.com</span><span style="color:var(--astro-code-token-keyword)"> --</span><span style="color:var(--astro-code-foreground)">trusted</span><span style="color:var(--astro-code-token-keyword)">-</span><span style="color:var(--astro-code-foreground)">host </span><span style="color:var(--astro-code-token-function)">wheels.myhloli.com</span></span></code></pre>
+<p><strong>逐行解释：</strong></p>
+<ul>
+<li><code>-U</code>：升级到最新版本</li>
+<li><code>"mineru[all]"</code>：<strong>安装 mineru 包</strong>（不是 magic-pdf 了），<code>[all]</code> 表示包含所有功能：
+<ul>
+<li><strong>OCR 识别</strong> — 识别图片中的文字（109 种语言）</li>
+<li><strong>版面检测</strong> — 分析段落、标题、页眉页脚</li>
+<li><strong>公式识别</strong> — 数学公式转 LaTeX</li>
+<li><strong>表格识别</strong> — 识别并还原表格结构</li>
+</ul>
+</li>
+<li><code>--extra-index-url</code>：从 myhloli 的仓库下载预编译的二进制包</li>
+<li><code>--trusted-host</code>：因为 myhloli 的仓库用 HTTP 不是 HTTPS，加这个避免警告</li>
+</ul>
+<p><strong>关于那个 <code>--trusted-host</code> 警告：</strong></p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>WARNING: wheels.myhloli.com is not a trusted or secure host...</span></span></code></pre>
+<p>这个警告是 pip 的”过度保护”——这个仓库是 MinerU 自己的开发者 myhloli 建的，<strong>安全没问题</strong>，只是他没有配 HTTPS 证书。加了 <code>--trusted-host</code> 就安静了。</p>
+<p><strong>如果下载慢，可以加国内 pip 镜像：</strong></p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="powershell"><code><span class="line"><span style="color:var(--astro-code-foreground)">pip install </span><span style="color:var(--astro-code-token-keyword)">-</span><span style="color:var(--astro-code-foreground)">U </span><span style="color:var(--astro-code-token-string-expression)">"mineru[all]"</span><span style="color:var(--astro-code-token-keyword)"> --</span><span style="color:var(--astro-code-foreground)">extra</span><span style="color:var(--astro-code-token-keyword)">-</span><span style="color:var(--astro-code-foreground)">index</span><span style="color:var(--astro-code-token-keyword)">-</span><span style="color:var(--astro-code-foreground)">url https:</span><span style="color:var(--astro-code-token-keyword)">//</span><span style="color:var(--astro-code-token-function)">wheels.myhloli.com</span><span style="color:var(--astro-code-token-keyword)"> --</span><span style="color:var(--astro-code-foreground)">trusted</span><span style="color:var(--astro-code-token-keyword)">-</span><span style="color:var(--astro-code-foreground)">host </span><span style="color:var(--astro-code-token-function)">wheels.myhloli.com</span><span style="color:var(--astro-code-token-keyword)"> -</span><span style="color:var(--astro-code-foreground)">i https:</span><span style="color:var(--astro-code-token-keyword)">//</span><span style="color:var(--astro-code-foreground)">pypi.tuna.tsinghua.edu.cn</span><span style="color:var(--astro-code-token-keyword)">/</span><span style="color:var(--astro-code-foreground)">simple</span></span></code></pre>
+<h3 id="step-34-验证安装">Step 3.4 验证安装</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="powershell"><code><span class="line"><span style="color:var(--astro-code-token-comment)"># ✅ 这个命令现在能用了（装的是 mineru 包，不是 magic-pdf 了）</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">mineru </span><span style="color:var(--astro-code-token-keyword)">--</span><span style="color:var(--astro-code-foreground)">help</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 查看版本</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">mineru </span><span style="color:var(--astro-code-token-keyword)">--</span><span style="color:var(--astro-code-foreground)">version</span></span></code></pre>
+<p><strong>预期输出：</strong></p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>MinerU v3.x.x</span></span></code></pre>
+<hr>
+<h2 id="第四阶段配置-gpu-加速如有-nvidia-显卡">第四阶段：配置 GPU 加速（如有 NVIDIA 显卡）</h2>
+<h3 id="step-41-确认已安装-cuda">Step 4.1 确认已安装 CUDA</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="powershell"><code><span class="line"><span style="color:var(--astro-code-token-comment)"># 查看 CUDA 驱动版本和 GPU 信息</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">nvidia</span><span style="color:var(--astro-code-token-keyword)">-</span><span style="color:var(--astro-code-foreground)">smi</span></span></code></pre>
+<p><strong>关注输出中的两行：</strong></p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>CUDA Version: 12.4          ← 驱动支持的 CUDA 版本</span></span>
+<span class="line"><span>NVIDIA GeForce RTX 3060    ← 你的显卡型号</span></span></code></pre>
+<h3 id="step-42-安装-cuda-版-pytorch">Step 4.2 安装 CUDA 版 PyTorch</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="powershell"><code><span class="line"><span style="color:var(--astro-code-token-comment)"># mineru[all] 默认装了 CPU 版 PyTorch，需要换成 CUDA 版</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 先卸载 CPU 版的 PyTorch</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">pip uninstall torch torchvision torchaudio </span><span style="color:var(--astro-code-token-keyword)">-</span><span style="color:var(--astro-code-foreground)">y</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 根据 nvidia-smi 显示的 CUDA 版本选择安装：</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 情况一：CUDA 12.4 或更高（推荐，兼容性最好）</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">pip install torch torchvision torchaudio </span><span style="color:var(--astro-code-token-keyword)">--</span><span style="color:var(--astro-code-foreground)">index</span><span style="color:var(--astro-code-token-keyword)">-</span><span style="color:var(--astro-code-foreground)">url https:</span><span style="color:var(--astro-code-token-keyword)">//</span><span style="color:var(--astro-code-foreground)">download.pytorch.org</span><span style="color:var(--astro-code-token-keyword)">/</span><span style="color:var(--astro-code-foreground)">whl</span><span style="color:var(--astro-code-token-keyword)">/</span><span style="color:var(--astro-code-foreground)">cu124</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 情况二：CUDA 11.8（老显卡如 GTX 10 系列）</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118</span></span></code></pre>
+<p><strong>逐行解释：</strong></p>
+<ul>
+<li><code>--index-url https://download.pytorch.org/whl/cu124</code>：从 PyTorch 官网下载 CUDA 12.4 编译版</li>
+<li><code>cu124</code> 中的 <code>124</code> 表示 CUDA 12.4 版本</li>
+<li>选择的 CUDA 版本<strong>不能高于</strong> <code>nvidia-smi</code> 中显示的版本</li>
+</ul>
+<h3 id="step-43-验证-gpu-可用">Step 4.3 验证 GPU 可用</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="powershell"><code><span class="line"><span style="color:var(--astro-code-token-comment)"># 测试 PyTorch 是否能识别 GPU</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">python </span><span style="color:var(--astro-code-token-keyword)">-</span><span style="color:var(--astro-code-foreground)">c </span><span style="color:var(--astro-code-token-string-expression)">"import torch; print('CUDA可用:', torch.cuda.is_available()); print('显卡名称:', torch.cuda.get_device_name(0) if torch.cuda.is_available() else '无')"</span></span></code></pre>
+<p><strong>成功输出（示例）：</strong></p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>CUDA可用: True</span></span>
+<span class="line"><span>显卡名称: NVIDIA GeForce RTX 3060</span></span></code></pre>
+<p><strong>失败输出：</strong></p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>CUDA可用: False</span></span>
+<span class="line"><span>显卡名称: 无</span></span></code></pre>
+<p>→ 说明 PyTorch 没有正确安装 CUDA 版本，回到 Step 4.2 重试</p>
+<h3 id="step-44-配置-mineru-使用-gpu">Step 4.4 配置 MinerU 使用 GPU</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="powershell"><code><span class="line"><span style="color:var(--astro-code-token-comment)"># 创建 MinerU 配置文件</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 用记事本打开文件</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">notepad $</span><span style="color:var(--astro-code-token-constant)">env:</span><span style="color:var(--astro-code-foreground)">USERPROFILE\.mineru.json</span></span></code></pre>
+<p>在弹出的记事本中输入：</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="json"><code><span class="line"><span style="color:var(--astro-code-foreground)">{</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">  "device-mode"</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-token-string-expression)"> "cuda"</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">}</span></span></code></pre>
+<p><strong>保存方法：</strong> <code>Ctrl+S</code> → 关闭记事本</p>
+<p><strong>逐行解释：</strong></p>
+<ul>
+<li><code>$env:USERPROFILE</code>：Windows 环境变量，指向 <code>C:\Users\你的用户名</code></li>
+<li><code>.mineru.json</code>：MinerU v3.x 的配置文件</li>
+<li><code>"device-mode": "cuda"</code>：启用 CUDA GPU 加速
+<ul>
+<li><code>"cpu"</code>：纯 CPU 模式（慢）</li>
+<li><code>"cuda"</code>：NVIDIA GPU 模式（快）</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="磁盘空间规划重要">磁盘空间规划（重要）</h2>
+<p>MinerU 安装后占用空间如下：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>项目</th><th>大小</th><th>默认位置</th><th align="center">能否自定义</th></tr></thead><tbody><tr><td><strong>Miniconda 本身</strong></td><td>~500 MB</td><td>安装时选的路径</td><td align="center">✅</td></tr><tr><td><strong>MinerU 环境</strong>（Python + 依赖包）</td><td>~3-5 GB</td><td><code>\envs\MinerU\</code>（和 conda 同盘）</td><td align="center">✅ 用 <code>-p</code> 参数</td></tr><tr><td><strong>pip 缓存</strong>（可清）</td><td>~1-2 GB</td><td><code>C:\Users\xxx\AppData\Local\pip\cache\</code></td><td align="center">⚠️ 用完后可 <code>pip cache purge</code></td></tr><tr><td><strong>AI 模型文件</strong></td><td><strong>~2-3 GB</strong></td><td><strong><code>C:\Users\xxx\.cache\</code></strong></td><td align="center"><strong>✅ 可以！通过环境变量改到其他盘</strong></td></tr></tbody></table>
+<blockquote>
+<p>⚠️ <strong>C 盘紧张的用户注意</strong>：模型文件的默认位置在 C 盘，但你可以在<strong>下载前</strong>设一个环境变量，让它直接下到 D 盘，一步到位。</p>
+</blockquote>
+<hr>
+<h2 id="第五阶段下载模型权重">第五阶段：下载模型权重</h2>
+<p>MinerU 需要下载 AI 模型文件（约 2-3 GB），用于版面检测、OCR、公式识别等。</p>
+<h3 id="step-50可选把模型下载到-d-盘c-盘紧张必看">Step 5.0（可选）把模型下载到 D 盘（C 盘紧张必看）</h3>
+<blockquote>
+<p><strong>在下载模型之前</strong>设置环境变量，告诉 MinerU “模型存在 D 盘，别放 C 盘”。</p>
+</blockquote>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="powershell"><code><span class="line"><span style="color:var(--astro-code-token-comment)"># 方法一：设置 MinerU 模型目录（推荐）</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 在 D 盘创建一个文件夹来存模型</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">mkdir D:\MinerU_models</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">setx MINERU_MODEL_DIR D:\MinerU_models</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 同时也设 modelscope 缓存目录（双保险）</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">setx MODELSCOPE_CACHE D:\MinerU_models</span></span></code></pre>
+<p><strong>逐行解释：</strong></p>
+<ul>
+<li><code>setx</code>：Windows 的命令，永久设置环境变量（重启终端后生效）</li>
+<li><code>MINERU_MODEL_DIR</code>：告诉 MinerU “把模型存到这个目录”</li>
+<li><code>MODELSCOPE_CACHE</code>：告诉 modelscope 下载工具”缓存也放这里”</li>
+<li><strong>设置后，下载的模型直接进 D 盘，不占 C 盘任何空间</strong></li>
+</ul>
+<p><strong>之后正常运行下载即可：</strong></p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="powershell"><code><span class="line"><span style="color:var(--astro-code-token-comment)"># 重启 PowerShell 让环境变量生效，然后：</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">conda activate MinerU</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">mineru models download</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 模型直接下到 D:\MinerU_models\，C 盘不受影响 ✅</span></span></code></pre>
+<h3 id="如果已经下载了模型在-c-盘想挪到-d-盘">如果已经下载了模型在 C 盘，想挪到 D 盘</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="powershell"><code><span class="line"><span style="color:var(--astro-code-token-comment)"># 1. 把已下载的模型搬到 D 盘</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">xcopy C:\Users\你的用户名\.cache\modelscope D:\MinerU_models </span><span style="color:var(--astro-code-token-keyword)">/</span><span style="color:var(--astro-code-foreground)">E </span><span style="color:var(--astro-code-token-keyword)">/</span><span style="color:var(--astro-code-foreground)">H</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 2. 确认复制完整后，删除 C 盘的</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">rmdir </span><span style="color:var(--astro-code-token-keyword)">/</span><span style="color:var(--astro-code-foreground)">S </span><span style="color:var(--astro-code-token-keyword)">/</span><span style="color:var(--astro-code-foreground)">Q C:\Users\你的用户名\.cache\modelscope</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 3. 建一个"符号链接"——让系统以为文件还在 C 盘</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">mklink </span><span style="color:var(--astro-code-token-keyword)">/</span><span style="color:var(--astro-code-foreground)">J C:\Users\你的用户名\.cache\modelscope D:\MinerU_models</span></span></code></pre>
+<h3 id="step-51-设置国内模型下载源推荐中国大陆用户">Step 5.1 设置国内模型下载源（推荐中国大陆用户）</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="powershell"><code><span class="line"><span style="color:var(--astro-code-token-comment)"># 如果你在中国大陆，建议用 ModelScope 源下载，速度快很多</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 设置环境变量（仅当前终端有效）</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">$</span><span style="color:var(--astro-code-token-constant)">env:</span><span style="color:var(--astro-code-foreground)">MINERU_MODEL_SOURCE </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-string-expression)"> "modelscope"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 或者永久设置（推荐）</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">[</span><span style="color:var(--astro-code-token-keyword)">Environment</span><span style="color:var(--astro-code-foreground)">]::SetEnvironmentVariable(</span><span style="color:var(--astro-code-token-string-expression)">"MINERU_MODEL_SOURCE"</span><span style="color:var(--astro-code-token-keyword)">,</span><span style="color:var(--astro-code-token-string-expression)"> "modelscope"</span><span style="color:var(--astro-code-token-keyword)">,</span><span style="color:var(--astro-code-token-string-expression)"> "User"</span><span style="color:var(--astro-code-foreground)">)</span></span></code></pre>
+<h3 id="step-52-执行模型下载">Step 5.2 执行模型下载</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="powershell"><code><span class="line"><span style="color:var(--astro-code-token-comment)"># 下载所有 MinerU 模型文件</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">mineru models download</span></span></code></pre>
+<p><strong>逐行解释：</strong></p>
+<ul>
+<li><code>mineru</code> 是 MinerU v3.x 的命令</li>
+<li>自动下载所有需要的预训练模型到指定目录（默认 <code>C:\Users\你的用户名\.cache\</code>，如已设环境变量则到 <code>D:\MinerU_models</code>）</li>
+<li>总大小约 <strong>2-3 GB</strong></li>
+<li>下载时间：根据网络速度，约 15-60 分钟</li>
+<li><strong>只需要下载一次</strong>——以后删了环境重建，模型还在，不需要重新下载</li>
+</ul>
+<hr>
+<h2 id="第六阶段测试-mineru">第六阶段：测试 MinerU</h2>
+<h3 id="step-61-准备一个测试-pdf">Step 6.1 准备一个测试 PDF</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="powershell"><code><span class="line"><span style="color:var(--astro-code-token-comment)"># 下载一个示例 PDF（学术论文）</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">curl </span><span style="color:var(--astro-code-token-keyword)">-</span><span style="color:var(--astro-code-foreground)">O https:</span><span style="color:var(--astro-code-token-keyword)">//</span><span style="color:var(--astro-code-foreground)">arxiv.org</span><span style="color:var(--astro-code-token-keyword)">/</span><span style="color:var(--astro-code-foreground)">pdf</span><span style="color:var(--astro-code-token-keyword)">/</span><span style="color:var(--astro-code-token-constant)">2303.08774</span><span style="color:var(--astro-code-foreground)">.pdf</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 或者使用你自己的 PDF 文件</span></span></code></pre>
+<h3 id="step-62-解析-pdf">Step 6.2 解析 PDF</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="powershell"><code><span class="line"><span style="color:var(--astro-code-token-comment)"># 将 PDF 转换为 Markdown（新版 mineru 命令）</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">mineru </span><span style="color:var(--astro-code-token-keyword)">-</span><span style="color:var(--astro-code-foreground)">p </span><span style="color:var(--astro-code-token-string-expression)">"2303.08774.pdf"</span><span style="color:var(--astro-code-token-keyword)"> -</span><span style="color:var(--astro-code-foreground)">o .</span><span style="color:var(--astro-code-token-keyword)">/</span><span style="color:var(--astro-code-foreground)">output</span></span></code></pre>
+<p><strong>逐行解释：</strong></p>
+<ul>
+<li><code>mineru</code>：v3.x 的命令（不再是 <code>magic-pdf pdf-command</code>）</li>
+<li><code>-p</code>：指定输入的 PDF 文件</li>
+<li><code>-o</code>：指定输出目录</li>
+</ul>
+<p><strong>成功后</strong>，<code>./output</code> 目录下生成：</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>output/</span></span>
+<span class="line"><span>├── 2303.08774.md          ← 转换后的 Markdown 文件</span></span>
+<span class="line"><span>├── images/                ← 提取的图片</span></span>
+<span class="line"><span>└── 2303.08774.json        ← 结构化 JSON</span></span></code></pre>
+<h3 id="step-63-启动-web-界面可选">Step 6.3 启动 Web 界面（可选）</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="powershell"><code><span class="line"><span style="color:var(--astro-code-token-comment)"># 启动图形化界面，可以在浏览器中上传 PDF</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">mineru gradio</span></span></code></pre>
+<p><strong>说明：</strong></p>
+<ul>
+<li>启动后终端会显示一个本地地址，如 <code>http://127.0.0.1:14229</code>（<strong>端口号不固定，以你实际显示的为准</strong>）</li>
+<li>在浏览器打开这个地址，可以图形化操作</li>
+<li>按 <code>Ctrl+C</code> 停止服务</li>
+</ul>
+<hr>
+<h2 id="完整安装流程复制即用版">完整安装流程（复制即用版）</h2>
+<p>以下是从零到完成的全部命令，<strong>在 PowerShell 中按顺序逐条执行</strong>：</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="powershell"><code><span class="line"><span style="color:var(--astro-code-token-comment)"># ===== 第一阶段：安装 Miniconda =====</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 去 https://docs.anaconda.com/miniconda/ 下载 Miniconda3 Windows 64-bit</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 双击安装，记得勾选 "Add to PATH"</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 装好后重新打开 PowerShell</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">conda </span><span style="color:var(--astro-code-token-keyword)">--</span><span style="color:var(--astro-code-foreground)">version                                   </span><span style="color:var(--astro-code-token-comment)"># 验证 conda 安装成功</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># ===== 第二阶段：创建 Python 3.10 环境 =====</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">conda create </span><span style="color:var(--astro-code-token-keyword)">-</span><span style="color:var(--astro-code-foreground)">n MinerU python</span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-constant)">3.10</span><span style="color:var(--astro-code-token-keyword)"> -</span><span style="color:var(--astro-code-foreground)">y             </span><span style="color:var(--astro-code-token-comment)"># 创建环境</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">conda activate MinerU                             </span><span style="color:var(--astro-code-token-comment)"># 激活环境</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">python </span><span style="color:var(--astro-code-token-keyword)">--</span><span style="color:var(--astro-code-foreground)">version                                  </span><span style="color:var(--astro-code-token-comment)"># 确认 → Python 3.10.x</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># ===== 第三阶段：安装 MinerU v3.x =====</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">python </span><span style="color:var(--astro-code-token-keyword)">-</span><span style="color:var(--astro-code-foreground)">m pip install </span><span style="color:var(--astro-code-token-keyword)">--</span><span style="color:var(--astro-code-foreground)">upgrade pip               </span><span style="color:var(--astro-code-token-comment)"># 升级 pip</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">pip install </span><span style="color:var(--astro-code-token-keyword)">-</span><span style="color:var(--astro-code-foreground)">U </span><span style="color:var(--astro-code-token-string-expression)">"mineru[all]"</span><span style="color:var(--astro-code-token-keyword)"> --</span><span style="color:var(--astro-code-foreground)">extra</span><span style="color:var(--astro-code-token-keyword)">-</span><span style="color:var(--astro-code-foreground)">index</span><span style="color:var(--astro-code-token-keyword)">-</span><span style="color:var(--astro-code-foreground)">url https:</span><span style="color:var(--astro-code-token-keyword)">//</span><span style="color:var(--astro-code-token-function)">wheels.myhloli.com</span><span style="color:var(--astro-code-token-keyword)"> --</span><span style="color:var(--astro-code-foreground)">trusted</span><span style="color:var(--astro-code-token-keyword)">-</span><span style="color:var(--astro-code-foreground)">host </span><span style="color:var(--astro-code-token-function)">wheels.myhloli.com</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">mineru </span><span style="color:var(--astro-code-token-keyword)">--</span><span style="color:var(--astro-code-foreground)">version                                  </span><span style="color:var(--astro-code-token-comment)"># 确认 → MinerU v3.x.x ✅</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># ===== 第四阶段：配置 GPU（有 NVIDIA 显卡才需要） =====</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">pip uninstall torch torchvision torchaudio </span><span style="color:var(--astro-code-token-keyword)">-</span><span style="color:var(--astro-code-foreground)">y     </span><span style="color:var(--astro-code-token-comment)"># 卸载 CPU 版 torch</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">pip install torch torchvision torchaudio </span><span style="color:var(--astro-code-token-keyword)">--</span><span style="color:var(--astro-code-foreground)">index</span><span style="color:var(--astro-code-token-keyword)">-</span><span style="color:var(--astro-code-foreground)">url https:</span><span style="color:var(--astro-code-token-keyword)">//</span><span style="color:var(--astro-code-foreground)">download.pytorch.org</span><span style="color:var(--astro-code-token-keyword)">/</span><span style="color:var(--astro-code-foreground)">whl</span><span style="color:var(--astro-code-token-keyword)">/</span><span style="color:var(--astro-code-foreground)">cu124</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">python </span><span style="color:var(--astro-code-token-keyword)">-</span><span style="color:var(--astro-code-foreground)">c </span><span style="color:var(--astro-code-token-string-expression)">"import torch; print(torch.cuda.is_available())"</span><span style="color:var(--astro-code-token-comment)">   # → 应该输出 True</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 创建配置文件</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">@</span><span style="color:var(--astro-code-token-string-expression)">'{"device-mode": "cuda"}'</span><span style="color:var(--astro-code-foreground)">@ </span><span style="color:var(--astro-code-token-keyword)">|</span><span style="color:var(--astro-code-token-function)"> Out-File</span><span style="color:var(--astro-code-token-keyword)"> -</span><span style="color:var(--astro-code-foreground)">Encoding UTF8 $</span><span style="color:var(--astro-code-token-constant)">env:</span><span style="color:var(--astro-code-foreground)">USERPROFILE\.mineru.json</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># ===== 第五阶段：下载模型 =====</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 可选：设完重启终端，模型就下到 D 盘（C 盘紧张时用）</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">setx MINERU_MODEL_DIR D:\MinerU_models</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">setx MODELSCOPE_CACHE D:\MinerU_models</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">$</span><span style="color:var(--astro-code-token-constant)">env:</span><span style="color:var(--astro-code-foreground)">MINERU_MODEL_SOURCE </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-string-expression)"> "modelscope"</span><span style="color:var(--astro-code-token-comment)">           # 国内用，加速下载</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">mineru models download                            </span><span style="color:var(--astro-code-token-comment)"># 下载模型（约2-3GB，等15-60分钟）</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># ===== 第六阶段：测试 =====</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">curl </span><span style="color:var(--astro-code-token-keyword)">-</span><span style="color:var(--astro-code-foreground)">O https:</span><span style="color:var(--astro-code-token-keyword)">//</span><span style="color:var(--astro-code-foreground)">arxiv.org</span><span style="color:var(--astro-code-token-keyword)">/</span><span style="color:var(--astro-code-foreground)">pdf</span><span style="color:var(--astro-code-token-keyword)">/</span><span style="color:var(--astro-code-token-constant)">2303.08774</span><span style="color:var(--astro-code-foreground)">.pdf</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">mineru </span><span style="color:var(--astro-code-token-keyword)">-</span><span style="color:var(--astro-code-foreground)">p </span><span style="color:var(--astro-code-token-string-expression)">"2303.08774.pdf"</span><span style="color:var(--astro-code-token-keyword)"> -</span><span style="color:var(--astro-code-foreground)">o .</span><span style="color:var(--astro-code-token-keyword)">/</span><span style="color:var(--astro-code-foreground)">output</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">Get-ChildItem</span><span style="color:var(--astro-code-foreground)"> .</span><span style="color:var(--astro-code-token-keyword)">/</span><span style="color:var(--astro-code-foreground)">output                            </span><span style="color:var(--astro-code-token-comment)"># 查看解析结果</span></span></code></pre>
+<hr>
+<h2 id="如果你之前已装了-magic-pdf旧版">如果你之前已装了 magic-pdf（旧版）</h2>
+<p>如果之前已经运行了 <code>pip install magic-pdf[full]</code>，两种选择：</p>
+<h3 id="选择-a继续用旧版不需要改">选择 A：继续用旧版（不需要改）</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="powershell"><code><span class="line"><span style="color:var(--astro-code-token-comment)"># 旧版用 magic-pdf 命令，功能是一样的</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">magic</span><span style="color:var(--astro-code-token-keyword)">-</span><span style="color:var(--astro-code-foreground)">pdf </span><span style="color:var(--astro-code-token-keyword)">--</span><span style="color:var(--astro-code-foreground)">version</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">magic</span><span style="color:var(--astro-code-token-keyword)">-</span><span style="color:var(--astro-code-foreground)">pdf pdf</span><span style="color:var(--astro-code-token-keyword)">-</span><span style="color:var(--astro-code-foreground)">command </span><span style="color:var(--astro-code-token-keyword)">--</span><span style="color:var(--astro-code-foreground)">pdf </span><span style="color:var(--astro-code-token-string-expression)">"xxx.pdf"</span><span style="color:var(--astro-code-token-keyword)"> --</span><span style="color:var(--astro-code-foreground)">output_path .</span><span style="color:var(--astro-code-token-keyword)">/</span><span style="color:var(--astro-code-foreground)">output</span></span></code></pre>
+<h3 id="选择-b升级到新版-mineru-命令推荐">选择 B：升级到新版 mineru 命令（推荐）</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="powershell"><code><span class="line"><span style="color:var(--astro-code-token-comment)"># 直接安装 mineru 包，它会覆盖旧版</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">pip install </span><span style="color:var(--astro-code-token-keyword)">-</span><span style="color:var(--astro-code-foreground)">U </span><span style="color:var(--astro-code-token-string-expression)">"mineru[all]"</span><span style="color:var(--astro-code-token-keyword)"> --</span><span style="color:var(--astro-code-foreground)">extra</span><span style="color:var(--astro-code-token-keyword)">-</span><span style="color:var(--astro-code-foreground)">index</span><span style="color:var(--astro-code-token-keyword)">-</span><span style="color:var(--astro-code-foreground)">url https:</span><span style="color:var(--astro-code-token-keyword)">//</span><span style="color:var(--astro-code-token-function)">wheels.myhloli.com</span><span style="color:var(--astro-code-token-keyword)"> --</span><span style="color:var(--astro-code-foreground)">trusted</span><span style="color:var(--astro-code-token-keyword)">-</span><span style="color:var(--astro-code-foreground)">host </span><span style="color:var(--astro-code-token-function)">wheels.myhloli.com</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 现在可以用 mineru 命令了</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">mineru </span><span style="color:var(--astro-code-token-keyword)">--</span><span style="color:var(--astro-code-foreground)">version</span></span></code></pre>
+<hr>
+<h2 id="无-gpu-电脑的替代方案">无 GPU 电脑的替代方案</h2>
+<h3 id="cpu-模式最简单">CPU 模式（最简单）</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="powershell"><code><span class="line"><span style="color:var(--astro-code-token-comment)"># mineru[all] 默认就是 CPU 版，不需要额外操作</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 配置文件设为 CPU 模式</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">@</span><span style="color:var(--astro-code-token-string-expression)">'{"device-mode": "cpu"}'</span><span style="color:var(--astro-code-foreground)">@ </span><span style="color:var(--astro-code-token-keyword)">|</span><span style="color:var(--astro-code-token-function)"> Out-File</span><span style="color:var(--astro-code-token-keyword)"> -</span><span style="color:var(--astro-code-foreground)">Encoding UTF8 $</span><span style="color:var(--astro-code-token-constant)">env:</span><span style="color:var(--astro-code-foreground)">USERPROFILE\.mineru.json</span></span></code></pre>
+<hr>
+<h2 id="gpu-性能参考">GPU 性能参考</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>GPU 型号</th><th>显存</th><th>20 页 PDF 耗时</th><th>速度对比 CPU</th></tr></thead><tbody><tr><td><strong>CPU only</strong></td><td>—</td><td>15-30 分钟</td><td>基准</td></tr><tr><td><strong>RTX 3050</strong></td><td>6 GB</td><td>3-8 分钟</td><td>~3-5x</td></tr><tr><td><strong>RTX 3060</strong></td><td>12 GB</td><td>2-5 分钟</td><td>~5-8x</td></tr><tr><td><strong>RTX 4090</strong></td><td>24 GB</td><td>1-2 分钟</td><td>~10-15x</td></tr></tbody></table>
+<hr>
+<h2 id="常见问题">常见问题</h2>
+<h3 id="q1-conda-命令找不到">Q1: <code>conda</code> 命令找不到</h3>
+<p><strong>原因</strong>：安装时没有勾选 “Add to PATH”
+<strong>解决</strong>：用开始菜单搜索 “Anaconda Prompt (Miniconda)” 打开</p>
+<h3 id="q2-mineru---version-报错">Q2: <code>mineru --version</code> 报错</h3>
+<p><strong>原因</strong>：可能装了旧版（magic-pdf）没装新版（mineru）
+<strong>解决</strong>：</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="powershell"><code><span class="line"><span style="color:var(--astro-code-foreground)">pip install </span><span style="color:var(--astro-code-token-keyword)">-</span><span style="color:var(--astro-code-foreground)">U </span><span style="color:var(--astro-code-token-string-expression)">"mineru[all]"</span><span style="color:var(--astro-code-token-keyword)"> --</span><span style="color:var(--astro-code-foreground)">extra</span><span style="color:var(--astro-code-token-keyword)">-</span><span style="color:var(--astro-code-foreground)">index</span><span style="color:var(--astro-code-token-keyword)">-</span><span style="color:var(--astro-code-foreground)">url https:</span><span style="color:var(--astro-code-token-keyword)">//</span><span style="color:var(--astro-code-token-function)">wheels.myhloli.com</span><span style="color:var(--astro-code-token-keyword)"> --</span><span style="color:var(--astro-code-foreground)">trusted</span><span style="color:var(--astro-code-token-keyword)">-</span><span style="color:var(--astro-code-foreground)">host </span><span style="color:var(--astro-code-token-function)">wheels.myhloli.com</span></span></code></pre>
+<h3 id="q3-torchcudais_available-返回-false">Q3: <code>torch.cuda.is_available()</code> 返回 False</h3>
+<p><strong>原因</strong>：PyTorch 安装成了 CPU 版
+<strong>解决</strong>：</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="powershell"><code><span class="line"><span style="color:var(--astro-code-foreground)">pip uninstall torch torchvision torchaudio </span><span style="color:var(--astro-code-token-keyword)">-</span><span style="color:var(--astro-code-foreground)">y</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">pip install torch torchvision torchaudio </span><span style="color:var(--astro-code-token-keyword)">--</span><span style="color:var(--astro-code-foreground)">index</span><span style="color:var(--astro-code-token-keyword)">-</span><span style="color:var(--astro-code-foreground)">url https:</span><span style="color:var(--astro-code-token-keyword)">//</span><span style="color:var(--astro-code-foreground)">download.pytorch.org</span><span style="color:var(--astro-code-token-keyword)">/</span><span style="color:var(--astro-code-foreground)">whl</span><span style="color:var(--astro-code-token-keyword)">/</span><span style="color:var(--astro-code-foreground)">cu124</span></span></code></pre>
+<h3 id="q4-模型下载特别慢">Q4: 模型下载特别慢</h3>
+<p><strong>原因</strong>：默认从 HuggingFace 下载（海外服务器）
+<strong>解决</strong>：</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="powershell"><code><span class="line"><span style="color:var(--astro-code-foreground)">$</span><span style="color:var(--astro-code-token-constant)">env:</span><span style="color:var(--astro-code-foreground)">MINERU_MODEL_SOURCE </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-string-expression)"> "modelscope"</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">mineru models download</span></span></code></pre>
+<h3 id="q5-c-盘空间不够怎么办">Q5: C 盘空间不够怎么办？</h3>
+<p><strong>原因</strong>：模型文件默认下到 C 盘（~2-3 GB），pip 缓存也在 C 盘（~1-2 GB）
+<strong>解决</strong>：</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="powershell"><code><span class="line"><span style="color:var(--astro-code-token-comment)"># 1. 清 pip 缓存（立刻释放，安全）</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">pip cache purge</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 2. 下载模型前设环境变量，改到 D 盘</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">setx MINERU_MODEL_DIR D:\MinerU_models</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">setx MODELSCOPE_CACHE D:\MinerU_models</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 重启 PowerShell → conda activate MinerU → mineru models download</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># 3. 如果模型已经下到 C 盘了，可以搬走</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">xcopy C:\Users\xxx\.cache\modelscope D:\MinerU_models </span><span style="color:var(--astro-code-token-keyword)">/</span><span style="color:var(--astro-code-foreground)">E </span><span style="color:var(--astro-code-token-keyword)">/</span><span style="color:var(--astro-code-foreground)">H</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">rmdir </span><span style="color:var(--astro-code-token-keyword)">/</span><span style="color:var(--astro-code-foreground)">S </span><span style="color:var(--astro-code-token-keyword)">/</span><span style="color:var(--astro-code-foreground)">Q C:\Users\xxx\.cache\modelscope</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">mklink </span><span style="color:var(--astro-code-token-keyword)">/</span><span style="color:var(--astro-code-foreground)">J C:\Users\xxx\.cache\modelscope D:\MinerU_models</span></span></code></pre>
+<h3 id="q6-想卸载整个环境">Q6: 想卸载整个环境</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="powershell"><code><span class="line"><span style="color:var(--astro-code-foreground)">conda deactivate                       </span><span style="color:var(--astro-code-token-comment)"># 先退出环境</span></span>
+<span class="line"><span style="color:var(--astro-code-foreground)">conda remove </span><span style="color:var(--astro-code-token-keyword)">-</span><span style="color:var(--astro-code-foreground)">n MinerU </span><span style="color:var(--astro-code-token-keyword)">--</span><span style="color:var(--astro-code-foreground)">all           </span><span style="color:var(--astro-code-token-comment)"># 删除整个环境</span></span></code></pre>
+<hr>
+<h2 id="-参考链接">🔗 参考链接</h2>
+<ul>
+<li><a href="https://github.com/opendatalab/MinerU">MinerU GitHub 仓库</a></li>
+<li><a href="https://docs.anaconda.com/miniconda/">Miniconda 官方下载（Windows）</a></li>
+<li><a href="https://pypi.org/project/mineru/">mineru PyPI 页面</a></li>
+<li><a href="https://opendatalab.com/OpenSourceTools/Extractor/PDF">MinerU 在线体验 Demo</a></li>
+<li><a href="https://pytorch.org/get-started/locally/">PyTorch 官方下载（选 CUDA 版本）</a></li>
+</ul>
+<hr>
+<p><strong>📂 关联笔记</strong>：</p>
+<ul>
+<li>[[Anaconda与Miniconda异同调研报告]] — 为什么选 Miniconda</li>
+<li>[[Python虚拟环境配置指南]] — Conda 基本操作</li>
+<li>[[Python虚拟环境工具调研报告]] — 环境管理全景</li>
+</ul>
+<p><strong>🔄 文档版本</strong>：v3.0（Windows + MinerU v3.x 版） | 最后更新：2026-07-14</p> <div> <a href="/notes" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150">
+&larr; 返回笔记列表
+</a> </div>  </div> <!-- Previous / Next navigation -->  <hr class="!mt-12 !mb-8" data-astro-cid-bvzihdzo> <div data-astro-cid-bvzihdzo> <a href="/blog" class="text-sm text-[var(--color-text-secondary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-bvzihdzo>
+&larr; 返回博客列表
+</a> </div> </div> </div> </article> </div>  </main> <footer class="border-t border-[var(--color-border)] mt-24 py-8" data-astro-cid-pux6a34n><div class="max-w-content flex items-center justify-between" data-astro-cid-pux6a34n><span class="text-sm text-[var(--color-text-tertiary)]" data-astro-cid-pux6a34n>
+&copy; 2026 星游寰宇
+</span><div class="flex items-center gap-4" data-astro-cid-pux6a34n><a href="/blog" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>博客</a><a href="/projects" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>项目</a><a href="/notes" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>日记</a><a href="/resources" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>资源</a><a href="/about" class="text-sm text-[var(--color-text-tertiary)] no-underline hover:text-[var(--color-text)] transition-colors duration-150" data-astro-cid-pux6a34n>关于</a></div></div></footer> <div id="link-preview" style="display:none;position:fixed;z-index:99;max-width:18rem;pointer-events:none;" data-astro-cid-t7vshrbh></div>  <script type="module">(async()=>{try{const c=await fetch("/posts.json");if(!c.ok)return;const u=await c.json(),p=new Map(u.map(t=>[t.href,t])),e=document.getElementById("link-preview");if(!e)return;let n="",d;document.addEventListener("mouseover",t=>{const i=t.target.closest("a[href^='/blog/']");if(!i){e.style.display="none",n="";return}const s=i.getAttribute("href");if(!s||s===n)return;const o=p.get(s);o&&(n=s,d=setTimeout(()=>{e.innerHTML=`<div class="lp-title">${o.title}</div><div class="lp-summary">${o.summary}</div>`;const r=i.getBoundingClientRect();let a=r.left,l=r.bottom+6;a+288>window.innerWidth&&(a=window.innerWidth-296),l+80>window.innerHeight&&(l=r.top-80),Object.assign(e.style,{left:a+"px",top:l+"px",display:"block"})},300))},{passive:!0}),document.addEventListener("mouseout",t=>{t.target.closest("a[href^='/blog/']")&&(clearTimeout(d),e.style.display="none",n="")},{passive:!0})}catch{}})();</script> </body></html>  <script type="module">const c=document.getElementById("toc-toggle"),s=document.getElementById("toc-list"),i=document.getElementById("toc-chevron");c&&s&&i&&c.addEventListener("click",()=>{const o=s.classList.toggle("hidden");c.setAttribute("aria-expanded",String(o)),i.style.transform=o?"rotate(180deg)":""});const r=document.querySelectorAll(".toc-list a");if(r.length>0){const o=new IntersectionObserver(n=>{for(const t of n)t.isIntersecting&&r.forEach(e=>{e.classList.toggle("active",e.getAttribute("href")===`#${t.target.id}`)})},{rootMargin:"-80px 0px -80% 0px"});r.forEach(n=>{const t=n.getAttribute("href")?.slice(1);if(t){const e=document.getElementById(t);e&&o.observe(e)}})}</script>
