@@ -6,19 +6,50 @@ import ProjectTreeSidebar from "../../features/projects/ProjectTreeSidebar.astro
 
 export async function getStaticPaths() {
   const projects = await getCollection("projects");
-  return projects.map((p) => ({
+  const paths = projects.map((p) => ({
     params: { slug: p.id.replace(/\.md$/, "") },
-    props: { project: p },
+    props: { project: p, folder: null as string | null },
   }));
+  const existing = new Set([...paths.map(p => p.params.slug), "program-0", "diamond-insulation"]);
+  const folders = new Set<string>();
+  for (const project of projects) {
+    const parts = project.id.split("/");
+    for (let i = 1; i < parts.length; i++) folders.add(parts.slice(0, i).join("/"));
+  }
+  return [...paths, ...[...folders].filter(folder => !existing.has(folder)).map(folder => ({
+    params: { slug: folder }, props: { project: null, folder },
+  }))];
 }
 
-const { project } = Astro.props;
-const { Content } = await render(project);
+const { project, folder } = Astro.props;
+const rendered = project ? await render(project) : null;
+const Content = rendered?.Content;
+const folderProjects = folder ? (await getCollection("projects"))
+  .filter(p => p.id.startsWith(folder + "/"))
+  .sort((a,b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()) : [];
+const projectData = project?.data ?? {
+  title: folder!.split("/").pop()!.replace(/-/g, " "),
+  date: folderProjects[0]?.data.date ?? "",
+  tags: [...new Set(folderProjects.flatMap(p => p.data.tags))].slice(0,5),
+  summary: `项目文件夹，共 ${folderProjects.length} 个内容文件。`,
+  github: undefined, demo: undefined, image: undefined,
+};
+const overviewItems: Array<{title:string;href:string;summary:string;count?:number}> = [];
+const childFolders = new Map<string, number>();
+for (const item of folderProjects) {
+  const relative = item.id.slice(folder!.length + 1);
+  if (relative.includes("/")) {
+    const name = relative.split("/")[0];childFolders.set(name,(childFolders.get(name) ?? 0)+1);
+  } else overviewItems.push({title:item.data.title,href:`/projects/${item.id.replace(/\.md$/, "")}`,summary:item.data.summary});
+}
+overviewItems.unshift(...[...childFolders].sort(([a],[b])=>a.localeCompare(b)).map(([name,count])=>({
+  title:name.replace(/-/g," "),href:`/projects/${folder}/${name}`,summary:`子文件夹 · ${count} 个文件`,count,
+})));
 
 // Detect if this is a sub-article (has parent group)
-const slug = project.id.replace(/\.md$/, "");
+const slug = project ? project.id.replace(/\.md$/, "") : folder!;
 const slugParts = slug.split("/");
-const isSubArticle = slugParts.length > 1;
+const isSubArticle = !!project && slugParts.length > 1;
 const parentGroup = isSubArticle ? slugParts[0] : null;
 
 // Fetch sibling articles for sidebar
@@ -39,16 +70,16 @@ if (isSubArticle) {
 ---
 
 <ProjectLayout
-  title={project.data.title}
-  date={project.data.date}
-  tags={project.data.tags}
-  summary={project.data.summary}
-  canonicalURL={`/projects/${project.id.replace(/\.md$/, "")}`}
-  github={project.data.github}
-  demo={project.data.demo}
-  image={project.data.image}
-  backHref={isSubArticle ? `/projects/${parentGroup}` : "/projects"}
-  backLabel={isSubArticle ? `返回 ${parentGroup} 概览` : "返回项目列表"}
+  title={projectData.title}
+  date={projectData.date}
+  tags={projectData.tags}
+  summary={projectData.summary}
+  canonicalURL={`/projects/${slug}`}
+  github={projectData.github}
+  demo={projectData.demo}
+  image={projectData.image}
+  backHref={slugParts.length > 1 ? `/projects/${slugParts.slice(0,-1).join("/")}` : "/projects"}
+  backLabel={slugParts.length > 1 ? "返回上级项目文件夹" : "返回项目列表"}
 >
   {isSubArticle && !hasSubfolder && (
     <ProjectSidebar
@@ -66,5 +97,17 @@ if (isSubArticle) {
       groupName={parentGroup!}
     />
   )}
-  <Content />
+  {Content ? <Content /> : (
+    <div>
+      <p class="text-[var(--color-text-secondary)]">项目文件夹 · {folderProjects.length} 个内容文件。选择子文件夹继续浏览，或打开具体内容。</p>
+      <div class="flex flex-col gap-3 mt-6">
+        {overviewItems.map(item => (
+          <a href={item.href} class="block p-4 rounded-lg border border-[var(--color-border)] no-underline hover:border-[var(--color-accent)] transition-colors">
+            <h2 class="text-base font-semibold m-0 text-[var(--color-text)]">{item.count ? "▰ " : ""}{item.title}</h2>
+            <p class="text-sm mt-2 mb-0 text-[var(--color-text-secondary)]">{item.summary}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  )}
 </ProjectLayout>
