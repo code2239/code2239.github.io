@@ -8,6 +8,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: github-pages-content
+  cancel-in-progress: false
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -21,9 +25,20 @@ jobs:
       - run: npm ci
       - run: npm run build
 
+      - name: Preserve independent development preview and domain
+        shell: bash
+        run: |
+          git fetch origin gh-pages --depth=1
+          if git cat-file -e FETCH_HEAD:dev 2>/dev/null; then
+            git archive FETCH_HEAD dev | tar -x -C dist
+          fi
+          if [ ! -f dist/CNAME ] && git cat-file -e FETCH_HEAD:CNAME 2>/dev/null; then
+            git show FETCH_HEAD:CNAME > dist/CNAME
+          fi
+
       - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
-          keep_files: true
+          keep_files: false

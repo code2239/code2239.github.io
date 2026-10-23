@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "astro dev",
     "validate": "node scripts/validate-categories.mjs",
-    "build": "npm run validate && astro build",
+    "build": "npm run validate && astro build --force",
     "preview": "astro preview"
   },
   "dependencies": {

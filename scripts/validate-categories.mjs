@@ -53,7 +53,15 @@ const validSlugs = new Set([
 
 function collectMdFiles(dir) {
   const results = [];
-  for (const entry of readdirSync(dir, { withFileTypes: true })) {
+  let entries;
+  try {
+    entries = readdirSync(dir, { withFileTypes: true });
+  } catch (error) {
+    // Git does not store empty directories. Deleting the final article is valid.
+    if (error.code === "ENOENT") return results;
+    throw error;
+  }
+  for (const entry of entries) {
     const full = join(dir, entry.name);
     if (entry.isDirectory()) results.push(...collectMdFiles(full));
     else if (extname(entry.name) === ".md") results.push(full);
