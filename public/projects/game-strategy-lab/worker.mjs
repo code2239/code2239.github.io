@@ -1,7 +1,11 @@
-import {runGame,validateConfig,pairSeed,mean,interval} from './engine.mjs';
+import {runGame,validateConfig,pairSeed,mean,interval,runEvolution} from './engine.mjs';
 self.onmessage=({data})=>{try{
  const {mode,config,a,b,strategies,reps,weights}=data;validateConfig(config);
  if(mode==='duel'){self.postMessage({type:'done',result:runGame(a,b,config)});return;}
+ if(mode==='evolution'){
+  const result=runEvolution(strategies,weights,config,data.evolution,value=>self.postMessage({type:'progress',value}));
+  self.postMessage({type:'done',result});return;
+ }
  if(!Number.isInteger(reps)||reps<2||reps>30||strategies.length<2||strategies.length>8||weights.some(w=>!Number.isFinite(w)||w<0)||!weights.some(w=>w>0))throw Error('请至少选两个策略，并设置有效的对手权重。');
  const k=strategies.length,mat=Array.from({length:k},()=>Array.from({length:k},()=>[])),coops=Array.from({length:k},()=>Array.from({length:k},()=>[]));
  const total=k*(k+1)/2*reps;let done=0;
